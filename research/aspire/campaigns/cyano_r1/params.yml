@@ -1,16 +1,10 @@
-# ASPIRE's own settings for the read-to-ASV pipeline, as its shipped config
-# (upstream asv_pipeline_nextflow.yml) sets them. Same keys as tool_defaults.yml.
-#
-# A 0 means the filter is off. Upstream differs: Groovy's `?:` treats a configured
-# 0 as unset and substitutes its code default, so `table_filter.min_asv_sum: 0`
-# upstream silently runs at 0.01.
-#
-# "no stated source" means neither the code nor the docs say where the value came from.
+# ASPIRE's preset (research/aspire/presets/aspire.yml) with this study's amplicon: 515F/806R,
+# the V4 region, sequenced 2x301 on a MiSeq. Only the lines that name the primers or V4 differ.
 
 fastp:
-  trim_front_r1: 19       # primer length, forward; shipped config
+  trim_front_r1: 19       # 515F, GTGYCAGCMGCCGCGGTAA
   trim_tail_r1: 20        # shipped config; the mock config uses 0
-  trim_front_r2: 20       # primer length, reverse; shipped config
+  trim_front_r2: 20       # 806R, GGACTACNVGGGTWTCTAAT
   trim_tail_r2: 20        # shipped config; the mock config uses 0
   qualified_quality: 15   # fastp default, not set upstream
   unqualified_percent: 40 # fastp default, not set upstream
@@ -26,8 +20,8 @@ merge:                    # paired samples only
 
 filter:
   max_ee: 1.0             # vsearch default none; the usual UPARSE/USEARCH recommendation
-  min_len: 245            # vsearch default 1; fits a V4-V5 amplicon; the mock config uses 230
-  max_len: 1500           # vsearch default none; the mock config uses 350
+  min_len: 230            # V4 is 253 bp between the primers
+  max_len: 300
 
 unoise:
   min_size: 3             # vsearch default 8; no stated source
@@ -37,8 +31,8 @@ count:
   identity: 0.999         # usearch_global --id has no default; hardcoded upstream
 
 sina:
-  regions: [V4-V5, V5, V4]  # shipped config; ASPIRE's own primers are 515F-Y/926R
-  trim_to: V4-V5            # shipped config
+  regions: [V4]
+  trim_to: V4
 
 table_filter:
   min_sample_sum: 5000    # reads per sample; Thompson 2017 (Earth Microbiome Project) rarefies at 5000. The mock config uses 1000
