@@ -869,6 +869,11 @@ behaviour are readable in `src/metasmith/gui/` and `src/metasmith/frontend/`.
   orphans its edits without warning. The agent, workflow and run a tutorial made are kept per
   tutorial id, each recorded when the step that makes it completes. Both live in that browser's
   local storage only. Nothing on the server ties a workflow to the tutorial that made it.
+- **A tutorial step that is already done moves on as soon as the page is still**, unless it was
+  reached by going back or picked from the list. So `done` must test something that happened
+  while the step was open. A control that arrives pre-filled, such as a select with a default,
+  completes on its `touchOn` events instead. A mark an earlier step can leave, like the preview's
+  `data-moved`, is a timestamp compared with the time the step's `enter` recorded.
 
 ## DAG rendering
 
