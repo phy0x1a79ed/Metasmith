@@ -117,7 +117,10 @@ verify() {
     ssh fir "find '$HOME_PATH' | wc -l"
     ssh fir "du -sb '$HOME_PATH'"
 
-    echo "== the relay executable survived the relay/ exclusion =="
+    echo "== the home's three executables =="
+    # CAUTION a Globus restore drops the execute bit. Without it staging fails on ./msm and ./relay/msm_relay,
+    # and every computed task exits 126 on lib/msm_bootstrap while cached tasks pass.
+    ssh fir "chmod u+x,g+x '$HOME_PATH/metasmith/msm' '$HOME_PATH/metasmith/relay/msm_relay' '$HOME_PATH/metasmith/lib/msm_bootstrap'"
     ssh fir "test -x '$HOME_PATH/metasmith/relay/msm_relay' && echo ok || echo 'MISSING -- re-extract with deploy_from_container'"
 
     echo "== the image is where APPTAINER_CACHEDIR will look =="
