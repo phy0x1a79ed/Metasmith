@@ -333,6 +333,8 @@ MAX_TASK_DURATION = "24h"
 LONG_RUNNING_STEPS = {
     "spades_pratama": "36h",
     "spades_hybrid_pratama": "36h",
+    "spades_pratama_noec": "36h",
+    "spades_hybrid_pratama_noec": "36h",
     "metawrap_refine_pratama": "36h",
     "spades": "36h",
 }
@@ -353,6 +355,8 @@ MAX_TASK_MEMORY_GB = 192
 # which wedges the run. Keep entries to what a measurement justifies.
 LARGE_MEMORY_STEPS = {
     "spades_hybrid_pratama": 768,
+    "spades_pratama_noec": 768,
+    "spades_hybrid_pratama_noec": 768,
 }
 
 
