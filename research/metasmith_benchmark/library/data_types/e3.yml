@@ -40,6 +40,15 @@ types:
       Data: nucleotide sequence
       ext: fna
 
+  # Ablation rung R3. E3's MEGAHIT contigs under a type of their own, as OPERA-MS's input.
+  megahit_draft:
+    properties:
+      _: MEGAHIT contigs from one 0.2 um 2022 Illumina replicate, rebuilt as OPERA-MS's scaffolding input
+      e3: megahit_draft
+      Format: FASTA
+      Data: nucleotide sequence
+      ext: fna
+
   # Ablation rung R4. Flye's long-read-only draft, which POLCA polishes into the hybrid lane's assembly.
   # OPERA-MS (R3) and POLCA (R4) emit hybrid_spades_assembly so the hybrid splitter and merge take them unchanged.
   flye_assembly:

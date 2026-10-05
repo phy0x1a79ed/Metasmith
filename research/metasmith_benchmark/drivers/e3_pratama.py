@@ -62,7 +62,8 @@ SCALED = {
     # Ablation rungs. No measurement yet: each starts at its parent's grant.
     "spades_pratama_noec": (48, 192, 24),
     "spades_hybrid_pratama_noec": (48, 384, 36),
-    "opera_ms_pratama": (16, 64, 12),       # its own MEGAHIT, then scaffolding: E5 needed 3.4 h at most for the second half
+    "megahit_draft_pratama": (16, 64, 12),  # megahit's row
+    "opera_ms_pratama": (16, 64, 12),       # E5: 17 of 17 first try, 3.4 h at most
     "flye_pratama": (16, 64, 12),
     "polca_pratama": (16, 48, 12),
 }
@@ -75,7 +76,7 @@ QUEUE_SIZE = 200
 # reuses every cached step its assembler set leaves unchanged.
 VARIANT_FILES = {
     "spades_pratama.py", "spades_pratama_noec.py",
-    "spades_hybrid_pratama.py", "spades_hybrid_pratama_noec.py", "opera_ms_pratama.py",
+    "spades_hybrid_pratama.py", "spades_hybrid_pratama_noec.py", "megahit_draft_pratama.py", "opera_ms_pratama.py",
     "flye_pratama.py", "polca_pratama.py",
     "merge_candidate_calls_pratama.py", "merge_candidate_calls_pratama_nospades.py",
 }
@@ -83,7 +84,7 @@ RUNGS = {
     "R0": {"spades_pratama.py", "spades_hybrid_pratama.py", "merge_candidate_calls_pratama.py"},
     "R1": {"spades_pratama_noec.py", "spades_hybrid_pratama_noec.py", "merge_candidate_calls_pratama.py"},
     "R2": {"spades_hybrid_pratama_noec.py", "merge_candidate_calls_pratama_nospades.py"},
-    "R3": {"opera_ms_pratama.py", "merge_candidate_calls_pratama_nospades.py"},
+    "R3": {"megahit_draft_pratama.py", "opera_ms_pratama.py", "merge_candidate_calls_pratama_nospades.py"},
     "R4": {"flye_pratama.py", "polca_pratama.py", "merge_candidate_calls_pratama_nospades.py"},
 }
 
