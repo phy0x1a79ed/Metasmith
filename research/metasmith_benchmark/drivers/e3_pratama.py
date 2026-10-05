@@ -268,7 +268,8 @@ def cmd_run(args):
     if remote:
         c.stage_and_run(smith, task, CACHE_DIR, args.tag or f"e3_{args.rung}_{len(runs)}runs", stage_only=args.stage_only,
                         params=dict(executor=dict(queueSize=QUEUE_SIZE), process=dict(tries=4, array=25)),
-                        scaled=SCALED, materialise=args.materialise)
+                        scaled=SCALED, materialise=args.materialise,
+                        on_exist="clear" if args.restage else "update")
     else:
         print("(dry run; nothing staged or submitted)")
     return 0
@@ -282,7 +283,7 @@ def main():
         p.add_argument("--runs", nargs="*", help="run accessions, e.g. a hybrid pilot")
         p.add_argument("--dataset", nargs="*", help="reads_2019, reads_2022")
         p.add_argument("--limit", type=int)
-        p.set_defaults(fn=fn, dag=False, stage_only=False, launch=False, materialise=False, tag=None, rung="R0")
+        p.set_defaults(fn=fn, dag=False, stage_only=False, launch=False, materialise=False, tag=None, rung="R0", restage=False)
         if name == "list":
             p.add_argument("--check", action="store_true", help="count verified interleaved files on fir")
         elif name == "run":
@@ -293,6 +294,8 @@ def main():
             mode.add_argument("--launch", action="store_true")
             mode.add_argument("--materialise", action="store_true", help="stage, fetch every image the plan needs, stop")
             p.add_argument("--tag")
+            # CAUTION R0 and R1 share a plan key, so one run dir, and an update restage keeps the bundle it finds.
+            p.add_argument("--restage", action="store_true", help="clear the run dir's staged bundle first")
             p.add_argument("--import", dest="import_givens", action="store_true",
                            help="import what the pool lacks before planning, as `import` does")
     args = ap.parse_args()
