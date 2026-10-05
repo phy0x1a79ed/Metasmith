@@ -8,7 +8,9 @@ run, assembled alone. 31 from 2019 and 34 from 2022 make Pratama's 65.
 and `--launch` act on the fir agent home, from a Slurm job there, and refuse until every
 run's interleave .ok stamp exists.
 
-Subcommands: list [--check], import, run [--runs ...] [--dataset ...] [--limit N] [--dag] [--stage-only | --launch].
+Subcommands: list [--check], import, run [--rung R0..R4] [--runs ...] [--dataset ...] [--limit N] [--dag] [--stage-only | --launch].
+
+`--rung` picks the assembler set of the pooled-catalogue ablation (RUNGS). R0, the default, is E3 as run.
 """
 
 import argparse
@@ -57,6 +59,32 @@ SCALED = {
     "merge_candidate_calls_pratama": (4, 32, 4),  # 65 runs sat at a 16 GB cap for 1.6 h
     "pratama_votu_recovery": (8, 128, 4),   # 65 runs: OOM at 32 GB, MaxRSS 58 GiB at 64
     "mmseqs_votu_pratama": (16, 128, 6),    # 65 runs: OOM at 64 GB, MaxRSS 116 GiB at 128
+    # Ablation rungs. No measurement yet: each starts at its parent's grant.
+    "spades_pratama_noec": (48, 192, 24),
+    "spades_hybrid_pratama_noec": (48, 384, 36),
+    "opera_ms_pratama": (16, 64, 12),       # its own MEGAHIT, then scaffolding: E5 needed 3.4 h at most for the second half
+    "flye_pratama": (16, 64, 12),
+    "polca_pratama": (16, 48, 12),
+}
+
+# Three rungs run at once beside E5, under one 1,000-job cap for the user (array elements count).
+QUEUE_SIZE = 200
+
+# The pooled-catalogue ablation. Each rung is the set of these e3 files it uses; the driver masks the
+# rest, so every product type has exactly one producer. Everything else in the plan is shared, so a rung
+# reuses every cached step its assembler set leaves unchanged.
+VARIANT_FILES = {
+    "spades_pratama.py", "spades_pratama_noec.py",
+    "spades_hybrid_pratama.py", "spades_hybrid_pratama_noec.py", "opera_ms_pratama.py",
+    "flye_pratama.py", "polca_pratama.py",
+    "merge_candidate_calls_pratama.py", "merge_candidate_calls_pratama_nospades.py",
+}
+RUNGS = {
+    "R0": {"spades_pratama.py", "spades_hybrid_pratama.py", "merge_candidate_calls_pratama.py"},
+    "R1": {"spades_pratama_noec.py", "spades_hybrid_pratama_noec.py", "merge_candidate_calls_pratama.py"},
+    "R2": {"spades_hybrid_pratama_noec.py", "merge_candidate_calls_pratama_nospades.py"},
+    "R3": {"opera_ms_pratama.py", "merge_candidate_calls_pratama_nospades.py"},
+    "R4": {"flye_pratama.py", "polca_pratama.py", "merge_candidate_calls_pratama_nospades.py"},
 }
 
 # The standard transforms each E3 library transform replaces, by library.
@@ -150,15 +178,16 @@ def declare_givens(smith, runs, ensure):
     return c.cite(givens, CACHE_DIR / "e3_inputs.xgdb", TYPE_LIBS, ensure)
 
 
-def build_transforms():
+def build_transforms(rung):
+    e3 = TransformInstanceLibrary.Load(c.LIBRARY / "transforms" / "e3")
     std = [lib if name not in REPLACED else lib.AsView({Path(p) for p in REPLACED[name]}, invert=True)
            for name, lib in ((n, TransformInstanceLibrary.Load(c.MLIB / "transforms" / n))
                              for n in ("logistics", "assembly", "metagenomics", "functionalAnnotation", "viromics"))]
-    return [TransformInstanceLibrary.Load(c.LIBRARY / "transforms" / "e3"),
-            TransformInstanceLibrary.Load(c.LIBRARY / "transforms" / "bench"), *std]
+    e3 = e3.AsView({Path(f) for f in VARIANT_FILES - RUNGS[rung]}, invert=True)
+    return [e3, TransformInstanceLibrary.Load(c.LIBRARY / "transforms" / "bench"), *std]
 
 
-def build_targets():
+def build_targets(rung):
     t = TargetBuilder()
     t.Add("sequences::read_qc_stats")
     t.Add("e3::fastp_report_json")
@@ -166,7 +195,8 @@ def build_targets():
 
     # Hybrid design A: only the 17 runs that carry a MinION partner can produce it.
     t.Add("e3::hybrid_spades_assembly")
-    t.Add("sequences::spades_assembly")
+    if "merge_candidate_calls_pratama.py" in RUNGS[rung]:
+        t.Add("sequences::spades_assembly")
     t.Add("sequences::megahit_assembly")
 
     # Every assembly lane's calls pooled into one frozen set and scored at the pool level, then
@@ -218,22 +248,25 @@ def cmd_run(args):
         samples=list(inputs.AsSamples("sequences::read_metadata")),
         resources=[DataInstanceLibrary.Load(c.MLIB / "resources" / "env"),
                    DataInstanceLibrary.Load(c.MLIB / "resources" / "lib"),
-                   DataInstanceLibrary.Load(c.LIBRARY / "resources" / "bench"), globals_lib],
-        transforms=build_transforms(),
-        targets=build_targets(),
+                   DataInstanceLibrary.Load(c.LIBRARY / "resources" / "bench"),
+                   DataInstanceLibrary.Load(c.LIBRARY / "resources" / "e3"), globals_lib],
+        transforms=build_transforms(args.rung),
+        targets=build_targets(args.rung),
     )
     c.check_plan(task, {"viromics::contig_study": 1, "sequences::read_metadata": len(runs),
                         "sequences::read_pair": len(runs), "sequences::short_reads_pe": len(runs),
                         "e3::nanopore_reads": sum(1 for r, _, _ in runs if r in hybrid_partners())})
     c.print_plan(task)
+    planned = {Path(s.transform._path).name for s in task.plan.steps}
+    assert planned & VARIANT_FILES <= RUNGS[args.rung], f"{args.rung} planned a masked file: {planned & VARIANT_FILES - RUNGS[args.rung]}"
     interleave = [s for s in task.plan.steps if Path(s.transform._path).stem == "interleave_zipped_short_reads"]
     assert not interleave, "the plan interleaves reads that are registered pre-interleaved"
 
     if args.dag:
         c.write_dag(task, "e3_pratama", CACHE_DIR)
     if remote:
-        c.stage_and_run(smith, task, CACHE_DIR, args.tag or f"e3_{len(runs)}runs", stage_only=args.stage_only,
-                        params=dict(executor=dict(queueSize=500), process=dict(tries=4, array=25)),
+        c.stage_and_run(smith, task, CACHE_DIR, args.tag or f"e3_{args.rung}_{len(runs)}runs", stage_only=args.stage_only,
+                        params=dict(executor=dict(queueSize=QUEUE_SIZE), process=dict(tries=4, array=25)),
                         scaled=SCALED, materialise=args.materialise)
     else:
         print("(dry run; nothing staged or submitted)")
@@ -248,10 +281,11 @@ def main():
         p.add_argument("--runs", nargs="*", help="run accessions, e.g. a hybrid pilot")
         p.add_argument("--dataset", nargs="*", help="reads_2019, reads_2022")
         p.add_argument("--limit", type=int)
-        p.set_defaults(fn=fn, dag=False, stage_only=False, launch=False, materialise=False, tag=None)
+        p.set_defaults(fn=fn, dag=False, stage_only=False, launch=False, materialise=False, tag=None, rung="R0")
         if name == "list":
             p.add_argument("--check", action="store_true", help="count verified interleaved files on fir")
         elif name == "run":
+            p.add_argument("--rung", choices=sorted(RUNGS), default="R0", help="the ablation's assembler set")
             p.add_argument("--dag", action="store_true", help="render the plan to page/dags/e3_pratama.dag.svg")
             mode = p.add_mutually_exclusive_group()
             mode.add_argument("--stage-only", action="store_true")

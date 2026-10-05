@@ -40,6 +40,24 @@ types:
       Data: nucleotide sequence
       ext: fna
 
+  # Ablation rung R4. Flye's long-read-only draft, which POLCA polishes into the hybrid lane's assembly.
+  # OPERA-MS (R3) and POLCA (R4) emit hybrid_spades_assembly so the hybrid splitter and merge take them unchanged.
+  flye_assembly:
+    properties:
+      _: Flye --meta contigs from one well's MinION run, before short-read polishing
+      e3: flye_assembly
+      Format: FASTA
+      Data: nucleotide sequence
+      ext: fna
+  opera_ms.env:
+    properties:
+      e3: env
+      provides: [opera_ms]
+  masurca.env:
+    properties:
+      e3: env
+      provides: [polca]
+
   votu_representatives_10kb:
     properties:
       _: the representative of every vOTU at least 10 kb long, cut from the frozen set by the vOTU table
