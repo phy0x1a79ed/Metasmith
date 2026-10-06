@@ -11,8 +11,8 @@
 # Stop a run with `scancel --batch --signal=USR1 <job>` or `runctl.py cancel <corpus> <key>`, never a
 # plain scancel. Slurm sends USR1 30 min before the wall, and the driver turns it into the same cancel.
 #SBATCH --account=rpp-shallam
-#SBATCH --cpus-per-task=10
-#SBATCH --mem=48G
+#SBATCH --cpus-per-task=2
+#SBATCH --mem=16G
 #SBATCH --time=7-00:00:00
 #SBATCH --signal=B:USR1@1800
 #SBATCH --output=/scratch/phyberos/bench/logs/%x.%j.out
