@@ -20,7 +20,7 @@ METHODS_HOOK = """<pre id="export"></pre><script>
 setTimeout(() => {
   const svg = document.querySelector("#p2-fig svg");
   const s = new XMLSerializer().serializeToString(svg);
-  document.getElementById("export").textContent = "methods=" + btoa(unescape(encodeURIComponent(s)));
+  document.getElementById("export").textContent = "model=" + btoa(unescape(encodeURIComponent(s)));
 }, 3000);
 </script>"""
 
