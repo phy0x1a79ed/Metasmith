@@ -1,0 +1,653 @@
+<title>Metasmith Methods Panels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout: a gallery ground holding one card per panel; each figure scrolls sideways inside its card on a phone. */
+  :root {
+    --ground:#F5F6F8; --surface:#FFFFFF; --ink:#1B1E24; --muted:#5F6878; --faint:#9AA2AF;
+    --rule:#E2E4E9; --accent:#4F5BD5; --accent-soft:#E9EBFC;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --ground:#14171C; --surface:#1B1E24; --ink:#DFE3EA; --muted:#97A0B0; --faint:#6B7484;
+    --rule:#2F343D; --accent:#8B93FB; --accent-soft:#272B4A; color-scheme:dark;
+  } }
+  :root[data-theme="dark"] {
+    --ground:#14171C; --surface:#1B1E24; --ink:#DFE3EA; --muted:#97A0B0; --faint:#6B7484;
+    --rule:#2F343D; --accent:#8B93FB; --accent-soft:#272B4A; color-scheme:dark;
+  }
+  body { background:var(--ground); color:var(--ink); margin:0; font-family:var(--sans); font-size:14px; line-height:1.45; }
+  .wrap { padding-inline:16px; padding-block:24px 64px; max-width:1280px; margin-inline:auto; display:grid; gap:20px; }
+  .top { display:flex; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+  .top > .intro { min-width:0; flex:1 1 320px; }
+  h1 { font-size:19px; font-weight:500; margin:0; letter-spacing:-0.01em; text-wrap:balance; }
+  .lede { color:var(--muted); font-size:13px; margin:6px 0 0; max-width:70ch; }
+  .seg { display:inline-flex; border:1px solid var(--rule); border-radius:8px; padding:3px; background:var(--surface); gap:3px; }
+  .seg button { font:500 12.5px var(--sans); color:var(--muted); background:none; border:0; border-radius:6px; padding:5px 12px; cursor:pointer; }
+  .seg button[aria-pressed="true"] { background:var(--accent-soft); color:var(--ink); }
+  .seg button:focus-visible, .dl:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .panel { margin:0; background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:16px 18px 18px; min-width:0; }
+  .panel-head { display:flex; align-items:baseline; gap:10px 14px; flex-wrap:wrap; border-bottom:1px solid var(--rule); padding-bottom:12px; margin-bottom:16px; }
+  .panel-head h2 { font-size:15px; font-weight:600; margin:0; }
+  .panel-head .sub { color:var(--muted); font-size:12.5px; }
+  .panel-head .tools { margin-left:auto; display:flex; align-items:center; gap:10px; }
+  .status { font-size:12px; color:var(--muted); }
+  .dl { display:inline-flex; align-items:center; gap:6px; font:500 12.5px var(--sans); color:var(--ink); background:var(--surface);
+    border:1px solid var(--rule); border-radius:7px; padding:6px 12px; cursor:pointer; }
+  .dl:hover { border-color:var(--muted); }
+  .dl svg { width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .scroll { overflow-x:auto; }
+  .fig svg { display:block; max-width:100%; height:auto; }
+  .note { color:var(--faint); font-size:12px; margin:0; }
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <div class="intro">
+      <h1>Metasmith methods panels</h1>
+      <p class="lede">Figures 1 to 3 as one panel, redrawn from the Trilium canvases in the style of figures 4 to 6: straight strokes, one label size, and triangles for transforms.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Theme">
+      <button type="button" data-set-theme="light" id="theme-light">Light</button>
+      <button type="button" data-set-theme="dark" id="theme-dark">Dark</button>
+    </div>
+  </div>
+
+  <section class="panel" id="panel-2" aria-labelledby="p2-title">
+    <div class="panel-head">
+      <h2 id="p2-title">Figures 1 to 3</h2><span class="sub">A interface · B types · C solver</span>
+      <div class="tools"><span class="status" id="p2-status" aria-live="polite"></span>
+        <button type="button" class="dl" id="p2-dl" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download SVG</button></div>
+    </div>
+    <div class="scroll"><div class="fig" id="p2-fig" role="img" aria-label="Methods panel: A layered interface, B types, C solver"></div></div>
+  </section>
+  <p class="note">The panel shows at its exported size (60% of the drawing). Downloads save it in the theme shown.</p>
+</div>
+
+<script type="application/json" id="fig-data">__DATA__</script>
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById("fig-data").textContent);
+  const ORDER = [["interface", "A"], ["types", "B"], ["solver", "C"]];
+  const root = document.documentElement;
+  const osDark = matchMedia("(prefers-color-scheme: dark)");
+  const theme = () => root.dataset.theme || (osDark.matches ? "dark" : "light");
+
+  // Figure palette, matched to figures 4-6 (Plotly hues, Arial labels, grey connectors).
+  const PAL = {
+    light: { bg: "#FFFFFF", ink: "#2B2B2B", edge: "#666666", text: "#111111", p1bg: "#FFFFFF" },
+    dark:  { bg: "#1B1E24", ink: "#DFE3EA", edge: "#8D97A8", text: "#DFE3EA", p1bg: "#121212" },
+  };
+  const HUE = { "#1971c2": "#636EFA", "#636efa": "#636EFA", "#ab63fa": "#AB63FA", "#ef553b": "#EF553B", "#00cc96": "#00CC96" };
+  const FONT = "Arial, Helvetica, sans-serif";
+  const f = (n) => String(Math.round(n * 100) / 100);
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const mctx = document.createElement("canvas").getContext("2d");
+  const textWidth = (t, fs) => { mctx.font = `${fs}px ${FONT}`; return mctx.measureText(t).width; };
+
+  function color(c, role, pal) {
+    c = String(c || "").toLowerCase();
+    if (!c || c === "transparent") return "none";
+    if (c === "#1e1e1e" || c === "#000000") return pal[role];
+    if (c === "#ffffff") return pal.bg;
+    return HUE[c] || c;
+  }
+
+  // ---- clean renderer for excalidraw scenes ----
+  function simplify(pts, tol) {
+    if (pts.length < 3) return pts;
+    const a = pts[0], b = pts[pts.length - 1];
+    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1;
+    let idx = -1, dmax = 0;
+    for (let i = 1; i < pts.length - 1; i++) {
+      const d = Math.abs(dy * pts[i][0] - dx * pts[i][1] + b[0] * a[1] - b[1] * a[0]) / L;
+      if (d > dmax) { dmax = d; idx = i; }
+    }
+    if (dmax <= tol) return [a, b];
+    return simplify(pts.slice(0, idx + 1), tol).slice(0, -1).concat(simplify(pts.slice(idx), tol));
+  }
+  function straighten(pts) {
+    const out = [pts[0].slice()];
+    for (let i = 1; i < pts.length; i++) {
+      const p = out[i - 1], q = pts[i].slice();
+      const ang = Math.abs(Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI);
+      if (Math.min(ang, 180 - ang) < 6) q[1] = p[1];
+      else if (Math.abs(ang - 90) < 6) q[0] = p[0];
+      out.push(q);
+    }
+    return out;
+  }
+  function cornerPath(pts, r) {
+    let d = `M ${f(pts[0][0])} ${f(pts[0][1])}`;
+    for (let i = 1; i < pts.length - 1; i++) {
+      const p = pts[i - 1], q = pts[i], n = pts[i + 1];
+      const l1 = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, l2 = Math.hypot(n[0] - q[0], n[1] - q[1]) || 1;
+      const rr = Math.min(r, l1 / 2, l2 / 2);
+      const a = [q[0] + (p[0] - q[0]) * rr / l1, q[1] + (p[1] - q[1]) * rr / l1];
+      const b = [q[0] + (n[0] - q[0]) * rr / l2, q[1] + (n[1] - q[1]) * rr / l2];
+      d += ` L ${f(a[0])} ${f(a[1])} Q ${f(q[0])} ${f(q[1])} ${f(b[0])} ${f(b[1])}`;
+    }
+    const z = pts[pts.length - 1];
+    return d + ` L ${f(z[0])} ${f(z[1])}`;
+  }
+  function smoothPath(pts) {
+    if (pts.length < 3) return cornerPath(pts, 0);
+    let d = `M ${f(pts[0][0])} ${f(pts[0][1])}`;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+      const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+      d += ` C ${f(c1[0])} ${f(c1[1])} ${f(c2[0])} ${f(c2[1])} ${f(p2[0])} ${f(p2[1])}`;
+    }
+    return d;
+  }
+  // On-screen sizes shared by every subplot, in composite px (the composite is 1200 wide).
+  const ST = { fs: 25.6, small: 16, sw: 1.5, head: 10, gap: 3, r: 9, dash: [10, 6], dot: [3, 4.5] };
+  const isNode = (e) => !!e && (e.type === "rectangle" || e.type === "ellipse" || e.type === "diamond");
+  function arrowHead(kind, tip, from, sw, len, c, bg) {
+    const dx = tip[0] - from[0], dy = tip[1] - from[1], L = Math.hypot(dx, dy) || 1;
+    const ux = dx / L, uy = dy / L, px = -uy, py = ux, hw = len * 0.42;
+    const b = [tip[0] - ux * len, tip[1] - uy * len];
+    const l = [b[0] + px * hw, b[1] + py * hw], r = [b[0] - px * hw, b[1] - py * hw];
+    switch (kind) {
+      case "triangle": case "triangle_outline":
+        return `<polygon points="${f(tip[0])},${f(tip[1])} ${f(l[0])},${f(l[1])} ${f(r[0])},${f(r[1])}" fill="${kind === "triangle" ? c : bg}" stroke="${c}" stroke-width="${f(sw)}" stroke-linejoin="round"/>`;
+      case "arrow":
+        return `<path d="M ${f(l[0])} ${f(l[1])} L ${f(tip[0])} ${f(tip[1])} L ${f(r[0])} ${f(r[1])}" fill="none" stroke="${c}" stroke-width="${f(sw)}" stroke-linecap="round" stroke-linejoin="round"/>`;
+      case "dot": case "circle": case "circle_outline":
+        return `<circle cx="${f(tip[0] - ux * len * 0.35)}" cy="${f(tip[1] - uy * len * 0.35)}" r="${f(len * 0.35)}" fill="${kind === "circle_outline" ? bg : c}" stroke="${c}" stroke-width="${f(sw)}"/>`;
+      case "bar":
+        return `<path d="M ${f(tip[0] + px * hw)} ${f(tip[1] + py * hw)} L ${f(tip[0] - px * hw)} ${f(tip[1] - py * hw)}" stroke="${c}" stroke-width="${f(sw)}" stroke-linecap="round"/>`;
+      default: return "";
+    }
+  }
+  const dash = (el, k) => el.strokeStyle === "dashed" ? ` stroke-dasharray="${f(ST.dash[0] * k)} ${f(ST.dash[1] * k)}"`
+    : el.strokeStyle === "dotted" ? ` stroke-dasharray="${f(ST.dot[0] * k)} ${f(ST.dot[1] * k)}"` : "";
+  function axisOf(p, q, tol) {
+    const a = Math.abs(Math.atan2(q[1] - p[1], q[0] - p[0]) * 180 / Math.PI);
+    return Math.min(a, 180 - a) < tol ? "h" : Math.abs(a - 90) < tol ? "v" : null;
+  }
+  // Square up segments that are within tol degrees of an axis; with all=true, only when every segment is.
+  function snapAxes(pts, tol, all) {
+    const kinds = pts.slice(1).map((q, i) => axisOf(pts[i], q, tol));
+    if (all && !kinds.every(Boolean)) return null;
+    const out = [pts[0].slice()];
+    for (let i = 1; i < pts.length; i++) {
+      const p = out[i - 1], q = pts[i].slice();
+      if (kinds[i - 1] === "h") q[1] = p[1]; else if (kinds[i - 1] === "v") q[0] = p[0];
+      out.push(q);
+    }
+    return out;
+  }
+  // Drop repeated points and points that sit on a straight run.
+  function tidy(pts) {
+    const out = [pts[0]];
+    for (const p of pts.slice(1)) { const q = out[out.length - 1]; if (Math.hypot(p[0] - q[0], p[1] - q[1]) > 0.5) out.push(p); }
+    for (let i = out.length - 2; i > 0; i--) {
+      const a = out[i - 1], b = out[i], c = out[i + 1];
+      const cross = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+      const ahead = (b[0] - a[0]) * (c[0] - b[0]) + (b[1] - a[1]) * (c[1] - b[1]) > 0;
+      if (ahead && Math.abs(cross) < 0.5 * Math.hypot(c[0] - a[0], c[1] - a[1])) out.splice(i, 1);
+    }
+    return out.length > 1 ? out : pts;
+  }
+  function cluster(items, tol) {
+    items.sort((a, b) => a.v - b.v);
+    let g = [];
+    const flush = () => { if (g.length > 1) { const m = g.reduce((s, o) => s + o.v, 0) / g.length; g.forEach((o) => o.set(m)); } g = []; };
+    for (const o of items) { if (g.length && o.v - g[0].v > tol) flush(); g.push(o); }
+    flush();
+  }
+
+  // opts.stack: centre the wide boxes on one axis (A). opts.align: snap nodes onto shared rows and columns.
+  // opts.triangles: squares become transform triangles. opts.legend: B's key and column captions.
+  function renderScene(elements, pal, opts = {}) {
+    const els = elements.filter((e) => !e.isDeleted).map((e) => Object.assign({}, e,
+      { pts: e.points ? e.points.map(([px, py]) => [e.x + px, e.y + py]) : null }));
+    if (opts.squeezeX) {   // narrow the drawing; wide boxes narrow with it, small icons keep their shape
+      const fx = opts.squeezeX, x0 = Math.min(...els.map((e) => (e.pts ? Math.min(...e.pts.map((p) => p[0])) : e.x)));
+      const sx = (x) => x0 + (x - x0) * fx;
+      // small drawn groups (the user icon) move as one piece
+      const groups = {};
+      for (const e of els) { const g = e.groupIds && e.groupIds.length ? e.groupIds[e.groupIds.length - 1] : null; if (g) (groups[g] = groups[g] || []).push(e); }
+      const moved = new Set();
+      for (const members of Object.values(groups)) {
+        const xs = members.flatMap((e) => (e.pts ? e.pts.map((p) => p[0]) : [e.x, e.x + e.width]));
+        const lo = Math.min(...xs), hi = Math.max(...xs);
+        if (hi - lo > 120) continue;
+        const d = sx((lo + hi) / 2) - (lo + hi) / 2;
+        for (const e of members) { if (e.pts) e.pts.forEach((p) => { p[0] += d; }); else e.x += d; moved.add(e); }
+      }
+      for (const e of els) {
+        if (moved.has(e)) continue;
+        if (e.pts) {
+          const xs = e.pts.map((p) => p[0]), lo = Math.min(...xs), hi = Math.max(...xs);
+          if (e.type === "line" && hi - lo < 60) { const d = sx((lo + hi) / 2) - (lo + hi) / 2; e.pts.forEach((p) => { p[0] += d; }); }
+          else e.pts.forEach((p) => { p[0] = sx(p[0]); });
+        } else if (isNode(e) && e.width > 100) { e.x = sx(e.x); e.width *= fx; }
+        else { const cx = e.x + e.width / 2; e.x = sx(cx) - e.width / 2; }
+      }
+    }
+    if (opts.extraCase) {   // B: a second not-chainable case, built from the chainable column, between the two
+      const seps = els.filter((e) => e.type === "line" && e.strokeStyle === "dashed" && e.pts).sort((a, b) => a.pts[0][0] - b.pts[0][0]);
+      const tf = els.find((e) => e.type === "text" && /^Transform:?$/.test(e.text));
+      const below = tf ? tf.y + tf.height + 5 : -Infinity;
+      if (seps.length >= 2) {
+        const x1 = seps[0].pts[0][0], x2 = seps[1].pts[0][0], pitch = x2 - x1;
+        const xs = (e) => (e.pts ? e.pts.map((p) => p[0]) : [e.x, e.x + e.width]);
+        const topY = (e) => (e.pts ? Math.min(...e.pts.map((p) => p[1])) : e.y);
+        const band = (lo, hi) => els.filter((e) => !seps.includes(e) && Math.min(...xs(e)) > lo && Math.max(...xs(e)) < hi && topY(e) > below);
+        const shift = (e, dx) => { if (e.pts) e.pts.forEach((p) => { p[0] += dx; }); else e.x += dx; };
+        const mid = band(x1, x2);
+        band(x2, Infinity).forEach((e) => shift(e, pitch));
+        const clones = mid.map((e) => {
+          const c = JSON.parse(JSON.stringify(e));
+          c.id = e.id + "-nc"; delete c.startBinding; delete c.endBinding;
+          if (c.containerId) c.containerId += "-nc";
+          shift(c, pitch); return c;
+        });
+        const arrows = clones.filter((c) => c.type === "arrow").sort((a, b) => a.pts[0][1] - b.pts[0][1]);
+        if (arrows.length >= 2) { arrows[0].endInner = true; arrows[arrows.length - 1].startOuter = true; }
+        const letters = clones.filter((c) => c.type === "text" && /^[A-Z]$/.test(c.text)).sort((a, b) => a.y - b.y);
+        if (letters.length >= 2) letters[letters.length - 1].text = "Z";
+        els.push(...clones);
+      }
+    }
+    const byId = Object.fromEntries(els.map((e) => [e.id, e]));
+    const nodes = els.filter(isNode);
+    if (opts.squeezeY) {   // pull rows closer together; shapes keep their size
+      const fy = opts.squeezeY, y0 = Math.min(...els.map((e) => e.y));
+      const sy = (y) => y0 + (y - y0) * fy;
+      for (const e of els) {
+        if (e.pts) { e.pts.forEach((p) => { p[1] = sy(p[1]); }); continue; }
+        const cy = e.y + e.height / 2; e.y = sy(cy) - e.height / 2;
+      }
+    }
+    if (opts.lift) {   // move everything drawn above `above` down by dy; arrows leaving it stretch to follow
+      const { above, dy, icon = 0 } = opts.lift;
+      for (const e of els) {
+        if (isNode(e) && e.y + e.height < above) {
+          e.y += dy + icon;
+          if (opts.tallHead && e.type === "ellipse" && e.width < 40) {   // upright oval, bottom kept in place
+            const bot = e.y + e.height, cx = e.x + e.width / 2, w = Math.min(e.width, e.height) * 1.04, h = Math.max(e.width, e.height) * 1.1;
+            e.width = w; e.height = h; e.x = cx - w / 2; e.y = bot - h; e.keepShape = true;
+          }
+        }
+        else if (e.pts && e.type === "line" && Math.max(...e.pts.map((p) => p[1])) < above) e.pts.forEach((p) => { p[1] += dy + icon; });
+        else if (e.pts && e.type === "arrow" && e.pts[0][1] < above + 15) {
+          const y0 = e.pts[0][1], y1 = e.pts[e.pts.length - 1][1];
+          e.pts.forEach((p) => { p[1] += dy * Math.max(0, 1 - (p[1] - y0) / ((y1 - y0) || 1)); });
+        }
+      }
+    }
+    for (const e of nodes) {
+      const a = (((e.angle || 0) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      if (a < 0.15 || Math.abs(a - Math.PI) < 0.15 || 2 * Math.PI - a < 0.15) e.angle = 0;   // a half-turn leaves these shapes unchanged
+      if (e.type === "ellipse" && !e.keepShape && Math.abs(e.width - e.height) < 0.1 * Math.max(e.width, e.height)) {
+        const m = (e.width + e.height) / 2, cx = e.x + e.width / 2, cy = e.y + e.height / 2;
+        e.width = e.height = m; e.x = cx - m / 2; e.y = cy - m / 2;
+      }
+      e.cx0 = e.x + e.width / 2; e.cy0 = e.y + e.height / 2;
+    }
+    const nearNode = (pt, pad) => {
+      let best = null, bd = Infinity;
+      for (const n of nodes) {
+        if (pt[0] < n.x - pad || pt[0] > n.x + n.width + pad || pt[1] < n.y - pad || pt[1] > n.y + n.height + pad) continue;
+        const d = Math.hypot(pt[0] - n.cx0, pt[1] - n.cy0);
+        if (d < bd) { bd = d; best = n; }
+      }
+      return best;
+    };
+    const linear = els.filter((e) => (e.type === "arrow" || e.type === "line") && e.pts && e.pts.length > 1);
+    // Which node each arrow end belongs to, judged on the drawing as made.
+    for (const e of linear) if (e.type === "arrow") {
+      const n = e.pts.length;
+      const pick = (b, pt) => (b && isNode(byId[b.elementId]) ? byId[b.elementId] : nearNode(pt, 12));
+      e.att = [pick(e.startBinding, e.pts[0]), pick(e.endBinding, e.pts[n - 1])];
+    }
+    // Labels sitting on a node belong to it (the innermost one).
+    for (const e of els) if (e.type === "text") {
+      if (e.containerId) { if (isNode(byId[e.containerId])) { e.host = byId[e.containerId]; e.bound = true; } continue; }
+      const c = [e.x + e.width / 2, e.y + e.height / 2];
+      for (const n of nodes) if (c[0] > n.x && c[0] < n.x + n.width && c[1] > n.y && c[1] < n.y + n.height)
+        if (!e.host || n.width * n.height < e.host.width * e.host.height) e.host = n;
+    }
+    if (opts.stack) {
+      const boxes = nodes.filter((e) => e.type === "rectangle" && e.width > 60);   // after squeezeX, GUI is ~80 wide
+      const axis = boxes.reduce((a, b) => (b.width > a.width ? b : a)).cx0;
+      for (const b of boxes) b.x = axis - b.width / 2;
+      const byTop = boxes.slice().sort((p, q) => p.y - q.y);
+      for (let i = 0; i < byTop.length - 1; i++) {
+        const up = byTop[i], low = byTop[i + 1];
+        if (up.y + up.height > low.y - 2) up.height = low.y - up.y;   // rests on the box below instead of cutting into it
+      }
+    }
+    if (opts.align) {
+      cluster(nodes.filter((e) => Math.max(e.width, e.height) < 200).map((e) => ({ v: e.x + e.width / 2, set: (m) => { e.x = m - e.width / 2; } })), 8);
+      cluster(nodes.filter((e) => Math.max(e.width, e.height) < 60).map((e) => ({ v: e.y + e.height / 2, set: (m) => { e.y = m - e.height / 2; } })), 7);
+    }
+    for (const e of nodes) {
+      e.cx = e.x + e.width / 2; e.cy = e.y + e.height / 2; e.top = e.y; e.bot = e.y + e.height;
+      if (opts.triangles && e.type === "rectangle" && Math.max(e.width, e.height) < 90) {
+        e.tw = Math.max(e.width, e.height) * (opts.legend ? 1.25 : 1); e.th = e.tw * 0.86;   // B's steps carry a letter
+        e.tri = true; e.bot = e.top + e.th;
+      }
+    }
+    // Arrow ends follow the node they belong to; an elbow's first or last bend moves with them.
+    for (const e of linear) if (e.att) {
+      const n = e.pts.length;
+      [[0, 1], [n - 1, n - 2]].forEach(([i, j], w) => {
+        const node = e.att[w]; if (!node) return;
+        const dx = node.cx - node.cx0, dy = node.cy - node.cy0, pt = e.pts[i], nb = e.pts[j];
+        const run = n > 2 ? axisOf(nb, pt, 15) : null;   // the bend slides along with a near-straight end run
+        if (run === "v") nb[0] += dx;
+        if (run === "h") nb[1] += dy;
+        pt[0] += dx; pt[1] += dy;
+      });
+    }
+    for (const e of linear) {
+      const p = e.elbowed ? e.pts.map((q) => q.slice()) : simplify(e.pts, 4);
+      const orth = p.length > 2 ? snapAxes(p, 15, true) : null;
+      e.orth = !!(e.elbowed || orth);
+      e.p = orth || snapAxes(p, 6, false);
+    }
+    // Ends that nearly meet share one point (the three arrows leaving the user in A, the strokes of icons).
+    const ends = [];
+    for (const e of linear) ends.push(e.p[0], e.p[e.p.length - 1]);
+    for (let i = 0; i < ends.length; i++) for (let j = i + 1; j < ends.length; j++) {
+      const a = ends[i], b = ends[j], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      if (d > 0 && d < 4) { a[0] = b[0] = (a[0] + b[0]) / 2; a[1] = b[1] = (a[1] + b[1]) / 2; }
+    }
+    for (const e of linear) if (!e.orth && e.p.length === 2) e.p = snapAxes(e.p, 6, false);
+
+    if (opts.legend) {
+      const types = els.find((e) => e.type === "text" && /^Types:?$/.test(e.text));
+      const tf = els.find((e) => e.type === "text" && /^Transform:?$/.test(e.text));
+      const key = tf && nodes.find((n) => n.tri && Math.abs(n.cy - (tf.y + tf.height / 2)) < 25 && n.x > tf.x);
+      if (key) { key.after = tf; key.isKey = true; }
+      if (types) {
+        types.text = "Types:";
+        const sz = key ? key.tw * 0.8 : 28;
+        if (key) { key.tw = sz; key.th = sz * 0.86; }
+        const circ = { id: "key-type", type: "ellipse", x: 0, y: 0, width: sz, height: sz, strokeColor: "#1e1e1e",
+          backgroundColor: "transparent", strokeWidth: 2, strokeStyle: "solid", opacity: 100, after: types, isKey: true };
+        els.splice(els.indexOf(types) + 1, 0, circ);
+      }
+      const old = els.find((e) => e.type === "text" && /chainable/i.test(e.text));
+      if (old) els.splice(els.indexOf(old), 1);
+      const seps = linear.filter((e) => e.type === "line" && e.strokeStyle === "dashed").sort((a, b) => a.p[0][0] - b.p[0][0]);
+      if (seps.length >= 2) {
+        const x1 = seps[0].p[0][0], x2 = seps[1].p[0][0], below = key ? key.cy + 25 : -Infinity;
+        const col = (lo, hi) => nodes.filter((n) => !n.isKey && n.cx > lo && n.cx < hi && n.cy > below);
+        for (const [text, members, bar] of [["Chainable", col(x1, x2), false], ["Not chainable", col(x2, Infinity), true]]) {
+          if (members.length) els.push({ id: "cap-" + text, type: "text", text, caption: members, bar, x: 0, y: 0, width: 0, height: 0,
+            strokeColor: "#1e1e1e", opacity: 100, lineHeight: 1.25 });
+        }
+      }
+    }
+
+    // Everything sized on screen is drawn at k scene units per composite px.
+    const build = (k) => {
+      const out = [], sw = ST.sw * k, len = ST.head * k, gap = ST.gap * k, fs = ST.fs * k;
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      const grow = (x, y) => { minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x); maxY = Math.max(maxY, y); };
+      // Key icons sit just after their label.
+      for (const e of els) if (e.after) {
+        const t = e.after, tw = textWidth(t.text, fs);
+        const left = t.textAlign === "center" ? t.x + t.width / 2 - tw / 2 : t.textAlign === "right" ? t.x + t.width - tw : t.x;
+        const size = e.tri ? e.tw : e.width, cx = left + tw + 8 * k + size / 2, cy = t.y + t.height / 2;
+        if (e.tri) { e.cx = cx; e.top = cy - e.th / 2; e.bot = e.top + e.th; }
+        else { e.x = cx - size / 2; e.y = cy - size / 2; e.cx = cx; e.cy = cy; }
+      }
+      // Arrow ends land on the centre line of their node, a fixed gap off its edge.
+      for (const e of linear) {
+        const p = e.p.map((q) => q.slice()), n = p.length;
+        const drop = n === 2 && e.att && e.att[0] && Math.abs(p[1][0] - p[0][0]) <= Math.abs(p[1][1] - p[0][1]);
+        if (opts.align && drop) {
+          let s = e.att[0];
+          for (const m of nodes) if (m.type === s.type && m.width < s.width && Math.abs(m.cx - s.cx) < 2 && Math.abs(m.cy - s.cy) < 2 && (m.width < (s.inner || s).width)) s.inner = m;
+          if (s.inner && !e.startOuter) s = s.inner;   // e.g. FASTA inside Nucleic Acid: the step consumes the inner type
+          if (e.startOuter) for (const m of nodes) if (m.type === s.type && m.width > s.width && Math.abs(m.cx - s.cx) < 2 && Math.abs(m.cy - s.cy) < 2) s = m;   // a clone has no binding, so it attached to the nearest centre, which may be the inner ring
+          const x = s.cx, down = p[1][1] > p[0][1];
+          const g0 = e.startOuter ? 0 : gap;   // leaves the outer ring from its edge
+          p[0] = [x, down ? s.bot + g0 : s.top - g0];
+          let hy = down ? Infinity : -Infinity, hit = null;
+          for (const m of nodes) {
+            if (m === s || m.isKey) continue;
+            const half = m.tri ? m.tw / 2 : m.width / 2, dx = x - m.cx;
+            if (Math.abs(dx) >= half) continue;
+            let yTop = m.top, yBot = m.bot;
+            if (m.type === "ellipse") { const t = (m.height / 2) * Math.sqrt(1 - (dx / half) ** 2); yTop = m.cy - t; yBot = m.cy + t; }
+            else if (m.tri) yBot = m.top + m.th * (1 - Math.abs(dx) / half);
+            if (down && yTop > p[0][1] && yTop < hy) { hy = yTop; hit = m; }
+            if (!down && yBot < p[0][1] && yBot > hy) { hy = yBot; hit = m; }
+          }
+          if (hit && e.endInner && down) {   // land on the innermost ring instead of the outer one
+            let inner = hit;
+            for (const m of nodes) if (m.type === hit.type && m.width < inner.width && Math.abs(m.cx - hit.cx) < 2 && Math.abs(m.cy - hit.cy) < 2) inner = m;
+            if (inner !== hit) hy = inner.cy - inner.height / 2;
+          }
+          const g2 = e.endInner ? 0 : gap;   // the arrow into the inner ring touches it
+          p[1] = hit ? [x, down ? hy - g2 : hy + g2] : [x, p[1][1]];
+        } else if (opts.align && e.att) {
+          [[0, 1], [n - 1, n - 2]].forEach(([i, j], w) => {
+            const s = e.att[w]; if (!s) return;
+            const pt = p[i], nb = p[j];
+            if (Math.abs(nb[0] - pt[0]) <= Math.abs(nb[1] - pt[1])) {
+              if (n === 2 || Math.abs(nb[0] - pt[0]) < 3) nb[0] = s.cx;
+              pt[0] = s.cx; pt[1] = pt[1] < s.cy ? s.top - gap : s.bot + gap;
+            } else {
+              const half = s.tri ? s.tw / 2 : s.width / 2;
+              if (n === 2 || Math.abs(nb[1] - pt[1]) < 3) nb[1] = s.cy;
+              pt[1] = s.cy; pt[0] = pt[0] < s.cx ? s.cx - half - gap : s.cx + half + gap;
+            }
+          });
+        }
+        e.q = tidy(p);
+      }
+      let hostFs = fs;
+      for (const e of els) if (e.type === "text" && e.host && !e.host.tri) {
+        const h = e.host, lines = String(e.text ?? "").split("\n"), lh = e.lineHeight || 1.25;
+        const room = h.type === "ellipse" ? h.width * 0.78 : h.width - 16 * k;
+        hostFs = Math.min(hostFs, room / Math.max(...lines.map((t) => textWidth(t, 1))),
+          e.bound ? (h.height * 0.8) / (lines.length * lh) : Infinity);
+      }
+      // a long axis arrow near a free label: the label centres on it
+      const axisNear = (e, dir) => {
+        const tcx = e.x + e.width / 2, tcy = e.y + e.height / 2;
+        return linear.find((l) => {
+          const q = l.q; if (!q || q.length !== 2 || !l.endArrowhead) return false;
+          const [a, b] = q, horiz = Math.abs(a[1] - b[1]) < 1, vert = Math.abs(a[0] - b[0]) < 1;
+          if (dir === "h") return horiz && Math.abs(a[0] - b[0]) > 300 && Math.abs(a[1] - tcy) < 80 && tcx > Math.min(a[0], b[0]) && tcx < Math.max(a[0], b[0]);
+          return vert && Math.abs(a[1] - b[1]) > 300 && Math.abs(a[0] - tcx) < 80 && tcy > Math.min(a[1], b[1]) && tcy < Math.max(a[1], b[1]);
+        });
+      };
+      for (const e of els) {
+        const op = (e.opacity ?? 100) < 100 ? ` opacity="${f(e.opacity / 100)}"` : "";
+        if (isNode(e)) {
+          const st = color(e.strokeColor, "ink", pal), fl = color(e.backgroundColor, "ink", pal);
+          const tr = e.angle ? ` transform="rotate(${f(e.angle * 180 / Math.PI)} ${f(e.cx)} ${f(e.cy)})"` : "";
+          const common = `fill="${fl}" stroke="${st}" stroke-width="${f(sw)}"${dash(e, k)}${op}${tr}`;
+          if (e.tri) {
+            out.push(`<polygon points="${f(e.cx - e.tw / 2)},${f(e.top)} ${f(e.cx + e.tw / 2)},${f(e.top)} ${f(e.cx)},${f(e.bot)}" stroke-linejoin="round" ${common}/>`);
+            grow(e.cx - e.tw / 2, e.top); grow(e.cx + e.tw / 2, e.bot);
+            continue;
+          }
+          if (e.type === "rectangle") {
+            const r = e.roundness ? (e.roundness.type === 3 ? Math.min(32, Math.min(e.width, e.height) * 0.25) : Math.min(e.width, e.height) * 0.25) : 0;
+            out.push(`<rect x="${f(e.x)}" y="${f(e.y)}" width="${f(e.width)}" height="${f(e.height)}" rx="${f(r)}" ${common}/>`);
+          } else if (e.type === "ellipse") {
+            out.push(`<ellipse cx="${f(e.cx)}" cy="${f(e.cy)}" rx="${f(e.width / 2)}" ry="${f(e.height / 2)}" ${common}/>`);
+          } else {
+            out.push(`<polygon points="${f(e.cx)},${f(e.y)} ${f(e.x + e.width)},${f(e.cy)} ${f(e.cx)},${f(e.y + e.height)} ${f(e.x)},${f(e.cy)}" stroke-linejoin="round" ${common}/>`);
+          }
+          grow(e.x, e.y); grow(e.x + e.width, e.y + e.height);
+        } else if (e.q) {
+          const q = e.q, n = q.length, c = color(e.strokeColor, "edge", pal);
+          // A sweep that ends near-vertically lands exactly vertically, so its head points straight down.
+          const sweep = !e.orth && n === 3 && e.roundness && e.endArrowhead && Math.abs(q[2][0] - q[1][0]) < 0.6 * Math.abs(q[2][1] - q[1][1]);
+          const ctrl = sweep ? [q[2][0], q[1][1]] : null;
+          const endFrom = sweep ? ctrl : q[n - 2], startFrom = sweep ? ctrl : q[1];
+          const dp = q.map((p) => p.slice());
+          const pull = (i, from, kind) => {          // the line stops under a solid head
+            if (!kind || kind === "arrow" || kind === "bar") return;
+            const dx = dp[i][0] - from[0], dy = dp[i][1] - from[1], L = Math.hypot(dx, dy) || 1, t = Math.min(len * 0.7, L * 0.5);
+            dp[i] = [dp[i][0] - dx / L * t, dp[i][1] - dy / L * t];
+          };
+          pull(n - 1, endFrom, e.endArrowhead); pull(0, startFrom, e.startArrowhead);
+          const d = sweep ? `M ${f(dp[0][0])} ${f(dp[0][1])} Q ${f(ctrl[0])} ${f(ctrl[1])} ${f(dp[2][0])} ${f(dp[2][1])}`
+            : e.orth ? cornerPath(dp, ST.r * k) : (e.roundness && n > 2 ? smoothPath(dp) : cornerPath(dp, 0));
+          const closed = e.type === "line" && n > 2 && Math.hypot(q[0][0] - q[n - 1][0], q[0][1] - q[n - 1][1]) < 1;
+          let g = `<path d="${d}" fill="${closed ? color(e.backgroundColor, "ink", pal) : "none"}" stroke="${c}" stroke-width="${f(sw)}" stroke-linejoin="round"${dash(e, k)}/>`;
+          if (e.endArrowhead) g += arrowHead(e.endArrowhead, q[n - 1], endFrom, sw, len, c, pal.bg);
+          if (e.startArrowhead) g += arrowHead(e.startArrowhead, q[0], startFrom, sw, len, c, pal.bg);
+          out.push(`<g${op}>${g}</g>`);
+          for (const p of q) grow(p[0], p[1]);
+        } else if (e.type === "text") {
+          const lines = String(e.text ?? "").split("\n"), lh = e.lineHeight || 1.25;
+          const tri = e.host && e.host.tri;
+          let tfs = tri ? ST.small * k : fs;
+          if (e.host && !tri) tfs = hostFs;
+          const blockH = lines.length * tfs * lh;
+          let ax, cy, anchor = "middle";
+          const box = e.containerId && byId[e.containerId];
+          if (e.caption) {
+            const lo = Math.min(...e.caption.map((n) => n.tri ? n.cx - n.tw / 2 : n.x));
+            const hi = Math.max(...e.caption.map((n) => n.tri ? n.cx + n.tw / 2 : n.x + n.width));
+            const cx = (lo + hi) / 2, tw = textWidth(e.text, tfs);
+            let y0 = Math.max(...e.caption.map((n) => n.bot)) + 12 * k;
+            if (e.bar) {   // a plain bar spans the columns the label covers
+              out.push(`<path d="M ${f(lo)} ${f(y0)} L ${f(hi)} ${f(y0)}" fill="none" stroke="${color(e.strokeColor, "edge", pal)}" stroke-width="${f(sw)}"/>`);
+              grow(lo, y0); grow(hi, y0); y0 += 8 * k;
+            }
+            // turned a quarter: reads bottom to top, hanging down from its column
+            out.push(`<g${op} transform="translate(${f(cx)} ${f(y0)}) rotate(-90)"><text x="0" y="${f(tfs * 0.35)}" font-family="${FONT}" font-size="${f(tfs)}" fill="${color(e.strokeColor, "text", pal)}" text-anchor="end">${esc(e.text)}</text></g>`);
+            grow(cx - tfs / 2, y0); grow(cx + tfs / 2, y0 + tw);
+            continue;
+          } else if (e.host) {
+            ax = e.host.cx;
+            cy = tri ? e.host.top + e.host.th / 3 : e.bound ? e.host.cy : e.y + e.height / 2;
+          } else if (e.angle) {
+            ax = e.x + e.width / 2; cy = e.y + e.height / 2;
+            const v = axisNear(e, "v"); if (v) cy = (v.q[0][1] + v.q[1][1]) / 2;
+          } else {
+            anchor = e.textAlign === "center" ? "middle" : e.textAlign === "right" ? "end" : "start";
+            ax = e.textAlign === "center" ? e.x + e.width / 2 : e.textAlign === "right" ? e.x + e.width : e.x;
+            cy = e.y + e.height / 2;
+            const h = axisNear(e, "h");
+            if (h) { anchor = "middle"; ax = (h.q[0][0] + h.q[1][0]) / 2; }
+            else if (anchor === "start" && opts.pullLeft) {   // a label right of the graph sits close to it
+              const t0 = cy - blockH / 2, t1 = cy + blockH / 2;
+              let edge = -Infinity;
+              for (const n of nodes) if (n.bot > t0 - 20 && n.top < t1 + 20 && n.cx < ax) edge = Math.max(edge, n.tri ? n.cx + n.tw / 2 : n.x + n.width);
+              for (const l of linear) for (let i = 1; i < (l.q || []).length; i++) {
+                const a2 = l.q[i - 1], b2 = l.q[i];
+                if (Math.max(a2[1], b2[1]) > t0 && Math.min(a2[1], b2[1]) < t1 && Math.max(a2[0], b2[0]) < ax) edge = Math.max(edge, a2[0], b2[0]);
+              }
+              if (edge > -Infinity && edge + 24 * k < ax) ax = edge + 24 * k;
+            }
+            else if (anchor === "start") {   // a label just left of a box grows leftward, away from it
+              const r = e.x + e.width;
+              const box = nodes.find((n) => !n.isKey && n.x > r - 5 && n.x - r < 80 && Math.abs(n.cy - cy) < n.height / 2 + 30);
+              if (box) { anchor = "end"; ax = box.x - 12 * k; cy = Math.min(cy, box.cy - blockH / 2 - 6 * k); }   // and clears arrows leaving the box side
+            }
+          }
+          const top = cy - blockH / 2;
+          const tr = e.angle ? ` transform="rotate(${f(e.angle * 180 / Math.PI)} ${f(ax)} ${f(cy)})"` : "";
+          let g = "";
+          const tw = Math.max(...lines.map((t) => textWidth(t, tfs)));
+          if (box && (box.type === "arrow" || box.type === "line")) {
+            const w = tw + tfs * 0.5, x0 = anchor === "middle" ? ax - w / 2 : anchor === "end" ? ax - w : ax - tfs * 0.25;
+            g += `<rect x="${f(x0)}" y="${f(top - 2 * k)}" width="${f(w)}" height="${f(blockH + 4 * k)}" fill="${pal.bg}"/>`;
+          }
+          g += `<text font-family="${FONT}" font-size="${f(tfs)}" fill="${color(e.strokeColor, "text", pal)}" text-anchor="${anchor}">`;
+          lines.forEach((t, i) => { g += `<tspan x="${f(ax)}" y="${f(top + tfs * lh * (i + 0.5) + tfs * 0.35)}">${esc(t)}</tspan>`; });
+          out.push(`<g${op}${tr}>${g}</text></g>`);
+          const x0 = anchor === "middle" ? ax - tw / 2 : anchor === "end" ? ax - tw : ax;
+          if (e.angle) { const r = Math.max(tw, blockH) / 2; grow(ax - blockH / 2, cy - r); grow(ax + blockH / 2, cy + r); } else { grow(x0, top); grow(x0 + tw, top + blockH); }
+        }
+      }
+      return { svg: out.join(""), box: [minX, minY, maxX, maxY] };
+    };
+    // Size the viewBox from a first pass at an even scale, then draw at the scale the composition gives.
+    const frame = (k) => {
+      const [x0, y0, x1, y1] = build(k).box, pad = 12 * k;
+      return { vx: x0 - pad, vy: y0 - pad, w: x1 - x0 + 2 * pad, h: y1 - y0 + 2 * pad };
+    };
+    let fr = frame(1);
+    return {
+      get w() { return fr.w; }, get h() { return fr.h; },
+      refit(k) { fr = frame(k); },
+      inner: (x, y, dw, dh) =>
+        `<svg x="${f(x)}" y="${f(y)}" width="${f(dw)}" height="${f(dh)}" viewBox="${f(fr.vx)} ${f(fr.vy)} ${f(fr.w)} ${f(fr.h)}" overflow="visible">${build(fr.w / dw).svg}</svg>`,
+    };
+  }
+
+  // ---- composition: A and B side by side at one scale, C full width below ----
+  const SCALE = 0.6;   // exported figure size relative to the 1200-wide drawing
+  function compose(parts, pal, bg) {
+    const W = 1200, PAD = 24, G = 48, LAB = 54;
+    const [a, b, c] = parts;
+    const layout = () => {
+      const s = (W - 2 * PAD - G) / (a.w + b.w), cw = W - 2 * PAD;
+      return { aw: a.w * s, ah: a.h * s, bw: b.w * s, bh: b.h * s, cw, ch: c.h * cw / c.w };
+    };
+    // Text is sized on screen, so a subplot's frame depends on its scale: settle the two together.
+    for (let i = 0; i < 3; i++) { const L = layout(); a.refit(a.w / L.aw); b.refit(b.w / L.bw); c.refit(c.w / L.cw); }
+    const L = layout();
+    // C tucks up under the top row; its letter sits in its own empty top-left corner
+    // A sets the row height: B's hanging captions may run into the empty space beside C's columns
+    const y1 = PAD + LAB, y2 = y1 + L.ah + 12, H = Math.max(y2 + L.ch, y1 + L.bh) + PAD;
+    const label = (t, x, y) => `<text x="${f(x)}" y="${f(y - 18)}" font-family="${FONT}" font-size="40" font-weight="bold" fill="${pal.text}">${t}</text>`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${f(W * SCALE)}" height="${f(H * SCALE)}" viewBox="0 0 ${W} ${f(H)}">`
+      + `<rect width="100%" height="100%" fill="${bg}"/>`
+      + a.inner(PAD, y1, L.aw, L.ah) + b.inner(PAD + L.aw + G, y1, L.bw, L.bh) + c.inner(PAD, y2, L.cw, L.ch)
+      + label(ORDER[0][1], PAD, y1) + label(ORDER[1][1], PAD + L.aw + G, y1) + label(ORDER[2][1], PAD, y2 + 48)
+      + `</svg>`;
+  }
+
+  const SCENE_OPTS = { interface: { stack: true, lift: { above: 240, dy: 75, icon: 12 }, squeezeX: 0.75, tallHead: true }, types: { align: true, triangles: true, legend: true, extraCase: true }, solver: { align: true, triangles: true, squeezeY: 0.72, pullLeft: true } };
+  const built = {};
+  function draw() {
+    const t = theme(), pal = PAL[t];
+    const p2 = compose(ORDER.map(([k]) => renderScene(DATA.scenes[k], pal, SCENE_OPTS[k])), pal, pal.bg);
+    built.p2 = p2;
+    document.getElementById("p2-fig").innerHTML = p2;
+    for (const b of document.querySelectorAll("[data-set-theme]")) b.setAttribute("aria-pressed", String(b.dataset.setTheme === t));
+  }
+
+  function setTheme(v) {
+    if (v === "light" || v === "dark") root.dataset.theme = v; else delete root.dataset.theme;
+    draw();
+  }
+  try { setTheme(localStorage.getItem("methods-panels-theme")); } catch (e) { setTheme(null); }
+  for (const b of document.querySelectorAll("[data-set-theme]")) b.addEventListener("click", () => {
+    try { localStorage.setItem("methods-panels-theme", b.dataset.setTheme); } catch (e) {}
+    setTheme(b.dataset.setTheme);
+  });
+  osDark.addEventListener("change", () => { if (!root.dataset.theme) draw(); });
+
+  // SVG downloads go through the viewer's save prompt.
+  (async () => {
+    const downloads = window.claude?.use ? await window.claude.use("downloads") : null;
+    if (!downloads) return;
+    for (const [id, file] of [["p2", "metasmith_methods_panel"]]) {
+      const btn = document.getElementById(id + "-dl"), status = document.getElementById(id + "-status");
+      btn.hidden = false;
+      btn.addEventListener("click", async () => {
+        status.textContent = "";
+        try {
+          await downloads.save({ filename: `${file}_${theme()}.svg`, data: '<?xml version="1.0" encoding="UTF-8"?>\n' + built[id] });
+          status.textContent = "Saved";
+        } catch (e) {
+          const code = e && e.code;
+          if (code === "declined") status.textContent = "";
+          else if (code === "rate_limited") status.textContent = "A save prompt is already open";
+          else { status.textContent = "Download isn't available here"; btn.hidden = true; }
+        }
+      });
+    }
+  })();
+})();
+</script>
