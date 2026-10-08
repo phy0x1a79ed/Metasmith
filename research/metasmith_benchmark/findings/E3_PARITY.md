@@ -19,7 +19,7 @@ The solve has 34 steps. `page/dags/e3_pratama.dag.svg` draws it. The local plan 
 
 CAUTION: the plan binds 17 hybrid pairings only once each pairing has its own file on fir. Run `drivers/stage_hybrid_pairs.sh` on fir before a relaunch. The given library keys givens by path and resolves symlinks, so pairings that share a MinION file collapse to one given unless each is a separate hard link.
 
-fir's task cache holds every step of wave e3_w9. A relaunch of the same plan recomputes only DeepVirFinder and the steps after it, because the 2 Mbp guard changed DeepVirFinder's transform id. CAUTION: a cache hit needs the environment leaf ids the cache was written with, and those ids are local to the tree that compiled `resources/env/_metadata/index.yml`. Sync from a worktree whose env index matches the archive's, as fir checkout `6afbe544` does. A fresh `-bm` mints new ids, and every task then misses the cache (`R1_WAVES.md` § HH).
+The task cache archived on chinook holds every step of wave e3_w9, and `results/e3/RESUME.md` covers its restore. A relaunch of the same plan recomputes only DeepVirFinder and the steps after it, because the 2 Mbp guard changed DeepVirFinder's transform id. CAUTION: a cache hit needs the environment leaf ids the cache was written with, and those ids are local to the tree that compiled `resources/env/_metadata/index.yml`. Sync from a worktree whose env index matches the archive's, as fir checkout `6afbe544` does. A fresh `-bm` mints new ids, and every task then misses the cache (`R1_WAVES.md` § HH).
 
 ## Decided differences
 

@@ -4,7 +4,8 @@
 
 E3's agent home left fir on 2026-09-22 and lives on the chinook Globus collection. This file tells
 the next agent what the archive contains, what state E3 stopped in, and the five things that turn a
-restore into a silent 2 TB recomputation.
+restore into a silent 2 TB recomputation. It also covers the ablation's add-on archive, and what a
+restore of both needs beyond `restore_e3.sh`.
 
 The restore procedure itself is not here. Run `drivers/restore_e3.sh`, which carries the endpoint
 ids, the external-dependency preflight and the verification numbers. Run
@@ -185,6 +186,32 @@ whose run directories no longer exist. The largest named lanes are `genomad_prat
 **CAUTION** Do not quote shard counts off the per-run rows of `meta/cache_transform_census.tsv`. It
 is grouped by transform *and run*, so a transform's total is the sum of several rows. Reading a
 single row is how `genomad_pratama` and `vibrant_pratama` were previously recorded as 847.
+
+## The ablation archive
+
+The E3 assembler ablation (`findings/E3_ABLATION.md`) ran from a restore of this archive and left
+fir on 2026-10-08. Its own archive is an add-on to this one, not a whole home:
+
+    chinook /Workspace_backups/Tony_Liu/fir_bench_e3_ablation/
+        pratama2026/metasmith/   4,406 new shards (868 GB), cache.sqlite, 7 run records
+        meta/                    manifests, the new-entry list, index counts, README
+
+The Globus task is `f7cc0c6c-c2ee-11f1-8b91-0effcb3df825`. Its index has sha256 `a33aca7a…` and
+14,456 entries: 14,185 lineage, 271 imported, 0 tombstoned. `restore_e3.sh` does not restore it as
+written. A restore that wants the ablation's assemblies must:
+
+1. Restore `fir_bench_e3` first, then copy `fir_bench_e3_ablation/pratama2026` over it at the same
+   path.
+2. **CAUTION** Merge the indexes. The ablation index lacks 3,871 R0-only entries that were evicted
+   on fir before the ablation ran. Their shards exist only in `fir_bench_e3`. The ablation index
+   alone leaves them on disk and unaddressable. `meta/` lists them.
+3. Expect `restore_e3.sh verify` to fail on its counts. It checks the wave-8 index (`eaee257a`,
+   11,326 entries), and neither archive holds that index now.
+4. Restore the ablation's `runs/nP0Jxo8W` elsewhere if wave 9's run record matters. Both archives
+   hold a folder of that name, and the copy over replaces wave 9's record with R1's.
+5. Sync to `/scratch/phyberos/bench/checkout/6afbe544` for a resume. That checkout carries
+   `2d3c669b`'s `deepvirfinder_pratama.py`, and a transform id hashes the library's path.
+6. Recreate `hybrid_pairs/` as hard links into `reads_2022/`, with `drivers/stage_hybrid_pairs.sh`.
 
 ## What a resume actually does
 
