@@ -8,6 +8,7 @@ This directory holds what research support established for the five benchmark ex
 - `BLOCKERS.md` lists the active blockers (B1–B12), the relaunch preconditions and the known latent defects.
 - `R1_TABLE_AUDIT.md` gives every tool-table cell for E1–E5 its status in R1's drivers: matched, pinned, gated or gapfill.
 - `E3_PARITY.md` compares each Pratama 2026 step with E3's solved plan, and lists the plan's heuristic values and open gaps.
+- `E3_ABLATION.md` reports what each assembler lane, and metaSPAdes' error correction, adds to the pooled Pratama catalogue and what it costs.
 - `E4_REPRODUCTION.md` lists how E4's two GEM lanes differ from metaGEM's original methods and from E5's GEM lane, with the measured parity.
 - This README records design findings that belong in neither ledger.
 
