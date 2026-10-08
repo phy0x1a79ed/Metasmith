@@ -1,0 +1,32 @@
+{
+ "published": {
+  "spades": 113105,
+  "megahit": 112924,
+  "hybrid": 31223
+ },
+ "R0": {
+  "spades": 0.7218,
+  "megahit": 0.8181,
+  "hybrid": 0.8976
+ },
+ "R1": {
+  "spades": 0.7108,
+  "megahit": 0.818,
+  "hybrid": 0.7572
+ },
+ "R2": {
+  "spades": 0.607,
+  "megahit": 0.7813,
+  "hybrid": 0.7486
+ },
+ "R3": {
+  "spades": 0.6073,
+  "megahit": 0.7828,
+  "hybrid": 0.3601
+ },
+ "R4": {
+  "spades": 0.6019,
+  "megahit": 0.7786,
+  "hybrid": 0.2631
+ }
+}

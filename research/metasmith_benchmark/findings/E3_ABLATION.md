@@ -80,6 +80,8 @@ The rungs' own vOTUs per lane tag. A vOTU takes its representative's lane, so a 
 
 Each run's `final_votu_recovery_pratama` step writes the skani table of its final set against Pratama's catalogue. Recovery, matched counts and pairing read that table. R0 reads wave e3_w9's table.
 
+`results/e3/ablation/` holds the scorers, the sacct and task-list inputs of the CPU ledger, and their outputs. Run `abl_cpu.py`, then `abl_lanes.py`, then `abl_score.py`. The rung catalogues are too large to commit. The scorers read them from `$E3_FIG` (default `~/scratch/e3_fig`).
+
 The CPU ledger charges a step a rung took from cache at the cost of the run that computed it. Short-read QC and assembly come from run `Son2YJiI`, hybrid assembly from `nP0Jxo8W` in September, and every new assembly from the rung's own runs. The R3 and R4 smoke runs (`1DdONH9q`, `5dqexz5s`) computed sample SRR32696698's hybrid lane, so the ledger adds them.
 
 CAUTION: query fir's `sacct` by job id. A query bounded by `-S` and `-E` silently drops some array elements, and refuses a range wider than about a week.

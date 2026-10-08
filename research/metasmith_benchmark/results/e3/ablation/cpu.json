@@ -1,0 +1,101 @@
+{
+ "units": {
+  "qc": 128.3,
+  "assembly": {
+   "A1_spades": 25946.7,
+   "A2_megahit": 5642.5,
+   "A3_hybrid_spades": 8814.9,
+   "A4_spades_noec": 11648.0,
+   "A5_hybrid_spades_noec": 5051.1,
+   "A6_opera_ms": 1820.5,
+   "A7A8_flye_polca": 671.4
+  },
+  "viral": {
+   "A1_spades": 10976.8,
+   "A2_megahit": 8182.3,
+   "A3_hybrid_spades": 3837.5,
+   "A4_spades_noec": 11194.8,
+   "A5_hybrid_spades_noec": 3907.7,
+   "A6_opera_ms": 2073.9,
+   "A7A8_flye_polca": 1116.1
+  },
+  "tail": {
+   "R0": 822.0,
+   "R1": 783.7,
+   "R2": 441.0,
+   "R3": 414.5,
+   "R4": 433.8
+  }
+ },
+ "proxied": {
+  "Son2YJiI:p14__vibrant_pratama": {
+   "sacct_tasks": 243,
+   "tasks": 561,
+   "proxy": "p19__vibrant_pratama"
+  },
+  "Son2YJiI:p16__genomad_pratama": {
+   "sacct_tasks": 53,
+   "tasks": 561,
+   "proxy": "p21__genomad_pratama"
+  }
+ },
+ "rungs": {
+  "R0": {
+   "sets": [
+    "A1_spades",
+    "A2_megahit",
+    "A3_hybrid_spades"
+   ],
+   "qc": 128.3,
+   "assembly": 40404.1,
+   "viral": 23818.6,
+   "total": 64351.0
+  },
+  "R1": {
+   "sets": [
+    "A4_spades_noec",
+    "A2_megahit",
+    "A5_hybrid_spades_noec"
+   ],
+   "qc": 128.3,
+   "assembly": 22341.6,
+   "viral": 24068.5,
+   "total": 46538.4
+  },
+  "R2": {
+   "sets": [
+    "A2_megahit",
+    "A5_hybrid_spades_noec"
+   ],
+   "qc": 128.3,
+   "assembly": 10693.6,
+   "viral": 12531.0,
+   "total": 23352.9
+  },
+  "R3": {
+   "sets": [
+    "A2_megahit",
+    "A6_opera_ms"
+   ],
+   "qc": 128.3,
+   "assembly": 7463.0,
+   "viral": 10670.7,
+   "total": 18262.0
+  },
+  "R4": {
+   "sets": [
+    "A2_megahit",
+    "A7A8_flye_polca"
+   ],
+   "qc": 128.3,
+   "assembly": 6313.9,
+   "viral": 9732.2,
+   "total": 16174.4
+  }
+ },
+ "ablation_spent": {
+  "all_attempts": 43019.2,
+  "failed_or_cancelled": 1807.0,
+  "r4_dvf_megahit_recompute": 1537.8
+ }
+}
