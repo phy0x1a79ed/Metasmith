@@ -19,7 +19,7 @@ The solve has 34 steps. `page/dags/e3_pratama.dag.svg` draws it. The local plan 
 
 CAUTION: the plan binds 17 hybrid pairings only once each pairing has its own file on fir. Run `drivers/stage_hybrid_pairs.sh` on fir before a relaunch. The given library keys givens by path and resolves symlinks, so pairings that share a MinION file collapse to one given unless each is a separate hard link.
 
-fir's task cache holds every step of wave e3_w9, so a relaunch of the same plan recomputes nothing. CAUTION: a cache hit needs the environment leaf ids the cache was written with, and those ids are local to the tree that compiled `resources/env/_metadata/index.yml`. Sync from a worktree carrying the env index of checkout `61c0eebc`. A fresh `-bm` mints new ids, and every task then misses the cache (`R1_WAVES.md` § HH).
+fir's task cache holds every step of wave e3_w9. A relaunch of the same plan recomputes only DeepVirFinder and the steps after it, because the 2 Mbp guard changed DeepVirFinder's transform id. CAUTION: a cache hit needs the environment leaf ids the cache was written with, and those ids are local to the tree that compiled `resources/env/_metadata/index.yml`. Sync from a worktree whose env index matches the archive's, as fir checkout `6afbe544` does. A fresh `-bm` mints new ids, and every task then misses the cache (`R1_WAVES.md` § HH).
 
 ## Decided differences
 
@@ -47,7 +47,7 @@ Status: **match** is the same command and settings. **version** is the same comm
 
 | Paper step | Paper setting | E3 transform | Status | Difference |
 |---|---|---|---|---|
-| DeepVirFinder (VB 19) | `-l 1000`, then score ≥ 0.9 and p ≤ 0.05 (Methods) | `e3/deepvirfinder_pratama.py:14-16,104` | match | Same length and cut. The transform drops contigs over 30% N before `dvf.py` sees them (`:94`). That is `dvf.py`'s own rule, applied early to dodge its crash when the accepted count is a multiple of 100 and the last record is rejected. |
+| DeepVirFinder (VB 19) | `-l 1000`, then score ≥ 0.9 and p ≤ 0.05 (Methods) | `e3/deepvirfinder_pratama.py:14,18-20,109` | differs | Same length and cut. The transform drops contigs over 30% N before `dvf.py` sees them (`:98`). That is `dvf.py`'s own rule, applied early to dodge its crash when the accepted count is a multiple of 100 and the last record is rejected. It also drops contigs over 2 Mbp, where `dvf.py`'s Theano predict segfaults and the dead pool worker hangs the batch. Wave e3_w9 ran before that guard. Its largest hybrid metaSPAdes contig is 1.69 Mbp, so the guard drops nothing from it. |
 | VIBRANT | `-f nucl -virome` | `e3/vibrant_pratama.py:105` | match | Adds `-no_plot`. VIBRANT 1.2.1. |
 | geNomad (VB 34) | `end-to-end --cleanup --splits 48 --min-virus-marker-enrichment 1 --min-virus-hallmarks 1` | `e3/genomad_pratama.py:48-49` | version | Same flags. geNomad 1.11.0 against 1.5.1. Database unpinned. |
 | VirSorter2 | `--include-groups dsDNAphage,ssDNA --keep-original-seq --min-score 0.5 --min-length 5000` | `e3/virsorter2_pratama.py:40-69` | version | Same flags. `\|\|full` and `\|\|lt2gene` calls span the whole contig, and partial calls use `full_bp_*`. VirSorter2 2.2.4 against 2.2.3. |
