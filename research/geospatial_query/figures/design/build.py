@@ -21,16 +21,16 @@ FAMILIES = [
 ]
 
 BLURBS = [
-    "People, money, movement and tenure: census, population, commuting, parcels.",
-    "What people build and run: buildings, roads, rail, power, pipelines, mines.",
-    "Things that can hurt: air quality, contamination, toxic releases, earthquakes.",
-    "Visible life: land cover and change, biomass, crops, vegetation, species.",
-    "The solid Earth: bedrock, surficial geology, elevation, radiometrics, permafrost.",
-    "Human health and microbes: disease and wastewater surveillance, clinics, sequencing.",
+    "People, money, movement, tenure and place names: census, population, commuting, parcels.",
+    "What people build and run: buildings, transport, power, pipelines, regulated facilities.",
+    "Things that can hurt: air quality, contamination, toxic and GHG releases, earthquakes.",
+    "Visible life: land cover and change, biomass, crops and fields, species records.",
+    "The solid Earth: bedrock, surficial geology, elevation, radiometrics, permafrost, mines.",
+    "Human health and microbes: health outcomes, clinics, disease and wastewater surveillance.",
     "Atmospheric and seasonal state: reanalysis climatology and sea ice.",
-    "Raw sensor pixels: Sentinel-2 optical, Sentinel-1 and PALSAR radar, Landsat thermal.",
+    "Sensor pixels: Sentinel-2 optical and band signatures, Sentinel-1 and PALSAR radar, Landsat thermal.",
     "Liquid water in lakes, rivers, oceans and aquifers.",
-    "Embeddings and other high-dimensional products, read by fitting a model.",
+    "Embeddings and multi-variable products such as MODIS, read by fitting a model.",
 ]
 
 # keys used by layer_families.md and the reconciled tables, in FAMILIES order
@@ -214,6 +214,11 @@ def main() -> None:
     failed = failed_sources(HERE.parents[1] / "reports" / "catalogue_reconciliation.csv")
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
     page = page.replace("/*FAILED*/[]", json.dumps(failed, ensure_ascii=False))
+    funnel = json.loads((HERE.parents[1] / "reports" / "funnel_counts.json").read_text())
+    for key, slot in [("catalogue modules in scope (317 existing + 11 added)", "N_CATALOGUE"),
+                      ("modules probed in triage", "N_PROBED"), ("modules implemented as adapters", "N_BUILT"),
+                      ("modules with a working adapter", "N_WORKING")]:
+        page = page.replace(f"{{{{{slot}}}}}", str(funnel[key]))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
