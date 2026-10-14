@@ -21,6 +21,19 @@ FAMILIES = [
     "Microbiology & health", "Climate", "Spectral", "Water bodies", "Latent",
 ]
 
+BLURBS = [
+    "People, their money and movement, and the institutions over the ground. Census counts, gridded population, commuting flows, parcels, and Indigenous and Crown land.",
+    "What people build and run. Buildings, addresses, roads, rail, power lines, pipelines, power plants, mines and industrial land.",
+    "Things that can hurt, and the records that feed risk. Air quality, contaminated sites, toxic releases, facility compliance, earthquakes and water quality.",
+    "Life visible without a sequencer. Land cover and its change, biomass, crops and fields, vegetation index and species records.",
+    "The solid Earth and its shape. Bedrock and surficial geology, elevation and bathymetry, radiometrics, glaciers and permafrost.",
+    "Human health or microbial life. Disease and wastewater surveillance, health facilities, health outcomes and geolocated sequencing samples.",
+    "The state of the atmosphere and the seasons. Reanalysis climatology and sea ice.",
+    "Sensor-native pixels before any classification. Sentinel-2 optical, Sentinel-1 and PALSAR radar, and Landsat surface temperature.",
+    "Liquid water in lakes, rivers, oceans and aquifers. Surface water extent and occurrence.",
+    "Embeddings and other high-dimensional products. Read by fitting a model, not by looking up a value.",
+]
+
 # POC slot -> family, under the rules in reports/layer_families.md
 SLOT_FAMILY = {
     "census_demography": 0, "mobility_flows": 0, "parcels_cadastre": 0, "population_gridded": 0,
@@ -85,7 +98,7 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
 
 def dag_svg(theme) -> str:
     nodes = {"query": NodeKind.GIVEN}
-    edges, labels = [], {"query": Label(name="query")}
+    edges, labels = [], {"query": Label(name="")}
     for i, fam in enumerate(FAMILIES):
         nodes[f"fam{i}"] = NodeKind.TRANSFORM
         labels[f"fam{i}"] = Label(name=fam)
@@ -94,17 +107,26 @@ def dag_svg(theme) -> str:
     nodes["feature_set"] = NodeKind.TARGET
     edges.append(("aggregate", "feature_set"))
     labels["aggregate"] = Label(name="aggregate")
-    labels["feature_set"] = Label(name="feature set")
+    labels["feature_set"] = Label(name="")
+    styles = {**theme.styles, NodeKind.TRANSFORM: replace(theme.styles[NodeKind.TRANSFORM], heading=False)}
     return render_svg(
-        layout(list(nodes), edges), theme.styles, kinds=nodes, labels=labels,
+        layout(list(nodes), edges), styles, kinds=nodes, labels=labels,
         font="IBM Plex Mono", font_size=12.5, max_label_chars=48,
         plate=replace(theme.plate, paint_background=False),
     )
 
 
+def vibe_variants() -> None:
+    src = (HERE / "vibe.svg").read_text()
+    for name, panel, ink in [("light", "#fbfbf8", "#1d2420"), ("dark", "#1b201d", "#e4e8e2")]:
+        out = src.replace('fill="#ffffff"', f'fill="{panel}"', 1).replace('fill="#1e1e1e"', f'fill="{ink}"')
+        (HERE / f"vibe-{name}.svg").write_text(out)
+
+
 def main() -> None:
+    vibe_variants()
     families = features_by_family(HERE.parents[1] / "reports" / "feature_values_long.csv")
-    data = [{"family": f, "features": feats} for f, feats in zip(FAMILIES, families)]
+    data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
