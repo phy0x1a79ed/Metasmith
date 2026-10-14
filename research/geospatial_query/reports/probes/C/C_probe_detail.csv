@@ -1,0 +1,272 @@
+candidate,aoi_id,n,nearest_km,extra
+NZA tiles,farm_sk_quarter,0,0,tile 11/419/676 status 204 (204 = no zoning data in tile)
+NZA tiles,farm_on_essex,0,0,tile 11/553/759 status 204 (204 = no zoning data in tile)
+NZA tiles,farm_ab_taber,0,0,tile 11/385/696 status 204 (204 = no zoning data in tile)
+NZA tiles,farm_us_ia_story,0,0,tile 11/491/759 status 204 (204 = no zoning data in tile)
+NZA tiles,mine_hvc_bc,0,0,tile 11/335/690 status 204 (204 = no zoning data in tile)
+NZA tiles,mine_syncrude_ab,0,0,tile 11/389/627 status 204 (204 = no zoning data in tile)
+NZA tiles,mine_sudbury_on,0,0,tile 11/562/724 status 204 (204 = no zoning data in tile)
+NZA tiles,mine_us_bingham_ut,1,0,tile 11/385/771 status 200 171790 B; districts ['M-2']; slices in bbox 1
+NZA tiles,city_toronto_core,0,0,tile 11/572/747 status 204 (204 = no zoning data in tile)
+NZA tiles,city_montreal_core,0,0,tile 11/605/732 status 204 (204 = no zoning data in tile)
+NZA tiles,city_windsor_on,0,0,"tile 11/551/757 status 200, no polygon in AOI bbox"
+NZA tiles,city_us_detroit_mi,957,0,"tile 11/551/757 status 200 1885013 B; districts ['B1', 'B4', 'B5', 'B6', 'Downtown Overlay', 'Gateway Radial Thoroughfare Overlay']; slices in bbox 34"
+NZA tiles,stress_mine_hvc_full,0,0,tile 11/335/690 status 204 (204 = no zoning data in tile)
+NZA tiles,stress_oilsands_region,0,0,tile 11/389/627 status 204 (204 = no zoning data in tile)
+NZA tiles,stress_city_toronto_full,0,0,tile 11/572/746 status 204 (204 = no zoning data in tile)
+NZA tiles,CONTROL,0,0,tile 11/170/1023 status 204 (204 = no zoning data in tile)
+PAD-US,farm_sk_quarter,0,,
+PAD-US,farm_on_essex,0,,
+PAD-US,farm_ab_taber,0,,
+PAD-US,farm_us_ia_story,0,,
+PAD-US,mine_hvc_bc,0,,
+PAD-US,mine_syncrude_ab,0,,
+PAD-US,mine_sudbury_on,0,,
+PAD-US,mine_us_bingham_ut,0,,
+PAD-US,city_toronto_core,0,,
+PAD-US,city_montreal_core,0,,
+PAD-US,city_windsor_on,0,,
+PAD-US,city_us_detroit_mi,19,,
+PAD-US,stress_mine_hvc_full,0,,
+PAD-US,stress_oilsands_region,0,,
+PAD-US,stress_city_toronto_full,0,,
+BC ALR,farm_sk_quarter,0,,
+BC ALR,farm_on_essex,0,,
+BC ALR,farm_ab_taber,0,,
+BC ALR,farm_us_ia_story,0,,
+BC ALR,mine_hvc_bc,1,,
+BC ALR,mine_syncrude_ab,0,,
+BC ALR,mine_sudbury_on,0,,
+BC ALR,mine_us_bingham_ut,0,,
+BC ALR,city_toronto_core,0,,
+BC ALR,city_montreal_core,0,,
+BC ALR,city_windsor_on,0,,
+BC ALR,city_us_detroit_mi,0,,
+BC ALR,stress_mine_hvc_full,2,,
+BC ALR,stress_oilsands_region,0,,
+BC ALR,stress_city_toronto_full,0,,
+EU Urban Atlas,farm_sk_quarter,0,,
+EU Urban Atlas,farm_on_essex,0,,
+EU Urban Atlas,farm_ab_taber,0,,
+EU Urban Atlas,farm_us_ia_story,0,,
+EU Urban Atlas,mine_hvc_bc,0,,
+EU Urban Atlas,mine_syncrude_ab,0,,
+EU Urban Atlas,mine_sudbury_on,0,,
+EU Urban Atlas,mine_us_bingham_ut,0,,
+EU Urban Atlas,city_toronto_core,0,,
+EU Urban Atlas,city_montreal_core,0,,
+EU Urban Atlas,city_windsor_on,0,,
+EU Urban Atlas,city_us_detroit_mi,0,,
+EU Urban Atlas,stress_mine_hvc_full,0,,
+EU Urban Atlas,stress_oilsands_region,0,,
+EU Urban Atlas,stress_city_toronto_full,0,,
+Vancouver zoning,farm_sk_quarter,0,,[]
+Vancouver zoning,farm_on_essex,0,,[]
+Vancouver zoning,farm_ab_taber,0,,[]
+Vancouver zoning,farm_us_ia_story,0,,[]
+Vancouver zoning,mine_hvc_bc,0,,[]
+Vancouver zoning,mine_syncrude_ab,0,,[]
+Vancouver zoning,mine_sudbury_on,0,,[]
+Vancouver zoning,mine_us_bingham_ut,0,,[]
+Vancouver zoning,city_toronto_core,0,,[]
+Vancouver zoning,city_montreal_core,0,,[]
+Vancouver zoning,city_windsor_on,0,,[]
+Vancouver zoning,city_us_detroit_mi,0,,[]
+Vancouver zoning,stress_mine_hvc_full,0,,[]
+Vancouver zoning,stress_oilsands_region,0,,[]
+Vancouver zoning,stress_city_toronto_full,0,,[]
+Toronto zoning,farm_sk_quarter,0,,[]
+Toronto zoning,farm_on_essex,0,,[]
+Toronto zoning,farm_ab_taber,0,,[]
+Toronto zoning,farm_us_ia_story,0,,[]
+Toronto zoning,mine_hvc_bc,0,,[]
+Toronto zoning,mine_syncrude_ab,0,,[]
+Toronto zoning,mine_sudbury_on,0,,[]
+Toronto zoning,mine_us_bingham_ut,0,,[]
+Toronto zoning,city_toronto_core,346,,"['(H) CR 1.5 (c1.0; r1.0) SS2  (x415)', '(H) CR 12.0 (c8.0; r11.7) SS1  (x772)', '(H) CR 6.0 (c6.0; r6.0) SS1  (x2116)', '(H) CRE (x54)']"
+Toronto zoning,city_montreal_core,0,,[]
+Toronto zoning,city_windsor_on,0,,[]
+Toronto zoning,city_us_detroit_mi,0,,[]
+Toronto zoning,stress_mine_hvc_full,0,,[]
+Toronto zoning,stress_oilsands_region,0,,[]
+Toronto zoning,stress_city_toronto_full,9508,,"['(H) CR (c0.0; r0.0) SS2  (x162)', '(H) CR 0.4 (c0.4; r0.0) SS3  (x283)', '(H) CR 1.0 (c0.5; r0.5) SS3  (x757)', '(H) CR 1.0 (c1.0; r0.0) SS2  (x821)']"
+Calgary land use,farm_sk_quarter,0,,
+Calgary land use,farm_on_essex,0,,
+Calgary land use,farm_ab_taber,0,,
+Calgary land use,farm_us_ia_story,0,,
+Calgary land use,mine_hvc_bc,0,,
+Calgary land use,mine_syncrude_ab,0,,
+Calgary land use,mine_sudbury_on,0,,
+Calgary land use,mine_us_bingham_ut,0,,
+Calgary land use,city_toronto_core,0,,
+Calgary land use,city_montreal_core,0,,
+Calgary land use,city_windsor_on,0,,
+Calgary land use,city_us_detroit_mi,0,,
+Calgary land use,stress_mine_hvc_full,0,,
+Calgary land use,stress_oilsands_region,0,,
+Calgary land use,stress_city_toronto_full,0,,
+USGS Water Data,farm_sk_quarter,0,,
+USGS Water Data,farm_on_essex,3,27.4,USGS-04165690
+USGS Water Data,farm_ab_taber,0,,
+USGS Water Data,farm_us_ia_story,35,2.5,USGS-05470000
+USGS Water Data,mine_hvc_bc,0,,
+USGS Water Data,mine_syncrude_ab,0,,
+USGS Water Data,mine_sudbury_on,0,,
+USGS Water Data,mine_us_bingham_ut,131,3.8,USGS-402922112092101
+USGS Water Data,city_toronto_core,0,,
+USGS Water Data,city_montreal_core,0,,
+USGS Water Data,city_windsor_on,93,3.1,USGS-04165705
+USGS Water Data,city_us_detroit_mi,106,2.2,USGS-04165705
+USGS Water Data,stress_mine_hvc_full,0,,
+USGS Water Data,stress_oilsands_region,0,,
+USGS Water Data,stress_city_toronto_full,0,,
+ECCC hydrometric,farm_sk_quarter,6,28.3,active=1 05HG001 daily_mean_records=41554 realtime_records=8413
+ECCC hydrometric,farm_on_essex,12,12.1,active=6 02GH002 daily_mean_records=19512 realtime_records=8419
+ECCC hydrometric,farm_ab_taber,18,12.0,active=3 05AG026 daily_mean_records=9574 realtime_records=8409
+ECCC hydrometric,farm_us_ia_story,0,,active=0 
+ECCC hydrometric,mine_hvc_bc,37,11.2,active=3 08LG009 daily_mean_records=12607 realtime_records=8420
+ECCC hydrometric,mine_syncrude_ab,13,6.4,active=10 07DA018 daily_mean_records=15526 realtime_records=8412
+ECCC hydrometric,mine_sudbury_on,20,3.0,active=10 02CF005 daily_mean_records=21213 realtime_records=8414
+ECCC hydrometric,mine_us_bingham_ut,0,,active=0 
+ECCC hydrometric,city_toronto_core,34,1.2,active=16 02HC048 daily_mean_records=42494 realtime_records=0
+ECCC hydrometric,city_montreal_core,46,10.6,active=12 02OA016 daily_mean_records=33999 realtime_records=8418
+ECCC hydrometric,city_windsor_on,10,5.1,active=5 02GH016 daily_mean_records=3653 realtime_records=8423
+ECCC hydrometric,city_us_detroit_mi,9,5.4,active=5 02GH015 daily_mean_records=5205 realtime_records=0
+ECCC hydrometric,stress_mine_hvc_full,42,11.2,active=5 08LG009 daily_mean_records=12607 realtime_records=8420
+ECCC hydrometric,stress_oilsands_region,26,6.4,active=17 07DA018 daily_mean_records=15526 realtime_records=8412
+ECCC hydrometric,stress_city_toronto_full,67,3.2,active=33 02HC005 daily_mean_records=26757 realtime_records=8208
+HydroRIVERS,farm_sk_quarter,158,0.7,ORD_STRA=1 DIS_AV_CMS=0.006 UPLAND_SKM=31.6
+HydroRIVERS,farm_on_essex,143,1.9,ORD_STRA=1 DIS_AV_CMS=0.355 UPLAND_SKM=70.3
+HydroRIVERS,farm_ab_taber,145,1.9,ORD_STRA=6 DIS_AV_CMS=110.09 UPLAND_SKM=25140.1
+HydroRIVERS,farm_us_ia_story,128,0.3,ORD_STRA=3 DIS_AV_CMS=6.373 UPLAND_SKM=840.3
+HydroRIVERS,mine_hvc_bc,145,0.5,ORD_STRA=1 DIS_AV_CMS=0.206 UPLAND_SKM=29.2
+HydroRIVERS,mine_syncrude_ab,0,,
+HydroRIVERS,mine_sudbury_on,141,1.1,ORD_STRA=1 DIS_AV_CMS=0.138 UPLAND_SKM=21.9
+HydroRIVERS,mine_us_bingham_ut,171,0.9,ORD_STRA=1 DIS_AV_CMS=0.453 UPLAND_SKM=76.2
+HydroRIVERS,city_toronto_core,139,2.0,ORD_STRA=1 DIS_AV_CMS=0.144 UPLAND_SKM=16.3
+HydroRIVERS,city_montreal_core,219,1.3,ORD_STRA=1 DIS_AV_CMS=0.157 UPLAND_SKM=8.6
+HydroRIVERS,city_windsor_on,138,1.6,ORD_STRA=8 DIS_AV_CMS=9262.285 UPLAND_SKM=592872.1
+HydroRIVERS,city_us_detroit_mi,143,0.7,ORD_STRA=1 DIS_AV_CMS=0.072 UPLAND_SKM=12.1
+HydroRIVERS,stress_mine_hvc_full,197,0.5,ORD_STRA=1 DIS_AV_CMS=0.206 UPLAND_SKM=29.2
+HydroRIVERS,stress_oilsands_region,0,,
+HydroRIVERS,stress_city_toronto_full,242,0.1,ORD_STRA=1 DIS_AV_CMS=0.148 UPLAND_SKM=16.6
+NHDPlus HR,farm_sk_quarter,0,,
+NHDPlus HR,farm_on_essex,113,0.2,"{""gnis_name"": null, ""streamorde"": 2, ""totdasqkm"": 2.3419000299999997, ""areasqkm"": 0.18719999, ""lengthkm"": 0.42708481000000004, ""qama"": 0.5850730000000001, ""vama"
+NHDPlus HR,farm_ab_taber,0,,
+NHDPlus HR,farm_us_ia_story,36,0.1,"{""gnis_name"": null, ""streamorde"": 1, ""totdasqkm"": 3.71639995, ""areasqkm"": 3.71639995, ""lengthkm"": 2.177, ""qama"": 0.779958, ""vama"": 0.79004944, ""slope"": 0.015613"
+NHDPlus HR,mine_hvc_bc,0,,
+NHDPlus HR,mine_syncrude_ab,0,,
+NHDPlus HR,mine_sudbury_on,75,1.02,"{""gnis_name"": null, ""streamorde"": 1, ""totdasqkm"": 0.69139994, ""areasqkm"": 0.69139994, ""lengthkm"": 0.52035138, ""qama"": 0.285677, ""vama"": 0.67808288, ""slope"": 0.0"
+NHDPlus HR,mine_us_bingham_ut,17,1.83,"{""gnis_name"": null, ""streamorde"": 1, ""totdasqkm"": 0, ""areasqkm"": 0, ""lengthkm"": 3.53918474, ""qama"": 0, ""vama"": 0.06561600000000001, ""slope"": -9998, ""reachcode"":"
+NHDPlus HR,city_toronto_core,12,1.13,"{""gnis_name"": null, ""streamorde"": 8, ""totdasqkm"": 16681.13819564, ""areasqkm"": 41.51760001, ""lengthkm"": 22.74367041, ""qama"": 1564.548497, ""vama"": 1.10925604, ""sl"
+NHDPlus HR,city_montreal_core,0,,
+NHDPlus HR,city_windsor_on,5,1.86,"{""gnis_name"": ""Detroit River"", ""streamorde"": 10, ""totdasqkm"": 587780.80982181, ""areasqkm"": 78.89479998, ""lengthkm"": 10.154493630000001, ""qama"": 210991.1841, ""va"
+NHDPlus HR,city_us_detroit_mi,1,2.14,"{""gnis_name"": ""Detroit River"", ""streamorde"": 10, ""totdasqkm"": 587780.80982181, ""areasqkm"": 78.89479998, ""lengthkm"": 10.154493630000001, ""qama"": 210991.1841, ""va"
+NHDPlus HR,stress_mine_hvc_full,0,,
+NHDPlus HR,stress_oilsands_region,0,,
+NHDPlus HR,stress_city_toronto_full,200,0.97,"{""gnis_name"": ""Don River West Branch"", ""streamorde"": 4, ""totdasqkm"": 95.2656, ""areasqkm"": 0.39009999, ""lengthkm"": 0.79750165, ""qama"": 27.041029, ""vama"": 0.63144"
+NHN WMS,farm_sk_quarter,0,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,farm_on_essex,1,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,farm_ab_taber,0,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,farm_us_ia_story,0,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,mine_hvc_bc,2,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,mine_syncrude_ab,2,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,mine_sudbury_on,1,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,mine_us_bingham_ut,0,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,city_toronto_core,2,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,city_montreal_core,0,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,city_windsor_on,1,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,city_us_detroit_mi,0,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,stress_mine_hvc_full,4,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,stress_oilsands_region,3,,3x3 grid GetFeatureInfo points with a hit
+NHN WMS,stress_city_toronto_full,7,,3x3 grid GetFeatureInfo points with a hit
+ECCC climate,farm_sk_quarter,35,33.3,active_since_2025=3 4057152 SASKATOON INTL A rows_2020_2024=1827 mean_temp 98% precip 0% of 1827 days (first 1827 rows)
+ECCC climate,farm_on_essex,34,13.4,active_since_2025=5 6134190 KINGSVILLE MOE rows_2020_2024=1827 mean_temp 72% precip 72% of 1827 days (first 1827 rows)
+ECCC climate,farm_ab_taber,31,2.0,active_since_2025=6 3036360 TABER rows_2020_2024=1827 mean_temp 45% precip 59% of 1827 days (first 1827 rows)
+ECCC climate,farm_us_ia_story,0,,active_since_2025=0 
+ECCC climate,mine_hvc_bc,55,31.2,active_since_2025=8 1160515 ASHCROFT rows_2020_2024=1827 mean_temp 99% precip 65% of 1827 days (first 1827 rows)
+ECCC climate,mine_syncrude_ab,15,5.2,active_since_2025=3 3064528 MILDRED LAKE rows_2020_2024=1827 mean_temp 65% precip 65% of 1827 days (first 1827 rows)
+ECCC climate,mine_sudbury_on,19,25.2,active_since_2025=2 6068153 SUDBURY A rows_2020_2024=1827 mean_temp 88% precip 99% of 1827 days (first 1827 rows)
+ECCC climate,mine_us_bingham_ut,0,,active_since_2025=0 
+ECCC climate,city_toronto_core,257,2.3,active_since_2025=14 6158355 TORONTO CITY rows_2020_2024=1827 mean_temp 99% precip 99% of 1827 days (first 1827 rows)
+ECCC climate,city_montreal_core,95,1.0,active_since_2025=25 7024745 MCTAVISH rows_2020_2024=1827 mean_temp 99% precip 99% of 1827 days (first 1827 rows)
+ECCC climate,city_windsor_on,22,7.2,active_since_2025=5 6139530 WINDSOR A rows_2020_2024=1827 mean_temp 98% precip 95% of 1827 days (first 1827 rows)
+ECCC climate,city_us_detroit_mi,22,11.2,active_since_2025=5 6139530 WINDSOR A rows_2020_2024=1827 mean_temp 98% precip 95% of 1827 days (first 1827 rows)
+ECCC climate,stress_mine_hvc_full,56,31.2,active_since_2025=8 1160515 ASHCROFT rows_2020_2024=1827 mean_temp 99% precip 65% of 1827 days (first 1827 rows)
+ECCC climate,stress_oilsands_region,16,5.2,active_since_2025=3 3064528 MILDRED LAKE rows_2020_2024=1827 mean_temp 65% precip 65% of 1827 days (first 1827 rows)
+ECCC climate,stress_city_toronto_full,335,6.0,active_since_2025=21 6158355 TORONTO CITY rows_2020_2024=1827 mean_temp 99% precip 99% of 1827 days (first 1827 rows)
+GHCN-Daily,farm_sk_quarter,52,15.5,"CA1SK000147 CLAVET 11.3 SW, SK CA PRCP:cov97%"
+GHCN-Daily,farm_on_essex,202,8.3,"CA1ON000312 NORTH WOODSLEE 0.9 ENE, ON CA PRCP:cov55%"
+GHCN-Daily,farm_ab_taber,40,2.0,"CAN03036360 TABER, AB CA TMAX:cov59% TMIN:cov59% PRCP:cov61%"
+GHCN-Daily,farm_us_ia_story,155,1.5,"US1IASR0002 AMES 1.5 NNE, IA US PRCP:cov100%"
+GHCN-Daily,mine_hvc_bc,58,31.2,"CAN01160515 ASHCROFT, BC CA TMAX:cov99% TMIN:cov99% PRCP:cov71%"
+GHCN-Daily,mine_syncrude_ab,16,5.2,"CAN03064528 MILDRED LAKE, AB CA TMAX:cov93% TMIN:cov93% PRCP:cov90%"
+GHCN-Daily,mine_sudbury_on,34,2.6,"CA1ON000789 SUDBURY 1.8 WSW NDCA, ON CA PRCP:cov44%"
+GHCN-Daily,mine_us_bingham_ut,206,5.5,"USS0012J09S DRY FORK, UT US TMAX:cov100% TMIN:cov100% PRCP:cov100%"
+GHCN-Daily,city_toronto_core,302,2.3,"CAN06158355 TORONTO CITY, ON CA TMAX:cov99% TMIN:cov99% PRCP:cov98%"
+GHCN-Daily,city_montreal_core,113,1.0,"CA1QC000048 MONTR AL 2.6 SSW, QC CA PRCP:cov94%"
+GHCN-Daily,city_windsor_on,303,1.5,"CA1ON000322 WINDSOR 4.0 NE, ON CA PRCP:cov100%"
+GHCN-Daily,city_us_detroit_mi,310,2.0,"US1MIWY0163 DETROIT 2.5 SE, MI US PRCP:cov98%"
+GHCN-Daily,stress_mine_hvc_full,59,31.2,"CAN01160515 ASHCROFT, BC CA TMAX:cov99% TMIN:cov99% PRCP:cov71%"
+GHCN-Daily,stress_oilsands_region,17,5.2,"CAN03064528 MILDRED LAKE, AB CA TMAX:cov93% TMIN:cov93% PRCP:cov90%"
+GHCN-Daily,stress_city_toronto_full,403,9.0,"CA1ON000837 TORONTO 9.7 ENE, ON CA PRCP:cov86%"
+Daymet,farm_sk_quarter,365,0,tile=12637 elev=527 m tmax_valid=365/365 annual_prcp=255
+Daymet,farm_on_essex,365,0,tile=11929 elev=194 m tmax_valid=365/365 annual_prcp=1050
+Daymet,farm_ab_taber,365,0,tile=12454 elev=807 m tmax_valid=365/365 annual_prcp=165
+Daymet,farm_us_ia_story,365,0,tile=11924 elev=288 m tmax_valid=365/365 annual_prcp=818
+Daymet,mine_hvc_bc,365,0,tile=12630 elev=1256 m tmax_valid=365/365 annual_prcp=270
+Daymet,mine_syncrude_ab,365,0,tile=13175 elev=309 m tmax_valid=365/365 annual_prcp=304
+Daymet,mine_sudbury_on,365,0,tile=12290 elev=288 m tmax_valid=365/365 annual_prcp=905
+Daymet,mine_us_bingham_ut,365,0,tile=11734 elev=1557 m tmax_valid=365/365 annual_prcp=592
+Daymet,city_toronto_core,365,0,tile=11931 elev=102 m tmax_valid=365/365 annual_prcp=907
+Daymet,city_montreal_core,365,0,tile=12114 elev=54 m tmax_valid=365/365 annual_prcp=1157
+Daymet,city_windsor_on,365,0,tile=11929 elev=185 m tmax_valid=365/365 annual_prcp=975
+Daymet,city_us_detroit_mi,365,0,tile=11929 elev=188 m tmax_valid=365/365 annual_prcp=949
+Daymet,stress_mine_hvc_full,365,0,tile=12630 elev=1256 m tmax_valid=365/365 annual_prcp=270
+Daymet,stress_oilsands_region,365,0,tile=13175 elev=309 m tmax_valid=365/365 annual_prcp=304
+Daymet,stress_city_toronto_full,365,0,tile=11931 elev=141 m tmax_valid=365/365 annual_prcp=927
+TerraClimate,farm_sk_quarter,12,0,"ppt_sum_2023_mm=252.9 raw_first3=[100.0, 82.0, 63.0]"
+TerraClimate,farm_on_essex,12,0,"ppt_sum_2023_mm=849.3 raw_first3=[666.0, 796.0, 815.0]"
+TerraClimate,farm_ab_taber,12,0,"ppt_sum_2023_mm=208.3 raw_first3=[115.0, 217.0, 152.0]"
+TerraClimate,farm_us_ia_story,12,0,"ppt_sum_2023_mm=620.8 raw_first3=[369.0, 455.0, 446.0]"
+TerraClimate,mine_hvc_bc,12,0,"ppt_sum_2023_mm=390.8 raw_first3=[282.0, 219.0, 143.0]"
+TerraClimate,mine_syncrude_ab,12,0,"ppt_sum_2023_mm=348.8 raw_first3=[151.0, 300.0, 165.0]"
+TerraClimate,mine_sudbury_on,12,0,"ppt_sum_2023_mm=937.4 raw_first3=[574.0, 677.0, 521.0]"
+TerraClimate,mine_us_bingham_ut,12,0,"ppt_sum_2023_mm=549.0 raw_first3=[873.0, 406.0, 1080.0]"
+TerraClimate,city_toronto_core,12,0,"ppt_sum_2023_mm=811.5 raw_first3=[701.0, 724.0, 840.0]"
+TerraClimate,city_montreal_core,12,0,"ppt_sum_2023_mm=1289.0 raw_first3=[992.0, 672.0, 624.0]"
+TerraClimate,city_windsor_on,12,0,"ppt_sum_2023_mm=864.9 raw_first3=[591.0, 712.0, 873.0]"
+TerraClimate,city_us_detroit_mi,12,0,"ppt_sum_2023_mm=859.8 raw_first3=[573.0, 702.0, 851.0]"
+TerraClimate,stress_mine_hvc_full,12,0,"ppt_sum_2023_mm=390.8 raw_first3=[282.0, 219.0, 143.0]"
+TerraClimate,stress_oilsands_region,12,0,"ppt_sum_2023_mm=348.8 raw_first3=[151.0, 300.0, 165.0]"
+TerraClimate,stress_city_toronto_full,12,0,"ppt_sum_2023_mm=817.7 raw_first3=[707.0, 727.0, 825.0]"
+CHIRPS v3,farm_sk_quarter,1,0,ok Jan-2024 precip_mm=21.427310943603516
+CHIRPS v3,farm_on_essex,1,0,ok Jan-2024 precip_mm=116.95638275146484
+CHIRPS v3,farm_ab_taber,1,0,ok Jan-2024 precip_mm=17.343868255615234
+CHIRPS v3,farm_us_ia_story,1,0,ok Jan-2024 precip_mm=50.90196228027344
+CHIRPS v3,mine_hvc_bc,1,0,ok Jan-2024 precip_mm=24.955509185791016
+CHIRPS v3,mine_syncrude_ab,1,0,ok Jan-2024 precip_mm=6.404509544372559
+CHIRPS v3,mine_sudbury_on,1,0,ok Jan-2024 precip_mm=48.54191589355469
+CHIRPS v3,mine_us_bingham_ut,1,0,ok Jan-2024 precip_mm=75.02196502685547
+CHIRPS v3,city_toronto_core,1,0,ok Jan-2024 precip_mm=105.7332992553711
+CHIRPS v3,city_montreal_core,1,0,ok Jan-2024 precip_mm=90.58746337890625
+CHIRPS v3,city_windsor_on,1,0,ok Jan-2024 precip_mm=147.61697387695312
+CHIRPS v3,city_us_detroit_mi,1,0,ok Jan-2024 precip_mm=143.37022399902344
+CHIRPS v3,stress_mine_hvc_full,1,0,ok Jan-2024 precip_mm=24.955509185791016
+CHIRPS v3,stress_oilsands_region,1,0,ok Jan-2024 precip_mm=6.404509544372559
+CHIRPS v3,stress_city_toronto_full,1,0,ok Jan-2024 precip_mm=121.83521270751953
+CHIRPS v2,farm_sk_quarter,0,0,outside Jan-2024 precip_mm=None
+CHIRPS v2,farm_on_essex,1,0,ok Jan-2024 precip_mm=92.95442199707031
+CHIRPS v2,farm_ab_taber,1,0,ok Jan-2024 precip_mm=18.541683197021484
+CHIRPS v2,farm_us_ia_story,1,0,ok Jan-2024 precip_mm=29.201831817626953
+CHIRPS v2,mine_hvc_bc,0,0,outside Jan-2024 precip_mm=None
+CHIRPS v2,mine_syncrude_ab,0,0,outside Jan-2024 precip_mm=None
+CHIRPS v2,mine_sudbury_on,1,0,ok Jan-2024 precip_mm=34.60724639892578
+CHIRPS v2,mine_us_bingham_ut,1,0,ok Jan-2024 precip_mm=89.30905151367188
+CHIRPS v2,city_toronto_core,1,0,ok Jan-2024 precip_mm=127.00196838378906
+CHIRPS v2,city_montreal_core,1,0,ok Jan-2024 precip_mm=74.07120513916016
+CHIRPS v2,city_windsor_on,1,0,ok Jan-2024 precip_mm=93.7895278930664
+CHIRPS v2,city_us_detroit_mi,1,0,ok Jan-2024 precip_mm=89.41010284423828
+CHIRPS v2,stress_mine_hvc_full,0,0,outside Jan-2024 precip_mm=None
+CHIRPS v2,stress_oilsands_region,0,0,outside Jan-2024 precip_mm=None
+CHIRPS v2,stress_city_toronto_full,1,0,ok Jan-2024 precip_mm=103.43580627441406

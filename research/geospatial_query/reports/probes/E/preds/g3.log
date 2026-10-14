@@ -1,0 +1,55 @@
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/590 [00:00<?, ?it/s]Loading weights:  14%|█▍        | 82/590 [00:00<00:02, 179.31it/s]Loading weights:  17%|█▋        | 100/590 [00:02<00:18, 26.84it/s]Loading weights:  19%|█▊        | 110/590 [00:03<00:22, 21.04it/s]Loading weights:  19%|█▉        | 115/590 [00:05<00:32, 14.51it/s]Loading weights:  22%|██▏       | 132/590 [00:05<00:24, 18.53it/s]Loading weights:  24%|██▎       | 139/590 [00:06<00:25, 17.87it/s]Loading weights:  25%|██▌       | 148/590 [00:06<00:20, 21.52it/s]Loading weights:  26%|██▌       | 153/590 [00:06<00:21, 20.77it/s]Loading weights:  27%|██▋       | 157/590 [00:06<00:20, 20.99it/s]Loading weights:  27%|██▋       | 162/590 [00:07<00:22, 18.89it/s]Loading weights:  29%|██▊       | 169/590 [00:07<00:19, 21.53it/s]Loading weights:  29%|██▉       | 172/590 [00:08<00:37, 11.03it/s]Loading weights:  29%|██▉       | 174/590 [00:08<00:36, 11.30it/s]Loading weights:  30%|███       | 178/590 [00:08<00:30, 13.68it/s]Loading weights:  33%|███▎      | 194/590 [00:09<00:27, 14.51it/s]Loading weights:  33%|███▎      | 197/590 [00:09<00:26, 15.10it/s]Loading weights:  34%|███▍      | 200/590 [00:10<00:31, 12.45it/s]Loading weights:  37%|███▋      | 218/590 [00:10<00:17, 21.13it/s]Loading weights:  38%|███▊      | 224/590 [00:10<00:15, 23.71it/s]Loading weights:  39%|███▉      | 233/590 [00:11<00:12, 27.64it/s]Loading weights:  41%|████      | 239/590 [00:11<00:22, 15.71it/s]Loading weights:  41%|████▏     | 244/590 [00:12<00:25, 13.31it/s]Loading weights:  43%|████▎     | 256/590 [00:12<00:18, 17.76it/s]Loading weights:  44%|████▍     | 259/590 [00:13<00:24, 13.28it/s]Loading weights:  44%|████▍     | 261/590 [00:14<00:43,  7.55it/s]Loading weights:  45%|████▍     | 264/590 [00:15<00:41,  7.77it/s]Loading weights:  47%|████▋     | 275/590 [00:15<00:22, 13.76it/s]Loading weights:  47%|████▋     | 279/590 [00:16<00:37,  8.37it/s]Loading weights:  48%|████▊     | 281/590 [00:16<00:38,  8.09it/s]Loading weights:  49%|████▉     | 290/590 [00:17<00:29, 10.05it/s]Loading weights:  50%|████▉     | 294/590 [00:17<00:31,  9.54it/s]Loading weights:  53%|█████▎    | 311/590 [00:18<00:14, 19.67it/s]Loading weights:  53%|█████▎    | 315/590 [00:18<00:16, 16.63it/s]Loading weights:  55%|█████▍    | 322/590 [00:19<00:18, 14.13it/s]Loading weights:  55%|█████▌    | 325/590 [00:19<00:22, 11.69it/s]Loading weights:  55%|█████▌    | 327/590 [00:20<00:27,  9.56it/s]Loading weights:  56%|█████▌    | 330/590 [00:20<00:26,  9.64it/s]Loading weights:  56%|█████▋    | 332/590 [00:20<00:27,  9.35it/s]Loading weights:  58%|█████▊    | 344/590 [00:20<00:12, 20.07it/s]Loading weights:  59%|█████▉    | 348/590 [00:20<00:11, 21.27it/s]Loading weights:  60%|█████▉    | 353/590 [00:21<00:09, 24.77it/s]Loading weights:  61%|██████    | 357/590 [00:21<00:14, 16.01it/s]Loading weights:  61%|██████    | 360/590 [00:21<00:16, 13.53it/s]Loading weights:  62%|██████▏   | 367/590 [00:22<00:13, 16.71it/s]Loading weights:  63%|██████▎   | 370/590 [00:22<00:12, 18.18it/s]Loading weights:  63%|██████▎   | 373/590 [00:22<00:14, 14.83it/s]Loading weights:  64%|██████▎   | 375/590 [00:22<00:16, 13.26it/s]Loading weights:  65%|██████▍   | 382/590 [00:23<00:12, 16.30it/s]Loading weights:  65%|██████▌   | 384/590 [00:23<00:17, 11.47it/s]Loading weights:  65%|██████▌   | 386/590 [00:23<00:16, 12.31it/s]Loading weights:  67%|██████▋   | 393/590 [00:23<00:09, 20.10it/s]Loading weights:  67%|██████▋   | 396/590 [00:24<00:18, 10.25it/s]Loading weights:  68%|██████▊   | 399/590 [00:24<00:19,  9.84it/s]Loading weights:  68%|██████▊   | 401/590 [00:25<00:25,  7.29it/s]Loading weights:  68%|██████▊   | 404/590 [00:25<00:25,  7.40it/s]Loading weights:  70%|███████   | 414/590 [00:26<00:16, 10.42it/s]Loading weights:  80%|███████▉  | 471/590 [00:26<00:02, 54.79it/s]Loading weights:  83%|████████▎ | 489/590 [00:27<00:02, 48.51it/s]Loading weights:  85%|████████▌ | 503/590 [00:28<00:02, 29.18it/s]Loading weights:  87%|████████▋ | 513/590 [00:28<00:02, 26.49it/s]Loading weights:  88%|████████▊ | 521/590 [00:28<00:02, 29.67it/s]Loading weights:  94%|█████████▍| 554/590 [00:29<00:00, 36.32it/s]Loading weights:  95%|█████████▌| 561/590 [00:30<00:01, 28.21it/s]Loading weights:  96%|█████████▌| 566/590 [00:30<00:01, 21.96it/s]Loading weights:  97%|█████████▋| 571/590 [00:31<00:00, 21.78it/s]Loading weights: 100%|██████████| 590/590 [00:31<00:00, 18.96it/s]
+<All keys matched successfully>
+gallery torch.Size([34162, 768]) 5
+p01 Joliet US 0.324
+p02 Unhel IN 0.333
+p03 Yujing TW 0.282
+p04 Chiyoda JP 0.31
+p05 Pasadena US 0.322
+p06 Vallejo US 0.296
+p07 Pleasant View CA 0.327
+p08 Financial District US 0.277
+p09 Daraw EG 0.337
+p10 Morelia MX 0.349
+p11 Orangeville CA 0.401
+p12 Le Vieux-Longueuil CA 0.292
+p13 Prince Albert CA 0.373
+p14 Qonce ZA 0.312
+p15 Midland CA 0.307
+p16 Satpayev KZ 0.298
+p17 Thaba Nchu ZA 0.357
+p18 Cleveland US 0.306
+p19 Encheng CN 0.343
+p20 As Santah EG 0.322
+p21 Yorkton CA 0.349
+p22 Bay Street Corridor CA 0.294
+p23 Farmington US 0.362
+p24 Anchorage US 0.364
+p25 Cipolletti AR 0.282
+p26 Yorkton CA 0.395
+p27 Melbourne AU 0.275
+p28 Barlad RO 0.337
+p29 Lesnoy RU 0.368
+p30 Moerfelden-Walldorf DE 0.326
+p31 La Banda PE 0.372
+p32 Friedrichshain Bezirk DE 0.315
+p33 Cochrane CA 0.298
+p34 Orangeville CA 0.329
+p35 Tromsdalen NO 0.321
+p36 Kisi NG 0.328
+p37 Orangeville CA 0.352
+p38 Sherwood Park CA 0.309
+p39 Downtown Vancouver CA 0.297
+p40 Akademgorodok RU 0.32
+p41 Cochrane CA 0.37
+p42 Eagle Foothills US 0.33
+p43 Kaij IN 0.369
+p44 Weston CA 0.292
+p45 Pensacola US 0.302
+p46 Marion US 0.303
+p47 Robina AU 0.316
+p48 Cuauhtemoc MX 0.309
+p49 Surrey City Centre CA 0.299
+p50 Halifax CA 0.313

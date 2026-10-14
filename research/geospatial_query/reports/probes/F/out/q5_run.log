@@ -1,0 +1,115 @@
+PC:sentinel-2-l2a farm_sk_quarter            S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a farm_on_essex              S2B_MSIL2A_20230618T161829_R040_T17TLG_20230618T221602  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a farm_ab_taber              S2A_MSIL2A_20230801T182921_R027_T12UVA_20230802T020507  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a farm_us_ia_story           S2B_MSIL2A_20230620T165849_R069_T15TVG_20230621T001910  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a mine_hvc_bc                S2A_MSIL2A_20230813T190921_R056_T10UFA_20230814T043251  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a mine_syncrude_ab           S2B_MSIL2A_20230829T183929_R070_T12VVJ_20230830T012738  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a mine_sudbury_on            S2B_MSIL2A_20230827T161829_R040_T17TMM_20241024T043128  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a mine_us_bingham_ut         S2A_MSIL2A_20230716T180921_R084_T12TVK_20230717T021728  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a city_toronto_core          S2A_MSIL2A_20230829T160831_R140_T17TPJ_20230830T011038  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a city_montreal_core         S2A_MSIL2A_20230823T154821_R054_T18TXR_20230824T005544  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a city_windsor_on            S2B_MSIL2A_20230618T161829_R040_T17TLG_20230618T221602  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a city_us_detroit_mi         S2B_MSIL2A_20230618T161829_R040_T17TLH_20230618T220029  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a stress_mine_hvc_full       S2A_MSIL2A_20230813T190921_R056_T10UFA_20230814T043251  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a stress_oilsands_region     S2B_MSIL2A_20230829T183929_R070_T12VVJ_20230830T012738  assets=5  range GET -> 206 (1024 B)
+PC:sentinel-2-l2a stress_city_toronto_full   S2A_MSIL2A_20230829T160831_R140_T17TPJ_20230830T011038  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 farm_sk_quarter            LE07_L2SP_036024_20230828_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 farm_on_essex              LE07_L2SP_020031_20230705_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 farm_ab_taber              LE07_L2SP_041025_20230814_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 farm_us_ia_story           LE07_L2SP_026031_20230728_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 mine_hvc_bc                LE07_L2SP_046025_20230827_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 mine_syncrude_ab           LE07_L2SP_043020_20230829_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 mine_sudbury_on            LE07_L2SP_018028_20230603_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 mine_us_bingham_ut         LC09_L2SP_038032_20230715_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 city_toronto_core          LC09_L2SP_018029_20230617_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 city_montreal_core         LE07_L2SP_015028_20230622_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 city_windsor_on            LE07_L2SP_020031_20230828_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 city_us_detroit_mi         LE07_L2SP_020031_20230828_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 stress_mine_hvc_full       LE07_L2SP_046025_20230827_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 stress_oilsands_region     LE07_L2SP_043020_20230829_02_T1  assets=5  range GET -> 206 (1024 B)
+PC:landsat-c2-l2 stress_city_toronto_full   LE07_L2SP_018029_20230620_02_T1  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a farm_sk_quarter            S2B_13UDT_20230810_0_L2A  assets=5  range GET -> s3:// (None B)
+ES:sentinel-2-l2a farm_on_essex              S2B_17TLG_20230618_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a farm_ab_taber              S2A_12UVA_20230801_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a farm_us_ia_story           S2B_15TVG_20230620_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a mine_hvc_bc                S2A_10UFA_20230813_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a mine_syncrude_ab           S2B_12VVJ_20230829_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a mine_sudbury_on            S2B_17TMM_20230827_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a mine_us_bingham_ut         S2A_12TVK_20230716_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a city_toronto_core          S2A_17TPJ_20230829_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a city_montreal_core         S2A_18TXR_20230823_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a city_windsor_on            S2B_17TLG_20230618_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a city_us_detroit_mi         S2B_17TLH_20230618_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a stress_mine_hvc_full       S2A_10UFA_20230813_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a stress_oilsands_region     S2B_12VVJ_20230829_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:sentinel-2-l2a stress_city_toronto_full   S2A_17TPJ_20230829_0_L2A  assets=5  range GET -> 206 (1024 B)
+ES:landsat-c2-l2 farm_sk_quarter            LE07_L2SP_036024_20230828_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 farm_on_essex              LE07_L2SP_020031_20230705_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 farm_ab_taber              LE07_L2SP_041025_20230814_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 farm_us_ia_story           LE07_L2SP_026031_20230728_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 mine_hvc_bc                LE07_L2SP_046025_20230827_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 mine_syncrude_ab           LE07_L2SP_043020_20230829_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 mine_sudbury_on            LE07_L2SP_018028_20230603_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 mine_us_bingham_ut         LC09_L2SP_038032_20230715_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 city_toronto_core          LC09_L2SP_018029_20230617_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 city_montreal_core         LE07_L2SP_015028_20230622_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 city_windsor_on            LE07_L2SP_020031_20230828_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 city_us_detroit_mi         LE07_L2SP_020031_20230828_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 stress_mine_hvc_full       LE07_L2SP_046025_20230827_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 stress_oilsands_region     LE07_L2SP_043020_20230829_02_T1  assets=5  range GET -> s3:// (None B)
+ES:landsat-c2-l2 stress_city_toronto_full   LE07_L2SP_018029_20230620_02_T1  assets=5  range GET -> s3:// (None B)
+
+== rasterio 64x64 window read of one signed href per combo (farm_sk_quarter) ==
+PC:sentinel-2-l2a S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252 B04: {'shape': (64, 64), 'dtype': 'uint16', 'min': 1146, 'max': 5812, 'mean': 1801.4, 'crs': 'EPSG:32613', 'overviews': [2, 4, 8]}
+PC:landsat-c2-l2 LE07_L2SP_036024_20230828_02_T1 red: {'shape': (64, 64), 'dtype': 'uint16', 'min': 0, 'max': 15580, 'mean': 8598.7, 'crs': 'EPSG:32613', 'overviews': [2, 4, 8]}
+ES:sentinel-2-l2a red: FAILED RasterioIOError: '/vsis3/sentinel-s2-l2a/tiles/13/U/DT/2023/8/10/0/R10m/B04.jp2' does not exist in the file system, and is not recognized as a supported data
+ES:landsat-c2-l2 red: FAILED RasterioIOError: InvalidCredentials: No valid AWS credentials found. For authenticated requests, you need to set AWS_SECRET_ACCESS_KEY, AWS_ACCESS_KEY_ID or 
+
+== Planetary Computer SAS ==
+unsigned href -> HTTP 409 '<?xml version="1.0" encoding="utf-8"?><Error><Code>PublicAccessNotPermitted</Code><Message>Public ac'
+signed href query params: ['se', 'sig', 'ske', 'skoid', 'sks', 'skt', 'sktid', 'skv', 'sp', 'sr', 'st', 'sv']
+SAS expiry se=2026-10-14T06:47:17+00:00  (44.3 min from now)
+token endpoint /api/sas/v1/token/sentinel2l2a01/sentinel2-l2: {'msft:expiry': '2026-10-14T06:47:58Z'}
+
+== proposed observation.assets payload (PC Sentinel-2, SAS truncated) ==
+{
+ "item_id": "S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+ "collection": "sentinel-2-l2a",
+ "datetime": "2023-07-31T18:09:19.024000Z",
+ "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+ "assets": {
+  "B04": {
+   "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_...",
+   "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+   "requester_pays": false
+  },
+  "B08": {
+   "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_...",
+   "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+   "requester_pays": false
+  },
+  "B11": {
+   "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_...",
+   "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+   "requester_pays": false
+  },
+  "SCL": {
+   "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_...",
+   "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+   "requester_pays": false
+  },
+  "granule-metadata": {
+   "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_...",
+   "type": "application/xml",
+   "requester_pays": false
+  }
+ },
+ "range_probe": {
+  "status": 206,
+  "bytes": 1024
+ }
+}
+
+real	0m43.092s
+user	0m4.642s
+sys	0m0.301s

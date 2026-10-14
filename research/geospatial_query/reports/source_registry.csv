@@ -1,77 +1,77 @@
-module_id,family,poc_family,slot,adapter,licence,found,unavailable,not_attempted,n_features,median_s,reason,status,module_ids_all
-census_grids,socio-economic,census,census_demography,acs5_api,public-domain (US Census),0,3,12,0,0.0,out of coverage (US-only),failing,census_grids
-census_micro,socio-economic,census,census_demography,statcan_csd_2016,OGL-Canada-2.0,12,0,3,16,0.03,out of coverage (Canada-only),working,census_micro
-census_micro,socio-economic,census,census_demography,statcan_wds_popest,OGL-Canada-2.0,12,0,3,6,0.65,out of coverage (Canada-only),working,census_micro
-census_grids,socio-economic,census,census_demography,tigerweb_blocks2020,public-domain (US Census),3,0,12,11,0.0,out of coverage (US-only),working,census_grids
-cadastre_open,socio-economic,census,crown_land,bc_tantalis_crown,Open Government Licence - BC,2,0,13,16,0.0,out of coverage (outside British Columbia),working,cadastre_open
-cdc_places,public health & microbiology,census,healthcare_accessibility,cdc_places,public-domain (US CDC),3,0,12,9,0.0,out of coverage (CDC PLACES is US-only),working,cdc_places
-health_facilities,public health & microbiology,census,healthcare_accessibility,statcan_odhf,OGL-Canada-2.0,12,0,3,13,0.01,out of coverage (Canada-only),working,health_facilities
-native_land,socio-economic,census,indigenous_lands,nrcan_alta,OGL-Canada-2.0,12,0,3,8,0.13,out of coverage (Canada-only),working,native_land
-native_land,socio-economic,census,indigenous_lands,tigerweb_aiannh,public-domain (US Census),3,0,12,6,0.0,out of coverage (US-only),working,native_land
-lodes,socio-economic,census,mobility_flows,lehd_lodes8,public-domain (US Census),3,0,12,18,0.0,out of coverage (LODES is US-only),working,lodes
-cadastre_open,socio-economic,census,parcels_cadastre,bc_pmbc_parcel_fabric,Open Government Licence - BC,2,0,13,11,0.0,out of coverage (outside British Columbia),working,cadastre_open
-ghsl_pop,socio-economic,census,population_gridded,ghs_pop_r2023a,CC-BY-4.0 (JRC GHSL),15,0,0,8,7.48,,working,ghsl_pop
-cadastre_open,socio-economic,census,property_assessment,donneesquebec_role,CC-BY-4.0 (Quebec),0,1,14,0,0.01,out of coverage (Quebec-only; AOI province 'Saskatchewan'),failing,cadastre_open
-census_micro,socio-economic,census,property_assessment,statcan_dwelling_value,OGL-Canada-2.0,12,0,3,4,0.02,out of coverage (Canada-only),working,census_micro
-ghsl_pop,socio-economic,census,urban_extent,ghs_smod_r2023a,CC-BY-4.0 (JRC GHSL),15,0,0,13,1.92,,working,ghsl_pop
-esri_lulc,macrobiology,census,urban_extent,io_lulc_annual_v02,CC-BY-4.0 (Impact Observatory),15,0,0,14,1.81,,working,esri_lulc
-era5,climate,climate,reanalysis_climate,era5_open_meteo,CC-BY-4.0 (ERA5),15,0,0,5,0.95,,working,era5
-natural_earth,geology,cryosphere,glaciers,natural_earth_10m,public-domain (Natural Earth),15,0,0,6,0.28,,working,natural_earth
-permafrost,geology,cryosphere,permafrost_extent,nrcan_permafrost,OGL-Canada-2.0,12,0,3,7,0.09,out of coverage (Permafrost Atlas of Canada is CA-only),working,permafrost
-sea_ice,climate,cryosphere,sea_ice,noaa_nsidc_sic_cdr,public-domain (NOAA/NSIDC CDR),15,0,0,7,0.02,,working,sea_ice
-alphaearth,latent,embeddings,embeddings,alphaearth_v1_annual,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",15,0,0,82,14.06,,working,alphaearth
-clay_prithvi,latent,embeddings,embeddings,clay_v0_embeddings,CC-BY-4.0 (Clay Foundation),5,10,0,11,0.0,LookupError: no Clay embedding tile for MGRS 17TLG (1170 of ~57k land tiles published),working,clay_prithvi
-sentinel2_l2a,spectral,embeddings,embeddings,s2_signature_v1,"CC-BY-4.0 (Copernicus, derived)",15,0,0,67,7.26,,working,sentinel2_l2a
-gebco,geology,geology,bathymetry,etopo_2022_30s_bed,public-domain (NOAA NCEI),15,0,0,9,0.54,,working,gebco
-macrostrat,geology,geology,bedrock_geology,macrostrat,CC-BY-4.0,15,0,0,5,0.26,,working,macrostrat
-copernicus_dem,geology,geology,dem_medium_res,cop_dem_glo30,ESA Copernicus DEM EULA,15,0,0,8,2.71,,working,copernicus_dem
-natl_lidar,geology,geology,dem_medium_res_ca,mrdem_30,OGL-Canada-2.0,12,0,3,5,1.86,out of coverage (Canada-only),working,natl_lidar
-radiometrics,geology,geology,gamma_radiometrics,usgs_namrad,public-domain (USGS),3,12,0,9,0.21,LookupError: AOI outside the North American radiometric grid (no surveyed cell),working,radiometrics
-gsc_surficial_1880a,geology,geology,surficial_geology,gsc_surficial_1880a,OGL-Canada-2.0,12,0,3,5,0.01,out of coverage (GSC surficial geology is CA-only),working,gsc_surficial_1880a
-eq_catalog,hazards,hazards,earthquake_catalogue,usgs_fdsn,public-domain (USGS),15,0,0,2,0.52,,working,eq_catalog
-cams,hazards,health_env,air_quality_modelled,cams_open_meteo,CC-BY-4.0 (CAMS/ECMWF),15,0,0,17,0.7,,working,cams
-eccc_naps,hazards,health_env,air_quality_monitors,eccc_naps,OGL-Canada-2.0,12,0,3,22,0.03,out of coverage (NAPS is Canada-only),working,eccc_naps
-epa_aqs_airdata,hazards,health_env,air_quality_monitors,epa_aqs_airdata,public-domain (US EPA),3,0,12,18,0.0,out of coverage (EPA AQS is US-only),working,epa_aqs_airdata
-epa_frs,infrastructure,health_env,contaminated_sites,epa_frs_sems,public-domain (US EPA),3,0,12,5,0.0,out of coverage (EPA SEMS/Superfund is US-only),working,epa_frs
-tbs_fcsi,hazards,health_env,contaminated_sites,tbs_fcsi,OGL-Canada-2.0,12,0,3,13,0.02,out of coverage (FCSI is Canada-only),working,tbs_fcsi
-cdc_nndss,public health & microbiology,health_env,disease_surveillance,cdc_nndss,public-domain (US CDC),3,0,12,14,0.0,out of coverage (CDC NNDSS is US-only),working,cdc_nndss
-phac_rvdss,public health & microbiology,health_env,disease_surveillance,phac_rvdss,OGL-Canada-2.0,12,0,3,8,0.02,out of coverage (PHAC RVDSS is Canada-only),working,phac_rvdss
-eccc_ghgrp,hazards,health_env,emissions_releases,eccc_ghgrp,OGL-Canada-2.0,12,0,3,7,0.01,out of coverage (ECCC GHGRP is Canada-only),working,eccc_ghgrp
-eccc_npri,hazards,health_env,emissions_releases,eccc_npri,OGL-Canada-2.0,12,0,3,18,0.05,out of coverage (NPRI is Canada-only),working,eccc_npri
-epa_frs,infrastructure,health_env,emissions_releases,epa_echo_tri,public-domain (US EPA),3,0,12,10,0.0,out of coverage (EPA ECHO/TRI is US-only),working,epa_frs
-epa_frs,infrastructure,health_env,facility_compliance,epa_echo,public-domain (US EPA),3,0,12,16,0.0,out of coverage (EPA ECHO is US-only),working,epa_frs
-wastewater,public health & microbiology,health_env,wastewater_surveillance,cdc_nwss,public-domain (US CDC),3,0,12,11,0.0,out of coverage (CDC NWSS is US-only),working,wastewater
-wastewater,public health & microbiology,health_env,wastewater_surveillance,phac_wastewater,OGL-Canada-2.0,12,0,3,10,0.01,out of coverage (PHAC wastewater is Canada-only),working,wastewater
-overture,infrastructure,infrastructure,addresses,overture_addresses,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),15,0,0,9,1.57,,working,overture
-overture,infrastructure,infrastructure,addresses,overture_buildings,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),15,0,0,14,0.57,,working,overture
-overture,infrastructure,infrastructure,cell_towers,overture_communication,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,7,1.12,,working,overture
-overture,infrastructure,infrastructure,gazetteer,overture_divisions,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),15,0,0,13,0.57,,working,overture
-wikidata_geo,socio-economic,infrastructure,gazetteer,wikidata_sparql,CC0-1.0,15,0,0,8,2.25,,working,wikidata_geo
-mapillary,infrastructure,infrastructure,ground_level_imagery,mapillary_kartaview,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),0,15,0,0,0.98,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restrict,failing,mapillary;kartaview
-epa_frs,infrastructure,infrastructure,industrial_facilities,epa_echo,public-domain (US EPA),3,0,12,12,0.0,out of coverage (US-only: EPA ECHO),working,epa_frs
-overture,infrastructure,infrastructure,industrial_facilities,overture_land_use,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,13,1.21,,working,overture
-osm_overpass,infrastructure,infrastructure,infrastructure_osm,osm_overpass,ODbL-1.0 (share-alike),0,15,0,0,0.03,"allowlist-blocked: overpass server busy/blocked after retries (ProxyError: HTTPSConnectionPool(host='overpass.kumi.systems', port=443):)",failing,osm_overpass
-nrcan_900a,infrastructure,infrastructure,mines_producing,nrcan_900a,OGL-Canada-2.0,12,0,3,7,0.01,out of coverage (NRCan Map 900A is CA-only),working,nrcan_900a
-mrds,infrastructure,infrastructure,mines_producing,usgs_mineplant,public-domain (USGS),3,0,12,9,0.0,out of coverage (USGS mineplant is US-only),working,mrds
-overture,infrastructure,infrastructure,pipelines,overture_utility,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,9,1.14,,working,overture
-overture,infrastructure,infrastructure,power_plants,overture_power_plant,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,7,1.12,,working,overture
-power_plants,infrastructure,infrastructure,power_plants,wri_gppd,CC-BY-4.0 (WRI GPPD v1.3.0),15,0,0,12,0.01,,working,power_plants
-overture,infrastructure,infrastructure,railways,overture_transportation,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,23,1.59,,working,overture
-overture,infrastructure,infrastructure,transmission_lines,overture_power,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,13,0.9,,working,overture
-spawn_biomass,macrobiology,macrobiology,biomass,hgb,CC-BY-4.0,15,0,0,5,2.76,,working,spawn_biomass
-aafc_aci,macrobiology,macrobiology,crop_type_ca,aafc_aci,OGL-Canada-2.0,0,12,3,0,0.01,"allowlist-blocked: HTTPSConnectionPool(host='www.agr.gc.ca', port=443): Max retries exceeded with url: /atlas/rest/services/imageservices/annual_crop_inventory_",failing,aafc_aci
-usda_cdl,macrobiology,macrobiology,crop_type_us,usda_cdl,public-domain (USDA),3,0,12,13,0.0,out of coverage (US-only),working,usda_cdl
-field_boundaries,macrobiology,macrobiology,field_boundaries,usda_csb_fiboa,public-domain (USDA NASS),3,0,12,6,0.0,out of coverage (USDA CSB is conterminous-US only),working,field_boundaries
-hansen_gfc,macrobiology,macrobiology,forest_change,hansen_gfc_v1_13,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),15,0,0,10,2.26,,working,hansen_gfc
-esa_worldcover,macrobiology,macrobiology,land_cover,esa_worldcover,CC-BY-4.0,15,0,0,12,1.49,,working,esa_worldcover
-nrcan_landcover,macrobiology,macrobiology,land_cover_ca,nrcan_landcover,OGL-Canada-2.0,10,2,3,12,1.69,out of coverage (Canada-only),working,nrcan_landcover
-gbif,macrobiology,macrobiology,species_occurrence,gbif,CC-BY / CC0 mixed,15,0,0,2,1.35,,working,gbif
-modis_bio,macrobiology,macrobiology,vegetation_timeseries,modis_13q1,public-domain (NASA),11,4,0,3,16.32,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,working,modis_bio
-mgnify,public health & microbiology,microbiology,geolocated_sequence,mgnify,EBI terms / open,15,0,0,2,1.54,,working,mgnify
-ena_geo,public health & microbiology,microbiology,geolocated_sequence_insdc,ena_geo,INSDC open,15,0,0,1,2.52,,working,ena_geo
-sentinel2_l2a,spectral,spectral,optical_multispectral,sentinel2_l2a,CC-BY-4.0 (Copernicus),15,0,0,12,4.95,,working,sentinel2_l2a
-sentinel1_rtc,spectral,spectral,sar_backscatter_c,sentinel1_rtc,CC-BY-4.0 (Copernicus),15,0,0,1,3.36,,working,sentinel1_rtc
-palsar_mosaic,spectral,spectral,sar_backscatter_l,alos_palsar_mosaic,JAXA open,15,0,0,4,3.04,,working,palsar_mosaic
-landsat_c2l2,spectral,spectral,thermal_surface_temp,landsat_c2l2_st,public-domain (USGS),15,0,0,5,2.58,,working,landsat_c2l2
-jrc_gsw,water bodies,water,surface_water_extent,jrc_gsw,CC-BY-4.0,15,0,0,6,1.63,,working,jrc_gsw
-wqp,hazards,water,water_quality,wqp,public-domain (US),15,0,0,1,0.5,,working,wqp
+module_id,family,poc_family,slot,adapter,source_type,licence,found,unavailable,not_attempted,n_features,median_s,reason,status,module_ids_all
+census_grids,socio-economic,census,census_demography,acs5_api,registry,public-domain (US Census),0,3,12,0,0.0,out of coverage (US-only),failing,census_grids
+census_micro,socio-economic,census,census_demography,statcan_csd_2016,registry,OGL-Canada-2.0,12,0,3,16,0.03,out of coverage (Canada-only),working,census_micro
+census_micro,socio-economic,census,census_demography,statcan_wds_popest,registry,OGL-Canada-2.0,12,0,3,6,0.65,out of coverage (Canada-only),working,census_micro
+census_grids,socio-economic,census,census_demography,tigerweb_blocks2020,registry,public-domain (US Census),3,0,12,11,0.0,out of coverage (US-only),working,census_grids
+cadastre_open,socio-economic,census,crown_land,bc_tantalis_crown,registry,Open Government Licence - BC,2,0,13,16,0.0,out of coverage (outside British Columbia),working,cadastre_open
+cdc_places,public health & microbiology,census,healthcare_accessibility,cdc_places,model,public-domain (US CDC),3,0,12,9,0.0,out of coverage (CDC PLACES is US-only),working,cdc_places
+health_facilities,public health & microbiology,census,healthcare_accessibility,statcan_odhf,registry,OGL-Canada-2.0,12,0,3,13,0.01,out of coverage (Canada-only),working,health_facilities
+native_land,socio-economic,census,indigenous_lands,nrcan_alta,registry,OGL-Canada-2.0,12,0,3,8,0.13,out of coverage (Canada-only),working,native_land
+native_land,socio-economic,census,indigenous_lands,tigerweb_aiannh,registry,public-domain (US Census),3,0,12,6,0.0,out of coverage (US-only),working,native_land
+lodes,socio-economic,census,mobility_flows,lehd_lodes8,model,public-domain (US Census),3,0,12,18,0.0,out of coverage (LODES is US-only),working,lodes
+cadastre_open,socio-economic,census,parcels_cadastre,bc_pmbc_parcel_fabric,registry,Open Government Licence - BC,2,0,13,11,0.0,out of coverage (outside British Columbia),working,cadastre_open
+ghsl_pop,socio-economic,census,population_gridded,ghs_pop_r2023a,model,CC-BY-4.0 (JRC GHSL),15,0,0,8,7.48,,working,ghsl_pop
+cadastre_open,socio-economic,census,property_assessment,donneesquebec_role,registry,CC-BY-4.0 (Quebec),0,1,14,0,0.01,out of coverage (Quebec-only; AOI province 'Saskatchewan'),failing,cadastre_open
+census_micro,socio-economic,census,property_assessment,statcan_dwelling_value,registry,OGL-Canada-2.0,12,0,3,4,0.02,out of coverage (Canada-only),working,census_micro
+ghsl_pop,socio-economic,census,urban_extent,ghs_smod_r2023a,model,CC-BY-4.0 (JRC GHSL),15,0,0,13,1.92,,working,ghsl_pop
+esri_lulc,macrobiology,census,urban_extent,io_lulc_annual_v02,satellite,CC-BY-4.0 (Impact Observatory),15,0,0,14,1.81,,working,esri_lulc
+era5,climate,climate,reanalysis_climate,era5_open_meteo,model,CC-BY-4.0 (ERA5),15,0,0,5,0.95,,working,era5
+natural_earth,geology,cryosphere,glaciers,natural_earth_10m,registry,public-domain (Natural Earth),15,0,0,6,0.28,,working,natural_earth
+permafrost,geology,cryosphere,permafrost_extent,nrcan_permafrost,registry,OGL-Canada-2.0,12,0,3,7,0.09,out of coverage (Permafrost Atlas of Canada is CA-only),working,permafrost
+sea_ice,climate,cryosphere,sea_ice,noaa_nsidc_sic_cdr,satellite,public-domain (NOAA/NSIDC CDR),15,0,0,7,0.02,,working,sea_ice
+alphaearth,latent,embeddings,embeddings,alphaearth_v1_annual,model,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",15,0,0,82,14.06,,working,alphaearth
+clay_prithvi,latent,embeddings,embeddings,clay_v0_embeddings,model,CC-BY-4.0 (Clay Foundation),5,10,0,11,0.0,LookupError: no Clay embedding tile for MGRS 17TLG (1170 of ~57k land tiles published),working,clay_prithvi
+sentinel2_l2a,spectral,embeddings,embeddings,s2_signature_v1,satellite,"CC-BY-4.0 (Copernicus, derived)",15,0,0,67,7.26,,working,sentinel2_l2a
+gebco,geology,geology,bathymetry,etopo_2022_30s_bed,model,public-domain (NOAA NCEI),15,0,0,9,0.54,,working,gebco
+macrostrat,geology,geology,bedrock_geology,macrostrat,field survey,CC-BY-4.0,15,0,0,5,0.26,,working,macrostrat
+copernicus_dem,geology,geology,dem_medium_res,cop_dem_glo30,satellite,ESA Copernicus DEM EULA,15,0,0,8,2.71,,working,copernicus_dem
+natl_lidar,geology,geology,dem_medium_res_ca,mrdem_30,satellite,OGL-Canada-2.0,12,0,3,5,1.86,out of coverage (Canada-only),working,natl_lidar
+radiometrics,geology,geology,gamma_radiometrics,usgs_namrad,airborne,public-domain (USGS),3,12,0,9,0.21,LookupError: AOI outside the North American radiometric grid (no surveyed cell),working,radiometrics
+gsc_surficial_1880a,geology,geology,surficial_geology,gsc_surficial_1880a,field survey,OGL-Canada-2.0,12,0,3,5,0.01,out of coverage (GSC surficial geology is CA-only),working,gsc_surficial_1880a
+eq_catalog,hazards,hazards,earthquake_catalogue,usgs_fdsn,ground station,public-domain (USGS),15,0,0,2,0.52,,working,eq_catalog
+cams,hazards,health_env,air_quality_modelled,cams_open_meteo,model,CC-BY-4.0 (CAMS/ECMWF),15,0,0,17,0.7,,working,cams
+eccc_naps,hazards,health_env,air_quality_monitors,eccc_naps,ground station,OGL-Canada-2.0,12,0,3,22,0.03,out of coverage (NAPS is Canada-only),working,eccc_naps
+epa_aqs_airdata,hazards,health_env,air_quality_monitors,epa_aqs_airdata,ground station,public-domain (US EPA),3,0,12,18,0.0,out of coverage (EPA AQS is US-only),working,epa_aqs_airdata
+epa_frs,infrastructure,health_env,contaminated_sites,epa_frs_sems,registry,public-domain (US EPA),3,0,12,5,0.0,out of coverage (EPA SEMS/Superfund is US-only),working,epa_frs
+tbs_fcsi,hazards,health_env,contaminated_sites,tbs_fcsi,registry,OGL-Canada-2.0,12,0,3,13,0.02,out of coverage (FCSI is Canada-only),working,tbs_fcsi
+cdc_nndss,public health & microbiology,health_env,disease_surveillance,cdc_nndss,registry,public-domain (US CDC),3,0,12,14,0.0,out of coverage (CDC NNDSS is US-only),working,cdc_nndss
+phac_rvdss,public health & microbiology,health_env,disease_surveillance,phac_rvdss,registry,OGL-Canada-2.0,12,0,3,8,0.02,out of coverage (PHAC RVDSS is Canada-only),working,phac_rvdss
+eccc_ghgrp,hazards,health_env,emissions_releases,eccc_ghgrp,registry,OGL-Canada-2.0,12,0,3,7,0.01,out of coverage (ECCC GHGRP is Canada-only),working,eccc_ghgrp
+eccc_npri,hazards,health_env,emissions_releases,eccc_npri,registry,OGL-Canada-2.0,12,0,3,18,0.05,out of coverage (NPRI is Canada-only),working,eccc_npri
+epa_frs,infrastructure,health_env,emissions_releases,epa_echo_tri,registry,public-domain (US EPA),3,0,12,10,0.0,out of coverage (EPA ECHO/TRI is US-only),working,epa_frs
+epa_frs,infrastructure,health_env,facility_compliance,epa_echo,registry,public-domain (US EPA),3,0,12,16,0.0,out of coverage (EPA ECHO is US-only),working,epa_frs
+wastewater,public health & microbiology,health_env,wastewater_surveillance,cdc_nwss,field survey,public-domain (US CDC),3,0,12,11,0.0,out of coverage (CDC NWSS is US-only),working,wastewater
+wastewater,public health & microbiology,health_env,wastewater_surveillance,phac_wastewater,field survey,OGL-Canada-2.0,12,0,3,10,0.01,out of coverage (PHAC wastewater is Canada-only),working,wastewater
+overture,infrastructure,infrastructure,addresses,overture_addresses,registry,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),15,0,0,9,1.57,,working,overture
+overture,infrastructure,infrastructure,addresses,overture_buildings,registry,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),15,0,0,14,0.57,,working,overture
+overture,infrastructure,infrastructure,cell_towers,overture_communication,registry,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,7,1.12,,working,overture
+overture,infrastructure,infrastructure,gazetteer,overture_divisions,registry,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),15,0,0,13,0.57,,working,overture
+wikidata_geo,socio-economic,infrastructure,gazetteer,wikidata_sparql,registry,CC0-1.0,15,0,0,8,2.25,,working,wikidata_geo
+mapillary,infrastructure,infrastructure,ground_level_imagery,mapillary_kartaview,vehicle,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),0,15,0,0,0.98,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restrict,failing,mapillary;kartaview
+epa_frs,infrastructure,infrastructure,industrial_facilities,epa_echo,registry,public-domain (US EPA),3,0,12,12,0.0,out of coverage (US-only: EPA ECHO),working,epa_frs
+overture,infrastructure,infrastructure,industrial_facilities,overture_land_use,registry,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,13,1.21,,working,overture
+osm_overpass,infrastructure,infrastructure,infrastructure_osm,osm_overpass,registry,ODbL-1.0 (share-alike),0,15,0,0,0.03,"allowlist-blocked: overpass server busy/blocked after retries (ProxyError: HTTPSConnectionPool(host='overpass.kumi.systems', port=443):)",failing,osm_overpass
+nrcan_900a,infrastructure,infrastructure,mines_producing,nrcan_900a,registry,OGL-Canada-2.0,12,0,3,7,0.01,out of coverage (NRCan Map 900A is CA-only),working,nrcan_900a
+mrds,infrastructure,infrastructure,mines_producing,usgs_mineplant,registry,public-domain (USGS),3,0,12,9,0.0,out of coverage (USGS mineplant is US-only),working,mrds
+overture,infrastructure,infrastructure,pipelines,overture_utility,registry,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,9,1.14,,working,overture
+overture,infrastructure,infrastructure,power_plants,overture_power_plant,registry,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,7,1.12,,working,overture
+power_plants,infrastructure,infrastructure,power_plants,wri_gppd,registry,CC-BY-4.0 (WRI GPPD v1.3.0),15,0,0,12,0.01,,working,power_plants
+overture,infrastructure,infrastructure,railways,overture_transportation,registry,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,23,1.59,,working,overture
+overture,infrastructure,infrastructure,transmission_lines,overture_power,registry,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,13,0.9,,working,overture
+spawn_biomass,macrobiology,macrobiology,biomass,hgb,satellite,CC-BY-4.0,15,0,0,5,2.76,,working,spawn_biomass
+aafc_aci,macrobiology,macrobiology,crop_type_ca,aafc_aci,satellite,OGL-Canada-2.0,0,12,3,0,0.01,"allowlist-blocked: HTTPSConnectionPool(host='www.agr.gc.ca', port=443): Max retries exceeded with url: /atlas/rest/services/imageservices/annual_crop_inventory_",failing,aafc_aci
+usda_cdl,macrobiology,macrobiology,crop_type_us,usda_cdl,satellite,public-domain (USDA),3,0,12,13,0.0,out of coverage (US-only),working,usda_cdl
+field_boundaries,macrobiology,macrobiology,field_boundaries,usda_csb_fiboa,satellite,public-domain (USDA NASS),3,0,12,6,0.0,out of coverage (USDA CSB is conterminous-US only),working,field_boundaries
+hansen_gfc,macrobiology,macrobiology,forest_change,hansen_gfc_v1_13,satellite,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),15,0,0,10,2.26,,working,hansen_gfc
+esa_worldcover,macrobiology,macrobiology,land_cover,esa_worldcover,satellite,CC-BY-4.0,15,0,0,12,1.49,,working,esa_worldcover
+nrcan_landcover,macrobiology,macrobiology,land_cover_ca,nrcan_landcover,satellite,OGL-Canada-2.0,10,2,3,12,1.69,out of coverage (Canada-only),working,nrcan_landcover
+gbif,macrobiology,macrobiology,species_occurrence,gbif,field survey,CC-BY / CC0 mixed,15,0,0,2,1.35,,working,gbif
+modis_bio,macrobiology,macrobiology,vegetation_timeseries,modis_13q1,satellite,public-domain (NASA),11,4,0,3,16.32,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,working,modis_bio
+mgnify,public health & microbiology,microbiology,geolocated_sequence,mgnify,field survey,EBI terms / open,15,0,0,2,1.54,,working,mgnify
+ena_geo,public health & microbiology,microbiology,geolocated_sequence_insdc,ena_geo,field survey,INSDC open,15,0,0,1,2.52,,working,ena_geo
+sentinel2_l2a,spectral,spectral,optical_multispectral,sentinel2_l2a,satellite,CC-BY-4.0 (Copernicus),15,0,0,12,4.95,,working,sentinel2_l2a
+sentinel1_rtc,spectral,spectral,sar_backscatter_c,sentinel1_rtc,satellite,CC-BY-4.0 (Copernicus),15,0,0,1,3.36,,working,sentinel1_rtc
+palsar_mosaic,spectral,spectral,sar_backscatter_l,alos_palsar_mosaic,satellite,JAXA open,15,0,0,4,3.04,,working,palsar_mosaic
+landsat_c2l2,spectral,spectral,thermal_surface_temp,landsat_c2l2_st,satellite,public-domain (USGS),15,0,0,5,2.58,,working,landsat_c2l2
+jrc_gsw,water bodies,water,surface_water_extent,jrc_gsw,satellite,CC-BY-4.0,15,0,0,6,1.63,,working,jrc_gsw
+wqp,hazards,water,water_quality,wqp,ground station,public-domain (US),15,0,0,1,0.5,,working,wqp

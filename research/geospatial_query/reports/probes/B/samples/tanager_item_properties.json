@@ -1,0 +1,44 @@
+{
+ "id": "20250911_191547_88_4001",
+ "bbox": [
+  -112.24360558315149,
+  40.428696308574764,
+  -111.92238187113833,
+  40.6837632348248
+ ],
+ "collection": "Energy and Mining",
+ "properties": {
+  "cloud_percent": 3,
+  "collection_mode": "maximum_sensitivity",
+  "constellation": "Tanager",
+  "datetime": "2025-09-11T19:15:47.894062Z",
+  "description": "All data products from Tanager-1 for 20250911_191547_88_4001 near South Jordan, Salt Lake County, Utah, United States",
+  "gsd": 35.86,
+  "instruments": [
+   "4001"
+  ],
+  "license": "CC-BY-4.0",
+  "light_haze_percent": 1,
+  "location_description": "South Jordan, Salt Lake County, Utah, United States",
+  "notes": null,
+  "platform": "Planet",
+  "plume_provider_ids": null,
+  "quality_category": "standard",
+  "title": "TanagerScene 20250911_191547_88_4001 Core Imagery",
+  "view:azimuth": 245.1,
+  "view:off_nadir": 15.4,
+  "view:sun_azimuth": 176.3,
+  "view:sun_elevation": 53.6
+ },
+ "assets": [
+  "basic_beta_udm",
+  "basic_radiance_hdf5",
+  "basic_sr_hdf5",
+  "geolocation_array",
+  "ortho_beta_udm",
+  "ortho_radiance_hdf5",
+  "ortho_sr_hdf5",
+  "ortho_visual",
+  "thumbnail"
+ ]
+}

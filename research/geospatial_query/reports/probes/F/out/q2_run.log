@@ -1,0 +1,80 @@
+QUERY SPEC: {"aoi": "farm_sk_quarter", "time": "2023-07-01/2023-07-31", "collections": ["sentinel-2-l2a", "landsat-c2-l2"], "bands": ["red", "nir", "swir16"], "indices": ["NDVI", "NDWI", "NBR"], "max_cloud": 20}
+
+== index plans (spyndex 0.12.0) ==
+NDVI: (N-R)/(N+R)  bands={'N': 'nir', 'R': 'red'} constants={}
+NDWI: (G-N)/(G+N)  bands={'G': 'green', 'N': 'nir'} constants={}
+NBR: (N-S2)/(N+S2)  bands={'N': 'nir', 'S2': 'swir22'} constants={}
+SAVI: (1.0+L)*(N-R)/(N+R+L)  bands={'N': 'nir', 'R': 'red'} constants={'L': 1.0}
+EVI: g*(N-R)/(N+C1*R-C2*B+L)  bands={'N': 'nir', 'R': 'red', 'B': 'blue'} constants={'g': 2.5, 'C1': 6.0, 'C2': 7.5, 'L': 1.0}
+
+== PC:sentinel-2-l2a ==
+collection item_assets resolve bands: {'red': ('B04', 'common_name'), 'nir': ('B08', 'common_name'), 'swir16': ('B11', 'common_name')}  (collection HTTP 200, licence proprietary)
+item S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252 cloud=0.288606 (search pages=1)
+  band red     -> B04 (common_name)
+  band nir     -> B08 (common_name)
+  band swir16  -> B11 (common_name)
+  NDVI  (N-R)/(N+R)                  N->B08(common_name) R->B04(common_name)
+  NDWI  (G-N)/(G+N)                  G->B03(common_name) N->B08(common_name)
+  NBR   (N-S2)/(N+S2)                N->B08(common_name) S2->B12(common_name)
+  SAVI  (1.0+L)*(N-R)/(N+R+L)        N->B08(common_name) R->B04(common_name)
+  EVI   g*(N-R)/(N+C1*R-C2*B+L)      N->B08(common_name) R->B04(common_name) B->B02(common_name)
+  AOI mean over farm_sk_quarter (window 82x82 px): {'band:red': 0.0849, 'band:nir': 0.3039, 'band:swir16': 0.2345, 'NDVI': 0.5458, 'NDWI': -0.5153, 'NBR': 0.2889}
+
+== PC:landsat-c2-l2 ==
+collection item_assets resolve bands: {'red': ('red', 'common_name'), 'nir': (None, 'unresolved'), 'swir16': ('swir16', 'common_name')}  (collection HTTP 200, licence proprietary)
+item LE07_L2SP_036024_20230710_02_T1 cloud=0.0 (search pages=1)
+  band red     -> red (common_name)
+  band nir     -> nir08 (wavelength 760-900nm)
+  band swir16  -> swir16 (common_name)
+  NDVI  (N-R)/(N+R)                  N->nir08(wavelength 760-900nm) R->red(common_name)
+  NDWI  (G-N)/(G+N)                  G->green(common_name) N->nir08(wavelength 760-900nm)
+  NBR   (N-S2)/(N+S2)                N->nir08(wavelength 760-900nm) S2->swir22(common_name)
+  SAVI  (1.0+L)*(N-R)/(N+R+L)        N->nir08(wavelength 760-900nm) R->red(common_name)
+  EVI   g*(N-R)/(N+C1*R-C2*B+L)      N->nir08(wavelength 760-900nm) R->red(common_name) B->blue(common_name)
+  AOI mean over farm_sk_quarter (window 27x27 px): {'band:red': 0.1108, 'band:nir': 0.3806, 'band:swir16': 0.2287, 'NDVI': 0.5419, 'NDWI': -0.5221, 'NBR': 0.4754}
+
+== ES:sentinel-2-l2a ==
+collection item_assets resolve bands: {'red': ('red', 'common_name'), 'nir': ('nir', 'common_name'), 'swir16': ('swir16', 'common_name')}  (collection HTTP 200, licence proprietary)
+item S2B_13UDT_20230731_0_L2A cloud=0.288957 (search pages=2)
+  band red     -> red (common_name)
+  band nir     -> nir (common_name)
+  band swir16  -> swir16 (common_name)
+  NDVI  (N-R)/(N+R)                  N->nir(common_name) R->red(common_name)
+  NDWI  (G-N)/(G+N)                  G->green(common_name) N->nir(common_name)
+  NBR   (N-S2)/(N+S2)                N->nir(common_name) S2->swir22(common_name)
+  SAVI  (1.0+L)*(N-R)/(N+R+L)        N->nir(common_name) R->red(common_name)
+  EVI   g*(N-R)/(N+C1*R-C2*B+L)      N->nir(common_name) R->red(common_name) B->blue(common_name)
+  AOI mean over farm_sk_quarter (window 82x82 px): {'band:red': 0.0845, 'band:nir': 0.3024, 'band:swir16': 0.2334, 'NDVI': 0.5458, 'NDWI': -0.5151, 'NBR': 0.2889}
+
+== ES:landsat-c2-l2 ==
+collection item_assets resolve bands: {'red': (None, 'unresolved'), 'nir': (None, 'unresolved'), 'swir16': (None, 'unresolved')}  (collection HTTP 200, licence proprietary)
+item LE07_L2SP_036024_20230710_02_T1 cloud=0 (search pages=2)
+  band red     -> red (common_name)
+  band nir     -> nir08 (wavelength 760-900nm)
+  band swir16  -> swir16 (common_name)
+  NDVI  (N-R)/(N+R)                  N->nir08(wavelength 760-900nm) R->red(common_name)
+  NDWI  (G-N)/(G+N)                  G->green(common_name) N->nir08(wavelength 760-900nm)
+  NBR   (N-S2)/(N+S2)                N->nir08(wavelength 760-900nm) S2->swir22(common_name)
+  SAVI  (1.0+L)*(N-R)/(N+R+L)        N->nir08(wavelength 760-900nm) R->red(common_name)
+  EVI   g*(N-R)/(N+C1*R-C2*B+L)      N->nir08(wavelength 760-900nm) R->red(common_name) B->blue(common_name)
+  READ FAILED: RasterioIOError: InvalidCredentials: No valid AWS credentials found. For authenticated requests, you need to set AWS_SECRET_ACCESS_KEY, AWS_ACCESS_KEY_ID or other configuration 
+
+== resolution across all 15 AOIs (item assets, both catalogues, both collections) ==
+  farm_sk_quarter            PC=True ES=True
+  farm_on_essex              PC=True ES=True
+  farm_ab_taber              PC=True ES=True
+  farm_us_ia_story           PC=True ES=True
+  mine_hvc_bc                PC=True ES=True
+  mine_syncrude_ab           PC=True ES=True
+  mine_sudbury_on            PC=True ES=True
+  mine_us_bingham_ut         PC=True ES=True
+  city_toronto_core          PC=True ES=True
+  city_montreal_core         PC=True ES=True
+  city_windsor_on            PC=True ES=True
+  city_us_detroit_mi         PC=True ES=True
+  stress_mine_hvc_full       PC=True ES=True
+  stress_oilsands_region     PC=True ES=True
+  stress_city_toronto_full   PC=True ES=True
+control mid-Pacific PC: items found for both collections = 0 (expected 0)
+control mid-Pacific ES: items found for both collections = 0 (expected 0)
+AOIs where both collections resolved all bands and indices: PC 15/15  ES 15/15

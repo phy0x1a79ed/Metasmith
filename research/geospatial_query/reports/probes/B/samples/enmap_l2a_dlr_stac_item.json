@@ -1,0 +1,230 @@
+{
+ "type": "Feature",
+ "stac_version": "1.0.0",
+ "stac_extensions": [
+  "https://stac-extensions.github.io/eo/v1.1.0/schema.json",
+  "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/view/v1.1.0/schema.json",
+  "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+  "https://stac-extensions.github.io/sat/v1.1.0/schema.json",
+  "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
+ ],
+ "id": "ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z",
+ "collection": "ENMAP_HSI_L2A",
+ "geometry": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     -83.171653,
+     42.428864
+    ],
+    [
+     -83.275389,
+     42.160106
+    ],
+    [
+     -82.837184,
+     42.083947
+    ],
+    [
+     -82.731527,
+     42.352268
+    ],
+    [
+     -83.171653,
+     42.428864
+    ]
+   ]
+  ]
+ },
+ "bbox": [
+  -83.2753894,
+  42.083947,
+  -82.7315268,
+  42.4288639
+ ],
+ "properties": {
+  "version": "01.05.06",
+  "created": "2026-08-14T12:03:25.539Z",
+  "updated": "2026-09-14T10:04:43.852Z",
+  "datetime": "2026-08-13T17:15:51.246273Z",
+  "start_datetime": "2026-08-13T17:15:49.000657Z",
+  "end_datetime": "2026-08-13T17:15:53.491888Z",
+  "platform": "enmap",
+  "proj:epsg": 32617,
+  "sat:relative_orbit": "23512",
+  "sat:orbit_state": "DESCENDING",
+  "eo:cloud_cover": 100,
+  "eo:snow_cover": 47,
+  "view:sun_azimuth": 169.168503,
+  "view:sun_elevation": 61.876162,
+  "processing:facility": "NZ",
+  "processing:level": "L2A",
+  "eop:sensorType": "OPTICAL",
+  "card4l:eastern_geometric_accuracy": -999.0,
+  "card4l:geometric_accuracy_radial_rmse": -999.0,
+  "card4l:northern_geometric_accuracy": -999.0,
+  "card4l:specification": "SR",
+  "card4l:specification_version": "5.0",
+  "data_type": "int16",
+  "enmap:SWIRAOrSWIRBSelected": "SWIRA",
+  "enmap:acquisitionConfiguration": "earth",
+  "enmap:acquisitionType": "EARTH",
+  "enmap:acrossOffNadirAngle": -24.3431301948,
+  "enmap:alongOffNadirAngle": -1.46388489905,
+  "enmap:archivedVersion": "01.05.06",
+  "enmap:biomeType": "Temperate Broadleaf and Mixed Forests",
+  "enmap:cirrus_cover": 0,
+  "enmap:cloud_shadow": 0,
+  "enmap:compressionType": "COMPRESSED",
+  "enmap:datatakeID": "0000209148",
+  "enmap:defectivePixelsSWIR": 12,
+  "enmap:defectivePixelsVNIR": 2,
+  "enmap:haze_cover": 0,
+  "enmap:imageID": "0000027614",
+  "enmap:instrumentStatusOK": "true",
+  "enmap:missionPhase": "routine",
+  "enmap:nodata": -32768,
+  "enmap:non_cloud_shadow": 0,
+  "enmap:numberOfTiles": "04",
+  "enmap:orbitNo": 23512,
+  "enmap:overallQuality": 2,
+  "enmap:overallQualitySWIR": 0,
+  "enmap:overallQualityVNIR": 0,
+  "enmap:ozoneValue": 330,
+  "enmap:phase": "routine",
+  "enmap:processingDate": "2026-08-14T06:47:25.648678Z",
+  "enmap:productScreeningFailedGroups": "TEMPERATURE",
+  "enmap:productScreeningResultStatus": "WARNING",
+  "enmap:qualityAtmosphere": 2,
+  "enmap:saturationCrosstalkSWIR": 0,
+  "enmap:saturationCrosstalkVNIR": 0,
+  "enmap:sceneAOT": 317,
+  "enmap:sceneAzimuthAngle": 13.6519299664,
+  "enmap:sceneSunglint": 0,
+  "enmap:sceneTerrain": 0,
+  "enmap:sceneWV": 699,
+  "enmap:season": "summer",
+  "enmap:status": "NOMINAL",
+  "enmap:statusSWIR": "on",
+  "enmap:statusVNIR": "on",
+  "enmap:sunAzimuthAngle": 169.168503,
+  "enmap:sunElevationAngle": 61.876162,
+  "enmap:swirNumberChannelsMissing": 0,
+  "enmap:tileID": "01",
+  "enmap:vnirNumberChannelsMissing": 0,
+  "enmap:water_cover": 0,
+  "eo:instrument": "HSI",
+  "raster:nodata": "int",
+  "sci:citation": "DLR (2026): EnMAP L0 Product 0000209148_01_L0_20260813T232134_010506_20260814 doi: 10.15489/rlyibn8gjc58 Processed to level 2A (version: 010506, parameters: U0BLNNTS330G)"
+ },
+ "assets": {
+  "metadata": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-METADATA.XML",
+  "image": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-SPECTRAL_IMAGE_COG.TIF",
+  "vnir": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_VNIR_COG.TIF",
+  "thumbnail": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_VNIR_COG_thumbnail.png",
+  "swir": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_SWIR_COG.TIF",
+  "quality_classes": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_CLASSES_COG.TIF",
+  "quality_cloud": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_CLOUD_COG.TIF",
+  "quality_cloud_shadow": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_CLOUDSHADOW_COG.TIF",
+  "quality_haze": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_HAZE_COG.TIF",
+  "quality_cirrus": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_CIRRUS_COG.TIF",
+  "quality_snow": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_SNOW_COG.TIF",
+  "quality_testflags": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_QUALITY_TESTFLAGS_COG.TIF",
+  "defective_pixel_mask": "https://download.geoservice.dlr.de/ENMAP/files/L2A/2026/08/13/DT0000209148/01/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z-QL_PIXELMASK_COG.TIF"
+ },
+ "links": [
+  {
+   "title": "Root",
+   "rel": "root",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+   "type": "application/json"
+  },
+  {
+   "title": "Parent",
+   "rel": "parent",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+   "type": "application/json"
+  },
+  {
+   "title": "Self",
+   "rel": "self",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A/items/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z",
+   "type": "application/geo%2Bjson"
+  },
+  {
+   "title": "Item",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A/items/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z",
+   "type": "application/geo%2Bjson"
+  },
+  {
+   "title": "Item as HTML",
+   "rel": "alternate",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A/items/ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z",
+   "type": "text/html"
+  },
+  {
+   "title": "Items",
+   "rel": "items",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A/items",
+   "type": "application/geo%2Bjson"
+  },
+  {
+   "title": "Items as HTML",
+   "rel": "items",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A/items",
+   "type": "text/html"
+  },
+  {
+   "title": "Collection",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A",
+   "type": "application/json"
+  },
+  {
+   "title": "Collection as HTML",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/ENMAP_HSI_L2A",
+   "type": "text/html"
+  },
+  {
+   "title": "Collections",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections",
+   "type": "application/json"
+  },
+  {
+   "title": "Collections as HTML",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections",
+   "type": "text/html"
+  },
+  {
+   "title": "OpenSearch GeoJSON",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/oseo/search?parentIdentifier=ENMAP_HSI_L2A&identifier=ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z&httpAccept=application%2Fgeo%252Bjson",
+   "type": "application/geo+json"
+  },
+  {
+   "title": "OpenSearch Atom XML",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/oseo/search?parentIdentifier=ENMAP_HSI_L2A&identifier=ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z&httpAccept=application%2Fatom%2Bxml",
+   "type": "application/atom+xml"
+  },
+  {
+   "title": "OpenSearch O&M XML",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/oseo/metadata?parentId=ENMAP_HSI_L2A&uid=ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z&httpAccept=application%2Fgml%2Bxml",
+   "type": "application/gml+xml"
+  },
+  {
+   "title": "Queryables",
+   "rel": "http://www.opengis.net/def/rel/ogc/1.0/queryables",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/collections/ENMAP_HSI_L2A/queryables",
+   "type": "application/schema+json"
+  }
+ ]
+}

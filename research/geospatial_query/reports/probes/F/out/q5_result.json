@@ -1,0 +1,2394 @@
+{
+ "observations": {
+  "PC:sentinel-2-l2a": {
+   "farm_sk_quarter": {
+    "item_id": "S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-07-31T18:09:19.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R10m/T13UDT_20230731T180919_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R10m/T13UDT_20230731T180919_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R20m/T13UDT_20230731T180919_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R20m/T13UDT_20230731T180919_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_on_essex": {
+    "item_id": "S2B_MSIL2A_20230618T161829_R040_T17TLG_20230618T221602",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-18T16:18:29.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230618T161829_R040_T17TLG_20230618T221602",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R10m/T17TLG_20230618T161829_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R10m/T17TLG_20230618T161829_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R20m/T17TLG_20230618T161829_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R20m/T17TLG_20230618T161829_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_ab_taber": {
+    "item_id": "S2A_MSIL2A_20230801T182921_R027_T12UVA_20230802T020507",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-01T18:29:21.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230801T182921_R027_T12UVA_20230802T020507",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/U/VA/2023/08/01/S2A_MSIL2A_20230801T182921_N0509_R027_T12UVA_20230802T020507.SAFE/GRANULE/L2A_T12UVA_A042352_20230801T183338/IMG_DATA/R10m/T12UVA_20230801T182921_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/U/VA/2023/08/01/S2A_MSIL2A_20230801T182921_N0509_R027_T12UVA_20230802T020507.SAFE/GRANULE/L2A_T12UVA_A042352_20230801T183338/IMG_DATA/R10m/T12UVA_20230801T182921_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/U/VA/2023/08/01/S2A_MSIL2A_20230801T182921_N0509_R027_T12UVA_20230802T020507.SAFE/GRANULE/L2A_T12UVA_A042352_20230801T183338/IMG_DATA/R20m/T12UVA_20230801T182921_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/U/VA/2023/08/01/S2A_MSIL2A_20230801T182921_N0509_R027_T12UVA_20230802T020507.SAFE/GRANULE/L2A_T12UVA_A042352_20230801T183338/IMG_DATA/R20m/T12UVA_20230801T182921_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/U/VA/2023/08/01/S2A_MSIL2A_20230801T182921_N0509_R027_T12UVA_20230802T020507.SAFE/GRANULE/L2A_T12UVA_A042352_20230801T183338/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_us_ia_story": {
+    "item_id": "S2B_MSIL2A_20230620T165849_R069_T15TVG_20230621T001910",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-20T16:58:49.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230620T165849_R069_T15TVG_20230621T001910",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/15/T/VG/2023/06/20/S2B_MSIL2A_20230620T165849_N0509_R069_T15TVG_20230621T001910.SAFE/GRANULE/L2A_T15TVG_A032842_20230620T170446/IMG_DATA/R10m/T15TVG_20230620T165849_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/15/T/VG/2023/06/20/S2B_MSIL2A_20230620T165849_N0509_R069_T15TVG_20230621T001910.SAFE/GRANULE/L2A_T15TVG_A032842_20230620T170446/IMG_DATA/R10m/T15TVG_20230620T165849_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/15/T/VG/2023/06/20/S2B_MSIL2A_20230620T165849_N0509_R069_T15TVG_20230621T001910.SAFE/GRANULE/L2A_T15TVG_A032842_20230620T170446/IMG_DATA/R20m/T15TVG_20230620T165849_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/15/T/VG/2023/06/20/S2B_MSIL2A_20230620T165849_N0509_R069_T15TVG_20230621T001910.SAFE/GRANULE/L2A_T15TVG_A032842_20230620T170446/IMG_DATA/R20m/T15TVG_20230620T165849_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/15/T/VG/2023/06/20/S2B_MSIL2A_20230620T165849_N0509_R069_T15TVG_20230621T001910.SAFE/GRANULE/L2A_T15TVG_A032842_20230620T170446/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_hvc_bc": {
+    "item_id": "S2A_MSIL2A_20230813T190921_R056_T10UFA_20230814T043251",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-13T19:09:21.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230813T190921_R056_T10UFA_20230814T043251",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R10m/T10UFA_20230813T190921_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R10m/T10UFA_20230813T190921_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R20m/T10UFA_20230813T190921_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R20m/T10UFA_20230813T190921_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_syncrude_ab": {
+    "item_id": "S2B_MSIL2A_20230829T183929_R070_T12VVJ_20230830T012738",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T18:39:29.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230829T183929_R070_T12VVJ_20230830T012738",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R10m/T12VVJ_20230829T183929_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R10m/T12VVJ_20230829T183929_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R20m/T12VVJ_20230829T183929_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R20m/T12VVJ_20230829T183929_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_sudbury_on": {
+    "item_id": "S2B_MSIL2A_20230827T161829_R040_T17TMM_20241024T043128",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-27T16:18:29.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230827T161829_R040_T17TMM_20241024T043128",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/MM/2023/08/27/S2B_MSIL2A_20230827T161829_N0510_R040_T17TMM_20241024T043128.SAFE/GRANULE/L2A_T17TMM_A033814_20230827T162957/IMG_DATA/R10m/T17TMM_20230827T161829_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/MM/2023/08/27/S2B_MSIL2A_20230827T161829_N0510_R040_T17TMM_20241024T043128.SAFE/GRANULE/L2A_T17TMM_A033814_20230827T162957/IMG_DATA/R10m/T17TMM_20230827T161829_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/MM/2023/08/27/S2B_MSIL2A_20230827T161829_N0510_R040_T17TMM_20241024T043128.SAFE/GRANULE/L2A_T17TMM_A033814_20230827T162957/IMG_DATA/R20m/T17TMM_20230827T161829_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/MM/2023/08/27/S2B_MSIL2A_20230827T161829_N0510_R040_T17TMM_20241024T043128.SAFE/GRANULE/L2A_T17TMM_A033814_20230827T162957/IMG_DATA/R20m/T17TMM_20230827T161829_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/MM/2023/08/27/S2B_MSIL2A_20230827T161829_N0510_R040_T17TMM_20241024T043128.SAFE/GRANULE/L2A_T17TMM_A033814_20230827T162957/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_us_bingham_ut": {
+    "item_id": "S2A_MSIL2A_20230716T180921_R084_T12TVK_20230717T021728",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-07-16T18:09:21.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230716T180921_R084_T12TVK_20230717T021728",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/T/VK/2023/07/16/S2A_MSIL2A_20230716T180921_N0509_R084_T12TVK_20230717T021728.SAFE/GRANULE/L2A_T12TVK_A042123_20230716T182229/IMG_DATA/R10m/T12TVK_20230716T180921_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/T/VK/2023/07/16/S2A_MSIL2A_20230716T180921_N0509_R084_T12TVK_20230717T021728.SAFE/GRANULE/L2A_T12TVK_A042123_20230716T182229/IMG_DATA/R10m/T12TVK_20230716T180921_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/T/VK/2023/07/16/S2A_MSIL2A_20230716T180921_N0509_R084_T12TVK_20230717T021728.SAFE/GRANULE/L2A_T12TVK_A042123_20230716T182229/IMG_DATA/R20m/T12TVK_20230716T180921_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/T/VK/2023/07/16/S2A_MSIL2A_20230716T180921_N0509_R084_T12TVK_20230717T021728.SAFE/GRANULE/L2A_T12TVK_A042123_20230716T182229/IMG_DATA/R20m/T12TVK_20230716T180921_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/T/VK/2023/07/16/S2A_MSIL2A_20230716T180921_N0509_R084_T12TVK_20230717T021728.SAFE/GRANULE/L2A_T12TVK_A042123_20230716T182229/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_toronto_core": {
+    "item_id": "S2A_MSIL2A_20230829T160831_R140_T17TPJ_20230830T011038",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T16:08:31.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230829T160831_R140_T17TPJ_20230830T011038",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R10m/T17TPJ_20230829T160831_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R10m/T17TPJ_20230829T160831_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R20m/T17TPJ_20230829T160831_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R20m/T17TPJ_20230829T160831_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_montreal_core": {
+    "item_id": "S2A_MSIL2A_20230823T154821_R054_T18TXR_20230824T005544",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-23T15:48:21.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230823T154821_R054_T18TXR_20230824T005544",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/18/T/XR/2023/08/23/S2A_MSIL2A_20230823T154821_N0509_R054_T18TXR_20230824T005544.SAFE/GRANULE/L2A_T18TXR_A042665_20230823T155606/IMG_DATA/R10m/T18TXR_20230823T154821_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/18/T/XR/2023/08/23/S2A_MSIL2A_20230823T154821_N0509_R054_T18TXR_20230824T005544.SAFE/GRANULE/L2A_T18TXR_A042665_20230823T155606/IMG_DATA/R10m/T18TXR_20230823T154821_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/18/T/XR/2023/08/23/S2A_MSIL2A_20230823T154821_N0509_R054_T18TXR_20230824T005544.SAFE/GRANULE/L2A_T18TXR_A042665_20230823T155606/IMG_DATA/R20m/T18TXR_20230823T154821_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/18/T/XR/2023/08/23/S2A_MSIL2A_20230823T154821_N0509_R054_T18TXR_20230824T005544.SAFE/GRANULE/L2A_T18TXR_A042665_20230823T155606/IMG_DATA/R20m/T18TXR_20230823T154821_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/18/T/XR/2023/08/23/S2A_MSIL2A_20230823T154821_N0509_R054_T18TXR_20230824T005544.SAFE/GRANULE/L2A_T18TXR_A042665_20230823T155606/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_windsor_on": {
+    "item_id": "S2B_MSIL2A_20230618T161829_R040_T17TLG_20230618T221602",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-18T16:18:29.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230618T161829_R040_T17TLG_20230618T221602",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R10m/T17TLG_20230618T161829_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R10m/T17TLG_20230618T161829_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R20m/T17TLG_20230618T161829_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/IMG_DATA/R20m/T17TLG_20230618T161829_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LG/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLG_20230618T221602.SAFE/GRANULE/L2A_T17TLG_A032813_20230618T162118/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_us_detroit_mi": {
+    "item_id": "S2B_MSIL2A_20230618T161829_R040_T17TLH_20230618T220029",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-18T16:18:29.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230618T161829_R040_T17TLH_20230618T220029",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LH/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLH_20230618T220029.SAFE/GRANULE/L2A_T17TLH_A032813_20230618T162118/IMG_DATA/R10m/T17TLH_20230618T161829_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LH/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLH_20230618T220029.SAFE/GRANULE/L2A_T17TLH_A032813_20230618T162118/IMG_DATA/R10m/T17TLH_20230618T161829_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LH/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLH_20230618T220029.SAFE/GRANULE/L2A_T17TLH_A032813_20230618T162118/IMG_DATA/R20m/T17TLH_20230618T161829_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LH/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLH_20230618T220029.SAFE/GRANULE/L2A_T17TLH_A032813_20230618T162118/IMG_DATA/R20m/T17TLH_20230618T161829_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/LH/2023/06/18/S2B_MSIL2A_20230618T161829_N0509_R040_T17TLH_20230618T220029.SAFE/GRANULE/L2A_T17TLH_A032813_20230618T162118/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_mine_hvc_full": {
+    "item_id": "S2A_MSIL2A_20230813T190921_R056_T10UFA_20230814T043251",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-13T19:09:21.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230813T190921_R056_T10UFA_20230814T043251",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R10m/T10UFA_20230813T190921_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R10m/T10UFA_20230813T190921_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R20m/T10UFA_20230813T190921_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/IMG_DATA/R20m/T10UFA_20230813T190921_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/10/U/FA/2023/08/13/S2A_MSIL2A_20230813T190921_N0509_R056_T10UFA_20230814T043251.SAFE/GRANULE/L2A_T10UFA_A042524_20230813T191425/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_oilsands_region": {
+    "item_id": "S2B_MSIL2A_20230829T183929_R070_T12VVJ_20230830T012738",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T18:39:29.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230829T183929_R070_T12VVJ_20230830T012738",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R10m/T12VVJ_20230829T183929_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R10m/T12VVJ_20230829T183929_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R20m/T12VVJ_20230829T183929_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/IMG_DATA/R20m/T12VVJ_20230829T183929_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/12/V/VJ/2023/08/29/S2B_MSIL2A_20230829T183929_N0509_R070_T12VVJ_20230830T012738.SAFE/GRANULE/L2A_T12VVJ_A033844_20230829T184118/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_city_toronto_full": {
+    "item_id": "S2A_MSIL2A_20230829T160831_R140_T17TPJ_20230830T011038",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T16:08:31.024000Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2A_MSIL2A_20230829T160831_R140_T17TPJ_20230830T011038",
+    "assets": {
+     "B04": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R10m/T17TPJ_20230829T160831_B04_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B08": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R10m/T17TPJ_20230829T160831_B08_10m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "B11": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R20m/T17TPJ_20230829T160831_B11_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "SCL": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/IMG_DATA/R20m/T17TPJ_20230829T160831_SCL_20m.tif?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule-metadata": {
+      "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/17/T/PJ/2023/08/29/S2A_MSIL2A_20230829T160831_N0509_R140_T17TPJ_20230830T011038.SAFE/GRANULE/L2A_T17TPJ_A042751_20230829T161818/MTD_TL.xml?<sas-redacted>",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   }
+  },
+  "PC:landsat-c2-l2": {
+   "farm_sk_quarter": {
+    "item_id": "LE07_L2SP_036024_20230828_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-28T15:38:45.260403Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_036024_20230828_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_on_essex": {
+    "item_id": "LE07_L2SP_020031_20230705_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-07-05T14:04:59.129184Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_020031_20230705_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_ab_taber": {
+    "item_id": "LE07_L2SP_041025_20230814_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-14T16:09:15.979406Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_041025_20230814_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_us_ia_story": {
+    "item_id": "LE07_L2SP_026031_20230728_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-07-28T14:41:02.692512Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_026031_20230728_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_hvc_bc": {
+    "item_id": "LE07_L2SP_046025_20230827_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-27T16:37:41.749482Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_046025_20230827_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_syncrude_ab": {
+    "item_id": "LE07_L2SP_043020_20230829_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-29T16:17:17.796018Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_043020_20230829_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_sudbury_on": {
+    "item_id": "LE07_L2SP_018028_20230603_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-03T13:59:52.094848Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_018028_20230603_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_us_bingham_ut": {
+    "item_id": "LC09_L2SP_038032_20230715_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-07-15T18:07:48.357111Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_038032_20230715_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_SR_B6.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_toronto_core": {
+    "item_id": "LC09_L2SP_018029_20230617_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-17T16:02:43.206563Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LC09_L2SP_018029_20230617_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_SR_B6.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_montreal_core": {
+    "item_id": "LE07_L2SP_015028_20230622_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-22T13:34:35.407106Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_015028_20230622_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_windsor_on": {
+    "item_id": "LE07_L2SP_020031_20230828_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-28T14:02:51.440510Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_020031_20230828_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_us_detroit_mi": {
+    "item_id": "LE07_L2SP_020031_20230828_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-28T14:02:51.440510Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_020031_20230828_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_mine_hvc_full": {
+    "item_id": "LE07_L2SP_046025_20230827_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-27T16:37:41.749482Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_046025_20230827_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_oilsands_region": {
+    "item_id": "LE07_L2SP_043020_20230829_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-29T16:17:17.796018Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_043020_20230829_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_city_toronto_full": {
+    "item_id": "LE07_L2SP_018029_20230620_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-20T13:53:14.971182Z",
+    "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-c2-l2/items/LE07_L2SP_018029_20230620_02_T1",
+    "assets": {
+     "red": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_SR_B3.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir08": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_SR_B4.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_SR_B5.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "qa_pixel": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_QA_PIXEL.TIF?<sas-redacted>",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "mtl.json": {
+      "href": "https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_MTL.json?<sas-redacted>",
+      "type": "application/json",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   }
+  },
+  "ES:sentinel-2-l2a": {
+   "farm_sk_quarter": {
+    "item_id": "S2B_13UDT_20230810_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-10T18:19:47.717000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_13UDT_20230810_0_L2A",
+    "assets": {
+     "red": {
+      "href": "s3://sentinel-s2-l2a/tiles/13/U/DT/2023/8/10/0/R10m/B04.jp2",
+      "type": "image/jp2",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "s3://sentinel-s2-l2a/tiles/13/U/DT/2023/8/10/0/R10m/B08.jp2",
+      "type": "image/jp2",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "s3://sentinel-s2-l2a/tiles/13/U/DT/2023/8/10/0/R20m/B11.jp2",
+      "type": "image/jp2",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "s3://sentinel-s2-l2a/tiles/13/U/DT/2023/8/10/0/R20m/SCL.jp2",
+      "type": "image/jp2",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "s3://sentinel-s2-l2a/tiles/13/U/DT/2023/8/10/0/metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "farm_on_essex": {
+    "item_id": "S2B_17TLG_20230618_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-18T16:31:53.202000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_17TLG_20230618_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_ab_taber": {
+    "item_id": "S2A_12UVA_20230801_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-01T18:40:27.259000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_12UVA_20230801_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/U/VA/2023/8/S2A_12UVA_20230801_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/U/VA/2023/8/S2A_12UVA_20230801_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/U/VA/2023/8/S2A_12UVA_20230801_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/U/VA/2023/8/S2A_12UVA_20230801_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/U/VA/2023/8/S2A_12UVA_20230801_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "farm_us_ia_story": {
+    "item_id": "S2B_15TVG_20230620_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-20T17:12:11.504000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_15TVG_20230620_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VG/2023/6/S2B_15TVG_20230620_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VG/2023/6/S2B_15TVG_20230620_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VG/2023/6/S2B_15TVG_20230620_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VG/2023/6/S2B_15TVG_20230620_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/15/T/VG/2023/6/S2B_15TVG_20230620_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_hvc_bc": {
+    "item_id": "S2A_10UFA_20230813_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-13T19:20:41.234000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_10UFA_20230813_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_syncrude_ab": {
+    "item_id": "S2B_12VVJ_20230829_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T18:48:29.827000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_12VVJ_20230829_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_sudbury_on": {
+    "item_id": "S2B_17TMM_20230827_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-27T16:30:37.224000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_17TMM_20230827_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/MM/2023/8/S2B_17TMM_20230827_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/MM/2023/8/S2B_17TMM_20230827_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/MM/2023/8/S2B_17TMM_20230827_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/MM/2023/8/S2B_17TMM_20230827_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/MM/2023/8/S2B_17TMM_20230827_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "mine_us_bingham_ut": {
+    "item_id": "S2A_12TVK_20230716_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-07-16T18:23:11.608000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_12TVK_20230716_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/T/VK/2023/7/S2A_12TVK_20230716_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/T/VK/2023/7/S2A_12TVK_20230716_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/T/VK/2023/7/S2A_12TVK_20230716_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/T/VK/2023/7/S2A_12TVK_20230716_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/T/VK/2023/7/S2A_12TVK_20230716_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_toronto_core": {
+    "item_id": "S2A_17TPJ_20230829_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T16:21:17.483000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_17TPJ_20230829_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_montreal_core": {
+    "item_id": "S2A_18TXR_20230823_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-23T16:00:37.855000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_18TXR_20230823_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/18/T/XR/2023/8/S2A_18TXR_20230823_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/18/T/XR/2023/8/S2A_18TXR_20230823_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/18/T/XR/2023/8/S2A_18TXR_20230823_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/18/T/XR/2023/8/S2A_18TXR_20230823_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/18/T/XR/2023/8/S2A_18TXR_20230823_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_windsor_on": {
+    "item_id": "S2B_17TLG_20230618_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-18T16:31:53.202000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_17TLG_20230618_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LG/2023/6/S2B_17TLG_20230618_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "city_us_detroit_mi": {
+    "item_id": "S2B_17TLH_20230618_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-06-18T16:31:38.879000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_17TLH_20230618_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LH/2023/6/S2B_17TLH_20230618_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LH/2023/6/S2B_17TLH_20230618_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LH/2023/6/S2B_17TLH_20230618_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LH/2023/6/S2B_17TLH_20230618_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/LH/2023/6/S2B_17TLH_20230618_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_mine_hvc_full": {
+    "item_id": "S2A_10UFA_20230813_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-13T19:20:41.234000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_10UFA_20230813_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/10/U/FA/2023/8/S2A_10UFA_20230813_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_oilsands_region": {
+    "item_id": "S2B_12VVJ_20230829_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T18:48:29.827000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2B_12VVJ_20230829_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/12/V/VJ/2023/8/S2B_12VVJ_20230829_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   },
+   "stress_city_toronto_full": {
+    "item_id": "S2A_17TPJ_20230829_0_L2A",
+    "collection": "sentinel-2-l2a",
+    "datetime": "2023-08-29T16:21:17.483000Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2A_17TPJ_20230829_0_L2A",
+    "assets": {
+     "red": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/B04.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "nir": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/B08.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "swir16": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/B11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "scl": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/SCL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": false
+     },
+     "granule_metadata": {
+      "href": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/17/T/PJ/2023/8/S2A_17TPJ_20230829_0_L2A/granule_metadata.xml",
+      "type": "application/xml",
+      "requester_pays": false
+     }
+    },
+    "range_probe": {
+     "status": 206,
+     "bytes": 1024
+    }
+   }
+  },
+  "ES:landsat-c2-l2": {
+   "farm_sk_quarter": {
+    "item_id": "LE07_L2SP_036024_20230828_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-28T15:38:45.260403Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_036024_20230828_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/036/024/LE07_L2SP_036024_20230828_20230923_02_T1/LE07_L2SP_036024_20230828_20230923_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "farm_on_essex": {
+    "item_id": "LE07_L2SP_020031_20230705_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-07-05T14:04:59.129184Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_020031_20230705_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230705_20230731_02_T1/LE07_L2SP_020031_20230705_20230731_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "farm_ab_taber": {
+    "item_id": "LE07_L2SP_041025_20230814_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-14T16:09:15.979406Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_041025_20230814_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/041/025/LE07_L2SP_041025_20230814_20230909_02_T1/LE07_L2SP_041025_20230814_20230909_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "farm_us_ia_story": {
+    "item_id": "LE07_L2SP_026031_20230728_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-07-28T14:41:02.692512Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_026031_20230728_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/026/031/LE07_L2SP_026031_20230728_20230823_02_T1/LE07_L2SP_026031_20230728_20230823_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "mine_hvc_bc": {
+    "item_id": "LE07_L2SP_046025_20230827_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-27T16:37:41.749482Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_046025_20230827_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "mine_syncrude_ab": {
+    "item_id": "LE07_L2SP_043020_20230829_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-29T16:17:17.796018Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_043020_20230829_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "mine_sudbury_on": {
+    "item_id": "LE07_L2SP_018028_20230603_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-03T13:59:52.094848Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_018028_20230603_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/028/LE07_L2SP_018028_20230603_20230629_02_T1/LE07_L2SP_018028_20230603_20230629_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "mine_us_bingham_ut": {
+    "item_id": "LC09_L2SP_038032_20230715_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-07-15T18:07:48.357111Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LC09_L2SP_038032_20230715_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_SR_B6.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/038/032/LC09_L2SP_038032_20230715_20230717_02_T1/LC09_L2SP_038032_20230715_20230717_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "city_toronto_core": {
+    "item_id": "LC09_L2SP_018029_20230617_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-17T16:02:43.206563Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LC09_L2SP_018029_20230617_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_SR_B6.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/oli-tirs/2023/018/029/LC09_L2SP_018029_20230617_20230619_02_T1/LC09_L2SP_018029_20230617_20230619_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "city_montreal_core": {
+    "item_id": "LE07_L2SP_015028_20230622_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-22T13:34:35.407106Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_015028_20230622_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/015/028/LE07_L2SP_015028_20230622_20230718_02_T1/LE07_L2SP_015028_20230622_20230718_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "city_windsor_on": {
+    "item_id": "LE07_L2SP_020031_20230828_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-28T14:02:51.440510Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_020031_20230828_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "city_us_detroit_mi": {
+    "item_id": "LE07_L2SP_020031_20230828_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-28T14:02:51.440510Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_020031_20230828_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/020/031/LE07_L2SP_020031_20230828_20230923_02_T1/LE07_L2SP_020031_20230828_20230923_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "stress_mine_hvc_full": {
+    "item_id": "LE07_L2SP_046025_20230827_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-27T16:37:41.749482Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_046025_20230827_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/046/025/LE07_L2SP_046025_20230827_20230922_02_T1/LE07_L2SP_046025_20230827_20230922_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "stress_oilsands_region": {
+    "item_id": "LE07_L2SP_043020_20230829_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-08-29T16:17:17.796018Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_043020_20230829_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/043/020/LE07_L2SP_043020_20230829_20230924_02_T1/LE07_L2SP_043020_20230829_20230924_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   },
+   "stress_city_toronto_full": {
+    "item_id": "LE07_L2SP_018029_20230620_02_T1",
+    "collection": "landsat-c2-l2",
+    "datetime": "2023-06-20T13:53:14.971182Z",
+    "self": "https://earth-search.aws.element84.com/v1/collections/landsat-c2-l2/items/LE07_L2SP_018029_20230620_02_T1",
+    "assets": {
+     "red": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_SR_B3.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "nir08": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_SR_B4.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "swir16": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_SR_B5.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "qa_pixel": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_QA_PIXEL.TIF",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "requester_pays": true
+     },
+     "mtl.json": {
+      "href": "s3://usgs-landsat/collection02/level-2/standard/etm/2023/018/029/LE07_L2SP_018029_20230620_20230716_02_T1/LE07_L2SP_018029_20230620_20230716_02_T1_MTL.json",
+      "type": "application/json",
+      "requester_pays": true
+     }
+    },
+    "range_probe": {
+     "status": "s3://",
+     "bytes": null
+    }
+   }
+  }
+ },
+ "hits": {
+  "PC:sentinel-2-l2a": [
+   "farm_sk_quarter",
+   "farm_on_essex",
+   "farm_ab_taber",
+   "farm_us_ia_story",
+   "mine_hvc_bc",
+   "mine_syncrude_ab",
+   "mine_sudbury_on",
+   "mine_us_bingham_ut",
+   "city_toronto_core",
+   "city_montreal_core",
+   "city_windsor_on",
+   "city_us_detroit_mi",
+   "stress_mine_hvc_full",
+   "stress_oilsands_region",
+   "stress_city_toronto_full"
+  ],
+  "PC:landsat-c2-l2": [
+   "farm_sk_quarter",
+   "farm_on_essex",
+   "farm_ab_taber",
+   "farm_us_ia_story",
+   "mine_hvc_bc",
+   "mine_syncrude_ab",
+   "mine_sudbury_on",
+   "mine_us_bingham_ut",
+   "city_toronto_core",
+   "city_montreal_core",
+   "city_windsor_on",
+   "city_us_detroit_mi",
+   "stress_mine_hvc_full",
+   "stress_oilsands_region",
+   "stress_city_toronto_full"
+  ],
+  "ES:sentinel-2-l2a": [
+   "farm_on_essex",
+   "farm_ab_taber",
+   "farm_us_ia_story",
+   "mine_hvc_bc",
+   "mine_syncrude_ab",
+   "mine_sudbury_on",
+   "mine_us_bingham_ut",
+   "city_toronto_core",
+   "city_montreal_core",
+   "city_windsor_on",
+   "city_us_detroit_mi",
+   "stress_mine_hvc_full",
+   "stress_oilsands_region",
+   "stress_city_toronto_full"
+  ],
+  "ES:landsat-c2-l2": []
+ },
+ "window_read": {
+  "PC:sentinel-2-l2a": {
+   "aoi": "farm_sk_quarter",
+   "asset": "B04",
+   "shape": [
+    64,
+    64
+   ],
+   "dtype": "uint16",
+   "min": 1146,
+   "max": 5812,
+   "mean": 1801.4,
+   "crs": "EPSG:32613",
+   "overviews": [
+    2,
+    4,
+    8
+   ]
+  },
+  "PC:landsat-c2-l2": {
+   "aoi": "farm_sk_quarter",
+   "asset": "red",
+   "shape": [
+    64,
+    64
+   ],
+   "dtype": "uint16",
+   "min": 0,
+   "max": 15580,
+   "mean": 8598.7,
+   "crs": "EPSG:32613",
+   "overviews": [
+    2,
+    4,
+    8
+   ]
+  },
+  "ES:sentinel-2-l2a": {
+   "aoi": "farm_on_essex",
+   "asset": "red",
+   "shape": [
+    64,
+    64
+   ],
+   "dtype": "uint16",
+   "min": 122,
+   "max": 3640,
+   "mean": 997.4,
+   "crs": "EPSG:32617",
+   "overviews": [
+    2,
+    4,
+    8
+   ]
+  },
+  "ES:landsat-c2-l2": {
+   "aoi": "farm_sk_quarter",
+   "asset": "red",
+   "error": "RasterioIOError: InvalidCredentials: No valid AWS credentials found. For authenticated requests, you need to set AWS_SECRET_ACCESS_KEY, AWS_ACCESS_KEY_ID or "
+  }
+ },
+ "expiry": {
+  "se": "2026-10-14T06:49:25+00:00",
+  "minutes_remaining": 44.3,
+  "token_endpoint": {
+   "msft:expiry": "2026-10-14T06:50:06Z"
+  }
+ },
+ "unsigned": {
+  "status": 409,
+  "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>PublicAccessNotPermitted</Code><Message>Public access is not permitte"
+ },
+ "example_observation": {
+  "item_id": "S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+  "collection": "sentinel-2-l2a",
+  "datetime": "2023-07-31T18:09:19.024000Z",
+  "self": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/items/S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+  "assets": {
+   "B04": {
+    "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R10m/T13UDT_20230731T180919_B04_10m.tif?<sas-redacted>",
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "requester_pays": false
+   },
+   "B08": {
+    "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R10m/T13UDT_20230731T180919_B08_10m.tif?<sas-redacted>",
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "requester_pays": false
+   },
+   "B11": {
+    "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R20m/T13UDT_20230731T180919_B11_20m.tif?<sas-redacted>",
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "requester_pays": false
+   },
+   "SCL": {
+    "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/IMG_DATA/R20m/T13UDT_20230731T180919_SCL_20m.tif?<sas-redacted>",
+    "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+    "requester_pays": false
+   },
+   "granule-metadata": {
+    "href": "https://sentinel2l2a01.blob.core.windows.net/sentinel2-l2/13/U/DT/2023/07/31/S2B_MSIL2A_20230731T180919_N0509_R084_T13UDT_20230731T233252.SAFE/GRANULE/L2A_T13UDT_A033429_20230731T181125/MTD_TL.xml?<sas-redacted>",
+    "type": "application/xml",
+    "requester_pays": false
+   }
+  },
+  "range_probe": {
+   "status": 206,
+   "bytes": 1024
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "picarta_api_no_token": {
+  "url": "https://api.picarta.ai/v1/geolocalize",
+  "status": 400,
+  "body": "Incorrect access token."
+ },
+ "picarta_pricing": {
+  "url": "https://picarta.ai/pricing",
+  "status": 200,
+  "text": " Picarta Pricing html { visibility: hidden; opacity: 0; background-color: #ffffff; } Resources API GitHub Pricing Contact us Log In Sign Up Free Plan Free To explore Picarta 1 Search Select Plan Wallet (One-Time Payment) $15.9 Ideal for enthusiasts 20 Searches Buy Once (No Subscription) Buy Quota Monthly Annual Save 17% Subscription $59.9 $49.9 Tailored for professionals 100 Searches / month Customer support Select Plan Enterprise Let's talk! For corporations and government agencies Production API access \u2020 Custom volume pricing On-premise deployment Priority support & SLA Contact Us \u2020 Picarta API is available to Enterprise accounts only. To get access, email [email&#160;protected] with your "
+ },
+ "picarta_admin1_public": {
+  "url": "https://api.picarta.ai/v1/admin1/CA",
+  "status": 200,
+  "body": "{\"admin1_regions\":[\"Alberta\",\"British Columbia\",\"Manitoba\",\"New Brunswick\",\"Newfoundland and Labrador\",\"Northwest Territ"
+ },
+ "geospy_app": {
+  "url": "https://app.geospy.ai",
+  "final": "https://app.withraven.ai/",
+  "status": 200,
+  "text": " Raven by Graylark (function() { document.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('raven-theme', 'dark'); } catch(e) {} })(); console.log( \"\ud83d\udcbf Hey developer \ud83d\udc4b. You can provide a way better UX than this \" + \"when your app is loading JS modules and/or running `cli"
+ },
+ "geospy_home": {
+  "url": "https://geospy.ai",
+  "status": 200,
+  "text": " GeoSpy | Unlock the Power of AI Image intelligence try{if(localStorage.getItem(\"__framer_force_showing_editorbar_since\")){const n=document.createElement(\"link\");n.rel=\"modulepreload\";n.href=\"https://framer.com/edit/init.mjs\";document.head.appendChild(n)}}catch(e){} /* cyrillic-ext */ @font-face { font-family: 'Inter Tight'; font-style: italic; font-weight: 400; font-display: swap; src: url(https://fonts.gstatic.com/s/intertight/v9/NGSyv5HMAFg6IuGlBNMjxLsCwadkRFe9.woff2) format('woff2'); unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F; } /* cyrillic */ @f"
+ },
+ "pigeon": {
+  "url": "https://github.com/LukasHaas/PIGEON",
+  "status": 200,
+  "quote": "This repository is purely meant for the academic validation of the paper's code. Geocell shapes and coordinates, training and validation datasets, and model weights are not provided as part of this release. Please read the section *Ethical considerations* in our paper to learn more."
+ }
+}

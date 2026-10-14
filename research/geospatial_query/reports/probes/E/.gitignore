@@ -1,0 +1,13 @@
+models/
+images/
+orig/
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.pth
+__pycache__/
+labels/*.zip
+labels/cities15000.txt
+labels/ne50/
+preds/*.partial.json

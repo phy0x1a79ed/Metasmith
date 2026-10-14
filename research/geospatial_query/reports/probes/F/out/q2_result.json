@@ -1,0 +1,269 @@
+{
+ "spec": {
+  "aoi": "farm_sk_quarter",
+  "time": "2023-07-01/2023-07-31",
+  "collections": [
+   "sentinel-2-l2a",
+   "landsat-c2-l2"
+  ],
+  "bands": [
+   "red",
+   "nir",
+   "swir16"
+  ],
+  "indices": [
+   "NDVI",
+   "NDWI",
+   "NBR"
+  ],
+  "max_cloud": 20
+ },
+ "combos": {
+  "PC:sentinel-2-l2a": {
+   "item": "S2B_MSIL2A_20230731T180919_R084_T13UDT_20230731T233252",
+   "collection_level_ok": true,
+   "bands": {
+    "red": "B04",
+    "nir": "B08",
+    "swir16": "B11"
+   },
+   "how": {
+    "red": "common_name",
+    "nir": "common_name",
+    "swir16": "common_name"
+   },
+   "indices": {
+    "NDVI": {
+     "N": "B08",
+     "R": "B04"
+    },
+    "NDWI": {
+     "G": "B03",
+     "N": "B08"
+    },
+    "NBR": {
+     "N": "B08",
+     "S2": "B12"
+    },
+    "SAVI": {
+     "N": "B08",
+     "R": "B04"
+    },
+    "EVI": {
+     "N": "B08",
+     "R": "B04",
+     "B": "B02"
+    }
+   },
+   "aoi_mean": {
+    "band:red": 0.0849,
+    "band:nir": 0.3039,
+    "band:swir16": 0.2345,
+    "NDVI": 0.5458,
+    "NDWI": -0.5153,
+    "NBR": 0.2889
+   },
+   "read": "ok"
+  },
+  "PC:landsat-c2-l2": {
+   "item": "LE07_L2SP_036024_20230710_02_T1",
+   "collection_level_ok": false,
+   "bands": {
+    "red": "red",
+    "nir": "nir08",
+    "swir16": "swir16"
+   },
+   "how": {
+    "red": "common_name",
+    "nir": "wavelength 760-900nm",
+    "swir16": "common_name"
+   },
+   "indices": {
+    "NDVI": {
+     "N": "nir08",
+     "R": "red"
+    },
+    "NDWI": {
+     "G": "green",
+     "N": "nir08"
+    },
+    "NBR": {
+     "N": "nir08",
+     "S2": "swir22"
+    },
+    "SAVI": {
+     "N": "nir08",
+     "R": "red"
+    },
+    "EVI": {
+     "N": "nir08",
+     "R": "red",
+     "B": "blue"
+    }
+   },
+   "aoi_mean": {
+    "band:red": 0.1108,
+    "band:nir": 0.3806,
+    "band:swir16": 0.2287,
+    "NDVI": 0.5419,
+    "NDWI": -0.5221,
+    "NBR": 0.4754
+   },
+   "read": "ok"
+  },
+  "ES:sentinel-2-l2a": {
+   "item": "S2B_13UDT_20230731_0_L2A",
+   "collection_level_ok": true,
+   "bands": {
+    "red": "red",
+    "nir": "nir",
+    "swir16": "swir16"
+   },
+   "how": {
+    "red": "common_name",
+    "nir": "common_name",
+    "swir16": "common_name"
+   },
+   "indices": {
+    "NDVI": {
+     "N": "nir",
+     "R": "red"
+    },
+    "NDWI": {
+     "G": "green",
+     "N": "nir"
+    },
+    "NBR": {
+     "N": "nir",
+     "S2": "swir22"
+    },
+    "SAVI": {
+     "N": "nir",
+     "R": "red"
+    },
+    "EVI": {
+     "N": "nir",
+     "R": "red",
+     "B": "blue"
+    }
+   },
+   "aoi_mean": {
+    "band:red": 0.0845,
+    "band:nir": 0.3024,
+    "band:swir16": 0.2334,
+    "NDVI": 0.5458,
+    "NDWI": -0.5151,
+    "NBR": 0.2889
+   },
+   "read": "ok"
+  },
+  "ES:landsat-c2-l2": {
+   "item": "LE07_L2SP_036024_20230710_02_T1",
+   "collection_level_ok": false,
+   "bands": {
+    "red": "red",
+    "nir": "nir08",
+    "swir16": "swir16"
+   },
+   "how": {
+    "red": "common_name",
+    "nir": "wavelength 760-900nm",
+    "swir16": "common_name"
+   },
+   "indices": {
+    "NDVI": {
+     "N": "nir08",
+     "R": "red"
+    },
+    "NDWI": {
+     "G": "green",
+     "N": "nir08"
+    },
+    "NBR": {
+     "N": "nir08",
+     "S2": "swir22"
+    },
+    "SAVI": {
+     "N": "nir08",
+     "R": "red"
+    },
+    "EVI": {
+     "N": "nir08",
+     "R": "red",
+     "B": "blue"
+    }
+   },
+   "read": "RasterioIOError: InvalidCredentials: No valid AWS credentials found. For authenticated requests, you need to set AWS_SECRET_ACCESS_KEY, AWS_ACCESS_KEY_ID or other configuration  [storage:requester_pays=true]"
+  }
+ },
+ "all_aoi_resolution": {
+  "farm_sk_quarter": {
+   "PC": true,
+   "ES": true
+  },
+  "farm_on_essex": {
+   "PC": true,
+   "ES": true
+  },
+  "farm_ab_taber": {
+   "PC": true,
+   "ES": true
+  },
+  "farm_us_ia_story": {
+   "PC": true,
+   "ES": true
+  },
+  "mine_hvc_bc": {
+   "PC": true,
+   "ES": true
+  },
+  "mine_syncrude_ab": {
+   "PC": true,
+   "ES": true
+  },
+  "mine_sudbury_on": {
+   "PC": true,
+   "ES": true
+  },
+  "mine_us_bingham_ut": {
+   "PC": true,
+   "ES": true
+  },
+  "city_toronto_core": {
+   "PC": true,
+   "ES": true
+  },
+  "city_montreal_core": {
+   "PC": true,
+   "ES": true
+  },
+  "city_windsor_on": {
+   "PC": true,
+   "ES": true
+  },
+  "city_us_detroit_mi": {
+   "PC": true,
+   "ES": true
+  },
+  "stress_mine_hvc_full": {
+   "PC": true,
+   "ES": true
+  },
+  "stress_oilsands_region": {
+   "PC": true,
+   "ES": true
+  },
+  "stress_city_toronto_full": {
+   "PC": true,
+   "ES": true
+  }
+ },
+ "control": {
+  "PC": 0,
+  "ES": 0
+ },
+ "aoi_hits": {
+  "PC": 15,
+  "ES": 15
+ }
+}

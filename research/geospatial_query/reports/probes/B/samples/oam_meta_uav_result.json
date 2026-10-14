@@ -1,0 +1,53 @@
+{
+ "_id": "6746449161d8410001b28a1a",
+ "acquisition_end": "2024-08-27T18:20:32.000Z",
+ "acquisition_start": "2024-08-27T17:20:32.000Z",
+ "contact": "Patrick Martiniuk,patrick@fourpoints.tech",
+ "platform": "uav",
+ "provider": "FOUR POINTS",
+ "properties": {
+  "tilejson": "https://tiles.openaerialmap.org/cog/tilejson.json?url=https%3A%2F%2Foin-hotosm.s3.us-east-1.amazonaws.com%2F6746415061d8410001b28a12%2F0%2F6746415061d8410001b28a13.tif",
+  "wmts": "https://tiles.openaerialmap.org/6746415061d8410001b28a12/0/6746415061d8410001b28a13/wmts",
+  "tms": "https://tiles.openaerialmap.org/6746415061d8410001b28a12/0/6746415061d8410001b28a13/{z}/{x}/{y}",
+  "thumbnail": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6746415061d8410001b28a12/0/6746415061d8410001b28a13.png",
+  "resolution_in_meters": 0.03081514109310319,
+  "resolution": [
+   0.030815100752632413,
+   0.03081514109310319
+  ],
+  "colorinterp": [
+   "red",
+   "green",
+   "blue"
+  ],
+  "crs": "EPSG:32617",
+  "dtype": "uint8",
+  "bands": 3,
+  "dimensions": [
+   32293,
+   27339
+  ],
+  "filename": "6746415061d8410001b28a13.tif",
+  "url": "s3://oin-hotosm/6746415061d8410001b28a12/0/6746415061d8410001b28a13.tif",
+  "sensor": "DJI M3E",
+  "license": "CC-BY 4.0"
+ },
+ "title": "Hillsboro Avenue - 8/27/2024",
+ "user": {
+  "_id": "66b1ac3f7f12df0001cdcfc5",
+  "name": "Patrick Martiniuk"
+ },
+ "uuid": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6746415061d8410001b28a12/0/6746415061d8410001b28a13.tif",
+ "footprint": "POLYGON ((-79.402398 43.669723, -79.389857 43.669723, -79.389857 43.677479, -79.402398 43.677479, -79.402398 43.669723))",
+ "gsd": 0.03081514109310319,
+ "file_size": 118972104,
+ "meta_uri": "https://oin-hotosm-temp.s3.us-east-1.amazonaws.com/6746415061d8410001b28a12/0/6746415061d8410001b28a13_meta.json",
+ "uploaded_at": "2024-11-26T21:58:41.078Z",
+ "bbox": [
+  -79.402398,
+  43.669723,
+  -79.389857,
+  43.677479
+ ],
+ "__v": 0
+}

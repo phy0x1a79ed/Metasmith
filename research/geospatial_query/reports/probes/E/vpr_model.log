@@ -1,0 +1,17 @@
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/223 [00:00<?, ?it/s]Loading weights:  96%|█████████▌| 214/223 [00:00<00:00, 2130.94it/s]Loading weights: 100%|██████████| 223/223 [00:00<00:00, 2184.75it/s]
+{"id": "p22", "condition": "model", "centre_lat": 43.651790618896484, "centre_lon": -79.38108825683594, "centre_err_km": 0.45926491779200324, "search_radius_m": 3000, "n_ref_pictures_in_disc": 5618, "n_ref_positions_used": 900, "n_views": 1801, "retrieval_top1_err_km": 1.2858983747204409, "nearest_ref_to_truth_km": 0.038800401654337145, "best_inliers": 25, "best_ref_err_km": 1.2858983747204409, "best_ref_id": "7f6860f0-1eeb-4bcd-8155-abafec3feb29", "accepted": false, "accepted_within_1km": false, "sec": 602}
+{"id": "p04", "condition": "model", "centre_lat": 34.68633270263672, "centre_lon": 135.5260009765625, "centre_err_km": 399.89776305071666, "search_radius_m": 3000, "n_ref_pictures_in_disc": 2, "n_ref_positions_used": 2, "note": "true location is outside the reference search disc", "n_views": 2, "retrieval_top1_err_km": 402.6332513864656, "nearest_ref_to_truth_km": 402.29408626560706, "best_inliers": 9, "best_ref_err_km": 402.6332513864656, "best_ref_id": "2e22bcf0-834e-4754-9a52-558f5a8ab05a", "accepted": false, "accepted_within_1km": false, "sec": 12}
+{"id": "p08", "condition": "model", "centre_lat": 39.95289611816406, "centre_lon": -75.16510772705078, "centre_err_km": 539.6719842192118, "search_radius_m": 3000, "n_ref_pictures_in_disc": 24, "n_ref_positions_used": 22, "note": "true location is outside the reference search disc", "n_views": 22, "retrieval_top1_err_km": 539.5440181572354, "nearest_ref_to_truth_km": 537.486629050803, "best_inliers": 16, "best_ref_err_km": 540.080193487953, "best_ref_id": "cae8b949-683d-4cb6-9a98-53fac9853b0e", "accepted": false, "accepted_within_1km": false, "sec": 51}
+Traceback (most recent call last):
+  File "/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/vpr.py", line 133, in <module>
+    res = run(cond, qid, T, G[qid]); json.dump(res, open(os.path.join(H, "vpr", f"{cond}_{qid}.json"), "w"), indent=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/vpr.py", line 107, in run
+    dq = describe([q])[0]; dr = describe(views); sim = (dr @ dq).numpy(); order = np.argsort(-sim)
+                                ^^^^^^^^^^^^^^^
+  File "/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/vpr.py", line 72, in describe
+    return torch.cat(out)
+           ^^^^^^^^^^^^^^
+ValueError: torch.cat(): expected a non-empty list of Tensors

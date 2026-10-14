@@ -1,0 +1,53 @@
+Loading weights:   0%|          | 0/824 [00:00<?, ?it/s]Loading weights:   9%|▉         | 75/824 [00:00<00:02, 250.14it/s]Loading weights:  12%|█▎        | 103/824 [00:00<00:02, 249.75it/s]Loading weights:  16%|█▌        | 128/824 [00:00<00:03, 207.32it/s]Loading weights:  20%|██        | 165/824 [00:00<00:03, 164.93it/s]Loading weights:  22%|██▏       | 183/824 [00:01<00:07, 89.95it/s] Loading weights:  24%|██▍       | 196/824 [00:02<00:18, 33.23it/s]Loading weights:  25%|██▍       | 205/824 [00:03<00:20, 30.35it/s]Loading weights:  26%|██▌       | 212/824 [00:04<00:27, 22.07it/s]Loading weights:  26%|██▋       | 217/824 [00:04<00:32, 18.40it/s]Loading weights:  27%|██▋       | 226/824 [00:05<00:34, 17.40it/s]Loading weights:  28%|██▊       | 231/824 [00:05<00:31, 18.81it/s]Loading weights:  29%|██▉       | 238/824 [00:06<00:46, 12.70it/s]Loading weights:  30%|██▉       | 244/824 [00:07<01:01,  9.44it/s]Loading weights:  31%|███       | 257/824 [00:08<00:39, 14.39it/s]Loading weights:  32%|███▏      | 264/824 [00:08<00:41, 13.40it/s]Loading weights:  33%|███▎      | 276/824 [00:08<00:27, 19.99it/s]Loading weights:  34%|███▍      | 282/824 [00:09<00:42, 12.61it/s]Loading weights:  35%|███▍      | 286/824 [00:10<00:39, 13.45it/s]Loading weights:  35%|███▌      | 290/824 [00:10<00:36, 14.81it/s]Loading weights:  36%|███▌      | 293/824 [00:10<00:43, 12.16it/s]Loading weights:  37%|███▋      | 301/824 [00:10<00:28, 18.17it/s]Loading weights:  37%|███▋      | 305/824 [00:11<00:30, 17.01it/s]Loading weights:  38%|███▊      | 309/824 [00:12<00:53,  9.72it/s]Loading weights:  38%|███▊      | 312/824 [00:12<01:09,  7.39it/s]Loading weights:  38%|███▊      | 314/824 [00:13<01:19,  6.42it/s]Loading weights:  38%|███▊      | 316/824 [00:14<01:41,  5.01it/s]Loading weights:  39%|███▉      | 325/824 [00:14<00:49, 10.07it/s]Loading weights:  40%|███▉      | 328/824 [00:14<00:45, 10.91it/s]Loading weights:  40%|████      | 331/824 [00:14<00:42, 11.57it/s]Loading weights:  41%|████      | 334/824 [00:15<00:45, 10.81it/s]Loading weights:  41%|████      | 337/824 [00:15<00:40, 12.16it/s]Loading weights:  43%|████▎     | 352/824 [00:15<00:18, 25.34it/s]Loading weights:  43%|████▎     | 356/824 [00:15<00:21, 21.83it/s]Loading weights:  45%|████▍     | 369/824 [00:16<00:16, 27.57it/s]Loading weights:  46%|████▌     | 376/824 [00:16<00:13, 32.53it/s]Loading weights:  46%|████▌     | 380/824 [00:16<00:18, 24.27it/s]Loading weights:  47%|████▋     | 388/824 [00:16<00:14, 30.00it/s]Loading weights:  48%|████▊     | 393/824 [00:17<00:21, 20.15it/s]Loading weights:  49%|████▊     | 400/824 [00:17<00:22, 19.07it/s]Loading weights:  49%|████▉     | 403/824 [00:17<00:23, 17.58it/s]Loading weights:  49%|████▉     | 406/824 [00:18<00:37, 11.09it/s]Loading weights:  50%|████▉     | 408/824 [00:18<00:37, 11.21it/s]Loading weights:  51%|█████     | 418/824 [00:18<00:20, 19.74it/s]Loading weights:  53%|█████▎    | 435/824 [00:19<00:10, 37.43it/s]Loading weights:  54%|█████▎    | 441/824 [00:19<00:18, 20.67it/s]Loading weights:  55%|█████▍    | 451/824 [00:20<00:20, 17.82it/s]Loading weights:  56%|█████▌    | 463/824 [00:20<00:16, 21.54it/s]Loading weights:  57%|█████▋    | 467/824 [00:21<00:19, 17.89it/s]Loading weights:  58%|█████▊    | 474/824 [00:21<00:15, 21.91it/s]Loading weights:  58%|█████▊    | 480/824 [00:21<00:14, 24.42it/s]Loading weights:  59%|█████▊    | 484/824 [00:22<00:26, 12.73it/s]Loading weights:  59%|█████▉    | 487/824 [00:22<00:25, 13.08it/s]Loading weights:  59%|█████▉    | 490/824 [00:23<00:31, 10.48it/s]Loading weights:  61%|██████    | 501/824 [00:23<00:17, 18.54it/s]Loading weights:  61%|██████▏   | 505/824 [00:23<00:16, 18.99it/s]Loading weights:  62%|██████▏   | 509/824 [00:24<00:23, 13.58it/s]Loading weights:  66%|██████▌   | 541/824 [00:24<00:06, 42.25it/s]Loading weights:  67%|██████▋   | 550/824 [00:24<00:06, 43.43it/s]Loading weights:  68%|██████▊   | 558/824 [00:24<00:05, 45.09it/s]Loading weights:  69%|██████▊   | 565/824 [00:24<00:07, 36.27it/s]Loading weights:  69%|██████▉   | 571/824 [00:25<00:06, 38.71it/s]Loading weights:  70%|███████   | 577/824 [00:25<00:08, 29.54it/s]Loading weights:  71%|███████   | 587/824 [00:25<00:07, 31.26it/s]Loading weights:  73%|███████▎  | 601/824 [00:26<00:07, 29.61it/s]Loading weights:  73%|███████▎  | 605/824 [00:26<00:09, 23.04it/s]Loading weights:  74%|███████▍  | 608/824 [00:27<00:11, 18.21it/s]Loading weights:  75%|███████▌  | 618/824 [00:27<00:13, 15.05it/s]Loading weights:  75%|███████▌  | 620/824 [00:28<00:14, 14.11it/s]Loading weights:  76%|███████▋  | 629/824 [00:28<00:11, 16.62it/s]Loading weights:  77%|███████▋  | 636/824 [00:28<00:10, 17.14it/s]Loading weights:  78%|███████▊  | 645/824 [00:29<00:08, 21.05it/s]Loading weights:  79%|███████▊  | 648/824 [00:30<00:19,  8.88it/s]Loading weights:  79%|███████▉  | 650/824 [00:30<00:20,  8.43it/s]Loading weights:  80%|███████▉  | 656/824 [00:31<00:16, 10.07it/s]Loading weights:  80%|███████▉  | 658/824 [00:31<00:15, 10.50it/s]Loading weights:  81%|████████  | 665/824 [00:32<00:16,  9.68it/s]Loading weights:  81%|████████  | 667/824 [00:32<00:16,  9.29it/s]Loading weights:  83%|████████▎ | 681/824 [00:32<00:08, 17.68it/s]Loading weights:  83%|████████▎ | 688/824 [00:33<00:09, 15.04it/s]Loading weights:  84%|████████▍ | 691/824 [00:33<00:08, 15.77it/s]Loading weights:  86%|████████▋ | 711/824 [00:33<00:03, 32.30it/s]Loading weights:  87%|████████▋ | 716/824 [00:34<00:03, 28.48it/s]Loading weights:  87%|████████▋ | 720/824 [00:34<00:04, 24.89it/s]Loading weights:  88%|████████▊ | 724/824 [00:34<00:05, 18.24it/s]Loading weights:  89%|████████▉ | 737/824 [00:35<00:05, 16.42it/s]Loading weights:  91%|█████████ | 746/824 [00:35<00:04, 19.47it/s]Loading weights:  91%|█████████ | 749/824 [00:36<00:04, 16.37it/s]Loading weights:  92%|█████████▏| 758/824 [00:36<00:03, 18.68it/s]Loading weights:  92%|█████████▏| 761/824 [00:36<00:03, 16.11it/s]Loading weights:  95%|█████████▍| 781/824 [00:37<00:01, 31.13it/s]Loading weights:  96%|█████████▌| 789/824 [00:37<00:01, 29.89it/s]Loading weights:  96%|█████████▌| 793/824 [00:37<00:01, 30.69it/s]Loading weights:  97%|█████████▋| 800/824 [00:37<00:00, 32.33it/s]Loading weights:  99%|█████████▉| 817/824 [00:37<00:00, 52.82it/s]Loading weights: 100%|██████████| 824/824 [00:37<00:00, 21.75it/s]
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/transformers/models/qwen2_vl/image_processing_qwen2_vl.py:129: FutureWarning: Passing `min_pixels` and `max_pixels` to a processor call is deprecated and will be removed in v5.23. Pass in `size={'longest_edge': xxx, 'shortest_edge': xxx} to override the target size.`
+  warnings.warn(
+p01 (41.79, -87.6) 474 <answer>41.79 N, -87.60 W</answer>
+p02 (-10.0, 75.0) 512 <answer>10.00 S, 75.00 E</answer>
+p03 (48.86, 2.35) 545 <answer>48.86 N, 2.35 E</answer>
+p04 (35.67, 139.69) 580 <answer>35.67 N, 139.69 E</answer>
+p05 (40.71, -74.0) 610 <answer>40.71 N, -74.00 W</answer>
+p06 (48.86, 2.35) 639 <answer>48.86 N, 2.35 E</answer>
+p07 (40.71, -74.0) 659 <answer>40.71 N, -74.00 E</answer>
+p08 (40.71, -74.0) 701 <answer>40.71 N, -74.00 W</answer>
+p09 (48.86, 2.35) 731 <answer>48.86 N, 2.35 E</answer>
+p10 (19.07, -99.12) 755 <answer>19.07 N, -99.12 W</answer>
+p11 (41.0, -87.0) 778 <answer>41.00 N, -87.00 W</answer>
+p12 (37.9, -122.41) 797 <answer>37.90 N, -122.41 W</answer>
+p13 (49.0, -100.0) 824 <answer>49.00 N, -100.00 W</answer>
+p14 (40.71, -74.0) 844 <answer>40.71 N, -74.00 E</answer>
+p15 (41.79, -87.6) 855 <answer>41.79 N, -87.60 W</answer>
+p16 (40.71, -74.0) 864 <answer>40.71 N, -74.00 W</answer>
+p17 (47.0, 12.0) 874 <answer>47.00 N, 12.00 E</answer>
+p18 (-37.81, 144.96) 883 <answer>-37.81 S, 144.96 E</answer>
+p19 (40.71, -74.0) 892 <answer>40.71 N, -74.00 W</answer>
+p20 (30.17, 31.23) 901 <answer>30.17 N, 31.23 E</answer>
+p21 (40.71, -74.0) 909 <answer>40.71 N, -74.00 W</answer>
+p22 (40.71, -74.0) 920 <answer>40.71 N, -74.00 W</answer>
+p23 (40.0, -97.0) 930 <answer>40.00 N, -97.00 W</answer>
+p24 (-61.07, -149.97) 943 <answer>-61.07 N, -149.97 W</answer>
+p25 (40.71, -74.0) 955 <answer>40.71 N, -74.00 W</answer>
+p26 (49.0, -97.0) 966 <answer>49.00 N, -97.00 W</answer>
+p27 (40.71, -74.0) 972 <answer>40.71 N, -74.00 E</answer>
+p28 (40.71, -74.0) 981 <answer>40.71 N, -74.00 W</answer>
+p29 (40.71, -74.0) 990 <answer>40.71 N, -74.00 E</answer>
+p30 (40.71, -74.0) 999 <answer>40.71 N, -74.00 W</answer>
+p31 (40.71, -74.0) 1006 <answer>40.71 N, -74.00 E</answer>
+p32 (48.86, 2.35) 1013 <answer>48.86 N, 2.35 E</answer>
+p33 (50.0, -100.0) 1020 <answer>50.00 N, 100.00 W</answer>
+p34 (41.79, -87.6) 1027 <answer>41.79 N, -87.60 W</answer>
+p35 (49.0, -1.0) 1032 <answer>49.00 N, 1.00 W</answer>
+p36 (40.71, -74.0) 1038 <answer>40.71 N, -74.00 E</answer>
+p37 (48.86, 2.35) 1045 <answer>48.86 N, 2.35 E</answer>
+p38 (40.71, -74.0) 1052 <answer>40.71 N, -74.00 E</answer>
+p39 (40.71, -74.0) 1058 <answer>40.71 N, -74.00 W</answer>
+p40 (40.71, -74.0) 1065 <answer>40.71 N, -74.00 E</answer>
+p41 (37.91, -105.23) 1072 <answer>37.91 N, -105.23 W</answer>
+p42 (40.71, -74.0) 1080 <answer>40.71 N, -74.00 E</answer>
+p43 (-20.97, 75.17) 1088 <answer>20.97 S, 75.17 E</answer>
+p44 (40.71, -74.0) 1093 <answer>40.71 N, -74.00 E</answer>
+p45 (40.71, -74.0) 1102 <answer>40.71 N, -74.00 E</answer>
+p46 (40.71, -74.0) 1110 <answer>40.71 N, -74.00 E</answer>
+p47 (40.71, -74.0) 1118 <answer>40.71 N, -74.00 E</answer>
+p48 (37.9, -122.4) 1125 <answer>37.90 N, -122.40 W</answer>
+p49 (40.71, -74.0) 1131 <answer>40.71 N, -74.00 W</answer>
+p50 (41.79, -87.6) 1138 <answer>41.79 N, -87.60 W</answer>

@@ -1,0 +1,203 @@
+{
+ "TemporalExtent": {
+  "RangeDateTime": {
+   "BeginningDateTime": "2025-04-29T20:32:37Z",
+   "EndingDateTime": "2025-04-29T20:35:13Z"
+  }
+ },
+ "GranuleUR": "AV520250429t203229_000_L2A_RFL_1",
+ "NativeProjectionNames": [
+  "UTM Northern Hemisphere"
+ ],
+ "AdditionalAttributes": [
+  {
+   "Name": "SOFTWARE_BUILD_VERSION",
+   "Values": [
+    "010304"
+   ]
+  },
+  {
+   "Name": "Identifier_product_doi_authority",
+   "Values": [
+    "https://doi.org"
+   ]
+  },
+  {
+   "Name": "FLIGHTLINE",
+   "Values": [
+    "AV520250429t203229"
+   ]
+  },
+  {
+   "Name": "SCENE",
+   "Values": [
+    "000"
+   ]
+  },
+  {
+   "Name": "Campaign",
+   "Values": [
+    "Calibration / Validation / Instrument Science / Testing"
+   ]
+  },
+  {
+   "Name": "Identifier_product_doi",
+   "Values": [
+    "https://doi.org/10.3334/ORNLDAAC/2484"
+   ]
+  },
+  {
+   "Name": "SOLAR_ZENITH",
+   "Values": [
+    "23.21"
+   ]
+  },
+  {
+   "Name": "SOLAR_AZIMUTH",
+   "Values": [
+    "204.81"
+   ]
+  },
+  {
+   "Name": "PARAMETER_HASH",
+   "Values": [
+    "ed596193"
+   ]
+  }
+ ],
+ "MeasuredParameters": [
+  {
+   "ParameterName": "HDRF Reflectance"
+  },
+  {
+   "ParameterName": "HDRF Reflectance Uncertainty"
+  }
+ ],
+ "SpatialExtent": {
+  "HorizontalSpatialDomain": {
+   "Geometry": {
+    "GPolygons": [
+     {
+      "Boundary": {
+       "Points": [
+        {
+         "Longitude": -119.52114444392245,
+         "Latitude": 36.36441328584356
+        },
+        {
+         "Longitude": -119.51161182661863,
+         "Latitude": 36.06691626279208
+        },
+        {
+         "Longitude": -119.14661474366909,
+         "Latitude": 36.07401253524295
+        },
+        {
+         "Longitude": -119.15476487524774,
+         "Latitude": 36.371586809121
+        },
+        {
+         "Longitude": -119.52114444392245,
+         "Latitude": 36.36441328584356
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "ProviderDates": [
+  {
+   "Date": "2026-04-10T15:47:57Z",
+   "Type": "Create"
+  }
+ ],
+ "CollectionReference": {
+  "ShortName": "AV5_L2A_RFL_2484",
+  "Version": "1"
+ },
+ "PGEVersionClass": {
+  "PGEName": "L2A_OE",
+  "PGEVersion": "v1.3.3"
+ },
+ "InputGranules": [
+  "AV520250429t203229_000_L1B_RDN_1"
+ ],
+ "DataGranule": {
+  "DayNightFlag": "Day",
+  "ArchiveAndDistributionInformation": [
+   {
+    "Name": "AV520250429t203229_000_L2A_OE_ed596193_RFL_ORT.nc",
+    "SizeInBytes": 3440899973,
+    "Format": "netCDF-4",
+    "MimeType": "application/x-netcdf",
+    "Checksum": {
+     "Value": "d1dd12b1cbb4ffd193304fd83f1eb51fad255053c54134db06a5248e23c6f054e372e23cacee3da4f79e4e50509cf116337eafbfc746d76b94f85e79417fac61",
+     "Algorithm": "SHA-512"
+    }
+   },
+   {
+    "Name": "AV520250429t203229_000_L2A_OE_ed596193_UNC_ORT.nc",
+    "SizeInBytes": 3954275358,
+    "Format": "netCDF-4",
+    "MimeType": "application/x-netcdf",
+    "Checksum": {
+     "Value": "783a4b054b5d21b75679740b5392a1faa5c7d8b38b11e1cdbb1f85d10fcdaf4a567ccceacc889a55e1bb3cf51be2aaf1bf7b5aeb08475f3b8657dee50f7053fe",
+     "Algorithm": "SHA-512"
+    }
+   },
+   {
+    "Name": "AV520250429t203229_000_L2A_OE_ed596193_RFL_ORT_QL.tif",
+    "SizeInBytes": 16835893,
+    "Format": "GeoTIFF",
+    "MimeType": "image/tiff",
+    "Checksum": {
+     "Value": "d4f8d3efde5e39da7b7405e0a280299dbe48e1099cbb66bf1c5bf683ac97b4a3f15150e0d2adeb3603f4a5e0a96295d1aee8ed889dccce5c5f77e9a615c67f6d",
+     "Algorithm": "SHA-512"
+    }
+   },
+   {
+    "Name": "AV520250429t203229_000_L2A_OE_ed596193_RFL_ORT_BROWSE.jpg",
+    "SizeInBytes": 539088,
+    "Format": "JPEG",
+    "MimeType": "image/jpeg",
+    "Checksum": {
+     "Value": "ee2ded31033da84665795913c13bec8deaf3843ec7a7c5b75558e93c0f632fbdb13c912964ba4a2c32f2a0eea140689868c330e445eb3e8bf3764753d719ffa4",
+     "Algorithm": "SHA-512"
+    }
+   },
+   {
+    "Name": "AV520250429t203229_000_L2A_OE_ed596193.yaml",
+    "SizeInBytes": 11108,
+    "Format": "YAML",
+    "Checksum": {
+     "Value": "ef6023c8997afdf19cfb43c19eded88adb898bbdc406cbc0dfced2496e5d66ff6faf5de45ea98b3699741239e8e493440295ca4ac98cffd3e009f75798c82fc7",
+     "Algorithm": "SHA-512"
+    }
+   }
+  ],
+  "ProductionDateTime": "2026-04-10T15:30:30Z",
+  "Identifiers": [
+   {
+    "Identifier": "AV520250429t203229_000_L2A_RFL_1",
+    "IdentifierType": "ProducerGranuleId"
+   }
+  ]
+ },
+ "Platforms": [
+  {
+   "ShortName": "NASA ER-2",
+   "Instruments": [
+    {
+     "ShortName": "AVIRIS-5"
+    }
+   ]
+  }
+ ],
+ "MetadataSpecification": {
+  "URL": "https://cdn.earthdata.nasa.gov/umm/granule/v1.6.7",
+  "Name": "UMM-G",
+  "Version": "1.6.7"
+ }
+}

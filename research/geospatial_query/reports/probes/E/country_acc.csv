@@ -1,0 +1,17 @@
+model,n,country_hits,country_acc_pct
+clf_jordiett_convnextv2,50,4,8.0
+clf_moreno_vit,50,10,20.0
+clf_prithiv_siglip2,50,13,26.0
+ensemble_vote,50,30,60.0
+g3_align,50,25,50.0
+geo_r1_7b,15,5,33.3
+geoclip,50,24,48.0
+osv5m,50,14,28.0
+plonk_inaturalist,50,10,20.0
+plonk_osv_5m,50,24,48.0
+plonk_yfcc,50,17,34.0
+qwen25vl3b,48,0,0.0
+qwen25vl3b_nsew,50,12,24.0
+streetclip_city,50,28,56.0
+streetclip_country,50,28,56.0
+streetclip_flatcity,50,34,68.0

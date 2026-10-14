@@ -1,0 +1,97 @@
+{
+ "id": "6746449161d8410001b28a1a",
+ "bbox": [
+  -79.402398,
+  43.669723,
+  -79.389857,
+  43.677479
+ ],
+ "type": "Feature",
+ "links": [
+  {
+   "rel": "collection",
+   "type": "application/json",
+   "href": "https://api.imagery.hotosm.org/stac/collections/openaerialmap"
+  },
+  {
+   "rel": "parent",
+   "type": "application/json",
+   "href": "https://api.imagery.hotosm.org/stac/collections/openaerialmap"
+  },
+  {
+   "rel": "root",
+   "type": "application/json",
+   "href": "https://api.imagery.hotosm.org/stac/"
+  },
+  {
+   "rel": "self",
+   "type": "application/geo+json",
+   "href": "https://api.imagery.hotosm.org/stac/collections/openaerialmap/items/6746449161d8410001b28a1a"
+  }
+ ],
+ "assets": [
+  "visual",
+  "metadata",
+  "thumbnail"
+ ],
+ "geometry": {
+  "type": "MultiPolygon",
+  "coordinates": [
+   [
+    [
+     [
+      -79.402197,
+      43.677479
+     ],
+     [
+      -79.402398,
+      43.669897
+     ],
+     [
+      -79.390059,
+      43.669723
+     ],
+     [
+      -79.389857,
+      43.677306
+     ],
+     [
+      -79.402197,
+      43.677479
+     ]
+    ]
+   ]
+  ]
+ },
+ "collection": "openaerialmap",
+ "properties": {
+  "gsd": 0.03081514109310319,
+  "title": "Hillsboro Avenue - 8/27/2024",
+  "created": "2024-11-26T21:58:41.078+00:00",
+  "license": "CC-BY-4.0",
+  "providers": [
+   {
+    "name": "FOUR POINTS",
+    "roles": [
+     "producer",
+     "licensor"
+    ],
+    "description": "Patrick Martiniuk,patrick@fourpoints.tech"
+   }
+  ],
+  "instruments": [
+   "DJI M3E"
+  ],
+  "end_datetime": "2024-08-27T18:20:32Z",
+  "start_datetime": "2024-08-27T17:20:32Z",
+  "oam:platform_type": "uav",
+  "oam:producer_name": "FOUR POINTS"
+ },
+ "stac_version": "1.1.0",
+ "stac_extensions": [
+  "https://stac-extensions.github.io/file/v2.1.0/schema.json",
+  "https://stac-extensions.github.io/projection/v2.0.0/schema.json",
+  "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+  "https://hotosm.github.io/stactools-hotosm/oam/v0.1.0/schema.json"
+ ]
+}

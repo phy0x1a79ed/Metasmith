@@ -1,0 +1,93 @@
+{
+ "TemporalExtent": {
+  "RangeDateTime": {
+   "BeginningDateTime": "2017-06-24T16:53:18.000Z",
+   "EndingDateTime": "2017-08-17T19:13:48.000Z"
+  }
+ },
+ "GranuleUR": "ABoVE_Airborne_AVIRIS_NG_V3.above_avirisng_boundaries_2017.zip",
+ "MeasuredParameters": [
+  {
+   "ParameterName": "INFRARED IMAGERY"
+  },
+  {
+   "ParameterName": "VISIBLE IMAGERY"
+  },
+  {
+   "ParameterName": "INFRARED RADIANCE"
+  },
+  {
+   "ParameterName": "VISIBLE RADIANCE"
+  },
+  {
+   "ParameterName": "REFLECTANCE"
+  }
+ ],
+ "SpatialExtent": {
+  "HorizontalSpatialDomain": {
+   "Geometry": {
+    "BoundingRectangles": [
+     {
+      "WestBoundingCoordinate": -166.642,
+      "EastBoundingCoordinate": -103.405,
+      "NorthBoundingCoordinate": 71.3765,
+      "SouthBoundingCoordinate": 52.1633
+     }
+    ]
+   }
+  }
+ },
+ "ProviderDates": [
+  {
+   "Date": "2025-06-10T00:00:00.000Z",
+   "Type": "Insert"
+  },
+  {
+   "Date": "2025-06-12T21:56:15.000Z",
+   "Type": "Update"
+  }
+ ],
+ "CollectionReference": {
+  "ShortName": "ABoVE_Airborne_AVIRIS_NG_V3_2362",
+  "Version": "3"
+ },
+ "Projects": [
+  {
+   "ShortName": "Not provided",
+   "Campaigns": [
+    "ABoVE"
+   ]
+  }
+ ],
+ "DataGranule": {
+  "DayNightFlag": "Both",
+  "ProductionDateTime": "2025-06-10T00:00:00.000Z",
+  "ArchiveAndDistributionInformation": [
+   {
+    "Name": "Not provided",
+    "Size": 47.414462,
+    "SizeInBytes": 47414462,
+    "Checksum": {
+     "Value": "31efb20ce129a27ee2cf1a2e3ed90c32c1c0fd8496794845dd2981d820a25291",
+     "Algorithm": "SHA-256"
+    },
+    "SizeUnit": "MB"
+   }
+  ]
+ },
+ "Platforms": [
+  {
+   "ShortName": "B-200",
+   "Instruments": [
+    {
+     "ShortName": "AVIRIS-NG"
+    }
+   ]
+  }
+ ],
+ "MetadataSpecification": {
+  "URL": "https://cdn.earthdata.nasa.gov/umm/granule/v1.6.7",
+  "Name": "UMM-G",
+  "Version": "1.6.7"
+ }
+}

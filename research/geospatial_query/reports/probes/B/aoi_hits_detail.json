@@ -1,0 +1,1819 @@
+{
+ "3dep-lidar-copc": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 9,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 15,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.169,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_QL2_2018_12TVK0387_LAS_2019",
+    "USGS_LPC_UT_Central_QL2_2018_12TVK0386_LAS_2019",
+    "USGS_LPC_UT_Central_QL2_2018_12TVK0385_LAS_2019",
+    "USGS_LPC_UT_Central_QL2_2018_12TVK0287_LAS_2019",
+    "USGS_LPC_UT_Central_QL2_2018_12TVK0286_LAS_2019"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_482300_LAS_2018",
+    "USGS_LPC_MI_WayneCo_2017_480300_LAS_2018"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_480312_LAS_2018",
+    "USGS_LPC_MI_WayneCo_2017_480310_LAS_2018",
+    "USGS_LPC_MI_WayneCo_2017_480307_LAS_2018",
+    "USGS_LPC_MI_WayneCo_2017_480305_LAS_2018",
+    "USGS_LPC_MI_WayneCo_2017_477312_LAS_2018"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-dtm": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.675,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_Ql2_TL_2018_LAS_2019-dtm-2m-6-13",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-dtm-2m-7-18"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-5-3"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-4-4"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-dtm-native": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.675,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_Ql2_TL_2018_LAS_2019-dtm_native-2m-6-13",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-dtm_native-2m-7-18"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm_native-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm_native-2m-5-3"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm_native-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm_native-2m-4-4"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-dsm": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.675,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_Ql2_TL_2018_LAS_2019-dsm-2m-6-13",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-dsm-2m-7-18"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dsm-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dsm-2m-5-3"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dsm-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-dsm-2m-4-4"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-hag": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.675,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_Ql2_TL_2018_LAS_2019-hag-2m-6-13",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-hag-2m-7-18"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-hag-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-hag-2m-5-3"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-hag-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-hag-2m-4-4"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-intensity": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.675,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_Ql2_TL_2018_LAS_2019-intensity-2m-6-13",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-intensity-2m-7-18"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-intensity-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-intensity-2m-5-3"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-intensity-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-intensity-2m-4-4"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-classification": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.675,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_Ql2_TL_2018_LAS_2019-classification-2m-6-13",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-classification-2m-7-18"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-classification-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-classification-2m-5-3"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-classification-2m-5-4",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-classification-2m-4-4"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-returns": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 1,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 1.0,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-returns-5m-3-7",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-returns-5m-2-7"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-returns-5m-2-1"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-returns-5m-2-1",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-returns-5m-1-1"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "3dep-lidar-pointsourceid": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 2,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 1,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 1.0,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-pointsourceid-5m-3-7",
+    "USGS_LPC_UT_Central_QL2_2018_LAS_2019-pointsourceid-5m-2-7"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-pointsourceid-5m-2-1"
+   ],
+   "city_us_detroit_mi": [
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-pointsourceid-5m-2-1",
+    "USGS_LPC_MI_WayneCo_2017_LAS_2018-pointsourceid-5m-1-1"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "naip": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 8,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 5,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 6,
+   "city_us_detroit_mi": 12,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cover": {
+   "farm_us_ia_story": 1.0,
+   "mine_us_bingham_ut": 1.0,
+   "city_windsor_on": 0.541,
+   "city_us_detroit_mi": 1.0
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [
+    "ia_m_4209360_sw_15_030_20230902_20240104",
+    "ia_m_4209360_sw_15_060_20210818",
+    "ia_m_4209360_sw_15_060_20190730_20191105",
+    "ia_m_4209360_sw_15_1_20170905_20171026",
+    "ia_m_4209360_sw_15_1_20150825_20151103"
+   ],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "ut_m_4011231_se_12_060_20211105",
+    "ut_m_4011231_se_12_060_20180909_20181209",
+    "ut_m_4011231_se_12_1_20160627_20161017",
+    "ut_m_4011231_se_12_1_20140630_20141030",
+    "ut_m_4011231_se_12_1_20110720_20111011"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "mi_m_4208348_ne_17_060_20220730",
+    "mi_m_4208348_ne_17_060_20200630",
+    "mi_m_4208348_ne_17_060_20180706_20181211",
+    "mi_m_4208348_ne_17_h_20160807",
+    "mi_m_4208348_ne_17_1_20140628_20141021"
+   ],
+   "city_us_detroit_mi": [
+    "mi_m_4208348_nw_17_060_20220730",
+    "mi_m_4208348_ne_17_060_20220730",
+    "mi_m_4208348_nw_17_060_20200705",
+    "mi_m_4208348_ne_17_060_20200630",
+    "mi_m_4208348_nw_17_060_20180706_20181211"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "wesm": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 2,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 4,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ql": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [
+    "Other",
+    "QL 2"
+   ],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "Other",
+    "QL 1",
+    "QL 2"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "Other",
+    "QL 2"
+   ],
+   "city_us_detroit_mi": [
+    "Other",
+    "QL 2"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "filter_diff": {
+   "all": 2,
+   "ql2": 1,
+   "ql0": 0
+  }
+ },
+ "hrdem-lidar": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 1,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 1,
+   "mine_syncrude_ab": 1,
+   "mine_sudbury_on": 2,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 3,
+   "city_montreal_core": 4,
+   "city_windsor_on": 1,
+   "city_us_detroit_mi": 1,
+   "stress_mine_hvc_full": 2,
+   "stress_oilsands_region": 1,
+   "stress_city_toronto_full": 4
+  },
+  "control": 0,
+  "valid_pixels_at_centroid": {
+   "farm_on_essex": [
+    "ON-2017-LakeErie-1m",
+    3600
+   ],
+   "mine_hvc_bc": [
+    "none",
+    0
+   ],
+   "mine_syncrude_ab": [
+    "NRCAN-Oil_Sands_2017_2-1m",
+    3600
+   ],
+   "mine_sudbury_on": [
+    "ON-ON_Sudbury_UTM17_2023-1m",
+    3600
+   ],
+   "city_toronto_core": [
+    "TRCA-GTA_2023-1m",
+    3600
+   ],
+   "city_montreal_core": [
+    "QC-600023_52_CMM_2023-1m",
+    3600
+   ],
+   "city_windsor_on": [
+    "ON-2017-LakeErie-1m",
+    3600
+   ],
+   "city_us_detroit_mi": [
+    "none",
+    0
+   ],
+   "stress_mine_hvc_full": [
+    "none",
+    0
+   ],
+   "stress_oilsands_region": [
+    "NRCAN-Oil_Sands_2017_2-1m",
+    3600
+   ],
+   "stress_city_toronto_full": [
+    "TRCA-GTA_2023-1m",
+    3600
+   ]
+  },
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [
+    "ON-2017-LakeErie-1m"
+   ],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [
+    "BC-Riverine_Floodplain_UTM10_2019-1m"
+   ],
+   "mine_syncrude_ab": [
+    "NRCAN-Oil_Sands_2017_2-1m"
+   ],
+   "mine_sudbury_on": [
+    "ON-ON_Sudbury_UTM17_2023-1m",
+    "ON-SPL_ON_Greater_Sudbury_UTM17_2022-1m"
+   ],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [
+    "TRCA-GTA_2023-1m",
+    "NRCAN-York_2019-1m",
+    "NRCAN-GTA2015-1m"
+   ],
+   "city_montreal_core": [
+    "QC-600023_52_CMM_2023-1m",
+    "QC-DIF_Grand_Montreal_2018-1m",
+    "QC-Fleuve_St_Laurent_2018-1m",
+    "VILLE_MONTREAL-VILLE_MONTREAL-1m"
+   ],
+   "city_windsor_on": [
+    "ON-2017-LakeErie-1m"
+   ],
+   "city_us_detroit_mi": [
+    "ON-2017-LakeErie-1m"
+   ],
+   "stress_mine_hvc_full": [
+    "BC-BCTS_PrinceGeorgeKamloops_UTM10_2020-1m",
+    "BC-Riverine_Floodplain_UTM10_2019-1m"
+   ],
+   "stress_oilsands_region": [
+    "NRCAN-Oil_Sands_2017_2-1m"
+   ],
+   "stress_city_toronto_full": [
+    "TRCA-GTA_2023-1m",
+    "NRCAN-York_2019-1m",
+    "NRCAN-GTA2015-1m",
+    "NRCAN-GTA2014-1m"
+   ],
+   "CONTROL": []
+  }
+ },
+ "hrdem-mosaic-1m": {
+  "per": {
+   "farm_sk_quarter": 1,
+   "farm_on_essex": 1,
+   "farm_ab_taber": 1,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 1,
+   "mine_syncrude_ab": 1,
+   "mine_sudbury_on": 1,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 1,
+   "city_montreal_core": 1,
+   "city_windsor_on": 1,
+   "city_us_detroit_mi": 1,
+   "stress_mine_hvc_full": 1,
+   "stress_oilsands_region": 2,
+   "stress_city_toronto_full": 1
+  },
+  "control": 0,
+  "valid_pixels_at_centroid": {
+   "farm_sk_quarter": [
+    "none",
+    0
+   ],
+   "farm_on_essex": [
+    "8_1-mosaic-1m",
+    3600
+   ],
+   "farm_ab_taber": [
+    "none",
+    0
+   ],
+   "mine_hvc_bc": [
+    "none",
+    0
+   ],
+   "mine_syncrude_ab": [
+    "4_5-mosaic-1m",
+    3600
+   ],
+   "mine_sudbury_on": [
+    "8_2-mosaic-1m",
+    3600
+   ],
+   "city_toronto_core": [
+    "8_2-mosaic-1m",
+    3600
+   ],
+   "city_montreal_core": [
+    "9_2-mosaic-1m",
+    3600
+   ],
+   "city_windsor_on": [
+    "8_1-mosaic-1m",
+    3600
+   ],
+   "city_us_detroit_mi": [
+    "none",
+    0
+   ],
+   "stress_mine_hvc_full": [
+    "none",
+    0
+   ],
+   "stress_oilsands_region": [
+    "4_5-mosaic-1m",
+    3600
+   ],
+   "stress_city_toronto_full": [
+    "8_2-mosaic-1m",
+    3600
+   ]
+  },
+  "ids": {
+   "farm_sk_quarter": [
+    "4_3-mosaic-1m"
+   ],
+   "farm_on_essex": [
+    "8_1-mosaic-1m"
+   ],
+   "farm_ab_taber": [
+    "3_3-mosaic-1m"
+   ],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [
+    "2_4-mosaic-1m"
+   ],
+   "mine_syncrude_ab": [
+    "4_5-mosaic-1m"
+   ],
+   "mine_sudbury_on": [
+    "8_2-mosaic-1m"
+   ],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [
+    "8_2-mosaic-1m"
+   ],
+   "city_montreal_core": [
+    "9_2-mosaic-1m"
+   ],
+   "city_windsor_on": [
+    "8_1-mosaic-1m"
+   ],
+   "city_us_detroit_mi": [
+    "8_1-mosaic-1m"
+   ],
+   "stress_mine_hvc_full": [
+    "2_4-mosaic-1m"
+   ],
+   "stress_oilsands_region": [
+    "4_4-mosaic-1m",
+    "4_5-mosaic-1m"
+   ],
+   "stress_city_toronto_full": [
+    "8_2-mosaic-1m"
+   ],
+   "CONTROL": []
+  }
+ },
+ "napl": {
+  "collections": [
+   "napl-halifax",
+   "napl-markham",
+   "napl-ottawa",
+   "napl-regina",
+   "napl-ring-of-fire",
+   "napl-salish",
+   "napl-tuktoyaktuk",
+   "napl-victoria"
+  ],
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 2
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [
+    "napl-markham-1974",
+    "napl-markham-1960"
+   ],
+   "CONTROL": []
+  }
+ },
+ "neon_data_listing": {
+  "url": "https://data.neonscience.org/api/v0/data/DP1.30003.001/ABBY/2025-08",
+  "status": 403,
+  "body": "{\"error\":{\"status\":403,\"detail\":\"Access Denied\"},\"data\":null}"
+ },
+ "neon_product_desc": {
+  "DP1.30003.001": {
+   "name": "Discrete return LiDAR point cloud",
+   "angle_mentions": []
+  },
+  "DP3.30006.001": {
+   "name": "Spectrometer orthorectified surface directional reflectance - mosaic",
+   "angle_mentions": [
+    " The mosaic is created using the most-nadir pixels from the flight lines observed with the least cloud cover."
+   ]
+  },
+  "DP1.30006.001": {
+   "name": "Spectrometer orthorectified surface directional reflectance - flightline",
+   "angle_mentions": []
+  },
+  "DP1.30008.001": {
+   "name": "Spectrometer orthorectified at-sensor radiance - flightline",
+   "angle_mentions": []
+  },
+  "DP3.30010.001": {
+   "name": "High-resolution orthorectified camera imagery mosaic",
+   "angle_mentions": []
+  }
+ },
+ "neon_lidar": {
+  "n_site_products": 59,
+  "nearest_km": {
+   "farm_sk_quarter": [
+    699.7,
+    "NOGP"
+   ],
+   "farm_on_essex": [
+    527.2,
+    "BLAN"
+   ],
+   "farm_ab_taber": [
+    552.4,
+    "YELL"
+   ],
+   "farm_us_ia_story": [
+    360.7,
+    "UKFS"
+   ],
+   "mine_hvc_bc": [
+    523.1,
+    "WREF"
+   ],
+   "mine_syncrude_ab": [
+    1341.5,
+    "YELL"
+   ],
+   "mine_sudbury_on": [
+    651.6,
+    "UNDE"
+   ],
+   "mine_us_bingham_ut": [
+    41.6,
+    "REDB"
+   ],
+   "city_toronto_core": [
+    525.4,
+    "BLAN"
+   ],
+   "city_montreal_core": [
+    240.7,
+    "BART"
+   ],
+   "city_windsor_on": [
+    556.3,
+    "BLAN"
+   ],
+   "city_us_detroit_mi": [
+    560.3,
+    "BLAN"
+   ],
+   "stress_mine_hvc_full": [
+    523.1,
+    "WREF"
+   ],
+   "stress_oilsands_region": [
+    1341.5,
+    "YELL"
+   ],
+   "stress_city_toronto_full": [
+    532.7,
+    "BLAN"
+   ],
+   "CONTROL": [
+    2246.2,
+    "PUUM"
+   ]
+  }
+ },
+ "neon_hyperspectral": {
+  "n_site_products": 174,
+  "nearest_km": {
+   "farm_sk_quarter": [
+    699.7,
+    "NOGP"
+   ],
+   "farm_on_essex": [
+    527.2,
+    "BLAN"
+   ],
+   "farm_ab_taber": [
+    552.4,
+    "YELL"
+   ],
+   "farm_us_ia_story": [
+    360.7,
+    "UKFS"
+   ],
+   "mine_hvc_bc": [
+    523.1,
+    "WREF"
+   ],
+   "mine_syncrude_ab": [
+    1341.5,
+    "YELL"
+   ],
+   "mine_sudbury_on": [
+    651.6,
+    "UNDE"
+   ],
+   "mine_us_bingham_ut": [
+    41.6,
+    "REDB"
+   ],
+   "city_toronto_core": [
+    525.4,
+    "BLAN"
+   ],
+   "city_montreal_core": [
+    240.7,
+    "BART"
+   ],
+   "city_windsor_on": [
+    556.3,
+    "BLAN"
+   ],
+   "city_us_detroit_mi": [
+    560.3,
+    "BLAN"
+   ],
+   "stress_mine_hvc_full": [
+    523.1,
+    "WREF"
+   ],
+   "stress_oilsands_region": [
+    1341.5,
+    "YELL"
+   ],
+   "stress_city_toronto_full": [
+    532.7,
+    "BLAN"
+   ],
+   "CONTROL": [
+    2246.2,
+    "PUUM"
+   ]
+  }
+ },
+ "neon_rgb": {
+  "n_site_products": 59,
+  "nearest_km": {
+   "farm_sk_quarter": [
+    699.7,
+    "NOGP"
+   ],
+   "farm_on_essex": [
+    527.2,
+    "BLAN"
+   ],
+   "farm_ab_taber": [
+    552.4,
+    "YELL"
+   ],
+   "farm_us_ia_story": [
+    360.7,
+    "UKFS"
+   ],
+   "mine_hvc_bc": [
+    523.1,
+    "WREF"
+   ],
+   "mine_syncrude_ab": [
+    1341.5,
+    "YELL"
+   ],
+   "mine_sudbury_on": [
+    651.6,
+    "UNDE"
+   ],
+   "mine_us_bingham_ut": [
+    41.6,
+    "REDB"
+   ],
+   "city_toronto_core": [
+    525.4,
+    "BLAN"
+   ],
+   "city_montreal_core": [
+    240.7,
+    "BART"
+   ],
+   "city_windsor_on": [
+    556.3,
+    "BLAN"
+   ],
+   "city_us_detroit_mi": [
+    560.3,
+    "BLAN"
+   ],
+   "stress_mine_hvc_full": [
+    523.1,
+    "WREF"
+   ],
+   "stress_oilsands_region": [
+    1341.5,
+    "YELL"
+   ],
+   "stress_city_toronto_full": [
+    532.7,
+    "BLAN"
+   ],
+   "CONTROL": [
+    2246.2,
+    "PUUM"
+   ]
+  }
+ },
+ "opentopography": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 2,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 1,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "names": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [
+    "IA NorthCentral 2 2020",
+    "IA FullState"
+   ],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [
+    "Lidar Survey of Montreal, Quebec, Canada 2015"
+   ],
+   "city_windsor_on": [
+    "USGS LPC MI WayneCo 2017 LAS 2018",
+    "2009 USGS Lidar: Wayne and Washtenaw Counties, MI"
+   ],
+   "city_us_detroit_mi": [
+    "USGS LPC MI WayneCo 2017 LAS 2018",
+    "2009 USGS Lidar: Wayne and Washtenaw Counties, MI"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "federated_false_detroit": 0,
+  "raster_detroit": 19,
+  "raster_control": 5
+ },
+ "noaa_dav": {
+  "lidar": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 2,
+   "city_us_detroit_mi": 2,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "imagery": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 1,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 1,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 6,
+   "city_us_detroit_mi": 6,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "inport": {
+   "Imagery": {
+    "status": 200,
+    "ql_text": [],
+    "has_pulse": false
+   },
+   "Lidar": {
+    "status": 200,
+    "ql_text": [
+     "QL2",
+     "QL2"
+    ],
+    "has_pulse": true
+   }
+  },
+  "titles": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [
+    "2021 USDA NAIP 4-Band 8 Bit Imagery: Iowa"
+   ],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [
+    "2021 USDA NAIP 4-Band 8 Bit Imagery: Utah"
+   ],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "2017 Lidar: Wayne County, MI",
+    "2009 USGS Lidar: Wayne and Washtenaw Counties, MI",
+    "2025 NOAA NGS DSS 4-Band Imagery: Detroit, MI",
+    "2020 USDA NAIP 4-Band 8 Bit Imagery: Michigan"
+   ],
+   "city_us_detroit_mi": [
+    "2017 Lidar: Wayne County, MI",
+    "2009 USGS Lidar: Wayne and Washtenaw Counties, MI",
+    "2025 NOAA NGS DSS 4-Band Imagery: Detroit, MI",
+    "2020 USDA NAIP 4-Band 8 Bit Imagery: Michigan"
+   ],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  }
+ },
+ "oam": {
+  "uav": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 2
+  },
+  "any_platform": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 2
+  },
+  "control_uav": 0,
+  "control_any": 1,
+  "gsd_filter_diff_toronto": [
+   2,
+   0
+  ]
+ },
+ "geonadir": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 3
+  },
+  "control": 0,
+  "total": 8856,
+  "private_in_hits": 0
+ },
+ "aviris_ng_l2_reflectance": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 8,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 32,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [
+    "AVIRIS-NG_L2_Reflectance.ang20170811t212940_h2o_v2p9_img.hdr",
+    "AVIRIS-NG_L2_Reflectance.ang20170811t212940_corr_v2p9_img.hdr"
+   ],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [
+    "AVIRIS-NG_L2_Reflectance.ang20170811t205134_h2o_v2p9_img.bin",
+    "AVIRIS-NG_L2_Reflectance.ang20170811t205134_corr_v2p9_img.hdr"
+   ],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "total": "10714"
+ },
+ "aviris_ng_above_v3": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 9,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 24,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [
+    "ABoVE_Airborne_AVIRIS_NG_V3.above_avirisng_boundaries_2017.zip",
+    "ABoVE_Airborne_AVIRIS_NG_V3.above_avirisng_boundaries_2019.zip"
+   ],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [
+    "ABoVE_Airborne_AVIRIS_NG_V3.above_avirisng_boundaries_2017.zip",
+    "ABoVE_Airborne_AVIRIS_NG_V3.above_avirisng_boundaries_2019.zip"
+   ],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "total": "2521"
+ },
+ "aviris3_l2a_reflectance": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "total": "511"
+ },
+ "aviris_classic_l2_reflectance": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "total": "2439"
+ },
+ "aviris5_l2a_reflectance": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "total": "6050"
+ },
+ "ENMAP_HSI_L2A": {
+  "per": {
+   "farm_sk_quarter": 2,
+   "farm_on_essex": 7,
+   "farm_ab_taber": 1,
+   "farm_us_ia_story": 1,
+   "mine_hvc_bc": 5,
+   "mine_syncrude_ab": 10,
+   "mine_sudbury_on": 3,
+   "mine_us_bingham_ut": 5,
+   "city_toronto_core": 16,
+   "city_montreal_core": 3,
+   "city_windsor_on": 9,
+   "city_us_detroit_mi": 8,
+   "stress_mine_hvc_full": 5,
+   "stress_oilsands_region": 16,
+   "stress_city_toronto_full": 25
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [
+    "ENMAP01-____L2A-DT0000088438_20240818T185347Z_018_V010502_20260511T031811Z",
+    "ENMAP01-____L2A-DT0000083057_20240718T185020Z_018_V010502_20260429T130146Z"
+   ],
+   "farm_on_essex": [
+    "ENMAP01-____L2A-DT0000191102_20260504T165717Z_003_V010506_20260505T213824Z",
+    "ENMAP01-____L2A-DT0000156917_20250926T165343Z_005_V010502_20250930T011302Z",
+    "ENMAP01-____L2A-DT0000137776_20250618T170119Z_001_V010502_20250619T154803Z",
+    "ENMAP01-____L2A-DT0000099979_20241106T165328Z_005_V010502_20260617T164454Z",
+    "ENMAP01-____L2A-DT0000097102_20241014T165730Z_008_V010502_20260601T013345Z"
+   ],
+   "farm_ab_taber": [
+    "ENMAP01-____L2A-DT0000042091_20230914T190609Z_002_V010502_20260102T201741Z"
+   ],
+   "farm_us_ia_story": [
+    "ENMAP01-____L2A-DT0000146268_20250801T174026Z_003_V010502_20250805T232709Z"
+   ],
+   "mine_hvc_bc": [
+    "ENMAP01-____L2A-DT0000144562_20250729T193732Z_002_V010502_20250731T004925Z",
+    "ENMAP01-____L2A-DT0000045185_20231009T195152Z_002_V010502_20260108T044719Z",
+    "ENMAP01-____L2A-DT0000040870_20230908T194924Z_002_V010502_20260101T034447Z",
+    "ENMAP01-____L2A-DT0000039923_20230904T194546Z_002_V010502_20251231T001209Z",
+    "ENMAP01-____L2A-DT0000028064_20230720T195232Z_002_V010502_20251219T144106Z"
+   ],
+   "mine_syncrude_ab": [
+    "ENMAP01-____L2A-DT0000140010_20250705T191416Z_008_V010502_20250708T135919Z",
+    "ENMAP01-____L2A-DT0000003365_20220910T193548Z_004_V010502_20251029T185646Z",
+    "ENMAP01-____L2A-DT0000003366_20220909T191042Z_004_V010502_20251029T152922Z",
+    "ENMAP01-____L2A-DT0000003180_20220902T192828Z_004_V010502_20251027T235052Z",
+    "ENMAP01-____L2A-DT0000002937_20220829T192447Z_004_V010502_20251018T005544Z"
+   ],
+   "mine_sudbury_on": [
+    "ENMAP01-____L2A-DT0000209065_20260801T170346Z_002_V010506_20260802T061254Z",
+    "ENMAP01-____L2A-DT0000103430_20241129T164850Z_002_V010502_20260627T095843Z",
+    "ENMAP01-____L2A-DT0000103430_20241129T164846Z_001_V010502_20260627T095843Z"
+   ],
+   "mine_us_bingham_ut": [
+    "ENMAP01-____L2A-DT0000148670_20250823T185012Z_007_V010502_20250825T171916Z",
+    "ENMAP01-____L2A-DT0000076307_20240529T185648Z_003_V010502_20260404T134538Z",
+    "ENMAP01-____L2A-DT0000054965_20231223T190105Z_008_V010502_20260118T235055Z",
+    "ENMAP01-____L2A-DT0000054964_20231219T185720Z_008_V010502_20260117T103439Z",
+    "ENMAP01-____L2A-DT0000028780_20230710T185740Z_002_V010502_20251218T132851Z"
+   ],
+   "city_toronto_core": [
+    "ENMAP01-____L2A-DT0000090876_20240905T164626Z_001_V010502_20260516T061419Z",
+    "ENMAP01-____L2A-DT0000089167_20240813T164923Z_001_V010502_20260509T074110Z",
+    "ENMAP01-____L2A-DT0000089166_20240809T164553Z_001_V010502_20260507T180123Z",
+    "ENMAP01-____L2A-DT0000039028_20230901T165349Z_009_V010502_20251229T233730Z",
+    "ENMAP01-____L2A-DT0000010872_20230324T035217Z_002_V010502_20251126T104737Z"
+   ],
+   "city_montreal_core": [
+    "ENMAP01-____L2A-DT0000153853_20250921T162354Z_009_V010502_20250925T084100Z",
+    "ENMAP01-____L2A-DT0000038656_20230831T162756Z_001_V010502_20251229T194956Z",
+    "ENMAP01-____L2A-DT0000030953_20230804T162711Z_001_V010502_20251222T081533Z"
+   ],
+   "city_windsor_on": [
+    "ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z",
+    "ENMAP01-____L2A-DT0000197504_20260608T170431Z_001_V010506_20260611T045502Z",
+    "ENMAP01-____L2A-DT0000163997_20251119T165333Z_003_V010505_20251120T171721Z",
+    "ENMAP01-____L2A-DT0000163997_20251119T165329Z_002_V010505_20251120T171721Z",
+    "ENMAP01-____L2A-DT0000143464_20250723T170746Z_007_V010502_20250725T185131Z"
+   ],
+   "city_us_detroit_mi": [
+    "ENMAP01-____L2A-DT0000209148_20260813T171549Z_001_V010506_20260814T064725Z",
+    "ENMAP01-____L2A-DT0000197504_20260608T170431Z_001_V010506_20260611T045502Z",
+    "ENMAP01-____L2A-DT0000163997_20251119T165329Z_002_V010505_20251120T171721Z",
+    "ENMAP01-____L2A-DT0000143464_20250723T170742Z_006_V010502_20250725T185131Z",
+    "ENMAP01-____L2A-DT0000072025_20240505T165702Z_008_V010502_20260326T041009Z"
+   ],
+   "stress_mine_hvc_full": [
+    "ENMAP01-____L2A-DT0000144562_20250729T193732Z_002_V010502_20250731T004925Z",
+    "ENMAP01-____L2A-DT0000045185_20231009T195152Z_002_V010502_20260108T044719Z",
+    "ENMAP01-____L2A-DT0000040870_20230908T194924Z_002_V010502_20260101T034447Z",
+    "ENMAP01-____L2A-DT0000039923_20230904T194546Z_002_V010502_20251231T001209Z",
+    "ENMAP01-____L2A-DT0000028064_20230720T195232Z_002_V010502_20251219T144106Z"
+   ],
+   "stress_oilsands_region": [
+    "ENMAP01-____L2A-DT0000157314_20251010T192830Z_002_V010502_20251013T074858Z",
+    "ENMAP01-____L2A-DT0000140010_20250705T191416Z_008_V010502_20250708T135919Z",
+    "ENMAP01-____L2A-DT0000003365_20220910T193548Z_004_V010502_20251029T185646Z",
+    "ENMAP01-____L2A-DT0000003365_20220910T193543Z_003_V010502_20251029T190112Z",
+    "ENMAP01-____L2A-DT0000003366_20220909T191042Z_004_V010502_20251029T152922Z"
+   ],
+   "stress_city_toronto_full": [
+    "ENMAP01-____L2A-DT0000176949_20260204T164934Z_008_V010505_20260206T065850Z",
+    "ENMAP01-____L2A-DT0000176949_20260204T164929Z_007_V010505_20260206T065850Z",
+    "ENMAP01-____L2A-DT0000090876_20240905T164626Z_001_V010502_20260516T061419Z",
+    "ENMAP01-____L2A-DT0000089167_20240813T164923Z_001_V010502_20260509T074110Z",
+    "ENMAP01-____L2A-DT0000089166_20240809T164553Z_001_V010502_20260507T180123Z"
+   ],
+   "CONTROL": []
+  },
+  "cover": {
+   "farm_sk_quarter": 1.0,
+   "farm_on_essex": 1.0,
+   "farm_ab_taber": 1.0,
+   "farm_us_ia_story": 1.0,
+   "mine_hvc_bc": 1.0,
+   "mine_syncrude_ab": 1.0,
+   "mine_sudbury_on": 1.0,
+   "mine_us_bingham_ut": 1.0,
+   "city_toronto_core": 1.0,
+   "city_montreal_core": 1.0,
+   "city_windsor_on": 1.0,
+   "city_us_detroit_mi": 1.0,
+   "stress_mine_hvc_full": 1.0,
+   "stress_oilsands_region": 1.0,
+   "stress_city_toronto_full": 1.0
+  }
+ },
+ "DESIS_HSI_L2A": {
+  "per": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 2,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 1,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "ids": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [
+    "DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220",
+    "DESIS-HSI-L2A-DT2018121002_003-20181210T175048-V0220"
+   ],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [
+    "DESIS-HSI-L2A-DT2018121002_003-20181210T175048-V0220"
+   ],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [],
+   "stress_city_toronto_full": [],
+   "CONTROL": []
+  },
+  "cover": {
+   "farm_on_essex": 1.0,
+   "city_windsor_on": 0.33
+  }
+ },
+ "uavsar": {
+  "asf": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "control": 0,
+  "cmr_polsar": {
+   "farm_sk_quarter": 0,
+   "farm_on_essex": 0,
+   "farm_ab_taber": 0,
+   "farm_us_ia_story": 0,
+   "mine_hvc_bc": 0,
+   "mine_syncrude_ab": 0,
+   "mine_sudbury_on": 0,
+   "mine_us_bingham_ut": 0,
+   "city_toronto_core": 0,
+   "city_montreal_core": 0,
+   "city_windsor_on": 0,
+   "city_us_detroit_mi": 0,
+   "stress_mine_hvc_full": 0,
+   "stress_oilsands_region": 0,
+   "stress_city_toronto_full": 0
+  },
+  "cmr_control": 0
+ },
+ "planet_open_canada": {
+  "hits": {
+   "farm_sk_quarter": [],
+   "farm_on_essex": [],
+   "farm_ab_taber": [],
+   "farm_us_ia_story": [],
+   "mine_hvc_bc": [],
+   "mine_syncrude_ab": [],
+   "mine_sudbury_on": [],
+   "mine_us_bingham_ut": [],
+   "city_toronto_core": [],
+   "city_montreal_core": [],
+   "city_windsor_on": [],
+   "city_us_detroit_mi": [],
+   "stress_mine_hvc_full": [],
+   "stress_oilsands_region": [
+    "psscene"
+   ],
+   "stress_city_toronto_full": []
+  },
+  "extents": {
+   "arps": [
+    -112.25295215535878,
+    57.103204652206315,
+    -111.65726808070603,
+    57.59303229695448
+   ],
+   "psscene": [
+    -112.34869931503664,
+    57.03001159556063,
+    -111.49254112341502,
+    57.66563706722706
+   ],
+   "skysat": [
+    -112.1518676799206,
+    57.21634365471234,
+    -111.5141146317413,
+    57.46604643098277
+   ],
+   "tanager": [
+    -112.23844150316658,
+    57.1061423415679,
+    -111.66503617745258,
+    57.59070735301335
+   ],
+   "lst": [
+    -112.23911111112514,
+    57.105777777784915,
+    -111.66488888890285,
+    57.59111111111831
+   ],
+   "swc": [
+    -112.23911111112514,
+    57.105777777784915,
+    -111.66488888890285,
+    57.59111111111831
+   ],
+   "crop-biomass": [
+    -111.83776500187378,
+    57.46757096661965,
+    -111.82994969465136,
+    57.47547610495956
+   ],
+   "fc-monitoring": [
+    -112.23845,
+    57.106125000000006,
+    -111.665025,
+    57.590725000000006
+   ],
+   "fc-diligence": [
+    -112.2385,
+    57.106,
+    -111.665,
+    57.59075
+   ]
+  },
+  "n_items": 20
+ }
+}

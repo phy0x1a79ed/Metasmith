@@ -1,0 +1,29 @@
+source,source_type,gap,angle_kind,field,location,sample_value,sample_range,note
+Sentinel-2 L2A (re-query of POC ids),satellite,Q1,view zenith,MTD_TL.xml Mean_Viewing_Incidence_Angle_List/ZENITH_ANGLE (13 bands),sidecar file,,2.8-10.3,"Mean of 13 per-band zenith angles, per granule; range over the 15 POC scenes"
+Landsat C2 L2 (re-query of POC ids),satellite,Q1,off-nadir,view:off_nadir,item property,0.0,0.0-0.0,Range over the 15 POC scenes
+Sentinel-1 RTC (re-query of POC ids),satellite,Q1,incidence,GRD annotation/iw-vv.xml geolocationGrid/incidenceAngle,sidecar file,,33.3-44.3,"Incidence at the AOI centroid from the GRD annotation grid, not on the RTC item; range over 15 POC scenes"
+HLS L30 v2.0 (Planetary Computer),satellite,Q1,view zenith,VZA asset,per-pixel band,1.93,,"Per-pixel COG, scale 0.01 deg; value at the farm_sk_quarter centroid; scene mean 3.17 deg from CMR UMM MEAN_VIEW_ZENITH_ANGLE"
+HLS S30 v2.0 (Planetary Computer),satellite,Q1,view zenith,VZA asset,per-pixel band,1.51,,"Per-pixel COG, scale 0.01 deg; value at the farm_sk_quarter centroid; items carry only view:azimuth"
+HLS L30 via NASA CMR-STAC (LPCLOUD),satellite,Q1,view zenith,VZA asset; CMR UMM MEAN_VIEW_ZENITH_ANGLE,per-pixel band,,,VZA href needs Earthdata login; scene mean public in the CMR UMM record; STAC item properties hold only eo:cloud_cover
+HLS S30 via NASA CMR-STAC (LPCLOUD),satellite,Q1,view zenith,VZA asset; CMR UMM MEAN_VIEW_ZENITH_ANGLE,per-pixel band,,,VZA href needs Earthdata login; scene mean public in the CMR UMM record; STAC item properties hold only eo:cloud_cover
+panoramax,vehicle,R1; S9,camera pitch,properties.pers:pitch; properties.view:azimuth,item property,,-16..13,Pitch 0 on every Toronto core item; non-zero on 202 of 999 in the Toronto stress extent
+3DEP lidar COPC (Planetary Computer),airborne,S1,scan angle,ScanAngleRank,per-point dimension,,,Per-point LAS dimension in the COPC file; the eight derived 3DEP rasters carry no angle (scan angle discarded)
+uavsar_asf_search,airborne,S1,incidence,*.inc incidence raster; *.ann annotation,per-pixel band,,,Listed per scene in the ASF file list; contents not opened (Earthdata login)
+enmap_l2a_dlr_stac,satellite,S3,off-nadir,enmap:acrossOffNadirAngle; enmap:alongOffNadirAngle,item property,,,Signed degrees; the only hyperspectral source with off-nadir item properties
+desis_l2a_dlr_stac,satellite,S3,incidence,desis:sceneIncidenceAngle,item property,,,"Named incidence, not off-nadir; plus desis:sceneAzimuthAngle"
+planet_tanager_open_stac,satellite,S3,off-nadir,view:off_nadir,item property,,0.2-30.5,Also view:azimuth; range over 153 scenes in the static catalogue
+Maxar Open Data (events),satellite,S4,off-nadir,view:off_nadir; view:incidence_angle,item property,41.2,,Also view:incidence_angle 43.7 deg; Maxar ARD tile
+Satellogic EarthView,satellite,S4,off-nadir,view:off_nadir,item property,18.79,,In {item}_metadata.json; view:azimuth and sun angles alongside
+Umbra open SAR data,satellite,S4,incidence,view:incidence_angle,item property,27.7,,Incidence only; no off-nadir field
+Capella open SAR data,satellite,S4,incidence,view:incidence_angle; capella:look_angle,item property,36.8,,capella:look_angle 33.5 deg is the off-nadir equivalent; sample item CAPELLA_C03_SP_GEO_HH_20210408172422
+ICEYE open SAR data,satellite,S4,off-nadir,view:off_nadir; view:incidence_angle,item property,20.69,,view:incidence_angle 22.734908 deg also present
+"Planet open STAC (Open SkySat, Open Canada, disasters, education, Tanager)",satellite,S4,off-nadir,view:off_nadir,item property,15.4,,Sample is a Tanager-1 scene (other hit 12.2 deg); SkySat/PlanetScope not hit
+SkyFi Platform API (archive search + quote),satellite,S4,off-nadir,offNadirAngle (ArchiveResponse); filter maxOffNadirAngle,quote response,30.0,-90..90,Schema range; request filter maxOffNadirAngle spans 0..50
+UP42 (catalog search + order estimate),satellite,S4,off-nadir,"per-host STAC property (incidence angle, off-nadir angle)",item property,,,"Documented per collection (Pleiades: incidence 5-50 deg, off-nadir 30 deg); name not verifiable without a token"
+Sentinel-2 L1C (Earth Search),satellite,S5,view zenith,granule_metadata asset metadata.xml Mean_Viewing_Incidence_Angle_List/ZENITH_ANGLE,sidecar file,4.509,,Sidecar over https; sample is the mean of 13 bands; not in item properties
+Landsat C2 L1 (USGS LandsatLook STAC),satellite,S5,off-nadir,view:off_nadir; VZA/VAA assets; ANG.txt,item property,0,,Sample 0 deg
+mapillary_api_v4,vehicle,S9,camera heading,compass_angle,item property,,,"Documented heading only, no pitch; token-blocked, not verified live"
+drivebc_webcams,fixed camera,S9,camera heading,orientation,item property,E,,Cardinal compass facing; no pitch
+phenocam,fixed camera,S9,camera heading,sitemetadata.camera_orientation,item property,NNW,,Cardinal compass facing; no pitch
+wikimedia_commons,handheld,S9,camera heading,metadata.GPSImgDirection,sidecar file,,,EXIF heading when present (9 of 31 sampled files); no pitch
+nuscenes,vehicle,S9,camera pitch,calibrated_sensor.rotation,sidecar file,,,"Camera extrinsics quaternion incl. pitch; docs only, not verified live, registration needed"

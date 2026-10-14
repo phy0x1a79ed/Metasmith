@@ -1,0 +1,7 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [03:26<03:26, 206.88s/it]Fetching 2 files: 100%|██████████| 2/2 [03:51<00:00, 99.52s/it] Fetching 2 files: 100%|██████████| 2/2 [03:51<00:00, 115.62s/it]
+Loading weights:   0%|          | 0/824 [00:00<?, ?it/s]Loading weights:  34%|███▎      | 277/824 [00:00<00:00, 2710.21it/s]Loading weights:  67%|██████▋   | 549/824 [00:00<00:00, 2047.30it/s]Loading weights:  93%|█████████▎| 764/824 [00:00<00:00, 2047.48it/s]Loading weights: 100%|██████████| 824/824 [00:00<00:00, 2137.07it/s]
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/transformers/models/qwen2_vl/image_processing_qwen2_vl.py:129: FutureWarning: Passing `min_pixels` and `max_pixels` to a processor call is deprecated and will be removed in v5.23. Pass in `size={'longest_edge': xxx, 'shortest_edge': xxx} to override the target size.`
+  warnings.warn(
+p01 (-39.2857, 146.25) 45 <answer>-39.2857, 146.25</answer>
+p02 (-12.05, 136.87) 54 <answer>-12.05, 136.87</answer>

@@ -1,0 +1,82 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 23687.05it/s]
+[transformers] [1mCLIPVisionModel LOAD REPORT[0m from: laion/CLIP-ViT-L-14-DataComp.XL-s13B-b90K
+Key                                                          | Status     |  | 
+-------------------------------------------------------------+------------+--+-
+text_model.encoder.layers.{0...11}.layer_norm2.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.weight | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.bias   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.weight   | UNEXPECTED |  | 
+text_model.embeddings.token_embedding.weight                 | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.bias     | UNEXPECTED |  | 
+text_model.embeddings.position_embedding.weight              | UNEXPECTED |  | 
+text_model.final_layer_norm.bias                             | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.weight        | UNEXPECTED |  | 
+text_model.final_layer_norm.weight                           | UNEXPECTED |  | 
+text_projection.weight                                       | UNEXPECTED |  | 
+logit_scale                                                  | UNEXPECTED |  | 
+visual_projection.weight                                     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+p01 43.72204994386015 -79.43923085679616
+p02 3.4567802194337705 -76.60361670416916
+p03 1.2829628572893956 103.81741001021145
+p04 35.00190646575243 135.74731396968292
+p05 27.52457869273537 -82.72847872940213
+p06 51.86639300607536 15.719451525390488
+p07 40.647893909790625 17.93272710420905
+p08 44.96796053473276 -93.27410769196464
+p09 31.60543163149936 -7.916179390182152
+p10 19.279773739237736 -99.16901158074447
+p11 40.12376995777276 -88.34812903788314
+p12 42.362798253156654 -71.01742538748138
+p13 51.91718306371704 -111.67267524213543
+p14 49.88314456058581 -97.42595247065175
+p15 43.64100035138698 -79.4350499042227
+p16 44.965370880761945 -78.92067774752012
+p17 44.303033127698285 39.35152612322838
+p18 43.63882911266472 -79.41484368183228
+p19 20.67140155775228 -103.31134542651436
+p20 30.03871524024018 31.02253595242237
+p21 44.75054994163578 -116.87649001965165
+p22 49.876829772993624 -97.18073793899963
+p23 40.863469894925174 -98.09459806711276
+p24 47.69129905040496 18.491477431235474
+p25 39.937312270729386 -88.8996468364852
+p26 40.748918352781025 23.042088606975064
+p27 35.22473252614145 -80.80209514389425
+p28 40.920912526395675 29.191302541385568
+p29 59.350019644374356 57.61659106535454
+p30 23.598944012775046 58.49708621867126
+p31 -17.272075256049796 -65.84721722179913
+p32 47.25528513836944 11.40408572220298
+p33 -30.523380370282336 152.71564188024476
+p34 41.69160023286042 -86.8299043647672
+p35 58.70189801157336 16.47291431233655
+p36 36.761192495596994 -4.732660373486411
+p37 49.212233241244114 -124.43849199120282
+p38 43.6559026761034 -116.26803398374271
+p39 49.27837096236826 -123.13047783078827
+p40 43.33093893985905 -2.9269405017898222
+p41 40.426608766761255 -99.79189381425498
+p42 56.409291958984305 24.36038663455008
+p43 23.038506011480482 72.46485889983438
+p44 43.72837950862677 -79.45325803671476
+p45 58.74732543256567 37.62710403200618
+p46 44.30603773553816 -85.32682243142044
+p47 40.381258668311666 -99.73895600713995
+p48 25.725926057844003 -100.34009543131265
+p49 36.54685612475388 -92.15289427516969
+p50 49.885769582210216 -97.1819613328104
+sec/img 2.0729176378250123

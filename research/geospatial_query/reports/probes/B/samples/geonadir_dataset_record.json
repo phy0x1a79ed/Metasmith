@@ -1,0 +1,93 @@
+{
+ "id": 4865,
+ "uav_uid": "9e8f15aa-a472-4a97-9ba6-808ad13622a2",
+ "user": "kempenfest 7459",
+ "workspace": 6492,
+ "dataset_name": "DJI_202311151347_002_ExtrusionVision",
+ "category": [
+  "Artificial - terrestrial"
+ ],
+ "thumbnail_image": "https://geonadir-prod.s3.amazonaws.com/privateuploads/thumbnail/4865-9e8f15aa-a472-4a97-9ba6-808ad13622a2/DJI_20231115135329_0001_V.JPG?<signed>",
+ "captured_date": "2023-11-15T13:53:29Z",
+ "is_private": false,
+ "is_shareable": false,
+ "available_rasters": [
+  "ortho",
+  "dsm",
+  "dtm"
+ ],
+ "is_deleted": false,
+ "gcps_file": null,
+ "band_stats": {
+  "dsm": {
+   "b1": {
+    "max": 196.99000549316406,
+    "min": 172.89309692382812,
+    "mean": 177.84896879751577,
+    "stddev": 4.024008836293866
+   }
+  },
+  "dtm": {
+   "b1": {
+    "max": 182.91986083984375,
+    "min": 172.8582305908203,
+    "mean": 176.62360082316542,
+    "stddev": 3.4253280820197607
+   }
+  },
+  "ortho": {
+   "b1": {
+    "max": 255.0,
+    "min": 0.0,
+    "mean": 136.87341880341882,
+    "stddev": 69.35981713939944
+   },
+   "b2": {
+    "max": 255.0,
+    "min": 0.0,
+    "mean": 137.35136752136754,
+    "stddev": 66.88948502964867
+   },
+   "b3": {
+    "max": 255.0,
+    "min": 0.0,
+    "mean": 137.82688034188035,
+    "stddev": 64.83515773989157
+   },
+   "b4": {
+    "max": 255.0,
+    "min": 0.0,
+    "mean": 230.35,
+    "stddev": 75.35335095402195
+   }
+  }
+ },
+ "bbox": [
+  43.8086007,
+  -79.5236372,
+  43.8100609,
+  -79.5215399
+ ],
+ "coordinates": [
+  43.80933079999999,
+  -79.52258855
+ ],
+ "cant_orthomosaic": false,
+ "geotransform": null,
+ "crs": null,
+ "is_dem_processing": false,
+ "cumulative_adjustment": 0.0,
+ "alignment": {
+  "is_aligned": false,
+  "is_alignment_processing": false,
+  "is_reverting": false,
+  "can_revert": false,
+  "alignment_id": null,
+  "latest_alignment_status": null,
+  "transformation": null,
+  "resampling": null,
+  "rmse": null
+ },
+ "latest_adjustment_status": "",
+ "latest_adjustment_id": ""
+}

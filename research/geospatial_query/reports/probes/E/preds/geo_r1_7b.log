@@ -1,0 +1,19 @@
+Loading weights:   0%|          | 0/729 [00:00<?, ?it/s]Loading weights:   0%|          | 1/729 [00:00<04:26,  2.73it/s]Loading weights:  21%|██        | 154/729 [00:00<00:01, 424.43it/s]Loading weights:  37%|███▋      | 271/729 [00:00<00:01, 428.06it/s]Loading weights:  46%|████▋     | 338/729 [00:01<00:01, 205.60it/s]Loading weights:  60%|██████    | 440/729 [00:01<00:00, 299.73it/s]Loading weights:  69%|██████▉   | 505/729 [00:02<00:01, 159.98it/s]Loading weights: 100%|██████████| 729/729 [00:02<00:00, 287.64it/s]
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/transformers/models/qwen2_vl/image_processing_qwen2_vl.py:129: FutureWarning: Passing `min_pixels` and `max_pixels` to a processor call is deprecated and will be removed in v5.23. Pass in `size={'longest_edge': xxx, 'shortest_edge': xxx} to override the target size.`
+  warnings.warn(
+p01 (41.3905, -80.0026) 561 mppost and the small dog door are also typical features of the cathedral's exterior.  <answer>41.3905, -80.0026</answer>
+p02 (10.5, 76.2) 984 nd 10.5° N, 76.2° E, which is in the vicinity of Bangalore, India. However, I can't be certain without more information.
+p03 (43.619, -79.382) 1379 ocation to be around 43.619 lat, -79.382 lon, which is near the University of Toronto.  <answer>43.619, -79.382</answer>
+p04 (35.689, 139.762) 1561 shi. The stone lanterns and the moat are also characteristic of the palace grounds.   <answer>35.6890, 139.7620</answer>
+p05 (37.7749, -122.4194) 1814 tiled with blue tiles. The restroom has a fluorescent light fixture on the ceiling.  <answer>37.7749, -122.4194</answer>
+p06 (48.85, 2.3) 2036 setting.   I'm estimating the coordinates to be approximately <answer>48.85, 2.30</answer>, which is near Paris, France.
+p07 (40.7125, -73.968) 2288 ng the location to be around 40.7125, -73.9680, which is near the Manhattan skyline.  <answer>40.7125, -73.9680</answer>
+p08 (49.283, -123.116) 2582 ver, BC, but I'm not sure. I'll guess the location is around Vancouver, BC, Canada.  <answer>49.2830, -123.1160</answer>
+p09 (25.7, 31.4) 2781 ion to ancient Egypt, but without more context, it's hard to pinpoint the exact location.  <answer>25.70, 31.40</answer>
+p10 (19.4325, -99.13) 2962 sence of a woman in a red jacket suggests it's a sunny day, likely in the afternoon.  <answer>19.4325, -99.1300</answer>
+p11 (43.61, -87.95) 3153 th America. The intersection seems to be a four-way stop with a small triangular island.  <answer>43.61, -87.95</answer>
+p12 (40.7125, -74.006) 3395  green roof that seems to be the Hudson County Courthouse is located in Jersey City.  <answer>40.7125, -74.0060</answer>
+p13 (43.0, -89.0) 3716 t it could be located in North America, possibly in the Midwest or the Great Lakes region.  <answer>43.0, -89.0</answer>
+p14 None 4430 ound 51.504 lat, -0.127 lon, which is near St. Paul's Cathedral in London. However, I can't confirm this with certainty.
+p15 (43.629, -79.385) 4643 ered sign for "Pizza Pizza." The architecture and signage strongly point to Toronto.  <answer>43.6290, -79.3850</answer>
+p16 (45.0, -123.0) 4751 e top. The Earth's curvature is clearly seen, and the view is oriented towards the north.  <answer>45.0, -123.0</answer>

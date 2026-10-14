@@ -1,0 +1,87 @@
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 11494.22it/s]
+[transformers] [1mCLIPVisionModel LOAD REPORT[0m from: geolocal/StreetCLIP
+Key                                                          | Status     |  | 
+-------------------------------------------------------------+------------+--+-
+text_model.encoder.layers.{0...11}.layer_norm2.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.weight | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.bias   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.weight   | UNEXPECTED |  | 
+text_model.final_layer_norm.weight                           | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.bias              | UNEXPECTED |  | 
+text_model.embeddings.position_embedding.weight              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.weight            | UNEXPECTED |  | 
+text_model.final_layer_norm.bias                             | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.bias     | UNEXPECTED |  | 
+text_projection.weight                                       | UNEXPECTED |  | 
+logit_scale                                                  | UNEXPECTED |  | 
+visual_projection.weight                                     | UNEXPECTED |  | 
+text_model.embeddings.token_embedding.weight                 | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/plonk/models/samplers/riemannian_flow_sampler.py:34: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(dtype=dtype):
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/cuda/amp/autocast_mode.py:54: UserWarning: CUDA is not available or torch_xla is imported. Disabling autocast.
+  super().__init__(
+p01 41.8381233215332 -87.64191436767578 0.796875 7
+p02 4.664055824279785 100.58537292480469 0.140625 12
+p03 37.337890625 -120.62933349609375 0.3125 18
+p04 35.964176177978516 138.97003173828125 0.890625 23
+p05 21.95599937438965 -158.2069854736328 0.109375 69
+p06 35.37099838256836 -118.30311584472656 0.203125 75
+p07 43.592559814453125 -79.60694122314453 0.1875 83
+p08 40.58450698852539 -80.09564971923828 0.453125 92
+p09 33.569034576416016 35.148643493652344 0.21875 102
+p10 18.922733306884766 -98.11053466796875 0.765625 110
+p11 43.19706344604492 -81.23475646972656 0.8125 118
+p12 45.501590728759766 -73.89530944824219 0.34375 127
+p13 52.392276763916016 -107.63514709472656 0.546875 135
+p14 43.80156707763672 -83.85546875 0.15625 143
+p15 43.62541961669922 -79.36740112304688 0.953125 151
+p16 46.51408004760742 10.514973640441895 0.25 157
+p17 37.763465881347656 -119.86858367919922 0.375 163
+p18 43.375389099121094 -79.95543670654297 0.765625 169
+p19 1.267006278038025 103.88570404052734 0.15625 175
+p20 30.361780166625977 32.263580322265625 0.546875 180
+p21 50.90460968017578 -113.51667785644531 0.359375 186
+p22 42.63584518432617 -80.6045913696289 0.828125 191
+p23 45.721927642822266 -93.98859405517578 0.3125 197
+p24 63.4538459777832 12.711519241333008 0.25 202
+p25 45.89923095703125 10.790752410888672 0.15625 208
+p26 49.79294204711914 -97.96826934814453 0.515625 213
+p27 51.38072204589844 -0.13922367990016937 0.40625 219
+p28 43.41070556640625 40.48957824707031 0.375 225
+p29 57.36830520629883 44.359222412109375 0.1875 230
+p30 57.29416275024414 25.396034240722656 0.1875 236
+p31 -16.200790405273438 -67.21399688720703 0.375 241
+p32 51.471778869628906 14.666488647460938 0.640625 247
+p33 51.63075637817383 -118.82962036132812 0.390625 252
+p34 42.954933166503906 -81.58045959472656 0.703125 258
+p35 45.99776077270508 -92.89085388183594 0.421875 263
+p36 35.9427490234375 -4.716121673583984 0.09375 269
+p37 43.77373504638672 -79.74348449707031 0.46875 274
+p38 51.92321014404297 5.118304252624512 0.40625 279
+p39 47.75278854370117 -122.68646240234375 0.3125 284
+p40 39.48729705810547 -81.64562225341797 0.296875 289
+p41 47.07480239868164 -95.27632141113281 0.296875 295
+p42 47.323699951171875 16.311620712280273 0.1875 300
+p43 17.492780685424805 73.75923919677734 0.546875 306
+p44 43.772377014160156 -79.45552825927734 0.546875 311
+p45 39.16313552856445 -104.87786865234375 0.078125 316
+p46 41.13494110107422 -82.07012176513672 0.25 321
+p47 42.57530975341797 -84.16971588134766 0.140625 327
+p48 -12.593360900878906 -75.67495727539062 0.34375 332
+p49 46.098243713378906 -73.17423248291016 0.546875 337
+p50 43.579925537109375 -79.34219360351562 0.78125 343

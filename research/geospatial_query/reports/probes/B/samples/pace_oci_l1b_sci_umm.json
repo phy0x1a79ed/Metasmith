@@ -1,0 +1,90 @@
+{
+ "TemporalExtent": {
+  "RangeDateTime": {
+   "EndingDateTime": "2026-09-01T19:28:11Z",
+   "BeginningDateTime": "2026-09-01T19:23:12Z"
+  }
+ },
+ "GranuleUR": "PACE_OCI.20260901T192312.L1B.V3.nc",
+ "SpatialExtent": {
+  "HorizontalSpatialDomain": {
+   "Geometry": {
+    "GPolygons": [
+     {
+      "Boundary": {
+       "Points": [
+        {
+         "Latitude": 51.97273,
+         "Longitude": -87.62474
+        },
+        {
+         "Latitude": 69.56479,
+         "Longitude": -84.92225
+        },
+        {
+         "Latitude": 60.877,
+         "Longitude": -141.75218
+        },
+        {
+         "Latitude": 45.73083,
+         "Longitude": -123.53175
+        },
+        {
+         "Latitude": 51.97273,
+         "Longitude": -87.62474
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "ProviderDates": [
+  {
+   "Type": "Insert",
+   "Date": "2026-09-25T16:35:16Z"
+  },
+  {
+   "Type": "Update",
+   "Date": "2026-09-25T14:41:02.880Z"
+  }
+ ],
+ "CollectionReference": {
+  "ShortName": "PACE_OCI_L1B_SCI",
+  "Version": "3"
+ },
+ "DataGranule": {
+  "DayNightFlag": "Day",
+  "Identifiers": [
+   {
+    "Identifier": "PACE_OCI.20260901T192312.L1B.V3.nc",
+    "IdentifierType": "ProducerGranuleId"
+   }
+  ],
+  "ProductionDateTime": "2026-09-25T14:41:02.880Z",
+  "ArchiveAndDistributionInformation": [
+   {
+    "MimeType": "application/x-netcdf",
+    "Format": "netCDF-4",
+    "Name": "PACE_OCI.20260901T192312.L1B.V3.nc",
+    "SizeInBytes": 1935562564
+   }
+  ]
+ },
+ "Platforms": [
+  {
+   "Instruments": [
+    {
+     "ShortName": "OCI"
+    }
+   ],
+   "ShortName": "PACE"
+  }
+ ],
+ "MetadataSpecification": {
+  "URL": "https://cdn.earthdata.nasa.gov/umm/granule/v1.6.7",
+  "Name": "UMM-G",
+  "Version": "1.6.7"
+ }
+}

@@ -1,0 +1,6 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [03:05<09:15, 185.04s/it]Fetching 4 files:  50%|█████     | 2/4 [07:35<07:50, 235.29s/it]Fetching 4 files: 100%|██████████| 4/4 [07:39<00:00, 88.92s/it] Fetching 4 files: 100%|██████████| 4/4 [07:39<00:00, 114.79s/it]
+Loading weights:   0%|          | 0/729 [00:00<?, ?it/s]Loading weights:  57%|█████▋    | 414/729 [00:00<00:00, 4136.74it/s]Loading weights: 100%|██████████| 729/729 [00:00<00:00, 2605.20it/s]
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/transformers/models/qwen2_vl/image_processing_qwen2_vl.py:129: FutureWarning: Passing `min_pixels` and `max_pixels` to a processor call is deprecated and will be removed in v5.23. Pass in `size={'longest_edge': xxx, 'shortest_edge': xxx} to override the target size.`
+  warnings.warn(
+p01 (41.3905, -80.0026) 812 mppost and the small dog door are also typical features of the cathedral's exterior.  <answer>41.3905, -80.0026</answer>
