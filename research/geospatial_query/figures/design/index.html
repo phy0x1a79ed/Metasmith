@@ -305,8 +305,11 @@ const SPEC = [
       ["share-alike", "above + ODbL, CC-BY-SA · derived data keeps the licence"],
       ["noncommercial", "above + CC-BY-NC · no commercial use"],
       ["restricted", "above + custom terms · no redistribution without permission"]] },
+    { name: "SourceType", kind: "is one of", opts: [["satellite"], ["airborne"], ["drone"], ["ground station"],
+      ["field survey"], ["model"], ["registry"]] },
     { name: "Feature", kind: "is composed of", rows: [
-      ["feature", "text"], ["family", "FeatureFamily"], ["time", "one of time, Interval"], ["value", "any"], ["SI_unit", "text"]] },
+      ["feature", "text"], ["family", "FeatureFamily"], ["source_type", "SourceType"], ["time", "one of time, Interval"],
+      ["value", "any"], ["SI_unit", "text"]] },
     { name: "Error", kind: "is composed of", rows: [
       ["feature", "text"], ["family", "FeatureFamily"], ["time", "one of time, Interval"], ["message", "text"]] },
   ] },
