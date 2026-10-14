@@ -61,32 +61,23 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .vibe img { display: block; width: 100%; height: auto; border-radius: 2px; background: #fff; }
 
 /* Signature */
-.sig { display: grid; gap: 18px; }
-.group { display: grid; gap: 10px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr)); gap: 10px; }
-.card { border: 1px solid var(--rule); border-radius: 2px; padding: 10px 12px 8px; background: var(--panel); scroll-margin-top: 16px; }
-.card:target { border-color: var(--accent); }
-.card header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
-.card header b { font-family: var(--mono); font-weight: 500; font-size: 14px; color: var(--accent); }
-.card header span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-.card .ex { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin: 2px 0 6px; overflow-wrap: anywhere; }
-.rows { display: grid; grid-template-columns: max-content max-content minmax(0, 1fr); gap: 3px 12px; font-size: 12.5px; align-items: baseline; }
-.rows .f { font-family: var(--mono); font-size: 12px; }
-.rows .t { font-family: var(--mono); font-size: 12px; color: var(--f1); }
-.rows .t a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
-.rows .n { color: var(--muted); }
-.opts { display: flex; flex-wrap: wrap; gap: 5px; }
-.opts code { font-family: var(--mono); font-size: 11.5px; padding: 1px 6px; border: 1px solid var(--rule); border-radius: 2px; }
-.opts a code { color: var(--accent); border-color: var(--accent); }
-.prims { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
-.prims b { color: var(--f1); font-weight: 500; }
+.sig { display: grid; gap: 4px; }
+.sig h3 { margin-top: 12px; }
+.sig > ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.def { scroll-margin-top: 16px; }
+.def > div { font-size: 14px; }
+.def > div b { font-family: var(--mono); font-weight: 500; color: var(--accent); }
+.def > div i { font-style: normal; color: var(--muted); font-size: 12.5px; }
+.def ul { margin: 4px 0 0; padding-left: 22px; display: grid; gap: 2px; font-size: 13px; }
+.def li::marker { color: var(--muted); }
+.def code { font-family: var(--mono); font-size: 12.5px; }
+.def .t { color: var(--f1); }
+.def a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+.def .n { color: var(--muted); }
+.def:target > div b { text-decoration: underline; }
 
 /* Feature set */
-.bars { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; gap: 6px 12px; align-items: center; }
-.bars .name { font-size: 13px; }
-.bars .track { height: 11px; }
-.bars .fill { display: block; height: 100%; border-radius: 1px; }
-.bars .n { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+#bars { width: 100%; height: 320px; }
 .fams { display: grid; gap: 0; border-top: 1px solid var(--rule); }
 .fams details { border-bottom: 1px solid var(--rule); }
 .fams summary {
@@ -96,7 +87,6 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .fams summary::before { content: "▸"; font-size: 11px; color: var(--muted); width: 10px; }
 .fams details[open] summary::before { content: "▾"; }
 .fams summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-.swatch { width: 10px; height: 10px; border-radius: 1px; flex: none; }
 .fams summary .count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .table { overflow-x: auto; padding-bottom: 10px; }
 .table table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
@@ -111,7 +101,10 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .driver span.on { border-color: var(--accent); color: var(--accent); }
 .driver i { color: var(--muted); font-style: normal; }
 .dag { overflow-x: auto; }
-.dag svg { display: block; margin: 0 auto; width: min(100%, 720px); height: auto; }
+.dag svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.dag .dark { display: none; }
+:root[data-dark] .dag .light { display: none; }
+:root[data-dark] .dag .dark { display: block; }
 .dag text { font-family: var(--mono); }
 </style>
 
@@ -135,50 +128,81 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 
   <section class="panel">
     <h2><b>3</b>Feature set</h2>
-    <div class="bars" id="bars"></div>
+    <div id="bars"></div>
     <div class="fams" id="fams"></div>
   </section>
 
   <section class="panel">
     <h2><b>4</b>Method</h2>
     <div class="driver"><span class="on">metasmith plan</span><i>→</i><span>Nextflow driver</span><i>→</i><span>1 task per source, all AOIs</span></div>
-    <div class="dag"><!--DAG--></div>
+    <div class="dag"><div class="light"><!--DAG-LIGHT--></div><div class="dark"><!--DAG-DARK--></div></div>
   </section>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.34.0/plotly.min.js"></script>
 <script>
 const DATA = /*FEATURES*/[];
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
-const PRIMS = [["float", "decimal number"], ["int", "whole number"], ["text", "string"],
-  ["time", "ISO 8601 · 2024-07-15T00:00Z"], ["duration", "ISO 8601 · P1M, P10D, ∞"], ["list of X", "ordered, may repeat"]];
-
 const SPEC = [
-  { group: "Input", types: [
-    { name: "query", kind: "call → FeatureSet", rows: [
-      ["aois", "list of AOI", "every area; each source runs once over all"],
-      ["times", "list of time", "one or more; build with a helper"],
-      ["tolerance", "duration", "max gap to a requested time · default ∞"],
-      ["families", "list of Family", "default: all"],
-      ["licences", "list of Licence", "default: all"]] },
+  { group: "Definitions", types: [
+    { name: "Point", kind: "made of", rows: [
+      ["longitude", "float", "degrees, −180 to 180"],
+      ["latitude", "float", "degrees, −90 to 90"]] },
     { name: "AOI", kind: "made of", rows: [
       ["id", "text", "your name for the area"],
       ["outline", "list of Point", "closed ring"]] },
-    { name: "Point", kind: "made of", ex: "(-120.53, 49.33)", rows: [
-      ["longitude", "float", "degrees, −180 to 180"],
-      ["latitude", "float", "degrees, −90 to 90"]] },
+    { name: "Family", kind: "one of", opts: ["socio-economic", "infrastructure", "hazards", "macrobiology", "geology",
+      "health-microbiology", "climate", "spectral", "water", "latent"] },
+    { name: "Licence", kind: "one of", opts: ["permissive", "share-alike", "noncommercial", "restricted"] },
+    { name: "Fill", kind: "one of", opts: ["observed", "inferred", "analogue"] },
+    { name: "Slot", kind: "made of", rows: [
+      ["aoi", "text", "AOI id"],
+      ["layer", "text", "what is measured, e.g. land_cover"],
+      ["source", "text", "who measured it, e.g. esa_worldcover"],
+      ["family", "Family", ""],
+      ["licence", "Licence", ""]] },
+    { name: "Feature", kind: "made of", rows: [
+      ["name", "text", "e.g. wc_frac_tree"],
+      ["value", "float or text", "e.g. 0.62"],
+      ["unit", "text", "optional"]] },
+    { name: "Found", kind: "made of", rows: [
+      ["slot", "Slot", ""],
+      ["rank", "int", "1 = best source for this AOI × layer"],
+      ["fill", "Fill", ""],
+      ["observed", "time", "when the source measured it"],
+      ["resolution_m", "float", "empty for vector data"],
+      ["features", "list of Feature", ""]] },
+    { name: "Unavailable", kind: "made of", rows: [
+      ["slot", "Slot", ""],
+      ["reason", "one of", "no-data, source-error, auth-required, outside-tolerance"]] },
+    { name: "NotAttempted", kind: "made of", rows: [
+      ["slot", "Slot", ""],
+      ["reason", "one of", "out-of-coverage, family-excluded, licence-excluded"]] },
+    { name: "Result", kind: "one of", opts: ["Found", "Unavailable", "NotAttempted"] },
+    { name: "Snapshot", kind: "made of", rows: [
+      ["time", "time", "one requested time"],
+      ["results", "list of Result", "per AOI × layer × source, nearest observation within tolerance"]] },
   ] },
   { group: "Helpers", types: [
-    { name: "every", kind: "call → list of time", ex: "every(2023-01-01, P1M, 24) → 24 monthly times", rows: [
+    { name: "every", kind: "returns list of time", rows: [
       ["start", "time", "first time"],
       ["step", "duration", "gap between times"],
       ["count", "int", "how many"]] },
-    { name: "yearly", kind: "call → list of time", ex: "yearly(7, 15, 2015, 2024) → each 15 July", rows: [
+    { name: "yearly", kind: "returns list of time", rows: [
       ["month", "int", "1 to 12"],
       ["day", "int", "1 to 31"],
       ["first_year", "int", ""],
       ["last_year", "int", "inclusive"]] },
+  ] },
+  { group: "Input", types: [
+    { name: "query", kind: "returns FeatureSet", rows: [
+      ["aois", "list of AOI", "each source runs once over all"],
+      ["times", "list of time", "one or more, from a helper"],
+      ["tolerance", "duration", "max gap to a requested time, default ∞"],
+      ["families", "list of Family", "default all"],
+      ["licences", "list of Licence", "default all"]] },
   ] },
   { group: "Output", types: [
     { name: "FeatureSet", kind: "made of", rows: [
@@ -186,58 +210,40 @@ const SPEC = [
       ["times", "list of time", "as requested"],
       ["tolerance", "duration", "as requested"],
       ["results", "list of Result", "everything fetched, each observation once"],
-      ["by_time()", "list of Snapshot", "view: results split by requested time"]] },
-    { name: "Snapshot", kind: "made of", rows: [
-      ["time", "time", "one requested time"],
-      ["results", "list of Result", "per AOI × layer × source: nearest observation within tolerance"]] },
-    { name: "Result", kind: "one of · one per AOI × layer × source", opts: ["Found", "Unavailable", "NotAttempted"] },
-    { name: "Found", kind: "made of", rows: [
-      ["slot", "Slot", ""],
-      ["rank", "int", "1 = best source for this layer"],
-      ["fill", "Fill", ""],
-      ["observed", "time", "when the source measured it"],
-      ["resolution_m", "float", "empty for vector data"],
-      ["features", "list of Feature", ""]] },
-    { name: "Unavailable", kind: "made of", rows: [
-      ["slot", "Slot", ""],
-      ["reason", "one of", "no-data · source-error · auth-required · outside-tolerance"]] },
-    { name: "NotAttempted", kind: "made of", rows: [
-      ["slot", "Slot", ""],
-      ["reason", "one of", "out-of-coverage · family-excluded · licence-excluded"]] },
-    { name: "Slot", kind: "made of", rows: [
-      ["aoi", "text", "AOI id"],
-      ["layer", "text", "what is measured · land_cover"],
-      ["source", "text", "who measured it · esa_worldcover"],
-      ["family", "Family", ""],
-      ["licence", "Licence", ""]] },
-    { name: "Feature", kind: "made of", rows: [
-      ["name", "text", "wc_frac_tree"],
-      ["value", "float or text", "0.62"],
-      ["unit", "text", "optional · fraction"]] },
-    { name: "Fill", kind: "one of", opts: ["observed", "inferred", "analogue"] },
-    { name: "Licence", kind: "one of", opts: ["permissive", "share-alike", "noncommercial", "restricted"] },
-    { name: "Family", kind: "one of", opts: ["socio-economic", "infrastructure", "hazards", "macrobiology", "geology",
-      "health-microbiology", "climate", "spectral", "water", "latent"] },
+      ["by_time()", "list of Snapshot", "results split by requested time"]] },
   ] },
 ];
 
 const NAMES = new Set(SPEC.flatMap(g => g.types.map(t => t.name)));
-const link = txt => esc(txt).replace(/\b[A-Z][A-Za-z]+\b/g, w => NAMES.has(w) ? `<a href="#t-${w}">${w}</a>` : w);
-const card = t => `<article class="card" id="t-${t.name}">
-  <header><b>${t.name}</b><span>${esc(t.kind)}</span></header>
-  ${t.ex ? `<div class="ex">${esc(t.ex)}</div>` : ""}
-  ${t.opts ? `<div class="opts">${t.opts.map(o => NAMES.has(o) ? `<a href="#t-${o}"><code>${o}</code></a>` : `<code>${esc(o)}</code>`).join("")}</div>` : ""}
-  ${t.rows ? `<div class="rows">${t.rows.map(([f, ty, n]) => `<span class="f">${esc(f)}</span><span class="t">${link(ty)}</span><span class="n">${esc(n)}</span>`).join("")}</div>` : ""}
-</article>`;
+const link = txt => esc(txt).replace(/\b[A-Za-z]+\b/g, w => NAMES.has(w) && /^[A-Z]/.test(w) ? `<a href="#t-${w}">${w}</a>` : w);
+const def = t => `<li class="def" id="t-${t.name}">
+  <div><b>${t.name}</b> <i>${link(t.kind)}</i></div>
+  <ul>${t.opts
+    ? t.opts.map(o => `<li><code>${NAMES.has(o) ? `<a href="#t-${o}">${o}</a>` : esc(o)}</code></li>`).join("")
+    : t.rows.map(([f, ty, n]) => `<li><code>${esc(f)}</code>: <code class="t">${link(ty)}</code>${n ? ` <span class="n">· ${esc(n)}</span>` : ""}</li>`).join("")}</ul>
+</li>`;
 document.getElementById("sig").innerHTML =
-  `<div class="prims">${PRIMS.map(([p, d]) => `<span><b>${esc(p)}</b> ${esc(d)}</span>`).join("")}</div>` +
-  SPEC.map(g => `<section class="group"><h3>${g.group}</h3><div class="cards">${g.types.map(card).join("")}</div></section>`).join("");
+  SPEC.map(g => `<h3>${g.group}</h3><ul>${g.types.map(def).join("")}</ul>`).join("");
 
-const max = Math.max(...DATA.map(d => d.features.length));
-document.getElementById("bars").innerHTML = DATA.map((d, i) =>
-  `<span class="name">${esc(d.family)}</span>
-   <span class="track"><span class="fill" style="width:${(d.features.length / max) * 100}%;background:var(--ink)"></span></span>
-   <span class="n">${d.features.length}</span>`).join("");
+function drawBars() {
+  const css = getComputedStyle(document.documentElement);
+  const v = n => css.getPropertyValue(n).trim();
+  const rows = [...DATA].reverse();
+  Plotly.react("bars", [{
+    type: "bar", orientation: "h",
+    x: rows.map(d => d.features.length), y: rows.map(d => d.family),
+    text: rows.map(d => d.features.length), textposition: "outside", cliponaxis: false,
+    marker: { color: v("--ink") },
+    hovertemplate: "%{y}: %{x} features<extra></extra>",
+  }], {
+    margin: { l: 190, r: 40, t: 4, b: 48 },
+    paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
+    font: { family: v("--mono"), size: 12, color: v("--ink") },
+    xaxis: { title: { text: "features", standoff: 10, font: { color: v("--muted") } }, gridcolor: v("--rule"), zeroline: false, tickfont: { color: v("--muted") } },
+    yaxis: { automargin: true, tickfont: { family: v("--body"), size: 13 } },
+    bargap: 0.35,
+  }, { displayModeBar: false, responsive: true });
+}
 
 document.getElementById("fams").innerHTML = DATA.map((d, i) =>
   `<details id="fam-${i}">
@@ -250,7 +256,7 @@ document.getElementById("fams").innerHTML = DATA.map((d, i) =>
 
 const root = document.documentElement, btn = document.getElementById("theme");
 const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-const paint = () => { root.toggleAttribute("data-dark", isDark()); };
+const paint = () => { root.toggleAttribute("data-dark", isDark()); if (window.Plotly) drawBars(); };
 try { const t = localStorage.getItem("gq-theme"); if (t) root.dataset.theme = t; } catch (e) {}
 btn.addEventListener("click", () => {
   root.dataset.theme = isDark() ? "light" : "dark";

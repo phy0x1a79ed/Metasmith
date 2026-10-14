@@ -1,6 +1,7 @@
 """Build the design artifact: POC features by family, the metasmith DAG, injected into template.html."""
 
 import csv
+from dataclasses import replace
 import json
 import re
 import sys
@@ -11,7 +12,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 
-from metasmith.models.dag_draw import Label, Plate, Style, render_svg
+from metasmith.models.dag_draw import Label, render_svg
+from metasmith.models.dag_renderer import DARK, LIGHT, NodeKind
 from metasmith.models.dag_layout import layout
 
 FAMILIES = [
@@ -81,30 +83,23 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
     return out
 
 
-def dag_svg() -> str:
-    query, agg, out = "query", "aggregate", "feature_set"
-    nodes, edges, labels = [query], [], {query: Label(name="query")}
+def dag_svg(theme) -> str:
+    nodes = {"query": NodeKind.GIVEN}
+    edges, labels = [], {"query": Label(name="query")}
     for i, fam in enumerate(FAMILIES):
-        node = f"fam{i}"
-        nodes.append(node)
-        edges += [(query, node), (node, agg)]
-        labels[node] = Label(name=fam)
-    nodes += [agg, out]
-    edges.append((agg, out))
-    labels[agg] = Label(name="aggregate")
-    labels[out] = Label(name="feature set")
-    style = {None: Style(fill="#FFFFFE", stroke="#111110", text="#111111", muted="#8A8A8A")}
-    svg = render_svg(
-        layout(nodes, edges), style, labels=labels, font="IBM Plex Mono", font_size=12.5,
-        max_label_chars=48, plate=Plate(paint_background=False, edge="#666665"),
+        nodes[f"fam{i}"] = NodeKind.TRANSFORM
+        labels[f"fam{i}"] = Label(name=fam)
+        edges += [("query", f"fam{i}"), (f"fam{i}", "aggregate")]
+    nodes["aggregate"] = NodeKind.TRANSFORM
+    nodes["feature_set"] = NodeKind.TARGET
+    edges.append(("aggregate", "feature_set"))
+    labels["aggregate"] = Label(name="aggregate")
+    labels["feature_set"] = Label(name="feature set")
+    return render_svg(
+        layout(list(nodes), edges), theme.styles, kinds=nodes, labels=labels,
+        font="IBM Plex Mono", font_size=12.5, max_label_chars=48,
+        plate=replace(theme.plate, paint_background=False),
     )
-    svg = re.sub(r"<\?xml[^>]*>\s*", "", svg)
-    for hexv, var in [("#FFFFFE", "var(--panel)"), ("#111110", "var(--ink)"), ("#111111", "var(--ink)"),
-                      ("#8A8A8A", "var(--muted)"), ("#666665", "var(--muted)")]:
-        svg = svg.replace(hexv, var)
-    # SVG presentation attributes ignore var(); move each colour into a style declaration
-    svg = re.sub(r'\b(fill|stroke)="(var\([^)]*\))"', r'style="\1:\2"', svg)
-    return svg
 
 
 def main() -> None:
@@ -112,7 +107,7 @@ def main() -> None:
     data = [{"family": f, "features": feats} for f, feats in zip(FAMILIES, families)]
     page = (HERE / "template.html").read_text()
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
-    page = page.replace("<!--DAG-->", dag_svg())
+    page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
         print(f"{len(feats):4d}  {len({x['source'] for x in feats}):3d}  {f}")
