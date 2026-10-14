@@ -107,7 +107,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .table td:last-child a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
 .csv { align-self: flex-start; font-family: var(--mono); font-size: 12px; color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 2px; padding: 5px 10px; cursor: pointer; }
 .csv:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.csv-row { display: flex; align-items: center; gap: 10px; }
+.csv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .csv-row span { font-size: 12px; color: var(--muted); }
 
 /* Method */
@@ -144,7 +144,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
     <h2><b>3</b>Features</h2>
     <p class="caption">Hybrid LLM + human curation with proof of concept live data retrieval tests produced the following list of features, grouped into families.</p>
     <div id="bars"></div>
-    <div class="csv-row" id="csv-row" hidden><button class="csv" id="csv" type="button">Download CSV</button><span id="csv-status"></span></div>
+    <div class="csv-row" id="csv-row" hidden><button class="csv" id="csv" type="button">Download features CSV</button><button class="csv" id="csv-failed" type="button">Download failed sources CSV</button><span id="csv-status"></span></div>
     <p class="hint">Click a row to expand.</p>
     <div class="fams" id="fams"></div>
   </section>
@@ -159,6 +159,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.34.0/plotly.min.js"></script>
 <script>
 const DATA = /*FEATURES*/[];
+const FAILED = /*FAILED*/[];
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -254,18 +255,20 @@ document.getElementById("fams").innerHTML = DATA.map((d, i) =>
    </details>`).join("");
 
 const csvCell = v => /[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
-const featureCsv = () => [["family", "feature", "description", "source", "source_url", "licence"],
-  ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.source, f.url, f.licence]))]
-  .map(r => r.map(csvCell).join(",")).join("\n") + "\n";
+const toCsv = rows => rows.map(r => r.map(csvCell).join(",")).join("\n") + "\n";
+const featureCsv = () => toCsv([["family", "feature", "description", "source", "source_url", "licence"],
+  ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.source, f.url, f.licence]))]);
+const FAILED_COLS = ["family", "layer", "source", "licence", "aois_found", "aois_unavailable", "aois_not_attempted", "reason"];
+const failedCsv = () => toCsv([FAILED_COLS, ...FAILED.map(f => FAILED_COLS.map(c => f[c]))]);
 (async () => {
   const downloads = await window.claude?.use?.("downloads");
   if (!downloads) return;
   const status = document.getElementById("csv-status");
   document.getElementById("csv-row").hidden = false;
-  document.getElementById("csv").addEventListener("click", async () => {
+  const offer = (id, filename, build) => document.getElementById(id).addEventListener("click", async () => {
     status.textContent = "";
     try {
-      await downloads.save({ filename: "geospatial_query_features.csv", data: featureCsv() });
+      await downloads.save({ filename, data: build() });
       status.textContent = "Saved";
     } catch (e) {
       if (e?.code === "declined") return;
@@ -273,6 +276,8 @@ const featureCsv = () => [["family", "feature", "description", "source", "source
       document.getElementById("csv-row").hidden = true;
     }
   });
+  offer("csv", "geospatial_query_features.csv", featureCsv);
+  offer("csv-failed", "geospatial_query_failed_sources.csv", failedCsv);
 })();
 
 const root = document.documentElement, btn = document.getElementById("theme");
