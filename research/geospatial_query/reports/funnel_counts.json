@@ -1,0 +1,10 @@
+{
+ "catalogue modules in scope (317 existing + 11 added)": 328,
+ "modules probed in triage": 70,
+ "modules implemented as adapters": 57,
+ "modules with a working adapter": 53,
+ "modules failed in the POC": 4,
+ "modules never probed": 232,
+ "dropped (rule 5)": 4,
+ "triage/slot candidates with no catalogue module": 97
+}

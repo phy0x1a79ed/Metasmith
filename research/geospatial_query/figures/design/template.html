@@ -258,7 +258,7 @@ const csvCell = v => /[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : S
 const toCsv = rows => rows.map(r => r.map(csvCell).join(",")).join("\n") + "\n";
 const featureCsv = () => toCsv([["family", "feature", "description", "source", "source_url", "licence"],
   ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.source, f.url, f.licence]))]);
-const FAILED_COLS = ["stage", "family", "layer", "source", "reason", "slot_filled_by"];
+const FAILED_COLS = ["outcome", "family", "module_id", "source_name", "triage_candidates", "poc_adapters", "reason"];
 const failedCsv = () => toCsv([FAILED_COLS, ...FAILED.map(f => FAILED_COLS.map(c => f[c]))]);
 (async () => {
   const downloads = await window.claude?.use?.("downloads");
