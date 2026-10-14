@@ -231,10 +231,10 @@ function drawBars() {
   }));
   const axis = (domain, title) => ({
     domain, title: { text: title, standoff: 10, font: { color: v("--muted") } },
-    gridcolor: v("--rule"), zeroline: false, tickfont: { color: v("--muted") },
+    showgrid: false, zeroline: false, showticklabels: false,
   });
   Plotly.react("bars", traces, {
-    barmode: "stack", margin: { l: 190, r: 30, t: 34, b: 48 },
+    barmode: "stack", margin: { l: 190, r: 30, t: 34, b: 30 },
     legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom", font: { size: 12 } },
     annotations: [...totals("x", d => d.features.length), ...totals("x2", d => nSources(d))],
     paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
@@ -258,7 +258,7 @@ const csvCell = v => /[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : S
 const toCsv = rows => rows.map(r => r.map(csvCell).join(",")).join("\n") + "\n";
 const featureCsv = () => toCsv([["family", "feature", "description", "source", "source_url", "licence"],
   ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.source, f.url, f.licence]))]);
-const FAILED_COLS = ["family", "layer", "source", "licence", "aois_found", "aois_unavailable", "aois_not_attempted", "reason"];
+const FAILED_COLS = ["stage", "family", "layer", "source", "reason", "slot_filled_by"];
 const failedCsv = () => toCsv([FAILED_COLS, ...FAILED.map(f => FAILED_COLS.map(c => f[c]))]);
 (async () => {
   const downloads = await window.claude?.use?.("downloads");

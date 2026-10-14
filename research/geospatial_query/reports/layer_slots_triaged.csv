@@ -1,0 +1,211 @@
+lane,slot,family,role,rank,triage_action,candidate,coverage,access_pattern,rep_aoi,pathfinder,rank_reason
+Biodiversity,forest_ground_plots,macrobiology,content,1,test-now,nfi_canada_plots,CA,archive-whole,city_toronto_core,,National Forest Inventory photo and ground plots.
+Biodiversity,forest_ground_plots,macrobiology,content,1,test-now,fia_us,US,archive-shard,city_toronto_core,,US Forest Inventory and Analysis; shards by state.
+Biodiversity,soil_biodiversity,macrobiology,content,1,test-now,soil_fauna_atlas,GLOBAL,archive-whole,city_toronto_core,,"Earthworm and nematode atlases; sparse points, analogue-fill candidate."
+Biodiversity,species_occurrence,macrobiology,content,1,test-now,gbif,GLOBAL,archive-shard,city_toronto_core,,Occurrence archive; country-filtered download far cheaper than per-AOI API calls.
+Biodiversity,species_occurrence,macrobiology,content,2,deferred-backup,inaturalist,GLOBAL,archive-shard,city_toronto_core,,"Dense in cities, sparse elsewhere. Research-grade subset only."
+Biodiversity,species_occurrence,macrobiology,content,3,deferred-backup,ebird,GLOBAL,archive-shard,city_toronto_core,,Birds only but exceptionally dense; registration required.
+Biodiversity,wetland_inventory,macrobiology,content,1,test-now,cwi_v3,CA,bbox-stac,city_toronto_core,,Canadian Wetland Inventory v3A on the national STAC.
+Biodiversity,wetland_inventory,macrobiology,content,1,test-now,nwi_us,US,bbox-vector,city_toronto_core,,US National Wetlands Inventory.
+Climate,climate_normals,climate,content,1,test-now,eccc_normals,CA,point-query,farm_ab_taber,,"Station normals, Canada."
+Climate,climate_normals,climate,content,1,test-now,noaa_normals,US,point-query,farm_ab_taber,,"Station normals, US."
+Climate,climate_projections,climate,content,1,test-now,candcs_u6,CA,archive-shard,farm_ab_taber,,CMIP6 downscaled for Canada; shards by scenario and variable.
+Climate,climate_projections,climate,content,2,deferred-backup,nex_gddp,GLOBAL,bbox-stac,farm_ab_taber,,25km global downscaled CMIP6.
+Climate,gridded_climate,climate,content,1,test-now,daymet,NA,bbox-stac,farm_ab_taber,,"1km daily North America, consistent across the border."
+Climate,gridded_climate,climate,content,2,deferred-backup,climatena,NA,archive-whole,farm_ab_taber,,Downscaled climate surfaces widely used in Canadian forestry.
+Climate,reanalysis,climate,content,1,test-now,era5_land,GLOBAL,archive-shard,farm_ab_taber,,9km hourly land reanalysis. Coarser than every test AOI.
+Climate,reanalysis,climate,content,2,deferred-backup,era5,GLOBAL,archive-shard,farm_ab_taber,,31km; use only for variables ERA5-Land lacks.
+Climate,reanalysis,climate,content,3,deferred-backup,rdrs_caspar,CA,archive-shard,farm_ab_taber,,10km Canadian regional reanalysis; finer over Canada than ERA5.
+Climate,sea_ice,climate,content,1,test-now,cis_ice_charts,CA,archive-shard,farm_ab_taber,,Canadian Ice Service charts; irrelevant for all twelve test AOIs.
+Climate,snow,climate,content,1,test-now,nrcan_snow_dynamics,CA,bbox-stac,farm_ab_taber,,"30m annual snow dynamics, 2018 onward. Unusually fine for snow."
+Climate,snow,climate,content,2,deferred-backup,snodas,US,archive-shard,farm_ab_taber,,1km daily US snow model.
+Climate,snow,climate,content,3,deferred-backup,era5_snow,GLOBAL,archive-shard,farm_ab_taber,,Coarse but complete and already held if ERA5-Land is taken.
+Constructors and latent,embeddings,latent,content,1,test-now,alphaearth,GLOBAL,bbox-stac,mine_hvc_bc,,"64-dim annual embedding, 10m. The join key for analogue fills, not just a raster."
+Constructors and latent,field_boundaries,constructor,constructor,1,test-now,fields_of_the_world,GLOBAL,archive-shard,mine_hvc_bc,,ML field delineation benchmark; coverage uneven.
+Constructors and latent,field_boundaries,constructor,constructor,2,deferred-backup,aci_vectorised,CA,bbox-api,mine_hvc_bc,,Vectorise Annual Crop Inventory as fallback field delineation.
+Constructors and latent,field_boundaries,constructor,constructor,3,deferred-backup,provincial_parcel_fabric,CA,portal-manual,mine_hvc_bc,,"Where open, the authoritative farm boundary."
+Constructors and latent,mine_polygons,constructor,constructor,1,test-now,maus_v2,GLOBAL,archive-whole,mine_hvc_bc,archive-whole (small vector archive),"44929 polygons, 101583 km2, CC-BY-SA, PANGAEA. Defines mine AOIs."
+Constructors and latent,mine_polygons,constructor,constructor,2,deferred-backup,tang_werner,GLOBAL,archive-whole,mine_hvc_bc,,"74548 polygons, larger count, different delineation method."
+Constructors and latent,mine_polygons,constructor,constructor,3,deferred-backup,xu_mining_timeseries,GLOBAL,archive-whole,mine_hvc_bc,,74726 polygons with 1985-2022 time series and reclamation. Newest.
+Constructors and latent,multivariable_adapter,latent,content,1,test-now,modis_bio,GLOBAL,bbox-stac,mine_hvc_bc,,"One adapter yields LST, vegetation indices, LAI/FAPAR, ET, productivity."
+Constructors and latent,multivariable_adapter,latent,content,2,deferred-backup,cgls,GLOBAL,bbox-api,mine_hvc_bc,,Eight variables from one adapter.
+Constructors and latent,urban_extent,constructor,constructor,1,test-now,ghsl_urban_centres,GLOBAL,archive-whole,mine_hvc_bc,,"Urban centre polygons, consistent definition cross-border."
+Constructors and latent,urban_extent,constructor,constructor,2,deferred-backup,statcan_population_centres,CA,archive-shard,mine_hvc_bc,,"Canadian population centre boundaries, OGL."
+Contamination,air_quality_modelled,hazards,content,1,test-now,modelled_surface_pm25,GLOBAL,bbox-stac,city_windsor_on,,1km modelled PM2.5; chronic exposure surface.
+Contamination,air_quality_monitors,hazards,content,1,test-now,naps,CA,archive-shard,city_windsor_on,,National Air Pollution Surveillance; Canadian monitor network.
+Contamination,air_quality_monitors,hazards,content,1,test-now,epa_aqs,US,point-query,city_windsor_on,,US Air Quality System.
+Contamination,air_quality_monitors,hazards,content,2,deferred-backup,openaq,GLOBAL,point-query,city_windsor_on,,"Aggregator over both, easier single integration."
+Contamination,air_quality_satellite,hazards,content,1,test-now,tropomi_no2,GLOBAL,bbox-stac,city_windsor_on,,7km NO2; coarser than city AOIs but shows urban plumes.
+Contamination,contaminated_sites,hazards,content,1,test-now,fcsi,CA,archive-whole,city_windsor_on,,"Federal Contaminated Sites Inventory; point registry, open."
+Contamination,contaminated_sites,hazards,content,1,test-now,epa_superfund_npl,US,archive-whole,city_windsor_on,,US National Priorities List and CERCLIS.
+Contamination,contaminated_sites,hazards,content,2,deferred-backup,provincial_contaminated_sites,CA,portal-manual,city_windsor_on,,"Per-province registries, inconsistent."
+Contamination,emissions_releases,hazards,content,1,test-now,npri,CA,archive-whole,city_windsor_on,,"National Pollutant Release Inventory; facility-level, geocoded, annual. Canada's TRI."
+Contamination,emissions_releases,hazards,content,1,test-now,epa_tri,US,archive-whole,city_windsor_on,,US Toxics Release Inventory.
+Contamination,facility_compliance,hazards,content,1,test-now,epa_echo,US,archive-shard,city_windsor_on,,Enforcement and compliance history; no Canadian equivalent at this depth.
+Contamination,facility_compliance,hazards,content,2,deferred-backup,eccc_enforcement,CA,archive-whole,city_windsor_on,,"Canadian environmental enforcement actions, much thinner."
+Contamination,pfas_measured,hazards,content,1,test-now,ucmr5,US,archive-whole,city_windsor_on,,Measured PFAS in US drinking water; no Canadian equivalent.
+Contamination,pfas_measured,hazards,content,2,deferred-backup,eccc_pfas,CA,archive-whole,city_windsor_on,,"Canadian PFAS monitoring, sparser."
+Contamination,radon,hazards,content,1,test-now,crosscanada_radon,CA,archive-whole,city_windsor_on,,Canadian residential radon survey; health-relevant and Canada-specific.
+Contamination,tailings_facilities,hazards,content,1,test-now,global_tailings_inventory,GLOBAL,archive-whole,city_windsor_on,,Industry-disclosed tailings dams; directly relevant to mine AOIs.
+Episodic hazards,earthquake_catalogue,hazards,content,1,test-now,usgs_fdsn,GLOBAL,point-query,mine_sudbury_on,point-query (event catalogue),"Verified in prior session: bbox + time + magnitude, GeoJSON out."
+Episodic hazards,earthquake_catalogue,hazards,content,2,deferred-backup,eccc_earthquakes_canada,CA,point-query,mine_sudbury_on,,Natural Resources Canada seismic catalogue.
+Episodic hazards,fire_weather,hazards,content,1,test-now,cffdrs_fwi,CA,bbox-api,mine_sudbury_on,,Canadian Fire Weather Index system; the national standard.
+Episodic hazards,flood_hazard,hazards,content,1,test-now,nrcan_flood_susceptibility,CA,bbox-stac,mine_sudbury_on,,"National flood susceptibility, historic and future scenarios."
+Episodic hazards,flood_hazard,hazards,content,1,test-now,fema_nfhl,US,bbox-vector,mine_sudbury_on,,US regulatory flood hazard layer.
+Episodic hazards,flood_hazard,hazards,content,2,deferred-backup,glofas,GLOBAL,bbox-api,mine_sudbury_on,,Global flood awareness; coarse.
+Episodic hazards,landslides,hazards,content,1,test-now,nasa_landslide_catalogue,GLOBAL,archive-whole,mine_sudbury_on,,"Global landslide inventory, small file."
+Episodic hazards,landslides,hazards,content,2,deferred-backup,gsc_landslide,CA,archive-whole,mine_sudbury_on,,Canadian landslide records.
+Episodic hazards,severe_weather,hazards,content,1,test-now,eccc_storm_events,CA,archive-whole,mine_sudbury_on,,Canadian severe weather and tornado records.
+Episodic hazards,severe_weather,hazards,content,1,test-now,noaa_storm_events,US,archive-shard,mine_sudbury_on,,"US storm events database, shards by year."
+Episodic hazards,wildfire_active,hazards,content,1,test-now,cwfis_hotspots,CA,archive-shard,mine_sudbury_on,,Canadian Wildland Fire Information System hotspots and fire weather.
+Episodic hazards,wildfire_active,hazards,content,2,deferred-backup,firms,GLOBAL,point-query,mine_sudbury_on,,"NASA active fire detections, near-real-time."
+Episodic hazards,wildfire_burned_area,hazards,content,1,test-now,nbac_canada,CA,archive-shard,mine_sudbury_on,,"National Burned Area Composite; authoritative Canadian fire perimeters, shards by year."
+Episodic hazards,wildfire_burned_area,hazards,content,1,test-now,mtbs_us,US,archive-shard,mine_sudbury_on,,US burn severity and perimeters.
+Episodic hazards,wildfire_burned_area,hazards,content,2,deferred-backup,modis_burned_area,GLOBAL,bbox-stac,mine_sudbury_on,,"500m global, coarse but continuous."
+Health and microbiology,disease_surveillance,public health & microbiology,content,1,test-now,phac_notifiable,CA,archive-whole,city_toronto_core,,"Notifiable disease reporting, provincial geography."
+Health and microbiology,disease_surveillance,public health & microbiology,content,1,test-now,cdc_nndss,US,archive-whole,city_toronto_core,,US notifiable disease surveillance.
+Health and microbiology,geolocated_sequence,public health & microbiology,content,1,test-now,mgnify,GLOBAL,point-query,city_toronto_core,,Verified: latitude_gte underscore form filters correctly. Nonsense-parameter control mandatory.
+Health and microbiology,geolocated_sequence,public health & microbiology,content,2,deferred-backup,ena_geo,GLOBAL,point-query,city_toronto_core,,Verified: geo_box1 query. Gateway to any geolocated INSDC sample.
+Health and microbiology,geolocated_sequence,public health & microbiology,content,3,deferred-backup,ncbi_biosample,GLOBAL,point-query,city_toronto_core,,Broader but weaker coordinate metadata.
+Health and microbiology,health_facilities,public health & microbiology,content,1,test-now,odhf_statcan,CA,archive-whole,city_toronto_core,,"Open Database of Healthcare Facilities, Canada."
+Health and microbiology,health_outcomes,public health & microbiology,content,1,test-now,cchs_health_region,CA,archive-whole,city_toronto_core,,Canadian health indicators at health-region geography only. Coarse.
+Health and microbiology,health_outcomes,public health & microbiology,content,1,test-now,cdc_places,US,archive-whole,city_toronto_core,,US census-tract health measures; far finer than Canadian equivalents.
+Health and microbiology,health_outcomes,public health & microbiology,content,2,deferred-backup,ihme_lbd,GLOBAL,archive-whole,city_toronto_core,,Modelled small-area health; restrictive licence.
+Health and microbiology,healthcare_accessibility,public health & microbiology,content,1,test-now,travel_time_health,GLOBAL,bbox-stac,city_toronto_core,,Modelled travel time to nearest facility.
+Health and microbiology,vector_occurrence,public health & microbiology,content,1,test-now,etick_canada,CA,archive-whole,city_toronto_core,,"Tick submissions and Lyme risk, Canada."
+Health and microbiology,vector_occurrence,public health & microbiology,content,2,deferred-backup,vectorbase,GLOBAL,archive-whole,city_toronto_core,,Global vector occurrence.
+Health and microbiology,wastewater_surveillance,public health & microbiology,content,1,test-now,phac_wastewater,CA,point-query,city_toronto_core,,"Wastewater surveillance sites, Canada."
+Health and microbiology,wastewater_surveillance,public health & microbiology,content,1,test-now,cdc_nwss,US,point-query,city_toronto_core,,US wastewater surveillance.
+Health and microbiology,zoonotic_animal_disease,public health & microbiology,content,1,test-now,cfia_reportable,CA,archive-whole,city_toronto_core,,"Reportable animal disease, Canada."
+Infrastructure,addresses,infrastructure,content,1,test-now,oda_statcan,CA,archive-shard,city_toronto_core,,"Open Database of Addresses, OGL."
+Infrastructure,addresses,infrastructure,content,2,deferred-backup,openaddresses,GLOBAL,archive-shard,city_toronto_core,,Aggregated address points.
+Infrastructure,building_footprints,infrastructure,content,1,test-now,overture,GLOBAL,archive-shard,city_toronto_core,archive-shard (GeoParquet predicate pushdown),"GeoParquet, permissive, predicate pushdown by bbox. Best access pattern of any vector source."
+Infrastructure,building_footprints,infrastructure,content,2,deferred-backup,ms_buildings,GLOBAL,bbox-stac,city_toronto_core,,"ML-derived footprints, wide coverage."
+Infrastructure,building_footprints,infrastructure,content,3,deferred-backup,odb_statcan,CA,archive-shard,city_toronto_core,,"Open Database of Buildings, Canada, OGL."
+Infrastructure,building_footprints,infrastructure,content,4,deferred-backup,osm_buildings,GLOBAL,bbox-vector,city_toronto_core,,Richest attributes but share-alike licence constrains downstream use.
+Infrastructure,building_height,infrastructure,content,1,test-now,ghsl_built_h,GLOBAL,bbox-stac,city_toronto_core,,Global building height at 100m.
+Infrastructure,built_up_surface,infrastructure,content,1,test-now,ghsl_built_s,GLOBAL,bbox-stac,city_toronto_core,,"Built-up surface fraction, 100m, 1975-2030 epochs."
+Infrastructure,cell_towers,infrastructure,content,1,test-now,opencellid,GLOBAL,archive-whole,city_toronto_core,,Only open tower point source; share-alike licence.
+Infrastructure,industrial_facilities,infrastructure,content,1,test-now,npri_facilities,CA,archive-whole,city_toronto_core,,"Geocoded reporting facilities, Canada."
+Infrastructure,industrial_facilities,infrastructure,content,1,test-now,epa_frs,US,archive-whole,city_toronto_core,,EPA Facility Registry Service.
+Infrastructure,mines_producing,infrastructure,content,1,test-now,pma_nrcan,CA,archive-whole,city_toronto_core,,"Producing mines and principal mineral areas, Canada."
+Infrastructure,mines_producing,infrastructure,content,2,deferred-backup,msha_us,US,archive-whole,city_toronto_core,,US Mine Safety and Health Administration mine registry.
+Infrastructure,nighttime_lights,infrastructure,content,1,test-now,viirs_black_marble,GLOBAL,bbox-stac,city_toronto_core,,"500m monthly, activity-emission proxy."
+Infrastructure,pipelines,infrastructure,content,1,test-now,cer_pipelines,CA,archive-whole,city_toronto_core,,Canada Energy Regulator pipeline network.
+Infrastructure,pipelines,infrastructure,content,1,test-now,hifld_pipelines,US,archive-whole,city_toronto_core,,US pipeline data.
+Infrastructure,power_plants,infrastructure,content,1,test-now,gem_trackers,GLOBAL,archive-whole,city_toronto_core,,"Global Energy Monitor, 25 trackers, CC-BY, asset-level."
+Infrastructure,power_plants,infrastructure,content,2,deferred-backup,wri_gppd,GLOBAL,archive-whole,city_toronto_core,,"Global Power Plant Database, older."
+Infrastructure,railways,infrastructure,content,1,test-now,osm_railways,GLOBAL,bbox-vector,city_toronto_core,,Most complete open rail network.
+Infrastructure,roads,infrastructure,content,1,test-now,nrn_canada,CA,archive-shard,city_toronto_core,,"National Road Network, OGL, shards by province."
+Infrastructure,roads,infrastructure,content,1,test-now,tiger_roads,US,archive-shard,city_toronto_core,,"US TIGER roads, shards by county."
+Infrastructure,roads,infrastructure,content,2,deferred-backup,overture_transportation,GLOBAL,archive-shard,city_toronto_core,,"Permissive, cross-border consistent."
+Infrastructure,roads,infrastructure,content,3,deferred-backup,osm_roads,GLOBAL,bbox-vector,city_toronto_core,bbox-vector (Overpass),"Best attributes, share-alike."
+Infrastructure,schools_health_facilities,infrastructure,content,1,test-now,odef_odhf_statcan,CA,archive-whole,city_toronto_core,,StatCan Open Database of Educational and Healthcare Facilities.
+Infrastructure,schools_health_facilities,infrastructure,content,1,test-now,hifld_facilities,US,archive-whole,city_toronto_core,,US facility inventories.
+Infrastructure,transmission_lines,infrastructure,content,1,test-now,osm_power,GLOBAL,bbox-vector,city_toronto_core,,Transmission and substations; share-alike.
+Land cover,biomass,macrobiology,content,1,test-now,nfi_biomass_canada,CA,bbox-stac,farm_sk_quarter,,NRCan merchantable volume and biomass.
+Land cover,biomass,macrobiology,content,2,deferred-backup,hgb,GLOBAL,bbox-stac,farm_sk_quarter,,"Harmonised global biomass, coarse."
+Land cover,canopy_height,macrobiology,content,1,test-now,gedi_l2a,GLOBAL,point-query,farm_sk_quarter,,"25m footprints on transects, not wall-to-wall. Sparse by design."
+Land cover,canopy_height,macrobiology,content,2,deferred-backup,canada_forest_height,CA,bbox-stac,farm_sk_quarter,,"NRCan modelled forest height, wall-to-wall."
+Land cover,canopy_height,macrobiology,content,3,deferred-backup,meta_canopy_height,GLOBAL,bbox-stac,farm_sk_quarter,,1m modelled global canopy height.
+Land cover,crop_type,macrobiology,content,1,test-now,aafc_aci,CA,bbox-api,farm_sk_quarter,bbox-api (image service export),"Annual Crop Inventory 30m, open, annual since 2009. The Canadian crop layer."
+Land cover,crop_type,macrobiology,content,1,test-now,usda_cdl,US,bbox-stac,farm_sk_quarter,,Cropland Data Layer 30m; longer and more consistent history than ACI.
+Land cover,evapotranspiration,macrobiology,content,1,test-now,nrcan_et,CA,bbox-stac,farm_sk_quarter,,"Canadian ET and PET, monthly and annual, national."
+Land cover,evapotranspiration,macrobiology,content,2,deferred-backup,modis_mod16,GLOBAL,bbox-stac,farm_sk_quarter,,500m global ET.
+Land cover,forest_change,macrobiology,content,1,test-now,hansen_gfc,GLOBAL,bbox-stac,farm_sk_quarter,,30m annual loss since 2000; the standard forest-change layer.
+Land cover,forest_change,macrobiology,content,2,deferred-backup,nrcan_forest_change,CA,bbox-stac,farm_sk_quarter,,Canadian national forest change products.
+Land cover,land_cover,macrobiology,content,1,test-now,nrcan_landcover,CA,bbox-stac,farm_sk_quarter,,"Land Cover of Canada 30m, OGL, national."
+Land cover,land_cover,macrobiology,content,2,deferred-backup,nalcms,NA,bbox-stac,farm_sk_quarter,,"North America 30m, consistent across the border. Best for cross-border comparison."
+Land cover,land_cover,macrobiology,content,3,deferred-backup,esa_worldcover,GLOBAL,bbox-stac,farm_sk_quarter,,"10m global, finer but non-Canadian semantics."
+Land cover,land_cover,macrobiology,content,4,deferred-backup,io_lulc_annual,GLOBAL,bbox-stac,farm_sk_quarter,,10m annual time series.
+Land cover,vegetation_timeseries,macrobiology,content,1,test-now,modis_13q1,GLOBAL,bbox-stac,farm_sk_quarter,,250m 16-day NDVI/EVI; best effort-to-value ratio per prior session.
+Land cover,vegetation_timeseries,macrobiology,content,2,deferred-backup,nrcan_monthly_veg_params,CA,bbox-stac,farm_sk_quarter,,20m monthly Canadian vegetation parameters. Finer than MODIS.
+Land cover,vegetation_timeseries,macrobiology,content,3,deferred-backup,cgls,GLOBAL,bbox-api,farm_sk_quarter,,Eight variables from one adapter; high value per integration.
+Population,business_establishments,socio-economic,content,1,test-now,statcan_business_counts,CA,archive-whole,city_montreal_core,,Canadian business counts by geography and industry.
+Population,business_establishments,socio-economic,content,1,test-now,us_cbp,US,archive-whole,city_montreal_core,,County Business Patterns.
+Population,census_demography,socio-economic,content,1,test-now,statcan_census_da,CA,archive-shard,city_montreal_core,,"Census at dissemination-area and block level, OGL."
+Population,census_demography,socio-economic,content,1,test-now,us_census_acs,US,bbox-api,city_montreal_core,,American Community Survey at block group; deeper attributes than Canada.
+Population,community_vitality,socio-economic,content,1,test-now,nrcan_cancvi,CA,bbox-stac,city_montreal_core,,"Regional and community vitality index, Canada."
+Population,income_wealth,socio-economic,content,1,test-now,statcan_taxfiler,CA,archive-whole,city_montreal_core,,Taxfiler income at small-area geography.
+Population,income_wealth,socio-economic,content,1,test-now,acs_income,US,bbox-api,city_montreal_core,,US income and housing attributes.
+Population,labour,socio-economic,content,1,test-now,nrcan_lfd,CA,bbox-stac,city_montreal_core,,"Labour force distribution for natural resource sectors, on the national STAC."
+Population,mobility_flows,socio-economic,content,1,test-now,lodes_us,US,archive-shard,city_montreal_core,,Origin-destination commuting flows; no open Canadian equivalent.
+Population,mobility_flows,socio-economic,content,2,deferred-backup,statcan_commute,CA,archive-whole,city_montreal_core,,"Census journey-to-work flows, coarser."
+Population,population_gridded,socio-economic,content,1,test-now,worldpop,GLOBAL,bbox-stac,city_montreal_core,,"100m gridded population, consistent cross-border."
+Population,population_gridded,socio-economic,content,2,deferred-backup,ghsl_pop,GLOBAL,bbox-stac,city_montreal_core,,"100m, epoch time series back to 1975."
+Population,property_assessment,socio-economic,content,1,test-now,provincial_assessment,CA,portal-manual,city_montreal_core,,Assessment rolls; mostly closed or fee-based in Canada.
+Spectral,aerial_sub_metre,spectral,content,1,test-now,naip,US,bbox-stac,farm_sk_quarter,,"60cm, US-only, no Canadian federal equivalent."
+Spectral,aerial_sub_metre,spectral,content,2,deferred-backup,napl_canada,CA,bbox-stac,farm_sk_quarter,,"NRCan air photo series, regional tiles only, not national."
+Spectral,aerial_sub_metre,spectral,content,3,deferred-backup,provincial_ortho,CA,portal-manual,farm_sk_quarter,,Per-province orthos; licence and access vary widely.
+Spectral,gamma_radiometrics,spectral,content,1,test-now,gsc_radiometric,CA,archive-shard,farm_sk_quarter,,"Airborne K/U/Th, Canada publishes openly. Mining staple."
+Spectral,gamma_radiometrics,spectral,content,2,deferred-backup,usgs_radiometric,US,archive-whole,farm_sk_quarter,,"US national compilation, coarser."
+Spectral,ground_level_imagery,spectral,content,1,test-now,mapillary,GLOBAL,bbox-vector,farm_sk_quarter,,Orthogonal viewpoint to all nadir sources; object detections usable as vector.
+Spectral,hyperspectral,spectral,content,1,test-now,emit,GLOBAL,bbox-stac,farm_sk_quarter,,"285 bands, free, but tasked coverage only. Expect absence."
+Spectral,hyperspectral,spectral,content,2,deferred-backup,enmap,GLOBAL,portal-manual,farm_sk_quarter,,"Free with registration, sparsely tasked."
+Spectral,hyperspectral,spectral,content,3,deferred-backup,prisma,GLOBAL,portal-manual,farm_sk_quarter,,"Free with registration, sparsely tasked."
+Spectral,optical_multispectral,spectral,content,1,test-now,sentinel2_l2a,GLOBAL,bbox-stac,farm_sk_quarter,bbox-stac (typical multiband),"10m, 5-day, 12 bands, free+permissive. The default optical layer."
+Spectral,optical_multispectral,spectral,content,2,deferred-backup,landsat_c2l2,GLOBAL,bbox-stac,farm_sk_quarter,,30m but carries thermal; 40yr archive. Wins where history or LST needed.
+Spectral,optical_multispectral,spectral,content,3,deferred-backup,hls_harmonized,GLOBAL,bbox-stac,farm_sk_quarter,,S2+Landsat harmonised 30m; adds little once both primaries held.
+Spectral,sar_backscatter_c,spectral,content,1,test-now,sentinel1_rtc,GLOBAL,bbox-stac,farm_sk_quarter,,"Terrain-corrected, analysis-ready, free. Preferred over raw GRD."
+Spectral,sar_backscatter_c,spectral,content,2,deferred-backup,sentinel1_grd,GLOBAL,bbox-stac,farm_sk_quarter,,Needs own terrain correction; use only if RTC absent.
+Spectral,sar_backscatter_c,spectral,content,3,deferred-backup,rcm_ard,CA,bbox-stac,farm_sk_quarter,,"RADARSAT Constellation ARD, Canada-only, OGL. Canadian specialty."
+Spectral,sar_backscatter_l,spectral,content,1,test-now,alos_palsar_mosaic,GLOBAL,bbox-stac,farm_sk_quarter,,L-band penetrates canopy; annual mosaic only.
+Spectral,thermal_surface_temp,spectral,content,1,test-now,landsat_c2l2_st,GLOBAL,bbox-stac,farm_sk_quarter,,Only free global 30m LST. No substitute at this resolution.
+Spectral,thermal_surface_temp,spectral,content,2,deferred-backup,modis_11a2,GLOBAL,bbox-stac,farm_sk_quarter,,1km but 2x daily; complements Landsat 16-day revisit.
+Spectral,thermal_surface_temp,spectral,content,3,deferred-backup,sentinel3_slstr,GLOBAL,bbox-api,farm_sk_quarter,,"1km, daily; EU archive access is clumsier than MODIS."
+Tenure and knowledge,admin_boundaries,socio-economic,both,1,test-now,statcan_boundary_files,CA,archive-shard,mine_hvc_bc,,"Census boundary files, OGL, all levels to block."
+Tenure and knowledge,admin_boundaries,socio-economic,both,1,test-now,tiger_boundaries,US,archive-shard,mine_hvc_bc,,US TIGER administrative boundaries.
+Tenure and knowledge,admin_boundaries,socio-economic,both,2,deferred-backup,overture_divisions,GLOBAL,archive-shard,mine_hvc_bc,,"Permissive, cross-border consistent."
+Tenure and knowledge,admin_boundaries,socio-economic,both,3,deferred-backup,geoboundaries,GLOBAL,archive-whole,mine_hvc_bc,,"Global, permissive, coarser."
+Tenure and knowledge,crown_land,socio-economic,both,1,test-now,provincial_crown_land,CA,portal-manual,mine_hvc_bc,,"Crown land tenure, per-province."
+Tenure and knowledge,gazetteer,socio-economic,both,1,test-now,cgndb,CA,archive-whole,mine_hvc_bc,,"Canadian Geographical Names Database, OGL."
+Tenure and knowledge,gazetteer,socio-economic,both,1,test-now,gnis,US,archive-whole,mine_hvc_bc,,US Geographic Names Information System.
+Tenure and knowledge,gazetteer,socio-economic,both,2,deferred-backup,geonames,GLOBAL,archive-whole,mine_hvc_bc,,"Global gazetteer, CC-BY."
+Tenure and knowledge,indigenous_lands,socio-economic,both,1,test-now,aboriginal_lands_canada,CA,archive-whole,mine_hvc_bc,,Reserves and treaty areas; materially important for Canadian resource AOIs.
+Tenure and knowledge,indigenous_lands,socio-economic,both,1,test-now,bia_aiannh,US,archive-whole,mine_hvc_bc,,US tribal lands.
+Tenure and knowledge,parcels_cadastre,socio-economic,both,1,test-now,provincial_parcel_fabric,CA,portal-manual,mine_hvc_bc,,Mostly fee-based or restricted in Canada. Known hard layer.
+Tenure and knowledge,parcels_cadastre,socio-economic,both,1,test-now,us_county_parcels,US,portal-manual,mine_hvc_bc,,"Per-county, highly variable openness."
+Tenure and knowledge,protected_areas,socio-economic,both,1,test-now,carts_canada,CA,archive-whole,mine_hvc_bc,,Conservation Areas Reporting and Tracking System.
+Tenure and knowledge,protected_areas,socio-economic,both,1,test-now,padus,US,archive-shard,mine_hvc_bc,,USGS Protected Areas Database.
+Tenure and knowledge,protected_areas,socio-economic,both,2,deferred-backup,wdpa,GLOBAL,archive-whole,mine_hvc_bc,,Global but restrictively licensed.
+Tenure and knowledge,semantic_entities,socio-economic,content,1,test-now,wikidata_geo,GLOBAL,archive-shard,mine_hvc_bc,,"Broadest single coordinate-bearing semantic layer, CC0. SPARQL or bulk dump."
+Terrain,bedrock_geology,geology,content,1,test-now,macrostrat,GLOBAL,point-query,mine_hvc_bc,,"Verified: lat/lng to geologic unit, lithology, age. Best coordinate-to-geology API."
+Terrain,bedrock_geology,geology,content,2,deferred-backup,gsc_bedrock,CA,archive-shard,mine_hvc_bc,,Geological Survey of Canada national bedrock compilation.
+Terrain,bedrock_geology,geology,content,3,deferred-backup,provincial_geology,CA,portal-manual,mine_hvc_bc,,"Higher detail, per-province, inconsistent licence."
+Terrain,dem_high_res,geology,content,1,test-now,hrdem_1m,CA,bbox-stac,mine_hvc_bc,bbox-stac (extreme: 500km COG tiles),"1m lidar DEM, OGL. 500km COG tiles so windowed read mandatory."
+Terrain,dem_high_res,geology,content,1,test-now,3dep_seamless,US,bbox-stac,mine_hvc_bc,,US 1m/10m lidar; direct counterpart to HRDEM.
+Terrain,dem_high_res,geology,content,2,deferred-backup,hrdem_2m,CA,bbox-stac,mine_hvc_bc,,Fallback where 1m mosaic absent.
+Terrain,dem_medium_res,geology,content,1,test-now,mrdem_30,CA,bbox-stac,mine_hvc_bc,,"30m national Canadian DEM, OGL, gapless."
+Terrain,dem_medium_res,geology,content,2,deferred-backup,cop_dem_glo30,GLOBAL,bbox-stac,mine_hvc_bc,,Global 30m; the cross-border fallback.
+Terrain,dem_medium_res,geology,content,3,deferred-backup,cdem,CA,bbox-stac,mine_hvc_bc,,Older Canadian DEM superseded by MRDEM.
+Terrain,glaciers,geology,content,1,test-now,rgi,GLOBAL,archive-whole,mine_hvc_bc,,"Randolph Glacier Inventory, small file, cache once."
+Terrain,gravity_magnetics,geology,content,1,test-now,gsc_gravmag,CA,archive-shard,mine_hvc_bc,,National gravity and aeromagnetic compilations.
+Terrain,gravity_magnetics,geology,content,2,deferred-backup,usgs_gravmag,US,archive-whole,mine_hvc_bc,,US counterpart.
+Terrain,mineral_deposits,geology,content,1,test-now,pma_nrcan,CA,archive-whole,mine_hvc_bc,,"Principal Mineral Areas, producing mines, annual, open."
+Terrain,mineral_deposits,geology,content,1,test-now,mrds_usgs,US,archive-whole,mine_hvc_bc,,USGS Mineral Resources Data System.
+Terrain,mineral_deposits,geology,content,2,deferred-backup,provincial_mineral_occurrence,CA,portal-manual,mine_hvc_bc,,Per-province occurrence databases.
+Terrain,permafrost,geology,content,1,test-now,permafrost_extent,GLOBAL,archive-whole,mine_hvc_bc,,Circumpolar permafrost zonation; relevant to northern AOIs.
+Terrain,soil_physical,geology,content,1,test-now,cansis_slc,CA,archive-shard,mine_hvc_bc,,Soil Landscapes of Canada; far coarser than gNATSGO. Real asymmetry.
+Terrain,soil_physical,geology,content,1,test-now,gnatsgo,US,bbox-stac,mine_hvc_bc,,"US soil survey, 10m, richest soil data on the continent."
+Terrain,soil_physical,geology,content,2,deferred-backup,soilgrids,GLOBAL,bbox-stac,mine_hvc_bc,,250m modelled; the cross-border fallback.
+Terrain,surface_deformation,geology,content,1,test-now,nrcan_land_deformation,CA,bbox-stac,mine_hvc_bc,,Canada InSAR pilot; showed real differential coverage. Direct mine-subsidence layer.
+Terrain,surface_deformation,geology,content,2,deferred-backup,sentinel1_insar_diy,GLOBAL,bbox-stac,mine_hvc_bc,,"Compute from S1 SLC; heavy processing, last resort."
+Terrain,surface_dem,geology,content,1,test-now,hrdem_dsm,CA,bbox-stac,mine_hvc_bc,,Surface (not bare-earth) 1m; canopy and building tops.
+Terrain,surface_dem,geology,content,2,deferred-backup,cdsm,CA,bbox-stac,mine_hvc_bc,,Licence reads proprietary on the STAC; verify.
+Terrain,surficial_geology,geology,content,1,test-now,gsc_surficial,CA,archive-shard,mine_hvc_bc,,Surficial materials; matters for farm and mine AOIs.
+Terrain,terrain_derivatives,geology,content,1,test-now,terrain_derived,GLOBAL,bbox-stac,mine_hvc_bc,,Slope/aspect/curvature/TWI computed locally from DEM. No fetch cost.
+Water,bathymetry,water bodies,content,1,test-now,chs_nonna,CA,archive-shard,mine_syncrude_ab,,Canadian Hydrographic Service NONNA bathymetry.
+Water,bathymetry,water bodies,content,2,deferred-backup,gebco,GLOBAL,archive-whole,mine_syncrude_ab,,Global 15-arcsec; coarse but complete.
+Water,groundwater,water bodies,content,1,test-now,grace_fo,GLOBAL,bbox-stac,mine_syncrude_ab,,Storage anomaly at 300km; far coarser than any test AOI.
+Water,groundwater,water bodies,content,2,deferred-backup,provincial_well_records,CA,portal-manual,mine_syncrude_ab,,"Water well records, per-province."
+Water,hydro_network,water bodies,content,1,test-now,nhn_canada,CA,archive-shard,mine_syncrude_ab,,"National Hydro Network, shards by drainage area."
+Water,hydro_network,water bodies,content,1,test-now,nhd_us,US,archive-shard,mine_syncrude_ab,,US National Hydrography Dataset.
+Water,hydro_network,water bodies,content,2,deferred-backup,hydrosheds,GLOBAL,archive-whole,mine_syncrude_ab,,"Global derived network, coarser."
+Water,lakes_reservoirs,water bodies,content,1,test-now,hydrolakes,GLOBAL,archive-whole,mine_syncrude_ab,,"Global lake polygons with attributes; small, cache once."
+Water,streamflow,water bodies,content,1,test-now,hydat,CA,archive-whole,mine_syncrude_ab,,"Canadian hydrometric archive; whole database is small, cache once."
+Water,streamflow,water bodies,content,1,test-now,nwis,US,point-query,mine_syncrude_ab,,USGS water data; exceptionally deep.
+Water,surface_water_extent,water bodies,content,1,test-now,nrcan_dynamic_surface_water,CA,bbox-stac,mine_syncrude_ab,,"30m annual Canadian surface water, 1984-2023."
+Water,surface_water_extent,water bodies,content,2,deferred-backup,jrc_gsw,GLOBAL,bbox-stac,mine_syncrude_ab,,30m global occurrence and change; the cross-border fallback.
+Water,water_frequency,water bodies,content,1,test-now,nrcan_surface_water_frequency,CA,bbox-stac,mine_syncrude_ab,,1991-2020 frequency; distinguishes permanent from seasonal.
+Water,water_quality,hazards,content,1,test-now,wqp,NA,point-query,mine_syncrude_ab,,Water Quality Portal; US-centric but accepts Canadian stations.
+Water,water_quality,hazards,content,2,deferred-backup,eccc_water_quality,CA,archive-shard,mine_syncrude_ab,,Canadian freshwater quality monitoring.
