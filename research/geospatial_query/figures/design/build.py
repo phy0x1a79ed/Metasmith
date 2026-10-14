@@ -5,7 +5,6 @@ from dataclasses import replace
 import json
 import re
 import sys
-from collections import defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -34,25 +33,11 @@ BLURBS = [
     "Embeddings and other high-dimensional products, read by fitting a model.",
 ]
 
-# POC slot -> family, under the rules in reports/layer_families.md
-SLOT_FAMILY = {
-    "census_demography": 0, "mobility_flows": 0, "parcels_cadastre": 0, "population_gridded": 0,
-    "property_assessment": 0, "ground_level_imagery": 1, "infrastructure_osm": 1, "crop_type_ca": 3, "indigenous_lands": 0, "crown_land": 0, "gazetteer": 0,
-    "urban_extent": 1, "addresses": 1, "cell_towers": 1, "industrial_facilities": 1,
-    "mines_producing": 1, "pipelines": 1, "power_plants": 1, "railways": 1, "transmission_lines": 1,
-    "air_quality_modelled": 2, "air_quality_monitors": 2, "contaminated_sites": 2,
-    "emissions_releases": 2, "facility_compliance": 2, "earthquake_catalogue": 2, "water_quality": 2,
-    "biomass": 3, "crop_type_us": 3, "field_boundaries": 3, "forest_change": 3, "land_cover": 3,
-    "land_cover_ca": 3, "species_occurrence": 3, "vegetation_timeseries": 3,
-    "bathymetry": 4, "bedrock_geology": 4, "dem_medium_res": 4, "dem_medium_res_ca": 4,
-    "gamma_radiometrics": 4, "surficial_geology": 4, "glaciers": 4, "permafrost_extent": 4,
-    "healthcare_accessibility": 5, "disease_surveillance": 5, "wastewater_surveillance": 5,
-    "geolocated_sequence": 5, "geolocated_sequence_insdc": 5,
-    "reanalysis_climate": 6, "sea_ice": 6,
-    "optical_multispectral": 7, "sar_backscatter_c": 7, "sar_backscatter_l": 7, "thermal_surface_temp": 7,
-    "surface_water_extent": 8,
-    "embeddings": 9,
-}
+# keys used by layer_families.md and the reconciled tables, in FAMILIES order
+FAMILY_KEYS = [
+    "socio-economic", "infrastructure", "hazards", "macrobiology", "geology",
+    "public health & microbiology", "climate", "spectral", "water bodies", "latent",
+]
 PC = "https://planetarycomputer.microsoft.com/dataset/"
 OVT = "https://docs.overturemaps.org/guides/"
 SOURCE_URLS = {
@@ -126,7 +111,9 @@ SOURCE_URLS = {
     "wqp": "https://www.waterqualitydata.us/",
     "wri_gppd": "https://datasets.wri.org/dataset/globalpowerplantdatabase",
 }
-DROPPED_SOURCES = {"alphaearth_v1_annual"}
+DROPPED_MODULES = {"alphaearth"}
+
+
 def licence_tier(licence: str) -> str:
     if "ODbL" in licence or "-SA" in licence:
         return "share-alike"
@@ -167,62 +154,29 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
     out: list[list[dict]] = [[] for _ in FAMILIES]
     with long_csv.open() as fh:
         for r in csv.DictReader(fh):
-            name, slot, source = r["feature"], r["slot"], r["source"]
-            if name in seen or source in DROPPED_SOURCES or any(t in name for t in QA_TOKENS):
+            name, slot, adapter = r["feature"], r["slot"], r["adapter"]
+            if name in seen or r["module_id"] in DROPPED_MODULES or any(t in name for t in QA_TOKENS):
                 continue
             seen.add(name)
-            out[SLOT_FAMILY[slot]].append(
-                {"name": name, "description": describe(name, slot), "source": source, "layer": slot,
-                 "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[source]}
+            out[FAMILY_KEYS.index(r["family"])].append(
+                {"name": name, "description": describe(name, slot), "source": adapter, "layer": slot,
+                 "module": r["module_id"], "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[adapter]}
             )
     for fam in out:
         fam.sort(key=lambda f: (f["layer"], f["name"]))
     return out
 
 
-FAMILY_NAMES = {
-    "socio-economic": "Socio-economic", "infrastructure": "Infrastructure & industry", "hazards": "Hazards",
-    "macrobiology": "Macrobiology", "geology": "Geology", "public health & microbiology": "Microbiology & health",
-    "climate": "Climate", "spectral": "Spectral", "water bodies": "Water bodies", "latent": "Latent",
-    "constructor": "Constructor",
-}
-
-
-def related(a: str, b: str) -> bool:
-    return a == b or a.startswith(b + "_") or b.startswith(a + "_")
-
-
-def failed_sources(reports: Path) -> list[dict]:
-    """Every catalogue or triage source that did not end up as a working POC adapter, with the stage it stopped at."""
-    rows = lambda name: list(csv.DictReader((reports / name).open()))
-    registry = rows("source_registry.csv")
-    working = [r for r in registry if r["status"] == "working"]
-    filled = defaultdict(list)
-    for r in working:
-        filled[r["slot"]].append(r["source"])
-    slot_family = {r["slot"]: FAMILY_NAMES.get(r["family"], r["family"]) for r in rows("layer_slots_triaged.csv")}
-    is_working = lambda name: any(related(name, w["source"]) for w in working)
-    out = []
-    for r in registry:
-        if r["status"] == "failing":
-            out.append({"stage": "poc-failed", "family": FAMILIES[SLOT_FAMILY[r["slot"]]], "layer": r["slot"],
-                        "source": r["source"], "reason": r["reason"], "slot_filled_by": " ".join(filled[r["slot"]])})
-    tested = {r["source"] for r in registry}
-    for r in rows("triage_results_merged.csv"):
-        name = r["candidate"].split(" (")[0]
-        tested.add(name)
-        if r["reachable"] == "yes" or is_working(name):
-            continue
-        out.append({"stage": "triage-unreachable" if r["reachable"] == "no" else "triage-unresolved",
-                    "family": slot_family.get(r["slot"], ""), "layer": r["slot"], "source": name,
-                    "reason": r["blocker"] or r["http_status"] or r["notes"],
-                    "slot_filled_by": " ".join(filled[r["slot"]])})
-    for r in rows("layer_inventory.csv"):
-        if r["family"] == "DROP" or any(related(r["module"], t) for t in tested):
-            continue
-        out.append({"stage": "not-probed", "family": FAMILY_NAMES.get(r["family"], r["family"]), "layer": "",
-                    "source": r["module"], "reason": "catalogued, never probed in the POC", "slot_filled_by": ""})
-    return out
+def failed_sources(reconciliation_csv: Path) -> list[dict]:
+    """Catalogue modules and unmatched triage candidates that did not end with a working adapter."""
+    with reconciliation_csv.open() as fh:
+        return [
+            {"outcome": r["outcome"],
+             "family": FAMILIES[FAMILY_KEYS.index(r["family"])] if r["family"] in FAMILY_KEYS else r["family"],
+             "module_id": r["module_id"], "source_name": r["source_name"],
+             "triage_candidates": r["triage_candidates"], "poc_adapters": r["poc_adapters"], "reason": r["reason"]}
+            for r in csv.DictReader(fh) if r["outcome"] not in ("working", "dropped")
+        ]
 
 
 def dag_svg(theme) -> str:
@@ -257,7 +211,7 @@ def main() -> None:
     families = features_by_family(HERE.parents[1] / "reports" / "feature_values_long.csv")
     data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
-    failed = failed_sources(HERE.parents[1] / "reports")
+    failed = failed_sources(HERE.parents[1] / "reports" / "catalogue_reconciliation.csv")
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
     page = page.replace("/*FAILED*/[]", json.dumps(failed, ensure_ascii=False))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
@@ -265,7 +219,7 @@ def main() -> None:
     for f, feats in zip(FAMILIES, families):
         print(f"{len(feats):4d}  {len({x['source'] for x in feats}):3d}  {f}")
     from collections import Counter
-    print(Counter(x["stage"] for x in failed))
+    print(Counter(x["outcome"] for x in failed))
 
 
 if __name__ == "__main__":

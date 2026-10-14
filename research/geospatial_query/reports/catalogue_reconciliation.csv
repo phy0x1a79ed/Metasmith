@@ -1,0 +1,430 @@
+module_id,family,triage_candidates,poc_adapters,outcome,reason,source_name,catalogue_status
+declass_corona,(dropped),,,dropped,"static archive, fails rule 5",USGS Declass 1 (CORONA/ARGON/LANYARD),existing
+declass_hexagon,(dropped),,,dropped,"static archive, fails rule 5","USGS Declass 2 + 3 (KH-7 GAMBIT, KH-9 HEXAGON)",existing
+hist_aerial,(dropped),,,dropped,"static archive, fails rule 5",Historical aerial photography archives,existing
+hist_topo,(dropped),,,dropped,"static archive, fails rule 5",Historical topographic maps,existing
+,(unmatched),canada_forest_height,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cdem,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cdsm,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),climatena,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),eccc_water_quality,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),hrdem_2m,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),io_lulc_annual,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),modis_11a2,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),msha_us,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nalcms,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_forest_change,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_monthly_veg_params,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_contaminated_sites,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_geology,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_mineral_occurrence,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_well_records,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),rcm_ard,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),rdrs_caspar,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),sentinel1_insar_diy,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),usgs_gravmag,,not-probed,triage/slot candidate with no catalogue module,,no catalogue entry
+agera5,climate,,,not-probed,not named in any triage or POC table,AgERA5,existing
+aridity,climate,,,not-probed,not named in any triage or POC table,CGIAR-CSI Global Aridity / PET,existing
+ascat_sm,climate,,,not-probed,not named in any triage or POC table,ASCAT scatterometer,existing
+ascat_wind,climate,,,not-probed,not named in any triage or POC table,ASCAT scatterometer,existing
+chirps,climate,,,not-probed,not named in any triage or POC table,CHIRPS v2,existing
+cygnss_sm,climate,,,not-probed,not named in any triage or POC table,CYGNSS (GNSS reflectometry),existing
+cygnss_wind,climate,,,not-probed,not named in any triage or POC table,CYGNSS (GNSS reflectometry),existing
+firms,climate,firms,,not-probed,"in slot table as deferred-backup, never probed",FIRMS active fire / FireCCI,existing
+imerg,climate,,,not-probed,not named in any triage or POC table,GPM IMERG,existing
+itrdb,climate,,,not-probed,not named in any triage or POC table,ITRDB tree rings / SISAL speleothems,existing
+koppen,climate,,,not-probed,not named in any triage or POC table,Koppen-Geiger classification,existing
+lightning,climate,,,not-probed,not named in any triage or POC table,WWLLN / GOES-GLM / LIS-OTD climatology,existing
+modis_snow,climate,,,not-probed,not named in any triage or POC table,MODIS/VIIRS snow cover,existing
+nex_gddp,climate,nex_gddp,,not-probed,"in slot table as deferred-backup, never probed",NEX-GDDP-CMIP6,existing
+paleoclim,climate,,,not-probed,not named in any triage or POC table,ERA-20C / 20CR / HadCRUT / PMIP,existing
+passive_mw,climate,,,not-probed,not named in any triage or POC table,AMSR2 / SMOS / SSMIS,existing
+smap,climate,,,not-probed,not named in any triage or POC table,SMAP soil moisture,existing
+snow_swe,climate,era5_snow;snodas,,not-probed,"in slot table as deferred-backup, never probed",ERA5-Land / GlobSnow / SNODAS SWE,existing
+solar_atlas,climate,,,not-probed,not named in any triage or POC table,Global Solar Atlas / NSRDB,existing
+sounders,climate,,,not-probed,not named in any triage or POC table,AIRS / IASI / CrIS / GNSS-RO,existing
+terraclimate,climate,,,not-probed,not named in any triage or POC table,TerraClimate,existing
+wind_atlas,climate,,,not-probed,not named in any triage or POC table,Global Wind Atlas,existing
+worldclim_chelsa,climate,,,not-probed,not named in any triage or POC table,WorldClim 2.1 / CHELSA,existing
+active_faults,geology,,,not-probed,not named in any triage or POC table,GEM Global Active Faults,existing
+aster_gdem,geology,,,not-probed,not named in any triage or POC table,ASTER GDEM v3,existing
+aw3d30,geology,,,not-probed,not named in any triage or POC table,ALOS World 3D AW3D30,existing
+boreholes,geology,,,not-probed,not named in any triage or POC table,"National borehole/well logs (BGS, DINOloket, USGS)",existing
+crust_model,geology,,,not-probed,not named in any triage or POC table,CRUST1.0 / LITHO1.0 / GlobSed,existing
+egdi,geology,,,not-probed,not named in any triage or POC table,EGDI (European Geological Data Infrastructure),existing
+egms,geology,,,not-probed,not named in any triage or POC table,Copernicus EGMS (European Ground Motion Service),existing
+emodnet_bathy,geology,,,not-probed,not named in any triage or POC table,EMODnet Bathymetry / BlueTopo,existing
+esdac,geology,,,not-probed,not named in any triage or POC table,ESDAC / LUCAS topsoil,existing
+fabdem,geology,,,not-probed,not named in any triage or POC table,FABDEM,existing
+geochem_soil,geology,,,not-probed,not named in any triage or POC table,USGS soil geochemical survey / GEMAS / FOREGS,existing
+geomag_field,geology,,,not-probed,not named in any triage or POC table,IGRF-14 / WMM,existing
+glacier_thick,geology,,,not-probed,not named in any triage or POC table,Farinotti consensus ice thickness,existing
+glim,geology,,,not-probed,not named in any triage or POC table,GLiM global lithology,existing
+gnss_vel,geology,,,not-probed,not named in any triage or POC table,Nevada Geodetic Lab / EarthScope GNSS,existing
+grav_anomaly,geology,,,not-probed,not named in any triage or POC table,EGM2008 / XGM2019e / WGM2012,existing
+gsocmap,geology,,,not-probed,not named in any triage or POC table,FAO GSOCmap,existing
+heat_flow,geology,,,not-probed,not named in any triage or POC table,IHFC Global Heat Flow Database,existing
+itslive,geology,,,not-probed,not named in any triage or POC table,ITS_LIVE,existing
+karst,geology,,,not-probed,not named in any triage or POC table,Karst/sinkhole susceptibility maps,existing
+licsar,geology,,,not-probed,not named in any triage or POC table,COMET LiCSAR / ARIA,existing
+mag_anomaly,geology,,,not-probed,not named in any triage or POC table,EMAG2 v3 / WDMAM v2,existing
+merit_dem,geology,,,not-probed,not named in any triage or POC table,MERIT DEM / MERIT Hydro,existing
+meteorites,geology,,,not-probed,not named in any triage or POC table,Meteoritical Bulletin DB / Earth Impact Database,existing
+nasadem,geology,,,not-probed,not named in any triage or POC table,NASADEM / SRTM v3,existing
+natl_geophys,geology,,,not-probed,not named in any triage or POC table,"National geophysical compilations (GA, NRCan, USGS, BGS)",existing
+onegeology,geology,gsc_bedrock,,not-probed,"in slot table as deferred-backup, never probed",OneGeology portal,existing
+soilgrids,geology,soilgrids,,not-probed,"in slot table as deferred-backup, never probed",SoilGrids 2.0 (ISRIC),existing
+tomography,geology,,,not-probed,not named in any triage or POC table,IRIS EMC / SubMachine,existing
+usgs_sgmc,geology,,,not-probed,not named in any triage or POC table,USGS State Geologic Map Compilation,existing
+conflict,hazards,,,not-probed,not named in any triage or POC table,UCDP GED / ACLED / GDELT,existing
+crashes,hazards,,,not-probed,not named in any triage or POC table,US FARS / state crash DBs / EU CARE,existing
+cygnss_flood,hazards,,,not-probed,not named in any triage or POC table,CYGNSS (GNSS reflectometry),existing
+deposition,hazards,,,not-probed,not named in any triage or POC table,NADP / EMEP / EURDEP,existing
+drought,hazards,,,not-probed,not named in any triage or POC table,US Drought Monitor / SPEI / Combined Drought Indicator,existing
+emdat,hazards,,,not-probed,not named in any triage or POC table,EM-DAT / DesInventar,existing
+exposure_model,hazards,,,not-probed,not named in any triage or POC table,GEM Global Exposure + Vulnerability Model,existing
+gemstat_waterbase,hazards,,,not-probed,not named in any triage or POC table,UNEP GEMStat / EEA Waterbase,existing
+glofas,hazards,glofas,,not-probed,"in slot table as deferred-backup, never probed",GloFAS / JRC flood hazard,existing
+grdc_gauges,hazards,,,not-probed,not named in any triage or POC table,GRDC / national streamflow archives,existing
+ibtracs,hazards,,,not-probed,not named in any triage or POC table,IBTrACS,existing
+inform,hazards,,,not-probed,not named in any triage or POC table,INFORM Risk Index / UNDRR GAR,existing
+landfills_waste,hazards,,,not-probed,not named in any triage or POC table,EPA LMOP / EU waste facilities,existing
+light_pollution,hazards,,,not-probed,not named in any triage or POC table,Falchi World Atlas of Artificial Night Sky Brightness,existing
+maiac_aod,hazards,,,not-probed,not named in any triage or POC table,MODIS MAIAC MCD19A2,existing
+microplastics,hazards,,,not-probed,not named in any triage or POC table,NOAA NCEI marine microplastics,existing
+mussel_watch,hazards,,,not-probed,not named in any triage or POC table,NOAA Mussel Watch / biota contaminants,existing
+nbi_bridges,hazards,,,not-probed,not named in any triage or POC table,US National Bridge Inventory,existing
+noise_maps,hazards,,,not-probed,not named in any triage or POC table,EU Environmental Noise Directive strategic noise maps,existing
+nutrients,hazards,,,not-probed,not named in any triage or POC table,"EarthStat / Ludemann fertiliser, PEST-CHEMGRIDS",existing
+oil_spills,hazards,,,not-probed,not named in any triage or POC table,NOAA IncidentNews / spill databases,existing
+pesticide_use,hazards,,,not-probed,not named in any triage or POC table,USGS pesticide national synthesis,existing
+pfas_europe,hazards,,,not-probed,not named in any triage or POC table,Forever Pollution Project / ECHA / national PFAS registers,existing
+pfas_sites,hazards,,,not-probed,not named in any triage or POC table,"EWG PFAS map / DoD installations / state programs (MI, NJ, CA GAMA)",existing
+pfas_usgs,hazards,,,not-probed,not named in any triage or POC table,USGS PFAS in groundwater + tapwater studies,existing
+radnet_fallout,hazards,,,not-probed,not named in any triage or POC table,EPA RadNet / Cs-137 fallout maps,existing
+radon,hazards,,,not-probed,not named in any triage or POC table,National radon potential maps,existing
+sdwis,hazards,,,not-probed,not named in any triage or POC table,EPA SDWIS drinking water violations,existing
+seismic_hazard,hazards,,,not-probed,not named in any triage or POC table,GEM Global Seismic Hazard / Risk Map,existing
+space_weather,hazards,,,not-probed,not named in any triage or POC table,Ionosphere TEC / geomagnetic indices / cosmic ray,existing
+tsunami,hazards,,,not-probed,not named in any triage or POC table,NOAA NGDC historical tsunami + runup DB,existing
+volcanoes,hazards,,,not-probed,not named in any triage or POC table,Smithsonian GVP,existing
+wildfire_hazard,hazards,,,not-probed,not named in any triage or POC table,CAL FIRE FHSZ / Pyrologix / national fire risk,existing
+building_permits,infrastructure,,,not-probed,not named in any triage or POC table,City/state building permit records,existing
+climate_trace,infrastructure,,,not-probed,not named in any triage or POC table,Climate TRACE,existing
+datacenters,infrastructure,,,not-probed,not named in any triage or POC table,"Data Center Map / IXPs / fibre routes (Afterfibre, ITU)",existing
+dmsp_ols,infrastructure,,,not-probed,not named in any triage or POC table,DMSP-OLS nighttime lights,existing
+epc,infrastructure,,,not-probed,not named in any triage or POC table,EU Energy Performance Certificates,existing
+eprtr,infrastructure,,,not-probed,not named in any triage or POC table,EU Industrial Emissions Portal (E-PRTR),existing
+fcc_uls,infrastructure,,,not-probed,not named in any triage or POC table,FCC ULS + broadband maps,existing
+food_facilities,infrastructure,,,not-probed,not named in any triage or POC table,USDA FSIS / slaughterhouses / grain elevators / processing,existing
+google_open_buildings,infrastructure,,,not-probed,not named in any triage or POC table,Google Open Buildings v3 + 2.5D Temporal,existing
+grand_goodd,infrastructure,,,not-probed,not named in any triage or POC table,GRanD / GOODD dams,existing
+gridfinder,infrastructure,,,not-probed,not named in any triage or POC table,gridfinder / OSM power,existing
+grip4,infrastructure,,,not-probed,not named in any triage or POC table,GRIP4 global roads,existing
+gsma_mce,infrastructure,,,not-probed,not named in any triage or POC table,GSMA Mobile Coverage Explorer,existing
+housing_registry,infrastructure,,,not-probed,not named in any triage or POC table,"National building registries (NL BAG, DK BBR, FR, AT)",existing
+iaea_pris,infrastructure,,,not-probed,not named in any triage or POC table,IAEA PRIS / nuclear facilities,existing
+mlab,infrastructure,,,not-probed,not named in any triage or POC table,M-Lab / RIPE Atlas,existing
+odiac,infrastructure,,,not-probed,not named in any triage or POC table,ODIAC / EDGAR emissions,existing
+offshore_infra,infrastructure,,,not-probed,not named in any triage or POC table,Offshore platforms / wind farms / cables,existing
+ogim,infrastructure,,,not-probed,not named in any triage or POC table,OGIM oil & gas infrastructure,existing
+ookla,infrastructure,,,not-probed,not named in any triage or POC table,Ookla Open Data,existing
+openchargemap,infrastructure,,,not-probed,not named in any triage or POC table,OpenChargeMap / fuel stations,existing
+ourairports,infrastructure,,,not-probed,not named in any triage or POC table,OurAirports / World Port Index,existing
+radio_quiet,infrastructure,,,not-probed,not named in any triage or POC table,Radio quiet zones / observatory protection areas,existing
+restaurant_inspect,infrastructure,,,not-probed,not named in any triage or POC table,Municipal restaurant + facility inspections,existing
+schools_edu,infrastructure,,,not-probed,not named in any triage or POC table,US NCES CCD/EDGE / national school registries,existing
+spectrum_intl,infrastructure,,,not-probed,not named in any triage or POC table,Ofcom / ITU / national spectrum registries,existing
+tailings,infrastructure,,,not-probed,not named in any triage or POC table,Global tailings dam inventory,existing
+tailings2,infrastructure,,,not-probed,not named in any triage or POC table,Global Tailings Portal / GRID-Arendal,existing
+tree_inventory,infrastructure,,,not-probed,not named in any triage or POC table,Municipal street tree inventories / i-Tree,existing
+viirs_nightfire,infrastructure,,,not-probed,not named in any triage or POC table,VIIRS Nightfire / flaring,existing
+wsf,infrastructure,,,not-probed,not named in any triage or POC table,World Settlement Footprint / WSF-Evolution,existing
+wwtp,infrastructure,,,not-probed,not named in any triage or POC table,EU UWWTD / EPA wastewater facilities,existing
+icesat2,latent,,,not-probed,not named in any triage or POC table,ICESat-2 ATL03/ATL08,existing
+major_tom,latent,,,not-probed,not named in any triage or POC table,Major TOM embeddings,existing
+mosaiks,latent,,,not-probed,not named in any triage or POC table,MOSAIKS random features,existing
+bold,macrobiology,,,not-probed,not named in any triage or POC table,BOLD Systems,existing
+canopy_height,macrobiology,meta_canopy_height,,not-probed,"in slot table as deferred-backup, never probed",Global canopy height maps,existing
+cci_biomass,macrobiology,,,not-probed,not named in any triage or POC table,ESA CCI Biomass,existing
+corine,macrobiology,,,not-probed,not named in any triage or POC table,CORINE Land Cover + CLC+ Backbone,existing
+dynamic_world,macrobiology,,,not-probed,not named in any triage or POC table,Dynamic World,existing
+esa_cci_lc,macrobiology,,,not-probed,not named in any triage or POC table,ESA CCI Land Cover,existing
+fluxnet,macrobiology,,,not-probed,not named in any triage or POC table,FLUXNET / AmeriFlux / ICOS,existing
+gaez,macrobiology,,,not-probed,not named in any triage or POC table,FAO GAEZ v4,existing
+genesys,macrobiology,,,not-probed,not named in any triage or POC table,Genesys PGR / GRIN,existing
+gfbi_splot,macrobiology,,,not-probed,not named in any triage or POC table,GFBI / sPlot / TRY,existing
+glc_fcs30,macrobiology,,,not-probed,not named in any triage or POC table,GLC_FCS30 / GlobeLand30,existing
+glw,macrobiology,,,not-probed,not named in any triage or POC table,FAO Gridded Livestock of the World,existing
+hyde_luh,macrobiology,,,not-probed,not named in any triage or POC table,HYDE 3.3 / LUH2 / Anthromes,existing
+idigbio,macrobiology,,,not-probed,not named in any triage or POC table,iDigBio / herbaria / museum specimens,existing
+inat_ebird,macrobiology,ebird;inaturalist,,not-probed,"in slot table as deferred-backup, never probed",iNaturalist / eBird,existing
+irrigation,macrobiology,,,not-probed,not named in any triage or POC table,GMIA / MIRCA / GRIPC,existing
+iucn_ranges,macrobiology,,,not-probed,not named in any triage or POC table,IUCN Red List range maps,existing
+jrc_tmf,macrobiology,,,not-probed,not named in any triage or POC table,JRC Tropical Moist Forest,existing
+mangrove_watch,macrobiology,,,not-probed,not named in any triage or POC table,Global Mangrove Watch,existing
+mapbiomas,macrobiology,,,not-probed,not named in any triage or POC table,MapBiomas,existing
+neotoma,macrobiology,,,not-probed,not named in any triage or POC table,Neotoma Paleoecology Database,existing
+nlcd,macrobiology,,,not-probed,not named in any triage or POC table,NLCD,existing
+obis,macrobiology,,,not-probed,not named in any triage or POC table,OBIS,existing
+phenology,macrobiology,,,not-probed,not named in any triage or POC table,USA-NPN / PEP725,existing
+seabed_habitat,macrobiology,,,not-probed,not named in any triage or POC table,EMODnet Seabed Habitats / substrate,existing
+spam_earthstat,macrobiology,,,not-probed,not named in any triage or POC table,MapSPAM / EarthStat,existing
+worldcereal,macrobiology,,,not-probed,not named in any triage or POC table,ESA WorldCereal,existing
+yield_hist,macrobiology,,,not-probed,not named in any triage or POC table,GDHY global historical yields,existing
+cdc_svi_eji,public health & microbiology,,,not-probed,not named in any triage or POC table,CDC SVI / Environmental Justice Index,existing
+ecdc_atlas,public health & microbiology,,,not-probed,not named in any triage or POC table,ECDC Surveillance Atlas / Eurostat health,existing
+emp_qiita,public health & microbiology,,,not-probed,not named in any triage or POC table,Earth Microbiome Project / Qiita,existing
+espen_jmp,public health & microbiology,,,not-probed,not named in any triage or POC table,ESPEN NTDs / WHO-UNICEF JMP,existing
+food_access,public health & microbiology,,,not-probed,not named in any triage or POC table,USDA Food Access Research Atlas,existing
+globalfungi,public health & microbiology,,,not-probed,not named in any triage or POC table,GlobalFungi / GSMc,existing
+logan,public health & microbiology,,,not-probed,not named in any triage or POC table,Logan (SRA unitigs/contigs on AWS),existing
+malaria_atlas,public health & microbiology,,,not-probed,not named in any triage or POC table,Malaria Atlas Project,existing
+ncbi_biosample,public health & microbiology,ncbi_biosample,,not-probed,"in slot table as deferred-backup, never probed",NCBI BioSample / SRA lat_lon attribute,existing
+ocean_omics,public health & microbiology,,,not-probed,not named in any triage or POC table,Tara Oceans / Malaspina / bioGEOTRACES / OSD,existing
+outbreaks_animal,public health & microbiology,,,not-probed,not named in any triage or POC table,WOAH WAHIS / FAO EMPRES-i,existing
+overdose_rx,public health & microbiology,,,not-probed,not named in any triage or POC table,CDC overdose / opioid dispensing / ARCOS,existing
+pathogen_genomics,public health & microbiology,,,not-probed,not named in any triage or POC table,NCBI Pathogen Detection / Nextstrain / Pathogenwatch,existing
+sandpiper,public health & microbiology,,,not-probed,not named in any triage or POC table,Sandpiper,existing
+seer_globocan,public health & microbiology,,,not-probed,not named in any triage or POC table,SEER / national cancer registries / GLOBOCAN,existing
+soil_biodiversity,public health & microbiology,,,not-probed,not named in any triage or POC table,SoilBON / GlobalFungi / earthworm + nematode atlases,existing
+spire,public health & microbiology,,,not-probed,not named in any triage or POC table,SPIRE (planetary microbiome resource),existing
+usaleep,public health & microbiology,,,not-probed,not named in any triage or POC table,USALEEP / small-area life expectancy,existing
+vital_stats,public health & microbiology,,,not-probed,not named in any triage or POC table,"Vital statistics (births, deaths, causes)",existing
+who_gho,public health & microbiology,,,not-probed,not named in any triage or POC table,WHO Global Health Observatory / GLASS,existing
+accessibility_iso,socio-economic,,,not-probed,not named in any triage or POC table,"Computed isochrones / accessibility (OSRM, Valhalla, OTP+GTFS)",existing
+ag_census,socio-economic,,,not-probed,not named in any triage or POC table,USDA Census of Agriculture / FAO / Eurostat FSS,existing
+aiddata,socio-economic,,,not-probed,not named in any triage or POC table,AidData geocoded aid / World Bank / IATI,existing
+ais_density,socio-economic,,,not-probed,not named in any triage or POC table,EMODnet Human Activities vessel density,existing
+archaeology,socio-economic,,,not-probed,not named in any triage or POC table,Open Context / EAMENA / ADS / national registers,existing
+cap_subsidies,socio-economic,,,not-probed,not named in any triage or POC table,EU CAP payments / USDA farm payments,existing
+concessions,socio-economic,,,not-probed,not named in any triage or POC table,"Mining / logging / oil concessions (GFW, national registries)",existing
+crop_insurance,socio-economic,,,not-probed,not named in any triage or POC table,USDA RMA cause-of-loss,existing
+dhs_clusters,socio-economic,,,not-probed,not named in any triage or POC table,DHS / LSMS / MICS survey clusters,existing
+electoral,socio-economic,,,not-probed,not named in any triage or POC table,Electoral + service districts,existing
+eu_lpis,socio-economic,,,not-probed,not named in any triage or POC table,EU LPIS / crop declarations,existing
+food_security,socio-economic,,,not-probed,not named in any triage or POC table,FEWS NET / IPC / WFP VAM prices,existing
+gadm,socio-economic,,,not-probed,not named in any triage or POC table,GADM,existing
+gbfs,socio-economic,,,not-probed,not named in any triage or POC table,GBFS bikeshare + micromobility feeds,existing
+gdelt_news,socio-economic,,,not-probed,not named in any triage or POC table,GDELT geocoded events + news,existing
+gdl_shdi,socio-economic,,,not-probed,not named in any triage or POC table,Global Data Lab subnational HDI,existing
+geotagged_photos,socio-economic,,,not-probed,not named in any triage or POC table,Wikimedia Commons / Flickr geotagged,existing
+gfw,socio-economic,,,not-probed,not named in any triage or POC table,Global Fishing Watch,existing
+giga_schools,socio-economic,,,not-probed,not named in any triage or POC table,GIGA school mapping / healthsites.io,existing
+glottolog,socio-economic,,,not-probed,not named in any triage or POC table,Glottolog / WALS,existing
+gpwv4,socio-economic,,,not-probed,not named in any triage or POC table,GPW v4 / LandScan,existing
+gridded_gdp,socio-economic,,,not-probed,not named in any triage or POC table,Kummu / Chen gridded GDP + HDI,existing
+gtfs,socio-economic,,,not-probed,not named in any triage or POC table,Mobility Database / transit.land (GTFS),existing
+heritage,socio-economic,,,not-probed,not named in any triage or POC table,UNESCO WHS / Pleiades / EAMENA / national registers,existing
+hist_gazetteer,socio-economic,,,not-probed,not named in any triage or POC table,Pleiades / World Historical Gazetteer / Getty TGN,existing
+hmda,socio-economic,,,not-probed,not named in any triage or POC table,HMDA mortgage lending,existing
+hrsl,socio-economic,,,not-probed,not named in any triage or POC table,Meta/CIESIN HRSL,existing
+land_matrix,socio-economic,,,not-probed,not named in any triage or POC table,Land Matrix,existing
+land_registry,socio-economic,,,not-probed,not named in any triage or POC table,HM Land Registry Price Paid / NL / DK transactions,existing
+landmark,socio-economic,,,not-probed,not named in any triage or POC table,LandMark indigenous & community lands,existing
+meta_rwi,socio-economic,,,not-probed,not named in any triage or POC table,Meta Relative Wealth Index,existing
+migration,socio-economic,,,not-probed,not named in any triage or POC table,UNHCR / IDMC / IOM DTM,existing
+mobility,socio-economic,,,not-probed,not named in any triage or POC table,"Meta Data for Good (movement, social connectedness)",existing
+nfip,socio-economic,,,not-probed,not named in any triage or POC table,FEMA NFIP claims + policies,existing
+openflights,socio-economic,,,not-probed,not named in any triage or POC table,OpenFlights / airline schedules,existing
+opensky,socio-economic,,,not-probed,not named in any triage or POC table,OpenSky Network,existing
+pdo_gi,socio-economic,,,not-probed,not named in any triage or POC table,EU protected designations (PDO/PGI/GI),existing
+religion_census,socio-economic,,,not-probed,not named in any triage or POC table,US Religion Census / congregations,existing
+strava_metro,socio-economic,,,not-probed,not named in any triage or POC table,Strava Metro,existing
+traffic_counts,socio-economic,,,not-probed,not named in any triage or POC table,National/state traffic counts (AADT),existing
+water_rights,socio-economic,,,not-probed,not named in any triage or POC table,US western state water rights / irrigation districts,existing
+wikipedia_geo,socio-economic,,,not-probed,not named in any triage or POC table,Wikipedia geocoded articles,existing
+ascat_backscatter,spectral,,,not-probed,not named in any triage or POC table,ASCAT scatterometer,existing
+ecostress,spectral,,,not-probed,not named in any triage or POC table,ECOSTRESS,existing
+hls,spectral,hls_harmonized,,not-probed,"in slot table as deferred-backup, never probed",HLS S30/L30 v2,existing
+landsat_c2l1_mss,spectral,,,not-probed,not named in any triage or POC table,Landsat 1-5 MSS C2 L1,existing
+modis_sr,spectral,,,not-probed,not named in any triage or POC table,MODIS MOD09/MYD09,existing
+natl_ortho,spectral,napl_canada;provincial_ortho,,not-probed,"in slot table as deferred-backup, never probed",National orthophoto portals,existing
+nisar,spectral,,,not-probed,not named in any triage or POC table,NISAR L+S band,existing
+openaerialmap,spectral,,,not-probed,not named in any triage or POC table,OpenAerialMap,existing
+sentinel1_grd,spectral,sentinel1_grd,,not-probed,"in slot table as deferred-backup, never probed",Sentinel-1 GRD,existing
+sentinel2_l1c,spectral,,,not-probed,not named in any triage or POC table,Sentinel-2 MSI L1C,existing
+sentinel3,spectral,sentinel3_slstr,,not-probed,"in slot table as deferred-backup, never probed",Sentinel-3 OLCI / SLSTR,existing
+viirs,spectral,,,not-probed,not named in any triage or POC table,VIIRS VNP09/VNP21/VNP13,existing
+argo_woa,water bodies,,,not-probed,not named in any triage or POC table,Argo floats / World Ocean Atlas / WOD,existing
+cmems,water bodies,,,not-probed,not named in any triage or POC table,Copernicus Marine (CMEMS),existing
+groundwater,water bodies,,,not-probed,not named in any triage or POC table,Global water table depth / WHYMAP,existing
+grwl,water bodies,,,not-probed,not named in any triage or POC table,Global River Widths from Landsat,existing
+hydroatlas,water bodies,,,not-probed,not named in any triage or POC table,BasinATLAS / RiverATLAS,existing
+mur_sst,water bodies,,,not-probed,not named in any triage or POC table,MUR SST / OSTIA,existing
+ocean_color,water bodies,,,not-probed,not named in any triage or POC table,Sentinel-3 OLCI / MODIS / PACE ocean colour,existing
+tides,water bodies,,,not-probed,not named in any triage or POC table,FES2022 / TPXO,existing
+water_level,water bodies,,,not-probed,not named in any triage or POC table,DAHITI / Hydroweb / G-REALM,existing
+kartaview,infrastructure,,mapillary_kartaview,poc-failed,ConnectionError: auth-blocked: no keyless street-level imagery route; ,KartaView (OpenStreetCam),existing
+mapillary,infrastructure,mapillary,mapillary_kartaview,poc-failed,ConnectionError: auth-blocked: no keyless street-level imagery route; ,Mapillary,existing
+osm_overpass,infrastructure,osm_power;osm_railways;osm_buildings;osm_roads,osm_overpass,poc-failed,allowlist-blocked: overpass server busy/blocked after retries (ProxyEr,OpenStreetMap (Overpass/extracts),existing
+aafc_aci,macrobiology,aafc_aci,aafc_aci,poc-failed,"allowlist-blocked: HTTPSConnectionPool(host='www.agr.gc.ca', port=443)",AAFC Annual Crop Inventory,new
+,(unmatched),3dep_seamless,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),"canadian_wetland_inventory (plan-step extra, not in slot table)",,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cansis_slc,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cchs_health_region,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cffdrs_fwi,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),crosscanada_radon,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cwfis_hotspots,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),hrdem_1m,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),hrdem_dsm,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),"inland_water_250m (plan-step extra, not in slot table)",,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),maus_v2,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),mrdem_30,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nbac_canada,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nhd_us,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_cancvi,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_dynamic_surface_water,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_et,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_flood_susceptibility,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_land_deformation,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_lfd,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrcan_snow_dynamics,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),odef_odhf_statcan,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),odhf_statcan,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),statcan_taxfiler,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),tiger_boundaries,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),tiger_roads,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),usgs_fdsn,,triage-reachable-not-built,triage/slot candidate with no catalogue module,,no catalogue entry
+modis_lc_fire,climate,modis_burned_area,,triage-reachable-not-built,probe reached it; no adapter written,MODIS MCD12Q1 / MCD64A1,existing
+ssurgo,geology,gnatsgo,,triage-reachable-not-built,probe reached it; no adapter written,gNATSGO / SSURGO,existing
+terrain_derived,geology,terrain_derived,,triage-reachable-not-built,probe reached it; no adapter written,Derived terrain (compute),existing
+nwis,hazards,nwis,,triage-reachable-not-built,probe reached it; no adapter written,USGS NWIS,existing
+sentinel5p,hazards,tropomi_no2,,triage-reachable-not-built,probe reached it; no adapter written,Sentinel-5P TROPOMI,existing
+severe_wx,hazards,noaa_storm_events,,triage-reachable-not-built,probe reached it; no adapter written,NOAA SPC storm reports / ESWD,existing
+blackmarble,infrastructure,viirs_black_marble,,triage-reachable-not-built,probe reached it; no adapter written,VIIRS VNP46 Black Marble,existing
+ghsl_built,infrastructure,ghsl_built_h;ghsl_built_s;ghsl_urban_centres,,triage-reachable-not-built,probe reached it; no adapter written,"GHSL (GHS-BUILT-S/H/V, POP, SMOD)",existing
+ms_buildings,infrastructure,ms_buildings,,triage-reachable-not-built,probe reached it; no adapter written,Microsoft Global Building Footprints,existing
+emit,latent,emit,,triage-reachable-not-built,probe reached it; no adapter written,EMIT / methane point sources,existing
+gedi,macrobiology,gedi_l2a,,triage-reachable-not-built,probe reached it; no adapter written,GEDI L2A/L2B/L4A,existing
+gedi_l4b,macrobiology,hgb,,triage-reachable-not-built,probe reached it; no adapter written,GEDI L4A/L4B,existing
+business_estab,socio-economic,statcan_business_counts;us_cbp,,triage-reachable-not-built,probe reached it; no adapter written,Overture places / OSM / OpenCorporates / GLEIF,existing
+naip,spectral,naip,,triage-reachable-not-built,probe reached it; no adapter written,NAIP,existing
+grace,water bodies,grace_fo,,triage-reachable-not-built,probe reached it; no adapter written,GRACE / GRACE-FO,existing
+,(unmatched),acs_income,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cis_ice_charts,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),eccc_storm_events,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),epa_aqs,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),fields_of_the_world,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),global_tailings_inventory,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),gsc_gravmag,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),hifld_facilities,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),hifld_pipelines,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),mtbs_us,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),naps,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),npri,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),npri_facilities,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nrn_canada,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nwi_us,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),odb_statcan,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),padus,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_crown_land,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),statcan_commute,,triage-unreachable,triage/slot candidate with no catalogue module,,no catalogue entry
+rgi_glims,geology,rgi,,triage-unreachable,network-blocked: daacdata.apps.nsidc.org,Randolph Glacier Inventory / GLIMS,existing
+acag_pm25,hazards,modelled_surface_pm25,,triage-unreachable,no PM2.5 surface among the 52 datacube.services.geo.ca collections or the 138 Planetary Computer collections (id/title scan),ACAG global PM2.5,existing
+openaq,hazards,openaq,,triage-unreachable,ProxyError: Tunnel connection failed: 403 Forbidden (host api.openaq.org not on the allowlist),OpenAQ,existing
+pfas_ucmr,hazards,ucmr5,,triage-unreachable,ProxyError: Tunnel connection failed: 403 Forbidden (host www.epa.gov not on the allowlist),EPA UCMR5 / PFAS Analytic Tools,existing
+gem_trackers,infrastructure,gem_trackers,,triage-unreachable,"network-blocked: globalenergymonitor.org (ProxyError, proxy tunnel refused)",Global Energy Monitor (25 trackers),existing
+openaddresses,infrastructure,openaddresses,,triage-unreachable,"network-blocked: batch.openaddresses.io (ProxyError, proxy tunnel refused)",OpenAddresses,existing
+opencellid,infrastructure,opencellid,,triage-unreachable,"network-blocked: opencellid.org (ProxyError, proxy tunnel refused)",OpenCelliD,existing
+fia_nfi,macrobiology,fia_us,,triage-unreachable,network-blocked: apps.fs.usda.gov,USDA FIA / national forest inventories,existing
+soil_fauna,macrobiology,soil_fauna_atlas,,triage-unreachable,network-blocked: api.datacite.org; Crossref query returned only comment/erratum records not the dataset,SoilBON / earthworm / nematode / soil fauna atlases,existing
+travel_time_health,public health & microbiology,travel_time_health,,triage-unreachable,not present in either STAC catalogue (keyword scan of id/title/description; manual read of hits found no relevant collection),MAP / Weiss accessibility to healthcare + cities,existing
+geoboundaries,socio-economic,geoboundaries,,triage-unreachable,network-blocked: www.geoboundaries.org (proxy tunnel 403),geoBoundaries,existing
+geonames,socio-economic,geonames;gnis,,triage-unreachable,network-blocked: download.geonames.org (proxy tunnel 403),GeoNames / NGA GNS,existing
+wdpa,socio-economic,wdpa;padus,,triage-unreachable,network-blocked: api.protectedplanet.net (proxy tunnel 403),WDPA / Natura 2000 / KBA,existing
+worldpop,socio-economic,worldpop,,triage-unreachable,ProxyError: Tunnel connection failed: 403 Forbidden (host stac.worldpop.org not on the allowlist),WorldPop,existing
+hydrosheds,water bodies,hydrolakes;hydrosheds,,triage-unreachable,network-blocked: data.hydrosheds.org,HydroSHEDS / RIVERS / BASINS / LAKES,existing
+,(unmatched),aboriginal_lands_canada,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),aci_vectorised,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),candcs_u6,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),carts_canada,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cer_pipelines,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cfia_reportable,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cgndb,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),chs_nonna,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),cwi_v3,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),eccc_enforcement,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),eccc_normals,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),eccc_pfas,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),etick_canada,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),fcsi,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),gsc_surficial,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),hydat,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nfi_biomass_canada,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nfi_canada_plots,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),nhn_canada,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),noaa_normals,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),oda_statcan,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),permafrost_extent,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),phac_notifiable,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),phac_wastewater,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),pma_nrcan,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_assessment,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),provincial_parcel_fabric,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),statcan_boundary_files,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),statcan_census_da,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),statcan_population_centres,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+,(unmatched),tang_werner,,triage-unresolved,triage/slot candidate with no catalogue module,,no catalogue entry
+daymet_prism,climate,daymet,,triage-unresolved,"planetarycomputer STAC search with collections=daymet-daily-na,daymet-monthly-na,daymet-annual-na returned 0 features for both AOI and control; cause ",Daymet / PRISM,existing
+flood_zones,hazards,fema_nfhl,,triage-unresolved,"SSLError(SSLEOFError(8, 'UNEXPECTED_EOF_WHILE_READING')) on hazards.fema.gov for both AOI and control calls (host allowlisted in wave 2; not an allowl",FEMA NFHL / national flood maps,existing
+landslides,hazards,gsc_landslide;nasa_landslide_catalogue,,triage-unresolved,no inventory-level GSC landslide dataset found in 2 CKAN searches,NASA COOLR / national inventories,existing
+mine_polygons,infrastructure,xu_mining_timeseries,,triage-unresolved,not probed: rank-1 reachable,Global mining land use (Maus et al.),existing
+cgls,latent,cgls,,triage-unresolved,not probed: rank-1 reachable,Copernicus Global Land Service,existing
+ihme_lbd,public health & microbiology,ihme_lbd,,triage-unresolved,"network-blocked: ghdx.healthdata.org (ProxyError, tunnel refused)",IHME Local Burden of Disease / GBD subnational,existing
+vectorbase,public health & microbiology,vectorbase,,triage-unresolved,"network-blocked: vectorbase.org (ProxyError, tunnel refused)",VectorBase / MAP vector occurrence,existing
+cadastre_us,socio-economic,us_county_parcels,,triage-unresolved,No single endpoint exists to probe; rep AOI is in Canada,US county/state parcel portals,existing
+enmap_prisma,spectral,enmap;prisma,,triage-unresolved,network-blocked: host geoservice.dlr.de not on the allowlist,EnMAP / PRISMA / DESIS,existing
+era5,climate,era5;era5_land,era5_open_meteo,working,1/1 adapter(s) returning features,ERA5 / ERA5-Land reanalysis,existing
+sea_ice,climate,,noaa_nsidc_sic_cdr,working,1/1 adapter(s) returning features,NSIDC sea ice concentration/extent/age/motion,existing
+copernicus_dem,geology,cop_dem_glo30,cop_dem_glo30,working,1/1 adapter(s) returning features,Copernicus DEM GLO-30 / GLO-90,existing
+gebco,geology,gebco,etopo_2022_30s_bed,working,1/1 adapter(s) returning features,GEBCO 2024 / SRTM15+,existing
+gsc_surficial_1880a,geology,,gsc_surficial_1880a,working,1/1 adapter(s) returning features,GSC Surficial Geology of Canada (Map 1880A),new
+macrostrat,geology,macrostrat,macrostrat,working,1/1 adapter(s) returning features,Macrostrat,existing
+natl_lidar,geology,,mrdem_30,working,1/1 adapter(s) returning features,National lidar programmes,existing
+nrcan_900a,geology,,nrcan_900a,working,1/1 adapter(s) returning features,NRCan 900A Principal Mineral Areas / producing mines,new
+permafrost,geology,,nrcan_permafrost,working,1/1 adapter(s) returning features,Obu et al. permafrost zonation / ground temperature,existing
+radiometrics,geology,gsc_radiometric;usgs_radiometric,usgs_namrad,working,1/1 adapter(s) returning features,"Airborne gamma-ray spectrometry (USGS NURE/EarthMRI, GA, GSC)",existing
+cams,hazards,,cams_open_meteo,working,1/1 adapter(s) returning features,CAMS reanalysis (EAC4) / forecasts,existing
+eccc_ghgrp,hazards,,eccc_ghgrp,working,1/1 adapter(s) returning features,ECCC Greenhouse Gas Reporting Program,new
+eccc_naps,hazards,,eccc_naps,working,1/1 adapter(s) returning features,ECCC National Air Pollution Surveillance (NAPS),new
+eccc_npri,hazards,,eccc_npri,working,1/1 adapter(s) returning features,ECCC National Pollutant Release Inventory (NPRI),new
+epa_aqs_airdata,hazards,,epa_aqs_airdata,working,1/1 adapter(s) returning features,US EPA AQS / AirData annual summaries,new
+eq_catalog,hazards,eccc_earthquakes_canada,usgs_fdsn,working,1/1 adapter(s) returning features,USGS ComCat / ISC / GCMT,existing
+tbs_fcsi,hazards,,tbs_fcsi,working,1/1 adapter(s) returning features,TBS Federal Contaminated Sites Inventory,new
+wqp,hazards,wqp,wqp,working,1/1 adapter(s) returning features,Water Quality Portal (USGS/EPA),existing
+epa_frs,infrastructure,epa_echo;epa_frs;epa_superfund_npl;epa_tri,epa_echo;epa_echo_tri;epa_frs_sems,working,3/3 adapter(s) returning features,US EPA FRS / TRI / ECHO / NPDES / Superfund,existing
+mrds,infrastructure,mrds_usgs,usgs_mineplant,working,1/1 adapter(s) returning features,USGS MRDS / MRDATA,existing
+overture,infrastructure,overture;overture_divisions;overture_transportation,overture_addresses;overture_buildings;overture_communication;overture_divisions;overture_land_use;overture_power;overture_power_plant;overture_transportation;overture_utility,working,9/9 adapter(s) returning features,Overture Maps,existing
+power_plants,infrastructure,wri_gppd,wri_gppd,working,1/1 adapter(s) returning features,WRI Global Power Plant Database,existing
+alphaearth,latent,alphaearth,alphaearth_v1_annual,working,1/1 adapter(s) returning features,AlphaEarth Satellite Embedding V1,existing
+clay_prithvi,latent,,clay_v0_embeddings,working,1/1 adapter(s) returning features,Clay v1.5 / Prithvi (run inference),existing
+modis_bio,latent,modis_13q1;modis_bio;modis_mod16,modis_13q1,working,1/1 adapter(s) returning features,MODIS MOD11/13/15/16/17,existing
+esa_worldcover,macrobiology,esa_worldcover,esa_worldcover,working,1/1 adapter(s) returning features,ESA WorldCover,existing
+esri_lulc,macrobiology,,io_lulc_annual_v02,working,1/1 adapter(s) returning features,Esri 10m Land Cover,existing
+field_boundaries,macrobiology,,usda_csb_fiboa,working,1/1 adapter(s) returning features,Global field boundary map (fiboa) / AI4Boundaries,existing
+gbif,macrobiology,gbif,gbif,working,1/1 adapter(s) returning features,GBIF occurrences,existing
+hansen_gfc,macrobiology,hansen_gfc,hansen_gfc_v1_13,working,1/1 adapter(s) returning features,Hansen Global Forest Change,existing
+nrcan_landcover,macrobiology,nrcan_landcover,nrcan_landcover,working,1/1 adapter(s) returning features,NRCan Land Cover of Canada (30 m),new
+spawn_biomass,macrobiology,,hgb,working,1/1 adapter(s) returning features,Spawn/Gibbs global biomass carbon,existing
+usda_cdl,macrobiology,usda_cdl,usda_cdl,working,1/1 adapter(s) returning features,USDA Cropland Data Layer,existing
+cdc_nndss,public health & microbiology,cdc_nndss,cdc_nndss,working,1/1 adapter(s) returning features,US CDC NNDSS notifiable disease surveillance,new
+cdc_places,public health & microbiology,cdc_places,cdc_places,working,1/1 adapter(s) returning features,CDC PLACES,existing
+ena_geo,public health & microbiology,ena_geo,ena_geo,working,1/1 adapter(s) returning features,ENA portal geospatial search,existing
+health_facilities,public health & microbiology,,statcan_odhf,working,1/1 adapter(s) returning features,healthsites.io / NPI / CMS POS / GIGA,existing
+mgnify,public health & microbiology,mgnify,mgnify,working,1/1 adapter(s) returning features,MGnify (EBI),existing
+phac_rvdss,public health & microbiology,,phac_rvdss,working,1/1 adapter(s) returning features,PHAC Respiratory Virus Detection Surveillance,new
+wastewater,public health & microbiology,cdc_nwss,cdc_nwss;phac_wastewater,working,2/2 adapter(s) returning features,CDC NWSS / WastewaterSCAN / EU sentinel,existing
+cadastre_open,socio-economic,,bc_pmbc_parcel_fabric;bc_tantalis_crown;donneesquebec_role,working,2/3 adapter(s) returning features,Open national cadastre,existing
+census_grids,socio-economic,us_census_acs,acs5_api;tigerweb_blocks2020,working,1/2 adapter(s) returning features,Eurostat GISCO / US TIGER + ACS,existing
+census_micro,socio-economic,,statcan_csd_2016;statcan_dwelling_value;statcan_wds_popest,working,3/3 adapter(s) returning features,National census + IPUMS International,existing
+ghsl_pop,socio-economic,ghsl_pop,ghs_pop_r2023a;ghs_smod_r2023a,working,2/2 adapter(s) returning features,"GHSL (GHS-BUILT-S/H/V, POP, SMOD)",existing
+lodes,socio-economic,lodes_us,lehd_lodes8,working,1/1 adapter(s) returning features,US LEHD LODES,existing
+native_land,socio-economic,bia_aiannh,nrcan_alta;tigerweb_aiannh,working,2/2 adapter(s) returning features,Native Land Digital / treaty boundaries,existing
+natural_earth,socio-economic,,natural_earth_10m,working,1/1 adapter(s) returning features,Natural Earth,existing
+wikidata_geo,socio-economic,wikidata_geo,wikidata_sparql,working,1/1 adapter(s) returning features,Wikidata coordinate-bearing entities,existing
+landsat_c2l2,spectral,landsat_c2l2_st;landsat_c2l2,landsat_c2l2_st,working,1/1 adapter(s) returning features,Landsat 4-9 Collection 2 L2,existing
+palsar_mosaic,spectral,alos_palsar_mosaic,alos_palsar_mosaic,working,1/1 adapter(s) returning features,ALOS PALSAR/PALSAR-2 annual mosaic,existing
+sentinel1_rtc,spectral,sentinel1_rtc,sentinel1_rtc,working,1/1 adapter(s) returning features,Sentinel-1 RTC,existing
+sentinel2_l2a,spectral,sentinel2_l2a,s2_signature_v1;sentinel2_l2a,working,2/2 adapter(s) returning features,Sentinel-2 MSI L2A,existing
+jrc_gsw,water bodies,nrcan_surface_water_frequency;jrc_gsw,jrc_gsw,working,1/1 adapter(s) returning features,JRC Global Surface Water,existing
