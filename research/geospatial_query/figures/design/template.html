@@ -58,7 +58,10 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 }
 .panel h2 b { color: var(--accent); font-weight: 600; }
 .panel h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: .02em; }
-.vibe img { display: block; width: 100%; height: auto; border-radius: 2px; background: #fff; }
+.vibe img { display: block; width: 100%; height: auto; }
+.vibe .dark { display: none; }
+:root[data-dark] .vibe .light { display: none; }
+:root[data-dark] .vibe .dark { display: block; }
 
 /* Signature */
 .sig { display: grid; gap: 4px; }
@@ -72,6 +75,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .def li::marker { color: var(--muted); }
 .def code { font-family: var(--mono); font-size: 12.5px; }
 .def .t { color: var(--f1); }
+.def .p { color: color-mix(in srgb, var(--f1) 50%, var(--panel)); }
+.def .k { color: var(--muted); font-family: var(--body); font-size: 12.5px; }
 .def a { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
 .def:target > div b { text-decoration: underline; }
 
@@ -95,16 +100,14 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .table td:last-child { color: var(--muted); }
 
 /* Method */
-.driver { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12.5px; }
-.driver span { padding: 4px 10px; border: 1px solid var(--rule); border-radius: 2px; }
-.driver span.on { border-color: var(--accent); color: var(--accent); }
-.driver i { color: var(--muted); font-style: normal; }
+.caption { margin: 0; font-size: 13.5px; color: var(--muted); max-width: 65ch; }
 .dag { overflow-x: auto; }
 .dag svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
 .dag .dark { display: none; }
 :root[data-dark] .dag .light { display: none; }
 :root[data-dark] .dag .dark { display: block; }
-.dag text { font-family: var(--mono); }
+.fams summary .blurb { display: block; font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.fams summary .name { flex: 1; }
 </style>
 
 <main class="sheet">
@@ -117,7 +120,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 
   <section class="panel">
     <h2><b>1</b>Abstract</h2>
-    <div class="vibe"><img src="vibe.svg" alt="Vibe abstract collage"></div>
+    <div class="vibe"><img class="light" src="vibe-light.svg" alt="Vibe abstract collage"><img class="dark" src="vibe-dark.svg" alt="Vibe abstract collage"></div>
   </section>
 
   <section class="panel">
@@ -126,14 +129,14 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
   </section>
 
   <section class="panel">
-    <h2><b>3</b>Feature set</h2>
+    <h2><b>3</b>Features</h2>
     <div id="bars"></div>
     <div class="fams" id="fams"></div>
   </section>
 
   <section class="panel">
     <h2><b>4</b>Method</h2>
-    <div class="driver"><span class="on">metasmith plan</span><i>→</i><span>Nextflow driver</span><i>→</i><span>1 task per source, all AOIs</span></div>
+    <p class="caption">Pipeline is a simple fanout and collect across sources. Diagram collapsed by feature family for legibility.</p>
     <div class="dag"><div class="light"><!--DAG-LIGHT--></div><div class="dark"><!--DAG-DARK--></div></div>
   </section>
 </main>
@@ -146,34 +149,47 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 
 const SPEC = [
   { group: "Definitions", types: [
-    { name: "Point", kind: "made of", rows: [["longitude", "float"], ["latitude", "float"]] },
-    { name: "AOI", kind: "made of", rows: [["outline", "list of Point"]] },
-    { name: "FeatureFamily", kind: "one of", opts: ["socio-economic", "infrastructure", "hazards", "macrobiology",
-      "geology", "microbiology-health", "climate", "spectral", "water", "latent"] },
-    { name: "Licence", kind: "one of", opts: ["permissive", "share-alike", "noncommercial", "restricted"] },
-    { name: "Feature", kind: "made of", rows: [
-      ["feature", "text"], ["value", "any"], ["SI_unit", "text"], ["family", "FeatureFamily"], ["time", "Time"]] },
-    { name: "Error", kind: "made of", rows: [
-      ["feature", "text"], ["family", "FeatureFamily"], ["time", "Time"], ["message", "text"]] },
+    { name: "Point", kind: "is composed of", rows: [["longitude", "float"], ["latitude", "float"]] },
+    { name: "AOI", kind: "is composed of", rows: [["outline", "list of Point"]] },
+    { name: "Interval", kind: "is composed of", rows: [["start", "time"], ["end", "time"]] },
+    { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
+      ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"]] },
+    { name: "Licence", kind: "is one of", opts: [
+      ["permissive", "CC-BY, OGL, public domain · any use, with attribution"],
+      ["share-alike", "above + ODbL, CC-BY-SA · derived data keeps the licence"],
+      ["noncommercial", "above + CC-BY-NC · no commercial use"],
+      ["restricted", "above + custom terms · no redistribution without permission"]] },
+    { name: "Feature", kind: "is composed of", rows: [
+      ["feature", "text"], ["family", "FeatureFamily"], ["time", "one of time, Interval"], ["value", "any"], ["SI_unit", "text"]] },
+    { name: "Error", kind: "is composed of", rows: [
+      ["feature", "text"], ["family", "FeatureFamily"], ["time", "one of time, Interval"], ["message", "text"]] },
   ] },
   { group: "Input", types: [
-    { name: "Query", kind: "made of", rows: [
-      ["aoi", "AOI"], ["time", "Time"], ["time_tolerance", "Duration"],
-      ["feature_families", "list of FeatureFamily"], ["licence", "Licence"]] },
+    { name: "Query", kind: "is composed of", rows: [
+      ["aoi", "AOI"], ["feature_families", "list of FeatureFamily"], ["time", "time"], ["time_tolerance", "duration"],
+      ["licence", "Licence"]] },
   ] },
   { group: "Output", types: [
-    { name: "QueryResult", kind: "made of", rows: [
+    { name: "QueryResult", kind: "is composed of", rows: [
       ["aoi", "AOI"], ["features", "list of Feature"], ["errors", "list of Error"]] },
   ] },
 ];
 
 const NAMES = new Set(SPEC.flatMap(g => g.types.map(t => t.name)));
-const link = txt => esc(txt).replace(/\b[A-Za-z_]+\b/g, w => NAMES.has(w) ? `<a href="#t-${w}">${w}</a>` : w);
+const KEYWORDS = ["list of", "one of"];
+const typeExpr = expr => {
+  const kw = KEYWORDS.find(k => expr.startsWith(k + " "));
+  const rest = kw ? expr.slice(kw.length + 1) : expr;
+  const parts = rest.split(", ").map(w => NAMES.has(w)
+    ? `<code class="t"><a href="#t-${w}">${w}</a></code>`
+    : `<code class="p">${esc(w)}</code>`);
+  return (kw ? `<span class="k">${kw}</span> ` : "") + parts.join('<span class="k">, </span>');
+};
 const def = t => `<li class="def" id="t-${t.name}">
   <div><b>${t.name}</b> <i>${t.kind}</i></div>
   <ul>${t.opts
-    ? t.opts.map(o => `<li><code class="t">${esc(o)}</code></li>`).join("")
-    : t.rows.map(([f, ty]) => `<li><code>${esc(f)}</code>: <code class="t">${link(ty)}</code></li>`).join("")}</ul>
+    ? t.opts.map(([o, note]) => `<li><code class="t">${esc(o)}</code>${note ? ` <span class="k">· ${esc(note)}</span>` : ""}</li>`).join("")
+    : t.rows.map(([f, ty]) => `<li><code>${esc(f)}</code>: ${typeExpr(ty)}</li>`).join("")}</ul>
 </li>`;
 document.getElementById("sig").innerHTML =
   SPEC.map(g => `<h3>${g.group}</h3><ul>${g.types.map(def).join("")}</ul>`).join("");
@@ -199,15 +215,15 @@ function drawBars() {
     showlegend: false, margin: { l: 190, r: 30, t: 4, b: 48 },
     paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
     font: { family: v("--mono"), size: 12, color: v("--ink") },
-    xaxis: axis([0, 0.6], "features"), xaxis2: axis([0.68, 1], "sources"),
-    yaxis: { automargin: true, tickfont: { family: v("--body"), size: 13 } },
+    xaxis: axis([0, 0.46], "features"), xaxis2: axis([0.54, 1], "sources"),
+    yaxis: { automargin: true, ticklabelstandoff: 12, tickfont: { family: v("--body"), size: 13 } },
     bargap: 0.35,
   }, { displayModeBar: false, responsive: true });
 }
 
 document.getElementById("fams").innerHTML = DATA.map((d, i) =>
   `<details id="fam-${i}">
-     <summary>${esc(d.family)}<span class="count">${d.features.length}</span></summary>
+     <summary><span class="name">${esc(d.family)}<span class="blurb">${esc(d.blurb)}</span></span><span class="count">${d.features.length}</span></summary>
      <div class="table"><table>
        <thead><tr><th>Feature</th><th>Description</th><th>Source</th></tr></thead>
        <tbody>${d.features.map(f => `<tr><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.source)}</td></tr>`).join("")}</tbody>
