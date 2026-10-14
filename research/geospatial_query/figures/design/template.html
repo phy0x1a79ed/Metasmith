@@ -1,0 +1,204 @@
+<title>Geospatial Query</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column of survey-sheet panels, scrolled vertically; one family palette shared by panels 3 and 4. */
+:root {
+  --paper: #f3f4ef;
+  --panel: #fbfbf8;
+  --ink: #1d2420;
+  --muted: #66706a;
+  --rule: #d5d9d1;
+  --accent: #2f6b4f;
+  --code: #eef0ea;
+  --f1: #b5543c; --f2: #7d6a58; --f3: #c48a1f; --f4: #4f8a3a; --f5: #8c6b3e;
+  --f6: #9b4f7a; --f7: #3f7fa8; --f8: #6a5fb0; --f9: #2f8f8f; --f10: #55606a;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #141816; --panel: #1b201d; --ink: #e4e8e2; --muted: #98a29b; --rule: #2e3531; --accent: #7cc49f; --code: #222824;
+    --f1: #e07a60; --f2: #b09a86; --f3: #e2ae4a; --f4: #82bd6a; --f5: #c49b66;
+    --f6: #cf7fac; --f7: #6fb0d8; --f8: #9d92e0; --f9: #5cc2c2; --f10: #9aa6b0;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141816; --panel: #1b201d; --ink: #e4e8e2; --muted: #98a29b; --rule: #2e3531; --accent: #7cc49f; --code: #222824;
+  --f1: #e07a60; --f2: #b09a86; --f3: #e2ae4a; --f4: #82bd6a; --f5: #c49b66;
+  --f6: #cf7fac; --f7: #6fb0d8; --f8: #9d92e0; --f9: #5cc2c2; --f10: #9aa6b0;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--body); }
+.sheet {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px;
+  max-width: 920px; margin: 0 auto; padding-block: 20px 32px; padding-inline: 20px;
+}
+.bar { display: flex; justify-content: flex-end; }
+.toggle {
+  display: grid; place-items: center; width: 34px; height: 34px; padding: 0; cursor: pointer;
+  color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 50%;
+}
+.toggle svg { width: 17px; height: 17px; }
+.toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.toggle .sun { display: none; }
+:root[data-dark] .toggle .sun { display: block; }
+:root[data-dark] .toggle .moon { display: none; }
+
+.panel {
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 3px;
+  padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 16px; min-width: 0;
+}
+.panel h2 {
+  margin: 0; font-family: var(--display); font-weight: 600; font-size: 15px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  display: flex; gap: 10px; align-items: baseline;
+}
+.panel h2 b { color: var(--accent); font-weight: 600; }
+.panel h3 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: .02em; }
+.vibe img { display: block; width: 100%; height: auto; border-radius: 2px; background: #fff; }
+
+/* Signature */
+.sig { display: grid; gap: 14px; }
+.sig pre {
+  margin: 0; padding: 14px 16px; overflow-x: auto; background: var(--code); border-radius: 2px;
+  font-family: var(--mono); font-size: 12.5px; line-height: 1.6; tab-size: 2;
+}
+.sig .ty { color: var(--accent); font-weight: 500; }
+.sig .st { color: var(--f1); }
+.sig .cm { color: var(--muted); font-style: italic; }
+.sig .op { color: var(--f8); }
+
+/* Feature set */
+.bars { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content; gap: 6px 12px; align-items: center; }
+.bars .name { font-size: 13px; }
+.bars .track { height: 11px; }
+.bars .fill { display: block; height: 100%; border-radius: 1px; }
+.bars .n { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.fams { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.fams details { border-bottom: 1px solid var(--rule); }
+.fams summary {
+  display: flex; align-items: center; gap: 10px; padding: 9px 2px; cursor: pointer; list-style: none; font-size: 14px;
+}
+.fams summary::-webkit-details-marker { display: none; }
+.fams summary::before { content: "▸"; font-size: 11px; color: var(--muted); width: 10px; }
+.fams details[open] summary::before { content: "▾"; }
+.fams summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.swatch { width: 10px; height: 10px; border-radius: 1px; flex: none; }
+.fams summary .count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.table { overflow-x: auto; padding-bottom: 10px; }
+.table table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.table th { text-align: left; font-family: var(--display); font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 6px 10px 6px 0; border-bottom: 1px solid var(--rule); }
+.table td { padding: 4px 10px 4px 0; vertical-align: top; border-bottom: 1px solid var(--code); }
+.table td:first-child, .table td:last-child { font-family: var(--mono); font-size: 12px; white-space: nowrap; }
+.table td:last-child { color: var(--muted); }
+
+/* Method */
+.driver { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12.5px; }
+.driver span { padding: 4px 10px; border: 1px solid var(--rule); border-radius: 2px; }
+.driver span.on { border-color: var(--accent); color: var(--accent); }
+.driver i { color: var(--muted); font-style: normal; }
+.dag { overflow-x: auto; }
+.dag svg { display: block; margin: 0 auto; width: min(100%, 720px); height: auto; }
+.dag text { font-family: var(--mono); }
+</style>
+
+<main class="sheet">
+  <div class="bar">
+    <button class="toggle" id="theme" type="button" aria-label="Toggle light and dark theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M1.5 12H4M20 12h2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+    </button>
+  </div>
+
+  <section class="panel">
+    <h2><b>1</b>Abstract</h2>
+    <div class="vibe"><img src="vibe.svg" alt="Vibe abstract collage"></div>
+  </section>
+
+  <section class="panel">
+    <h2><b>2</b>Pipeline signature</h2>
+    <div class="sig">
+      <h3>Input</h3>
+<pre class="code">query(aoi: AOI, when?: Interval, families?: Family[], licences?: Licence[]) → FeatureSet
+
+AOI      = GeoJSON.Polygon | GeoJSON.MultiPolygon      // EPSG:4326
+Interval = { start: Date, end: Date }                   // default: latest
+Family   = "socio-economic" | "infrastructure" | "hazards" | "macrobiology"
+         | "geology" | "health-microbiology" | "climate" | "spectral"
+         | "water" | "latent"                           // default: all
+Licence  = "permissive" | "share-alike" | "noncommercial" | "restricted"</pre>
+      <h3>Output</h3>
+<pre class="code">FeatureSet   = { aoi: AOI, queried_at: DateTime, results: Result[] }
+
+Result       = Found | Unavailable | NotAttempted      // one per layer × source
+Found        = Slot &amp; { status: "found", rank: int, fill: Fill,
+                        observed: Date, res_m: number | "vector", features: Feature[] }
+Unavailable  = Slot &amp; { status: "unavailable", reason: UnavailableReason }
+NotAttempted = Slot &amp; { status: "not-attempted", reason: SkipReason }
+
+Slot         = { layer: LayerId, source: SourceId, family: Family, licence: Licence }
+Fill         = "observed" | "inferred" | "analogue"
+Feature      = { name: FeatureId, value: number | string, unit?: string }
+
+UnavailableReason = "no-data" | "source-error" | "auth-required"
+SkipReason        = "out-of-coverage" | "family-excluded" | "licence-excluded"</pre>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2><b>3</b>Feature set</h2>
+    <div class="bars" id="bars"></div>
+    <div class="fams" id="fams"></div>
+  </section>
+
+  <section class="panel">
+    <h2><b>4</b>Method</h2>
+    <div class="driver"><span class="on">metasmith plan</span><i>→</i><span>Nextflow driver</span><i>→</i><span>1 task per source × AOI</span></div>
+    <div class="dag"><!--DAG--></div>
+  </section>
+</main>
+
+<script>
+const DATA = /*FEATURES*/[];
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+document.querySelectorAll("pre.code").forEach(pre => {
+  pre.innerHTML = esc(pre.textContent)
+    .replace(/(\/\/[^\n]*)|(&quot;[^&]*?&quot;)|\b([A-Z][A-Za-z]*(?:\.[A-Z][A-Za-z]*)?)\b|(\||&amp;|→)/g,
+      (m, cm, st, ty, op) => cm ? `<span class="cm">${cm}</span>`
+        : st ? `<span class="st">${st}</span>`
+        : ty ? `<span class="ty">${ty}</span>`
+        : `<span class="op">${op}</span>`);
+});
+
+const max = Math.max(...DATA.map(d => d.features.length));
+document.getElementById("bars").innerHTML = DATA.map((d, i) =>
+  `<span class="name">${esc(d.family)}</span>
+   <span class="track"><span class="fill" style="width:${(d.features.length / max) * 100}%;background:var(--f${i + 1})"></span></span>
+   <span class="n">${d.features.length}</span>`).join("");
+
+document.getElementById("fams").innerHTML = DATA.map((d, i) =>
+  `<details id="fam-${i}">
+     <summary><span class="swatch" style="background:var(--f${i + 1})"></span>${esc(d.family)}<span class="count">${d.features.length}</span></summary>
+     <div class="table"><table>
+       <thead><tr><th>Feature</th><th>Description</th><th>Source</th></tr></thead>
+       <tbody>${d.features.map(f => `<tr><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.source)}</td></tr>`).join("")}</tbody>
+     </table></div>
+   </details>`).join("");
+
+const root = document.documentElement, btn = document.getElementById("theme");
+const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+const paint = () => { root.toggleAttribute("data-dark", isDark()); };
+try { const t = localStorage.getItem("gq-theme"); if (t) root.dataset.theme = t; } catch (e) {}
+btn.addEventListener("click", () => {
+  root.dataset.theme = isDark() ? "light" : "dark";
+  try { localStorage.setItem("gq-theme", root.dataset.theme); } catch (e) {}
+  paint();
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+paint();
+</script>
