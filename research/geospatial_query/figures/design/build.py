@@ -22,16 +22,16 @@ FAMILIES = [
 ]
 
 BLURBS = [
-    "People, their money and movement, and the institutions over the ground. Census counts, gridded population, commuting flows, parcels, and Indigenous and Crown land.",
-    "What people build and run. Buildings, addresses, roads, rail, power lines, pipelines, power plants, mines and industrial land.",
-    "Things that can hurt, and the records that feed risk. Air quality, contaminated sites, toxic releases, facility compliance, earthquakes and water quality.",
-    "Life visible without a sequencer. Land cover and its change, biomass, crops and fields, vegetation index and species records.",
-    "The solid Earth and its shape. Bedrock and surficial geology, elevation and bathymetry, radiometrics, glaciers and permafrost.",
-    "Human health or microbial life. Disease and wastewater surveillance, health facilities, health outcomes and geolocated sequencing samples.",
-    "The state of the atmosphere and the seasons. Reanalysis climatology and sea ice.",
-    "Sensor-native pixels before any classification. Sentinel-2 optical, Sentinel-1 and PALSAR radar, and Landsat surface temperature.",
-    "Liquid water in lakes, rivers, oceans and aquifers. Surface water extent and occurrence.",
-    "Embeddings and other high-dimensional products. Read by fitting a model, not by looking up a value.",
+    "People, money, movement and tenure: census, population, commuting, parcels.",
+    "What people build and run: buildings, roads, rail, power, pipelines, mines.",
+    "Things that can hurt: air quality, contamination, toxic releases, earthquakes.",
+    "Visible life: land cover and change, biomass, crops, vegetation, species.",
+    "The solid Earth: bedrock, surficial geology, elevation, radiometrics, permafrost.",
+    "Human health and microbes: disease and wastewater surveillance, clinics, sequencing.",
+    "Atmospheric and seasonal state: reanalysis climatology and sea ice.",
+    "Raw sensor pixels: Sentinel-2 optical, Sentinel-1 and PALSAR radar, Landsat thermal.",
+    "Liquid water in lakes, rivers, oceans and aquifers.",
+    "Embeddings and other high-dimensional products, read by fitting a model.",
 ]
 
 # POC slot -> family, under the rules in reports/layer_families.md
@@ -53,7 +53,90 @@ SLOT_FAMILY = {
     "surface_water_extent": 8,
     "embeddings": 9,
 }
+PC = "https://planetarycomputer.microsoft.com/dataset/"
+OVT = "https://docs.overturemaps.org/guides/"
+SOURCE_URLS = {
+    "alos_palsar_mosaic": PC + "alos-palsar-mosaic",
+    "bc_pmbc_parcel_fabric": "https://catalogue.data.gov.bc.ca/dataset/parcelmap-bc-parcel-fabric",
+    "bc_tantalis_crown": "https://catalogue.data.gov.bc.ca/dataset/parcelmap-bc-parcel-fabric",
+    "cams_open_meteo": "https://open-meteo.com/en/docs/air-quality-api",
+    "cdc_nndss": "https://data.cdc.gov/d/x9gk-5huc",
+    "cdc_nwss": "https://data.cdc.gov/d/2ew6-ywp6",
+    "cdc_places": "https://data.cdc.gov/d/yjkw-uj5s",
+    "clay_v0_embeddings": "https://source.coop/clay/clay-model-v0-embeddings",
+    "cop_dem_glo30": PC + "cop-dem-glo-30",
+    "eccc_ghgrp": "https://www.canada.ca/en/environment-climate-change/services/climate-change/greenhouse-gas-emissions/facility-reporting.html",
+    "eccc_naps": "https://www.canada.ca/en/environment-climate-change/services/air-pollution/monitoring-networks-data/national-air-pollution-program.html",
+    "eccc_npri": "https://www.canada.ca/en/services/environment/pollution-waste-management/national-pollutant-release-inventory.html",
+    "ena_geo": "https://www.ebi.ac.uk/ena/browser/",
+    "epa_aqs_airdata": "https://aqs.epa.gov/aqsweb/airdata/download_files.html",
+    "epa_echo": "https://echo.epa.gov/",
+    "epa_echo_tri": "https://www.epa.gov/toxics-release-inventory-tri-program",
+    "epa_frs_sems": "https://www.epa.gov/superfund/superfund-data-and-reports",
+    "era5_open_meteo": "https://open-meteo.com/en/docs/historical-weather-api",
+    "esa_worldcover": PC + "esa-worldcover",
+    "etopo_2022_30s_bed": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+    "gbif": "https://www.gbif.org/",
+    "ghs_pop_r2023a": "https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php",
+    "ghs_smod_r2023a": "https://human-settlement.emergency.copernicus.eu/ghs_smod2023.php",
+    "gsc_surficial_1880a": "https://ftp.maps.canada.ca/pub/nrcan_rncan/Surficial-geology_Geologie-des-depots-meubles/",
+    "hansen_gfc_v1_13": "https://glad.earthengine.app/view/global-forest-change",
+    "hgb": PC + "hgb",
+    "io_lulc_annual_v02": PC + "io-lulc-annual-v02",
+    "jrc_gsw": "https://global-surface-water.appspot.com/",
+    "landsat_c2l2_st": PC + "landsat-c2-l2",
+    "lehd_lodes8": "https://lehd.ces.census.gov/data/",
+    "macrostrat": "https://macrostrat.org/",
+    "mgnify": "https://www.ebi.ac.uk/metagenomics",
+    "modis_13q1": PC + "modis-13Q1-061",
+    "mrdem_30": "https://search.open.canada.ca/opendata/?search_text=MRDEM",
+    "natural_earth_10m": "https://www.naturalearthdata.com/downloads/10m-physical-vectors/",
+    "noaa_nsidc_sic_cdr": "https://nsidc.org/data/g02202",
+    "nrcan_900a": "https://ftp.maps.canada.ca/pub/nrcan_rncan/Mining-industry_Industrie-miniere/900A_and_top_100/",
+    "nrcan_alta": "https://ftp.maps.canada.ca/pub/nrcan_rncan/vector/geobase_al_ta/",
+    "nrcan_landcover": PC + "nrcan-landcover",
+    "nrcan_permafrost": "https://search.open.canada.ca/opendata/?search_text=permafrost%20atlas%20of%20canada",
+    "overture_addresses": OVT + "addresses/",
+    "overture_buildings": OVT + "buildings/",
+    "overture_communication": OVT + "base/",
+    "overture_divisions": OVT + "divisions/",
+    "overture_land_use": OVT + "base/",
+    "overture_power": OVT + "base/",
+    "overture_power_plant": OVT + "base/",
+    "overture_transportation": OVT + "transportation/",
+    "overture_utility": OVT + "base/",
+    "phac_rvdss": "https://health-infobase.canada.ca/respiratory-virus-detections/",
+    "phac_wastewater": "https://health-infobase.canada.ca/wastewater/",
+    "s2_signature_v1": PC + "sentinel-2-l2a",
+    "sentinel1_rtc": PC + "sentinel-1-rtc",
+    "sentinel2_l2a": PC + "sentinel-2-l2a",
+    "statcan_csd_2016": "https://www12.statcan.gc.ca/census-recensement/2016/index-eng.cfm",
+    "statcan_dwelling_value": "https://www12.statcan.gc.ca/census-recensement/2016/index-eng.cfm",
+    "statcan_odhf": "https://www.statcan.gc.ca/en/lode/databases/odhf",
+    "statcan_wds_popest": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710015501",
+    "tbs_fcsi": "https://www.tbs-sct.canada.ca/fcsi-rscf/home-accueil-eng.aspx",
+    "tigerweb_aiannh": "https://tigerweb.geo.census.gov/",
+    "tigerweb_blocks2020": "https://tigerweb.geo.census.gov/",
+    "usda_cdl": PC + "usda-cdl",
+    "usda_csb_fiboa": "https://source.coop/fiboa/us-usda-cropland",
+    "usgs_fdsn": "https://earthquake.usgs.gov/fdsnws/event/1/",
+    "usgs_mineplant": "https://mrdata.usgs.gov/mineplant/",
+    "usgs_namrad": "https://mrdata.usgs.gov/radiometric/",
+    "wikidata_sparql": "https://query.wikidata.org/",
+    "wqp": "https://www.waterqualitydata.us/",
+    "wri_gppd": "https://datasets.wri.org/dataset/globalpowerplantdatabase",
+}
 DROPPED_SOURCES = {"alphaearth_v1_annual"}
+def licence_tier(licence: str) -> str:
+    if "ODbL" in licence or "-SA" in licence:
+        return "share-alike"
+    if "-NC" in licence:
+        return "noncommercial"
+    if "EULA" in licence:
+        return "restricted"
+    return "permissive"
+
+
 QA_TOKENS = ("control", "bbox_pad", "sample_pad", "skipped")
 
 TOKENS = {
@@ -89,7 +172,8 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
                 continue
             seen.add(name)
             out[SLOT_FAMILY[slot]].append(
-                {"name": name, "description": describe(name, slot), "source": source, "layer": slot}
+                {"name": name, "description": describe(name, slot), "source": source, "layer": slot,
+                 "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[source]}
             )
     for fam in out:
         fam.sort(key=lambda f: (f["layer"], f["name"]))
@@ -108,7 +192,7 @@ def dag_svg(theme) -> str:
     edges.append(("aggregate", "feature_set"))
     labels["aggregate"] = Label(name="aggregate")
     labels["feature_set"] = Label(name="")
-    styles = {**theme.styles, NodeKind.TRANSFORM: replace(theme.styles[NodeKind.TRANSFORM], heading=False)}
+    styles = {**theme.styles, NodeKind.TRANSFORM: replace(theme.styles[NodeKind.TRANSFORM], heading=False, weight="normal")}
     return render_svg(
         layout(list(nodes), edges), styles, kinds=nodes, labels=labels,
         font="IBM Plex Mono", font_size=12.5, max_label_chars=48,
