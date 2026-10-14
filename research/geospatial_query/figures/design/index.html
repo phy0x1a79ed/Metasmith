@@ -1,0 +1,194 @@
+<title>Geospatial Query</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 2x2 grid of survey-sheet panels; one family palette shared by panels 3 and 4. */
+:root {
+  --paper: #f3f4ef;
+  --panel: #fbfbf8;
+  --ink: #1d2420;
+  --muted: #66706a;
+  --rule: #d5d9d1;
+  --accent: #2f6b4f;
+  --f1: #b5543c; --f2: #7d6a58; --f3: #c48a1f; --f4: #4f8a3a; --f5: #8c6b3e;
+  --f6: #9b4f7a; --f7: #3f7fa8; --f8: #6a5fb0; --f9: #2f8f8f; --f10: #55606a;
+  --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #141816; --panel: #1b201d; --ink: #e4e8e2; --muted: #98a29b; --rule: #2e3531; --accent: #7cc49f;
+    --f1: #e07a60; --f2: #b09a86; --f3: #e2ae4a; --f4: #82bd6a; --f5: #c49b66;
+    --f6: #cf7fac; --f7: #6fb0d8; --f8: #9d92e0; --f9: #5cc2c2; --f10: #9aa6b0;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141816; --panel: #1b201d; --ink: #e4e8e2; --muted: #98a29b; --rule: #2e3531; --accent: #7cc49f;
+  --f1: #e07a60; --f2: #b09a86; --f3: #e2ae4a; --f4: #82bd6a; --f5: #c49b66;
+  --f6: #cf7fac; --f7: #6fb0d8; --f8: #9d92e0; --f9: #5cc2c2; --f10: #9aa6b0;
+}
+body { background: var(--paper); color: var(--ink); font-family: var(--body); }
+.sheet {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px;
+  max-width: 1280px; margin: 0 auto; padding-block: 24px; padding-inline: 20px;
+}
+.panel {
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 3px;
+  padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0;
+}
+.panel h2 {
+  margin: 0; font-family: var(--display); font-weight: 600; font-size: 15px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  display: flex; gap: 10px; align-items: baseline;
+}
+.panel h2 b { color: var(--accent); font-weight: 600; }
+.vibe { display: flex; align-items: center; justify-content: center; flex: 1; }
+.vibe img { width: 100%; height: auto; border-radius: 2px; background: #fff; }
+
+/* Contract */
+.contract { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contract h3 {
+  margin: 0 0 8px; font-family: var(--display); font-weight: 600; font-size: 20px; letter-spacing: .02em;
+}
+.contract ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.contract li { font-size: 13.5px; line-height: 1.35; padding-left: 14px; position: relative; }
+.contract li::before { content: ""; position: absolute; left: 0; top: .5em; width: 6px; height: 6px; background: var(--accent); }
+.contract li.opt::before { background: transparent; border: 1px solid var(--accent); width: 4px; height: 4px; }
+.contract code { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.arrow { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.arrow::before, .arrow::after { content: ""; flex: 1; border-top: 1px dashed var(--rule); }
+.states { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.chip { font-family: var(--mono); font-size: 11px; padding: 2px 7px; border-radius: 2px; border: 1px solid var(--rule); }
+.chip.found { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+.chip.unav { border-style: solid; }
+.chip.nota { border-style: dashed; color: var(--muted); }
+
+/* Families */
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 16px; }
+.stat { display: flex; flex-direction: column; }
+.stat b { font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.bars { display: grid; grid-template-columns: max-content 1fr max-content; gap: 5px 10px; align-items: center; }
+.bars .name { font-size: 13px; }
+.bars .track { height: 10px; }
+.bars .bar { height: 100%; border-radius: 1px; }
+.bars .n { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+
+/* DAG */
+.dag { overflow-x: auto; }
+.dag svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.dag text { font-family: var(--mono); font-size: 11px; fill: var(--ink); }
+.dag .type { fill: var(--muted); font-size: 10px; }
+
+@media (max-width: 820px) {
+  .sheet { grid-template-columns: 1fr; }
+}
+@media (max-width: 460px) {
+  .contract { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+
+<main class="sheet">
+  <section class="panel">
+    <h2><b>1</b>Abstract</h2>
+    <div class="vibe"><img src="vibe.svg" alt="Vibe abstract collage"></div>
+  </section>
+
+  <section class="panel">
+    <h2><b>2</b>Contract</h2>
+    <div class="contract">
+      <div>
+        <h3>Requires</h3>
+        <ul>
+          <li>AOI polygon <code>GeoJSON · EPSG:4326</code></li>
+          <li class="opt">Time window <code>default: latest</code></li>
+          <li class="opt">Families <code>default: all</code></li>
+          <li class="opt">Licence tiers <code>default: open</code></li>
+          <li class="opt">AlphaEarth <code>opt-in</code></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Promises</h3>
+        <ul>
+          <li>Feature set: one record per layer × source</li>
+          <li>Every layer has a status
+            <div class="states"><span class="chip found">found</span><span class="chip unav">unavailable + reason</span><span class="chip nota">not attempted + reason</span></div>
+          </li>
+          <li>Every value has a fill type <code>observed · inferred · analogue</code></li>
+          <li>Every value has provenance <code>source · licence · fetch date</code></li>
+          <li>All fills returned, ranked</li>
+          <li>Query only, no analysis</li>
+        </ul>
+      </div>
+      <div class="arrow">polygon → feature set</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2><b>3</b>Feature set</h2>
+    <div class="stats">
+      <div class="stat"><b>10</b><span>families</span></div>
+      <div class="stat"><b>317</b><span>catalogue entries</span></div>
+      <div class="stat"><b>69/74</b><span>POC adapters live</span></div>
+      <div class="stat"><b>15</b><span>POC AOIs</span></div>
+      <div class="stat"><b>392–447</b><span>features / AOI</span></div>
+      <div class="stat"><b>662</b><span>distinct features</span></div>
+    </div>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section class="panel">
+    <h2><b>4</b>Method · metasmith</h2>
+    <div class="dag" id="dag"></div>
+  </section>
+</main>
+
+<script>
+const FAMILIES = [
+  ["Socio-economic", 56], ["Infrastructure & industry", 46], ["Hazards", 44],
+  ["Macrobiology", 39], ["Geology", 39], ["Public health & microbiology", 28],
+  ["Climate", 27], ["Spectral", 18], ["Water bodies", 12], ["Latent", 8],
+];
+const max = Math.max(...FAMILIES.map(f => f[1]));
+
+const bars = document.getElementById("bars");
+FAMILIES.forEach(([name, n], i) => {
+  bars.insertAdjacentHTML("beforeend",
+    `<span class="name">${name}</span>
+     <span class="track"><span class="bar" style="display:block;width:${(n / max) * 100}%;background:var(--f${i + 1})"></span></span>
+     <span class="n">${n}</span>`);
+});
+
+const W = 720, H = 440, rowH = 34, y0 = 50;
+const xIn = 70, xFam = 250, xAgg = 560, xOut = 668, yMid = y0 + (FAMILIES.length - 1) * rowH / 2;
+let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Fan-out DAG by family">`;
+s += `<text class="type" x="${xIn}" y="20" text-anchor="middle">geospatial_query</text>`;
+s += `<text class="type" x="${xFam + 70}" y="20" text-anchor="middle">modules → gis_layer</text>`;
+s += `<text class="type" x="${xAgg}" y="20" text-anchor="middle">aggregator</text>`;
+s += `<text class="type" x="${xOut}" y="20" text-anchor="middle">feature set</text>`;
+FAMILIES.forEach(([name, n], i) => {
+  const y = y0 + i * rowH, c = `var(--f${i + 1})`, w = 1 + n / 10;
+  s += `<path d="M${xIn + 24},${yMid} C${xIn + 100},${yMid} ${xFam - 80},${y} ${xFam - 6},${y}" fill="none" stroke="${c}" stroke-width="${w}" opacity=".8"/>`;
+  s += `<path d="M${xFam + 150},${y} C${xAgg - 90},${y} ${xAgg - 80},${yMid} ${xAgg - 14},${yMid}" fill="none" stroke="${c}" stroke-width="${w}" opacity=".8"/>`;
+  s += `<rect x="${xFam - 6}" y="${y - 11}" width="156" height="22" rx="2" fill="var(--panel)" stroke="${c}" stroke-width="1.5"/>`;
+  s += `<text x="${xFam + 2}" y="${y + 4}">${name.length > 22 ? name.replace(" & microbiology", " & micro") : name}</text>`;
+});
+const yAE = y0 + FAMILIES.length * rowH + 14;
+s += `<path d="M${xIn},${yMid + 26} L${xIn},${yAE} L${xFam - 6},${yAE}" fill="none" stroke="var(--f10)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+s += `<path d="M${xFam + 150},${yAE} L${xAgg},${yAE} L${xAgg},${yMid + 16}" fill="none" stroke="var(--f10)" stroke-width="1.5" stroke-dasharray="4 4"/>`;
+s += `<rect x="${xFam - 6}" y="${yAE - 11}" width="156" height="22" rx="2" fill="var(--panel)" stroke="var(--f10)" stroke-dasharray="4 4"/>`;
+s += `<text x="${xFam + 2}" y="${yAE + 4}">AlphaEarth · opt-in</text>`;
+s += `<polygon points="${xIn - 22},${yMid - 10} ${xIn - 4},${yMid - 24} ${xIn + 22},${yMid - 14} ${xIn + 18},${yMid + 16} ${xIn - 12},${yMid + 22} ${xIn - 24},${yMid + 6}" fill="var(--accent)" opacity=".85"/>`;
+s += `<circle cx="${xAgg}" cy="${yMid}" r="14" fill="var(--ink)"/>`;
+s += `<path d="M${xAgg + 14},${yMid} L${xOut - 26},${yMid}" stroke="var(--ink)" stroke-width="2" fill="none"/>`;
+s += `<path d="M${xOut - 30},${yMid - 5} L${xOut - 24},${yMid} L${xOut - 30},${yMid + 5}" stroke="var(--ink)" stroke-width="2" fill="none"/>`;
+for (let r = 0; r < 5; r++) for (let c = 0; c < 3; c++) {
+  s += `<rect x="${xOut - 20 + c * 14}" y="${yMid - 34 + r * 14}" width="11" height="11" rx="1" fill="var(--f${((r * 3 + c) % 10) + 1})" opacity="${r === 3 && c === 2 ? .15 : .9}"/>`;
+}
+s += `</svg>`;
+document.getElementById("dag").innerHTML = s;
+</script>
