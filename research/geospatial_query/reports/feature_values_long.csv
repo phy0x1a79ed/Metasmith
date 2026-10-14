@@ -229,12 +229,12 @@ farm_sk_quarter,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_
 farm_sk_quarter,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 farm_sk_quarter,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 farm_sk_quarter,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-farm_sk_quarter,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,637.74,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_sk_quarter,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_sk_quarter,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_sk_quarter,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_sk_quarter,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_sk_quarter,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_sk_quarter,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,637.74,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_sk_quarter,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_sk_quarter,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_sk_quarter,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_sk_quarter,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_sk_quarter,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 farm_sk_quarter,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 farm_sk_quarter,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 farm_sk_quarter,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -260,13 +260,13 @@ farm_sk_quarter,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiol
 farm_sk_quarter,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_loss_n_years_affected,0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_60N_110W
 farm_sk_quarter,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_gain_frac_2000_2012,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_60N_110W
 farm_sk_quarter,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_net_change_frac,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_60N_110W
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,10.717,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,7,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Patience Lake,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_sk_quarter,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Potash (potassium chloride),2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,10.717,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,7,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Patience Lake,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Potash (potassium chloride),2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 farm_sk_quarter,embeddings,clay_prithvi,latent,clay_v0_embeddings,embeddings,clay_emb_dim,768,2017-08-21,10,CC-BY-4.0 (Clay Foundation),observed,13UDT_20170821_20201203_v001.gpq
 farm_sk_quarter,embeddings,clay_prithvi,latent,clay_v0_embeddings,embeddings,clay_emb_patch_count,3,2017-08-21,10,CC-BY-4.0 (Clay Foundation),observed,13UDT_20170821_20201203_v001.gpq
 farm_sk_quarter,embeddings,clay_prithvi,latent,clay_v0_embeddings,embeddings,clay_emb_l2_norm,1.7315,2017-08-21,10,CC-BY-4.0 (Clay Foundation),observed,13UDT_20170821_20201203_v001.gpq
@@ -682,12 +682,12 @@ farm_on_essex,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_fr
 farm_on_essex,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 farm_on_essex,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 farm_on_essex,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-farm_on_essex,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,2465.29,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_on_essex,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_on_essex,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_on_essex,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_on_essex,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_on_essex,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_on_essex,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,2465.29,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_on_essex,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_on_essex,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_on_essex,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_on_essex,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_on_essex,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 farm_on_essex,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 farm_on_essex,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 farm_on_essex,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -718,13 +718,13 @@ farm_on_essex,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_min_elev
 farm_on_essex,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_frac_below_sea_level,0.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 farm_on_essex,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_max_depth_m,0.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 farm_on_essex,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_is_submarine,False,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,30.996,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Ojibway,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_on_essex,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Salt,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,30.996,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Ojibway,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Salt,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 farm_on_essex,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_pct_mean,2.22,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_090W
 farm_on_essex,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_pct_p90,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_090W
 farm_on_essex,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_frac_ge25pct,0.0306,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_090W
@@ -1320,12 +1320,12 @@ farm_ab_taber,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_fr
 farm_ab_taber,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 farm_ab_taber,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 farm_ab_taber,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-farm_ab_taber,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,227.67,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_ab_taber,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_ab_taber,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_ab_taber,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_ab_taber,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,2,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_ab_taber,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_ab_taber,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,227.67,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_ab_taber,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_ab_taber,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_ab_taber,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_ab_taber,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,2,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_ab_taber,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 farm_ab_taber,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 farm_ab_taber,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 farm_ab_taber,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -1338,13 +1338,13 @@ farm_ab_taber,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,
 farm_ab_taber,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Diamicton; thick and continuous; may include fluted landforms, drumlins and morainal deposits.",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 farm_ab_taber,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,1,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 farm_ab_taber,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,1.0,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,189.569,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Line Creek,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-farm_ab_taber,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Coal (metallurgical, thermal)",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,189.569,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Line Creek,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Coal (metallurgical, thermal)",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 farm_ab_taber,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_mean,809.2,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 farm_ab_taber,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_std,0.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 farm_ab_taber,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_p10,809.2,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
@@ -1853,12 +1853,12 @@ farm_us_ia_story,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghs
 farm_us_ia_story,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghssmod_subpixel_aoi,True,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
 farm_us_ia_story,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghssmod_window_deg,0.025,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
 farm_us_ia_story,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghssmod_tiles,R5_C9,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
-farm_us_ia_story,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,1667.46,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_us_ia_story,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_us_ia_story,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_us_ia_story,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_us_ia_story,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-farm_us_ia_story,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_us_ia_story,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,1667.46,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_us_ia_story,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_us_ia_story,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_us_ia_story,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_us_ia_story,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+farm_us_ia_story,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 farm_us_ia_story,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namrad_sample_pad_deg,0.02,"1960-1983 (NURE/GSC surveys, 2009 compilation)",2000,public-domain (USGS),observed,NAMrad_K/U/Th
 farm_us_ia_story,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namrad_k_pct_mean,1.093,"1960-1983 (NURE/GSC surveys, 2009 compilation)",2000,public-domain (USGS),observed,NAMrad_K/U/Th
 farm_us_ia_story,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namrad_k_pct_max,1.119,"1960-1983 (NURE/GSC surveys, 2009 compilation)",2000,public-domain (USGS),observed,NAMrad_K/U/Th
@@ -1908,12 +1908,12 @@ farm_us_ia_story,crop_type_us,usda_cdl,macrobiology,usda_cdl,macrobiology,cdl_fr
 farm_us_ia_story,crop_type_us,usda_cdl,macrobiology,usda_cdl,macrobiology,cdl_frac_herb_wetlands,0.0031,2021-01-01,30,public-domain (USDA),observed,cropland_2021_163905_2182575_90000
 farm_us_ia_story,crop_type_us,usda_cdl,macrobiology,usda_cdl,macrobiology,cdl_dominant,corn,2021-01-01,30,public-domain (USDA),observed,cropland_2021_163905_2182575_90000
 farm_us_ia_story,crop_type_us,usda_cdl,macrobiology,usda_cdl,macrobiology,cdl_n_classes,11,2021-01-01,30,public-domain (USDA),observed,cropland_2021_163905_2182575_90000
-farm_us_ia_story,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.4328,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-farm_us_ia_story,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.5013,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-farm_us_ia_story,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-farm_ab_taber,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.3768,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v04.061.2026266000157
-farm_ab_taber,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.3448,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v04.061.2026266000157
-farm_ab_taber,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v04.061.2026266000157
+farm_us_ia_story,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.4328,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+farm_us_ia_story,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.5013,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+farm_us_ia_story,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+farm_ab_taber,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.3768,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v04.061.2026266000157
+farm_ab_taber,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.3448,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v04.061.2026266000157
+farm_ab_taber,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v04.061.2026266000157
 farm_us_ia_story,power_plants,power_plants,infrastructure,wri_gppd,infrastructure,gppd_plants_50km,25,2021 (GPPD v1.3.0),point,CC-BY-4.0 (WRI GPPD v1.3.0),observed,wri/global-power-plant-database@master
 farm_us_ia_story,power_plants,power_plants,infrastructure,wri_gppd,infrastructure,gppd_capacity_mw_50km,1133.6,2021 (GPPD v1.3.0),point,CC-BY-4.0 (WRI GPPD v1.3.0),observed,wri/global-power-plant-database@master
 farm_us_ia_story,power_plants,power_plants,infrastructure,wri_gppd,infrastructure,gppd_plants_in_bbox,0,2021 (GPPD v1.3.0),point,CC-BY-4.0 (WRI GPPD v1.3.0),observed,wri/global-power-plant-database@master
@@ -2337,12 +2337,12 @@ mine_hvc_bc,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac
 mine_hvc_bc,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_hvc_bc,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_hvc_bc,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-mine_hvc_bc,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,72.94,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_hvc_bc,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_hvc_bc,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_hvc_bc,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,1,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_hvc_bc,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,53,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_hvc_bc,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_hvc_bc,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,72.94,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_hvc_bc,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_hvc_bc,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_hvc_bc,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,1,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_hvc_bc,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,53,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_hvc_bc,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 mine_hvc_bc,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 mine_hvc_bc,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 mine_hvc_bc,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,2,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -2375,13 +2375,13 @@ mine_hvc_bc,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_min_elev_m
 mine_hvc_bc,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_frac_below_sea_level,0.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 mine_hvc_bc,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_max_depth_m,0.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 mine_hvc_bc,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_is_submarine,False,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,1.122,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,1,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Highland Valley Copper,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_hvc_bc,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Copper, silver, molybdenum",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,1.122,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,1,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Highland Valley Copper,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Copper, silver, molybdenum",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 mine_hvc_bc,pipelines,overture,infrastructure,overture_utility,infrastructure,ovt_pipeline_km,0.433,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.infrastructure[utility]
 mine_hvc_bc,pipelines,overture,infrastructure,overture_utility,infrastructure,ovt_pipeline_km_per_km2,0.0865,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.infrastructure[utility]
 mine_hvc_bc,pipelines,overture,infrastructure,overture_utility,infrastructure,ovt_pipeline_n,1,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.infrastructure[utility]
@@ -2654,9 +2654,9 @@ mine_syncrude_ab,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,macr
 mine_syncrude_ab,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,macrobiology,nrcanlc_n_classes,8,2015-01-01,30,OGL-Canada-2.0,observed,CAN_LC_2015_CAL_10_06
 mine_syncrude_ab,species_occurrence,gbif,macrobiology,gbif,macrobiology,gbif_occurrences,3801,all-time,point,CC-BY / CC0 mixed,observed,
 mine_syncrude_ab,species_occurrence,gbif,macrobiology,gbif,macrobiology,gbif_distinct_species,192,all-time,point,CC-BY / CC0 mixed,observed,
-mine_hvc_bc,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.1749,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
-mine_hvc_bc,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2402,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
-mine_hvc_bc,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
+mine_hvc_bc,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.1749,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
+mine_hvc_bc,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2402,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
+mine_hvc_bc,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
 mine_hvc_bc,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embeddings,s2sig_raw_b02_med,0.210575,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2A_MSIL2A_20240317T190121_R013_T10UFA_20240318T032250;S2A_MSIL2A_20240509T190921_R056_T10UFA_20240510T023150;S2A_MSIL2A_20240906T190921_R056_T10UFA_20240907T023150;S2A_MSIL2A_20241112T190631_R013_T10
 mine_hvc_bc,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embeddings,s2sig_raw_b02_p10,0.13078,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2A_MSIL2A_20240317T190121_R013_T10UFA_20240318T032250;S2A_MSIL2A_20240509T190921_R056_T10UFA_20240510T023150;S2A_MSIL2A_20240906T190921_R056_T10UFA_20240907T023150;S2A_MSIL2A_20241112T190631_R013_T10
 mine_hvc_bc,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embeddings,s2sig_raw_b02_p90,0.33485,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2A_MSIL2A_20240317T190121_R013_T10UFA_20240318T032250;S2A_MSIL2A_20240509T190921_R056_T10UFA_20240510T023150;S2A_MSIL2A_20240906T190921_R056_T10UFA_20240907T023150;S2A_MSIL2A_20241112T190631_R013_T10
@@ -2910,12 +2910,12 @@ mine_syncrude_ab,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic
 mine_syncrude_ab,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_syncrude_ab,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_syncrude_ab,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-mine_syncrude_ab,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,608.13,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_syncrude_ab,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_syncrude_ab,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_syncrude_ab,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_syncrude_ab,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_syncrude_ab,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_syncrude_ab,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,608.13,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_syncrude_ab,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_syncrude_ab,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_syncrude_ab,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_syncrude_ab,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_syncrude_ab,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 mine_syncrude_ab,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 mine_syncrude_ab,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 mine_syncrude_ab,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,4,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -2948,13 +2948,13 @@ mine_syncrude_ab,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_188
 mine_syncrude_ab,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Sand and gravel; variable thickness; deposited as outwash sheets, valley trains and terraced sediments.",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 mine_syncrude_ab,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,1,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 mine_syncrude_ab,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,1.0,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,6.98,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,10,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Mildred Lake,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_syncrude_ab,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Upgraded crude oil,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,6.98,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,10,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Mildred Lake,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Upgraded crude oil,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 mine_syncrude_ab,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,census,ghspop_total_persons,0.0,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
 mine_syncrude_ab,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,census,ghspop_density_km2,0.0,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
 mine_syncrude_ab,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,census,ghspop_cell_max,0.003,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
@@ -3473,12 +3473,12 @@ mine_sudbury_on,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_
 mine_sudbury_on,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_sudbury_on,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_sudbury_on,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-mine_sudbury_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,1976.91,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_sudbury_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_sudbury_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_sudbury_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_sudbury_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_sudbury_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_sudbury_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,1976.91,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_sudbury_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_sudbury_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_sudbury_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_sudbury_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_sudbury_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 mine_sudbury_on,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 mine_sudbury_on,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 mine_sudbury_on,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -3512,13 +3512,13 @@ mine_sudbury_on,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namr
 mine_sudbury_on,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namrad_th_ppm_max,9.619,"1960-1983 (NURE/GSC surveys, 2009 compilation)",2000,public-domain (USGS),observed,NAMrad_K/U/Th
 mine_sudbury_on,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namrad_th_k_ratio,4.783,"1960-1983 (NURE/GSC surveys, 2009 compilation)",2000,public-domain (USGS),observed,NAMrad_K/U/Th
 mine_sudbury_on,gamma_radiometrics,radiometrics,geology,usgs_namrad,geology,namrad_u_th_ratio,0.1831,"1960-1983 (NURE/GSC surveys, 2009 compilation)",2000,public-domain (USGS),observed,NAMrad_K/U/Th
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,0.319,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,5,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,11,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Copper Cliff (Sudbury Operations),2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-mine_sudbury_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Nickel, copper, platinum group metals, gold, sil",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,0.319,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,5,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,11,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Copper Cliff (Sudbury Operations),2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Nickel, copper, platinum group metals, gold, sil",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 mine_sudbury_on,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_mean,280.4,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 mine_sudbury_on,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_std,16.8,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 mine_sudbury_on,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_p10,262.1,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
@@ -3871,9 +3871,9 @@ mine_us_bingham_ut,biomass,spawn_biomass,macrobiology,hgb,macrobiology,agb_mgha_
 mine_us_bingham_ut,biomass,spawn_biomass,macrobiology,hgb,macrobiology,agb_mgha_p10,0.0,2010,300,CC-BY-4.0,observed,hgb
 mine_us_bingham_ut,biomass,spawn_biomass,macrobiology,hgb,macrobiology,agb_mgha_p90,1.0,2010,300,CC-BY-4.0,observed,hgb
 mine_us_bingham_ut,biomass,spawn_biomass,macrobiology,hgb,macrobiology,agb_mgha_n_px,70,2010,300,CC-BY-4.0,observed,hgb
-mine_sudbury_on,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.1125,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-mine_sudbury_on,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2208,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-mine_sudbury_on,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+mine_sudbury_on,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.1125,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+mine_sudbury_on,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2208,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+mine_sudbury_on,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
 mine_us_bingham_ut,reanalysis_climate,era5,climate,era5_open_meteo,climate,clim_mean_annual_temp_c,12.15,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 mine_us_bingham_ut,reanalysis_climate,era5,climate,era5_open_meteo,climate,clim_coldest_day_c,-17.9,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 mine_us_bingham_ut,reanalysis_climate,era5,climate,era5_open_meteo,climate,clim_hottest_day_c,32.7,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
@@ -4120,12 +4120,12 @@ mine_us_bingham_ut,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_s
 mine_us_bingham_ut,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_us_bingham_ut,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 mine_us_bingham_ut,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-mine_us_bingham_ut,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,800.42,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_us_bingham_ut,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_us_bingham_ut,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_us_bingham_ut,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_us_bingham_ut,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-mine_us_bingham_ut,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_us_bingham_ut,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,800.42,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_us_bingham_ut,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_us_bingham_ut,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_us_bingham_ut,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_us_bingham_ut,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+mine_us_bingham_ut,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 mine_us_bingham_ut,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_pct_mean,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_120W
 mine_us_bingham_ut,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_pct_p90,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_120W
 mine_us_bingham_ut,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_frac_ge25pct,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_120W
@@ -4298,9 +4298,9 @@ mine_us_bingham_ut,addresses,overture,infrastructure,overture_addresses,infrastr
 mine_us_bingham_ut,addresses,overture,infrastructure,overture_addresses,infrastructure,ovt_control_address_rows,0,2026-09-23,point,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed,overture/2026-09-23.1/addresses.address
 mine_us_bingham_ut,addresses,overture,infrastructure,overture_addresses,infrastructure,ovt_address_n_within_25km,501711,2026-09-23,point,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed,overture/2026-09-23.1/addresses.address
 mine_us_bingham_ut,addresses,overture,infrastructure,overture_addresses,infrastructure,ovt_address_regional_coverage,True,2026-09-23,point,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed,overture/2026-09-23.1/addresses.address
-mine_us_bingham_ut,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.0455,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h09v04.061.2026265235857
-mine_us_bingham_ut,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1256,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h09v04.061.2026265235857
-mine_us_bingham_ut,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h09v04.061.2026265235857
+mine_us_bingham_ut,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.0455,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h09v04.061.2026265235857
+mine_us_bingham_ut,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1256,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h09v04.061.2026265235857
+mine_us_bingham_ut,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h09v04.061.2026265235857
 city_toronto_core,thermal_surface_temp,landsat_c2l2,spectral,landsat_c2l2_st,spectral,lst_c_mean,29.27,2024-05-02,30,public-domain (USGS),observed,LC09_L2SP_018030_20240502_02_T1
 city_toronto_core,thermal_surface_temp,landsat_c2l2,spectral,landsat_c2l2_st,spectral,lst_c_std,3.04,2024-05-02,30,public-domain (USGS),observed,LC09_L2SP_018030_20240502_02_T1
 city_toronto_core,thermal_surface_temp,landsat_c2l2,spectral,landsat_c2l2_st,spectral,lst_c_p10,25.27,2024-05-02,30,public-domain (USGS),observed,LC09_L2SP_018030_20240502_02_T1
@@ -4689,12 +4689,12 @@ city_toronto_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_si
 city_toronto_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 city_toronto_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 city_toronto_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-city_toronto_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,2226.89,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_toronto_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_toronto_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_toronto_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_toronto_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_toronto_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_toronto_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,2226.89,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_toronto_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_toronto_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_toronto_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_toronto_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_toronto_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 city_toronto_core,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 city_toronto_core,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 city_toronto_core,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -4718,13 +4718,13 @@ city_toronto_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_18
 city_toronto_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Sand, silt, and gravel; variable thickness; deposited as deltas, sheet sands, and lag deposits.",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 city_toronto_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,3,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 city_toronto_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,0.7581,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,59.916,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Bowmanville,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_toronto_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Limestone,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,59.916,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Bowmanville,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Limestone,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 city_toronto_core,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_mean,86.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 city_toronto_core,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_std,4.9,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 city_toronto_core,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_p10,81.0,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
@@ -4870,9 +4870,9 @@ city_toronto_core,gazetteer,overture,infrastructure,overture_divisions,infrastru
 city_toronto_core,gazetteer,overture,infrastructure,overture_divisions,infrastructure,ovt_max_place_population_radius,2731571,2026-09-23,admin,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/divisions.division
 city_toronto_core,gazetteer,overture,infrastructure,overture_divisions,infrastructure,ovt_n_places_with_population,27,2026-09-23,admin,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/divisions.division
 city_toronto_core,gazetteer,overture,infrastructure,overture_divisions,infrastructure,ovt_place_names_in_aoi,Discovery District; Garden District; Downtown; Downtown Yonge,2026-09-23,admin,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/divisions.division
-city_toronto_core,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.1203,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-city_toronto_core,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1992,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-city_toronto_core,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+city_toronto_core,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.1203,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+city_toronto_core,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1992,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+city_toronto_core,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
 city_toronto_core,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,census,ghspop_total_persons,45014.8,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
 city_toronto_core,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,census,ghspop_density_km2,11257.61,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
 city_toronto_core,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,census,ghspop_cell_max,762.445,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
@@ -5191,12 +5191,12 @@ city_montreal_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_s
 city_montreal_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 city_montreal_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 city_montreal_core,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-city_montreal_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,1909.47,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_montreal_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_montreal_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_montreal_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_montreal_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_montreal_core,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_montreal_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,1909.47,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_montreal_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_montreal_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_montreal_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_montreal_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_montreal_core,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 city_montreal_core,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 city_montreal_core,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 city_montreal_core,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -5218,13 +5218,13 @@ city_montreal_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1
 city_montreal_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Dominantly silt and clay, locally containing stones; variable thickness; deposited in quiet water marine and g",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 city_montreal_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,2,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 city_montreal_core,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,0.9032,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,12.849,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,6,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Laval,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_montreal_core,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Limestone,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,12.849,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,6,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Laval,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Limestone,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 city_toronto_core,embeddings,alphaearth,latent,alphaearth_v1_annual,embeddings,aef_emb_dim,64,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x1qqixu5uqxramff8-0000008192-0000008192.tiff
 city_toronto_core,embeddings,alphaearth,latent,alphaearth_v1_annual,embeddings,aef_emb_year,2024,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x1qqixu5uqxramff8-0000008192-0000008192.tiff
 city_toronto_core,embeddings,alphaearth,latent,alphaearth_v1_annual,embeddings,aef_emb_n_tiles,2,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x1qqixu5uqxramff8-0000008192-0000008192.tiff
@@ -5317,9 +5317,9 @@ city_montreal_core,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrob
 city_montreal_core,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_loss_last_year,2020,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_080W
 city_montreal_core,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_gain_frac_2000_2012,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_080W
 city_montreal_core,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_net_change_frac,-0.00081,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_080W
-city_montreal_core,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.1241,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-city_montreal_core,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2189,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-city_montreal_core,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+city_montreal_core,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.1241,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+city_montreal_core,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2189,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+city_montreal_core,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
 city_montreal_core,railways,overture,infrastructure,overture_transportation,infrastructure,ovt_rail_km,23.627,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/transportation.segment
 city_montreal_core,railways,overture,infrastructure,overture_transportation,infrastructure,ovt_rail_km_per_km2,5.9068,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/transportation.segment
 city_montreal_core,railways,overture,infrastructure,overture_transportation,infrastructure,ovt_rail_n_segments,58,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/transportation.segment
@@ -5702,9 +5702,9 @@ city_windsor_on,census_demography,census_micro,socio-economic,statcan_wds_popest
 city_windsor_on,census_demography,census_micro,socio-economic,statcan_wds_popest,census,statcan_popest_geo_code,3537039,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2141"
 city_windsor_on,census_demography,census_micro,socio-economic,statcan_wds_popest,census,statcan_popest_vector_id,1592182855,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2141"
 city_windsor_on,census_demography,census_micro,socio-economic,statcan_wds_popest,census,statcan_popest_yoy_pct,1.138,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2141"
-city_windsor_on,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.2561,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-city_windsor_on,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1922,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-city_windsor_on,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+city_windsor_on,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.2561,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+city_windsor_on,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1922,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+city_windsor_on,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
 city_montreal_core,embeddings,alphaearth,latent,alphaearth_v1_annual,embeddings,aef_emb_dim,64,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xadi87zhpp7mhup8w-0000008192-0000008192.tiff
 city_montreal_core,embeddings,alphaearth,latent,alphaearth_v1_annual,embeddings,aef_emb_year,2024,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xadi87zhpp7mhup8w-0000008192-0000008192.tiff
 city_montreal_core,embeddings,alphaearth,latent,alphaearth_v1_annual,embeddings,aef_emb_n_tiles,1,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xadi87zhpp7mhup8w-0000008192-0000008192.tiff
@@ -5846,12 +5846,12 @@ city_windsor_on,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiol
 city_windsor_on,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_loss_n_years_affected,0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_090W
 city_windsor_on,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_gain_frac_2000_2012,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_090W
 city_windsor_on,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_net_change_frac,0.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_50N_090W
-city_windsor_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,2435.97,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_windsor_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_windsor_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_windsor_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_windsor_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_windsor_on,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_windsor_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,2435.97,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_windsor_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_windsor_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_windsor_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_windsor_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_windsor_on,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 city_windsor_on,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 city_windsor_on,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 city_windsor_on,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,1,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -5864,13 +5864,13 @@ city_windsor_on,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880
 city_windsor_on,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Diamicton; thick and continuous; may include fluted landforms, drumlins and morainal deposits.",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 city_windsor_on,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,1,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 city_windsor_on,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,1.0,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,4.39,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Windsor,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-city_windsor_on,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Salt,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,4.39,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,2,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Windsor,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Salt,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 city_windsor_on,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_mean,183.9,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 city_windsor_on,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_std,1.1,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 city_windsor_on,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_p10,182.8,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
@@ -6334,9 +6334,9 @@ city_us_detroit_mi,contaminated_sites,epa_frs,infrastructure,epa_frs_sems,health
 city_us_detroit_mi,contaminated_sites,epa_frs,infrastructure,epa_frs_sems,health_env,sems_sites_5km,54,current,point,public-domain (US EPA),observed,EPA FRS pgm=SEMS
 city_us_detroit_mi,contaminated_sites,epa_frs,infrastructure,epa_frs_sems,health_env,sems_nearest_km,0.23,current,point,public-domain (US EPA),observed,EPA FRS pgm=SEMS
 city_us_detroit_mi,contaminated_sites,epa_frs,infrastructure,epa_frs_sems,health_env,sems_nearest_name,CLIFFORD LAB,current,point,public-domain (US EPA),observed,EPA FRS pgm=SEMS
-city_us_detroit_mi,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.2166,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-city_us_detroit_mi,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1995,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
-city_us_detroit_mi,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+city_us_detroit_mi,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.2166,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+city_us_detroit_mi,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.1995,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
+city_us_detroit_mi,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h11v04.061.2026266000455
 city_us_detroit_mi,urban_extent,esri_lulc,macrobiology,io_lulc_annual_v02,census,iolulc_frac_built,0.996,2023-01-01,10,CC-BY-4.0 (Impact Observatory),observed,17T-2023
 city_us_detroit_mi,urban_extent,esri_lulc,macrobiology,io_lulc_annual_v02,census,iolulc_frac_rangeland,0.004,2023-01-01,10,CC-BY-4.0 (Impact Observatory),observed,17T-2023
 city_us_detroit_mi,urban_extent,esri_lulc,macrobiology,io_lulc_annual_v02,census,iolulc_dominant,built,2023-01-01,10,CC-BY-4.0 (Impact Observatory),observed,17T-2023
@@ -6405,12 +6405,12 @@ city_us_detroit_mi,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_s
 city_us_detroit_mi,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 city_us_detroit_mi,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 city_us_detroit_mi,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-city_us_detroit_mi,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,2432.33,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_us_detroit_mi,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_us_detroit_mi,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_us_detroit_mi,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_us_detroit_mi,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-city_us_detroit_mi,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_us_detroit_mi,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,2432.33,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_us_detroit_mi,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_us_detroit_mi,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_us_detroit_mi,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_us_detroit_mi,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+city_us_detroit_mi,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 city_us_detroit_mi,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_mean,186.7,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 city_us_detroit_mi,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_std,1.8,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 city_us_detroit_mi,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_p10,184.6,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
@@ -6786,9 +6786,9 @@ stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,climate,cli
 stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,climate,clim_hottest_day_c,29.2,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,climate,clim_annual_precip_mm,570.7,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,climate,clim_n_days,3653,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
-stress_mine_hvc_full,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.3014,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
-stress_mine_hvc_full,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2948,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
-stress_mine_hvc_full,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
+stress_mine_hvc_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.3014,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
+stress_mine_hvc_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.2948,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
+stress_mine_hvc_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
 stress_mine_hvc_full,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,hazards,eq_count_100km_m2.5,10,1980-present,point,public-domain (USGS),observed,
 stress_mine_hvc_full,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,hazards,eq_max_mag_100km,4.5,1980-present,point,public-domain (USGS),observed,
 stress_mine_hvc_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,microbiology,mgnify_samples_25km,1,all-time,point,EBI terms / open,observed,
@@ -6983,12 +6983,12 @@ stress_mine_hvc_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc
 stress_mine_hvc_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 stress_mine_hvc_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 stress_mine_hvc_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-stress_mine_hvc_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,69.57,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_mine_hvc_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_mine_hvc_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_mine_hvc_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,1,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_mine_hvc_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,56,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_mine_hvc_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_mine_hvc_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,69.57,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_mine_hvc_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_mine_hvc_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_mine_hvc_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,1,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_mine_hvc_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,56,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_mine_hvc_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 stress_mine_hvc_full,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_nearest_km,0.0,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 stress_mine_hvc_full,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_present_in_aoi,True,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 stress_mine_hvc_full,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_count_within_100km,2,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
@@ -7010,13 +7010,13 @@ stress_mine_hvc_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial
 stress_mine_hvc_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,Diamicton; thin and discontinuous; may include extensive areas of rock outcrop.,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_mine_hvc_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,2,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_mine_hvc_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,0.8204,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,0.0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,1,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,1,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Highland Valley Copper,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_mine_hvc_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Copper, silver, molybdenum",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,0.0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,1,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,1,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Highland Valley Copper,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,"Copper, silver, molybdenum",2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 stress_mine_hvc_full,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_pct_mean,21.17,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_60N_130W
 stress_mine_hvc_full,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_pct_p90,85.0,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_60N_130W
 stress_mine_hvc_full,forest_change,hansen_gfc,macrobiology,hansen_gfc_v1_13,macrobiology,hansen_treecover2000_frac_ge25pct,0.2847,2000-2024,30,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed,Hansen_GFC-2025-v1.13_60N_130W
@@ -7557,24 +7557,24 @@ stress_oilsands_region,permafrost_extent,permafrost,geology,nrcan_permafrost,cry
 stress_oilsands_region,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_zone_class,Isolated patches (0% to 10%),"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 stress_oilsands_region,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_ice_class,Low to nil (<10% to 0%),"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
 stress_oilsands_region,permafrost_extent,permafrost,geology,nrcan_permafrost,cryosphere,nrcanpf_zone_code,I,"2019 (Atlas of Canada, permafrost)",vector,OGL-Canada-2.0,observed,permafrost_pg
-stress_oilsands_region,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,598.58,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_oilsands_region,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_oilsands_region,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_oilsands_region,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_oilsands_region,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_oilsands_region,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_oilsands_region,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,598.58,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_oilsands_region,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_oilsands_region,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_oilsands_region,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_oilsands_region,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_oilsands_region,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 stress_oilsands_region,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_unit,GFp: Outwash plain sediments,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_oilsands_region,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_label,GFp,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_oilsands_region,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Sand and gravel; variable thickness; deposited as outwash sheets, valley trains and terraced sediments.",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_oilsands_region,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,2,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_oilsands_region,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,0.5385,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,0.177,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,6,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,10,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Mildred Lake,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_oilsands_region,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Upgraded crude oil,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,0.177,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,6,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,10,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Mildred Lake,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Upgraded crude oil,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 stress_oilsands_region,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_mean,319.2,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 stress_oilsands_region,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_std,31.3,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
 stress_oilsands_region,bathymetry,gebco,geology,etopo_2022_30s_bed,geology,etopo_bed_elev_m_p10,276.3,2022,926,public-domain (NOAA NCEI),observed,ETOPO_2022_v1_30s_bed
@@ -8138,12 +8138,12 @@ stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,n
 stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_frac_max,0.0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_present,False,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,cryosphere,nsidc_sic_in_grid_footprint,True,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
-stress_city_toronto_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_km,2205.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_city_toronto_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_city_toronto_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_city_toronto_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_city_toronto_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
-stress_city_toronto_full,glaciers,natural_earth,socio-economic,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_city_toronto_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_km,2205.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_city_toronto_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_nearest_name,unnamed,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_city_toronto_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_frac_in_aoi,0.0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_city_toronto_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_100km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_city_toronto_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_count_within_250km,0,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
+stress_city_toronto_full,glaciers,natural_earth,geology,natural_earth_10m,cryosphere,neglac_present_in_aoi,False,2023 (NE v5.1.1),vector (1:10M generalised),public-domain (Natural Earth),observed,ne_10m_glaciated_areas
 stress_city_toronto_full,embeddings,clay_prithvi,latent,clay_v0_embeddings,embeddings,clay_emb_dim,768,2019-10-09,10,CC-BY-4.0 (Clay Foundation),observed,17TPJ_20191009_20230531_v001.gpq
 stress_city_toronto_full,embeddings,clay_prithvi,latent,clay_v0_embeddings,embeddings,clay_emb_patch_count,102,2019-10-09,10,CC-BY-4.0 (Clay Foundation),observed,17TPJ_20191009_20230531_v001.gpq
 stress_city_toronto_full,embeddings,clay_prithvi,latent,clay_v0_embeddings,embeddings,clay_emb_l2_norm,1.8569,2019-10-09,10,CC-BY-4.0 (Clay Foundation),observed,17TPJ_20191009_20230531_v001.gpq
@@ -8167,13 +8167,13 @@ stress_city_toronto_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surfi
 stress_city_toronto_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_description,"Diamicton; thick and continuous; may include fluted landforms, drumlins and morainal deposits.",2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_city_toronto_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_n_units_in_aoi,6,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
 stress_city_toronto_full,surficial_geology,gsc_surficial_1880a,geology,gsc_surficial_1880a,geology,gsc_surf_dominant_frac,0.6713,2014 (GSC Map 1880A),vector (1:5M),OGL-Canada-2.0,observed,gsc_surficial_geology/geology
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_km,42.753,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_name,Bowmanville,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
-stress_city_toronto_full,mines_producing,nrcan_900a,geology,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Limestone,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_km,42.753,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_in_aoi,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_25km,0,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_count_within_100km,4,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_name,Bowmanville,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_total_records,183,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,nrcan_900a,infrastructure,nrcan900a_nearest_commodity,Limestone,2025 (900A 75th edition),point,OGL-Canada-2.0,observed,900A_75th_ProducingMines
 stress_city_toronto_full,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghssmod_frac_water,0.1071,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
 stress_city_toronto_full,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghssmod_frac_very_low_rural,0.018,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
 stress_city_toronto_full,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,census,ghssmod_frac_urban_centre,0.8749,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
@@ -8490,9 +8490,9 @@ stress_city_toronto_full,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embed
 stress_city_toronto_full,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embeddings,s2sig_year,2024,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240301T161109_R140_T17TPJ_20240301T221310;S2B_MSIL2A_20240530T160829_R140_T17TPJ_20240530T222224;S2A_MSIL2A_20240902T160901_R140_T17TPJ_20240903T000903;S2B_MSIL2A_20241017T161159_R140_T17
 stress_city_toronto_full,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embeddings,s2sig_version,s2sig-v2-whitened,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240301T161109_R140_T17TPJ_20240301T221310;S2B_MSIL2A_20240530T160829_R140_T17TPJ_20240530T222224;S2A_MSIL2A_20240902T160901_R140_T17TPJ_20240903T000903;S2B_MSIL2A_20241017T161159_R140_T17
 stress_city_toronto_full,embeddings,sentinel2_l2a,spectral,s2_signature_v1,embeddings,s2sig_ref_n,28,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240301T161109_R140_T17TPJ_20240301T221310;S2B_MSIL2A_20240530T160829_R140_T17TPJ_20240530T222224;S2A_MSIL2A_20240902T160901_R140_T17TPJ_20240903T000903;S2B_MSIL2A_20241017T161159_R140_T17
-stress_city_toronto_full,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_mean,0.2917,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-stress_city_toronto_full,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_ndvi_amplitude,0.3701,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
-stress_city_toronto_full,vegetation_timeseries,modis_bio,latent,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+stress_city_toronto_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_mean,0.2917,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+stress_city_toronto_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_ndvi_amplitude,0.3701,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
+stress_city_toronto_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h12v04.061.2026266000809
 stress_city_toronto_full,gazetteer,wikidata_geo,socio-economic,wikidata_sparql,infrastructure,wd_entities_bbox,3454,live,point,CC0-1.0,observed,wikidata_query_service
 stress_city_toronto_full,gazetteer,wikidata_geo,socio-economic,wikidata_sparql,infrastructure,wd_distinct_classes,745,live,point,CC0-1.0,observed,wikidata_query_service
 stress_city_toronto_full,gazetteer,wikidata_geo,socio-economic,wikidata_sparql,infrastructure,wd_entities_per_km2,5.483,live,point,CC0-1.0,observed,wikidata_query_service

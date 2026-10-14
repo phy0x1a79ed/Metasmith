@@ -22,15 +22,15 @@ FAMILIES = [
 
 BLURBS = [
     "People, money, movement, tenure and place names: census, population, commuting, parcels.",
-    "What people build and run: buildings, transport, power, pipelines, regulated facilities.",
+    "What people build and run: buildings, transport, power, pipelines, mines, regulated facilities.",
     "Things that can hurt: air quality, contamination, toxic and GHG releases, earthquakes.",
-    "Visible life: land cover and change, biomass, crops and fields, species records.",
-    "The solid Earth: bedrock, surficial geology, elevation, radiometrics, permafrost, mines.",
+    "Visible life: land cover and change, vegetation index, biomass, crops, species records.",
+    "The solid Earth: bedrock, surficial geology, elevation, radiometrics, glaciers, permafrost.",
     "Human health and microbes: health outcomes, clinics, disease and wastewater surveillance.",
     "Atmospheric and seasonal state: reanalysis climatology and sea ice.",
     "Sensor pixels: Sentinel-2 optical and band signatures, Sentinel-1 and PALSAR radar, Landsat thermal.",
     "Liquid water in lakes, rivers, oceans and aquifers.",
-    "Embeddings and multi-variable products such as MODIS, read by fitting a model.",
+    "Embeddings from foundation models, read by fitting a model, not by looking up a value.",
 ]
 
 # keys used by layer_families.md and the reconciled tables, in FAMILIES order

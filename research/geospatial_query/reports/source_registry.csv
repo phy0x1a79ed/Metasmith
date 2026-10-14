@@ -16,7 +16,7 @@ census_micro,socio-economic,census,property_assessment,statcan_dwelling_value,OG
 ghsl_pop,socio-economic,census,urban_extent,ghs_smod_r2023a,CC-BY-4.0 (JRC GHSL),15,0,0,13,1.92,,working,ghsl_pop
 esri_lulc,macrobiology,census,urban_extent,io_lulc_annual_v02,CC-BY-4.0 (Impact Observatory),15,0,0,14,1.81,,working,esri_lulc
 era5,climate,climate,reanalysis_climate,era5_open_meteo,CC-BY-4.0 (ERA5),15,0,0,5,0.95,,working,era5
-natural_earth,socio-economic,cryosphere,glaciers,natural_earth_10m,public-domain (Natural Earth),15,0,0,6,0.28,,working,natural_earth
+natural_earth,geology,cryosphere,glaciers,natural_earth_10m,public-domain (Natural Earth),15,0,0,6,0.28,,working,natural_earth
 permafrost,geology,cryosphere,permafrost_extent,nrcan_permafrost,OGL-Canada-2.0,12,0,3,7,0.09,out of coverage (Permafrost Atlas of Canada is CA-only),working,permafrost
 sea_ice,climate,cryosphere,sea_ice,noaa_nsidc_sic_cdr,public-domain (NOAA/NSIDC CDR),15,0,0,7,0.02,,working,sea_ice
 alphaearth,latent,embeddings,embeddings,alphaearth_v1_annual,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",15,0,0,82,14.06,,working,alphaearth
@@ -51,7 +51,7 @@ mapillary,infrastructure,infrastructure,ground_level_imagery,mapillary_kartaview
 epa_frs,infrastructure,infrastructure,industrial_facilities,epa_echo,public-domain (US EPA),3,0,12,12,0.0,out of coverage (US-only: EPA ECHO),working,epa_frs
 overture,infrastructure,infrastructure,industrial_facilities,overture_land_use,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,13,1.21,,working,overture
 osm_overpass,infrastructure,infrastructure,infrastructure_osm,osm_overpass,ODbL-1.0 (share-alike),0,15,0,0,0.03,"allowlist-blocked: overpass server busy/blocked after retries (ProxyError: HTTPSConnectionPool(host='overpass.kumi.systems', port=443):)",failing,osm_overpass
-nrcan_900a,geology,infrastructure,mines_producing,nrcan_900a,OGL-Canada-2.0,12,0,3,7,0.01,out of coverage (NRCan Map 900A is CA-only),working,nrcan_900a
+nrcan_900a,infrastructure,infrastructure,mines_producing,nrcan_900a,OGL-Canada-2.0,12,0,3,7,0.01,out of coverage (NRCan Map 900A is CA-only),working,nrcan_900a
 mrds,infrastructure,infrastructure,mines_producing,usgs_mineplant,public-domain (USGS),3,0,12,9,0.0,out of coverage (USGS mineplant is US-only),working,mrds
 overture,infrastructure,infrastructure,pipelines,overture_utility,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,9,1.14,,working,overture
 overture,infrastructure,infrastructure,power_plants,overture_power_plant,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,7,1.12,,working,overture
@@ -66,7 +66,7 @@ hansen_gfc,macrobiology,macrobiology,forest_change,hansen_gfc_v1_13,CC-BY-4.0 (H
 esa_worldcover,macrobiology,macrobiology,land_cover,esa_worldcover,CC-BY-4.0,15,0,0,12,1.49,,working,esa_worldcover
 nrcan_landcover,macrobiology,macrobiology,land_cover_ca,nrcan_landcover,OGL-Canada-2.0,10,2,3,12,1.69,out of coverage (Canada-only),working,nrcan_landcover
 gbif,macrobiology,macrobiology,species_occurrence,gbif,CC-BY / CC0 mixed,15,0,0,2,1.35,,working,gbif
-modis_bio,latent,macrobiology,vegetation_timeseries,modis_13q1,public-domain (NASA),11,4,0,3,16.32,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,working,modis_bio
+modis_bio,macrobiology,macrobiology,vegetation_timeseries,modis_13q1,public-domain (NASA),11,4,0,3,16.32,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,working,modis_bio
 mgnify,public health & microbiology,microbiology,geolocated_sequence,mgnify,EBI terms / open,15,0,0,2,1.54,,working,mgnify
 ena_geo,public health & microbiology,microbiology,geolocated_sequence_insdc,ena_geo,INSDC open,15,0,0,1,2.52,,working,ena_geo
 sentinel2_l2a,spectral,spectral,optical_multispectral,sentinel2_l2a,CC-BY-4.0 (Copernicus),15,0,0,12,4.95,,working,sentinel2_l2a

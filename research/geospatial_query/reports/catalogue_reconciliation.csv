@@ -382,7 +382,7 @@ gebco,geology,gebco,etopo_2022_30s_bed,working,1/1 adapter(s) returning features
 gsc_surficial_1880a,geology,,gsc_surficial_1880a,working,1/1 adapter(s) returning features,GSC Surficial Geology of Canada (Map 1880A),new
 macrostrat,geology,macrostrat,macrostrat,working,1/1 adapter(s) returning features,Macrostrat,existing
 natl_lidar,geology,,mrdem_30,working,1/1 adapter(s) returning features,National lidar programmes,existing
-nrcan_900a,geology,,nrcan_900a,working,1/1 adapter(s) returning features,NRCan 900A Principal Mineral Areas / producing mines,new
+nrcan_900a,infrastructure,,nrcan_900a,working,1/1 adapter(s) returning features,NRCan 900A Principal Mineral Areas / producing mines,new
 permafrost,geology,,nrcan_permafrost,working,1/1 adapter(s) returning features,Obu et al. permafrost zonation / ground temperature,existing
 radiometrics,geology,gsc_radiometric;usgs_radiometric,usgs_namrad,working,1/1 adapter(s) returning features,"Airborne gamma-ray spectrometry (USGS NURE/EarthMRI, GA, GSC)",existing
 cams,hazards,,cams_open_meteo,working,1/1 adapter(s) returning features,CAMS reanalysis (EAC4) / forecasts,existing
