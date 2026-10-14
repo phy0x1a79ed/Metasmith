@@ -37,7 +37,7 @@ BLURBS = [
 # POC slot -> family, under the rules in reports/layer_families.md
 SLOT_FAMILY = {
     "census_demography": 0, "mobility_flows": 0, "parcels_cadastre": 0, "population_gridded": 0,
-    "property_assessment": 0, "indigenous_lands": 0, "crown_land": 0, "gazetteer": 0,
+    "property_assessment": 0, "ground_level_imagery": 1, "infrastructure_osm": 1, "crop_type_ca": 3, "indigenous_lands": 0, "crown_land": 0, "gazetteer": 0,
     "urban_extent": 1, "addresses": 1, "cell_towers": 1, "industrial_facilities": 1,
     "mines_producing": 1, "pipelines": 1, "power_plants": 1, "railways": 1, "transmission_lines": 1,
     "air_quality_modelled": 2, "air_quality_monitors": 2, "contaminated_sites": 2,
@@ -180,6 +180,17 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
     return out
 
 
+def failed_sources(registry_csv: Path) -> list[dict]:
+    with registry_csv.open() as fh:
+        return [
+            {"family": FAMILIES[SLOT_FAMILY[r["slot"]]], "layer": r["slot"], "source": r["source"],
+             "licence": licence_tier(r["licence"]), "aois_found": int(r["found"]),
+             "aois_unavailable": int(r["unavailable"]), "aois_not_attempted": int(r["not_attempted"]),
+             "reason": r["reason"]}
+            for r in csv.DictReader(fh) if r["status"] == "failing"
+        ]
+
+
 def dag_svg(theme) -> str:
     nodes = {"query": NodeKind.GIVEN}
     edges, labels = [], {"query": Label(name="")}
@@ -212,7 +223,9 @@ def main() -> None:
     families = features_by_family(HERE.parents[1] / "reports" / "feature_values_long.csv")
     data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
+    failed = failed_sources(HERE.parents[1] / "reports" / "source_registry.csv")
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
+    page = page.replace("/*FAILED*/[]", json.dumps(failed, ensure_ascii=False))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
