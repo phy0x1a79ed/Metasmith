@@ -88,8 +88,15 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
   display: flex; align-items: center; gap: 10px; padding: 9px 2px; cursor: pointer; list-style: none; font-size: 14px;
 }
 .fams summary::-webkit-details-marker { display: none; }
-.fams summary::before { content: "▸"; font-size: 11px; color: var(--muted); width: 10px; }
-.fams details[open] summary::before { content: "▾"; }
+.fams summary::before {
+  content: ""; flex: none; width: 0; height: 0; margin: 0 4px 0 2px;
+  border-style: solid; border-width: 6px 0 6px 9px; border-color: transparent transparent transparent var(--accent);
+  transition: transform .15s ease;
+}
+.fams details[open] summary::before { transform: rotate(90deg); }
+.fams summary:hover { background: var(--code); }
+.hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .fams summary::before { transition: none; } }
 .fams summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .fams summary .count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .table { overflow-x: auto; padding-bottom: 10px; }
@@ -138,6 +145,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
     <p class="caption">Hybrid LLM + human curation with proof of concept live data retrieval tests produced the following list of features, grouped into families.</p>
     <div id="bars"></div>
     <div class="csv-row" id="csv-row" hidden><button class="csv" id="csv" type="button">Download CSV</button><span id="csv-status"></span></div>
+    <p class="hint">Click a row to expand.</p>
     <div class="fams" id="fams"></div>
   </section>
 
