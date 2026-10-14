@@ -11,7 +11,6 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 
-from metasmith.models.dag_colour import Colouring
 from metasmith.models.dag_draw import Label, Plate, Style, render_svg
 from metasmith.models.dag_layout import layout
 
@@ -82,37 +81,29 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
     return out
 
 
-def dag_svg(families: list[list[dict]]) -> str:
+def dag_svg() -> str:
     query, agg, out = "query", "aggregate", "feature_set"
-    nodes, edges, labels, colours = [query], [], {}, {}
-    labels[query] = Label(name="geospatial_query", namespace="aoi")
-    for i, (fam, feats) in enumerate(zip(FAMILIES, families)):
-        n_src = len({f["source"] for f in feats})
+    nodes, edges, labels = [query], [], {query: Label(name="query")}
+    for i, fam in enumerate(FAMILIES):
         node = f"fam{i}"
         nodes.append(node)
         edges += [(query, node), (node, agg)]
-        labels[node] = Label(name=f"{fam} ×{n_src} → {len(feats)} features", namespace="fetch")
-        colours[node] = f"#F{i:05d}"
+        labels[node] = Label(name=fam)
     nodes += [agg, out]
     edges.append((agg, out))
-    labels[agg] = Label(name="aggregate", namespace="gis_layer")
-    labels[out] = Label(name="feature_set", namespace="aoi")
-    lay = layout(nodes, edges)
-    colouring = Colouring(nodes=colours, edges={(a, b): colours[a] for a, b in edges if a in colours})
+    labels[agg] = Label(name="aggregate")
+    labels[out] = Label(name="feature set")
     style = {None: Style(fill="#FFFFFE", stroke="#111110", text="#111111", muted="#8A8A8A")}
     svg = render_svg(
-        lay, style, labels=labels, colour=colouring, font="IBM Plex Mono", font_size=12.5, max_label_chars=48,
-        plate=Plate(paint_background=False, edge="#666665"),
+        layout(nodes, edges), style, labels=labels, font="IBM Plex Mono", font_size=12.5,
+        max_label_chars=48, plate=Plate(paint_background=False, edge="#666665"),
     )
     svg = re.sub(r"<\?xml[^>]*>\s*", "", svg)
-    for i in range(len(FAMILIES)):
-        svg = svg.replace(f"#F{i:05d}", f"var(--f{i + 1})")
     for hexv, var in [("#FFFFFE", "var(--panel)"), ("#111110", "var(--ink)"), ("#111111", "var(--ink)"),
                       ("#8A8A8A", "var(--muted)"), ("#666665", "var(--muted)")]:
         svg = svg.replace(hexv, var)
     # SVG presentation attributes ignore var(); move each colour into a style declaration
     svg = re.sub(r'\b(fill|stroke)="(var\([^)]*\))"', r'style="\1:\2"', svg)
-    svg = re.sub(r'style="([^"]*)"\s+style="([^"]*)"', r'style="\1;\2"', svg)
     return svg
 
 
@@ -121,7 +112,7 @@ def main() -> None:
     data = [{"family": f, "features": feats} for f, feats in zip(FAMILIES, families)]
     page = (HERE / "template.html").read_text()
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
-    page = page.replace("<!--DAG-->", dag_svg(families))
+    page = page.replace("<!--DAG-->", dag_svg())
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
         print(f"{len(feats):4d}  {len({x['source'] for x in feats}):3d}  {f}")
