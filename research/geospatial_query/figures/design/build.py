@@ -18,7 +18,7 @@ from metasmith.models.dag_layout import layout
 
 FAMILIES = [
     "Socio-economic", "Infrastructure & industry", "Hazards", "Macrobiology", "Geology",
-    "Public health & microbiology", "Climate", "Spectral", "Water bodies", "Latent",
+    "Microbiology & health", "Climate", "Spectral", "Water bodies", "Latent",
 ]
 
 # POC slot -> family, under the rules in reports/layer_families.md

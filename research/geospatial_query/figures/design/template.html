@@ -72,8 +72,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .def li::marker { color: var(--muted); }
 .def code { font-family: var(--mono); font-size: 12.5px; }
 .def .t { color: var(--f1); }
-.def a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
-.def .n { color: var(--muted); }
+.def a { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
 .def:target > div b { text-decoration: underline; }
 
 /* Feature set */
@@ -147,80 +146,34 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;",
 
 const SPEC = [
   { group: "Definitions", types: [
-    { name: "Point", kind: "made of", rows: [
-      ["longitude", "float", "degrees, −180 to 180"],
-      ["latitude", "float", "degrees, −90 to 90"]] },
-    { name: "AOI", kind: "made of", rows: [
-      ["id", "text", "your name for the area"],
-      ["outline", "list of Point", "closed ring"]] },
-    { name: "Family", kind: "one of", opts: ["socio-economic", "infrastructure", "hazards", "macrobiology", "geology",
-      "health-microbiology", "climate", "spectral", "water", "latent"] },
+    { name: "Point", kind: "made of", rows: [["longitude", "float"], ["latitude", "float"]] },
+    { name: "AOI", kind: "made of", rows: [["outline", "list of Point"]] },
+    { name: "FeatureFamily", kind: "one of", opts: ["socio-economic", "infrastructure", "hazards", "macrobiology",
+      "geology", "microbiology-health", "climate", "spectral", "water", "latent"] },
     { name: "Licence", kind: "one of", opts: ["permissive", "share-alike", "noncommercial", "restricted"] },
-    { name: "Fill", kind: "one of", opts: ["observed", "inferred", "analogue"] },
-    { name: "Slot", kind: "made of", rows: [
-      ["aoi", "text", "AOI id"],
-      ["layer", "text", "what is measured, e.g. land_cover"],
-      ["source", "text", "who measured it, e.g. esa_worldcover"],
-      ["family", "Family", ""],
-      ["licence", "Licence", ""]] },
     { name: "Feature", kind: "made of", rows: [
-      ["name", "text", "e.g. wc_frac_tree"],
-      ["value", "float or text", "e.g. 0.62"],
-      ["unit", "text", "optional"]] },
-    { name: "Found", kind: "made of", rows: [
-      ["slot", "Slot", ""],
-      ["rank", "int", "1 = best source for this AOI × layer"],
-      ["fill", "Fill", ""],
-      ["observed", "time", "when the source measured it"],
-      ["resolution_m", "float", "empty for vector data"],
-      ["features", "list of Feature", ""]] },
-    { name: "Unavailable", kind: "made of", rows: [
-      ["slot", "Slot", ""],
-      ["reason", "one of", "no-data, source-error, auth-required, outside-tolerance"]] },
-    { name: "NotAttempted", kind: "made of", rows: [
-      ["slot", "Slot", ""],
-      ["reason", "one of", "out-of-coverage, family-excluded, licence-excluded"]] },
-    { name: "Result", kind: "one of", opts: ["Found", "Unavailable", "NotAttempted"] },
-    { name: "Snapshot", kind: "made of", rows: [
-      ["time", "time", "one requested time"],
-      ["results", "list of Result", "per AOI × layer × source, nearest observation within tolerance"]] },
-  ] },
-  { group: "Helpers", types: [
-    { name: "every", kind: "returns list of time", rows: [
-      ["start", "time", "first time"],
-      ["step", "duration", "gap between times"],
-      ["count", "int", "how many"]] },
-    { name: "yearly", kind: "returns list of time", rows: [
-      ["month", "int", "1 to 12"],
-      ["day", "int", "1 to 31"],
-      ["first_year", "int", ""],
-      ["last_year", "int", "inclusive"]] },
+      ["feature", "text"], ["value", "any"], ["SI_unit", "text"], ["family", "FeatureFamily"], ["time", "Time"]] },
+    { name: "Error", kind: "made of", rows: [
+      ["feature", "text"], ["family", "FeatureFamily"], ["time", "Time"], ["message", "text"]] },
   ] },
   { group: "Input", types: [
-    { name: "query", kind: "returns FeatureSet", rows: [
-      ["aois", "list of AOI", "each source runs once over all"],
-      ["times", "list of time", "one or more, from a helper"],
-      ["tolerance", "duration", "max gap to a requested time, default ∞"],
-      ["families", "list of Family", "default all"],
-      ["licences", "list of Licence", "default all"]] },
+    { name: "Query", kind: "made of", rows: [
+      ["aoi", "AOI"], ["time", "Time"], ["time_tolerance", "Duration"],
+      ["feature_families", "list of FeatureFamily"], ["licence", "Licence"]] },
   ] },
   { group: "Output", types: [
-    { name: "FeatureSet", kind: "made of", rows: [
-      ["aois", "list of AOI", "as requested"],
-      ["times", "list of time", "as requested"],
-      ["tolerance", "duration", "as requested"],
-      ["results", "list of Result", "everything fetched, each observation once"],
-      ["by_time()", "list of Snapshot", "results split by requested time"]] },
+    { name: "QueryResult", kind: "made of", rows: [
+      ["aoi", "AOI"], ["features", "list of Feature"], ["errors", "list of Error"]] },
   ] },
 ];
 
 const NAMES = new Set(SPEC.flatMap(g => g.types.map(t => t.name)));
-const link = txt => esc(txt).replace(/\b[A-Za-z]+\b/g, w => NAMES.has(w) && /^[A-Z]/.test(w) ? `<a href="#t-${w}">${w}</a>` : w);
+const link = txt => esc(txt).replace(/\b[A-Za-z_]+\b/g, w => NAMES.has(w) ? `<a href="#t-${w}">${w}</a>` : w);
 const def = t => `<li class="def" id="t-${t.name}">
-  <div><b>${t.name}</b> <i>${link(t.kind)}</i></div>
+  <div><b>${t.name}</b> <i>${t.kind}</i></div>
   <ul>${t.opts
-    ? t.opts.map(o => `<li><code>${NAMES.has(o) ? `<a href="#t-${o}">${o}</a>` : esc(o)}</code></li>`).join("")
-    : t.rows.map(([f, ty, n]) => `<li><code>${esc(f)}</code>: <code class="t">${link(ty)}</code>${n ? ` <span class="n">· ${esc(n)}</span>` : ""}</li>`).join("")}</ul>
+    ? t.opts.map(o => `<li><code class="t">${esc(o)}</code></li>`).join("")
+    : t.rows.map(([f, ty]) => `<li><code>${esc(f)}</code>: <code class="t">${link(ty)}</code></li>`).join("")}</ul>
 </li>`;
 document.getElementById("sig").innerHTML =
   SPEC.map(g => `<h3>${g.group}</h3><ul>${g.types.map(def).join("")}</ul>`).join("");
@@ -229,17 +182,24 @@ function drawBars() {
   const css = getComputedStyle(document.documentElement);
   const v = n => css.getPropertyValue(n).trim();
   const rows = [...DATA].reverse();
-  Plotly.react("bars", [{
-    type: "bar", orientation: "h",
-    x: rows.map(d => d.features.length), y: rows.map(d => d.family),
-    text: rows.map(d => d.features.length), textposition: "outside", cliponaxis: false,
-    marker: { color: v("--ink") },
-    hovertemplate: "%{y}: %{x} features<extra></extra>",
-  }], {
-    margin: { l: 190, r: 40, t: 4, b: 48 },
+  const y = rows.map(d => d.family);
+  const bar = (x, xaxis, unit) => ({
+    type: "bar", orientation: "h", x, y, xaxis, yaxis: "y",
+    text: x, textposition: "outside", cliponaxis: false, marker: { color: v("--ink") },
+    hovertemplate: `%{y}: %{x} ${unit}<extra></extra>`,
+  });
+  const axis = (domain, title) => ({
+    domain, title: { text: title, standoff: 10, font: { color: v("--muted") } },
+    gridcolor: v("--rule"), zeroline: false, tickfont: { color: v("--muted") },
+  });
+  Plotly.react("bars", [
+    bar(rows.map(d => d.features.length), "x", "features"),
+    bar(rows.map(d => new Set(d.features.map(f => f.source)).size), "x2", "sources"),
+  ], {
+    showlegend: false, margin: { l: 190, r: 30, t: 4, b: 48 },
     paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)",
     font: { family: v("--mono"), size: 12, color: v("--ink") },
-    xaxis: { title: { text: "features", standoff: 10, font: { color: v("--muted") } }, gridcolor: v("--rule"), zeroline: false, tickfont: { color: v("--muted") } },
+    xaxis: axis([0, 0.6], "features"), xaxis2: axis([0.68, 1], "sources"),
     yaxis: { automargin: true, tickfont: { family: v("--body"), size: 13 } },
     bargap: 0.35,
   }, { displayModeBar: false, responsive: true });
