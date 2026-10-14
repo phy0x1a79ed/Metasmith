@@ -1,0 +1,131 @@
+{
+ "TemporalExtent": {
+  "RangeDateTime": {
+   "BeginningDateTime": "2017-08-11T21:29:40.000Z",
+   "EndingDateTime": "2017-08-11T21:40:40.000Z"
+  }
+ },
+ "GranuleUR": "AVIRIS-NG_L2_Reflectance.ang20170811t212940_h2o_v2p9_img.hdr",
+ "MeasuredParameters": [
+  {
+   "ParameterName": "ABSORPTION"
+  },
+  {
+   "ParameterName": "REFLECTANCE"
+  },
+  {
+   "ParameterName": "ABSORPTION"
+  }
+ ],
+ "SpatialExtent": {
+  "HorizontalSpatialDomain": {
+   "Geometry": {
+    "GPolygons": [
+     {
+      "Boundary": {
+       "Points": [
+        {
+         "Longitude": -111.1529083,
+         "Latitude": 56.9827499
+        },
+        {
+         "Longitude": -111.1492844,
+         "Latitude": 57.0119553
+        },
+        {
+         "Longitude": -111.981102,
+         "Latitude": 57.0399055
+        },
+        {
+         "Longitude": -111.9840775,
+         "Latitude": 57.0106773
+        },
+        {
+         "Longitude": -111.1529083,
+         "Latitude": 56.9827499
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "ProviderDates": [
+  {
+   "Date": "2023-09-21T00:00:00.000Z",
+   "Type": "Insert"
+  },
+  {
+   "Date": "2023-09-28T20:44:07.000Z",
+   "Type": "Update"
+  }
+ ],
+ "CollectionReference": {
+  "ShortName": "AVIRIS-NG_L2_Reflectance_2110",
+  "Version": "1"
+ },
+ "Projects": [
+  {
+   "ShortName": "Not provided",
+   "Campaigns": [
+    "AVIRIS"
+   ]
+  }
+ ],
+ "DataGranule": {
+  "DayNightFlag": "Both",
+  "ProductionDateTime": "2023-09-21T00:00:00.000Z",
+  "ArchiveAndDistributionInformation": [
+   {
+    "Name": "Not provided",
+    "Size": 0.011068,
+    "SizeInBytes": 11068,
+    "Checksum": {
+     "Value": "9d794be48bbfe9fc84f78f815285c7327f799bf5e37d3d54bf21e16efb157ded",
+     "Algorithm": "SHA-256"
+    },
+    "SizeUnit": "MB"
+   }
+  ]
+ },
+ "Platforms": [
+  {
+   "ShortName": "NOAA Twin Otter",
+   "Instruments": [
+    {
+     "ShortName": "AVIRIS-NG"
+    }
+   ]
+  },
+  {
+   "ShortName": "NASA ER-2",
+   "Instruments": [
+    {
+     "ShortName": "AVIRIS-NG"
+    }
+   ]
+  },
+  {
+   "ShortName": "DHC-6",
+   "Instruments": [
+    {
+     "ShortName": "AVIRIS-NG"
+    }
+   ]
+  },
+  {
+   "ShortName": "B-200",
+   "Instruments": [
+    {
+     "ShortName": "AVIRIS-NG"
+    }
+   ]
+  }
+ ],
+ "MetadataSpecification": {
+  "URL": "https://cdn.earthdata.nasa.gov/umm/granule/v1.6.7",
+  "Name": "UMM-G",
+  "Version": "1.6.7"
+ }
+}

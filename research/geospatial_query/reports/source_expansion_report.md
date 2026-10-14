@@ -2,239 +2,242 @@
 
 ## Purpose & Contents
 
-This brief is the starting point for the sessions that expand the geospatial query's sources. Read it before you add a source, change the spec or re-probe the catalogue. It holds:
+This brief is the starting point for the sessions that expand the geospatial query's sources. Read it before you add a source, change the spec or re-probe a candidate. It holds:
 
-- links to every input: the design artifact, the POC, the reports, the science project
-- what an observation is, and why the current spec has no place for quality metadata
-- the quality metadata each kind of source exposes, checked live on 2026-10-13
-- the ten gaps between the user's original brief and the POC, each with new candidate sources
+- links to every input: the design artifact, the POC, the probe tables, the science project
+- what an observation is, and where its quality metadata comes from
+- the off-nadir field of every imagery source probed
+- the named gaps, each with its probe outcome and its best candidate
+- how well a picture can be placed from its pixels alone
 - the open decisions and the traps that cost time before
 
-It does not repeat the catalogue or the POC code. Follow the links for those.
+It does not repeat the probe rows, the catalogue or the POC code. Follow the links for those.
 
 ## Links
 
 | What | Where |
 |---|---|
-| Design artifact (spec, features, DAG) | https://claude.ai/artifact/Nj52Qha3utLQH7RVkssZJb (private, v17) |
+| Design artifact (spec, features, DAG) | https://claude.ai/artifact/Nj52Qha3utLQH7RVkssZJb (private) |
 | Artifact source | [`figures/design/build.py`](../figures/design/build.py) builds `index.html` from [`template.html`](../figures/design/template.html) and the tables below |
 | POC adapters (Python, one function per source) | [`poc/`](../poc/), entry point [`poc/run_all.py`](../poc/run_all.py), shared code [`poc/pipeline.py`](../poc/pipeline.py) |
 | POC write-up | [`poc_report.md`](poc_report.md) |
 | Design decisions from the science project | [`session-debrief.md`](session-debrief.md), [`metasmith_core_set.md`](metasmith_core_set.md) |
 | Family definitions and rules | [`layer_families.md`](layer_families.md) |
-| Original catalogue, 316 modules | [`geolocatable_data_registry.md`](geolocatable_data_registry.md) |
-| Catalogue as a table | [`layer_inventory.csv`](layer_inventory.csv) |
+| Original catalogue, 316 modules | [`geolocatable_data_registry.md`](geolocatable_data_registry.md), as a table in [`layer_inventory.csv`](layer_inventory.csv) |
 | Outcome per catalogue module | [`catalogue_reconciliation.csv`](catalogue_reconciliation.csv), totals in [`funnel_counts.json`](funnel_counts.json) |
-| Per-adapter status | [`source_registry.csv`](source_registry.csv) |
+| Per-adapter status and source type | [`source_registry.csv`](source_registry.csv) |
 | Every POC feature value (15 AOIs) | [`feature_values_long.csv`](feature_values_long.csv) |
 | Triage probes | [`triage_results_merged.csv`](triage_results_merged.csv), [`layer_slots_triaged.csv`](layer_slots_triaged.csv) |
+| Gap probes, one row per candidate | [`gap_source_probes.csv`](gap_source_probes.csv), built by [`merge_probes.py`](merge_probes.py) from the lane tables |
+| Off-nadir field per imagery source | [`off_nadir_fields.csv`](off_nadir_fields.csv), built by the same script |
+| Probe lanes: script, table, findings | [`probes/<lane>/`](probes/). A: satellite QC and tasked imagery. B: airborne, drone, hyperspectral. C: zoning, water, climate. D: ground-level cameras. E: picture to location. F: query ideas |
+| Angles for the 45 POC scene records | [`probes/A/scene_qc_backfill.csv`](probes/A/scene_qc_backfill.csv) |
 | Test AOIs | [`../examples/test_aois.geojson`](../examples/test_aois.geojson) |
-| Family corrections | [`apply_family_fixes.py`](apply_family_fixes.py). Re-run it after any fresh copy from the science project |
+| Fixes after a fresh copy from the science project | [`apply_family_fixes.py`](apply_family_fixes.py) moves three family assignments. [`apply_source_type.py`](apply_source_type.py) adds the `source_type` column. Re-run both |
 | Science project | Claude Science `proj_8be587fb267f`, conversation `ea94976a-52cc-40e1-9649-39706ecd4d0e`. Files live under `~/.claude-science/orgs/0e7f7957-d72e-4f89-b89e-32275f97b806/artifacts/proj_8be587fb267f/<uuid>/v<hash>_<name>`. Take the newest by mtime |
 
-**CAUTION** The local tables differ from the science project's copies. `apply_family_fixes.py` moved three family assignments.
+**CAUTION** Lane A's `cache/` (263 MB) and lane E's `models/` (43 GB), `images/` and `orig/` are gitignored. Run lane A's `crawl_*.py` before its `probe.py` on a fresh checkout. Lane E's `probe.py` rebuilds its table from the committed predictions. `probe.py --rerun` needs the models.
 
 ## Where the sources stand
 
 The catalogue held 317 modules in scope. 11 national modules were added, which gives 328. 70 were probed, 57 got an adapter and 53 return data. 4 adapters fail (mapillary, kartaview, osm_overpass, aafc_aci). 4 modules were dropped. 252 were never probed. 97 triage candidates match no catalogue module.
 
-The user considers the catalogue already worked through. Do not treat its leftovers as the expansion plan. The gaps below are the plan. The leftovers stay in `catalogue_reconciliation.csv` for when a gap points at one.
+The user considers the catalogue already worked through. Do not treat its leftovers as the expansion plan. The gaps below are the plan.
 
-Working adapters by SourceType:
-
-| SourceType | Working adapters |
-|---|---|
-| satellite | sentinel2_l2a, s2_signature_v1, landsat_c2l2_st, sentinel1_rtc, alos_palsar_mosaic, modis_13q1, esa_worldcover, io_lulc_annual_v02, hansen_gfc_v1_13, hgb, nrcan_landcover, usda_cdl, usda_csb_fiboa, jrc_gsw, noaa_nsidc_sic_cdr, cop_dem_glo30, mrdem_30 (part lidar) |
-| airborne | usgs_namrad |
-| drone | none |
-| ground station | eccc_naps, epa_aqs_airdata, usgs_fdsn, wqp |
-| field survey | macrostrat, gsc_surficial_1880a, gbif, mgnify, ena_geo, cdc_nwss, phac_wastewater |
-| model | era5_open_meteo, cams_open_meteo, etopo_2022_30s_bed, ghs_pop_r2023a, ghs_smod_r2023a, lehd_lodes8, cdc_places, alphaearth_v1_annual, clay_v0_embeddings |
-| registry | the 11 overture_* adapters, epa_echo, epa_echo_tri, epa_frs_sems, eccc_npri, eccc_ghgrp, tbs_fcsi, nrcan_900a, usgs_mineplant, wri_gppd, natural_earth_10m, nrcan_permafrost, statcan_*, tigerweb_*, bc_pmbc_parcel_fabric, bc_tantalis_crown, nrcan_alta, wikidata_sparql, cdc_nndss, phac_rvdss, statcan_odhf |
-
-Water (6 features) and climate (12 features) are the thinnest families. The design artifact's features panel has the counts for every family.
+`source_registry.csv` carries a `source_type` per adapter. The registry holds 9 `overture_*` adapters. Water (6 features) and climate (12 features) were the thinnest families before this round of probes.
 
 ## What an observation is
 
-The standard definition is OGC/ISO 19156 Observations & Measurements ([OGC](https://www.ogc.org/standard/om/)), with its W3C ontology form SOSA/SSN ([W3C](https://www.w3.org/TR/vocab-ssn/)). An observation is one act of sensing. It has:
+An observation is a group of features produced together. This matches OGC/ISO 19156 Observations & Measurements ([OGC](https://www.ogc.org/standard/om/)) and SOSA/SSN ([W3C](https://www.w3.org/TR/vocab-ssn/)): one act of sensing, by one procedure, of one place, at one time, with a result quality.
 
-- a procedure: the sensor on its platform
-- a feature of interest: the place observed
-- a phenomenon time: when the sensing happened
-- results, with a result quality
+The spec has one level, Observation, with three units:
 
-For imagery, one observation is one acquisition: one scene, granule or STAC item. The sensing conditions belong to the acquisition: off-nadir angle, sun angle, cloud cover, orbit and processing level. Features such as NDVI mean and NDVI p90 are results computed from it. Many features therefore share one observation.
-
-An adapter does not always return one observation. It returns a **product**, which takes one of three shapes:
-
-| Product shape | Examples | Honest quality fields |
+| Unit | Examples | Quality fields |
 |---|---|---|
-| one acquisition | sentinel2_l2a, landsat_c2l2_st, sentinel1_rtc | off-nadir, sun angles, cloud cover (tile and AOI), processing level, orbit |
-| a composite of many acquisitions | modis_13q1 (16-day), s2_signature_v1 (season), esa_worldcover, hansen_gfc, era5 (days), epa_aqs (annual means) | scene or reading count, clear-pixel share, period, input missions, distance to the station |
-| a registry snapshot | overture_*, eccc_npri, statcan_*, wikidata | snapshot date, join level (point, block, county, province), record count, search radius |
+| acquisition | one scene, granule, point cloud, photo | off-nadir or incidence, sun angles, cloud cover (tile and AOI), processing level, orbit, camera heading |
+| composite | modis_13q1 (16-day), s2_signature_v1, esa_worldcover, era5, Daymet | scene or reading count, clear-pixel share, period, input missions, distance to the station |
+| snapshot | overture_*, eccc_npri, zoning, statcan_* | snapshot date, join level (point, block, county, province), record count, search radius |
 
-A registry snapshot is not an act of sensing. It still needs provenance and a vintage.
+The spec panel in the design artifact is the source of truth for the fields. Three choices are not visible there:
 
-## Quality metadata
+- `quality` is an open map. A field is absent when it does not apply. About 70 POC features (`*_n_px`, `*_src_km`, `*_year`, `s2sig_n_scenes`, `ovt_control_*` and others) are quality metadata and move into it.
+- `processing_level` uses the NASA levels: L1 calibrated, L2 geophysical per scene, L3 gridded composite, L4 model output. A snapshot takes none. A derived product (land cover, biomass) has source type satellite but is not a measurement. The level tells them apart.
+- `assets` holds the STAC item id, the collection and the unsigned asset hrefs (gap Q5).
 
-### What the POC keeps
+The POC keeps one record per AOI × adapter, with no angles. Only 45 records carry a real STAC scene id (15 AOIs × Sentinel-2, Landsat, Sentinel-1). `scene_qc_backfill.csv` holds their angles, sun position and AOI cloud.
 
-The POC keeps one record per AOI × adapter: 792 records over 15 AOIs. Each record holds obs_date, res_m, item, licence and fill_type. No record holds an off-nadir angle or a sun angle.
+## Off-nadir
 
-Only 45 records carry a real STAC scene id: 15 AOIs × sentinel2_l2a, landsat_c2l2_st and sentinel1_rtc. Re-query those ids to recover the angles and the cloud breakdown. The other 639 `item` values are labels or product versions, not observations.
+Off-nadir varies little for Sentinel-2 and Landsat. It becomes a useful filter for tasked imagery (S4), hyperspectral (S3) and airborne surveys (S1). The table lists the imagery sources that expose a view angle. `off_nadir_fields.csv` has the full fields and notes.
 
-About 70 of the 814 feature names in 42 adapters are quality metadata stored as features:
+| Source | Gap | Angle | Field | Where it lives | Sample |
+|---|---|---|---|---|---|
+| Sentinel-2 L2A | Q1 | view zenith | mean of 13 `ZENITH_ANGLE` in `Mean_Viewing_Incidence_Angle_List` | `granule-metadata` asset (MTD_TL.xml) | 2.8–10.3° over 15 scenes |
+| Sentinel-2 L1C (Earth Search) | S5 | view zenith | same, in `metadata.xml` | `granule_metadata` asset | 4.5° |
+| Landsat C2 L2 and L1 | Q1, S5 | off-nadir | `view:off_nadir` | item property | 0 on every scene |
+| Sentinel-1 RTC | Q1 | incidence | `geolocationGrid/incidenceAngle` | GRD sidecar `annotation/iw-vv.xml`. The RTC item has none | 33.3–44.3° |
+| HLS L30, S30 | Q1 | view zenith | `VZA` band. Scene mean `MEAN_VIEW_ZENITH_ANGLE` | per-pixel asset. The mean is in the CMR record | 1.9° pixel, 3.17° mean |
+| ICEYE | S4 | off-nadir, incidence | `view:off_nadir`, `view:incidence_angle` | item property | 20.7°, 22.7° |
+| Capella | S4 | incidence, look | `view:incidence_angle`, `capella:look_angle` (off-nadir equivalent) | item property | 36.8°, 33.5° |
+| Umbra | S4 | incidence | `view:incidence_angle` | item property | 27.7° |
+| Satellogic EarthView | S4 | off-nadir | `view:off_nadir` | item property in `{item}_metadata.json` | 18.8° |
+| Maxar Open Data | S4 | off-nadir | `view:off_nadir` | item property | 41.2° |
+| SkyFi | S4 | off-nadir | `offNadirAngle`. Filter `maxOffNadirAngle` | archive search response (needs an account) | schema only |
+| Planet Tanager | S3 | off-nadir | `view:off_nadir` | item property | 0.2–30.5° over 153 scenes |
+| EnMAP | S3 | off-nadir | `enmap:acrossOffNadirAngle`, `enmap:alongOffNadirAngle` | item property | signed degrees |
+| DESIS | S3 | incidence | `desis:sceneIncidenceAngle` | item property | |
+| 3DEP lidar COPC | S1 | scan angle | `ScanAngleRank` | per-point dimension. The derived rasters have none | |
+| UAVSAR | S1 | incidence | `.inc` raster | per-pixel file beside each scene (Earthdata login) | |
 
-- pixel counts: `*_n_px`, `aef_emb_pixel_count`, `ghspop_n_cells`
-- distance to the measuring site: `naps_*_src_km`, `aqs_nearest_monitor_km`, `nsidc_sic_nearest_cell_km`
-- vintage: `*_year`, `phacww_latest_date`
-- sample size: `s2sig_n_scenes`, `clim_n_days`, `cams_n_hours`, `modis_n_composites`, `nwss_sites_county`
-- join level and coverage: `statcan_popest_geo_level`, `bcpmbc_parcel_coverage_frac`, `echo_bbox_pad_km`
-- controls: `ovt_control_*`, `mgnify_control_count`, `wd_control_entities`
+None: NAIP, HRDEM, NAPL, WESM, NOAA Digital Coast, OpenTopography, OpenAerialMap, GeoNadir, EMIT, PACE, NICFI, Planet Open Canada.
 
-`s2_cloud_cover_pct` is the only scene-quality value. It is the cloud cover of the whole 110 km tile, not of the AOI. The S2 and Landsat adapters hard-code cloud < 20 % and < 25 % ([`poc/pipeline.py`](../poc/pipeline.py), `_a_s2` and `_a_landsat_st`).
-
-### What the sources expose
-
-Checked live against Planetary Computer ([STAC API](https://planetarycomputer.microsoft.com/api/stac/v1)) and NASA CMR ([search](https://cmr.earthdata.nasa.gov/search)) on 2026-10-13. The field names follow the STAC extensions [eo](https://github.com/stac-extensions/eo), [view](https://github.com/stac-extensions/view), [sat](https://github.com/stac-extensions/sat) and [processing](https://github.com/stac-extensions/processing).
-
-| Source | Quality metadata | Where it lives |
-|---|---|---|
-| Sentinel-2 L2A | `eo:cloud_cover`, `s2:cloud_shadow_percentage`, `s2:thin_cirrus_percentage`, `s2:high_proba_clouds_percentage`, `s2:snow_ice_percentage`, `s2:nodata_pixel_percentage`, `s2:degraded_msi_data_percentage`, `s2:mean_solar_zenith`, `s2:mean_solar_azimuth`, `s2:processing_baseline`, `s2:product_type`, `sat:orbit_state`, `sat:relative_orbit`, `s2:mgrs_tile` | item properties |
-| Sentinel-2 L2A | viewing incidence (off-nadir) per band, 9.0° on tile 10UFV | `granule-metadata` asset (MTD_TL.xml, `Mean_Viewing_Incidence_Angle_List`). It is not in the item properties |
-| Landsat C2 L2 | `eo:cloud_cover`, `landsat:cloud_cover_land`, `view:off_nadir`, `view:sun_elevation`, `view:sun_azimuth`, `landsat:correction` (L2SP), `landsat:collection_category` (T1/T2), `landsat:wrs_path`, `landsat:wrs_row` | item properties |
-| S2 and Landsat, AOI level | cloud and shadow share inside the AOI | derive it from the `SCL` band (S2) or the `qa_pixel` band (Landsat) |
-| Sentinel-1 RTC | `sat:orbit_state`, `sat:relative_orbit`, `sar:polarizations`, `sar:instrument_mode`, `sar:looks_*`, `sar:resolution_*`, `s1:orbit_source`, `s1:product_timeliness`, `s1:processing_level` | item properties. The incidence angle is a per-pixel asset |
-| HLS L30 | `eo:cloud_cover`, `view:azimuth`, `view:sun_azimuth` | item properties |
-| MODIS 13Q1 | `eo:cloud_cover`, platform (terra or aqua), tile | item properties. Pixel reliability is a QA band |
-| ESA WorldCover, Copernicus DEM | product version, input missions, period | item properties |
-| NAIP | `gsd`, `naip:year`, `naip:state` | item properties. Nothing else |
-| 3DEP lidar COPC | `pc:count` (points), acquisition window, `3dep:usgs_id` | item properties. Quality level (QL1/QL2) is in USGS WESM, not STAC |
-| EMIT L2A | `cloud_cover` | NASA CMR granule. EMIT is not on Planetary Computer STAC (the collection returns 404) |
-| ground stations | distance to the station, station count, reading count, completeness, year | the adapter computes them |
-| models | grid resolution, time steps used, model version | the adapter computes them or reads the dataset attributes |
-| registries | snapshot date, join level, record count, search radius | the adapter computes them |
-
-The off-nadir angle varies for tasked high-resolution imagery: commercial satellites and airborne surveys. Sentinel-2 and Landsat look nearly straight down. Off-nadir becomes a useful filter only after gap G7 (commercial and open commercial imagery) is closed.
-
-## Proposed spec change
-
-**This needs the user's approval.** The user agreed that features group into observations. The two-level shape below is not approved yet.
-
-- **Observation** is composed of: source, sensor, platform, source_type, time, processing_level, resolution_m, aoi_coverage, quality, assets
-- **Product** is composed of: source, family, source_type, time (one of time, Interval), licence, processing_level, observations (list of Observation, or a summary for a composite), quality, features
-- **Feature** is composed of: feature, value, SI_unit
-- **QueryResult** is composed of: aoi, products, errors
-
-`quality` is an open map of the fields in the table above. `processing_level` uses the NASA levels: L1 calibrated, L2 geophysical per scene, L3 gridded composite, L4 model output. A registry takes none. `assets` holds the STAC item id and the asset hrefs (gap G9). All 70 quality features move into `quality`.
-
-Every adapter written to the flat spec has to be rewritten later. Settle this before the next build round.
+The ground-level counterpart of off-nadir is camera pitch and heading. Panoramax carries `pers:pitch` and `view:azimuth`. Wikimedia, DriveBC and PhenoCam carry a heading only. Panoramax pitch is 0 on every Toronto core item and non-zero (−16 to +13°) on 202 of 999 items in the Toronto stress extent. It filters some surveys only.
 
 ## Gaps against the original brief
 
 The user's original brief asked for: an AOI as a lat/lon box plus periodic time plus spectral band, cloud cover, off-nadir angle, multispectral and hyperspectral, satellite vs plane vs lidar vs drone, paid brokers (SkyFi) and government agencies (NASA), correction steps (orthorectified, atmospheric), and knowledge representation for GIS and land-use records.
 
-None of the candidate sources below are in the original catalogue unless marked. None are probed. The links resolved on 2026-10-13. usgs.gov returns 403 to scripts.
+Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q) lacks a field in the query or the result. R1 goes the other way: from a picture to a place. Hits count the 15 AOIs in `test_aois.geojson`, each against a control outside coverage. Every candidate was probed live on 2026-10-13 and 2026-10-14.
 
-### G1. Observations and quality metadata
+| Id | Gap | Old id | Outcome | Best candidate |
+|---|---|---|---|---|
+| Q1 | No QC metrics per observation (off-nadir, sun angle, AOI cloud) | G1 | closed for the 45 scene records | Planetary Computer item plus sidecar XML (see Off-nadir) |
+| Q2 | Query cannot pick bands or indices | G2 | works, 15/15 | `eo:bands` common name plus `spyndex` |
+| Q3 | Query cannot ask for periodic time | G3 | works, 15/15 | one range search, binned client-side |
+| Q4 | Query cannot filter on QC | G4 | works, 15/15 | CQL2-JSON on Planetary Computer, AOI cloud after the read |
+| Q5 | Result holds no pointer to the data itself | G9 | works, 15/15 | unsigned href, signed at read time |
+| S1 | No airborne lidar or aerial imagery | G5 | sources found, US and Canada | 3DEP COPC with WESM quality level (US), HRDEM (Canada) |
+| S2 | No drone imagery | G5 | thin, 1/15 | OpenAerialMap through the HOT STAC |
+| S3 | No hyperspectral imagery | G6 | sources found | EnMAP 15/15, EMIT 11/15 |
+| S4 | No high-resolution tasked imagery (open commercial and brokers) | G7 | open samples only, brokers need an account | ICEYE, Umbra, Capella, Satellogic |
+| S5 | No uncorrected (L1) imagery | G8 | closed, 15/15 | Earth Search Sentinel-2 L1C, LandsatLook C2 L1 |
+| S6 | No zoning or land-use records | G10 | partial, 2/15 at best | National Zoning Atlas (US, terms), city open data (Canada) |
+| S7 | Too few water features | new | closed | ECCC hydrometric 13/15, HydroRIVERS 13/15 |
+| S8 | Too few climate features | new | closed, 15/15 | GHCN-Daily, Daymet, TerraClimate, CHIRPS v3 |
+| S9 | No ground-level camera imagery: vehicle-mounted, fixed or geotagged photos | new | geotagged photos everywhere, street-level thin | iNaturalist 15/15, GBIF 14/15, Wikimedia 7/15, Panoramax 3/15 |
+| R1 | Nothing places a picture that has no coordinates | new | coarse only, no street-level fix | EXIF, then StreetCLIP plus PLONK, then VPR |
 
-- **State:** no observation level. Quality is filed as features (see above).
-- **Close it:** adopt the spec change. Refactor the POC adapters to return products. Re-query the 45 scene records to backfill angles.
-- **Families:** all.
+### Q1. No QC metrics per observation
 
-### G2. Band selection
+- **Outcome:** all 45 POC scene records resolve. Each has its off-nadir or incidence, processing level, and (for optical) sun position, tile cloud and AOI cloud.
+- **AOI cloud:** derive it from `SCL` (Sentinel-2) or `qa_pixel` (Landsat). It often disagrees with tile cloud. Landsat at Bingham reads 0.48 % on the scene and 31 % over the AOI. A Sentinel-2 scene at farm_sk_quarter reads 8.99 % on the tile and 64.7 % over the AOI.
+- **Next:** refactor the POC adapters to return observations with `quality` filled.
 
-- **State:** each adapter fixes its bands. The query names families only.
-- **Close it:** add an optional `bands` or `indices` field to the query. Resolve band names through the STAC `eo:bands` metadata. Resolve index names through [Awesome Spectral Indices](https://github.com/awesome-spectral-indices/awesome-spectral-indices) (Python: `spyndex`).
-- **Families:** spectral, macrobiology, water.
+### Q2. Query cannot pick bands or indices
 
-### G3. Periodic time
+- **Outcome:** one spec (bands red, nir, swir16; indices NDVI, NDWI, NBR) resolves on Sentinel-2 and Landsat, on Planetary Computer and Earth Search. NDVI at farm_sk_quarter in July 2023: 0.5458 on both S2 catalogues, 0.5419 on Landsat.
+- **Spec:** `bands`, `indices`, `index_params` (SAVI and EVI need constants).
+- **CAUTION** Landsat names NIR `nir08`. Fall back to wavelength (760–900 nm). `rededge` is ambiguous on Sentinel-2 (B05, B06, B07, B8A).
 
-- **State:** the query takes one time plus a tolerance (default infinite). The user wants the result to hold the fetched data and a view that splits it into the periods requested. The helper that expands a recurrence into a list of times left the spec, not the plan.
-- **Close it:** fan one query out per time. For STAC sources, search a date range once and bin the items. [openEO](https://openeo.org) defines a time-series process model worth borrowing.
-- **Families:** spectral, climate, macrobiology, hazards.
+### Q3. Query cannot ask for periodic time
 
-### G4. Quality filters in the query
+- **Outcome:** one range search binned client-side picks the same best-cloud item as a per-period fan-out in 24/24 months. Planetary Computer needs 15 requests over 15 AOIs, against 360 for a monthly fan-out.
+- **Spec:** `period {start, end, every, months?}`. "Every July" is `{every: "year", months: [7]}`.
 
-- **State:** hard-coded cloud thresholds.
-- **Close it:** add query filters (maximum cloud, maximum off-nadir, minimum sun elevation, processing level) after G1. Push them into the STAC query where the property exists. Filter AOI cloud after the read.
-- **Families:** spectral, plus every imagery-derived family.
+### Q4. Query cannot filter on QC
 
-### G5. Airborne, lidar and drone
+- **Outcome:** filters change counts as expected on Planetary Computer. Sentinel-2 2023 at farm_sk_quarter: 129 items, 36 under 10 % cloud.
+- **Spec:** `qc {max_cloud_tile_pct, max_cloud_aoi_pct, max_off_nadir_deg, min_sun_elevation_deg, processing_level}`. Send the tile fields to the server. Apply AOI cloud after the read.
+- **CAUTION** the sun property differs per catalogue: `s2:mean_solar_zenith` on Planetary Computer, `view:sun_elevation` on Earth Search. Keep a property map per collection.
 
-- **State:** one airborne adapter (usgs_namrad, radiometrics). Lidar only through MRDEM at 30 m. No drone source. HRDEM 1 m lidar was probed and covers 6 of 12 POC AOIs. It is absent at the prairie AOIs ([`metasmith_core_set.md`](metasmith_core_set.md)).
-- **Candidates:**
-  - USGS 3DEP lidar on Planetary Computer, as ready layers: [DTM](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-dtm), DSM, HAG, intensity, classification (catalogued as `natl_lidar`)
-  - [NAIP](https://planetarycomputer.microsoft.com/dataset/naip) aerial imagery, 0.3–1 m, US (catalogued, triage reachable)
-  - [HRDEM](https://open.canada.ca/data/en/dataset/957782bf-847c-4644-a757-e383c0057995), Canada 1 m lidar
-  - [NEON AOP](https://www.neonscience.org/data-collection/airborne-remote-sensing): airborne lidar, hyperspectral and RGB over US NEON sites
-  - [OpenTopography](https://opentopography.org): lidar point clouds and DEMs, API
-  - [NOAA Digital Coast](https://coast.noaa.gov/digitalcoast/): coastal lidar and imagery
-  - drone: [OpenAerialMap](https://openaerialmap.org) (catalogued, not probed), [GeoNadir](https://geonadir.com)
-- **Families:** geology, macrobiology, infrastructure, spectral.
+### Q5. Result holds no pointer to the data itself
 
-### G6. Hyperspectral
+- **Outcome:** a range GET returns 206 on Planetary Computer for S2 and Landsat at 15/15 AOIs. Earth Search Landsat assets are requester-pays `s3://`.
+- **Spec:** `assets {href, type, requester_pays, signed_until?}`, plus `item_id` and `collection`. Store the unsigned href. The SAS token lasts about 44 min.
 
-- **State:** none built.
-- **Candidates:**
-  - [EMIT](https://earth.jpl.nasa.gov/emit/), 285 bands, 60 m, through NASA CMR with a free Earthdata login (catalogued, triage reachable)
-  - [AVIRIS](https://aviris.jpl.nasa.gov) airborne campaigns
-  - NEON AOP hyperspectral (see G5)
-  - [EnMAP](https://www.enmap.org) and PRISMA, free registration, sparse tasking (catalogued as `enmap_prisma`)
-  - [PACE](https://pace.gsfc.nasa.gov) OCI, hyperspectral ocean colour (catalogued within `ocean_color`)
-  - Planet Tanager sample products in [Planet's open data STAC](https://www.planet.com/data/stac/browser/)
-- **Families:** spectral, latent, geology (mineralogy), water, hazards (methane plumes).
+### S1, S2. No airborne lidar, aerial or drone imagery
 
-### G7. Commercial imagery and paid brokers
+- **US lidar:** Planetary Computer `3dep-lidar-copc`, 3/15, angle per point. USGS WESM (layer 8 of `index.nationalmap.gov` `3DEPElevationIndex`) gives the quality level per work unit and hits 4/15. NAIP hits 4/15.
+- **Canada lidar:** HRDEM has valid 1 m pixels at 8/15. It is absent at both prairie farms.
+- **Elsewhere:** OpenTopography needs `include_federated=true` and is the only catalogue that hits Montreal. NOAA Digital Coast hits 2/15 lidar, 4/15 imagery. NEON AOP and UAVSAR hit 0/15.
+- **Drone:** OpenAerialMap through `api.imagery.hotosm.org/stac`, filtered on `oam:platform_type=uav`, hits only the Toronto stress AOI (2 scenes, about 3 cm). GeoNadir answers without auth but is undocumented. EarthExplorer UAS needs a USGS account. DroneDB has no search API.
 
-- **State:** out of scope under the "free and open" decision. The licence tiers have no commercial level.
-- **Open commercial programmes (free, carry off-nadir metadata):**
-  - [Maxar Open Data](https://registry.opendata.aws/maxar-open-data/): event imagery, STAC on AWS
-  - [Umbra](https://registry.opendata.aws/umbra-open-data/), [Capella](https://registry.opendata.aws/capella_opendata/) and [ICEYE](https://registry.opendata.aws/iceye-opendata/): open SAR samples
-  - [Satellogic EarthView](https://registry.opendata.aws/satellogic-earthview/)
-  - Planet: [NICFI](https://planetarycomputer.microsoft.com/dataset/planet-nicfi-analytic) (tropics, on Planetary Computer) and [open SkySat data](https://www.planet.com/data/stac/browser/)
-- **Paid brokers:** [SkyFi](https://skyfi.com), [UP42](https://up42.com), [Sentinel Hub](https://www.sentinel-hub.com). An adapter could search the archive and return a quote (scene, date, off-nadir, cloud, price) without buying.
+### S3. No hyperspectral imagery
+
+- **Outcome:** EnMAP L2A on the DLR STAC hits 15/15 with off-nadir in the item. EMIT hits 11/15 through CMR. Tanager hits 3/15, DESIS 2/15, AVIRIS-NG 2/15, NEON 0/15. PACE OCI is global ocean colour.
+- **Walls:** EnMAP and DESIS assets need DLR SSO. EMIT downloads need Earthdata. PRISMA is portal only.
+
+### S4. No high-resolution tasked imagery
+
+- **Open commercial:** ICEYE 3/15, Umbra 2/15, Capella 2/15, Satellogic 1/15 (Bingham, July–December 2022 only), Maxar 0/15. All carry an angle in the item. NICFI is tropics only. Planet Open Canada hits 1/15 (Fort McKay) with no angle.
+- **Brokers:** SkyFi, UP42 and Sentinel Hub return 401 on search and quote. SkyFi's OpenAPI spec shows a quote returns `offNadirAngle`, `cloudCoveragePercent`, `captureTimestamp` and `priceForOneSquareKm`.
 - **Decision needed:** add a commercial licence tier, and decide whether quote-only adapters are in scope.
-- **Families:** spectral, infrastructure, hazards.
 
-### G8. Correction level
+### S5. No uncorrected (L1) imagery
 
-- **State:** the science project chose processed Level-2 data. The output does not record the level.
-- **Close it:** record `processing_level` (G1). Offer L1C for callers who correct themselves: Sentinel-2 L1C is on [Earth Search](https://earth-search.aws.element84.com/v1) (`sentinel-2-l1c`). Planetary Computer returned no L1C items for the test tile.
-- **Families:** spectral.
+- **Outcome:** Earth Search `sentinel-2-l1c` and LandsatLook `landsat-c2l1` each hit 15/15. Planetary Computer has no L1C. LandsatLook pixels redirect to the EROS login.
 
-### G9. Returning the data itself
+### S6. No zoning or land-use records
 
-- **State:** the output is summary statistics only.
-- **Close it:** put the STAC item id and the asset hrefs into each observation (`assets`). The caller fetches pixels itself. The POC already keeps `item` for the 45 scene records.
-- **Families:** all imagery-derived families.
+- **US:** the National Zoning Atlas hits 2/15 (Detroit, Bingham) with district code, housing treatment, parking, height cap and minimum lot. **CAUTION** its terms bar download without written permission. PAD-US hits 1/15 and is protected land, not zoning. Regrid is paid.
+- **Canada:** Toronto open data hits 2/15. Vancouver and Calgary work but sit outside the test AOIs. BC ALR hits both Fraser Valley AOIs. Each city needs its own adapter.
+- **EU:** Urban Atlas works on a Paris control and covers no test AOI.
 
-### G10. Zoning and land-use records
+### S7. Too few water features
 
-- **State:** missing. `layer_families.md` flags it. `cadastre_us` (with zoning) is unresolved. `overture_land_use` is land cover, not zoning. Parcel adapters exist for BC and Quebec only.
-- **Candidates:**
-  - [National Zoning Atlas](https://www.zoningatlas.org/atlas): US zoning by jurisdiction
-  - [Regrid](https://regrid.com): US parcels with zoning, paid (catalogued under `cadastre_us`)
-  - [BC Agricultural Land Reserve](https://www.alc.gov.bc.ca)
-  - PAD-US: US protected areas, USGS Gap Analysis Project
-  - [EU Urban Atlas](https://land.copernicus.eu/en/products/urban-atlas)
-  - municipal open-data zoning by-laws (Toronto, Vancouver, Calgary and others), one adapter per city
-- **Families:** socio-economic (new sub-family: planning and zoning).
+- **Outcome:** ECCC hydrometric (`api.weather.gc.ca`) 13/15 within 25 km. HydroRIVERS 13/15, one schema for both countries, a 66 MB download. USGS Water Data 5/15. NHDPlus HR 8/15. NHN 9/15 or more.
+
+### S8. Too few climate features
+
+- **Outcome:** GHCN-Daily, Daymet, TerraClimate and CHIRPS v3.0 each hit 15/15. CHIRPS v3.0 covers 60S–60N. v2.0 covers 50S–50N and misses 5 AOIs. ECCC daily climate hits 13/15.
+
+### S9. No ground-level camera imagery
+
+- **Vehicle-mounted:** Panoramax hits 3/15 (Toronto core, Toronto stress, Montreal), needs no key and has the best per-image QC: `view:azimuth`, `pers:pitch`, `quality:horizontal_accuracy`. Mapillary fails because the POC adapter sends no `access_token` (error 190). A free token fixes it. KartaView returns `"Restricted access!"` inside HTTP 200. Bee Maps and Street View need a key.
+- **Fixed cameras:** DriveBC and PhenoCam work, 0/15, with a cardinal heading. Windy, 511 Ontario and 511 Alberta need a key. AMOS is gone.
+- **Geotagged photos:** iNaturalist 15/15, GBIF 14/15, Wikimedia Commons 7/15 within 1 km. Flickr needs a key. Geograph is UK only.
+- **Datasets:** OSV-5M (5.1M Mapillary images, CC-BY-SA-4.0) downloads without login. BDD100K, nuScenes and YFCC100M need a form or are unreachable.
+
+## Picture to location (R1)
+
+Lane E scored open tools on 50 CC-licensed photos with known coordinates and stripped EXIF: 30 near the AOIs, 20 worldwide. [`probes/E/findings.md`](probes/E/findings.md) has every model, the caveats on the test set and the services that refused.
+
+| Tool | Median error | Within 25 km | Right country |
+|---|---|---|---|
+| StreetCLIP over a flat 7402-city list | 803 km | 24 % | 68 % |
+| Plurality vote of 6 models | 712 km | 16 % | 60 % |
+| PLONK_OSV_5M | 878 km | 0 % | 48 % |
+| G3 alignment checkpoint | 1108 km | 12 % | 50 % |
+| GeoCLIP | 1250 km | 8 % | 48 % |
+| OSV-5M baseline | 2808 km | 6 % | 28 % |
+
+- StreetCLIP's label list holds the AOI cities, so its 25 km score is optimistic.
+- PLONK sample density is the best confidence signal (AUROC 0.86 for error under 200 km). OSV-5M and PLONK still return a point for a blank image.
+- Visual place recognition (DINOv2 retrieval, then LightGlue) against Panoramax found a reference within 1 km for 6/7 photos when handed the area. Only 1/7 passed geometric verification. From a model's guess, 0 verified.
+- PIGEON withholds its weights. GeoSpy and Picarta need an account.
+
+The pipeline to build:
+
+1. Read EXIF GPS and accept it. 24 of 50 originals carry it.
+2. Otherwise run StreetCLIP over a regional city list, plus PLONK_YFCC and PLONK_OSV_5M. Report a place and a radius from the PLONK density, not a point.
+3. Where street-level references exist near the guess, run retrieval then LightGlue. Accept at 40 or more inliers.
 
 ## Traps
 
-- MGnify returns HTTP 200 for an unknown query parameter and serves the unfiltered catalogue. Test every filter against a control: a differential count, not a 200 (`geolocatable_data_registry.md`).
-- `eo:cloud_cover` is per tile. An AOI can be clear under a 60 % tile or cloudy under a 5 % tile.
-- A derived product (land cover, biomass, a composite) has SourceType satellite but is not a measurement. Use processing_level to tell them apart.
-- The triage did not keep endpoint URLs. `aafc_aci` passed triage, then failed in the POC with a 404 that nobody could trace ([`poc_report.md`](poc_report.md)). Keep the endpoint with every probe.
-- Planetary Computer blob reads need a SAS token from its token endpoint. Unsigned reads return HTTP 409 and look like an absent layer ([`metasmith_core_set.md`](metasmith_core_set.md)).
+- MGnify returns HTTP 200 for an unknown query parameter and serves the unfiltered catalogue. Test every filter against a control: a differential count, not a 200.
+- **CAUTION** Earth Search ignores CQL2-JSON filters and returns HTTP 200 with the unfiltered count. Use its `query` extension.
+- Earth Search Sentinel-2 declares a reflectance offset of -0.1 that it already applied (`earthsearch:boa_offset_applied=true`). Planetary Computer S2 declares none. Apply 1e-4 and -0.1 when `s2:processing_baseline` ≥ 04.00.
+- Planetary Computer returns reprocessed duplicates: 199 items, 142 distinct datetimes at one AOI. Dedupe before binning.
+- `eo:cloud_cover` is per tile. Use it only as a prefilter.
+- Planetary Computer blob reads need a SAS token. Unsigned reads return HTTP 409 and look like an absent layer.
+- The open SAR STAC roots are incomplete. Umbra links only 2024–2025 (list the bucket: 7,561 items). ICEYE links 589 of 663. Capella has 9,999 per-product items.
+- Planetary Computer 3DEP dates are year-granular: 2018-01-01 for a survey flown in April 2017.
+- A bbox STAC search overstates HRDEM coverage (11/15 against 8/15 valid). Read the COG.
+- TerraClimate's THREDDS subset returns packed integers. Apply scale 0.1. The ocean control returns the fill value with HTTP 200.
+- ECCC climate station `LATITUDE` and `LONGITUDE` are integers × 1e7. Use the geometry.
+- NCEI search `totalCount` is the whole dataset, not the bbox count. Its bbox order is north, west, south, east.
+- KartaView returns its error inside an HTTP 200 envelope.
+- Count hits over the AOI extent, not a box at the centroid. A 2 km box at the centre of the 25 km Toronto stress polygon holds no Panoramax items. Its extent holds 1000. GBIF, DriveBC and PhenoCam were counted around the centroid and may undercount the stress AOIs.
+- Wikimedia returns 429 under load. Without a backoff a 429 reads as 0 hits.
 - A STAC search by bbox in Canada returns nothing for US-only collections (NAIP, 3DEP). That is coverage, not failure.
+- usgs.gov returns 403 to scripts. Use the API hosts (`index.nationalmap.gov`, `api.waterdata.usgs.gov`).
 
 ## Next sessions
 
-1. Get the user's decision on the Observation and Product levels.
-2. Get the user's decision on G7: a commercial tier and quote-only adapters.
-3. Refactor the POC adapters to return products. Move the quality features into `quality`. Backfill angles for the 45 scene records.
-4. Close G5, G6 and G10 with new sources. These are the gaps with no source at all.
-5. Add the query fields for G2, G3 and G4.
-6. Update the design artifact's spec panel. Rebuild with `figures/design/build.py`.
+1. Get the user's decision on S4: a commercial tier and quote-only adapters.
+2. Ask the National Zoning Atlas for permission, or drop it for US zoning.
+3. Get a free Mapillary token and fix the POC adapter.
+4. Refactor the POC adapters to return observations with `quality` and `assets`.
+5. Build adapters for the best candidates in the gap table, starting with S7, S8, S5 and S3.
+6. Add the Q2, Q3 and Q4 query fields to the POC query.
+7. Build the picture-to-location pipeline as an adapter that returns a place and a radius.

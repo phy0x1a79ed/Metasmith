@@ -1,0 +1,49 @@
+{
+ "id": "p27",
+ "condition": "model",
+ "centre_lat": -27.46910858154297,
+ "centre_lon": 153.02532958984375,
+ "centre_err_km": 16316.697514631382,
+ "search_radius_m": 3000,
+ "n_ref_pictures_in_disc": 4,
+ "n_ref_positions_used": 3,
+ "note": "true location is outside the reference search disc",
+ "n_views": 3,
+ "retrieval_top1_err_km": 16316.573810545908,
+ "nearest_ref_to_truth_km": 16316.38897479129,
+ "best_inliers": 11,
+ "best_ref_err_km": 16316.38897479129,
+ "best_ref_id": "c3ad0353-a3b5-4e47-8dae-260a238d88b5",
+ "accepted": false,
+ "accepted_within_1km": false,
+ "top_candidates": [
+  {
+   "ref": "c3ad0353-a3b5-4e47-8dae-260a238d88b5",
+   "lat": -27.4815676,
+   "lon": 153.0013277,
+   "sim": 0.4645496606826782,
+   "matches": 19,
+   "inliers": 11,
+   "err_km": 16316.38897479129
+  },
+  {
+   "ref": "39506397-7695-4e95-a6c1-cd9c8b659617",
+   "lat": -27.4741543,
+   "lon": 153.0158031,
+   "sim": 0.4348790943622589,
+   "matches": 9,
+   "inliers": 8,
+   "err_km": 16316.584148249467
+  },
+  {
+   "ref": "dea4ecbc-591a-4a20-b317-1704d4717d60",
+   "lat": -27.4746697,
+   "lon": 153.0148512,
+   "sim": 0.47430500388145447,
+   "matches": 4,
+   "inliers": 0,
+   "err_km": 16316.573810545908
+  }
+ ],
+ "sec": 15
+}

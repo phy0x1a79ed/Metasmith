@@ -1,0 +1,282 @@
+{
+ "key": 5827664612,
+ "datasetKey": "50c9509d-22c7-4a22-a47d-8c48425ef4a7",
+ "publishingOrgKey": "28eb1a3f-1c15-4a95-931a-4af90ecb574d",
+ "datasetCategory": [
+  "CitizenScience"
+ ],
+ "installationKey": "997448a8-f762-11e1-a439-00145eb45e9a",
+ "hostingOrganizationKey": "28eb1a3f-1c15-4a95-931a-4af90ecb574d",
+ "publishingCountry": "US",
+ "protocol": "DWC_ARCHIVE",
+ "lastCrawled": "2026-10-13T15:36:28.771+00:00",
+ "lastParsed": "2026-10-14T02:49:51.010+00:00",
+ "crawlId": 609,
+ "extensions": {
+  "http://rs.gbif.org/terms/1.0/Multimedia": [
+   {
+    "http://purl.org/dc/terms/license": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "http://purl.org/dc/terms/created": "2025-07-18T00:40:23Z",
+    "http://purl.org/dc/terms/publisher": "iNaturalist",
+    "http://purl.org/dc/terms/format": "image/jpeg",
+    "http://purl.org/dc/terms/identifier": "https://inaturalist-open-data.s3.amazonaws.com/photos/538283700/original.jpg",
+    "http://rs.tdwg.org/dwc/terms/catalogNumber": "538283700",
+    "http://purl.org/dc/terms/references": "https://www.inaturalist.org/photos/538283700",
+    "http://purl.org/dc/terms/rightsHolder": "tracyhumphrey",
+    "http://purl.org/dc/terms/type": "StillImage",
+    "http://purl.org/dc/terms/creator": "tracyhumphrey"
+   }
+  ]
+ },
+ "basisOfRecord": "HUMAN_OBSERVATION",
+ "occurrenceStatus": "PRESENT",
+ "classifications": {
+  "7ddf754f-d193-4cc9-b351-99906754a03b": {
+   "usage": {
+    "key": "5BCMF",
+    "name": "Vicia cracca L.",
+    "rank": "SPECIES",
+    "code": "BOTANICAL",
+    "authorship": "L.",
+    "genericName": "Vicia",
+    "specificEpithet": "cracca",
+    "formattedName": "<i>Vicia</i> <i>cracca</i> L."
+   },
+   "acceptedUsage": {
+    "key": "5BCMF",
+    "name": "Vicia cracca L.",
+    "rank": "SPECIES",
+    "code": "BOTANICAL",
+    "authorship": "L.",
+    "genericName": "Vicia",
+    "specificEpithet": "cracca",
+    "formattedName": "<i>Vicia</i> <i>cracca</i> L."
+   },
+   "taxonomicStatus": "ACCEPTED",
+   "classification": [
+    {
+     "key": "CS5HF",
+     "name": "Eukaryota",
+     "rank": "DOMAIN"
+    },
+    {
+     "key": "P",
+     "name": "Plantae",
+     "rank": "KINGDOM"
+    },
+    {
+     "key": "CMQ8S",
+     "name": "Pteridobiotina",
+     "rank": "SUBKINGDOM"
+    },
+    {
+     "key": "TP",
+     "name": "Tracheophyta",
+     "rank": "PHYLUM"
+    },
+    {
+     "key": "MG",
+     "name": "Magnoliopsida",
+     "rank": "CLASS"
+    },
+    {
+     "key": "383",
+     "name": "Fabales",
+     "rank": "ORDER"
+    },
+    {
+     "key": "623QT",
+     "name": "Fabaceae",
+     "rank": "FAMILY"
+    },
+    {
+     "key": "9CMDW",
+     "name": "Vicia",
+     "rank": "GENUS"
+    },
+    {
+     "key": "5BCMF",
+     "name": "Vicia cracca",
+     "rank": "SPECIES"
+    }
+   ],
+   "issues": [
+    "TAXON_ID_NOT_FOUND"
+   ]
+  },
+  "d7dddbf4-2cf0-4f39-9b2a-bb099caae36c": {
+   "usage": {
+    "key": "2975287",
+    "name": "Vicia cracca L.",
+    "rank": "SPECIES",
+    "authorship": "L.",
+    "genericName": "Vicia",
+    "specificEpithet": "cracca",
+    "formattedName": "<i>Vicia</i> <i>cracca</i> L."
+   },
+   "acceptedUsage": {
+    "key": "2975287",
+    "name": "Vicia cracca L.",
+    "rank": "SPECIES",
+    "authorship": "L.",
+    "genericName": "Vicia",
+    "specificEpithet": "cracca",
+    "formattedName": "<i>Vicia</i> <i>cracca</i> L."
+   },
+   "taxonomicStatus": "ACCEPTED",
+   "classification": [
+    {
+     "key": "6",
+     "name": "Plantae",
+     "rank": "KINGDOM"
+    },
+    {
+     "key": "7707728",
+     "name": "Tracheophyta",
+     "rank": "PHYLUM"
+    },
+    {
+     "key": "220",
+     "name": "Magnoliopsida",
+     "rank": "CLASS"
+    },
+    {
+     "key": "1370",
+     "name": "Fabales",
+     "rank": "ORDER"
+    },
+    {
+     "key": "5386",
+     "name": "Fabaceae",
+     "rank": "FAMILY"
+    },
+    {
+     "key": "2974751",
+     "name": "Vicia",
+     "rank": "GENUS"
+    },
+    {
+     "key": "2975287",
+     "name": "Vicia cracca",
+     "rank": "SPECIES"
+    }
+   ],
+   "issues": [
+    "TAXON_ID_NOT_FOUND"
+   ]
+  }
+ },
+ "taxonKey": 2975287,
+ "kingdomKey": 6,
+ "phylumKey": 7707728,
+ "classKey": 220,
+ "orderKey": 1370,
+ "familyKey": 5386,
+ "genusKey": 2974751,
+ "speciesKey": 2975287,
+ "acceptedTaxonKey": 2975287,
+ "scientificName": "Vicia cracca L.",
+ "scientificNameAuthorship": "L.",
+ "acceptedScientificName": "Vicia cracca L.",
+ "kingdom": "Plantae",
+ "phylum": "Tracheophyta",
+ "order": "Fabales",
+ "family": "Fabaceae",
+ "genus": "Vicia",
+ "species": "Vicia cracca",
+ "genericName": "Vicia",
+ "specificEpithet": "cracca",
+ "taxonRank": "SPECIES",
+ "taxonomicStatus": "ACCEPTED",
+ "dateIdentified": "2025-07-18T02:36:47",
+ "decimalLatitude": 52.004734,
+ "decimalLongitude": -106.311325,
+ "coordinateUncertaintyInMeters": 4.0,
+ "continent": "NORTH_AMERICA",
+ "stateProvince": "Saskatchewan",
+ "gadm": {
+  "level0": {
+   "gid": "CAN",
+   "name": "Canada"
+  },
+  "level1": {
+   "gid": "CAN.12_1",
+   "name": "Saskatchewan"
+  },
+  "level2": {
+   "gid": "CAN.12.2_1",
+   "name": "Division No. 11"
+  },
+  "level3": {
+   "gid": "CAN.12.2.5_1",
+   "name": "Blucher No. 343"
+  }
+ },
+ "year": 2025,
+ "month": 7,
+ "day": 17,
+ "eventDate": "2025-07-17T18:40:23",
+ "startDayOfYear": 198,
+ "endDayOfYear": 198,
+ "issues": [
+  "COORDINATE_ROUNDED",
+  "CONTINENT_DERIVED_FROM_COORDINATES",
+  "TAXON_ID_NOT_FOUND"
+ ],
+ "modified": "2025-09-08T13:00:54.000+00:00",
+ "lastInterpreted": "2026-10-14T02:49:51.010+00:00",
+ "references": "https://www.inaturalist.org/observations/298812331",
+ "license": "http://creativecommons.org/licenses/by-nc/4.0/legalcode",
+ "isSequenced": false,
+ "identifiers": [
+  {
+   "identifier": "298812331"
+  }
+ ],
+ "media": [
+  {
+   "type": "StillImage",
+   "format": "image/jpeg",
+   "references": "https://www.inaturalist.org/photos/538283700",
+   "created": "2025-07-18T00:40:23.000+00:00",
+   "creator": "tracyhumphrey",
+   "publisher": "iNaturalist",
+   "license": "http://creativecommons.org/licenses/by-nc/4.0/",
+   "rightsHolder": "tracyhumphrey",
+   "identifier": "https://inaturalist-open-data.s3.amazonaws.com/photos/538283700/original.jpg"
+  }
+ ],
+ "facts": [],
+ "relations": [],
+ "isInCluster": false,
+ "datasetName": "iNaturalist research-grade observations",
+ "recordedBy": "tracyhumphrey",
+ "identifiedBy": "Lori Skulski",
+ "dnaSequenceID": [],
+ "nucleotideSequence": [],
+ "geodeticDatum": "WGS84",
+ "class": "Magnoliopsida",
+ "countryCode": "CA",
+ "recordedByIDs": [],
+ "identifiedByIDs": [],
+ "gbifRegion": "NORTH_AMERICA",
+ "country": "Canada",
+ "publishedByGbifRegion": "NORTH_AMERICA",
+ "rightsHolder": "tracyhumphrey",
+ "identifier": "298812331",
+ "http://unknown.org/nick": "tracyhumphrey",
+ "verbatimEventDate": "2025-07-17 18:40:23-06:00",
+ "http://unknown.org/crawl_attempt": "610",
+ "http://unknown.org/status": "not_reviewed",
+ "http://unknown.org/allowCoordinatesFlipping": "true",
+ "collectionCode": "Observations",
+ "gbifID": "5827664612",
+ "verbatimLocality": "Blucher No. 343, SK, CA",
+ "occurrenceID": "https://www.inaturalist.org/observations/298812331",
+ "taxonID": "52471",
+ "http://unknown.org/captive_cultivated": "wild",
+ "catalogNumber": "298812331",
+ "institutionCode": "iNaturalist",
+ "eventTime": "18:40:23-06:00",
+ "identificationID": "666741376"
+}

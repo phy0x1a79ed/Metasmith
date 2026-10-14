@@ -1,0 +1,97 @@
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/590 [00:00<?, ?it/s]Loading weights:   6%|▌         | 34/590 [00:00<00:03, 147.25it/s]Loading weights:  12%|█▏        | 68/590 [00:00<00:03, 134.26it/s]Loading weights:  14%|█▍        | 82/590 [00:01<00:11, 46.00it/s] Loading weights:  15%|█▌        | 91/590 [00:01<00:12, 38.83it/s]Loading weights:  31%|███       | 181/590 [00:01<00:03, 116.25it/s]Loading weights:  34%|███▍      | 201/590 [00:02<00:04, 79.06it/s] Loading weights:  36%|███▋      | 215/590 [00:03<00:08, 46.50it/s]Loading weights:  38%|███▊      | 225/590 [00:03<00:07, 46.92it/s]Loading weights:  40%|███▉      | 234/590 [00:03<00:07, 49.95it/s]Loading weights:  41%|████      | 243/590 [00:04<00:09, 37.90it/s]Loading weights:  42%|████▏     | 250/590 [00:05<00:15, 22.06it/s]Loading weights:  43%|████▎     | 255/590 [00:05<00:14, 23.39it/s]Loading weights:  44%|████▍     | 260/590 [00:05<00:14, 22.97it/s]Loading weights:  45%|████▍     | 264/590 [00:05<00:13, 24.18it/s]Loading weights:  45%|████▌     | 268/590 [00:06<00:14, 22.20it/s]Loading weights:  46%|████▋     | 274/590 [00:06<00:14, 21.48it/s]Loading weights:  47%|████▋     | 277/590 [00:06<00:16, 18.63it/s]Loading weights:  47%|████▋     | 280/590 [00:06<00:17, 18.09it/s]Loading weights:  48%|████▊     | 283/590 [00:07<00:18, 16.69it/s]Loading weights:  50%|████▉     | 294/590 [00:07<00:16, 17.48it/s]Loading weights:  51%|█████     | 300/590 [00:08<00:17, 16.75it/s]Loading weights:  52%|█████▏    | 307/590 [00:08<00:12, 21.96it/s]Loading weights:  53%|█████▎    | 311/590 [00:09<00:29,  9.55it/s]Loading weights:  53%|█████▎    | 314/590 [00:11<00:50,  5.51it/s]Loading weights:  54%|█████▎    | 316/590 [00:11<00:44,  6.17it/s]Loading weights:  61%|██████    | 359/590 [00:11<00:08, 26.21it/s]Loading weights:  71%|███████   | 418/590 [00:12<00:04, 42.09it/s]Loading weights:  74%|███████▎  | 434/590 [00:12<00:03, 41.59it/s]Loading weights:  75%|███████▌  | 444/590 [00:14<00:05, 26.47it/s]Loading weights:  76%|███████▌  | 448/590 [00:15<00:08, 17.35it/s]Loading weights:  76%|███████▋  | 451/590 [00:15<00:08, 16.41it/s]Loading weights:  77%|███████▋  | 454/590 [00:16<00:13, 10.39it/s]Loading weights:  77%|███████▋  | 456/590 [00:16<00:12, 10.50it/s]Loading weights:  78%|███████▊  | 458/590 [00:17<00:12, 10.41it/s]Loading weights:  80%|███████▉  | 470/590 [00:17<00:08, 14.57it/s]Loading weights:  80%|████████  | 472/590 [00:18<00:10, 11.58it/s]Loading weights:  81%|████████  | 477/590 [00:18<00:08, 13.67it/s]Loading weights:  84%|████████▎ | 494/590 [00:18<00:03, 27.85it/s]Loading weights:  85%|████████▍ | 500/590 [00:20<00:07, 11.43it/s]Loading weights:  85%|████████▌ | 504/590 [00:20<00:06, 12.43it/s]Loading weights:  88%|████████▊ | 518/590 [00:20<00:04, 17.86it/s]Loading weights:  89%|████████▊ | 523/590 [00:21<00:04, 16.49it/s]Loading weights:  89%|████████▉ | 527/590 [00:21<00:04, 13.50it/s]Loading weights: 100%|██████████| 590/590 [00:21<00:00, 27.28it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 19610.80it/s]
+[transformers] [1mCLIPVisionModel LOAD REPORT[0m from: laion/CLIP-ViT-L-14-DataComp.XL-s13B-b90K
+Key                                                          | Status     |  | 
+-------------------------------------------------------------+------------+--+-
+text_model.encoder.layers.{0...11}.mlp.fc2.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.weight            | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.bias          | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm2.weight        | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.bias   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc2.bias              | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.q_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.k_proj.weight   | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.v_proj.bias     | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.self_attn.out_proj.weight | UNEXPECTED |  | 
+visual_projection.weight                                     | UNEXPECTED |  | 
+text_projection.weight                                       | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.layer_norm1.bias          | UNEXPECTED |  | 
+logit_scale                                                  | UNEXPECTED |  | 
+text_model.encoder.layers.{0...11}.mlp.fc1.bias              | UNEXPECTED |  | 
+text_model.embeddings.token_embedding.weight                 | UNEXPECTED |  | 
+text_model.final_layer_norm.bias                             | UNEXPECTED |  | 
+text_model.final_layer_norm.weight                           | UNEXPECTED |  | 
+text_model.embeddings.position_embedding.weight              | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Using cache found in /home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/models/torch/hub/facebookresearch_dinov2_main
+/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/models/torch/hub/facebookresearch_dinov2_main/dinov2/layers/swiglu_ffn.py:51: UserWarning: xFormers is not available (SwiGLU)
+  warnings.warn("xFormers is not available (SwiGLU)")
+/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/models/torch/hub/facebookresearch_dinov2_main/dinov2/layers/attention.py:33: UserWarning: xFormers is not available (Attention)
+  warnings.warn("xFormers is not available (Attention)")
+/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/E/models/torch/hub/facebookresearch_dinov2_main/dinov2/layers/block.py:40: UserWarning: xFormers is not available (Block)
+  warnings.warn("xFormers is not available (Block)")
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/plonk/models/samplers/riemannian_flow_sampler.py:34: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(dtype=dtype):
+/home/tony/lib/miniforge3/envs/geoloc/lib/python3.11/site-packages/torch/cuda/amp/autocast_mode.py:54: UserWarning: CUDA is not available or torch_xla is imported. Disabling autocast.
+  super().__init__(
+{
+ "geoclip": {
+  "grey": [
+   30.30168914794922,
+   119.12713623046875,
+   0.0004466464160941541
+  ],
+  "black": [
+   32.467002868652344,
+   -94.73218536376953,
+   0.0001851311099017039
+  ],
+  "noise": [
+   42.658302307128906,
+   -76.91695404052734,
+   0.0006948345107957721
+  ]
+ },
+ "osv5m": {
+  "grey": [
+   37.239827231526185,
+   -113.18799145675554
+  ],
+  "black": [
+   37.90507252055369,
+   23.953329850230922
+  ],
+  "noise": [
+   42.23708851820409,
+   -83.64475041800978
+  ]
+ },
+ "plonk_yfcc": {
+  "grey": [
+   30.452083587646484,
+   -87.62337493896484,
+   18.252975463867188
+  ],
+  "black": [
+   41.91667938232422,
+   -5.0031514167785645,
+   19.95812225341797
+  ],
+  "noise": [
+   47.709625244140625,
+   -1.447052240371704,
+   18.84543228149414
+  ]
+ }
+}

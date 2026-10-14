@@ -1,0 +1,162 @@
+{
+ "id": "napl-markham-1974",
+ "bbox": [
+  -79.40248486563688,
+  43.81618611591762,
+  -79.15603701189208,
+  43.94325600556525
+ ],
+ "type": "Feature",
+ "links": [
+  {
+   "rel": "collection",
+   "type": "application/json",
+   "href": "https://datacube.services.geo.ca/pgstac/api/collections/napl-markham"
+  },
+  {
+   "rel": "parent",
+   "type": "application/json",
+   "href": "https://datacube.services.geo.ca/pgstac/api/collections/napl-markham"
+  },
+  {
+   "rel": "root",
+   "type": "application/json",
+   "href": "https://datacube.services.geo.ca/pgstac/api/"
+  },
+  {
+   "rel": "self",
+   "type": "application/geo+json",
+   "href": "https://datacube.services.geo.ca/pgstac/api/collections/napl-markham/items/napl-markham-1974"
+  }
+ ],
+ "assets": {
+  "mosaic": "https://datacube-prod-data-public.s3.amazonaws.com/store/imagery/aerial/napl/napl-markham/napl-markham-1974-mosaic.tif",
+  "thumbnail": "https://datacube-prod-data-public.s3.amazonaws.com/store/imagery/aerial/napl/napl-markham/napl-markham-1974-thumbnail.jpg"
+ },
+ "geometry": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     -79.15984002217289,
+     43.81618611591762
+    ],
+    [
+     -79.15845618208965,
+     43.861181664755144
+    ],
+    [
+     -79.15706912595331,
+     43.90617682298688
+    ],
+    [
+     -79.15603701189208,
+     43.93958997468323
+    ],
+    [
+     -79.17206510082201,
+     43.93984758108875
+    ],
+    [
+     -79.2343362857951,
+     43.94082705993991
+    ],
+    [
+     -79.29661056558126,
+     43.94177261923772
+    ],
+    [
+     -79.35888783128631,
+     43.94268425448774
+    ],
+    [
+     -79.39918276190187,
+     43.94325600556525
+    ],
+    [
+     -79.39960895590487,
+     43.92737084187041
+    ],
+    [
+     -79.40081440876288,
+     43.88237011957529
+    ],
+    [
+     -79.40201706567458,
+     43.83736901513961
+    ],
+    [
+     -79.40248486563688,
+     43.819836481429576
+    ],
+    [
+     -79.36454767083828,
+     43.81929975606553
+    ],
+    [
+     -79.3023986102714,
+     43.81839325284305
+    ],
+    [
+     -79.24025250896429,
+     43.817452970253264
+    ],
+    [
+     -79.15984002217289,
+     43.81618611591762
+    ]
+   ]
+  ]
+ },
+ "collection": "napl-markham",
+ "properties": {
+  "created": "2023-12-13T20:59:15Z",
+  "updated": "2023-12-13T20:59:16.904140Z",
+  "datetime": "1974-07-01T12:00:00Z",
+  "proj:epsg": 32617,
+  "collection": "napl-markham",
+  "proj:shape": [
+   27426,
+   39044
+  ],
+  "proj:geometry": {
+   "type": "Polygon",
+   "coordinates": [
+    [
+     [
+      647989.0,
+      4853103.0
+     ],
+     [
+      647989.0,
+      4866816.0
+     ],
+     [
+      628467.0,
+      4866816.0
+     ],
+     [
+      628467.0,
+      4853103.0
+     ],
+     [
+      647989.0,
+      4853103.0
+     ]
+    ]
+   ]
+  },
+  "proj:transform": [
+   628467.0,
+   0.5,
+   0.0,
+   4866816.0,
+   0.0,
+   -0.5
+  ]
+ },
+ "stac_version": "1.0.0",
+ "stac_extensions": [
+  "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+ ]
+}

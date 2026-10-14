@@ -1,0 +1,352 @@
+[
+ {
+  "id": "p01",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p02",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p03",
+  "source": "panoramax",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p04",
+  "source": "commons",
+  "n_300m": 24,
+  "n_other_collections": 24,
+  "n_collections": 2
+ },
+ {
+  "id": "p05",
+  "source": "panoramax",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p06",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p07",
+  "source": "panoramax",
+  "n_300m": 2,
+  "n_other_collections": 1,
+  "n_collections": 1
+ },
+ {
+  "id": "p08",
+  "source": "commons",
+  "n_300m": 200,
+  "n_other_collections": 200,
+  "n_collections": 6
+ },
+ {
+  "id": "p09",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p10",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p11",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p12",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p13",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p14",
+  "source": "commons",
+  "n_300m": 1,
+  "n_other_collections": 1,
+  "n_collections": 1
+ },
+ {
+  "id": "p15",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p16",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p17",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p18",
+  "source": "commons",
+  "n_300m": 200,
+  "n_other_collections": 200,
+  "n_collections": 5
+ },
+ {
+  "id": "p19",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p20",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p21",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p22",
+  "source": "commons",
+  "n_300m": 200,
+  "n_other_collections": 200,
+  "n_collections": 8
+ },
+ {
+  "id": "p23",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p24",
+  "source": "commons",
+  "n_300m": 3,
+  "n_other_collections": 3,
+  "n_collections": 1
+ },
+ {
+  "id": "p25",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p26",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p27",
+  "source": "panoramax",
+  "n_300m": 200,
+  "n_other_collections": 196,
+  "n_collections": 8
+ },
+ {
+  "id": "p28",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p29",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p30",
+  "source": "commons",
+  "n_300m": 4,
+  "n_other_collections": 4,
+  "n_collections": 2
+ },
+ {
+  "id": "p31",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p32",
+  "source": "panoramax",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p33",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p34",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p35",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p36",
+  "source": "commons",
+  "n_300m": 200,
+  "n_other_collections": 200,
+  "n_collections": 10
+ },
+ {
+  "id": "p37",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p38",
+  "source": "commons",
+  "n_300m": 128,
+  "n_other_collections": 128,
+  "n_collections": 2
+ },
+ {
+  "id": "p39",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p40",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p41",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p42",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p43",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p44",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p45",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p46",
+  "source": "panoramax",
+  "n_300m": 1,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p47",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p48",
+  "source": "commons",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p49",
+  "source": "panoramax",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ },
+ {
+  "id": "p50",
+  "source": "panoramax",
+  "n_300m": 0,
+  "n_other_collections": 0,
+  "n_collections": 0
+ }
+]

@@ -1,0 +1,1248 @@
+{
+ "id": "USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-5-4",
+ "bbox": [
+  -83.0534141,
+  42.3182092,
+  -82.9516354,
+  42.3936975
+ ],
+ "type": "Feature",
+ "links": [
+  {
+   "rel": "collection",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-dtm"
+  },
+  {
+   "rel": "parent",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-dtm"
+  },
+  {
+   "rel": "root",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/"
+  },
+  {
+   "rel": "self",
+   "type": "application/geo+json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-dtm/items/USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-5-4"
+  },
+  {
+   "rel": "alternate",
+   "href": "https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/USGS_LPC_MI_WayneCo_2017_LAS_2018/metadata/",
+   "type": "application/xml",
+   "title": "USGS Metadata"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477300_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477300_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_477327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_477327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480300_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480300_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_480327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482300_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482300_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_482327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_482327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_485327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_485327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_487327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_487327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_490327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_490327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_492327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_492327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495302_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495302_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_495327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_495327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_497327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_497327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_500327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_500327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_502327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_502327_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505305_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505305_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505307_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505307_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505310_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505310_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505312_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505312_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505315_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505315_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505317_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505317_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505320_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505320_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505322_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505322_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505325_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505325_LAS_2018"
+  },
+  {
+   "rel": "derived_from",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_505327_LAS_2018",
+   "title": "USGS_LPC_MI_WayneCo_2017_505327_LAS_2018"
+  },
+  {
+   "rel": "preview",
+   "href": "https://planetarycomputer.microsoft.com/api/data/v1/item/map?collection=3dep-lidar-dtm&item=USGS_LPC_MI_WayneCo_2017_LAS_2018-dtm-2m-5-4",
+   "title": "Map of item",
+   "type": "text/html"
+  }
+ ],
+ "geometry": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     -83.0534141,
+     42.391958
+    ],
+    [
+     -83.0510137,
+     42.3182092
+    ],
+    [
+     -82.9516354,
+     42.3199442
+    ],
+    [
+     -82.9539196,
+     42.3936975
+    ],
+    [
+     -83.0534141,
+     42.391958
+    ]
+   ]
+  ]
+ },
+ "collection": "3dep-lidar-dtm",
+ "properties": {
+  "datetime": null,
+  "proj:epsg": null,
+  "proj:shape": [
+   4097,
+   4097
+  ],
+  "3dep:usgs_id": "USGS_LPC_MI_WayneCo_2017_LAS_2018",
+  "end_datetime": "2018-01-01T00:00:00Z",
+  "raster:bands": {
+   "unit": "metre",
+   "nodata": "nan",
+   "sampling": "point",
+   "data_type": "Float32",
+   "histogram": {
+    "max": 363.14463931812645,
+    "min": 163.97993343577352,
+    "count": 256,
+    "buckets": [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     0,
+     1,
+     1,
+     10,
+     1036,
+     33331,
+     2896804,
+     852491,
+     743292,
+     476832,
+     337108,
+     330484,
+     382032,
+     328193,
+     536803,
+     801374,
+     913577,
+     680891,
+     457922,
+     330181,
+     400956,
+     434877,
+     463266,
+     476916,
+     648553,
+     510923,
+     679750,
+     953264,
+     567896,
+     160768,
+     60047,
+     26365,
+     22017,
+     20062,
+     17945,
+     28279,
+     27034,
+     17813,
+     30000,
+     9685,
+     12746,
+     64814,
+     18401,
+     14177,
+     12723,
+     3777,
+     3535,
+     2516,
+     4432,
+     2496,
+     5458,
+     3455,
+     2298,
+     2587,
+     1681,
+     1970,
+     697,
+     2132,
+     987,
+     949,
+     1505,
+     1605,
+     921,
+     347,
+     628,
+     585,
+     332,
+     301,
+     316,
+     1763,
+     651,
+     1008,
+     1497,
+     417,
+     506,
+     537,
+     521,
+     617,
+     728,
+     956,
+     1801,
+     228,
+     41,
+     29,
+     24,
+     21,
+     45,
+     54,
+     242,
+     649,
+     9,
+     13,
+     11,
+     23,
+     11,
+     110,
+     267,
+     56,
+     33,
+     30,
+     112,
+     48,
+     50,
+     43,
+     54,
+     51,
+     203,
+     117,
+     15,
+     18,
+     11,
+     12,
+     6,
+     2,
+     4,
+     0,
+     4,
+     3,
+     2,
+     2,
+     1,
+     5,
+     9,
+     5,
+     4,
+     7,
+     5,
+     2,
+     5,
+     4,
+     13,
+     46,
+     14,
+     12,
+     12,
+     13,
+     20,
+     290,
+     29,
+     3,
+     7,
+     5,
+     2,
+     2,
+     3,
+     4,
+     7,
+     4,
+     4,
+     2,
+     4,
+     1,
+     4,
+     2,
+     3,
+     4,
+     4,
+     6,
+     1,
+     0,
+     3,
+     3,
+     3,
+     1,
+     1,
+     6,
+     3,
+     5,
+     1,
+     2,
+     4,
+     5,
+     4,
+     5,
+     3,
+     4,
+     8,
+     2,
+     2,
+     2,
+     5,
+     3,
+     6,
+     7,
+     2,
+     10,
+     9,
+     1,
+     6,
+     9,
+     4,
+     6,
+     2,
+     7,
+     5,
+     3,
+     5,
+     10,
+     6,
+     8,
+     13,
+     12,
+     11,
+     25,
+     13,
+     25,
+     37,
+     1208,
+     26,
+     5,
+     5,
+     7,
+     6,
+     6,
+     5,
+     5,
+     4,
+     7,
+     3,
+     5,
+     12,
+     7,
+     7,
+     6,
+     18,
+     9,
+     12,
+     27,
+     23,
+     17,
+     14,
+     23,
+     21,
+     15,
+     17,
+     18,
+     14,
+     5,
+     9,
+     9,
+     1,
+     6,
+     8,
+     15,
+     5,
+     10,
+     7,
+     4
+    ]
+   },
+   "statistics": {
+    "mean": "183.29761350363",
+    "stddev": "6.913753644987",
+    "maximum": "362.75564575195",
+    "minimum": "164.36892700195",
+    "valid_percent": "94.39"
+   },
+   "pdal_pipeline": [
+    {
+     "tag": "noise_remover",
+     "type": "filters.range",
+     "limits": "Classification![7:7]"
+    },
+    {
+     "tag": "prepare_ground_classifier",
+     "type": "filters.assign",
+     "value": [
+      "Classification = 0",
+      "ReturnNumber = 1 WHERE ReturnNumber < 1",
+      "NumberOfReturns = 1 WHERE NumberOfReturns < 1"
+     ]
+    },
+    {
+     "tag": "merge_filter",
+     "type": "filters.merge"
+    },
+    {
+     "tag": "ground_classifier",
+     "type": "filters.smrf"
+    },
+    {
+     "tag": "nonground_remover",
+     "type": "filters.range",
+     "limits": "Classification[2:2]"
+    },
+    {
+     "tag": "gdal_writer",
+     "type": "writers.gdal",
+     "filename": null,
+     "resolution": null,
+     "output_type": "idw",
+     "window_size": 3,
+     "pdal_metadata": true
+    }
+   ],
+   "spatial_resolution": 16785409
+  },
+  "proj:geometry": {
+   "type": "Polygon",
+   "coordinates": [
+    [
+     [
+      -83.0534141,
+      42.391958
+     ],
+     [
+      -83.0510137,
+      42.3182092
+     ],
+     [
+      -82.9516354,
+      42.3199442
+     ],
+     [
+      -82.9539196,
+      42.3936975
+     ],
+     [
+      -83.0534141,
+      42.391958
+     ]
+    ]
+   ]
+  },
+  "proj:projjson": {
+   "name": "NAD83 / UTM zone 17N + NAVD88 height",
+   "type": "CompoundCRS",
+   "$schema": "https://proj.org/schemas/v0.4/projjson.schema.json",
+   "components": [
+    {
+     "id": {
+      "code": 26917,
+      "authority": "EPSG"
+     },
+     "name": "NAD83 / UTM zone 17N",
+     "type": "ProjectedCRS",
+     "base_crs": {
+      "id": {
+       "code": 4269,
+       "authority": "EPSG"
+      },
+      "name": "NAD83",
+      "datum": {
+       "name": "North American Datum 1983",
+       "type": "GeodeticReferenceFrame",
+       "ellipsoid": {
+        "name": "GRS 1980",
+        "semi_major_axis": 6378137,
+        "inverse_flattening": 298.257222101
+       }
+      },
+      "coordinate_system": {
+       "axis": [
+        {
+         "name": "Geodetic latitude",
+         "unit": "degree",
+         "direction": "north",
+         "abbreviation": "Lat"
+        },
+        {
+         "name": "Geodetic longitude",
+         "unit": "degree",
+         "direction": "east",
+         "abbreviation": "Lon"
+        }
+       ],
+       "subtype": "ellipsoidal"
+      }
+     },
+     "conversion": {
+      "name": "UTM zone 17N",
+      "method": {
+       "id": {
+        "code": 9807,
+        "authority": "EPSG"
+       },
+       "name": "Transverse Mercator"
+      },
+      "parameters": [
+       {
+        "id": {
+         "code": 8801,
+         "authority": "EPSG"
+        },
+        "name": "Latitude of natural origin",
+        "unit": "degree",
+        "value": 0
+       },
+       {
+        "id": {
+         "code": 8802,
+         "authority": "EPSG"
+        },
+        "name": "Longitude of natural origin",
+        "unit": "degree",
+        "value": -81
+       },
+       {
+        "id": {
+         "code": 8805,
+         "authority": "EPSG"
+        },
+        "name": "Scale factor at natural origin",
+        "unit": "unity",
+        "value": 0.9996
+       },
+       {
+        "id": {
+         "code": 8806,
+         "authority": "EPSG"
+        },
+        "name": "False easting",
+        "unit": "metre",
+        "value": 500000
+       },
+       {
+        "id": {
+         "code": 8807,
+         "authority": "EPSG"
+        },
+        "name": "False northing",
+        "unit": "metre",
+        "value": 0
+       }
+      ]
+     },
+     "coordinate_system": {
+      "axis": [
+       {
+        "name": "Easting",
+        "unit": "metre",
+        "direction": "east",
+        "abbreviation": ""
+       },
+       {
+        "name": "Northing",
+        "unit": "metre",
+        "direction": "north",
+        "abbreviation": ""
+       }
+      ],
+      "subtype": "Cartesian"
+     }
+    },
+    {
+     "id": {
+      "code": 5703,
+      "authority": "EPSG"
+     },
+     "name": "NAVD88 height",
+     "type": "VerticalCRS",
+     "datum": {
+      "name": "North American Vertical Datum 1988",
+      "type": "VerticalReferenceFrame"
+     },
+     "coordinate_system": {
+      "axis": [
+       {
+        "name": "Gravity-related height",
+        "unit": "metre",
+        "direction": "up",
+        "abbreviation": ""
+       }
+      ],
+      "subtype": "vertical"
+     }
+    }
+   ]
+  },
+  "proj:transform": [
+   2.0,
+   0.0,
+   330985.0,
+   0.0,
+   -2.0,
+   4695338.0,
+   0,
+   0,
+   1
+  ],
+  "start_datetime": "2018-01-01T00:00:00Z"
+ },
+ "stac_extensions": [
+  "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/raster/v1.1.0/schema.json",
+  "https://stac-extensions.github.io/classification/v1.0.0/schema.json"
+ ],
+ "stac_version": "1.0.0",
+ "assets": [
+  "data",
+  "thumbnail",
+  "tilejson",
+  "rendered_preview"
+ ]
+}

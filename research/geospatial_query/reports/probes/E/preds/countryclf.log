@@ -1,0 +1,13 @@
+[transformers] Model config: bos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49406. This may result in unexpected behavior.
+[transformers] Model config: eos_token_id must be `None` or an integer within the vocabulary (between 0 and 31999), got 49407. This may result in unexpected behavior.
+Loading weights:   0%|          | 0/210 [00:00<?, ?it/s]Loading weights:  88%|████████▊ | 184/210 [00:00<00:00, 1816.07it/s]Loading weights: 100%|██████████| 210/210 [00:00<00:00, 1979.75it/s]
+prithivMLmods/GeoGuessr-55 unmapped labels: set()
+Loading weights:   0%|          | 0/380 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 160/380 [00:00<00:00, 1579.18it/s]Loading weights:  90%|████████▉ | 341/380 [00:00<00:00, 1712.47it/s]Loading weights: 100%|██████████| 380/380 [00:00<00:00, 1699.01it/s]
+Jordiett/convnextv2-geoguessr unmapped labels: set()
+The repository Simon-Kotchou/dinov3-convnext-small-geoguessr-25k-384 contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co/Simon-Kotchou/dinov3-convnext-small-geoguessr-25k-384 .
+ You can inspect the repository content at https://hf.co/Simon-Kotchou/dinov3-convnext-small-geoguessr-25k-384.
+You can avoid this prompt in future by passing the argument `trust_remote_code=True`.
+
+Do you wish to run the custom code? [y/N] FAIL Simon-Kotchou/dinov3-convnext-small-geoguessr-25k-384 ValueError('The repository Simon-Kotchou/dinov3-convnext-small-geoguessr-25k-384 contains custom code which must be executed to correctly load the model. You can inspect the repository content at https://hf.co/Simon-Kotchou/dinov3-convnext-small-geoguessr-25k-384 .\n You can inspect the repository c
+Loading weights:   0%|          | 0/200 [00:00<?, ?it/s]Loading weights:  83%|████████▎ | 166/200 [00:00<00:00, 1636.26it/s]Loading weights: 100%|██████████| 200/200 [00:00<00:00, 1765.34it/s]
+marcelomoreno26/vit-base-patch-16-384-geoguessr unmapped labels: set()

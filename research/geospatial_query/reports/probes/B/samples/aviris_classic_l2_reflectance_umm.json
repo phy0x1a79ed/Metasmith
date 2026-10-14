@@ -1,0 +1,120 @@
+{
+ "TemporalExtent": {
+  "RangeDateTime": {
+   "BeginningDateTime": "2008-06-11T21:38:00Z",
+   "EndingDateTime": "2008-06-11T21:44:00Z"
+  }
+ },
+ "GranuleUR": "f080611t01p00r13_L2_reflectance",
+ "AdditionalAttributes": [
+  {
+   "Name": "Identifier_product_doi_authority",
+   "Values": [
+    "https://doi.org"
+   ]
+  },
+  {
+   "Name": "FLIGHTLINE",
+   "Values": [
+    "f080611t01p00r13"
+   ]
+  },
+  {
+   "Name": "Campaign",
+   "Values": [
+    "AVIRIS"
+   ]
+  }
+ ],
+ "SpatialExtent": {
+  "HorizontalSpatialDomain": {
+   "Geometry": {
+    "GPolygons": [
+     {
+      "Boundary": {
+       "Points": [
+        {
+         "Longitude": -118.7215,
+         "Latitude": 34.4952
+        },
+        {
+         "Longitude": -118.2636,
+         "Latitude": 34.023
+        },
+        {
+         "Longitude": -118.1574,
+         "Latitude": 34.0937
+        },
+        {
+         "Longitude": -118.6152,
+         "Latitude": 34.5663
+        },
+        {
+         "Longitude": -118.7215,
+         "Latitude": 34.4952
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ },
+ "ProviderDates": [
+  {
+   "Date": "2025-04-02T15:41:16Z",
+   "Type": "Create"
+  }
+ ],
+ "CollectionReference": {
+  "ShortName": "AVIRIS-Classic_L2_Reflectance_2154",
+  "Version": "1"
+ },
+ "DataGranule": {
+  "DayNightFlag": "Day",
+  "ArchiveAndDistributionInformation": [
+   {
+    "Name": "f080611t01p00r13_corr_v1h_img.bin",
+    "SizeInBytes": 2782897152,
+    "Format": "ENVI",
+    "Checksum": {
+     "Value": "f9f37bb93095bb8b1382bd75585f5ffaf3b46c26e90c9272345d8ea81f850deb",
+     "Algorithm": "SHA-256"
+    }
+   },
+   {
+    "Name": "f080611t01p00r13_corr_v1h_img.hdr",
+    "SizeInBytes": 8829,
+    "Format": "ENVI",
+    "Checksum": {
+     "Value": "5ff8cdfeb27039de7fb4757f422560dab5cf7ec164b914f119499589621ca0b8",
+     "Algorithm": "SHA-256"
+    }
+   },
+   {
+    "Name": "f080611t01p00r13_h2o_v1h_img.bin",
+    "SizeInBytes": 37270944,
+    "Format": "ENVI",
+    "Checksum": {
+     "Value": "298353555a44e0f37b1bc3c4914d6abf4917cb62d71541d9df3bb240642c37d0",
+     "Algorithm": "SHA-256"
+    }
+   },
+   {
+    "Name": "f080611t01p00r13_h2o_v1h_img.hdr",
+    "SizeInBytes": 6166,
+    "Format": "ENVI",
+    "Checksum": {
+     "Value": "d47749fcc8b3de32ceaf41bd6d6639f9c728466157ece03efd29d6326c6106a9",
+     "Algorithm": "SHA-256"
+    }
+   }
+  ],
+  "ProductionDateTime": "2025-04-02T15:41:16Z"
+ },
+ "MetadataSpecification": {
+  "URL": "https://cdn.earthdata.nasa.gov/umm/granule/v1.6.7",
+  "Name": "UMM-G",
+  "Version": "1.6.7"
+ }
+}

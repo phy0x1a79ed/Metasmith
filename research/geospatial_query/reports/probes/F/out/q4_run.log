@@ -1,0 +1,390 @@
+PC:sentinel-2-l2a queryables(36): in queryables=['eo:cloud_cover', 's2:mean_solar_zenith', 's2:product_type']  in item properties=['eo:cloud_cover', 's2:mean_solar_zenith', 's2:product_type']
+PC:landsat-c2-l2 queryables(27): in queryables=['eo:cloud_cover', 'view:off_nadir', 'view:sun_elevation', 'landsat:correction']  in item properties=['eo:cloud_cover', 'view:off_nadir', 'view:sun_elevation', 'landsat:correction']
+ES:sentinel-2-l2a queryables(1): in queryables=['eo:cloud_cover']  in item properties=['eo:cloud_cover', 'view:sun_elevation', 's2:product_type']
+ES:landsat-c2-l2 queryables(1): in queryables=['eo:cloud_cover']  in item properties=['eo:cloud_cover', 'view:off_nadir', 'view:sun_elevation', 'landsat:correction']
+
+== dialect discovery (counts for 2023 over the AOI: N unfiltered | F filtered | notF complement | imp impossible) ==
+PC sentinel-2-l2a  eo:cloud_cover         <10       cql2-json farm_sk_quarter    N=129 F=36 notF=93 imp=0 -> honoured
+PC sentinel-2-l2a  eo:cloud_cover         <10       query-ext farm_sk_quarter    N=129 F=36 notF=93 imp=0 -> honoured
+PC sentinel-2-l2a  eo:cloud_cover         <10       cql2-json city_toronto_core  N=121 F=19 notF=102 imp=0 -> honoured
+PC sentinel-2-l2a  eo:cloud_cover         <10       query-ext city_toronto_core  N=121 F=19 notF=102 imp=0 -> honoured
+PC landsat-c2-l2   eo:cloud_cover         <10       cql2-json farm_sk_quarter    N=108 F=39 notF=69 imp=0 -> honoured
+PC landsat-c2-l2   eo:cloud_cover         <10       query-ext farm_sk_quarter    N=108 F=39 notF=69 imp=0 -> honoured
+PC landsat-c2-l2   eo:cloud_cover         <10       cql2-json city_toronto_core  N=156 F=24 notF=132 imp=0 -> honoured
+PC landsat-c2-l2   eo:cloud_cover         <10       query-ext city_toronto_core  N=156 F=24 notF=132 imp=0 -> honoured
+PC landsat-c2-l2   view:sun_elevation     >30       cql2-json farm_sk_quarter    N=108 F=69 notF=39 imp=0 -> honoured
+PC landsat-c2-l2   view:sun_elevation     >30       query-ext farm_sk_quarter    N=108 F=69 notF=39 imp=0 -> honoured
+PC landsat-c2-l2   view:sun_elevation     >30       cql2-json city_toronto_core  N=156 F=109 notF=47 imp=0 -> honoured
+PC landsat-c2-l2   view:sun_elevation     >30       query-ext city_toronto_core  N=156 F=109 notF=47 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         <5        cql2-json farm_sk_quarter    N=108 F=108 notF=0 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         <5        query-ext farm_sk_quarter    N=108 F=108 notF=0 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         <5        cql2-json city_toronto_core  N=156 F=156 notF=0 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         <5        query-ext city_toronto_core  N=156 F=156 notF=0 imp=0 -> honoured
+PC sentinel-2-l2a  view:sun_elevation     >30       cql2-json farm_sk_quarter    N=129 F=0 notF=0 imp=0 -> property-absent
+PC sentinel-2-l2a  view:sun_elevation     >30       query-ext farm_sk_quarter    N=129 F=0 notF=0 imp=0 -> property-absent
+PC sentinel-2-l2a  view:sun_elevation     >30       cql2-json city_toronto_core  N=121 F=0 notF=0 imp=0 -> property-absent
+PC sentinel-2-l2a  view:sun_elevation     >30       query-ext city_toronto_core  N=121 F=0 notF=0 imp=0 -> property-absent
+PC landsat-c2-l2   view:off_nadir         >1        cql2-json farm_sk_quarter    N=108 F=0 notF=108 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         >1        query-ext farm_sk_quarter    N=108 F=0 notF=108 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         >1        cql2-json city_toronto_core  N=156 F=0 notF=156 imp=0 -> honoured
+PC landsat-c2-l2   view:off_nadir         >1        query-ext city_toronto_core  N=156 F=0 notF=156 imp=0 -> honoured
+PC sentinel-2-l2a  s2:mean_solar_zenith   <60       cql2-json farm_sk_quarter    N=129 F=80 notF=49 imp=0 -> honoured
+PC sentinel-2-l2a  s2:mean_solar_zenith   <60       query-ext farm_sk_quarter    N=129 F=80 notF=49 imp=0 -> honoured
+PC sentinel-2-l2a  s2:mean_solar_zenith   <60       cql2-json city_toronto_core  N=121 F=89 notF=32 imp=0 -> honoured
+PC sentinel-2-l2a  s2:mean_solar_zenith   <60       query-ext city_toronto_core  N=121 F=89 notF=32 imp=0 -> honoured
+PC landsat-c2-l2   landsat:correction     =L2SP     cql2-json farm_sk_quarter    N=108 F=108 notF=0 imp=0 -> honoured
+PC landsat-c2-l2   landsat:correction     =L2SP     query-ext farm_sk_quarter    N=108 F=108 notF=0 imp=0 -> honoured
+PC landsat-c2-l2   landsat:correction     =L2SP     cql2-json city_toronto_core  N=156 F=156 notF=0 imp=0 -> honoured
+PC landsat-c2-l2   landsat:correction     =L2SP     query-ext city_toronto_core  N=156 F=156 notF=0 imp=0 -> honoured
+PC sentinel-2-l2a  s2:product_type        =S2MSI2A  cql2-json farm_sk_quarter    N=129 F=129 notF=0 imp=0 -> honoured
+PC sentinel-2-l2a  s2:product_type        =S2MSI2A  query-ext farm_sk_quarter    N=129 F=129 notF=0 imp=0 -> honoured
+PC sentinel-2-l2a  s2:product_type        =S2MSI2A  cql2-json city_toronto_core  N=121 F=121 notF=0 imp=0 -> honoured
+PC sentinel-2-l2a  s2:product_type        =S2MSI2A  query-ext city_toronto_core  N=121 F=121 notF=0 imp=0 -> honoured
+ES sentinel-2-l2a  eo:cloud_cover         <10       cql2-json farm_sk_quarter    N=79 F=79 notF=79 imp=79 -> IGNORED
+ES sentinel-2-l2a  eo:cloud_cover         <10       query-ext farm_sk_quarter    N=79 F=23 notF=56 imp=0 -> honoured
+ES sentinel-2-l2a  eo:cloud_cover         <10       cql2-json city_toronto_core  N=75 F=75 notF=75 imp=75 -> IGNORED
+ES sentinel-2-l2a  eo:cloud_cover         <10       query-ext city_toronto_core  N=75 F=11 notF=64 imp=0 -> honoured
+ES landsat-c2-l2   eo:cloud_cover         <10       cql2-json farm_sk_quarter    N=112 F=112 notF=112 imp=112 -> IGNORED
+ES landsat-c2-l2   eo:cloud_cover         <10       query-ext farm_sk_quarter    N=112 F=40 notF=72 imp=0 -> honoured
+ES landsat-c2-l2   eo:cloud_cover         <10       cql2-json city_toronto_core  N=161 F=161 notF=161 imp=161 -> IGNORED
+ES landsat-c2-l2   eo:cloud_cover         <10       query-ext city_toronto_core  N=161 F=24 notF=137 imp=0 -> honoured
+ES landsat-c2-l2   view:sun_elevation     >30       cql2-json farm_sk_quarter    N=112 F=112 notF=112 imp=112 -> IGNORED
+ES landsat-c2-l2   view:sun_elevation     >30       query-ext farm_sk_quarter    N=112 F=70 notF=42 imp=0 -> honoured
+ES landsat-c2-l2   view:sun_elevation     >30       cql2-json city_toronto_core  N=161 F=161 notF=161 imp=161 -> IGNORED
+ES landsat-c2-l2   view:sun_elevation     >30       query-ext city_toronto_core  N=161 F=113 notF=48 imp=0 -> honoured
+ES landsat-c2-l2   view:off_nadir         <5        cql2-json farm_sk_quarter    N=112 F=112 notF=112 imp=112 -> IGNORED
+ES landsat-c2-l2   view:off_nadir         <5        query-ext farm_sk_quarter    N=112 F=112 notF=0 imp=0 -> honoured
+ES landsat-c2-l2   view:off_nadir         <5        cql2-json city_toronto_core  N=161 F=161 notF=161 imp=161 -> IGNORED
+ES landsat-c2-l2   view:off_nadir         <5        query-ext city_toronto_core  N=161 F=161 notF=0 imp=0 -> honoured
+ES sentinel-2-l2a  view:sun_elevation     >30       cql2-json farm_sk_quarter    N=79 F=79 notF=79 imp=79 -> IGNORED
+ES sentinel-2-l2a  view:sun_elevation     >30       query-ext farm_sk_quarter    N=79 F=47 notF=32 imp=0 -> honoured
+ES sentinel-2-l2a  view:sun_elevation     >30       cql2-json city_toronto_core  N=75 F=75 notF=75 imp=75 -> IGNORED
+ES sentinel-2-l2a  view:sun_elevation     >30       query-ext city_toronto_core  N=75 F=54 notF=21 imp=0 -> honoured
+ES landsat-c2-l2   view:off_nadir         >1        cql2-json farm_sk_quarter    N=112 F=112 notF=112 imp=112 -> IGNORED
+ES landsat-c2-l2   view:off_nadir         >1        query-ext farm_sk_quarter    N=112 F=0 notF=112 imp=0 -> honoured
+ES landsat-c2-l2   view:off_nadir         >1        cql2-json city_toronto_core  N=161 F=161 notF=161 imp=161 -> IGNORED
+ES landsat-c2-l2   view:off_nadir         >1        query-ext city_toronto_core  N=161 F=0 notF=161 imp=0 -> honoured
+ES sentinel-2-l2a  s2:mean_solar_zenith   <60       cql2-json farm_sk_quarter    N=79 F=79 notF=79 imp=79 -> IGNORED
+ES sentinel-2-l2a  s2:mean_solar_zenith   <60       query-ext farm_sk_quarter    N=79 F=0 notF=0 imp=0 -> property-absent
+ES sentinel-2-l2a  s2:mean_solar_zenith   <60       cql2-json city_toronto_core  N=75 F=75 notF=75 imp=75 -> IGNORED
+ES sentinel-2-l2a  s2:mean_solar_zenith   <60       query-ext city_toronto_core  N=75 F=0 notF=0 imp=0 -> property-absent
+ES landsat-c2-l2   landsat:correction     =L2SP     cql2-json farm_sk_quarter    N=112 F=112 notF=112 imp=112 -> IGNORED
+ES landsat-c2-l2   landsat:correction     =L2SP     query-ext farm_sk_quarter    N=112 F=112 notF=0 imp=0 -> honoured
+ES landsat-c2-l2   landsat:correction     =L2SP     cql2-json city_toronto_core  N=161 F=161 notF=161 imp=161 -> IGNORED
+ES landsat-c2-l2   landsat:correction     =L2SP     query-ext city_toronto_core  N=161 F=161 notF=0 imp=0 -> honoured
+ES sentinel-2-l2a  s2:product_type        =S2MSI2A  cql2-json farm_sk_quarter    N=79 F=79 notF=79 imp=79 -> IGNORED
+ES sentinel-2-l2a  s2:product_type        =S2MSI2A  query-ext farm_sk_quarter    N=79 F=79 notF=0 imp=0 -> honoured
+ES sentinel-2-l2a  s2:product_type        =S2MSI2A  cql2-json city_toronto_core  N=75 F=75 notF=75 imp=75 -> IGNORED
+ES sentinel-2-l2a  s2:product_type        =S2MSI2A  query-ext city_toronto_core  N=75 F=75 notF=0 imp=0 -> honoured
+
+working dialect per catalogue/property: {
+ "PC:sentinel-2-l2a:eo:cloud_cover<10": "cql2-json",
+ "PC:landsat-c2-l2:eo:cloud_cover<10": "cql2-json",
+ "PC:landsat-c2-l2:view:sun_elevation>30": "cql2-json",
+ "PC:landsat-c2-l2:view:off_nadir<5": "cql2-json",
+ "PC:landsat-c2-l2:view:off_nadir>1": "cql2-json",
+ "PC:sentinel-2-l2a:s2:mean_solar_zenith<60": "cql2-json",
+ "PC:landsat-c2-l2:landsat:correction=L2SP": "cql2-json",
+ "PC:sentinel-2-l2a:s2:product_type=S2MSI2A": "cql2-json",
+ "ES:sentinel-2-l2a:eo:cloud_cover<10": "query-ext",
+ "ES:landsat-c2-l2:eo:cloud_cover<10": "query-ext",
+ "ES:landsat-c2-l2:view:sun_elevation>30": "query-ext",
+ "ES:landsat-c2-l2:view:off_nadir<5": "query-ext",
+ "ES:sentinel-2-l2a:view:sun_elevation>30": "query-ext",
+ "ES:landsat-c2-l2:view:off_nadir>1": "query-ext",
+ "ES:landsat-c2-l2:landsat:correction=L2SP": "query-ext",
+ "ES:sentinel-2-l2a:s2:product_type=S2MSI2A": "query-ext"
+}
+
+== all 15 AOIs with the working dialect (2023) ==
+farm_sk_quarter            PC sentinel-2-l2a  eo:cloud_cover<10          N= 129 F=  36 notF=  93 ok
+farm_sk_quarter            PC landsat-c2-l2   eo:cloud_cover<10          N= 108 F=  39 notF=  69 ok
+farm_sk_quarter            PC landsat-c2-l2   view:sun_elevation>30      N= 108 F=  69 notF=  39 ok
+farm_sk_quarter            PC landsat-c2-l2   view:off_nadir<5           N= 108 F= 108 notF=   0 ok
+farm_sk_quarter            PC landsat-c2-l2   view:off_nadir>1           N= 108 F=   0 notF= 108 ok
+farm_sk_quarter            PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 129 F=  80 notF=  49 ok
+farm_sk_quarter            PC landsat-c2-l2   landsat:correction=L2SP    N= 108 F= 108 notF=   0 ok
+farm_sk_quarter            PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 129 F= 129 notF=   0 ok
+farm_sk_quarter            ES sentinel-2-l2a  eo:cloud_cover<10          N=  79 F=  23 notF=  56 ok
+farm_sk_quarter            ES landsat-c2-l2   eo:cloud_cover<10          N= 112 F=  40 notF=  72 ok
+farm_sk_quarter            ES landsat-c2-l2   view:sun_elevation>30      N= 112 F=  70 notF=  42 ok
+farm_sk_quarter            ES landsat-c2-l2   view:off_nadir<5           N= 112 F= 112 notF=   0 ok
+farm_sk_quarter            ES sentinel-2-l2a  view:sun_elevation>30      N=  79 F=  47 notF=  32 ok
+farm_sk_quarter            ES landsat-c2-l2   view:off_nadir>1           N= 112 F=   0 notF= 112 ok
+farm_sk_quarter            ES landsat-c2-l2   landsat:correction=L2SP    N= 112 F= 112 notF=   0 ok
+farm_sk_quarter            ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  79 F=  79 notF=   0 ok
+farm_on_essex              PC sentinel-2-l2a  eo:cloud_cover<10          N= 118 F=  24 notF=  94 ok
+farm_on_essex              PC landsat-c2-l2   eo:cloud_cover<10          N= 112 F=  23 notF=  89 ok
+farm_on_essex              PC landsat-c2-l2   view:sun_elevation>30      N= 112 F=  82 notF=  30 ok
+farm_on_essex              PC landsat-c2-l2   view:off_nadir<5           N= 112 F= 112 notF=   0 ok
+farm_on_essex              PC landsat-c2-l2   view:off_nadir>1           N= 112 F=   0 notF= 112 ok
+farm_on_essex              PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 118 F=  95 notF=  23 ok
+farm_on_essex              PC landsat-c2-l2   landsat:correction=L2SP    N= 112 F= 111 notF=   1 ok
+farm_on_essex              PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 118 F= 118 notF=   0 ok
+farm_on_essex              ES sentinel-2-l2a  eo:cloud_cover<10          N=  73 F=  15 notF=  58 ok
+farm_on_essex              ES landsat-c2-l2   eo:cloud_cover<10          N= 120 F=  23 notF=  97 ok
+farm_on_essex              ES landsat-c2-l2   view:sun_elevation>30      N= 120 F=  84 notF=  36 ok
+farm_on_essex              ES landsat-c2-l2   view:off_nadir<5           N= 120 F= 120 notF=   0 ok
+farm_on_essex              ES sentinel-2-l2a  view:sun_elevation>30      N=  73 F=  56 notF=  17 ok
+farm_on_essex              ES landsat-c2-l2   view:off_nadir>1           N= 120 F=   0 notF= 120 ok
+farm_on_essex              ES landsat-c2-l2   landsat:correction=L2SP    N= 120 F= 119 notF=   1 ok
+farm_on_essex              ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  73 F=  73 notF=   0 ok
+farm_ab_taber              PC sentinel-2-l2a  eo:cloud_cover<10          N= 118 F=  33 notF=  85 ok
+farm_ab_taber              PC landsat-c2-l2   eo:cloud_cover<10          N= 131 F=  43 notF=  88 ok
+farm_ab_taber              PC landsat-c2-l2   view:sun_elevation>30      N= 131 F=  83 notF=  48 ok
+farm_ab_taber              PC landsat-c2-l2   view:off_nadir<5           N= 131 F= 131 notF=   0 ok
+farm_ab_taber              PC landsat-c2-l2   view:off_nadir>1           N= 131 F=   0 notF= 131 ok
+farm_ab_taber              PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 118 F=  82 notF=  36 ok
+farm_ab_taber              PC landsat-c2-l2   landsat:correction=L2SP    N= 131 F= 131 notF=   0 ok
+farm_ab_taber              PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 118 F= 118 notF=   0 ok
+farm_ab_taber              ES sentinel-2-l2a  eo:cloud_cover<10          N=  71 F=  20 notF=  51 ok
+farm_ab_taber              ES landsat-c2-l2   eo:cloud_cover<10          N= 136 F=  44 notF=  92 ok
+farm_ab_taber              ES landsat-c2-l2   view:sun_elevation>30      N= 136 F=  85 notF=  51 ok
+farm_ab_taber              ES landsat-c2-l2   view:off_nadir<5           N= 136 F= 136 notF=   0 ok
+farm_ab_taber              ES sentinel-2-l2a  view:sun_elevation>30      N=  71 F=  46 notF=  25 ok
+farm_ab_taber              ES landsat-c2-l2   view:off_nadir>1           N= 136 F=   0 notF= 136 ok
+farm_ab_taber              ES landsat-c2-l2   landsat:correction=L2SP    N= 136 F= 136 notF=   0 ok
+farm_ab_taber              ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  71 F=  71 notF=   0 ok
+farm_us_ia_story           PC sentinel-2-l2a  eo:cloud_cover<10          N= 237 F=  65 notF= 172 ok
+farm_us_ia_story           PC landsat-c2-l2   eo:cloud_cover<10          N= 110 F=  40 notF=  70 ok
+farm_us_ia_story           PC landsat-c2-l2   view:sun_elevation>30      N= 110 F=  79 notF=  31 ok
+farm_us_ia_story           PC landsat-c2-l2   view:off_nadir<5           N= 110 F= 110 notF=   0 ok
+farm_us_ia_story           PC landsat-c2-l2   view:off_nadir>1           N= 110 F=   0 notF= 110 ok
+farm_us_ia_story           PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 237 F= 182 notF=  55 ok
+farm_us_ia_story           PC landsat-c2-l2   landsat:correction=L2SP    N= 110 F= 110 notF=   0 ok
+farm_us_ia_story           PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 237 F= 237 notF=   0 ok
+farm_us_ia_story           ES sentinel-2-l2a  eo:cloud_cover<10          N= 147 F=  43 notF= 104 ok
+farm_us_ia_story           ES landsat-c2-l2   eo:cloud_cover<10          N= 116 F=  40 notF=  76 ok
+farm_us_ia_story           ES landsat-c2-l2   view:sun_elevation>30      N= 116 F=  81 notF=  35 ok
+farm_us_ia_story           ES landsat-c2-l2   view:off_nadir<5           N= 116 F= 116 notF=   0 ok
+farm_us_ia_story           ES sentinel-2-l2a  view:sun_elevation>30      N= 147 F= 111 notF=  36 ok
+farm_us_ia_story           ES landsat-c2-l2   view:off_nadir>1           N= 116 F=   0 notF= 116 ok
+farm_us_ia_story           ES landsat-c2-l2   landsat:correction=L2SP    N= 116 F= 116 notF=   0 ok
+farm_us_ia_story           ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 147 F= 147 notF=   0 ok
+mine_hvc_bc                PC sentinel-2-l2a  eo:cloud_cover<10          N= 494 F=  89 notF= 405 ok
+mine_hvc_bc                PC landsat-c2-l2   eo:cloud_cover<10          N= 118 F=  21 notF=  97 ok
+mine_hvc_bc                PC landsat-c2-l2   view:sun_elevation>30      N= 118 F=  75 notF=  43 ok
+mine_hvc_bc                PC landsat-c2-l2   view:off_nadir<5           N= 118 F= 118 notF=   0 ok
+mine_hvc_bc                PC landsat-c2-l2   view:off_nadir>1           N= 118 F=   0 notF= 118 ok
+mine_hvc_bc                PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 494 F= 325 notF= 169 ok
+mine_hvc_bc                PC landsat-c2-l2   landsat:correction=L2SP    N= 118 F= 118 notF=   0 ok
+mine_hvc_bc                PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 494 F= 494 notF=   0 ok
+mine_hvc_bc                ES sentinel-2-l2a  eo:cloud_cover<10          N= 292 F=  50 notF= 242 ok
+mine_hvc_bc                ES landsat-c2-l2   eo:cloud_cover<10          N= 120 F=  21 notF=  99 ok
+mine_hvc_bc                ES landsat-c2-l2   view:sun_elevation>30      N= 120 F=  75 notF=  45 ok
+mine_hvc_bc                ES landsat-c2-l2   view:off_nadir<5           N= 120 F= 120 notF=   0 ok
+mine_hvc_bc                ES sentinel-2-l2a  view:sun_elevation>30      N= 292 F= 187 notF= 105 ok
+mine_hvc_bc                ES landsat-c2-l2   view:off_nadir>1           N= 120 F=   0 notF= 120 ok
+mine_hvc_bc                ES landsat-c2-l2   landsat:correction=L2SP    N= 120 F= 120 notF=   0 ok
+mine_hvc_bc                ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 292 F= 292 notF=   0 ok
+mine_syncrude_ab           PC sentinel-2-l2a  eo:cloud_cover<10          N= 253 F=  63 notF= 190 ok
+mine_syncrude_ab           PC landsat-c2-l2   eo:cloud_cover<10          N= 100 F=  28 notF=  72 ok
+mine_syncrude_ab           PC landsat-c2-l2   view:sun_elevation>30      N= 100 F=  65 notF=  35 ok
+mine_syncrude_ab           PC landsat-c2-l2   view:off_nadir<5           N= 100 F= 100 notF=   0 ok
+mine_syncrude_ab           PC landsat-c2-l2   view:off_nadir>1           N= 100 F=   0 notF= 100 ok
+mine_syncrude_ab           PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 253 F= 144 notF= 109 ok
+mine_syncrude_ab           PC landsat-c2-l2   landsat:correction=L2SP    N= 100 F= 100 notF=   0 ok
+mine_syncrude_ab           PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 253 F= 253 notF=   0 ok
+mine_syncrude_ab           ES sentinel-2-l2a  eo:cloud_cover<10          N= 146 F=  35 notF= 111 ok
+mine_syncrude_ab           ES landsat-c2-l2   eo:cloud_cover<10          N= 102 F=  28 notF=  74 ok
+mine_syncrude_ab           ES landsat-c2-l2   view:sun_elevation>30      N= 102 F=  65 notF=  37 ok
+mine_syncrude_ab           ES landsat-c2-l2   view:off_nadir<5           N= 102 F= 102 notF=   0 ok
+mine_syncrude_ab           ES sentinel-2-l2a  view:sun_elevation>30      N= 146 F=  80 notF=  66 ok
+mine_syncrude_ab           ES landsat-c2-l2   view:off_nadir>1           N= 102 F=   0 notF= 102 ok
+mine_syncrude_ab           ES landsat-c2-l2   landsat:correction=L2SP    N= 102 F= 102 notF=   0 ok
+mine_syncrude_ab           ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 146 F= 146 notF=   0 ok
+mine_sudbury_on            PC sentinel-2-l2a  eo:cloud_cover<10          N= 118 F=  18 notF= 100 ok
+mine_sudbury_on            PC landsat-c2-l2   eo:cloud_cover<10          N= 157 F=  31 notF= 126 ok
+mine_sudbury_on            PC landsat-c2-l2   view:sun_elevation>30      N= 157 F= 107 notF=  50 ok
+mine_sudbury_on            PC landsat-c2-l2   view:off_nadir<5           N= 157 F= 157 notF=   0 ok
+mine_sudbury_on            PC landsat-c2-l2   view:off_nadir>1           N= 157 F=   0 notF= 157 ok
+mine_sudbury_on            PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 118 F=  83 notF=  35 ok
+mine_sudbury_on            PC landsat-c2-l2   landsat:correction=L2SP    N= 157 F= 156 notF=   1 ok
+mine_sudbury_on            PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 118 F= 118 notF=   0 ok
+mine_sudbury_on            ES sentinel-2-l2a  eo:cloud_cover<10          N=  75 F=  12 notF=  63 ok
+mine_sudbury_on            ES landsat-c2-l2   eo:cloud_cover<10          N= 165 F=  31 notF= 134 ok
+mine_sudbury_on            ES landsat-c2-l2   view:sun_elevation>30      N= 165 F= 111 notF=  54 ok
+mine_sudbury_on            ES landsat-c2-l2   view:off_nadir<5           N= 165 F= 165 notF=   0 ok
+mine_sudbury_on            ES sentinel-2-l2a  view:sun_elevation>30      N=  75 F=  51 notF=  24 ok
+mine_sudbury_on            ES landsat-c2-l2   view:off_nadir>1           N= 165 F=   0 notF= 165 ok
+mine_sudbury_on            ES landsat-c2-l2   landsat:correction=L2SP    N= 165 F= 164 notF=   1 ok
+mine_sudbury_on            ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  75 F=  75 notF=   0 ok
+mine_us_bingham_ut         PC sentinel-2-l2a  eo:cloud_cover<10          N= 490 F= 160 notF= 330 ok
+mine_us_bingham_ut         PC landsat-c2-l2   eo:cloud_cover<10          N=  69 F=  25 notF=  44 ok
+mine_us_bingham_ut         PC landsat-c2-l2   view:sun_elevation>30      N=  69 F=  52 notF=  17 ok
+mine_us_bingham_ut         PC landsat-c2-l2   view:off_nadir<5           N=  69 F=  69 notF=   0 ok
+mine_us_bingham_ut         PC landsat-c2-l2   view:off_nadir>1           N=  69 F=   0 notF=  69 ok
+mine_us_bingham_ut         PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 490 F= 404 notF=  86 ok
+mine_us_bingham_ut         PC landsat-c2-l2   landsat:correction=L2SP    N=  69 F=  69 notF=   0 ok
+mine_us_bingham_ut         PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 490 F= 490 notF=   0 ok
+mine_us_bingham_ut         ES sentinel-2-l2a  eo:cloud_cover<10          N= 294 F=  92 notF= 202 ok
+mine_us_bingham_ut         ES landsat-c2-l2   eo:cloud_cover<10          N=  75 F=  27 notF=  48 ok
+mine_us_bingham_ut         ES landsat-c2-l2   view:sun_elevation>30      N=  75 F=  54 notF=  21 ok
+mine_us_bingham_ut         ES landsat-c2-l2   view:off_nadir<5           N=  75 F=  75 notF=   0 ok
+mine_us_bingham_ut         ES sentinel-2-l2a  view:sun_elevation>30      N= 294 F= 232 notF=  62 ok
+mine_us_bingham_ut         ES landsat-c2-l2   view:off_nadir>1           N=  75 F=   0 notF=  75 ok
+mine_us_bingham_ut         ES landsat-c2-l2   landsat:correction=L2SP    N=  75 F=  75 notF=   0 ok
+mine_us_bingham_ut         ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 294 F= 294 notF=   0 ok
+city_toronto_core          PC sentinel-2-l2a  eo:cloud_cover<10          N= 121 F=  19 notF= 102 ok
+city_toronto_core          PC landsat-c2-l2   eo:cloud_cover<10          N= 156 F=  24 notF= 132 ok
+city_toronto_core          PC landsat-c2-l2   view:sun_elevation>30      N= 156 F= 109 notF=  47 ok
+city_toronto_core          PC landsat-c2-l2   view:off_nadir<5           N= 156 F= 156 notF=   0 ok
+city_toronto_core          PC landsat-c2-l2   view:off_nadir>1           N= 156 F=   0 notF= 156 ok
+city_toronto_core          PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 121 F=  89 notF=  32 ok
+city_toronto_core          PC landsat-c2-l2   landsat:correction=L2SP    N= 156 F= 156 notF=   0 ok
+city_toronto_core          PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 121 F= 121 notF=   0 ok
+city_toronto_core          ES sentinel-2-l2a  eo:cloud_cover<10          N=  75 F=  11 notF=  64 ok
+city_toronto_core          ES landsat-c2-l2   eo:cloud_cover<10          N= 161 F=  24 notF= 137 ok
+city_toronto_core          ES landsat-c2-l2   view:sun_elevation>30      N= 161 F= 113 notF=  48 ok
+city_toronto_core          ES landsat-c2-l2   view:off_nadir<5           N= 161 F= 161 notF=   0 ok
+city_toronto_core          ES sentinel-2-l2a  view:sun_elevation>30      N=  75 F=  54 notF=  21 ok
+city_toronto_core          ES landsat-c2-l2   view:off_nadir>1           N= 161 F=   0 notF= 161 ok
+city_toronto_core          ES landsat-c2-l2   landsat:correction=L2SP    N= 161 F= 161 notF=   0 ok
+city_toronto_core          ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  75 F=  75 notF=   0 ok
+city_montreal_core         PC sentinel-2-l2a  eo:cloud_cover<10          N= 127 F=  14 notF= 113 ok
+city_montreal_core         PC landsat-c2-l2   eo:cloud_cover<10          N= 169 F=  29 notF= 140 ok
+city_montreal_core         PC landsat-c2-l2   view:sun_elevation>30      N= 169 F= 115 notF=  54 ok
+city_montreal_core         PC landsat-c2-l2   view:off_nadir<5           N= 169 F= 169 notF=   0 ok
+city_montreal_core         PC landsat-c2-l2   view:off_nadir>1           N= 169 F=   0 notF= 169 ok
+city_montreal_core         PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 127 F=  87 notF=  40 ok
+city_montreal_core         PC landsat-c2-l2   landsat:correction=L2SP    N= 169 F= 169 notF=   0 ok
+city_montreal_core         PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 127 F= 127 notF=   0 ok
+city_montreal_core         ES sentinel-2-l2a  eo:cloud_cover<10          N=  76 F=   8 notF=  68 ok
+city_montreal_core         ES landsat-c2-l2   eo:cloud_cover<10          N= 175 F=  32 notF= 143 ok
+city_montreal_core         ES landsat-c2-l2   view:sun_elevation>30      N= 175 F= 116 notF=  59 ok
+city_montreal_core         ES landsat-c2-l2   view:off_nadir<5           N= 175 F= 175 notF=   0 ok
+city_montreal_core         ES sentinel-2-l2a  view:sun_elevation>30      N=  76 F=  53 notF=  23 ok
+city_montreal_core         ES landsat-c2-l2   view:off_nadir>1           N= 175 F=   0 notF= 175 ok
+city_montreal_core         ES landsat-c2-l2   landsat:correction=L2SP    N= 175 F= 175 notF=   0 ok
+city_montreal_core         ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  76 F=  76 notF=   0 ok
+city_windsor_on            PC sentinel-2-l2a  eo:cloud_cover<10          N= 118 F=  24 notF=  94 ok
+city_windsor_on            PC landsat-c2-l2   eo:cloud_cover<10          N= 157 F=  33 notF= 124 ok
+city_windsor_on            PC landsat-c2-l2   view:sun_elevation>30      N= 157 F= 116 notF=  41 ok
+city_windsor_on            PC landsat-c2-l2   view:off_nadir<5           N= 157 F= 157 notF=   0 ok
+city_windsor_on            PC landsat-c2-l2   view:off_nadir>1           N= 157 F=   0 notF= 157 ok
+city_windsor_on            PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 118 F=  95 notF=  23 ok
+city_windsor_on            PC landsat-c2-l2   landsat:correction=L2SP    N= 157 F= 156 notF=   1 ok
+city_windsor_on            PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 118 F= 118 notF=   0 ok
+city_windsor_on            ES sentinel-2-l2a  eo:cloud_cover<10          N=  73 F=  15 notF=  58 ok
+city_windsor_on            ES landsat-c2-l2   eo:cloud_cover<10          N= 166 F=  33 notF= 133 ok
+city_windsor_on            ES landsat-c2-l2   view:sun_elevation>30      N= 166 F= 120 notF=  46 ok
+city_windsor_on            ES landsat-c2-l2   view:off_nadir<5           N= 166 F= 166 notF=   0 ok
+city_windsor_on            ES sentinel-2-l2a  view:sun_elevation>30      N=  73 F=  56 notF=  17 ok
+city_windsor_on            ES landsat-c2-l2   view:off_nadir>1           N= 166 F=   0 notF= 166 ok
+city_windsor_on            ES landsat-c2-l2   landsat:correction=L2SP    N= 166 F= 165 notF=   1 ok
+city_windsor_on            ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  73 F=  73 notF=   0 ok
+city_us_detroit_mi         PC sentinel-2-l2a  eo:cloud_cover<10          N= 232 F=  41 notF= 191 ok
+city_us_detroit_mi         PC landsat-c2-l2   eo:cloud_cover<10          N= 157 F=  33 notF= 124 ok
+city_us_detroit_mi         PC landsat-c2-l2   view:sun_elevation>30      N= 157 F= 116 notF=  41 ok
+city_us_detroit_mi         PC landsat-c2-l2   view:off_nadir<5           N= 157 F= 157 notF=   0 ok
+city_us_detroit_mi         PC landsat-c2-l2   view:off_nadir>1           N= 157 F=   0 notF= 157 ok
+city_us_detroit_mi         PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 232 F= 182 notF=  50 ok
+city_us_detroit_mi         PC landsat-c2-l2   landsat:correction=L2SP    N= 157 F= 156 notF=   1 ok
+city_us_detroit_mi         PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 232 F= 232 notF=   0 ok
+city_us_detroit_mi         ES sentinel-2-l2a  eo:cloud_cover<10          N= 146 F=  27 notF= 119 ok
+city_us_detroit_mi         ES landsat-c2-l2   eo:cloud_cover<10          N= 169 F=  35 notF= 134 ok
+city_us_detroit_mi         ES landsat-c2-l2   view:sun_elevation>30      N= 169 F= 120 notF=  49 ok
+city_us_detroit_mi         ES landsat-c2-l2   view:off_nadir<5           N= 169 F= 169 notF=   0 ok
+city_us_detroit_mi         ES sentinel-2-l2a  view:sun_elevation>30      N= 146 F= 110 notF=  36 ok
+city_us_detroit_mi         ES landsat-c2-l2   view:off_nadir>1           N= 169 F=   0 notF= 169 ok
+city_us_detroit_mi         ES landsat-c2-l2   landsat:correction=L2SP    N= 169 F= 168 notF=   1 ok
+city_us_detroit_mi         ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 146 F= 146 notF=   0 ok
+stress_mine_hvc_full       PC sentinel-2-l2a  eo:cloud_cover<10          N= 494 F=  89 notF= 405 ok
+stress_mine_hvc_full       PC landsat-c2-l2   eo:cloud_cover<10          N= 119 F=  21 notF=  98 ok
+stress_mine_hvc_full       PC landsat-c2-l2   view:sun_elevation>30      N= 119 F=  75 notF=  44 ok
+stress_mine_hvc_full       PC landsat-c2-l2   view:off_nadir<5           N= 119 F= 119 notF=   0 ok
+stress_mine_hvc_full       PC landsat-c2-l2   view:off_nadir>1           N= 119 F=   0 notF= 119 ok
+stress_mine_hvc_full       PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 494 F= 325 notF= 169 ok
+stress_mine_hvc_full       PC landsat-c2-l2   landsat:correction=L2SP    N= 119 F= 119 notF=   0 ok
+stress_mine_hvc_full       PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 494 F= 494 notF=   0 ok
+stress_mine_hvc_full       ES sentinel-2-l2a  eo:cloud_cover<10          N= 292 F=  50 notF= 242 ok
+stress_mine_hvc_full       ES landsat-c2-l2   eo:cloud_cover<10          N= 121 F=  21 notF= 100 ok
+stress_mine_hvc_full       ES landsat-c2-l2   view:sun_elevation>30      N= 121 F=  75 notF=  46 ok
+stress_mine_hvc_full       ES landsat-c2-l2   view:off_nadir<5           N= 121 F= 121 notF=   0 ok
+stress_mine_hvc_full       ES sentinel-2-l2a  view:sun_elevation>30      N= 292 F= 187 notF= 105 ok
+stress_mine_hvc_full       ES landsat-c2-l2   view:off_nadir>1           N= 121 F=   0 notF= 121 ok
+stress_mine_hvc_full       ES landsat-c2-l2   landsat:correction=L2SP    N= 121 F= 121 notF=   0 ok
+stress_mine_hvc_full       ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 292 F= 292 notF=   0 ok
+stress_oilsands_region     PC sentinel-2-l2a  eo:cloud_cover<10          N= 254 F=  64 notF= 190 ok
+stress_oilsands_region     PC landsat-c2-l2   eo:cloud_cover<10          N= 110 F=  32 notF=  78 ok
+stress_oilsands_region     PC landsat-c2-l2   view:sun_elevation>30      N= 110 F=  74 notF=  36 ok
+stress_oilsands_region     PC landsat-c2-l2   view:off_nadir<5           N= 110 F= 110 notF=   0 ok
+stress_oilsands_region     PC landsat-c2-l2   view:off_nadir>1           N= 110 F=   0 notF= 110 ok
+stress_oilsands_region     PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 254 F= 145 notF= 109 ok
+stress_oilsands_region     PC landsat-c2-l2   landsat:correction=L2SP    N= 110 F= 110 notF=   0 ok
+stress_oilsands_region     PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 254 F= 254 notF=   0 ok
+stress_oilsands_region     ES sentinel-2-l2a  eo:cloud_cover<10          N= 147 F=  36 notF= 111 ok
+stress_oilsands_region     ES landsat-c2-l2   eo:cloud_cover<10          N= 112 F=  32 notF=  80 ok
+stress_oilsands_region     ES landsat-c2-l2   view:sun_elevation>30      N= 112 F=  74 notF=  38 ok
+stress_oilsands_region     ES landsat-c2-l2   view:off_nadir<5           N= 112 F= 112 notF=   0 ok
+stress_oilsands_region     ES sentinel-2-l2a  view:sun_elevation>30      N= 147 F=  81 notF=  66 ok
+stress_oilsands_region     ES landsat-c2-l2   view:off_nadir>1           N= 112 F=   0 notF= 112 ok
+stress_oilsands_region     ES landsat-c2-l2   landsat:correction=L2SP    N= 112 F= 112 notF=   0 ok
+stress_oilsands_region     ES sentinel-2-l2a  s2:product_type=S2MSI2A    N= 147 F= 147 notF=   0 ok
+stress_city_toronto_full   PC sentinel-2-l2a  eo:cloud_cover<10          N= 121 F=  19 notF= 102 ok
+stress_city_toronto_full   PC landsat-c2-l2   eo:cloud_cover<10          N= 176 F=  30 notF= 146 ok
+stress_city_toronto_full   PC landsat-c2-l2   view:sun_elevation>30      N= 176 F= 124 notF=  52 ok
+stress_city_toronto_full   PC landsat-c2-l2   view:off_nadir<5           N= 176 F= 176 notF=   0 ok
+stress_city_toronto_full   PC landsat-c2-l2   view:off_nadir>1           N= 176 F=   0 notF= 176 ok
+stress_city_toronto_full   PC sentinel-2-l2a  s2:mean_solar_zenith<60    N= 121 F=  89 notF=  32 ok
+stress_city_toronto_full   PC landsat-c2-l2   landsat:correction=L2SP    N= 176 F= 176 notF=   0 ok
+stress_city_toronto_full   PC sentinel-2-l2a  s2:product_type=S2MSI2A    N= 121 F= 121 notF=   0 ok
+stress_city_toronto_full   ES sentinel-2-l2a  eo:cloud_cover<10          N=  75 F=  11 notF=  64 ok
+stress_city_toronto_full   ES landsat-c2-l2   eo:cloud_cover<10          N= 185 F=  30 notF= 155 ok
+stress_city_toronto_full   ES landsat-c2-l2   view:sun_elevation>30      N= 185 F= 128 notF=  57 ok
+stress_city_toronto_full   ES landsat-c2-l2   view:off_nadir<5           N= 185 F= 185 notF=   0 ok
+stress_city_toronto_full   ES sentinel-2-l2a  view:sun_elevation>30      N=  75 F=  54 notF=  21 ok
+stress_city_toronto_full   ES landsat-c2-l2   view:off_nadir>1           N= 185 F=   0 notF= 185 ok
+stress_city_toronto_full   ES landsat-c2-l2   landsat:correction=L2SP    N= 185 F= 185 notF=   0 ok
+stress_city_toronto_full   ES sentinel-2-l2a  s2:product_type=S2MSI2A    N=  75 F=  75 notF=   0 ok
+control mid-Pacific PC:sentinel-2-l2a items=0
+control mid-Pacific PC:landsat-c2-l2 items=0
+control mid-Pacific ES:sentinel-2-l2a items=0
+control mid-Pacific ES:landsat-c2-l2 items=0
+
+== post-read AOI cloud from SCL: farm_sk_quarter, 40 S2 scenes Apr-Oct 2023 (PC, signed SCL, 20 m window) ==
+tile eo:cloud_cover < 10 passes 13; AOI (SCL cloud+shadow) < 10 passes 17; the two disagree on 8
+  2023-04-02 tile_cc= 99.80 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230402T180919_R084_T13UDT_20240829T080410
+  2023-04-02 tile_cc= 98.62 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230402T180919_R084_T13UDT_20230403T000000
+  2023-04-07 tile_cc=  1.07 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230407T180911_R084_T13UDT_20240829T015656
+  2023-04-07 tile_cc=  1.16 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230407T180911_R084_T13UDT_20230408T043456
+  2023-04-12 tile_cc=  0.36 aoi_cloud=  0.00 aoi_shadow= 0.00  S2B_MSIL2A_20230412T180919_R084_T13UDT_20240828T200213
+  2023-04-12 tile_cc=  0.36 aoi_cloud=  0.00 aoi_shadow= 0.00  S2B_MSIL2A_20230412T180919_R084_T13UDT_20230413T003541
+  2023-04-17 tile_cc= 25.32 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230417T180911_R084_T13UDT_20240903T030847  <-- differs
+  2023-04-17 tile_cc= 25.33 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230417T180911_R084_T13UDT_20230418T052108  <-- differs
+  2023-04-22 tile_cc= 50.51 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230422T180919_R084_T13UDT_20240905T130955
+  2023-04-22 tile_cc= 50.53 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230422T180919_R084_T13UDT_20230423T212605
+  2023-04-27 tile_cc= 89.58 aoi_cloud= 99.64 aoi_shadow= 0.36  S2A_MSIL2A_20230427T180911_R084_T13UDT_20230428T032951
+  2023-05-02 tile_cc= 12.51 aoi_cloud=  0.00 aoi_shadow= 0.00  S2B_MSIL2A_20230502T180919_R084_T13UDT_20240902T185017  <-- differs
+  2023-05-07 tile_cc= 62.23 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230507T180911_R084_T13UDT_20240906T063721
+  2023-05-07 tile_cc= 86.52 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230507T180911_R084_T13UDT_20230508T042256
+  2023-05-12 tile_cc= 99.50 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230512T180919_R084_T13UDT_20230512T232216
+  2023-05-17 tile_cc= 92.89 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230517T180921_R084_T13UDT_20230518T144339
+  2023-05-22 tile_cc= 40.56 aoi_cloud= 18.08 aoi_shadow= 0.00  S2B_MSIL2A_20230522T180919_R084_T13UDT_20230522T232147
+  2023-05-27 tile_cc= 99.95 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230527T180921_R084_T13UDT_20240907T174918
+  2023-05-27 tile_cc= 99.95 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230527T180921_R084_T13UDT_20230528T015648
+  2023-06-01 tile_cc= 58.78 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230601T180919_R084_T13UDT_20240909T204702
+  2023-06-01 tile_cc= 58.79 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230601T180919_R084_T13UDT_20230602T021730
+  2023-06-06 tile_cc=  9.71 aoi_cloud=  0.06 aoi_shadow= 2.14  S2A_MSIL2A_20230606T180921_R084_T13UDT_20240913T093702
+  2023-06-06 tile_cc=  9.67 aoi_cloud=  0.06 aoi_shadow= 2.14  S2A_MSIL2A_20230606T180921_R084_T13UDT_20230607T014012
+  2023-06-11 tile_cc=  3.55 aoi_cloud=  5.77 aoi_shadow= 0.00  S2B_MSIL2A_20230611T180919_R084_T13UDT_20240928T091605
+  2023-06-11 tile_cc=  3.59 aoi_cloud=  6.19 aoi_shadow= 0.00  S2B_MSIL2A_20230611T180919_R084_T13UDT_20230611T233139
+  2023-06-16 tile_cc=  4.04 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230616T180921_R084_T13UDT_20230617T032955
+  2023-06-21 tile_cc= 52.65 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230621T180919_R084_T13UDT_20240928T000050
+  2023-06-21 tile_cc= 52.65 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230621T180919_R084_T13UDT_20230622T132216
+  2023-06-26 tile_cc= 22.42 aoi_cloud=  0.00 aoi_shadow=16.89  S2A_MSIL2A_20230626T180921_R084_T13UDT_20230627T012728
+  2023-07-01 tile_cc=  8.99 aoi_cloud= 64.72 aoi_shadow= 2.80  S2B_MSIL2A_20230701T180919_R084_T13UDT_20241020T162124  <-- differs
+  2023-07-01 tile_cc=  8.99 aoi_cloud= 64.66 aoi_shadow= 2.80  S2B_MSIL2A_20230701T180919_R084_T13UDT_20230701T234824  <-- differs
+  2023-07-06 tile_cc= 29.94 aoi_cloud=  0.00 aoi_shadow= 4.16  S2A_MSIL2A_20230706T180921_R084_T13UDT_20230707T020346  <-- differs
+  2023-07-11 tile_cc= 99.01 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230711T180919_R084_T13UDT_20241019T131803
+  2023-07-11 tile_cc= 98.97 aoi_cloud=100.00 aoi_shadow= 0.00  S2B_MSIL2A_20230711T180919_R084_T13UDT_20230712T002639
+  2023-07-16 tile_cc= 92.85 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230716T180921_R084_T13UDT_20241021T220536
+  2023-07-16 tile_cc= 92.85 aoi_cloud=100.00 aoi_shadow= 0.00  S2A_MSIL2A_20230716T180921_R084_T13UDT_20230717T012252
+  2023-07-21 tile_cc= 18.56 aoi_cloud=  0.00 aoi_shadow= 4.64  S2B_MSIL2A_20230721T180919_R084_T13UDT_20241015T212636  <-- differs
+  2023-07-21 tile_cc= 18.54 aoi_cloud=  0.00 aoi_shadow= 4.64  S2B_MSIL2A_20230721T180919_R084_T13UDT_20230721T232906  <-- differs
+  2023-07-26 tile_cc=  6.44 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230726T180921_R084_T13UDT_20241029T133949
+  2023-07-26 tile_cc=  6.44 aoi_cloud=  0.00 aoi_shadow= 0.00  S2A_MSIL2A_20230726T180921_R084_T13UDT_20230727T010842
+
+real	12m45.031s
+user	0m11.404s
+sys	0m1.076s

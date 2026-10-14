@@ -1,0 +1,294 @@
+{
+ "id": "3b6bfe66-7918-4ea4-a518-8ebe743882f2",
+ "bbox": [
+  -79.3828941,
+  43.6495962,
+  -79.3828941,
+  43.6495962
+ ],
+ "type": "Feature",
+ "links": [
+  {
+   "rel": "license",
+   "href": "https://spdx.org/licenses/CC-BY-SA-4.0.html",
+   "title": "License for this object (CC-BY-SA-4.0)"
+  },
+  {
+   "rel": "self",
+   "href": "https://api.panoramax.xyz/api/collections/4be8ec78-b65b-4ba0-8de1-bcb3a174b79e/items/3b6bfe66-7918-4ea4-a518-8ebe743882f2",
+   "type": "application/geo+json"
+  },
+  {
+   "rel": "collection",
+   "href": "https://api.panoramax.xyz/api/collections/4be8ec78-b65b-4ba0-8de1-bcb3a174b79e",
+   "type": "application/json"
+  },
+  {
+   "rel": "parent",
+   "href": "https://api.panoramax.xyz/api/collections/4be8ec78-b65b-4ba0-8de1-bcb3a174b79e",
+   "type": "application/json"
+  },
+  {
+   "rel": "root",
+   "href": "https://api.panoramax.xyz/api",
+   "type": "application/json",
+   "title": "Instance catalog"
+  },
+  {
+   "rel": "prev",
+   "href": "https://api.panoramax.xyz/api/collections/4be8ec78-b65b-4ba0-8de1-bcb3a174b79e/items/bd014ff7-9e70-4963-97c1-9d5f64497c5b",
+   "type": "application/geo+json",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.3830201,
+     43.6495659
+    ]
+   },
+   "id": "bd014ff7-9e70-4963-97c1-9d5f64497c5b"
+  },
+  {
+   "rel": "next",
+   "href": "https://api.panoramax.xyz/api/collections/4be8ec78-b65b-4ba0-8de1-bcb3a174b79e/items/7b61c87f-0478-436d-80ab-5fb1017fa301",
+   "type": "application/geo+json",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -79.3827742,
+     43.649627
+    ]
+   },
+   "id": "7b61c87f-0478-436d-80ab-5fb1017fa301"
+  },
+  {
+   "rel": "via",
+   "href": "https://panoramax.bikespaceproject.ca",
+   "type": "application/json",
+   "title": "Link to the original instance",
+   "instance_name": "bikespace"
+  }
+ ],
+ "assets": {
+  "hd": {
+   "href": "https://bikespace-panoramax-public.s3.bhs.io.cloud.ovh.net/main-pictures/3b/6b/fe/66/7918-4ea4-a518-8ebe743882f2.jpg",
+   "type": "image/jpeg",
+   "roles": [
+    "data"
+   ],
+   "title": "HD picture",
+   "description": "Highest resolution available of this picture"
+  },
+  "sd": {
+   "href": "https://bikespace-panoramax-public.s3.bhs.io.cloud.ovh.net/derivates/3b/6b/fe/66/7918-4ea4-a518-8ebe743882f2/sd.jpg",
+   "type": "image/jpeg",
+   "roles": [
+    "visual"
+   ],
+   "title": "SD picture",
+   "description": "Picture in standard definition (fixed width of 2048px)"
+  },
+  "thumb": {
+   "href": "https://bikespace-panoramax-public.s3.bhs.io.cloud.ovh.net/derivates/3b/6b/fe/66/7918-4ea4-a518-8ebe743882f2/thumb.jpg",
+   "type": "image/jpeg",
+   "roles": [
+    "thumbnail"
+   ],
+   "title": "Thumbnail",
+   "description": "Picture in low definition (fixed width of 500px)"
+  }
+ },
+ "geometry": {
+  "type": "Point",
+  "coordinates": [
+   -79.3828941,
+   43.6495962
+  ]
+ },
+ "providers": [
+  {
+   "id": "b4fd5d00-51be-4208-9da4-2271727292f0",
+   "name": "tallcoleman",
+   "roles": [
+    "producer"
+   ]
+  }
+ ],
+ "collection": "4be8ec78-b65b-4ba0-8de1-bcb3a174b79e",
+ "properties": {
+  "exif": {
+   "Xmp.Camera.Yaw": "0/1000",
+   "Exif.Image.Make": "GoPro",
+   "Xmp.Camera.Roll": "0/1000",
+   "Exif.Image.Model": "GoPro Max",
+   "Exif.Photo.Flash": "32",
+   "Xmp.Camera.Pitch": "0/1000",
+   "Exif.Image.GPSTag": "3232",
+   "Exif.Image.ExifTag": "310",
+   "Exif.Photo.FNumber": "28/10",
+   "Exif.Image.DateTime": "2025:08:18 16:22:10",
+   "Exif.Image.Software": "H19.03.02.04.00",
+   "Exif.Photo.Contrast": "0",
+   "Exif.Photo.SceneType": "1",
+   "Exif.Photo.Sharpness": "2",
+   "Exif.Photo.ColorSpace": "0",
+   "Exif.Photo.FileSource": "3",
+   "Exif.Photo.Saturation": "0",
+   "Exif.Image.Orientation": "1",
+   "Exif.Image.XResolution": "72/1",
+   "Exif.Image.YResolution": "72/1",
+   "Exif.Photo.ExifVersion": "48 50 50 49",
+   "Exif.Photo.FocalLength": "3/1",
+   "Exif.Photo.GainControl": "0",
+   "Exif.Photo.LightSource": "0",
+   "Exif.Photo.MeteringMode": "1",
+   "Exif.Photo.WhiteBalance": "0",
+   "Xmp.GPano.LastPhotoDate": "2025:08:18 16:22:10",
+   "Exif.GPSInfo.GPSAltitude": "102518/1000",
+   "Exif.GPSInfo.GPSLatitude": "43/1 38/1 731829/12500",
+   "Exif.Photo.ApertureValue": "297/100",
+   "Exif.Photo.SensingMethod": "2",
+   "Xmp.GPano.FirstPhotoDate": "2025:08:18 16:22:10",
+   "Xmp.GPano.ProjectionType": "equirectangular",
+   "Exif.GPSInfo.GPSDateStamp": "2025-08-18",
+   "Exif.GPSInfo.GPSLongitude": "79/1 22/1 1460469/25000",
+   "Exif.GPSInfo.GPSTimeStamp": "20/1 12/1 19/1",
+   "Exif.Image.ResolutionUnit": "2",
+   "Exif.Photo.CustomRendered": "0",
+   "Xmp.GPano.CaptureSoftware": "GoPro Max",
+   "Xmp.GPano.PoseRollDegrees": "0.0",
+   "Exif.Photo.FlashpixVersion": "8 9 10 11",
+   "Exif.Photo.PixelXDimension": "5760",
+   "Exif.Photo.PixelYDimension": "2880",
+   "Exif.Photo.SubjectDistance": "0/1",
+   "Exif.Thumbnail.Compression": "6",
+   "Exif.Thumbnail.XResolution": "72/1",
+   "Exif.Thumbnail.YResolution": "72/1",
+   "Xmp.GPano.ExposureLockUsed": "False",
+   "Xmp.GPano.PosePitchDegrees": "0.0",
+   "Exif.GPSInfo.GPSAltitudeRef": "0",
+   "Exif.GPSInfo.GPSLatitudeRef": "N",
+   "Exif.Image.ImageDescription": "DCIM\\147GOPRO\\GSBP4757.JPG",
+   "Exif.Image.YCbCrPositioning": "1",
+   "Exif.Photo.BodySerialNumber": "C3354270062371",
+   "Exif.Photo.DateTimeOriginal": "2025-08-18 20:12:19",
+   "Exif.Photo.DigitalZoomRatio": "1024/1024",
+   "Exif.Photo.MaxApertureValue": "297/100",
+   "Exif.Photo.SceneCaptureType": "1",
+   "Xmp.GPano.SourcePhotosCount": "2",
+   "Xmp.GPano.StitchingSoftware": "GoPro Max",
+   "Xmp.GPano.UsePanoramaViewer": "True",
+   "Exif.GPSInfo.GPSImgDirection": "255000/1000",
+   "Exif.GPSInfo.GPSLongitudeRef": "W",
+   "Exif.Photo.DateTimeDigitized": "2025:08:18 16:22:10",
+   "Xmp.GPano.InitialCameraDolly": "0.0",
+   "Xmp.GPano.PoseHeadingDegrees": "255000/1000",
+   "Exif.Photo.OffsetTimeOriginal": "+00:00",
+   "Exif.Photo.SubSecTimeOriginal": "000000",
+   "Exif.Thumbnail.ResolutionUnit": "2",
+   "Xmp.GPano.FullPanoWidthPixels": "5760",
+   "Exif.Iop.InteroperabilityIndex": "R98",
+   "Exif.Photo.InteroperabilityTag": "3202",
+   "Xmp.GPano.CroppedAreaTopPixels": "0",
+   "Xmp.GPano.FullPanoHeightPixels": "2880",
+   "Exif.GPSInfo.GPSImgDirectionRef": "T",
+   "Exif.Photo.SubjectDistanceRange": "0",
+   "Xmp.GPano.CroppedAreaLeftPixels": "0",
+   "Exif.Iop.InteroperabilityVersion": "48 49 48 48",
+   "Exif.Photo.FocalLengthIn35mmFilm": "15",
+   "Xmp.GPano.InitialViewRollDegrees": "0.0",
+   "Exif.Photo.CompressedBitsPerPixel": "100/297",
+   "Xmp.GPano.InitialViewPitchDegrees": "0.0",
+   "Exif.Photo.ComponentsConfiguration": "1 2 3 0",
+   "Exif.Photo.DeviceSettingDescription": "0 0 0 0",
+   "Xmp.GPano.InitialVerticalFOVDegrees": "0.0",
+   "Xmp.GPano.InitialViewHeadingDegrees": "0.0",
+   "Exif.Thumbnail.JPEGInterchangeFormat": "3552",
+   "Xmp.GPano.CroppedAreaImageWidthPixels": "5760",
+   "Xmp.GPano.InitialHorizontalFOVDegrees": "0.0",
+   "Xmp.GPano.CroppedAreaImageHeightPixels": "2880",
+   "Exif.Thumbnail.JPEGInterchangeFormatLength": "16369"
+  },
+  "created": "2026-07-26T14:14:10.226476+00:00",
+  "license": "CC-BY-SA-4.0",
+  "updated": "2026-07-26T14:14:10.226476+00:00",
+  "datetime": "2025-08-18T20:12:19+00:00",
+  "pers:yaw": 0.0,
+  "pers:roll": 0.0,
+  "semantics": [],
+  "collection": {
+   "semantics": [
+    {
+     "key": "original:collection_location",
+     "value": "https://panoramax.openstreetmap.fr/api/collections/4be8ec78-b65b-4ba0-8de1-bcb3a174b79e"
+    },
+    {
+     "key": "transport",
+     "value": "bike"
+    }
+   ]
+  },
+  "datetimetz": "2025-08-18T16:12:19-04:00",
+  "pers:pitch": 0.0,
+  "annotations": [],
+  "view:azimuth": 255,
+  "geovisio:image": "https://bikespace-panoramax-public.s3.bhs.io.cloud.ovh.net/main-pictures/3b/6b/fe/66/7918-4ea4-a518-8ebe743882f2.jpg",
+  "geovisio:status": "ready",
+  "geovisio:producer": "tallcoleman",
+  "geovisio:thumbnail": "https://bikespace-panoramax-public.s3.bhs.io.cloud.ovh.net/derivates/3b/6b/fe/66/7918-4ea4-a518-8ebe743882f2/thumb.jpg",
+  "original_file:name": "GSBP4757.JPG",
+  "original_file:size": 3020130,
+  "geovisio:visibility": "anyone",
+  "tiles:tile_matrix_sets": {
+   "geovisio": {
+    "type": "TileMatrixSetType",
+    "title": "GeoVisio tile matrix for picture 3b6bfe66-7918-4ea4-a518-8ebe743882f2",
+    "identifier": "geovisio-3b6bfe66-7918-4ea4-a518-8ebe743882f2",
+    "tileMatrix": [
+     {
+      "type": "TileMatrixType",
+      "tileWidth": 720.0,
+      "identifier": "0",
+      "tileHeight": 720.0,
+      "matrixWidth": 8,
+      "matrixHeight": 4,
+      "topLeftCorner": [
+       0,
+       0
+      ],
+      "scaleDenominator": 1
+     }
+    ]
+   }
+  },
+  "pers:interior_orientation": {
+   "camera_model": "Max",
+   "focal_length": 3.0,
+   "field_of_view": 360,
+   "camera_manufacturer": "GoPro",
+   "sensor_array_dimensions": [
+    5760,
+    2880
+   ]
+  },
+  "geovisio:rank_in_collection": 15,
+  "quality:horizontal_accuracy": 4.0,
+  "panoramax:horizontal_pixel_density": 16
+ },
+ "stac_version": "1.0.0",
+ "asset_templates": {
+  "tiles": {
+   "href": "https://bikespace-panoramax-public.s3.bhs.io.cloud.ovh.net/derivates/3b/6b/fe/66/7918-4ea4-a518-8ebe743882f2/tiles/{TileCol}_{TileRow}.jpg",
+   "type": "image/jpeg",
+   "roles": [
+    "data"
+   ],
+   "title": "HD tiled picture",
+   "description": "Highest resolution available of this picture, as tiles"
+  }
+ },
+ "stac_extensions": [
+  "https://stac-extensions.github.io/view/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/perspective-imagery/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/tiled-assets/v1.0.0/schema.json"
+ ]
+}

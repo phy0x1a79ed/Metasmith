@@ -1,0 +1,200 @@
+{
+ "type": "Feature",
+ "stac_version": "1.0.0",
+ "stac_extensions": [
+  "https://stac-extensions.github.io/eo/v1.1.0/schema.json",
+  "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/view/v1.1.0/schema.json",
+  "https://stac-extensions.github.io/processing/v1.2.0/schema.json",
+  "https://stac-extensions.github.io/raster/v1.1.0/schema.json"
+ ],
+ "id": "DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220",
+ "collection": "DESIS_HSI_L2A",
+ "geometry": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     -83.240883,
+     41.737784
+    ],
+    [
+     -82.667919,
+     41.747533
+    ],
+    [
+     -82.679102,
+     42.17481
+    ],
+    [
+     -83.255901,
+     42.164914
+    ],
+    [
+     -83.240883,
+     41.737784
+    ]
+   ]
+  ]
+ },
+ "bbox": [
+  -83.25590067236305,
+  41.73778400913089,
+  -82.66791893945896,
+  42.17480998083195
+ ],
+ "properties": {
+  "created": "2025-03-12T12:26:34.241Z",
+  "updated": "2025-03-12T12:26:34.241Z",
+  "datetime": "2019-02-09T17:19:51.547511Z",
+  "start_datetime": "2019-02-09T17:19:49.374531Z",
+  "end_datetime": "2019-02-09T17:19:53.720490Z",
+  "platform": "ISS",
+  "gsd": 30.0,
+  "proj:epsg": null,
+  "sci:doi": "10.15489/hxom21uqeo90",
+  "eo:cloud_cover": 0.492849151876,
+  "view:sun_azimuth": 171.875459,
+  "view:sun_elevation": 33.066695,
+  "processing:facility": "NZ",
+  "processing:level": "L2A",
+  "ceosard:specification": "SR",
+  "ceosard:specification_version": "5.0.1",
+  "ceosard:type": "optical",
+  "desis:datatakeID": "2019020908",
+  "desis:eastern_geometric_accuracy": -1.0,
+  "desis:imageID": "2019020908003",
+  "desis:missionPhase": "routine",
+  "desis:nodata": "-32768",
+  "desis:northern_geometric_accuracy": -1.0,
+  "desis:numberOfTiles": "3",
+  "desis:ozoneValue": "330",
+  "desis:raster_space": "PixelIsArea",
+  "desis:sceneAzimuthAngle": 314.92,
+  "desis:sceneIncidenceAngle": 24.13,
+  "desis:season": "winter",
+  "desis:si_wavelength_unit": "Nanometer",
+  "desis:tileID": "003",
+  "mission": "DESIS",
+  "processing:datetime": "2025-01-25T05:30:43.186531Z",
+  "processing:version": "02.20",
+  "proj:code": "EPSG:32617",
+  "sci:citation": "DLR (2019): DESIS L1A Product DESIS-HSI-L1A-DT2019020908_003-20190209T171754-V0200 doi: 10.15489/hxom21uqeo90 Processed to Level 2A (version: 02.20, parameters: U0BLNNXXW330G4)",
+  "statistic": {
+   "cloud_shadow": 0.492849151876,
+   "defectivePixels": 0.0,
+   "haze_cover": 39.8653218478
+  }
+ },
+ "assets": {
+  "metadata": "https://download.geoservice.dlr.de/DESIS/files/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220-METADATA.xml",
+  "image": "https://download.geoservice.dlr.de/DESIS/files/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220-SPECTRAL_IMAGE.tif",
+  "quality": "https://download.geoservice.dlr.de/DESIS/files/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220-QL_QUALITY.tif",
+  "quality2": "https://download.geoservice.dlr.de/DESIS/files/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220-QL_QUALITY-2.tif",
+  "overview": "https://download.geoservice.dlr.de/DESIS/files/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220-QL_IMAGE.tif",
+  "thumbnail": "https://download.geoservice.dlr.de/DESIS/files/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220-QL_IMAGE_thumbnail.png"
+ },
+ "links": [
+  {
+   "href": "DESIS_HSI_L2A",
+   "rel": "collection",
+   "type": "application/json"
+  },
+  {
+   "href": "/ida/hyperspectral/DESIS/L2A/2019/02/09/DT2019020908/003/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220_stac.json",
+   "rel": "self",
+   "type": "application/json"
+  },
+  {
+   "title": "Root",
+   "rel": "root",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+   "type": "application/json"
+  },
+  {
+   "title": "Parent",
+   "rel": "parent",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1",
+   "type": "application/json"
+  },
+  {
+   "title": "Self",
+   "rel": "self",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A/items/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220",
+   "type": "application/geo%2Bjson"
+  },
+  {
+   "title": "Item",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A/items/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220",
+   "type": "application/geo%2Bjson"
+  },
+  {
+   "title": "Item as HTML",
+   "rel": "alternate",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A/items/DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220",
+   "type": "text/html"
+  },
+  {
+   "title": "Items",
+   "rel": "items",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A/items",
+   "type": "application/geo%2Bjson"
+  },
+  {
+   "title": "Items as HTML",
+   "rel": "items",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A/items",
+   "type": "text/html"
+  },
+  {
+   "title": "Collection",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A",
+   "type": "application/json"
+  },
+  {
+   "title": "Collection as HTML",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections/DESIS_HSI_L2A",
+   "type": "text/html"
+  },
+  {
+   "title": "Collections",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections",
+   "type": "application/json"
+  },
+  {
+   "title": "Collections as HTML",
+   "rel": "collection",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/v1/collections",
+   "type": "text/html"
+  },
+  {
+   "title": "OpenSearch GeoJSON",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/oseo/search?parentIdentifier=DESIS_HSI_L2A&identifier=DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220&httpAccept=application%2Fgeo%252Bjson",
+   "type": "application/geo+json"
+  },
+  {
+   "title": "OpenSearch Atom XML",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/oseo/search?parentIdentifier=DESIS_HSI_L2A&identifier=DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220&httpAccept=application%2Fatom%2Bxml",
+   "type": "application/atom+xml"
+  },
+  {
+   "title": "OpenSearch O&M XML",
+   "rel": "item",
+   "href": "https://geoservice.dlr.de/eoc/oseo/metadata?parentId=DESIS_HSI_L2A&uid=DESIS-HSI-L2A-DT2019020908_003-20190209T171754-V0220&httpAccept=application%2Fgml%2Bxml",
+   "type": "application/gml+xml"
+  },
+  {
+   "title": "Queryables",
+   "rel": "http://www.opengis.net/def/rel/ogc/1.0/queryables",
+   "href": "https://geoservice.dlr.de/eoc/ogc/stac/collections/DESIS_HSI_L2A/queryables",
+   "type": "application/schema+json"
+  }
+ ]
+}

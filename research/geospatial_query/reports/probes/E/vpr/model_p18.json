@@ -1,0 +1,16 @@
+{
+ "id": "p18",
+ "condition": "model",
+ "centre_lat": 42.33133316040039,
+ "centre_lon": -83.04666900634766,
+ "centre_err_km": 332.12611261234446,
+ "search_radius_m": 3000,
+ "n_ref_pictures_in_disc": 0,
+ "n_ref_positions_used": 0,
+ "note": "true location is outside the reference search disc; no Panoramax pictures within the search disc",
+ "n_views": 0,
+ "best_inliers": 0,
+ "accepted": false,
+ "accepted_within_1km": false,
+ "sec": 6
+}

@@ -1,0 +1,392 @@
+{
+ "id": "USGS_LPC_MI_WayneCo_2017_480312_LAS_2018",
+ "bbox": [
+  -83.04746655,
+  42.34957201,
+  -30.34424,
+  -83.03763163,
+  42.35686799,
+  807.74576
+ ],
+ "type": "Feature",
+ "links": [
+  {
+   "rel": "collection",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc"
+  },
+  {
+   "rel": "parent",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc"
+  },
+  {
+   "rel": "root",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/"
+  },
+  {
+   "rel": "self",
+   "type": "application/geo+json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/3dep-lidar-copc/items/USGS_LPC_MI_WayneCo_2017_480312_LAS_2018"
+  },
+  {
+   "rel": "alternate",
+   "href": "https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/USGS_LPC_MI_WayneCo_2017_LAS_2018/metadata/",
+   "type": "application/xml",
+   "title": "USGS Metadata"
+  }
+ ],
+ "assets": {
+  "data": {
+   "href": "https://usgslidareuwest.blob.core.windows.net/usgs-3dep-copc/usgs-copc/USGS_LPC_MI_WayneCo_2017_LAS_2018/copc/USGS_LPC_MI_WayneCo_2017_480312_LAS_2018.copc.laz",
+   "type": "application/vnd.laszip+copc",
+   "roles": [
+    "data"
+   ],
+   "title": "COPC data"
+  },
+  "thumbnail": {
+   "href": "https://usgslidareuwest.blob.core.windows.net/usgs-3dep-copc/usgs-copc/USGS_LPC_MI_WayneCo_2017_LAS_2018/copc/thumbnails/USGS_LPC_MI_WayneCo_2017_480312_LAS_2018-thumbnail.png",
+   "type": "image/png",
+   "roles": [
+    "thumbnail",
+    "overview"
+   ],
+   "title": "3DEP Lidar COPC"
+  }
+ },
+ "geometry": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     -83.0458059,
+     42.3475751
+    ],
+    [
+     -83.0385259,
+     42.3477049
+    ],
+    [
+     -83.0361998,
+     42.3508658
+    ],
+    [
+     -83.0370332,
+     42.3578702
+    ],
+    [
+     -83.0473228,
+     42.3569069
+    ],
+    [
+     -83.0494965,
+     42.349069
+    ],
+    [
+     -83.0458059,
+     42.3475751
+    ]
+   ]
+  ]
+ },
+ "collection": "3dep-lidar-copc",
+ "properties": {
+  "pc:type": "lidar",
+  "datetime": null,
+  "group_id": "3dep-lidar",
+  "pc:count": 3603827,
+  "proj:bbox": [
+   331380.2133,
+   4690619.084,
+   -30.34424,
+   332171.6933,
+   4691410.694,
+   807.74576
+  ],
+  "proj:epsg": null,
+  "pc:schemas": [
+   {
+    "name": "X",
+    "size": 8,
+    "type": "floating"
+   },
+   {
+    "name": "Y",
+    "size": 8,
+    "type": "floating"
+   },
+   {
+    "name": "Z",
+    "size": 8,
+    "type": "floating"
+   },
+   {
+    "name": "Intensity",
+    "size": 2,
+    "type": "unsigned"
+   },
+   {
+    "name": "ReturnNumber",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "NumberOfReturns",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "ScanDirectionFlag",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "EdgeOfFlightLine",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "Classification",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "ScanAngleRank",
+    "size": 4,
+    "type": "floating"
+   },
+   {
+    "name": "UserData",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "PointSourceId",
+    "size": 2,
+    "type": "unsigned"
+   },
+   {
+    "name": "GpsTime",
+    "size": 8,
+    "type": "floating"
+   },
+   {
+    "name": "ScanChannel",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "ClassFlags",
+    "size": 1,
+    "type": "unsigned"
+   },
+   {
+    "name": "Red",
+    "size": 2,
+    "type": "unsigned"
+   },
+   {
+    "name": "Green",
+    "size": 2,
+    "type": "unsigned"
+   },
+   {
+    "name": "Blue",
+    "size": 2,
+    "type": "unsigned"
+   }
+  ],
+  "pc:encoding": "application/vnd.laszip+copc",
+  "3dep:usgs_id": "USGS_LPC_MI_WayneCo_2017_LAS_2018",
+  "end_datetime": "2018-01-01T00:00:00Z",
+  "proj:geometry": {
+   "type": "Polygon",
+   "coordinates": [
+    [
+     [
+      331492.61126645,
+      4690394.51164561
+     ],
+     [
+      332092.6112663,
+      4690394.51164561
+     ],
+     [
+      332292.61126625,
+      4690740.92180712
+     ],
+     [
+      332242.61126626,
+      4691520.34467053
+     ],
+     [
+      331392.61126647,
+      4691433.74213015
+     ],
+     [
+      331192.61126652,
+      4690567.71672637
+     ],
+     [
+      331492.61126645,
+      4690394.51164561
+     ]
+    ]
+   ]
+  },
+  "proj:projjson": {
+   "name": "NAD83 / UTM zone 17N + NAVD88 height",
+   "type": "CompoundCRS",
+   "$schema": "https://proj.org/schemas/v0.4/projjson.schema.json",
+   "components": [
+    {
+     "id": {
+      "code": 26917,
+      "authority": "EPSG"
+     },
+     "name": "NAD83 / UTM zone 17N",
+     "type": "ProjectedCRS",
+     "base_crs": {
+      "id": {
+       "code": 4269,
+       "authority": "EPSG"
+      },
+      "name": "NAD83",
+      "datum": {
+       "name": "North American Datum 1983",
+       "type": "GeodeticReferenceFrame",
+       "ellipsoid": {
+        "name": "GRS 1980",
+        "semi_major_axis": 6378137,
+        "inverse_flattening": 298.257222101
+       }
+      },
+      "coordinate_system": {
+       "axis": [
+        {
+         "name": "Geodetic latitude",
+         "unit": "degree",
+         "direction": "north",
+         "abbreviation": "Lat"
+        },
+        {
+         "name": "Geodetic longitude",
+         "unit": "degree",
+         "direction": "east",
+         "abbreviation": "Lon"
+        }
+       ],
+       "subtype": "ellipsoidal"
+      }
+     },
+     "conversion": {
+      "name": "UTM zone 17N",
+      "method": {
+       "id": {
+        "code": 9807,
+        "authority": "EPSG"
+       },
+       "name": "Transverse Mercator"
+      },
+      "parameters": [
+       {
+        "id": {
+         "code": 8801,
+         "authority": "EPSG"
+        },
+        "name": "Latitude of natural origin",
+        "unit": "degree",
+        "value": 0
+       },
+       {
+        "id": {
+         "code": 8802,
+         "authority": "EPSG"
+        },
+        "name": "Longitude of natural origin",
+        "unit": "degree",
+        "value": -81
+       },
+       {
+        "id": {
+         "code": 8805,
+         "authority": "EPSG"
+        },
+        "name": "Scale factor at natural origin",
+        "unit": "unity",
+        "value": 0.9996
+       },
+       {
+        "id": {
+         "code": 8806,
+         "authority": "EPSG"
+        },
+        "name": "False easting",
+        "unit": "metre",
+        "value": 500000
+       },
+       {
+        "id": {
+         "code": 8807,
+         "authority": "EPSG"
+        },
+        "name": "False northing",
+        "unit": "metre",
+        "value": 0
+       }
+      ]
+     },
+     "coordinate_system": {
+      "axis": [
+       {
+        "name": "Easting",
+        "unit": "metre",
+        "direction": "east",
+        "abbreviation": ""
+       },
+       {
+        "name": "Northing",
+        "unit": "metre",
+        "direction": "north",
+        "abbreviation": ""
+       }
+      ],
+      "subtype": "Cartesian"
+     }
+    },
+    {
+     "id": {
+      "code": 5703,
+      "authority": "EPSG"
+     },
+     "name": "NAVD88 height",
+     "type": "VerticalCRS",
+     "datum": {
+      "name": "North American Vertical Datum 1988",
+      "type": "VerticalReferenceFrame"
+     },
+     "coordinate_system": {
+      "axis": [
+       {
+        "name": "Gravity-related height",
+        "unit": "metre",
+        "direction": "up",
+        "abbreviation": ""
+       }
+      ],
+      "subtype": "vertical"
+     }
+    }
+   ]
+  },
+  "start_datetime": "2018-01-01T00:00:00Z"
+ },
+ "stac_extensions": [
+  "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/pointcloud/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/file/v2.1.0/schema.json"
+ ],
+ "stac_version": "1.0.0"
+}

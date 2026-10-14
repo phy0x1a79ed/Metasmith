@@ -1,0 +1,119 @@
+{
+ "id": "ia_m_4209360_sw_15_030_20230902_20240104",
+ "bbox": [
+  -93.62926,
+  41.996952,
+  -93.558301,
+  42.065543
+ ],
+ "type": "Feature",
+ "links": [
+  {
+   "rel": "collection",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip"
+  },
+  {
+   "rel": "parent",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip"
+  },
+  {
+   "rel": "root",
+   "type": "application/json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/"
+  },
+  {
+   "rel": "self",
+   "type": "application/geo+json",
+   "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items/ia_m_4209360_sw_15_030_20230902_20240104"
+  },
+  {
+   "rel": "preview",
+   "href": "https://planetarycomputer.microsoft.com/api/data/v1/item/map?collection=naip&item=ia_m_4209360_sw_15_030_20230902_20240104",
+   "title": "Map of item",
+   "type": "text/html"
+  }
+ ],
+ "assets": [
+  "image",
+  "thumbnail",
+  "tilejson",
+  "rendered_preview"
+ ],
+ "geometry": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     -93.558301,
+     41.997315
+    ],
+    [
+     -93.558899,
+     42.065543
+    ],
+    [
+     -93.62926,
+     42.065179
+    ],
+    [
+     -93.628587,
+     41.996952
+    ],
+    [
+     -93.558301,
+     41.997315
+    ]
+   ]
+  ]
+ },
+ "collection": "naip",
+ "properties": {
+  "gsd": 0.3,
+  "datetime": "2023-09-02T16:00:00Z",
+  "naip:year": "2023",
+  "proj:bbox": [
+   447939.3,
+   4649628.9,
+   453760.8,
+   4657204.5
+  ],
+  "proj:epsg": 26915,
+  "providers": [
+   {
+    "url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/",
+    "name": "USDA Farm Service Agency",
+    "roles": [
+     "producer",
+     "licensor"
+    ]
+   }
+  ],
+  "naip:state": "ia",
+  "proj:shape": [
+   25252,
+   19405
+  ],
+  "proj:centroid": {
+   "lat": 42.03125,
+   "lon": -93.59376
+  },
+  "proj:transform": [
+   0.3,
+   0.0,
+   447939.3,
+   0.0,
+   -0.3,
+   4657204.5,
+   0.0,
+   0.0,
+   1.0
+  ]
+ },
+ "stac_extensions": [
+  "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+  "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+ ],
+ "stac_version": "1.0.0"
+}

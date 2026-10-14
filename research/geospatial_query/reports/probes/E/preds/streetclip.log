@@ -1,0 +1,54 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/590 [00:00<?, ?it/s]Loading weights: 100%|██████████| 590/590 [00:00<00:00, 14002.45it/s]
+text emb done 188.47408485412598
+p01 Marshall Is. | Dalap-Uliga-Dorrit, Marshall Is. | Omaha, United States of America
+p02 Taiwan | Taoyuan, Taiwan | Tasikmalaya, Indonesia
+p03 United States of America | San Francisco, United States of America | Paris 11e Arrondissement, France
+p04 Japan | Osaka, Japan | Osaka, Japan
+p05 United States of America | New York City, United States of America | New York City, United States of America
+p06 Australia | Ballarat, Australia | Ballarat, Australia
+p07 Canada | Mississauga, Canada | Mississauga, Canada
+p08 Canada | Montreal, Canada | Montreal, Canada
+p09 Egypt | Esna, Egypt | Esna, Egypt
+p10 Mexico | Morelia, Mexico | Morelia, Mexico
+p11 Canada | Windsor, Canada | Windsor, Canada
+p12 Canada | Montreal, Canada | Montreal, Canada
+p13 Canada | Saint-Louis-de-Terrebonne, Canada | Saint-Louis-de-Terrebonne, Canada
+p14 Isle of Man | Douglas, Isle of Man | Halifax, Canada
+p15 Canada | Windsor, Canada | Windsor, Canada
+p16 Canada | Levis, Canada | Levis, Canada
+p17 South Africa | Somerset West, South Africa | Somerset West, South Africa
+p18 Canada | Toronto, Canada | Toronto, Canada
+p19 Myanmar | Yangon, Myanmar | Yangon, Myanmar
+p20 Egypt | Cairo, Egypt | Cairo, Egypt
+p21 Canada | Newton, Canada | Newton, Canada
+p22 Canada | Toronto, Canada | Toronto, Canada
+p23 Marshall Is. | Dalap-Uliga-Dorrit, Marshall Is. | Newton, Canada
+p24 St. Vin. and Gren. | Calliaqua, St. Vin. and Gren. | Lulea, Sweden
+p25 Canada | Edmonton, Canada | Edmonton, Canada
+p26 Canada | Winnipeg, Canada | Winnipeg, Canada
+p27 United Kingdom | City of Westminster, United Kingdom | City of Westminster, United Kingdom
+p28 Armenia | Yerevan, Armenia | Tbilisi, Georgia
+p29 S. Geo. and the Is. | Grytviken, S. Geo. and the Is. | Saguenay, Canada
+p30 Germany | Karlsruhe, Germany | Karlsruhe, Germany
+p31 Laos | Ban Xeno, Laos | Pokhara, Nepal
+p32 Germany | Neukoelln, Germany | Neukoelln, Germany
+p33 Canada | Levis, Canada | Levis, Canada
+p34 Canada | Mississauga, Canada | Mississauga, Canada
+p35 Sweden | Haninge, Sweden | Kopavogur, Iceland
+p36 Bahamas | Freeport, Bahamas | New Orleans, United States of America
+p37 Canada | Kingston, Canada | Kingston, Canada
+p38 Canada | Saanich, Canada | Saanich, Canada
+p39 Canada | Calgary, Canada | Calgary, Canada
+p40 Canada | Langley, Canada | Omsk, Russia
+p41 Heard I. and McDonald Is. | Heard I. and McDonald Is. | Levis, Canada
+p42 Cook Is. | Avarua, Cook Is. | Pestlorinc, Hungary
+p43 India | Mumbai, India | Mumbai, India
+p44 Canada | Vancouver, Canada | Vancouver, Canada
+p45 Montserrat | Plymouth, Montserrat | Lai, Chad
+p46 Marshall Is. | Dalap-Uliga-Dorrit, Marshall Is. | Ahuntsic-Cartierville, Canada
+p47 Canada | Laval, Canada | Laval, Canada
+p48 Mexico | Ciudad Nezahualcoyotl, Mexico | Lima, Peru
+p49 Canada | Rosemont-La Petite-Patrie, Canada | Rosemont-La Petite-Patrie, Canada
+p50 Canada | Ottawa, Canada | Ottawa, Canada
+total sec 368.21180057525635

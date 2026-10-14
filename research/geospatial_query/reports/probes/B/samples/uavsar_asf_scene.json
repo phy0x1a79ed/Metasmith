@@ -1,0 +1,144 @@
+{
+ "centerLat": 8.25402794523353,
+ "centerLon": -80.51960967833962,
+ "stopTime": "2026-05-06T16:39:10Z",
+ "fileID": "pchame_06021_26008_022_260506_L090_CX_01",
+ "flightDirection": null,
+ "pathNumber": null,
+ "processingLevel": "POLSAR",
+ "url": "https://cumulus.asf.earthdatacloud.nasa.gov/PRODUCTS/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHHH_CX_01.grd",
+ "startTime": "2026-05-06T16:36:48Z",
+ "sceneName": "pchame_06021_26008_022_260506_L090_CX_01",
+ "browse": [
+  "https://cumulus.asf.earthdatacloud.nasa.gov/BROWSE/UAVSAR/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.gif"
+ ],
+ "platform": "UAVSAR",
+ "bytes": {
+  "pchame_06021_26008_022_260506_L090HHHH_CX_01.mlc": {
+   "bytes": 51110400,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HHHV_CX_01.mlc": {
+   "bytes": 102220800,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HHVV_CX_01.mlc": {
+   "bytes": 102220800,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HVHV_CX_01.mlc": {
+   "bytes": 51110400,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HVVV_CX_01.mlc": {
+   "bytes": 102220800,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090VVVV_CX_01.mlc": {
+   "bytes": 51110400,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HHHH_CX_01.grd": {
+   "bytes": 130875264,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HHHV_CX_01.grd": {
+   "bytes": 261750528,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HHVV_CX_01.grd": {
+   "bytes": 261750528,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HVHV_CX_01.grd": {
+   "bytes": 130875264,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090HVVV_CX_01.grd": {
+   "bytes": 261750528,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090VVVV_CX_01.grd": {
+   "bytes": 130875264,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.dat": {
+   "bytes": 127875000,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.hgt": {
+   "bytes": 130875264,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.inc": {
+   "bytes": 130875264,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.slope": {
+   "bytes": 261750528,
+   "format": "Binary"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.kmz": {
+   "bytes": 48290284,
+   "format": "KMZ"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.ann": {
+   "bytes": 30180,
+   "format": "ASCII"
+  },
+  "pchame_06021_26008_022_260506_L090_CX_01.gif": {
+   "bytes": 489138,
+   "format": "GIF"
+  }
+ },
+ "frameNumber": null,
+ "granuleType": null,
+ "orbit": null,
+ "polarization": [
+  "HH",
+  "HV",
+  "VH",
+  "VV"
+ ],
+ "processingDate": "2026-05-12T00:00:00Z",
+ "sensor": "UAVSAR",
+ "groupID": null,
+ "insarStackId": null,
+ "fileName": "pchame_06021_26008_022_260506_L090HHHH_CX_01.grd",
+ "beamModeType": null,
+ "s3Urls": [
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHHH_CX_01.grd",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHHH_CX_01.mlc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHHV_CX_01.grd",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHHV_CX_01.mlc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHVV_CX_01.grd",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HHVV_CX_01.mlc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HVHV_CX_01.grd",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HVHV_CX_01.mlc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HVVV_CX_01.grd",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090HVVV_CX_01.mlc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090VVVV_CX_01.grd",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090VVVV_CX_01.mlc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01-END",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.ann",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.dat",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.hgt",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.inc",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.kmz",
+  "s3://asf-cumulus-prod-products/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.slope",
+  "s3://asf-cumulus-prod-public-browse/UAVSAR/UAVSAR_POLSAR/pchame_06021_26008_022_260506_L090_CX_01/pchame_06021_26008_022_260506_L090_CX_01.gif"
+ ],
+ "conceptID": "C4261555796-ASF",
+ "collectionName": "UAVSAR_POLSAR",
+ "file_suffixes": [
+  "ann",
+  "dat",
+  "gif",
+  "grd",
+  "hgt",
+  "inc",
+  "kmz",
+  "mlc",
+  "slope"
+ ]
+}
