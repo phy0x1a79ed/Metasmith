@@ -180,15 +180,49 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
     return out
 
 
-def failed_sources(registry_csv: Path) -> list[dict]:
-    with registry_csv.open() as fh:
-        return [
-            {"family": FAMILIES[SLOT_FAMILY[r["slot"]]], "layer": r["slot"], "source": r["source"],
-             "licence": licence_tier(r["licence"]), "aois_found": int(r["found"]),
-             "aois_unavailable": int(r["unavailable"]), "aois_not_attempted": int(r["not_attempted"]),
-             "reason": r["reason"]}
-            for r in csv.DictReader(fh) if r["status"] == "failing"
-        ]
+FAMILY_NAMES = {
+    "socio-economic": "Socio-economic", "infrastructure": "Infrastructure & industry", "hazards": "Hazards",
+    "macrobiology": "Macrobiology", "geology": "Geology", "public health & microbiology": "Microbiology & health",
+    "climate": "Climate", "spectral": "Spectral", "water bodies": "Water bodies", "latent": "Latent",
+    "constructor": "Constructor",
+}
+
+
+def related(a: str, b: str) -> bool:
+    return a == b or a.startswith(b + "_") or b.startswith(a + "_")
+
+
+def failed_sources(reports: Path) -> list[dict]:
+    """Every catalogue or triage source that did not end up as a working POC adapter, with the stage it stopped at."""
+    rows = lambda name: list(csv.DictReader((reports / name).open()))
+    registry = rows("source_registry.csv")
+    working = [r for r in registry if r["status"] == "working"]
+    filled = defaultdict(list)
+    for r in working:
+        filled[r["slot"]].append(r["source"])
+    slot_family = {r["slot"]: FAMILY_NAMES.get(r["family"], r["family"]) for r in rows("layer_slots_triaged.csv")}
+    is_working = lambda name: any(related(name, w["source"]) for w in working)
+    out = []
+    for r in registry:
+        if r["status"] == "failing":
+            out.append({"stage": "poc-failed", "family": FAMILIES[SLOT_FAMILY[r["slot"]]], "layer": r["slot"],
+                        "source": r["source"], "reason": r["reason"], "slot_filled_by": " ".join(filled[r["slot"]])})
+    tested = {r["source"] for r in registry}
+    for r in rows("triage_results_merged.csv"):
+        name = r["candidate"].split(" (")[0]
+        tested.add(name)
+        if r["reachable"] == "yes" or is_working(name):
+            continue
+        out.append({"stage": "triage-unreachable" if r["reachable"] == "no" else "triage-unresolved",
+                    "family": slot_family.get(r["slot"], ""), "layer": r["slot"], "source": name,
+                    "reason": r["blocker"] or r["http_status"] or r["notes"],
+                    "slot_filled_by": " ".join(filled[r["slot"]])})
+    for r in rows("layer_inventory.csv"):
+        if r["family"] == "DROP" or any(related(r["module"], t) for t in tested):
+            continue
+        out.append({"stage": "not-probed", "family": FAMILY_NAMES.get(r["family"], r["family"]), "layer": "",
+                    "source": r["module"], "reason": "catalogued, never probed in the POC", "slot_filled_by": ""})
+    return out
 
 
 def dag_svg(theme) -> str:
@@ -223,13 +257,15 @@ def main() -> None:
     families = features_by_family(HERE.parents[1] / "reports" / "feature_values_long.csv")
     data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
-    failed = failed_sources(HERE.parents[1] / "reports" / "source_registry.csv")
+    failed = failed_sources(HERE.parents[1] / "reports")
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
     page = page.replace("/*FAILED*/[]", json.dumps(failed, ensure_ascii=False))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
         print(f"{len(feats):4d}  {len({x['source'] for x in feats}):3d}  {f}")
+    from collections import Counter
+    print(Counter(x["stage"] for x in failed))
 
 
 if __name__ == "__main__":
