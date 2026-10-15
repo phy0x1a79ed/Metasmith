@@ -50,19 +50,17 @@ The user considers the catalogue already worked through. Do not treat its leftov
 
 An observation is a group of features produced together. This matches OGC/ISO 19156 Observations & Measurements ([OGC](https://www.ogc.org/standard/om/)) and SOSA/SSN ([W3C](https://www.w3.org/TR/vocab-ssn/)): one act of sensing, by one procedure, of one place, at one time, with a result quality.
 
-The spec has one level, Observation, with three units:
+An observation only groups features. It carries its source, its source type and its time. Everything else is a feature.
 
-| Unit | Examples | Quality fields |
+Quality metrics are features in the `quality` family. A query filters them like any other feature. Only their reading differs. Which quality features an observation carries depends on how it was made:
+
+| Made by | Examples | Quality features |
 |---|---|---|
-| acquisition | one scene, granule, point cloud, photo | off-nadir or incidence, sun angles, cloud cover (tile and AOI), processing level, orbit, camera heading |
-| composite | modis_13q1 (16-day), s2_signature_v1, esa_worldcover, era5, Daymet | scene or reading count, clear-pixel share, period, input missions, distance to the station |
-| snapshot | overture_*, eccc_npri, zoning, statcan_* | snapshot date, join level (point, block, county, province), record count, search radius |
+| one acquisition | one scene, granule, point cloud, photo | off-nadir or incidence, sun angles, cloud cover (tile and AOI), camera heading and pitch |
+| a composite | modis_13q1 (16-day), s2_signature_v1, esa_worldcover, era5, Daymet | scene or reading count, clear-pixel share, distance to the station |
+| a registry snapshot | overture_*, eccc_npri, zoning, statcan_* | snapshot date, join level (point, block, county, province), record count |
 
-The spec panel in the design artifact is the source of truth for the fields. Three choices are not visible there:
-
-- `quality` is an open map. A field is absent when it does not apply. About 70 POC features (`*_n_px`, `*_src_km`, `*_year`, `s2sig_n_scenes`, `ovt_control_*` and others) are quality metadata and move into it.
-- `processing_level` uses the NASA levels: L1 calibrated, L2 geophysical per scene, L3 gridded composite, L4 model output. A snapshot takes none. A derived product (land cover, biomass) has source type satellite but is not a measurement. The level tells them apart.
-- `assets` holds the STAC item id, the collection and the unsigned asset hrefs (gap Q5).
+The spec panel in the design artifact is the source of truth for the fields. About 70 POC features (`*_n_px`, `*_src_km`, `*_year`, `s2sig_n_scenes`, `ovt_control_*` and others) move into the `quality` family.
 
 The POC keeps one record per AOI × adapter, with no angles. Only 45 records carry a real STAC scene id (15 AOIs × Sentinel-2, Landsat, Sentinel-1). `scene_qc_backfill.csv` holds their angles, sun position and AOI cloud.
 
@@ -121,29 +119,29 @@ Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q)
 
 - **Outcome:** all 45 POC scene records resolve. Each has its off-nadir or incidence, processing level, and (for optical) sun position, tile cloud and AOI cloud.
 - **AOI cloud:** derive it from `SCL` (Sentinel-2) or `qa_pixel` (Landsat). It often disagrees with tile cloud. Landsat at Bingham reads 0.48 % on the scene and 31 % over the AOI. A Sentinel-2 scene at farm_sk_quarter reads 8.99 % on the tile and 64.7 % over the AOI.
-- **Next:** refactor the POC adapters to return observations with `quality` filled.
+- **Next:** refactor the POC adapters to return these as `quality` features.
 
 ### Q2. Query cannot pick bands or indices
 
 - **Outcome:** one spec (bands red, nir, swir16; indices NDVI, NDWI, NBR) resolves on Sentinel-2 and Landsat, on Planetary Computer and Earth Search. NDVI at farm_sk_quarter in July 2023: 0.5458 on both S2 catalogues, 0.5419 on Landsat.
-- **Spec:** `bands`, `indices`, `index_params` (SAVI and EVI need constants).
+- **Spec:** none. Bands and indices apply only to imagery. An imagery adapter names each band or index as a feature.
 - **CAUTION** Landsat names NIR `nir08`. Fall back to wavelength (760–900 nm). `rededge` is ambiguous on Sentinel-2 (B05, B06, B07, B8A).
 
 ### Q3. Query cannot ask for periodic time
 
 - **Outcome:** one range search binned client-side picks the same best-cloud item as a per-period fan-out in 24/24 months. Planetary Computer needs 15 requests over 15 AOIs, against 360 for a monthly fan-out.
-- **Spec:** `period {start, end, every, months?}`. "Every July" is `{every: "year", months: [7]}`.
+- **Spec:** `time` is a list of intervals. Expand a periodic request into one interval per period before the query. "Every July" is one interval per year.
 
 ### Q4. Query cannot filter on QC
 
 - **Outcome:** filters change counts as expected on Planetary Computer. Sentinel-2 2023 at farm_sk_quarter: 129 items, 36 under 10 % cloud.
-- **Spec:** `qc {max_cloud_tile_pct, max_cloud_aoi_pct, max_off_nadir_deg, min_sun_elevation_deg, processing_level}`. Send the tile fields to the server. Apply AOI cloud after the read.
+- **Spec:** a filter on a `quality` feature, such as `off_nadir_deg <= 15`. Send a filter the catalogue knows to the server. Apply the rest, AOI cloud among them, after the read.
 - **CAUTION** the sun property differs per catalogue: `s2:mean_solar_zenith` on Planetary Computer, `view:sun_elevation` on Earth Search. Keep a property map per collection.
 
 ### Q5. Result holds no pointer to the data itself
 
 - **Outcome:** a range GET returns 206 on Planetary Computer for S2 and Landsat at 15/15 AOIs. Earth Search Landsat assets are requester-pays `s3://`.
-- **Spec:** `assets {href, type, requester_pays, signed_until?}`, plus `item_id` and `collection`. Store the unsigned href. The SAS token lasts about 44 min.
+- **Spec:** none. Most sources have no file to point at. An imagery adapter that needs one stores the unsigned href. The SAS token lasts about 44 min.
 
 ### S1, S2. No airborne lidar, aerial or drone imagery
 
@@ -237,7 +235,7 @@ The pipeline to build:
 1. Get the user's decision on S4: a commercial tier and quote-only adapters.
 2. Ask the National Zoning Atlas for permission, or drop it for US zoning.
 3. Get a free Mapillary token and fix the POC adapter.
-4. Refactor the POC adapters to return observations with `quality` and `assets`.
+4. Refactor the POC adapters to return observations, with quality metrics as `quality` features.
 5. Build adapters for the best candidates in the gap table, starting with S7, S8, S5 and S3.
-6. Add the Q2, Q3 and Q4 query fields to the POC query.
+6. Change the POC query to an AOI, a list of intervals and a list of filters.
 7. Build the picture-to-location pipeline as an adapter that returns a place and a radius.
