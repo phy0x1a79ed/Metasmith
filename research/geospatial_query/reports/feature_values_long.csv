@@ -46,7 +46,7 @@ farm_sk_quarter,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,ag
 farm_sk_quarter,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_n_px,12,2010,300,CC-BY-4.0,observed,hgb
 farm_sk_quarter,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,0,all-time,point,CC-BY / CC0 mixed,observed,
 farm_sk_quarter,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,0,all-time,point,CC-BY / CC0 mixed,observed,
-farm_sk_quarter,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+farm_sk_quarter,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 farm_sk_quarter,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,1,1980-present,point,public-domain (USGS),observed,
 farm_sk_quarter,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,3.1,1980-present,point,public-domain (USGS),observed,
 farm_sk_quarter,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_km,29.06,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
@@ -142,8 +142,8 @@ farm_sk_quarter,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health
 farm_sk_quarter,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_n_hours,720,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 farm_sk_quarter,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lat,52.0,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 farm_sk_quarter,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-106.3,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
-farm_sk_quarter,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,389,all-time,point,EBI terms / open,observed,
-farm_sk_quarter,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+farm_sk_quarter,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,389,all-time,point,EBI terms / open,observed,
+farm_sk_quarter,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 farm_sk_quarter,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_jurisdiction,Saskatchewan,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 farm_sk_quarter,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_week,2026-W39,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 farm_sk_quarter,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_viruses_reported,1,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
@@ -176,16 +176,16 @@ farm_sk_quarter,property_assessment,census_micro,socio-economic,statcan_dwelling
 farm_sk_quarter,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_owner_occupied_dwellings,690,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4711069
 farm_sk_quarter,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_dwelling_value_csd_uid,4711069,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4711069
 farm_sk_quarter,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_dwelling_value_n_csd,1,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4711069
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Saskatchewan,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,47,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,23,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,1,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-28,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,30.9,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,30.9,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,2724,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,47.7,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.648,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Saskatchewan,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,47,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,23,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,1,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-28,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,30.9,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,30.9,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,2724,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,47.7,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_sk_quarter,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.648,2024-06-28,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 farm_sk_quarter,healthcare_accessibility,health_facilities,public health & microbiology,statcan_odhf,survey,census,odhf_nearest_facility_km,23.857,2020,point,OGL-Canada-2.0,observed,StatCan 13-26-0001 ODHF v1.1
 farm_sk_quarter,healthcare_accessibility,health_facilities,public health & microbiology,statcan_odhf,survey,census,odhf_nearest_facility_type,nursing and residential care facilities,2020,point,OGL-Canada-2.0,observed,StatCan 13-26-0001 ODHF v1.1
 farm_sk_quarter,healthcare_accessibility,health_facilities,public health & microbiology,statcan_odhf,survey,census,odhf_nearest_facility_name,st. ann's senior citizen's village corporation,2020,point,OGL-Canada-2.0,observed,StatCan 13-26-0001 ODHF v1.1
@@ -358,7 +358,7 @@ farm_sk_quarter,cell_towers,overture,infrastructure,overture_communication,crowd
 farm_sk_quarter,cell_towers,overture,infrastructure,overture_communication,crowdsourced,infrastructure,ovt_control_infra_rows,0,2026-09-23,point,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.infrastructure[communication]
 farm_sk_quarter,cell_towers,overture,infrastructure,overture_communication,crowdsourced,infrastructure,ovt_opencellid_status,auth-blocked-401,2026-09-23,point,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.infrastructure[communication]
 farm_sk_quarter,cell_towers,overture,infrastructure,overture_communication,crowdsourced,infrastructure,ovt_comm_n_within_10km,1,2026-09-23,point,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.infrastructure[communication]
-farm_sk_quarter,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,9199,all-time,point,INSDC open,observed,
+farm_sk_quarter,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,9199,all-time,point,INSDC open,observed,
 farm_sk_quarter,addresses,overture,infrastructure,overture_buildings,blended,infrastructure,ovt_building_n,2,2026-09-23,vector,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/buildings.building
 farm_sk_quarter,addresses,overture,infrastructure,overture_buildings,blended,infrastructure,ovt_building_per_km2,3.09,2026-09-23,vector,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/buildings.building
 farm_sk_quarter,addresses,overture,infrastructure,overture_buildings,blended,infrastructure,ovt_building_n_bbox,2,2026-09-23,vector,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/buildings.building
@@ -445,7 +445,7 @@ farm_on_essex,sar_backscatter_l,palsar_mosaic,spectral,alos_palsar_mosaic,satell
 farm_on_essex,sar_backscatter_l,palsar_mosaic,spectral,alos_palsar_mosaic,satellite,spectral,palsar_hh_db_std,4.39,2021-01-01,25,JAXA open,observed,N43W083_21_F02DAR_MOS
 farm_on_essex,sar_backscatter_l,palsar_mosaic,spectral,alos_palsar_mosaic,satellite,spectral,palsar_hv_db_mean,-22.34,2021-01-01,25,JAXA open,observed,N43W083_21_F02DAR_MOS
 farm_on_essex,sar_backscatter_l,palsar_mosaic,spectral,alos_palsar_mosaic,satellite,spectral,palsar_hv_db_std,5.16,2021-01-01,25,JAXA open,observed,N43W083_21_F02DAR_MOS
-farm_on_essex,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,3,all-time,point,public-domain (US),observed,
+farm_on_essex,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,3,all-time,point,public-domain (US),observed,
 farm_on_essex,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,5,all-time,point,CC-BY / CC0 mixed,observed,
 farm_on_essex,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,4,all-time,point,CC-BY / CC0 mixed,observed,
 farm_on_essex,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_mean,35.7,2010,300,CC-BY-4.0,observed,hgb
@@ -586,18 +586,18 @@ farm_on_essex,disease_surveillance,phac_rvdss,public health & microbiology,phac_
 farm_on_essex,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,3.4,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 farm_on_essex,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,2.23,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 farm_on_essex,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.2,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-farm_on_essex,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,3,all-time,point,EBI terms / open,observed,
-farm_on_essex,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,3,all-time,point,EBI terms / open,observed,
+farm_on_essex,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_on_essex,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 farm_on_essex,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_csd_uid,3537013,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3537013
 farm_on_essex,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_csd_name,Kingsville,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3537013
 farm_on_essex,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_csd_type,Town,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3537013
@@ -643,7 +643,7 @@ farm_on_essex,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_e
 farm_on_essex,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-82.7,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 farm_on_essex,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,17,1980-present,point,public-domain (USGS),observed,
 farm_on_essex,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,3.4,1980-present,point,public-domain (USGS),observed,
-farm_on_essex,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,2022,all-time,point,INSDC open,observed,
+farm_on_essex,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,2022,all-time,point,INSDC open,observed,
 farm_on_essex,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_avg_dwelling_value_cad,279135,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3537013
 farm_on_essex,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_owner_occupied_dwellings,6545,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3537013
 farm_on_essex,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_dwelling_value_csd_uid,3537013,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3537013
@@ -1071,7 +1071,7 @@ farm_on_essex,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,blended,
 farm_on_essex,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,blended,census,ghspop_populated_cell_frac,0.4,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
 farm_on_essex,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,blended,census,ghspop_n_cells,80,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
 farm_on_essex,population_gridded,ghsl_pop,socio-economic,ghs_pop_r2023a,blended,census,ghspop_tiles,R5_C10,2020,100,CC-BY-4.0 (JRC GHSL),observed,GHS_POP_E2020_GLOBE_R2023A_4326_3ss_V1_0
-farm_ab_taber,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+farm_ab_taber,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 farm_ab_taber,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,13,1980-present,point,public-domain (USGS),observed,
 farm_ab_taber,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,3.8,1980-present,point,public-domain (USGS),observed,
 farm_ab_taber,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_mean,0.0,1984-2021,30,CC-BY-4.0,observed,120W_50Nv1_3_2020
@@ -1136,16 +1136,16 @@ farm_ab_taber,disease_surveillance,phac_rvdss,public health & microbiology,phac_
 farm_ab_taber,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_tests_latest_week,3422.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 farm_ab_taber,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_detections_latest_week,85.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 farm_ab_taber,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,2.5,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Alberta,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,48,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,38.7759,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,43.339,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,349,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,99.0393,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Alberta,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,48,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,38.7759,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,43.339,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,349,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,99.0393,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+farm_ab_taber,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 farm_ab_taber,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,2.49,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 farm_ab_taber,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,Taber RCMP Detachment Site,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 farm_ab_taber,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Closed,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -1195,8 +1195,8 @@ farm_ab_taber,census_demography,census_micro,socio-economic,statcan_wds_popest,s
 farm_ab_taber,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_geo_code,4802022,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=3958"
 farm_ab_taber,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_vector_id,1592184461,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=3958"
 farm_ab_taber,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_yoy_pct,2.861,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=3958"
-farm_ab_taber,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,0,all-time,point,EBI terms / open,observed,
-farm_ab_taber,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+farm_ab_taber,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,0,all-time,point,EBI terms / open,observed,
+farm_ab_taber,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 farm_on_essex,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_dim,64,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xegut5h9lqo3093nm-0000000000-0000000000.tiff
 farm_on_essex,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_year,2024,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xegut5h9lqo3093nm-0000000000-0000000000.tiff
 farm_on_essex,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_n_tiles,1,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xegut5h9lqo3093nm-0000000000-0000000000.tiff
@@ -1470,7 +1470,7 @@ farm_ab_taber,gazetteer,overture,infrastructure,overture_divisions,crowdsourced,
 farm_ab_taber,gazetteer,overture,infrastructure,overture_divisions,crowdsourced,infrastructure,ovt_nearest_place_km,0.498,2026-09-23,admin,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/divisions.division
 farm_ab_taber,gazetteer,overture,infrastructure,overture_divisions,crowdsourced,infrastructure,ovt_region_code,CA-AB,2026-09-23,admin,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/divisions.division
 farm_ab_taber,gazetteer,overture,infrastructure,overture_divisions,crowdsourced,infrastructure,ovt_country_code,CA,2026-09-23,admin,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/divisions.division
-farm_ab_taber,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,93,all-time,point,INSDC open,observed,
+farm_ab_taber,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,93,all-time,point,INSDC open,observed,
 farm_ab_taber,industrial_facilities,overture,infrastructure,overture_land_use,crowdsourced,infrastructure,ovt_landuse_n_bbox,3,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.land_use
 farm_ab_taber,industrial_facilities,overture,infrastructure,overture_land_use,crowdsourced,infrastructure,ovt_industrial_area_km2,0.1368,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.land_use
 farm_ab_taber,industrial_facilities,overture,infrastructure,overture_land_use,crowdsourced,infrastructure,ovt_industrial_frac,0.2138,2026-09-23,vector,ODbL-1.0 (share-alike; OSM via Overture),observed,overture/2026-09-23.1/base.land_use
@@ -1603,7 +1603,7 @@ farm_us_ia_story,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,a
 farm_us_ia_story,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_n_px,12,2010,300,CC-BY-4.0,observed,hgb
 farm_us_ia_story,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,94,all-time,point,CC-BY / CC0 mixed,observed,
 farm_us_ia_story,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,60,all-time,point,CC-BY / CC0 mixed,observed,
-farm_us_ia_story,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,333,all-time,point,public-domain (US),observed,
+farm_us_ia_story,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,333,all-time,point,public-domain (US),observed,
 farm_us_ia_story,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_mean,0.0,1984-2021,30,CC-BY-4.0,observed,100W_50Nv1_3_2020
 farm_us_ia_story,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_std,0.0,1984-2021,30,CC-BY-4.0,observed,100W_50Nv1_3_2020
 farm_us_ia_story,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p10,0.0,1984-2021,30,CC-BY-4.0,observed,100W_50Nv1_3_2020
@@ -1646,8 +1646,8 @@ farm_us_ia_story,air_quality_modelled,cams,hazards,cams_open_meteo,blended,healt
 farm_us_ia_story,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_n_hours,720,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 farm_us_ia_story,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lat,42.1,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 farm_us_ia_story,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-93.6,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
-farm_us_ia_story,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,805,all-time,point,EBI terms / open,observed,
-farm_us_ia_story,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+farm_us_ia_story,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,805,all-time,point,EBI terms / open,observed,
+farm_us_ia_story,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 farm_us_ia_story,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_tri_reporters_25km,14,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
 farm_us_ia_story,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_caa_air_sources_25km,132,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
 farm_us_ia_story,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_rcra_handlers_25km,361,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
@@ -1674,7 +1674,7 @@ farm_us_ia_story,facility_compliance,epa_frs,infrastructure,epa_echo,survey,heal
 farm_us_ia_story,facility_compliance,epa_frs,infrastructure,epa_echo,survey,health_env,echo_insp_per_facility,0.0909,"5-year compliance window, current snapshot",vector,public-domain (US EPA),observed,ECHO ALL DATA v2017-06-16 0923
 farm_us_ia_story,facility_compliance,epa_frs,infrastructure,epa_echo,survey,health_env,echo_sig_violation_rate,0.0,"5-year compliance window, current snapshot",vector,public-domain (US EPA),observed,ECHO ALL DATA v2017-06-16 0923
 farm_us_ia_story,facility_compliance,epa_frs,infrastructure,epa_echo,survey,health_env,echo_bbox_pad_km,2.0,"5-year compliance window, current snapshot",vector,public-domain (US EPA),observed,ECHO ALL DATA v2017-06-16 0923
-farm_us_ia_story,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,16913,all-time,point,INSDC open,observed,
+farm_us_ia_story,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,16913,all-time,point,INSDC open,observed,
 farm_us_ia_story,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_state,Iowa,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Iowa
 farm_us_ia_story,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_year,2026,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Iowa
 farm_us_ia_story,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_week,39,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Iowa
@@ -1700,10 +1700,10 @@ farm_us_ia_story,census_demography,census_grids,socio-economic,tigerweb_blocks20
 farm_us_ia_story,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_state_fips,19,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=5
 farm_us_ia_story,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_county_fips,19169,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=5
 farm_us_ia_story,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_transfer_limit_hit,False,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=5
-farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_county,Story County,current,admin:county,public-domain (US CDC),observed,
-farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_county_fips,19169,current,admin:county,public-domain (US CDC),observed,
-farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_sites_county,0,current,admin:county,public-domain (US CDC),observed,
-farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_records_county,0,current,admin:county,public-domain (US CDC),observed,
+farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_county,Story County,current,admin:county,public-domain (US CDC),observed,
+farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_county_fips,19169,current,admin:county,public-domain (US CDC),observed,
+farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_sites_county,0,current,admin:county,public-domain (US CDC),observed,
+farm_us_ia_story,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_records_county,0,current,admin:county,public-domain (US CDC),observed,
 farm_ab_taber,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_dim,64,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xglmzzfe86tci6cx6-0000008192-0000000000.tiff
 farm_ab_taber,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_year,2024,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xglmzzfe86tci6cx6-0000008192-0000000000.tiff
 farm_ab_taber,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_n_tiles,1,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xglmzzfe86tci6cx6-0000008192-0000000000.tiff
@@ -2089,7 +2089,7 @@ mine_hvc_bc,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,wa
 mine_hvc_bc,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p90,0.0,1984-2021,30,CC-BY-4.0,observed,130W_60Nv1_3_2020
 mine_hvc_bc,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_n_px,10080,1984-2021,30,CC-BY-4.0,observed,130W_60Nv1_3_2020
 mine_hvc_bc,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_frac_ge50pct,0.0227,1984-2021,30,CC-BY-4.0,observed,130W_60Nv1_3_2020
-mine_hvc_bc,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+mine_hvc_bc,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 mine_hvc_bc,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,10,1980-present,point,public-domain (USGS),observed,
 mine_hvc_bc,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,4.5,1980-present,point,public-domain (USGS),observed,
 mine_hvc_bc,optical_multispectral,sentinel2_l2a,spectral,sentinel2_l2a,satellite,spectral,s2_ndvi_mean,0.117,2024-08-29,10,CC-BY-4.0 (Copernicus),observed,S2B_MSIL2A_20240829T185919_R013_T10UFB_20240829T230848
@@ -2147,16 +2147,16 @@ mine_hvc_bc,disease_surveillance,phac_rvdss,public health & microbiology,phac_rv
 mine_hvc_bc,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,7.8,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 mine_hvc_bc,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,8.13,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 mine_hvc_bc,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.1,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,British Columbia,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,59,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,99.1159,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,92.7438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1853,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,103.7097,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.894,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,British Columbia,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,59,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,99.1159,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,92.7438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1853,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,103.7097,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_hvc_bc,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.894,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 mine_hvc_bc,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,14.03,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 mine_hvc_bc,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,695 - Lower Nicola - 07225 - PIPSEUL 3 - BC04826811,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 mine_hvc_bc,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Active,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -2186,7 +2186,7 @@ mine_hvc_bc,census_demography,census_micro,socio-economic,statcan_csd_2016,surve
 mine_hvc_bc,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_name,Kamloops,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=5933035
 mine_hvc_bc,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_uid,925,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=5933035
 mine_hvc_bc,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_ct_n_overlapping,1,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=5933035
-mine_hvc_bc,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,294,all-time,point,INSDC open,observed,
+mine_hvc_bc,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,294,all-time,point,INSDC open,observed,
 mine_hvc_bc,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm25_ugm3_mean,4.026,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_hvc_bc,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm25_ugm3_p95,10.305,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_hvc_bc,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm10_ugm3_mean,4.584,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
@@ -2294,8 +2294,8 @@ mine_hvc_bc,healthcare_accessibility,health_facilities,public health & microbiol
 mine_hvc_bc,healthcare_accessibility,health_facilities,public health & microbiology,statcan_odhf,survey,census,odhf_n_ambulatory_within_25km,0,2020,point,OGL-Canada-2.0,observed,StatCan 13-26-0001 ODHF v1.1
 mine_hvc_bc,healthcare_accessibility,health_facilities,public health & microbiology,statcan_odhf,survey,census,odhf_nearest_nursing_km,43.752,2020,point,OGL-Canada-2.0,observed,StatCan 13-26-0001 ODHF v1.1
 mine_hvc_bc,healthcare_accessibility,health_facilities,public health & microbiology,statcan_odhf,survey,census,odhf_n_nursing_within_25km,0,2020,point,OGL-Canada-2.0,observed,StatCan 13-26-0001 ODHF v1.1
-mine_hvc_bc,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,1,all-time,point,EBI terms / open,observed,
-mine_hvc_bc,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+mine_hvc_bc,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,1,all-time,point,EBI terms / open,observed,
+mine_hvc_bc,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 mine_hvc_bc,indigenous_lands,native_land,socio-economic,nrcan_alta,survey,census,alta_overlap_frac,0.0,2026-10 (CLSS snapshot),vector,OGL-Canada-2.0,observed,AL_TA_BC_SHP_DCM_eng
 mine_hvc_bc,indigenous_lands,native_land,socio-economic,nrcan_alta,survey,census,alta_overlap_km2,0.0,2026-10 (CLSS snapshot),vector,OGL-Canada-2.0,observed,AL_TA_BC_SHP_DCM_eng
 mine_hvc_bc,indigenous_lands,native_land,socio-economic,nrcan_alta,survey,census,alta_n_parcels_intersecting,0,2026-10 (CLSS snapshot),vector,OGL-Canada-2.0,observed,AL_TA_BC_SHP_DCM_eng
@@ -2729,7 +2729,7 @@ mine_syncrude_ab,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,a
 mine_syncrude_ab,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_p10,0.0,2010,300,CC-BY-4.0,observed,hgb
 mine_syncrude_ab,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_p90,312.0,2010,300,CC-BY-4.0,observed,hgb
 mine_syncrude_ab,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_n_px,91,2010,300,CC-BY-4.0,observed,hgb
-mine_syncrude_ab,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+mine_syncrude_ab,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 mine_hvc_bc,gazetteer,wikidata_geo,socio-economic,wikidata_sparql,crowdsourced,infrastructure,wd_entities_bbox,2,live,point,CC0-1.0,observed,wikidata_query_service
 mine_hvc_bc,gazetteer,wikidata_geo,socio-economic,wikidata_sparql,crowdsourced,infrastructure,wd_distinct_classes,2,live,point,CC0-1.0,observed,wikidata_query_service
 mine_hvc_bc,gazetteer,wikidata_geo,socio-economic,wikidata_sparql,crowdsourced,infrastructure,wd_entities_per_km2,0.4,live,point,CC0-1.0,observed,wikidata_query_service
@@ -2797,16 +2797,16 @@ mine_syncrude_ab,disease_surveillance,phac_rvdss,public health & microbiology,ph
 mine_syncrude_ab,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_tests_latest_week,3422.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 mine_syncrude_ab,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_detections_latest_week,85.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 mine_syncrude_ab,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,2.5,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Alberta,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,48,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,38.7759,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,43.339,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,349,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,99.0393,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Alberta,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,48,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,38.7759,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,43.339,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,349,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,99.0393,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_syncrude_ab,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 mine_syncrude_ab,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_mean_annual_temp_c,1.83,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 mine_syncrude_ab,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_coldest_day_c,-43.9,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 mine_syncrude_ab,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_hottest_day_c,31.1,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
@@ -2841,7 +2841,7 @@ mine_syncrude_ab,census_demography,census_micro,socio-economic,statcan_csd_2016,
 mine_syncrude_ab,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_name,Wood Buffalo,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
 mine_syncrude_ab,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_uid,860,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
 mine_syncrude_ab,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_ct_n_overlapping,1,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
-mine_syncrude_ab,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,2358,all-time,point,INSDC open,observed,
+mine_syncrude_ab,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,2358,all-time,point,INSDC open,observed,
 mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm25_ugm3_mean,2.109,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm25_ugm3_p95,5.6,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm10_ugm3_mean,2.283,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
@@ -2859,8 +2859,8 @@ mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,healt
 mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_n_hours,720,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lat,57.0,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_syncrude_ab,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-111.6,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
-mine_syncrude_ab,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,21,all-time,point,EBI terms / open,observed,
-mine_syncrude_ab,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+mine_syncrude_ab,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,21,all-time,point,EBI terms / open,observed,
+mine_syncrude_ab,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 mine_syncrude_ab,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_avg_dwelling_value_cad,619344,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
 mine_syncrude_ab,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_owner_occupied_dwellings,17345,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
 mine_syncrude_ab,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_dwelling_value_csd_uid,4816037,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
@@ -3230,7 +3230,7 @@ mine_sudbury_on,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,satel
 mine_sudbury_on,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,satellite,macrobiology,nrcanlc_frac_water,0.2524,2015-01-01,30,OGL-Canada-2.0,observed,CAN_LC_2015_CAL_14_13
 mine_sudbury_on,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,satellite,macrobiology,nrcanlc_dominant,urban,2015-01-01,30,OGL-Canada-2.0,observed,CAN_LC_2015_CAL_14_13
 mine_sudbury_on,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,satellite,macrobiology,nrcanlc_n_classes,7,2015-01-01,30,OGL-Canada-2.0,observed,CAN_LC_2015_CAL_14_13
-mine_sudbury_on,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+mine_sudbury_on,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 mine_sudbury_on,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,18,1980-present,point,public-domain (USGS),observed,
 mine_sudbury_on,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,4.4,1980-present,point,public-domain (USGS),observed,
 mine_sudbury_on,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_mean,18.5,2010,300,CC-BY-4.0,observed,hgb
@@ -3313,16 +3313,16 @@ mine_sudbury_on,disease_surveillance,phac_rvdss,public health & microbiology,pha
 mine_sudbury_on,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,3.4,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 mine_sudbury_on,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,2.23,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 mine_sudbury_on,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.2,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+mine_sudbury_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 mine_sudbury_on,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,3.46,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 mine_sudbury_on,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,Sudbury Armoury,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 mine_sudbury_on,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Closed,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -3352,8 +3352,8 @@ mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_csd_2016,s
 mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_name,Greater Sudbury / Grand Sudbury,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3553005
 mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_uid,580,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3553005
 mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_ct_n_overlapping,4,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3553005
-mine_sudbury_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,122,all-time,point,EBI terms / open,observed,
-mine_sudbury_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+mine_sudbury_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,122,all-time,point,EBI terms / open,observed,
+mine_sudbury_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 mine_syncrude_ab,embeddings,sentinel2_l2a,spectral,s2_signature_v1,satellite,embeddings,s2sig_raw_b02_med,0.129725,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240218T185439_R113_T12VVJ_20240218T230715;S2A_MSIL2A_20240622T184921_R113_T12VVJ_20240623T022927;S2B_MSIL2A_20240902T183919_R070_T12VVJ_20240902T225006;S2B_MSIL2A_20241015T185249_R113_T12
 mine_syncrude_ab,embeddings,sentinel2_l2a,spectral,s2_signature_v1,satellite,embeddings,s2sig_raw_b02_p10,0.1139,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240218T185439_R113_T12VVJ_20240218T230715;S2A_MSIL2A_20240622T184921_R113_T12VVJ_20240623T022927;S2B_MSIL2A_20240902T183919_R070_T12VVJ_20240902T225006;S2B_MSIL2A_20241015T185249_R113_T12
 mine_syncrude_ab,embeddings,sentinel2_l2a,spectral,s2_signature_v1,satellite,embeddings,s2sig_raw_b02_p90,0.153075,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240218T185439_R113_T12VVJ_20240218T230715;S2A_MSIL2A_20240622T184921_R113_T12VVJ_20240623T022927;S2B_MSIL2A_20240902T183919_R070_T12VVJ_20240902T225006;S2B_MSIL2A_20241015T185249_R113_T12
@@ -3427,7 +3427,7 @@ mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_wds_popest
 mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_geo_code,3553005,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2146"
 mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_vector_id,1592183045,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2146"
 mine_sudbury_on,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_yoy_pct,0.726,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2146"
-mine_sudbury_on,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,1140,all-time,point,INSDC open,observed,
+mine_sudbury_on,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,1140,all-time,point,INSDC open,observed,
 mine_sudbury_on,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_avg_dwelling_value_cad,298842,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3553005
 mine_sudbury_on,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_owner_occupied_dwellings,45375,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3553005
 mine_sudbury_on,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_dwelling_value_csd_uid,3553005,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3553005
@@ -3907,7 +3907,7 @@ mine_us_bingham_ut,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,
 mine_us_bingham_ut,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,fixed sensor,health_env,aqs_co_src_km,23.25,2025,point,public-domain (US EPA),observed,EPA AirData annual_conc_by_monitor_2025
 mine_us_bingham_ut,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,fixed sensor,health_env,aqs_pm10_ugm3_mean,21.08151,2025,point,public-domain (US EPA),observed,EPA AirData annual_conc_by_monitor_2025
 mine_us_bingham_ut,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,fixed sensor,health_env,aqs_pm10_src_km,10.14,2025,point,public-domain (US EPA),observed,EPA AirData annual_conc_by_monitor_2025
-mine_us_bingham_ut,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,1163,all-time,point,public-domain (US),observed,
+mine_us_bingham_ut,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,1163,all-time,point,public-domain (US),observed,
 mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm25_ugm3_mean,14.148,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm25_ugm3_p95,30.025,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_pm10_ugm3_mean,54.695,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
@@ -3925,8 +3925,8 @@ mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,hea
 mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_n_hours,720,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lat,40.5,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 mine_us_bingham_ut,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-112.2,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
-mine_us_bingham_ut,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,20,all-time,point,EBI terms / open,observed,
-mine_us_bingham_ut,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+mine_us_bingham_ut,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,20,all-time,point,EBI terms / open,observed,
+mine_us_bingham_ut,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 mine_us_bingham_ut,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_tri_reporters_25km,59,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
 mine_us_bingham_ut,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_caa_air_sources_25km,87,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
 mine_us_bingham_ut,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_rcra_handlers_25km,1810,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
@@ -3967,7 +3967,7 @@ mine_us_bingham_ut,disease_surveillance,cdc_nndss,public health & microbiology,c
 mine_us_bingham_ut,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_campylobacteriosis_ytd,695.0,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Utah
 mine_us_bingham_ut,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_legionellosis_ytd,29.0,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Utah
 mine_us_bingham_ut,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_tuberculosis_ytd,23.0,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Utah
-mine_us_bingham_ut,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,14015,all-time,point,INSDC open,observed,
+mine_us_bingham_ut,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,14015,all-time,point,INSDC open,observed,
 mine_us_bingham_ut,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_block_pop_2020,0,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=1
 mine_us_bingham_ut,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_block_housing_units_2020,0,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=1
 mine_us_bingham_ut,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_pop_density_km2,0.0,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=1
@@ -4060,17 +4060,17 @@ mine_sudbury_on,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embe
 mine_sudbury_on,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_a61,-0.13317,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x8dndsyq1kce15m5u-0000000000-0000008192.tiff
 mine_sudbury_on,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_a62,-0.13986,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x8dndsyq1kce15m5u-0000000000-0000008192.tiff
 mine_sudbury_on,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_a63,0.084776,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x8dndsyq1kce15m5u-0000000000-0000008192.tiff
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_county,Salt Lake County,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_county_fips,49035,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_sites_county,5,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_population_served,1674594.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_latest_period_end,2025-09-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_records_county,2000,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_latest,91.33,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_detect_prop_15d_latest,100.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_last_reported,91.33,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_last_reported_end,2025-09-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
-mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_max_county,97.2,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_county,Salt Lake County,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_county_fips,49035,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_sites_county,5,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_population_served,1674594.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_latest_period_end,2025-09-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_records_county,2000,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_latest,91.33,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_detect_prop_15d_latest,100.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_last_reported,91.33,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_last_reported_end,2025-09-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
+mine_us_bingham_ut,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_max_county,97.2,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Salt Lake County County (49035)
 mine_us_bingham_ut,mobility_flows,lodes,socio-economic,lehd_lodes8,survey,census,lodes_jobs_in_aoi,0,2022,admin:block,public-domain (US Census),observed,LODES8/ut/od_main_JT00_2022
 mine_us_bingham_ut,mobility_flows,lodes,socio-economic,lehd_lodes8,survey,census,lodes_jobs_held_by_residents,0,2022,admin:block,public-domain (US Census),observed,LODES8/ut/od_main_JT00_2022
 mine_us_bingham_ut,mobility_flows,lodes,socio-economic,lehd_lodes8,survey,census,lodes_flow_records_matched,0,2022,admin:block,public-domain (US Census),observed,LODES8/ut/od_main_JT00_2022
@@ -4418,7 +4418,7 @@ mine_us_bingham_ut,embeddings,sentinel2_l2a,spectral,s2_signature_v1,satellite,e
 mine_us_bingham_ut,embeddings,sentinel2_l2a,spectral,s2_signature_v1,satellite,embeddings,s2sig_ref_n,28,2024,10,"CC-BY-4.0 (Copernicus, derived)",observed,S2B_MSIL2A_20240130T182609_R127_T12TVK_20240130T223454;S2A_MSIL2A_20240620T180921_R084_T12TUK_20240621T032331;S2B_MSIL2A_20240906T181919_R127_T12TVK_20240907T002550;S2B_MSIL2A_20241003T181119_R084_T12
 city_toronto_core,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,34926,all-time,point,CC-BY / CC0 mixed,observed,
 city_toronto_core,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,1200,all-time,point,CC-BY / CC0 mixed,observed,
-city_toronto_core,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+city_toronto_core,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 city_toronto_core,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_mean,44.7,2010,300,CC-BY-4.0,observed,hgb
 city_toronto_core,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_std,85.4,2010,300,CC-BY-4.0,observed,hgb
 city_toronto_core,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_p10,2.0,2010,300,CC-BY-4.0,observed,hgb
@@ -4509,16 +4509,16 @@ city_toronto_core,disease_surveillance,phac_rvdss,public health & microbiology,p
 city_toronto_core,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,3.4,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 city_toronto_core,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,2.23,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 city_toronto_core,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.2,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_toronto_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 city_toronto_core,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,0.89,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 city_toronto_core,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,CN Tower (301 Front Street),current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 city_toronto_core,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Closed,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -4548,15 +4548,15 @@ city_toronto_core,census_demography,census_micro,socio-economic,statcan_csd_2016
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_name,Toronto,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3520005
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_cma_uid,535,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3520005
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_csd_2016,survey,census,statcan_ct_n_overlapping,17,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=3520005
-city_toronto_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,442,all-time,point,EBI terms / open,observed,
-city_toronto_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+city_toronto_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,442,all-time,point,EBI terms / open,observed,
+city_toronto_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_latest,3271830,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_ref_period,2025-07-01,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_geo_level,csd,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_geo_code,3520005,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_vector_id,1592182773,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 city_toronto_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_yoy_pct,-0.262,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
-city_toronto_core,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,19627,all-time,point,INSDC open,observed,
+city_toronto_core,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,19627,all-time,point,INSDC open,observed,
 mine_us_bingham_ut,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_dim,64,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xs4vtljqxgmhr4fub-0000000000-0000000000.tiff
 mine_us_bingham_ut,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_year,2024,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xs4vtljqxgmhr4fub-0000000000-0000000000.tiff
 mine_us_bingham_ut,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_n_tiles,1,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,xs4vtljqxgmhr4fub-0000000000-0000000000.tiff
@@ -5002,7 +5002,7 @@ city_montreal_core,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology
 city_montreal_core,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_n_px,54,2010,300,CC-BY-4.0,observed,hgb
 city_montreal_core,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,18790,all-time,point,CC-BY / CC0 mixed,observed,
 city_montreal_core,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,1072,all-time,point,CC-BY / CC0 mixed,observed,
-city_montreal_core,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+city_montreal_core,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 city_montreal_core,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_mean,0.75,1984-2021,30,CC-BY-4.0,observed,80W_50Nv1_3_2020
 city_montreal_core,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_std,5.29,1984-2021,30,CC-BY-4.0,observed,80W_50Nv1_3_2020
 city_montreal_core,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p10,0.0,1984-2021,30,CC-BY-4.0,observed,80W_50Nv1_3_2020
@@ -5016,8 +5016,8 @@ city_montreal_core,reanalysis_climate,era5,climate,era5_open_meteo,blended,clima
 city_montreal_core,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_n_days,3653,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 city_montreal_core,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,83,1980-present,point,public-domain (USGS),observed,
 city_montreal_core,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,4.5,1980-present,point,public-domain (USGS),observed,
-city_montreal_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,315,all-time,point,EBI terms / open,observed,
-city_montreal_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+city_montreal_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,315,all-time,point,EBI terms / open,observed,
+city_montreal_core,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 city_montreal_core,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_km,1.13,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 city_montreal_core,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_id,050136,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 city_montreal_core,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_city,Montréal,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
@@ -5088,16 +5088,16 @@ city_montreal_core,disease_surveillance,phac_rvdss,public health & microbiology,
 city_montreal_core,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,5.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 city_montreal_core,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,1.67,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 city_montreal_core,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.1,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Québec,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,24,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,2,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,2,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-22,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,5.1827,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,5.2985,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,789,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,36.2274,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.146,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Québec,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,24,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,2,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,2,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-22,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,5.1827,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,5.2985,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,789,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,36.2274,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_montreal_core,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.146,2024-06-22,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 city_montreal_core,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,0.21,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 city_montreal_core,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,Cathcart Armoury,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 city_montreal_core,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Closed,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -5133,7 +5133,7 @@ city_montreal_core,census_demography,census_micro,socio-economic,statcan_wds_pop
 city_montreal_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_geo_code,2466023,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=847"
 city_montreal_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_vector_id,1592182168,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=847"
 city_montreal_core,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_yoy_pct,0.256,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=847"
-city_montreal_core,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,22965,all-time,point,INSDC open,observed,
+city_montreal_core,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,22965,all-time,point,INSDC open,observed,
 city_montreal_core,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,blended,census,ghssmod_frac_urban_centre,1.0,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
 city_montreal_core,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,blended,census,ghssmod_dominant_class,urban_centre,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
 city_montreal_core,urban_extent,ghsl_pop,socio-economic,ghs_smod_r2023a,blended,census,ghssmod_dominant_label,urban centre,2020,1000,CC-BY-4.0 (JRC GHSL),observed,GHS_SMOD_E2020_GLOBE_R2023A_4326_30ss_V2_0
@@ -5574,7 +5574,7 @@ city_windsor_on,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,wate
 city_windsor_on,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p90,0.0,1984-2021,30,CC-BY-4.0,observed,90W_50Nv1_3_2020
 city_windsor_on,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_n_px,6984,1984-2021,30,CC-BY-4.0,observed,90W_50Nv1_3_2020
 city_windsor_on,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_frac_ge50pct,0.0,1984-2021,30,CC-BY-4.0,observed,90W_50Nv1_3_2020
-city_windsor_on,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,114,all-time,point,public-domain (US),observed,
+city_windsor_on,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,114,all-time,point,public-domain (US),observed,
 city_windsor_on,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_mean_annual_temp_c,10.93,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 city_windsor_on,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_coldest_day_c,-22.1,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 city_windsor_on,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_hottest_day_c,29.1,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
@@ -5582,9 +5582,9 @@ city_windsor_on,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,
 city_windsor_on,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_n_days,3653,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 city_windsor_on,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,16,1980-present,point,public-domain (USGS),observed,
 city_windsor_on,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,3.4,1980-present,point,public-domain (USGS),observed,
-city_windsor_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,10,all-time,point,EBI terms / open,observed,
-city_windsor_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
-city_windsor_on,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,6446,all-time,point,INSDC open,observed,
+city_windsor_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,10,all-time,point,EBI terms / open,observed,
+city_windsor_on,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+city_windsor_on,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,6446,all-time,point,INSDC open,observed,
 city_windsor_on,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_km,1.29,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 city_windsor_on,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_id,060204,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 city_windsor_on,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_city,Windsor,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
@@ -5657,16 +5657,16 @@ city_windsor_on,disease_surveillance,phac_rvdss,public health & microbiology,pha
 city_windsor_on,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,3.4,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 city_windsor_on,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,2.23,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 city_windsor_on,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.2,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+city_windsor_on,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 city_windsor_on,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,1.31,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 city_windsor_on,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,441 University,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 city_windsor_on,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Closed,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -6217,7 +6217,7 @@ city_us_detroit_mi,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology
 city_us_detroit_mi,biomass,spawn_biomass,macrobiology,hgb,satellite,macrobiology,agb_mgha_n_px,54,2010,300,CC-BY-4.0,observed,hgb
 city_us_detroit_mi,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,4122,all-time,point,CC-BY / CC0 mixed,observed,
 city_us_detroit_mi,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,767,all-time,point,CC-BY / CC0 mixed,observed,
-city_us_detroit_mi,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,149,all-time,point,public-domain (US),observed,
+city_us_detroit_mi,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,149,all-time,point,public-domain (US),observed,
 city_us_detroit_mi,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_mean,0.03,1984-2021,30,CC-BY-4.0,observed,90W_50Nv1_3_2020
 city_us_detroit_mi,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_std,0.62,1984-2021,30,CC-BY-4.0,observed,90W_50Nv1_3_2020
 city_us_detroit_mi,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p10,0.0,1984-2021,30,CC-BY-4.0,observed,90W_50Nv1_3_2020
@@ -6231,8 +6231,8 @@ city_us_detroit_mi,reanalysis_climate,era5,climate,era5_open_meteo,blended,clima
 city_us_detroit_mi,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_hottest_day_c,29.1,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 city_us_detroit_mi,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_annual_precip_mm,875.5,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 city_us_detroit_mi,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_n_days,3653,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
-city_us_detroit_mi,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,12,all-time,point,EBI terms / open,observed,
-city_us_detroit_mi,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+city_us_detroit_mi,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,12,all-time,point,EBI terms / open,observed,
+city_us_detroit_mi,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 city_us_detroit_mi,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,fixed sensor,health_env,aqs_nearest_monitor_km,4.06,2025,point,public-domain (US EPA),observed,EPA AirData annual_conc_by_monitor_2025
 city_us_detroit_mi,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,fixed sensor,health_env,aqs_nearest_site_id,261630098,2025,point,public-domain (US EPA),observed,EPA AirData annual_conc_by_monitor_2025
 city_us_detroit_mi,air_quality_monitors,epa_aqs_airdata,hazards,epa_aqs_airdata,fixed sensor,health_env,aqs_nearest_site_name,DP4th - Detroit Police 4th Precinct (near GHIB),2025,point,public-domain (US EPA),observed,EPA AirData annual_conc_by_monitor_2025
@@ -6268,7 +6268,7 @@ city_us_detroit_mi,air_quality_modelled,cams,hazards,cams_open_meteo,blended,hea
 city_us_detroit_mi,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_n_hours,720,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 city_us_detroit_mi,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lat,42.3,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 city_us_detroit_mi,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-83.1,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
-city_us_detroit_mi,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,6454,all-time,point,INSDC open,observed,
+city_us_detroit_mi,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,6454,all-time,point,INSDC open,observed,
 city_us_detroit_mi,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_tri_reporters_25km,118,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
 city_us_detroit_mi,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_caa_air_sources_25km,519,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
 city_us_detroit_mi,emissions_releases,epa_frs,infrastructure,epa_echo_tri,survey,health_env,echotri_rcra_handlers_25km,11518,current snapshot,vector,public-domain (US EPA),observed,ECHO bbox reporter counts at 25 km / 10 km buffers
@@ -6309,15 +6309,15 @@ city_us_detroit_mi,disease_surveillance,cdc_nndss,public health & microbiology,c
 city_us_detroit_mi,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_campylobacteriosis_ytd,1746.0,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Michigan
 city_us_detroit_mi,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_legionellosis_ytd,252.0,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Michigan
 city_us_detroit_mi,disease_surveillance,cdc_nndss,public health & microbiology,cdc_nndss,survey,health_env,nndss_tuberculosis_ytd,74.0,2026-W39,admin:state,public-domain (US CDC),observed,CDC NNDSS x9gk-5huc / Michigan
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_county,Wayne County,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_county_fips,26163,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_sites_county,2,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_population_served,1332600.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_latest_period_end,2025-09-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_records_county,1078,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_last_reported,55.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_last_reported_end,2025-08-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
-city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,survey,health_env,nwss_percentile_max_county,93.75,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_county,Wayne County,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_county_fips,26163,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_sites_county,2,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_population_served,1332600.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_latest_period_end,2025-09-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_records_county,1078,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_last_reported,55.0,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_last_reported_end,2025-08-07,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
+city_us_detroit_mi,wastewater_surveillance,wastewater,public health & microbiology,cdc_nwss,field sample,health_env,nwss_percentile_max_county,93.75,2025-09-07,admin:county,public-domain (US CDC),observed,CDC NWSS 2ew6-ywp6 / Wayne County County (26163)
 city_us_detroit_mi,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_block_pop_2020,10159,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=311
 city_us_detroit_mi,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_block_housing_units_2020,8581,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=311
 city_us_detroit_mi,census_demography,census_grids,socio-economic,tigerweb_blocks2020,survey,census,tiger_pop_density_km2,2541.51,2020-04-01,admin:block,public-domain (US Census),observed,tigerWMS_Census2020/10 n=311
@@ -6780,7 +6780,7 @@ stress_mine_hvc_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite
 stress_mine_hvc_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p90,0.0,1984-2021,30,CC-BY-4.0,observed,130W_60Nv1_3_2020
 stress_mine_hvc_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_n_px,64960,1984-2021,30,CC-BY-4.0,observed,130W_60Nv1_3_2020
 stress_mine_hvc_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_frac_ge50pct,0.0212,1984-2021,30,CC-BY-4.0,observed,130W_60Nv1_3_2020
-stress_mine_hvc_full,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+stress_mine_hvc_full,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_mean_annual_temp_c,4.72,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_coldest_day_c,-31.1,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
 stress_mine_hvc_full,reanalysis_climate,era5,climate,era5_open_meteo,blended,climate,clim_hottest_day_c,29.2,2015-2024,11000,CC-BY-4.0 (ERA5),observed,
@@ -6791,15 +6791,15 @@ stress_mine_hvc_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,sat
 stress_mine_hvc_full,vegetation_timeseries,modis_bio,macrobiology,modis_13q1,satellite,macrobiology,modis_n_composites,4,2024,250,public-domain (NASA),observed,MYD13Q1.A2026249.h10v03.061.2026266000450
 stress_mine_hvc_full,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,10,1980-present,point,public-domain (USGS),observed,
 stress_mine_hvc_full,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,4.5,1980-present,point,public-domain (USGS),observed,
-stress_mine_hvc_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,1,all-time,point,EBI terms / open,observed,
-stress_mine_hvc_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+stress_mine_hvc_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,1,all-time,point,EBI terms / open,observed,
+stress_mine_hvc_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 stress_mine_hvc_full,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_km,52.7,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_mine_hvc_full,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_id,100401,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_mine_hvc_full,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_city,Kamloops,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_mine_hvc_full,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_stations_25km,0,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_mine_hvc_full,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_stations_50km,0,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_mine_hvc_full,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_year,2024,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
-stress_mine_hvc_full,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,295,all-time,point,INSDC open,observed,
+stress_mine_hvc_full,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,295,all-time,point,INSDC open,observed,
 stress_mine_hvc_full,emissions_releases,eccc_npri,hazards,eccc_npri,survey,health_env,npri_nearest_facility_km,1.25,2024,point,OGL-Canada-2.0,observed,NPRI reporting year 2024
 stress_mine_hvc_full,emissions_releases,eccc_npri,hazards,eccc_npri,survey,health_env,npri_nearest_facility_name,Teck Highland Valley Copper Partnership,2024,point,OGL-Canada-2.0,observed,NPRI reporting year 2024
 stress_mine_hvc_full,emissions_releases,eccc_npri,hazards,eccc_npri,survey,health_env,npri_nearest_facility_sector,Metal ore mining,2024,point,OGL-Canada-2.0,observed,NPRI reporting year 2024
@@ -6832,16 +6832,16 @@ stress_mine_hvc_full,disease_surveillance,phac_rvdss,public health & microbiolog
 stress_mine_hvc_full,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,7.8,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 stress_mine_hvc_full,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,8.13,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 stress_mine_hvc_full,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.1,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,British Columbia,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,59,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,99.1159,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,92.7438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1853,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,103.7097,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.894,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,British Columbia,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,59,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,5,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,99.1159,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,92.7438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1853,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,103.7097,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_mine_hvc_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.894,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 stress_mine_hvc_full,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,14.03,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 stress_mine_hvc_full,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,695 - Lower Nicola - 07225 - PIPSEUL 3 - BC04826811,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 stress_mine_hvc_full,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Active,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -7388,7 +7388,7 @@ city_montreal_core,dem_medium_res_ca,natl_lidar,geology,mrdem_30,blended,geology
 city_montreal_core,dem_medium_res_ca,natl_lidar,geology,mrdem_30,blended,geology,mrdem_elev_m_n_px,2756,2024,30,OGL-Canada-2.0,observed,mrdem
 stress_oilsands_region,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_occurrences,30316,all-time,point,CC-BY / CC0 mixed,observed,
 stress_oilsands_region,species_occurrence,gbif,macrobiology,gbif,crowdsourced,macrobiology,gbif_distinct_species,642,all-time,point,CC-BY / CC0 mixed,observed,
-stress_oilsands_region,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+stress_oilsands_region,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 stress_oilsands_region,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_km,0.58,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_oilsands_region,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_id,090805,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
 stress_oilsands_region,air_quality_monitors,eccc_naps,hazards,eccc_naps,fixed sensor,health_env,naps_nearest_station_city,Fort Mckay,2024,point,OGL-Canada-2.0,observed,NAPS 2024 annual means
@@ -7440,16 +7440,16 @@ stress_oilsands_region,disease_surveillance,phac_rvdss,public health & microbiol
 stress_oilsands_region,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_tests_latest_week,3422.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 stress_oilsands_region,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_detections_latest_week,85.0,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 stress_oilsands_region,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,2.5,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Alberta,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,48,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,38.7759,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,43.339,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,349,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,99.0393,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Alberta,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,48,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,1,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,38.7759,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,43.339,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,349,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,99.0393,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_oilsands_region,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.438,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 stress_oilsands_region,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_count_100km_m2.5,0,1980-present,point,public-domain (USGS),observed,
 stress_oilsands_region,earthquake_catalogue,eq_catalog,hazards,usgs_fdsn,fixed sensor,hazards,eq_max_mag_100km,,1980-present,point,public-domain (USGS),observed,
 stress_oilsands_region,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,11.25,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -7503,7 +7503,7 @@ stress_oilsands_region,air_quality_modelled,cams,hazards,cams_open_meteo,blended
 stress_oilsands_region,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_n_hours,720,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 stress_oilsands_region,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lat,57.0,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
 stress_oilsands_region,air_quality_modelled,cams,hazards,cams_open_meteo,blended,health_env,cams_grid_lon,-111.6,2026-09-13/2026-10-12,44000,CC-BY-4.0 (CAMS/ECMWF),observed,CAMS global reanalysis/forecast via open-meteo
-stress_oilsands_region,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,4089,all-time,point,INSDC open,observed,
+stress_oilsands_region,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,4089,all-time,point,INSDC open,observed,
 stress_oilsands_region,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_avg_dwelling_value_cad,619344,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
 stress_oilsands_region,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_owner_occupied_dwellings,17345,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
 stress_oilsands_region,property_assessment,census_micro,socio-economic,statcan_dwelling_value,survey,census,statcan_dwelling_value_csd_uid,4816037,2016,admin:csd,OGL-Canada-2.0,observed,CSDUID=4816037
@@ -7533,8 +7533,8 @@ stress_oilsands_region,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satelli
 stress_oilsands_region,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p90,50.0,1984-2021,30,CC-BY-4.0,observed,120W_60Nv1_3_2020
 stress_oilsands_region,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_n_px,55680,1984-2021,30,CC-BY-4.0,observed,120W_60Nv1_3_2020
 stress_oilsands_region,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_frac_ge50pct,0.1005,1984-2021,30,CC-BY-4.0,observed,120W_60Nv1_3_2020
-stress_oilsands_region,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,28,all-time,point,EBI terms / open,observed,
-stress_oilsands_region,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+stress_oilsands_region,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,28,all-time,point,EBI terms / open,observed,
+stress_oilsands_region,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 stress_oilsands_region,indigenous_lands,native_land,socio-economic,nrcan_alta,survey,census,alta_overlap_frac,0.0,2026-10 (CLSS snapshot),vector,OGL-Canada-2.0,observed,AL_TA_AB_SHP_DCM_eng
 stress_oilsands_region,indigenous_lands,native_land,socio-economic,nrcan_alta,survey,census,alta_overlap_km2,0.0,2026-10 (CLSS snapshot),vector,OGL-Canada-2.0,observed,AL_TA_AB_SHP_DCM_eng
 stress_oilsands_region,indigenous_lands,native_land,socio-economic,nrcan_alta,survey,census,alta_n_parcels_intersecting,0,2026-10 (CLSS snapshot),vector,OGL-Canada-2.0,observed,AL_TA_AB_SHP_DCM_eng
@@ -7899,7 +7899,7 @@ stress_city_toronto_full,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landco
 stress_city_toronto_full,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,satellite,macrobiology,nrcanlc_dominant,urban,2015-01-01,30,OGL-Canada-2.0,observed,CAN_LC_2015_CAL_15_13
 stress_city_toronto_full,land_cover_ca,nrcan_landcover,macrobiology,nrcan_landcover,satellite,macrobiology,nrcanlc_n_classes,10,2015-01-01,30,OGL-Canada-2.0,observed,CAN_LC_2015_CAL_15_13
 stress_city_toronto_full,sar_backscatter_c,sentinel1_rtc,spectral,sentinel1_rtc,satellite,spectral,s1_vv_db_mean,-6.61,2024-09-23,10,CC-BY-4.0 (Copernicus),observed,S1A_IW_GRDH_1SDV_20240923T231643_20240923T231708_055799_06D15D_rtc
-stress_city_toronto_full,water_quality,wqp,hazards,wqp,survey,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
+stress_city_toronto_full,water_quality,wqp,hazards,wqp,field sample,water,wqp_stations_20km,0,all-time,point,public-domain (US),observed,
 stress_city_toronto_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_mean,16.28,1984-2021,30,CC-BY-4.0,observed,80W_50Nv1_3_2020
 stress_city_toronto_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_std,36.1,1984-2021,30,CC-BY-4.0,observed,80W_50Nv1_3_2020
 stress_city_toronto_full,surface_water_extent,jrc_gsw,water bodies,jrc_gsw,satellite,water,water_occurrence_pct_p10,0.0,1984-2021,30,CC-BY-4.0,observed,80W_50Nv1_3_2020
@@ -7965,16 +7965,16 @@ stress_city_toronto_full,disease_surveillance,phac_rvdss,public health & microbi
 stress_city_toronto_full,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_sarscov2_pct_positive,3.4,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 stress_city_toronto_full,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_influenza_pct_positive,2.23,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
 stress_city_toronto_full,disease_surveillance,phac_rvdss,public health & microbiology,phac_rvdss,survey,health_env,rvdss_rsv_pct_positive,0.2,2026-W39,admin:province,OGL-Canada-2.0,observed,PHAC RVD_WeeklyData.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
-stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,survey,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_province,Ontario,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_pruid,35,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_province,4,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_sites_latest_date,3,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_date,2024-06-23,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_viral_load_latest,14.7742,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_latest,18.0879,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_records_province,1469,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_7day_avg_p90_1yr,92.215,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
+stress_city_toronto_full,wastewater_surveillance,wastewater,public health & microbiology,phac_wastewater,field sample,health_env,phacww_latest_vs_1yr_p90,0.196,2024-06-23,admin:province,OGL-Canada-2.0,observed,PHAC covid19-wastewater.csv
 stress_city_toronto_full,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_km,3.21,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 stress_city_toronto_full,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_name,Don River at York Mills,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
 stress_city_toronto_full,contaminated_sites,tbs_fcsi,hazards,tbs_fcsi,survey,health_env,fcsi_nearest_site_status,Closed,current inventory snapshot,point,OGL-Canada-2.0,observed,TBS FCSI fcsi-rscf.xml
@@ -8129,8 +8129,8 @@ stress_city_toronto_full,census_demography,census_micro,socio-economic,statcan_w
 stress_city_toronto_full,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_geo_code,3520005,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 stress_city_toronto_full,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_vector_id,1592182773,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
 stress_city_toronto_full,census_demography,census_micro,socio-economic,statcan_wds_popest,survey,census,statcan_popest_yoy_pct,-0.262,2025-07-01,admin:csd,OGL-Canada-2.0,observed,"pid=17100155,coord=2132"
-stress_city_toronto_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_samples_25km,472,all-time,point,EBI terms / open,observed,
-stress_city_toronto_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,survey,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
+stress_city_toronto_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_samples_25km,472,all-time,point,EBI terms / open,observed,
+stress_city_toronto_full,geolocated_sequence,mgnify,public health & microbiology,mgnify,field sample,microbiology,mgnify_control_count,0,all-time,point,EBI terms / open,observed,
 stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,satellite,cryosphere,nsidc_sic_cells_in_aoi,2,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,satellite,cryosphere,nsidc_sic_valid_cells,0,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
 stress_city_toronto_full,sea_ice,sea_ice,climate,noaa_nsidc_sic_cdr,satellite,cryosphere,nsidc_sic_nearest_cell_km,6.42,2015-12-31,25000,public-domain (NOAA/NSIDC CDR),observed,seaice_conc_daily_nh_f17_20151231_v02r00.nc
@@ -8335,7 +8335,7 @@ stress_city_toronto_full,addresses,overture,infrastructure,overture_buildings,bl
 stress_city_toronto_full,addresses,overture,infrastructure,overture_buildings,blended,infrastructure,ovt_building_dominant_class,detached,2026-09-23,vector,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/buildings.building
 stress_city_toronto_full,addresses,overture,infrastructure,overture_buildings,blended,infrastructure,ovt_building_n_classes,62,2026-09-23,vector,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/buildings.building
 stress_city_toronto_full,addresses,overture,infrastructure,overture_buildings,blended,infrastructure,ovt_building_footprint_skipped_n,372510,2026-09-23,vector,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed,overture/2026-09-23.1/buildings.building
-stress_city_toronto_full,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,survey,microbiology,ena_geolocated_samples_25km,23467,all-time,point,INSDC open,observed,
+stress_city_toronto_full,geolocated_sequence_insdc,ena_geo,public health & microbiology,ena_geo,field sample,microbiology,ena_geolocated_samples_25km,23467,all-time,point,INSDC open,observed,
 stress_city_toronto_full,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_dim,64,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x1qqixu5uqxramff8-0000008192-0000008192.tiff
 stress_city_toronto_full,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_year,2024,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x1qqixu5uqxramff8-0000008192-0000008192.tiff
 stress_city_toronto_full,embeddings,alphaearth,latent,alphaearth_v1_annual,satellite,embeddings,aef_emb_n_tiles,2,2024-01-01/2024-12-31,10,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed,x1qqixu5uqxramff8-0000008192-0000008192.tiff

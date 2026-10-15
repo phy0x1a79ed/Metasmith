@@ -5,7 +5,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 LANES = ["SAT", "AIR", "HYP", "REC", "CAM"]
-OBSERVATION_TYPES = {"satellite", "aerial", "surface vehicle", "fixed sensor", "crowdsourced", "survey", "blended"}
+OBSERVATION_TYPES = {"satellite", "aerial", "surface vehicle", "fixed sensor", "crowdsourced", "field sample", "survey", "blended"}
 
 # A QC feature takes the family of the data it qualifies.
 # source -> (family, observation_type, source_url, licence, gap)
