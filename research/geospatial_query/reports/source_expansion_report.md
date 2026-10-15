@@ -33,6 +33,7 @@ It does not repeat the probe rows, the catalogue or the POC code. Follow the lin
 | Off-nadir field per imagery source | [`off_nadir_fields.csv`](off_nadir_fields.csv), built by the same script |
 | Probe lanes: script, table, findings | [`probes/<lane>/`](probes/). A: satellite QC and tasked imagery. B: airborne, drone, hyperspectral. C: zoning, water, climate. D: ground-level cameras. E: picture to location. F: query ideas |
 | Validated probe features, one row per feature with a value | [`probed_features.csv`](probed_features.csv), built by [`probed_features.py`](probed_features.py) from `probes/<lane>/poc/`. Lanes SAT, AIR, HYP, REC, CAM each hold `poc.py`, `poc_values.csv` and `poc_status.csv` |
+| Fresh re-pull of every listed feature | [`recheck/adapters/`](recheck/) re-runs the POC adapters through `go.sh`. [`recheck/lanes/`](recheck/) re-runs the five probe lanes. Each `recheck_status.csv` holds one row per feature |
 | Angles for the 45 POC scene records | [`probes/A/scene_qc_backfill.csv`](probes/A/scene_qc_backfill.csv) |
 | Test AOIs | [`../examples/test_aois.geojson`](../examples/test_aois.geojson) |
 | Fixes after a fresh copy from the science project | [`apply_family_fixes.py`](apply_family_fixes.py) moves three family assignments. [`apply_observation_type.py`](apply_observation_type.py) adds the `observation_type` column. Re-run both |
@@ -99,7 +100,7 @@ The ground-level counterpart of off-nadir is camera pitch and heading. Panoramax
 
 ## Validated probe features
 
-A probed feature enters the artifact only when a POC read a real value at one or more of the 15 test AOIs. Five sonnet lanes ran the POCs on 2026-10-14. 152 features from 43 sources pass. 34 features fail:
+A probed feature enters the artifact only when a POC read a real value at one or more of the 15 test AOIs. Five sonnet lanes ran the POCs on 2026-10-14. A fresh re-run the same day read all of them again, and all 719 adapter features too. 152 features from 43 sources pass. 34 features fail:
 
 - **Pixels behind a login:** EMIT and PACE (Earthdata), EnMAP and DESIS (DLR SSO), Landsat L1 (EROS), AVIRIS-NG (Earthdata). Their scene QC features pass.
 - **No reader in the env:** Sentinel-2 L1C (JPEG2000), Tanager reflectance (HDF5), 3DEP scan angle (LAZ).
@@ -246,6 +247,8 @@ The pipeline to build:
 - Wikimedia returns 429 under load. Without a backoff a 429 reads as 0 hits.
 - A STAC search by bbox in Canada returns nothing for US-only collections (NAIP, 3DEP). That is coverage, not failure.
 - usgs.gov returns 403 to scripts. Use the API hosts (`index.nationalmap.gov`, `api.waterdata.usgs.gov`).
+- **CAUTION** No env runs the whole POC. `geoquery` lacks pyarrow and `msm` lacks rasterio. `pipeline.py` also reads PROJ data from `./projdata`, and every raster adapter fails without it. `recheck/adapters/go.sh` shows the working setup. `poc/README.md` names a `requirements.txt` that does not exist.
+- Wikimedia search answers HTTP 200 with a `cirrussearch-too-busy-error` body under load. Retry it like a 429.
 
 ## Next sessions
 
@@ -256,3 +259,4 @@ The pipeline to build:
 5. Build adapters for the best candidates in the gap table, starting with S7, S8, S5 and S3.
 6. Change the POC query to an AOI, a list of moments and a list of filters.
 7. Build the picture-to-location pipeline as an adapter that returns a place and a radius.
+8. Pin one env that runs every adapter, with PROJ data, before the production build.
