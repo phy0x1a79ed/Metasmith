@@ -169,48 +169,25 @@ const SPEC = [
     { name: "AOI", kind: "is composed of", rows: [["outline", "list of Point"]] },
     { name: "Interval", kind: "is composed of", rows: [["start", "time"], ["end", "time"]] },
     { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
-      ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"]] },
-    { name: "Licence", kind: "is one of", opts: [
-      ["permissive", "CC-BY, OGL, public domain · any use, with attribution"],
-      ["share-alike", "above + ODbL, CC-BY-SA · derived data keeps the licence"],
-      ["noncommercial", "above + CC-BY-NC · no commercial use"],
-      ["restricted", "above + custom terms · no redistribution without permission"]] },
+      ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"],
+      ["quality", "off-nadir, sun elevation, cloud cover, distance to station"]] },
     { name: "SourceType", kind: "is one of", opts: [["satellite"], ["airborne"], ["drone"], ["vehicle"], ["fixed camera"],
       ["handheld"], ["ground station"], ["field survey"], ["model"], ["registry"]] },
-    { name: "ObservationUnit", kind: "is one of", opts: [
-      ["acquisition", "one scene, granule, point cloud or photo"],
-      ["composite", "many acquisitions summarised over a period"],
-      ["snapshot", "a registry or model state at one date"]] },
-    { name: "ProcessingLevel", kind: "is one of", opts: [
-      ["L1", "calibrated, not corrected"], ["L2", "geophysical values per scene"],
-      ["L3", "gridded composite"], ["L4", "model output"]] },
-    { name: "Period", kind: "is composed of", rows: [
-      ["start", "time"], ["end", "time"], ["every", "one of month, year, duration"], ["months", "list of int"]] },
-    { name: "QCFilter", kind: "is composed of", rows: [
-      ["max_cloud_tile_pct", "float"], ["max_cloud_aoi_pct", "float"], ["max_off_nadir_deg", "float"],
-      ["min_sun_elevation_deg", "float"], ["processing_level", "ProcessingLevel"]] },
-    { name: "Quality", kind: "is an open map, a field absent when not applicable, of", rows: [
-      ["off_nadir_deg", "float"], ["incidence_deg", "float"], ["sun_elevation_deg", "float"],
-      ["cloud_cover_scene_pct", "float"], ["cloud_cover_aoi_pct", "float"], ["camera_heading_deg", "float"],
-      ["camera_pitch_deg", "float"], ["n_inputs", "int"], ["distance_km", "float"], ["snapshot_date", "time"],
-      ["join_level", "text"]] },
-    { name: "Asset", kind: "is composed of", rows: [
-      ["href", "text"], ["type", "text"], ["requester_pays", "bool"], ["signed_until", "time"]] },
     { name: "Feature", kind: "is composed of", rows: [
       ["feature", "text"], ["family", "FeatureFamily"], ["value", "any"], ["SI_unit", "text"]] },
     { name: "Observation", kind: "is composed of", rows: [
-      ["source", "text"], ["source_type", "SourceType"], ["unit", "ObservationUnit"], ["sensor", "text"],
-      ["platform", "text"], ["time", "one of time, Interval"], ["processing_level", "ProcessingLevel"],
-      ["resolution_m", "float"], ["item_id", "text"], ["collection", "text"], ["quality", "Quality"],
-      ["assets", "list of Asset"], ["features", "list of Feature"]] },
+      ["source", "text"], ["source_type", "SourceType"], ["time", "Interval"], ["features", "list of Feature"]] },
+    { name: "Operation", kind: "is one of", opts: [
+      ["regex", "text value"], ["=", "numeric"], ["!=", "numeric"], ["<", "numeric"], ["<=", "numeric"],
+      [">", "numeric"], [">=", "numeric"]] },
+    { name: "Filter", kind: "is composed of", rows: [
+      ["feature", "text"], ["operation", "Operation"], ["value", "one of text, float"]] },
     { name: "Error", kind: "is composed of", rows: [
-      ["feature", "text"], ["family", "FeatureFamily"], ["time", "one of time, Interval"], ["message", "text"]] },
+      ["feature", "text"], ["family", "FeatureFamily"], ["time", "Interval"], ["message", "text"]] },
   ] },
   { group: "Input", types: [
     { name: "Query", kind: "is composed of", rows: [
-      ["aoi", "AOI"], ["feature_families", "list of FeatureFamily"], ["time", "one of time, Period"],
-      ["time_tolerance", "duration"], ["bands", "list of text"], ["indices", "list of text"],
-      ["index_params", "map of text to float"], ["qc", "QCFilter"], ["licence", "Licence"]] },
+      ["aoi", "AOI"], ["time", "list of Interval"], ["filters", "list of Filter"]] },
   ] },
   { group: "Output", types: [
     { name: "QueryResult", kind: "is composed of", rows: [
