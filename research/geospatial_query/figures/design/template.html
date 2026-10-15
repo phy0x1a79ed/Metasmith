@@ -114,7 +114,6 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .csv:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .csv-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .csv-row span { font-size: 12px; color: var(--muted); }
-.table td .tag { font-size: 11px; color: var(--muted); border-bottom: none; }
 
 /* Method */
 .caption { margin: 0; font-size: 13.5px; color: var(--muted); }
@@ -259,7 +258,7 @@ document.getElementById("fams").innerHTML = DATA.map((d, i) =>
      <summary><span class="name">${esc(d.family)}<span class="blurb">${esc(d.blurb)}</span></span><span class="count" id="count-${i}">${d.features.length}</span></summary>
      <div class="table"><table>
        <thead><tr><th>Feature</th><th>Description</th><th>Observation type</th><th>Source</th></tr></thead>
-       <tbody>${d.features.map((f, j) => `<tr id="row-${i}-${j}"><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.observation_type)}</td><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.source)}</a>${f.probed ? ' <span class="tag">probed</span>' : ""}</td></tr>`).join("")}</tbody>
+       <tbody>${d.features.map((f, j) => `<tr id="row-${i}-${j}"><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.observation_type)}</td><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.source)}</a></td></tr>`).join("")}</tbody>
      </table></div>
    </details>`).join("");
 
@@ -306,8 +305,8 @@ if (!window.Fuse) document.getElementById("q").hidden = true;
 
 const csvCell = v => /[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
 const toCsv = rows => rows.map(r => r.map(csvCell).join(",")).join("\n") + "\n";
-const featureCsv = () => toCsv([["family", "feature", "description", "observation_type", "source", "source_url", "licence", "probed"],
-  ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.observation_type, f.source, f.url, f.licence, f.probed ? "yes" : "no"]))]);
+const featureCsv = () => toCsv([["family", "feature", "description", "observation_type", "source", "source_url", "licence", "poc_adapter"],
+  ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.observation_type, f.source, f.url, f.licence, f.poc_adapter ? "yes" : "no"]))]);
 (async () => {
   const downloads = await window.claude?.use?.("downloads");
   if (!downloads) return;

@@ -163,7 +163,7 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
             out[FAMILY_KEYS.index(r["family"])].append(
                 {"name": name, "description": describe(name, slot), "source": adapter, "layer": slot,
                  "module": r["module_id"], "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[adapter],
-                 "observation_type": r["observation_type"], "probed": False}
+                 "observation_type": r["observation_type"], "poc_adapter": True}
             )
     return out
 
@@ -174,13 +174,13 @@ def add_probed(out: list[list[dict]], probed_csv: Path) -> None:
             out[FAMILY_KEYS.index(r["family"])].append(
                 {"name": r["feature"], "description": r["description"], "source": r["source"], "layer": r["gap"],
                  "module": "", "licence": licence_tier(r["licence"]), "url": r["source_url"],
-                 "observation_type": r["observation_type"], "probed": True}
+                 "observation_type": r["observation_type"], "poc_adapter": False}
             )
 
 
 def sort_features(out: list[list[dict]]) -> None:
     for fam in out:
-        fam.sort(key=lambda f: (f["probed"], f["layer"], f["name"]))
+        fam.sort(key=lambda f: (not f["poc_adapter"], f["layer"], f["name"]))
 
 
 def dag_svg(theme) -> str:
@@ -235,11 +235,11 @@ def standalone(page: str) -> str:
 def write_features_csv(data: list[dict]) -> None:
     with FEATURES_CSV.open("w", newline="") as fh:
         writer = csv.writer(fh, lineterminator="\n")
-        writer.writerow(["family", "feature", "description", "observation_type", "source", "source_url", "licence", "probed"])
+        writer.writerow(["family", "feature", "description", "observation_type", "source", "source_url", "licence", "poc_adapter"])
         for d in data:
             for f in d["features"]:
                 writer.writerow([d["family"], f["name"], f["description"], f["observation_type"], f["source"], f["url"],
-                                 f["licence"], "yes" if f["probed"] else "no"])
+                                 f["licence"], "yes" if f["poc_adapter"] else "no"])
 
 
 def main() -> None:
