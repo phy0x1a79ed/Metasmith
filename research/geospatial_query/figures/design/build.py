@@ -2,9 +2,11 @@
 
 import csv
 from dataclasses import replace
+import base64
 import json
 import re
 import sys
+import urllib.request
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -208,6 +210,38 @@ def vibe_variants() -> None:
         (HERE / f"vibe-{name}.svg").write_text(out)
 
 
+STANDALONE = HERE / "geospatial_query.html"
+FEATURES_CSV = HERE / "geospatial_query_features.csv"
+VENDOR = HERE / "vendor"
+
+
+def inline_script(url: str) -> str:
+    cached = VENDOR / url.rsplit("/", 1)[1]
+    if not cached.exists():
+        VENDOR.mkdir(exist_ok=True)
+        cached.write_bytes(urllib.request.urlopen(url, timeout=60).read())
+    return "<script>" + cached.read_text().replace("</script", "<\\/script") + "</script>"
+
+
+def standalone(page: str) -> str:
+    for name in ("vibe-light.svg", "vibe-dark.svg"):
+        uri = "data:image/svg+xml;base64," + base64.b64encode((HERE / name).read_bytes()).decode()
+        page = page.replace(f'src="{name}"', f'src="{uri}"')
+    for url in re.findall(r'<script src="(https://cdnjs[^"]+)"></script>', page):
+        page = page.replace(f'<script src="{url}"></script>', inline_script(url))
+    return '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' + page + "\n</html>\n"
+
+
+def write_features_csv(data: list[dict]) -> None:
+    with FEATURES_CSV.open("w", newline="") as fh:
+        writer = csv.writer(fh, lineterminator="\n")
+        writer.writerow(["family", "feature", "description", "observation_type", "source", "source_url", "licence", "probed"])
+        for d in data:
+            for f in d["features"]:
+                writer.writerow([d["family"], f["name"], f["description"], f["observation_type"], f["source"], f["url"],
+                                 f["licence"], "yes" if f["probed"] else "no"])
+
+
 def main() -> None:
     vibe_variants()
     reports = HERE.parents[1] / "reports"
@@ -228,6 +262,8 @@ def main() -> None:
     page = page.replace("{{N_PROBED_SOURCES}}", str(len(probed - adapters)))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
+    STANDALONE.write_text(standalone(page))
+    write_features_csv(data)
     for f, feats in zip(FAMILIES, families):
         print(f"{len(feats):4d}  {len({x['source'] for x in feats}):3d}  {f}")
 
