@@ -171,14 +171,13 @@ const SPEC = [
     { name: "AOI", kind: "is composed of", rows: [["outline", "list of Point"]] },
     { name: "Moment", kind: "is composed of", rows: [["time", "time"], ["accuracy", "duration"]] },
     { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
-      ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"],
-      ["quality", "off-nadir, sun elevation, cloud cover, distance to station"]] },
-    { name: "SourceType", kind: "is one of", opts: [["satellite"], ["airborne"], ["drone"], ["vehicle"], ["fixed camera"],
-      ["handheld"], ["ground station"], ["field survey"], ["model"], ["registry"]] },
+      ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"]] },
+    { name: "ObservationType", kind: "is one of", opts: [["satellite"], ["aerial"], ["surface vehicle"], ["fixed sensor"],
+      ["crowdsourced"], ["survey"], ["blended"]] },
     { name: "Feature", kind: "is composed of", rows: [
       ["feature", "text"], ["family", "FeatureFamily"], ["value", "any"], ["SI_unit", "text"]] },
     { name: "Observation", kind: "is composed of", rows: [
-      ["source", "text"], ["source_type", "SourceType"], ["time", "Moment"], ["features", "list of Feature"]] },
+      ["source", "text"], ["observation_type", "ObservationType"], ["time", "Moment"], ["features", "list of Feature"]] },
     { name: "Operation", kind: "is one of", opts: [["regex"], ["="], ["!="], ["<"], ["<="], [">"], [">="]] },
     { name: "Filter", kind: "is composed of", rows: [
       ["feature", "text"], ["operation", "Operation"], ["value", "one of text, number"]] },
@@ -253,15 +252,15 @@ document.getElementById("fams").innerHTML = DATA.map((d, i) =>
   `<details id="fam-${i}">
      <summary><span class="name">${esc(d.family)}<span class="blurb">${esc(d.blurb)}</span></span><span class="count">${d.features.length}</span></summary>
      <div class="table"><table>
-       <thead><tr><th>Feature</th><th>Description</th><th>Source type</th><th>Source</th></tr></thead>
-       <tbody>${d.features.map(f => `<tr><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.source_type)}</td><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.source)}</a>${f.probed ? ' <span class="tag">probed</span>' : ""}</td></tr>`).join("")}</tbody>
+       <thead><tr><th>Feature</th><th>Description</th><th>Observation type</th><th>Source</th></tr></thead>
+       <tbody>${d.features.map(f => `<tr><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.observation_type)}</td><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.source)}</a>${f.probed ? ' <span class="tag">probed</span>' : ""}</td></tr>`).join("")}</tbody>
      </table></div>
    </details>`).join("");
 
 const csvCell = v => /[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
 const toCsv = rows => rows.map(r => r.map(csvCell).join(",")).join("\n") + "\n";
-const featureCsv = () => toCsv([["family", "feature", "description", "source_type", "source", "source_url", "licence", "probed"],
-  ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.source_type, f.source, f.url, f.licence, f.probed ? "yes" : "no"]))]);
+const featureCsv = () => toCsv([["family", "feature", "description", "observation_type", "source", "source_url", "licence", "probed"],
+  ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.observation_type, f.source, f.url, f.licence, f.probed ? "yes" : "no"]))]);
 const FAILED_COLS = ["outcome", "family", "module_id", "source_name", "triage_candidates", "poc_adapters", "reason"];
 const failedCsv = () => toCsv([FAILED_COLS, ...FAILED.map(f => FAILED_COLS.map(c => f[c]))]);
 (async () => {

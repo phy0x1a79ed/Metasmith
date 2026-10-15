@@ -1,0 +1,5 @@
+source,feature,status,n_aois_with_value,reason
+phenocam,phenocam_station_distance_km,validated,15,distance from the AOI polygon to the nearest site in the global camera list
+phenocam,phenocam_camera_heading,validated,4,"camera_orientation of the nearest site, read only within 30 km"
+phenocam,phenocam_missing_data_pct,validated,4,"roilists missing_data_pct of the nearest site's ROI, read only within 30 km"
+phenocam,phenocam_gcc,validated,4,"mean of the last 30 valid days of gcc_90 in the 1-day summary CSV of the nearest site's ROI, read only within 30 km"

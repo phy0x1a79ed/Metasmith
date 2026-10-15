@@ -1,0 +1,5 @@
+source,feature,status,n_aois_with_value,reason
+panoramax,panoramax_image_n,validated,15,STAC /search over the AOI extent; count of items in the extent
+panoramax,panoramax_camera_pitch_deg,validated,2,STAC /search over the AOI extent; median pers:pitch item property
+panoramax,panoramax_camera_heading_deg,validated,3,STAC /search over the AOI extent; circular mean view:azimuth item property
+panoramax,panoramax_gps_accuracy_m,validated,3,STAC /search over the AOI extent; median quality:horizontal_accuracy item property
