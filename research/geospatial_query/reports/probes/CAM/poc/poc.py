@@ -246,7 +246,13 @@ WM = "https://commons.wikimedia.org/w/api.php"
 
 def wm_tile(b, depth=0):
     w, s, e, n = b
-    r = get(WM, dict(action="query", list="geosearch", gsbbox=f"{n}|{w}|{s}|{e}", gsnamespace=6, gslimit=500, format="json"), gap=1.0)
+    for attempt in range(8):
+        r = get(WM, dict(action="query", list="geosearch", gsbbox=f"{n}|{w}|{s}|{e}", gsnamespace=6, gslimit=500, format="json"), gap=1.0)
+        if r is not None and r.status_code == 200 and "error" not in r.json():
+            break
+        if r is not None and r.status_code == 200 and r.json()["error"].get("code") != "cirrussearch-too-busy-error":
+            break
+        time.sleep(min(60, 5 * 2 ** attempt))
     if r is None or r.status_code != 200 or "error" in r.json():
         raise RuntimeError(f"wikimedia {None if r is None else (r.status_code, r.text[:100])}")
     hits = r.json()["query"]["geosearch"]
@@ -277,9 +283,13 @@ def wikimedia():
     url = "https://commons.wikimedia.org/wiki/Special:Search"
     fails = 0
     for aid, g, b in aoi_geoms():
-        try:
-            hits = wm_hits(b)
-        except RuntimeError:
+        hits = None
+        for attempt in range(3):
+            try:
+                hits = wm_hits(b); break
+            except RuntimeError:
+                time.sleep(120)
+        if hits is None:
             fails += 1; continue
         row(aid, src, "wikimedia_photo_n", len(hits), "count", TODAY, "", "Commons files (namespace 6) with a coordinate inside the AOI extent (snapshot)", url, lic, ep)
         if not hits:

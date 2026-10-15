@@ -149,5 +149,5 @@ water bodies,usgs_gage_height_ft,"Stream gauge: latest gage height, feet",usgs_w
 water bodies,usgs_station_distance_km,"Gauge QC: distance to the nearest stream gauge, kilometres",usgs_waterdata,fixed sensor,https://api.waterdata.usgs.gov/ogcapi/v0,U.S. Government public domain (USGS),S7,9
 geology,wesm_quality_level,Lidar QC: USGS quality level of the survey (QL0 to QL3),usgs_wesm,aerial,https://index.nationalmap.gov/arcgis/rest/services/3DEPElevationIndex/MapServer/8,not stated by the service (USGS 3DEP index),S1,4
 geology,wesm_workunit_n,Lidar survey index: 3DEP work units covering the area,usgs_wesm,aerial,https://index.nationalmap.gov/arcgis/rest/services/3DEPElevationIndex/MapServer/8,not stated by the service (USGS 3DEP index),S1,4
-infrastructure,wikimedia_camera_heading_deg,Camera QC: EXIF image direction when present,wikimedia_commons,crowdsourced,https://commons.wikimedia.org/w/api.php,"per file (CC BY, CC BY-SA, PD)",S9,4
-infrastructure,wikimedia_photo_n,Geotagged photos: Wikimedia Commons files in the area,wikimedia_commons,crowdsourced,https://commons.wikimedia.org/w/api.php,"per file (CC BY, CC BY-SA, PD)",S9,14
+infrastructure,wikimedia_camera_heading_deg,Camera QC: EXIF image direction when present,wikimedia_commons,crowdsourced,https://commons.wikimedia.org/w/api.php,"per file (CC BY, CC BY-SA, PD)",S9,5
+infrastructure,wikimedia_photo_n,Geotagged photos: Wikimedia Commons files in the area,wikimedia_commons,crowdsourced,https://commons.wikimedia.org/w/api.php,"per file (CC BY, CC BY-SA, PD)",S9,15

@@ -1,3 +1,3 @@
 source,feature,status,n_aois_with_value,reason
-wikimedia_commons,wikimedia_photo_n,validated,14,"geosearch over the AOI extent, tiled and split on a full page; 1 AOIs failed after backoff"
-wikimedia_commons,wikimedia_camera_heading_deg,validated,4,"EXIF GPSImgDirection in imageinfo metadata, sample of up to 120 files per AOI; 1 AOIs failed after backoff"
+wikimedia_commons,wikimedia_photo_n,validated,15,"geosearch over the AOI extent, tiled and split on a full page"
+wikimedia_commons,wikimedia_camera_heading_deg,validated,5,"EXIF GPSImgDirection in imageinfo metadata, sample of up to 120 files per AOI"

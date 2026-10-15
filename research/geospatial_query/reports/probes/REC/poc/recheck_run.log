@@ -1,0 +1,19 @@
+padus {'padus_designation': 1, 'padus_gap_status': 1, 'padus_public_access': 1, 'padus_iucn_category': 1, 'padus_source_date': 1}
+bc_alr {}
+eu_urban_atlas {}
+vancouver_zoning {}
+calgary_land_use {}
+ERROR 1: PROJ: proj_create_from_database: Open of /home/tony/lib/miniforge3/envs/geoquery/share/proj failed
+toronto_zoning {'torzone_zone_code': 2, 'torzone_fsi_ratio': 1, 'torzone_snapshot_date': 2, 'torzone_coverage_pct': 1}
+nza {'nza_zone_code': 2, 'nza_housing_treatment': 2, 'nza_parking_required_flag': 2, 'nza_height_cap_flag': 2, 'nza_snapshot_date': 2}
+usgs_waterdata {'usgs_discharge_cfs': 9, 'usgs_approval_status': 9, 'usgs_station_distance_km': 9, 'usgs_drainage_area_mi2': 9, 'usgs_gage_height_ft': 9}
+eccc_hydrometric {'hydat_discharge_m3s': 13, 'hydat_station_distance_km': 13, 'hydat_drainage_area_km2': 13, 'hydat_daily_record_n': 13, 'hydat_level_m': 13}
+eccc_climate {'eccc_tmax_c': 13, 'eccc_tmin_c': 13, 'eccc_precip_mm': 13, 'eccc_station_distance_km': 13, 'eccc_record_completeness_pct': 13}
+ghcn_daily {'ghcnd_tmax_c': 15, 'ghcnd_tmin_c': 15, 'ghcnd_prcp_mm': 15, 'ghcnd_station_distance_km': 15, 'ghcnd_coverage_pct': 15}
+daymet {'daymet_tmax_c': 15, 'daymet_tmin_c': 15, 'daymet_prcp_mm': 15, 'daymet_srad_wm2': 15, 'daymet_swe_kgm2': 15, 'daymet_vp_pa': 15}
+terraclimate {'terraclim_tmax_c': 15, 'terraclim_ppt_mm': 15, 'terraclim_pet_mm': 15, 'terraclim_def_mm': 15, 'terraclim_soil_mm': 15, 'terraclim_swe_mm': 15}
+chirps {'chirps_precip_mm': 15}
+hydrorivers {'hydrorivers_discharge_m3s': 13, 'hydrorivers_upland_area_km2': 13, 'hydrorivers_strahler_order': 13, 'hydrorivers_nearest_km': 13}
+nhdplus_hr {'nhdhr_mean_flow_cfs': 8, 'nhdhr_stream_order': 8, 'nhdhr_drainage_area_km2': 8, 'nhdhr_slope_frac': 8, 'nhdhr_feature_date': 8}
+nrcan_nhn {'nhn_permanency': 6, 'nhn_water_type': 6, 'nhn_survey_year': 6, 'nhn_horiz_accuracy_m': 6}
+assembled 582 values 72 status rows
