@@ -142,14 +142,14 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 
   <section class="panel">
     <h2><b>2</b>Pipeline signature</h2>
-    <p class="caption">This section describes what the pipeline requires as input and what it promises to produce as output.</p>
+    <p class="caption">This section describes what the pipeline requires as input and what it promises to produce as output. Briefly, a query specifying time and area of interest (AOI) returns a list of features. Panel 3 describes available features.</p>
     <div class="sig" id="sig"></div>
     <p class="caption">Some features, such as nadir or cloud cover, can be used for QC and are filterable at the query level.</p>
   </section>
 
   <section class="panel">
     <h2><b>3</b>Features</h2>
-    <p class="caption">Hybrid LLM + human curation with proof of concept live data retrieval tests produced the following list of obtainable features, grouped into families. Of {{N_CATALOGUE}} catalogued modules, {{N_PROBED}} were probed, {{N_BUILT}} were built as adapters and {{N_WORKING}} returned data. A further {{N_PROBED_SOURCES}} sources, marked probed, returned data in a live probe and have no adapter yet.</p>
+    <p class="caption">Hybrid LLM + human curation with proof of concept live data retrieval tests produced the following list of obtainable features, grouped into families.</p>
     <div id="bars"></div>
     <div class="csv-row" id="csv-row" hidden><button class="csv" id="csv" type="button">Download features CSV</button><span id="csv-status"></span></div>
     <div class="find"><p class="hint">Click a row to expand.</p><input type="search" id="q" placeholder="Search features, sources, types" aria-label="Search features" autocomplete="off" spellcheck="false"><p class="hint" id="q-status" aria-live="polite"></p></div>
@@ -158,7 +158,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 
   <section class="panel">
     <h2><b>4</b>Method</h2>
-    <p class="caption">Pipeline is a simple scatter-gather across sources. Diagram collapsed by feature family for legibility.</p>
+    <p class="caption">The pipeline is a simple scatter-gather across sources. Diagram collapsed by feature family for legibility. Metasmith will plan the data fetch across sources and compile into Nextflow for execution.</p>
     <div class="dag"><div class="light"><!--DAG-LIGHT--></div><div class="dark"><!--DAG-DARK--></div></div>
   </section>
 </main>

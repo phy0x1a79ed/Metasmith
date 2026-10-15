@@ -252,14 +252,6 @@ def main() -> None:
     data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
-    funnel = json.loads((HERE.parents[1] / "reports" / "funnel_counts.json").read_text())
-    for key, slot in [("catalogue modules in scope (317 existing + 11 added)", "N_CATALOGUE"),
-                      ("modules probed in triage", "N_PROBED"), ("modules implemented as adapters", "N_BUILT"),
-                      ("modules with a working adapter", "N_WORKING")]:
-        page = page.replace(f"{{{{{slot}}}}}", str(funnel[key]))
-    adapters = {f["source"] for fam in families for f in fam if not f["probed"]}
-    probed = {f["source"] for fam in families for f in fam if f["probed"]}
-    page = page.replace("{{N_PROBED_SOURCES}}", str(len(probed - adapters)))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
     STANDALONE.write_text(standalone(page))
