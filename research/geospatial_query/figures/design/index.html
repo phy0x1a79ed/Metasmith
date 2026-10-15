@@ -306,9 +306,14 @@ const SPEC = [
     { name: "Moment", kind: "is composed of", rows: [["time", "time"], ["accuracy", "duration"]], example: "2024-07-16 ± 12 hours" },
     { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
       ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"]] },
-    { name: "ObservationType", kind: "is one of", opts: [["satellite"], ["aerial"], ["surface vehicle"], ["fixed sensor"],
-      ["crowdsourced"], ["survey"], ["blended"]],
-      note: "How the data was collected; a modelled product takes the type of its inputs, and one built from several types is blended." },
+    { name: "ObservationType", kind: "is one of", opts: [
+      ["satellite", "collected from space"],
+      ["aerial", "collected from a flying vehicle"],
+      ["surface vehicle", "collected from a vehicle on land or water"],
+      ["fixed sensor", "collected by a sensor fixed in place"],
+      ["crowdsourced", "collected by the public"],
+      ["survey", "collected by people in the field or from records"],
+      ["blended", "fused sensor data, additional notes will indicate composition"]] },
     { name: "Feature", kind: "is composed of", rows: [
       ["feature", "text"], ["family", "FeatureFamily"], ["value", "any"], ["SI_unit", "text"]] },
     { name: "Observation", kind: "is composed of", rows: [
@@ -344,7 +349,7 @@ const def = t => `<li class="def" id="t-${t.name}">
   <ul>${t.opts
     ? t.opts.map(([o, note]) => `<li><code class="t">${esc(o)}</code>${note ? ` <span class="k">· ${esc(note)}</span>` : ""}</li>`).join("")
     : t.rows.map(([f, ty]) => `<li><code>${esc(f)}</code>: ${typeExpr(ty)}</li>`).join("")}</ul>
-  ${t.note ? `<p class="ex">${esc(t.note)}</p>` : ""}${t.example ? `<p class="ex">e.g. ${esc(t.example)}</p>` : ""}
+  ${t.example ? `<p class="ex">e.g. ${esc(t.example)}</p>` : ""}
 </li>`;
 document.getElementById("sig").innerHTML =
   SPEC.map(g => `<h3>${g.group}</h3><ul>${g.types.map(def).join("")}</ul>`).join("");
