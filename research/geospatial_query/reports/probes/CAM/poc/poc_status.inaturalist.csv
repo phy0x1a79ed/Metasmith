@@ -1,0 +1,4 @@
+source,feature,status,n_aois_with_value,reason
+inaturalist,inat_observation_n,validated,15,total_results of /v1/observations over the AOI extent
+inaturalist,inat_gps_accuracy_m,validated,15,median positional_accuracy of the newest 200 observations per AOI
+inaturalist,inat_quality_grade,validated,15,three quality_grade-filtered total_results over the AOI extent

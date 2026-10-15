@@ -5,7 +5,8 @@
 This brief is the starting point for the sessions that expand the geospatial query's sources. Read it before you add a source, change the spec or re-probe a candidate. It holds:
 
 - links to every input: the design artifact, the POC, the probe tables, the science project
-- what an observation is, and where its quality metadata comes from
+- what an observation is, its observation type, and where its quality metadata comes from
+- which probed features returned a real value at the test AOIs
 - the off-nadir field of every imagery source probed
 - the named gaps, each with its probe outcome and its best candidate
 - how well a picture can be placed from its pixels alone
@@ -25,15 +26,16 @@ It does not repeat the probe rows, the catalogue or the POC code. Follow the lin
 | Family definitions and rules | [`layer_families.md`](layer_families.md) |
 | Original catalogue, 316 modules | [`geolocatable_data_registry.md`](geolocatable_data_registry.md), as a table in [`layer_inventory.csv`](layer_inventory.csv) |
 | Outcome per catalogue module | [`catalogue_reconciliation.csv`](catalogue_reconciliation.csv), totals in [`funnel_counts.json`](funnel_counts.json) |
-| Per-adapter status and source type | [`source_registry.csv`](source_registry.csv) |
+| Per-adapter status and observation type | [`source_registry.csv`](source_registry.csv) |
 | Every POC feature value (15 AOIs) | [`feature_values_long.csv`](feature_values_long.csv) |
 | Triage probes | [`triage_results_merged.csv`](triage_results_merged.csv), [`layer_slots_triaged.csv`](layer_slots_triaged.csv) |
 | Gap probes, one row per candidate | [`gap_source_probes.csv`](gap_source_probes.csv), built by [`merge_probes.py`](merge_probes.py) from the lane tables |
 | Off-nadir field per imagery source | [`off_nadir_fields.csv`](off_nadir_fields.csv), built by the same script |
 | Probe lanes: script, table, findings | [`probes/<lane>/`](probes/). A: satellite QC and tasked imagery. B: airborne, drone, hyperspectral. C: zoning, water, climate. D: ground-level cameras. E: picture to location. F: query ideas |
+| Validated probe features, one row per feature with a value | [`probed_features.csv`](probed_features.csv), built by [`probed_features.py`](probed_features.py) from `probes/<lane>/poc/`. Lanes SAT, AIR, HYP, REC, CAM each hold `poc.py`, `poc_values.csv` and `poc_status.csv` |
 | Angles for the 45 POC scene records | [`probes/A/scene_qc_backfill.csv`](probes/A/scene_qc_backfill.csv) |
 | Test AOIs | [`../examples/test_aois.geojson`](../examples/test_aois.geojson) |
-| Fixes after a fresh copy from the science project | [`apply_family_fixes.py`](apply_family_fixes.py) moves three family assignments. [`apply_source_type.py`](apply_source_type.py) adds the `source_type` column. Re-run both |
+| Fixes after a fresh copy from the science project | [`apply_family_fixes.py`](apply_family_fixes.py) moves three family assignments. [`apply_observation_type.py`](apply_observation_type.py) adds the `observation_type` column. Re-run both |
 | Science project | Claude Science `proj_8be587fb267f`, conversation `ea94976a-52cc-40e1-9649-39706ecd4d0e`. Files live under `~/.claude-science/orgs/0e7f7957-d72e-4f89-b89e-32275f97b806/artifacts/proj_8be587fb267f/<uuid>/v<hash>_<name>`. Take the newest by mtime |
 
 **CAUTION** Lane A's `cache/` (263 MB) and lane E's `models/` (43 GB), `images/` and `orig/` are gitignored. Run lane A's `crawl_*.py` before its `probe.py` on a fresh checkout. Lane E's `probe.py` rebuilds its table from the committed predictions. `probe.py --rerun` needs the models.
@@ -44,25 +46,27 @@ The catalogue held 317 modules in scope. 11 national modules were added, which g
 
 The user considers the catalogue already worked through. Do not treat its leftovers as the expansion plan. The gaps below are the plan.
 
-`source_registry.csv` carries a `source_type` per adapter. The registry holds 9 `overture_*` adapters. Water (6 features) and climate (12 features) were the thinnest families before this round of probes.
+`source_registry.csv` carries an `observation_type` per adapter. The registry holds 9 `overture_*` adapters. Water (6 features) and climate (12 features) were the thinnest families before this round of probes.
 
 ## What an observation is
 
 An observation is a group of features produced together. This matches OGC/ISO 19156 Observations & Measurements ([OGC](https://www.ogc.org/standard/om/)) and SOSA/SSN ([W3C](https://www.w3.org/TR/vocab-ssn/)): one act of sensing, by one procedure, of one place, at one time, with a result quality.
 
-An observation only groups features. It carries its source, its source type and its time. Everything else is a feature.
+An observation only groups features. It carries its source, its observation type and its time. Everything else is a feature.
+
+The observation type says how the data was collected: satellite, aerial (aircraft and drone), surface vehicle, fixed sensor (station, gauge or camera), crowdsourced, survey or blended. A modelled or derived product takes the type of its inputs. A land cover map is satellite and Daymet is fixed sensor. A product built from inputs of several types is blended: CHIRPS, TerraClimate, ERA5. A record compiled by people, such as zoning or a census, is survey.
 
 A time is a moment plus an accuracy, read as plus or minus. A scene is its acquisition time, accurate to seconds. A composite is its midpoint, with half its span as the accuracy: July 2023 is 16 July plus or minus 15.5 days. A query time uses the same shape as a search window.
 
-Quality metrics are features in the `quality` family. A query filters them like any other feature. Only their reading differs. Which quality features an observation carries depends on how it was made:
+Quality metrics are features in the family of the data they qualify. Scene angles and cloud cover go to spectral. Lidar quality level goes to geology. Station distance goes to climate or water bodies. A zoning snapshot date goes to socio-economic. A camera's heading goes to the family of its photos. A query filters them like any other feature. Only their reading differs. Which quality features an observation carries depends on how it was made:
 
 | Made by | Examples | Quality features |
 |---|---|---|
 | one acquisition | one scene, granule, point cloud, photo | off-nadir or incidence, sun angles, cloud cover (tile and AOI), camera heading and pitch |
 | a composite | modis_13q1 (16-day), s2_signature_v1, esa_worldcover, era5, Daymet | scene or reading count, clear-pixel share, distance to the station |
-| a registry snapshot | overture_*, eccc_npri, zoning, statcan_* | snapshot date, join level (point, block, county, province), record count |
+| a compiled record snapshot | overture_*, eccc_npri, zoning, statcan_* | snapshot date, join level (point, block, county, province), record count |
 
-The spec panel in the design artifact is the source of truth for the fields. About 70 POC features (`*_n_px`, `*_src_km`, `*_year`, `s2sig_n_scenes`, `ovt_control_*` and others) move into the `quality` family.
+The spec panel in the design artifact is the source of truth for the fields. About 70 POC features (`*_n_px`, `*_src_km`, `*_year`, `s2sig_n_scenes`, `ovt_control_*` and others) are quality features under the same rule.
 
 The POC keeps one record per AOI × adapter, with no angles. Only 45 records carry a real STAC scene id (15 AOIs × Sentinel-2, Landsat, Sentinel-1). `scene_qc_backfill.csv` holds their angles, sun position and AOI cloud.
 
@@ -89,9 +93,20 @@ Off-nadir varies little for Sentinel-2 and Landsat. It becomes a useful filter f
 | 3DEP lidar COPC | S1 | scan angle | `ScanAngleRank` | per-point dimension. The derived rasters have none | |
 | UAVSAR | S1 | incidence | `.inc` raster | per-pixel file beside each scene (Earthdata login) | |
 
-None: NAIP, HRDEM, NAPL, WESM, NOAA Digital Coast, OpenTopography, OpenAerialMap, GeoNadir, EMIT, PACE, NICFI, Planet Open Canada.
+None: NAIP, HRDEM, NAPL, WESM, NOAA Digital Coast, OpenTopography, OpenAerialMap, EMIT, PACE, NICFI, Planet Open Canada. GeoNadir carries the drone gimbal pitch in each image's EXIF, through `/api/metadata/`.
 
 The ground-level counterpart of off-nadir is camera pitch and heading. Panoramax carries `pers:pitch` and `view:azimuth`. Wikimedia, DriveBC and PhenoCam carry a heading only. Panoramax pitch is 0 on every Toronto core item and non-zero (−16 to +13°) on 202 of 999 items in the Toronto stress extent. It filters some surveys only.
+
+## Validated probe features
+
+A probed feature enters the artifact only when a POC read a real value at one or more of the 15 test AOIs. Five sonnet lanes ran the POCs on 2026-10-14. 152 features from 43 sources pass. 34 features fail:
+
+- **Pixels behind a login:** EMIT and PACE (Earthdata), EnMAP and DESIS (DLR SSO), Landsat L1 (EROS), AVIRIS-NG (Earthdata). Their scene QC features pass.
+- **No reader in the env:** Sentinel-2 L1C (JPEG2000), Tanager reflectance (HDF5), 3DEP scan angle (LAZ).
+- **No test AOI in coverage:** Maxar Open Data, NEON AOP, UAVSAR, Geograph, BC ALR, EU Urban Atlas, Vancouver and Calgary zoning. Each answers its positive control.
+- **Null at every AOI:** DESIS geometric accuracy (-1 sentinel), Zoning Atlas minimum lot size.
+
+**CAUTION** Some values are not physical units. Umbra and ICEYE backscatter are amplitude DN, Satellogic reflectance is TOA DN, and GeoNadir colour is a dataset-wide mean. Each row's description says so.
 
 ## Gaps against the original brief
 
@@ -121,7 +136,7 @@ Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q)
 
 - **Outcome:** all 45 POC scene records resolve. Each has its off-nadir or incidence, processing level, and (for optical) sun position, tile cloud and AOI cloud.
 - **AOI cloud:** derive it from `SCL` (Sentinel-2) or `qa_pixel` (Landsat). It often disagrees with tile cloud. Landsat at Bingham reads 0.48 % on the scene and 31 % over the AOI. A Sentinel-2 scene at farm_sk_quarter reads 8.99 % on the tile and 64.7 % over the AOI.
-- **Next:** refactor the POC adapters to return these as `quality` features.
+- **Next:** refactor the POC adapters to return these as spectral QC features.
 
 ### Q2. Query cannot pick bands or indices
 
@@ -137,7 +152,7 @@ Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q)
 ### Q4. Query cannot filter on QC
 
 - **Outcome:** filters change counts as expected on Planetary Computer. Sentinel-2 2023 at farm_sk_quarter: 129 items, 36 under 10 % cloud.
-- **Spec:** a filter on a `quality` feature, such as `off_nadir_deg <= 15`. Send a filter the catalogue knows to the server. Apply the rest, AOI cloud among them, after the read.
+- **Spec:** a filter on a QC feature, such as `off_nadir_deg <= 15`. Send a filter the catalogue knows to the server. Apply the rest, AOI cloud among them, after the read.
 - **CAUTION** the sun property differs per catalogue: `s2:mean_solar_zenith` on Planetary Computer, `view:sun_elevation` on Earth Search. Keep a property map per collection.
 
 ### Q5. Result holds no pointer to the data itself
@@ -170,7 +185,7 @@ Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q)
 ### S6. No zoning or land-use records
 
 - **US:** the National Zoning Atlas hits 2/15 (Detroit, Bingham) with district code, housing treatment, parking, height cap and minimum lot. **CAUTION** its terms bar download without written permission. PAD-US hits 1/15 and is protected land, not zoning. Regrid is paid.
-- **Canada:** Toronto open data hits 2/15. Vancouver and Calgary work but sit outside the test AOIs. BC ALR hits both Fraser Valley AOIs. Each city needs its own adapter.
+- **Canada:** Toronto open data hits 2/15. Vancouver and Calgary work but sit outside the test AOIs. BC ALR polygons touch the bounding box of 3 AOIs and intersect none. Each city needs its own adapter.
 - **EU:** Urban Atlas works on a Paris control and covers no test AOI.
 
 ### S7. Too few water features
@@ -184,7 +199,7 @@ Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q)
 ### S9. No ground-level camera imagery
 
 - **Vehicle-mounted:** Panoramax hits 3/15 (Toronto core, Toronto stress, Montreal), needs no key and has the best per-image QC: `view:azimuth`, `pers:pitch`, `quality:horizontal_accuracy`. Mapillary fails because the POC adapter sends no `access_token` (error 190). A free token fixes it. KartaView returns `"Restricted access!"` inside HTTP 200. Bee Maps and Street View need a key.
-- **Fixed cameras:** DriveBC and PhenoCam work, 0/15, with a cardinal heading. Windy, 511 Ontario and 511 Alberta need a key. AMOS is gone.
+- **Fixed cameras:** DriveBC has 2 cameras in the BC AOIs. PhenoCam has a site within 30 km of 4/15. Both carry a cardinal heading. Windy, 511 Ontario and 511 Alberta need a key. AMOS is gone.
 - **Geotagged photos:** iNaturalist 15/15, GBIF 14/15, Wikimedia Commons 7/15 within 1 km. Flickr needs a key. Geograph is UK only.
 - **Datasets:** OSV-5M (5.1M Mapillary images, CC-BY-SA-4.0) downloads without login. BDD100K, nuScenes and YFCC100M need a form or are unreachable.
 
@@ -237,7 +252,7 @@ The pipeline to build:
 1. Get the user's decision on S4: a commercial tier and quote-only adapters.
 2. Ask the National Zoning Atlas for permission, or drop it for US zoning.
 3. Get a free Mapillary token and fix the POC adapter.
-4. Refactor the POC adapters to return observations, with quality metrics as `quality` features.
+4. Refactor the POC adapters to return observations, with quality metrics as features in the family they qualify.
 5. Build adapters for the best candidates in the gap table, starting with S7, S8, S5 and S3.
 6. Change the POC query to an AOI, a list of moments and a list of filters.
 7. Build the picture-to-location pipeline as an adapter that returns a place and a radius.

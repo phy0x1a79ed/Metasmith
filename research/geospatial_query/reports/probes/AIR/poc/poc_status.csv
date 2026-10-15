@@ -1,0 +1,24 @@
+source,feature,status,n_aois_with_value,reason
+aviris,aviris_reflectance,dropped,0,"CMR granule hits per AOI {'mine_syncrude_ab': 17, 'stress_oilsands_region': 56}; reflectance is a whole ENVI flight line, anonymous read fails: sample data URL https://data.ornldaac.earthdata.nasa.gov/protected/aviris/AVIRIS-NG_L2_Reflectance/data/ang20170811t212940_h2o_v2p9_img.hdr answers HTTP 302 redirecting to https://urs.earthdata.nasa.gov/oauth/authorize?client_id=esz"
+naip_pc,naip_flight_year,validated,4,"read at 4 AOI(s): city_us_detroit_mi, city_windsor_on, farm_us_ia_story, mine_us_bingham_ut"
+naip_pc,naip_rgbnir_dn,validated,4,"read at 4 AOI(s): city_us_detroit_mi, city_windsor_on, farm_us_ia_story, mine_us_bingham_ut"
+neon_aop,neon_hyperspec_reflectance,dropped,0,"59 NEON sites carry AOP products; nearest to any test AOI is REDB at 41.6 km (mine_us_bingham_ut), outside any AOP flight box (boxes span a few km around a site); AOP tiles are whole-tile downloads"
+neon_aop,neon_lidar_elev_m,dropped,0,"59 NEON sites carry AOP products; nearest to any test AOI is REDB at 41.6 km (mine_us_bingham_ut), outside any AOP flight box (boxes span a few km around a site); AOP tiles are whole-tile downloads"
+neon_aop,neon_rgb_dn,dropped,0,"59 NEON sites carry AOP products; nearest to any test AOI is REDB at 41.6 km (mine_us_bingham_ut), outside any AOP flight box (boxes span a few km around a site); AOP tiles are whole-tile downloads"
+noaa_dav,noaa_dav_imagery_n,validated,4,"read at 4 AOI(s): city_us_detroit_mi, city_windsor_on, farm_us_ia_story, mine_us_bingham_ut"
+noaa_dav,noaa_dav_lidar_survey_n,validated,2,"read at 2 AOI(s): city_us_detroit_mi, city_windsor_on"
+nrcan_hrdem,hrdem_dsm_elev_m,validated,9,"read at 9 AOI(s): city_montreal_core, city_toronto_core, city_windsor_on, farm_on_essex, mine_sudbury_on, mine_syncrude_ab, stress_city_toronto_full, stress_mine_hvc_full, stress_oilsands_region"
+nrcan_hrdem,hrdem_dtm_elev_m,validated,9,"read at 9 AOI(s): city_montreal_core, city_toronto_core, city_windsor_on, farm_on_essex, mine_sudbury_on, mine_syncrude_ab, stress_city_toronto_full, stress_mine_hvc_full, stress_oilsands_region"
+nrcan_napl,napl_airphoto_dn,validated,1,read at 1 AOI(s): stress_city_toronto_full
+opentopography,opentopo_lidar_survey_n,validated,4,"read at 4 AOI(s): city_montreal_core, city_us_detroit_mi, city_windsor_on, farm_us_ia_story"
+uavsar_asf,uavsar_incidence_deg,dropped,0,ASF UAVSAR search by AOI polygon returned scenes for 0/15 AOIs (all zero)
+uavsar_asf,uavsar_sar_backscatter,dropped,0,ASF UAVSAR search by AOI polygon returned scenes for 0/15 AOIs (all zero)
+usgs3dep_pc,usgs3dep_dsm_elev_m,validated,3,"read at 3 AOI(s): city_us_detroit_mi, city_windsor_on, mine_us_bingham_ut"
+usgs3dep_pc,usgs3dep_dtm_elev_m,validated,3,"read at 3 AOI(s): city_us_detroit_mi, city_windsor_on, mine_us_bingham_ut"
+usgs3dep_pc,usgs3dep_hag_m,validated,3,"read at 3 AOI(s): city_us_detroit_mi, city_windsor_on, mine_us_bingham_ut"
+usgs3dep_pc,usgs3dep_intensity,validated,3,"read at 3 AOI(s): city_us_detroit_mi, city_windsor_on, mine_us_bingham_ut"
+usgs3dep_pc,usgs3dep_point_class,validated,3,"read at 3 AOI(s): city_us_detroit_mi, city_windsor_on, mine_us_bingham_ut"
+usgs3dep_pc,usgs3dep_returns_n,validated,3,"read at 3 AOI(s): city_us_detroit_mi, city_windsor_on, mine_us_bingham_ut"
+usgs3dep_pc,usgs3dep_scan_angle_deg,dropped,0,"per-point ScanAngleRank lives inside COPC LAZ; no LAZ decoder (laspy/lazrs/pdal) in the geoquery env and no derived raster carries it; no 3DEP lidar tile covering the AOI on Planetary Computer (US-only, partial)"
+usgs_wesm,wesm_quality_level,validated,4,"read at 4 AOI(s): city_us_detroit_mi, city_windsor_on, farm_us_ia_story, mine_us_bingham_ut"
+usgs_wesm,wesm_workunit_n,validated,4,"read at 4 AOI(s): city_us_detroit_mi, city_windsor_on, farm_us_ia_story, mine_us_bingham_ut"

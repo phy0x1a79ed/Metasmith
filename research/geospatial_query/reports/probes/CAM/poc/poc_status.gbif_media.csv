@@ -1,0 +1,3 @@
+source,feature,status,n_aois_with_value,reason
+gbif_media,gbifmedia_image_n,validated,15,count of /occurrence/search mediaType=StillImage over the AOI polygon
+gbif_media,gbifmedia_coordinate_uncertainty_m,validated,13,median coordinateUncertaintyInMeters over the first 300 records per AOI

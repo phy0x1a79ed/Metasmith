@@ -1,0 +1,5 @@
+source,feature,status,n_aois_with_value,reason
+drivebc_webcams,drivebc_webcam_n,validated,2,"camera list filtered by AOI polygon; BC AOIs only (DriveBC is BC-only, other AOIs are out of coverage)"
+drivebc_webcams,drivebc_nearest_camera_km,validated,2,"nearest camera to the AOI polygon, BC AOIs only"
+drivebc_webcams,drivebc_camera_heading,validated,2,orientation field of the nearest camera if within 5 km
+drivebc_webcams,drivebc_snapshot_date,validated,2,last_update_modified of the nearest camera if within 5 km

@@ -1,0 +1,24 @@
+source,feature,status,n_aois_with_value,reason
+emit,emit_reflectance,dropped,0,"anonymous ranged GET of the granule NetCDF returns HTTP 401 (text/html, redirect to Earthdata login); the s3 bucket also answers 403 anonymously"
+emit,emit_cloud_cover_scene_pct,validated,11,
+emit,emit_sun_zenith_deg,validated,11,
+emit,emit_sun_azimuth_deg,validated,11,
+pace_oci,pace_reflectance,dropped,0,"anonymous ranged GET of the granule NetCDF returns HTTP 401 (text/html, redirect to Earthdata login); the s3 bucket also answers 403 anonymously"
+pace_oci,pace_cloud_cover_scene_pct,validated,15,
+enmap,enmap_reflectance,dropped,0,"image asset is reachable only behind DLR SSO: anonymous ranged GET returns HTTP 200 text/html (login page), not a TIFF"
+enmap,enmap_off_nadir_across_deg,validated,15,
+enmap,enmap_off_nadir_along_deg,validated,15,
+enmap,enmap_sun_elevation_deg,validated,15,
+enmap,enmap_cloud_cover_scene_pct,validated,15,
+enmap,enmap_overall_quality,validated,15,
+desis,desis_reflectance,dropped,0,"image asset is reachable only behind DLR SSO: anonymous ranged GET returns HTTP 200 text/html (login page), not a TIFF"
+desis,desis_incidence_deg,validated,2,
+desis,desis_sun_elevation_deg,validated,2,
+desis,desis_cloud_cover_scene_pct,validated,2,
+desis,desis_geometric_accuracy_m,dropped,0,"every intersecting DESIS item carries -1.0 for eastern/northern geometric accuracy, the product's unavailable sentinel"
+oam,oam_uav_rgb_dn,validated,1,
+oam,oam_uav_gsd_m,validated,1,
+geonadir,geonadir_ortho_dn,validated,1,
+geonadir,geonadir_ortho_gsd_m,validated,1,
+geonadir,geonadir_gimbal_pitch_deg,validated,1,
+geonadir,geonadir_flight_height_m,validated,1,

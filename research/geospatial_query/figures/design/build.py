@@ -17,27 +17,26 @@ from metasmith.models.dag_layout import layout
 
 FAMILIES = [
     "Socio-economic", "Infrastructure & industry", "Hazards", "Macrobiology", "Geology",
-    "Microbiology & health", "Climate", "Spectral", "Water bodies", "Latent", "Quality",
+    "Microbiology & health", "Climate", "Spectral", "Water bodies", "Latent",
 ]
 
 BLURBS = [
     "People, money, movement, tenure and place names: census, population, commuting, parcels.",
-    "What people build and run: buildings, transport, power, pipelines, mines, regulated facilities.",
+    "What people build and run: buildings, transport, power, pipelines, mines, regulated facilities, street-level imagery.",
     "Things that can hurt: air quality, contamination, toxic and GHG releases, earthquakes.",
-    "Visible life: land cover and change, vegetation index, biomass, crops, species records.",
-    "The solid Earth: bedrock, surficial geology, elevation, radiometrics, glaciers, permafrost.",
+    "Visible life: land cover and change, vegetation index, biomass, crops, species records and photos, canopy cameras.",
+    "The solid Earth: bedrock, surficial geology, elevation and lidar, radiometrics, glaciers, permafrost.",
     "Human health and microbes: health outcomes, clinics, disease and wastewater surveillance.",
-    "Atmospheric and seasonal state: reanalysis climatology and sea ice.",
-    "Sensor pixels: Sentinel-2 optical and band signatures, Sentinel-1 and PALSAR radar, Landsat thermal.",
-    "Liquid water in lakes, rivers, oceans and aquifers.",
+    "Atmospheric and seasonal state: reanalysis, weather stations, gridded climate, sea ice.",
+    "Sensor pixels and their scene QC: optical, hyperspectral, radar and thermal from satellite, aircraft and drone, with view angle, sun angle and cloud cover.",
+    "Liquid water in lakes, rivers, oceans and aquifers, with river gauges and stream networks.",
     "Embeddings from foundation models, read by fitting a model, not by looking up a value.",
-    "How good one observation is: off-nadir, sun elevation, cloud cover, camera pitch, station distance.",
 ]
 
 # keys used by layer_families.md and the reconciled tables, in FAMILIES order
 FAMILY_KEYS = [
     "socio-economic", "infrastructure", "hazards", "macrobiology", "geology",
-    "public health & microbiology", "climate", "spectral", "water bodies", "latent", "quality",
+    "public health & microbiology", "climate", "spectral", "water bodies", "latent",
 ]
 PC = "https://planetarycomputer.microsoft.com/dataset/"
 OVT = "https://docs.overturemaps.org/guides/"
@@ -162,7 +161,7 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
             out[FAMILY_KEYS.index(r["family"])].append(
                 {"name": name, "description": describe(name, slot), "source": adapter, "layer": slot,
                  "module": r["module_id"], "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[adapter],
-                 "source_type": r["source_type"], "probed": False}
+                 "observation_type": r["observation_type"], "probed": False}
             )
     return out
 
@@ -173,7 +172,7 @@ def add_probed(out: list[list[dict]], probed_csv: Path) -> None:
             out[FAMILY_KEYS.index(r["family"])].append(
                 {"name": r["feature"], "description": r["description"], "source": r["source"], "layer": r["gap"],
                  "module": "", "licence": licence_tier(r["licence"]), "url": r["source_url"],
-                 "source_type": r["source_type"], "probed": True}
+                 "observation_type": r["observation_type"], "probed": True}
             )
 
 

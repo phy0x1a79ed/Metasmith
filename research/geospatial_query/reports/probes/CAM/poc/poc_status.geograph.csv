@@ -1,0 +1,2 @@
+source,feature,status,n_aois_with_value,reason
+geograph,geograph_photo_n,dropped,0,"Geograph covers Britain and Ireland only; no AOI is inside it (AOI answers ['outside coverage area']; London control 15 items). Outside coverage is not a zero, so no value is written"

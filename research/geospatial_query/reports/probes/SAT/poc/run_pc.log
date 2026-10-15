@@ -1,0 +1,202 @@
+== sentinel2_l2a
+  city_montreal_core         sentinel2_l2a        s2_off_nadir_deg             5.30265
+  city_montreal_core         sentinel2_l2a        s2_sun_elevation_deg         64.75657
+  city_montreal_core         sentinel2_l2a        s2_sun_azimuth_deg           152.1616
+  city_montreal_core         sentinel2_l2a        s2_cloud_cover_scene_pct     0.00128
+  city_montreal_core         sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  city_toronto_core          sentinel2_l2a        s2_off_nadir_deg             3.67234
+  city_toronto_core          sentinel2_l2a        s2_sun_elevation_deg         65.58881
+  city_toronto_core          sentinel2_l2a        s2_sun_azimuth_deg           149.20476
+  city_toronto_core          sentinel2_l2a        s2_cloud_cover_scene_pct     0.20096
+  city_toronto_core          sentinel2_l2a        s2_cloud_cover_aoi_pct       0.09005
+  city_us_detroit_mi         sentinel2_l2a        s2_off_nadir_deg             3.42907
+  city_us_detroit_mi         sentinel2_l2a        s2_sun_elevation_deg         66.81739
+  city_us_detroit_mi         sentinel2_l2a        s2_sun_azimuth_deg           143.17699
+  city_us_detroit_mi         sentinel2_l2a        s2_cloud_cover_scene_pct     0.00138
+  city_us_detroit_mi         sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  city_windsor_on            sentinel2_l2a        s2_off_nadir_deg             2.78517
+  city_windsor_on            sentinel2_l2a        s2_sun_elevation_deg         52.26657
+  city_windsor_on            sentinel2_l2a        s2_sun_azimuth_deg           156.16707
+  city_windsor_on            sentinel2_l2a        s2_cloud_cover_scene_pct     0.00308
+  city_windsor_on            sentinel2_l2a        s2_cloud_cover_aoi_pct       0.01002
+  farm_ab_taber              sentinel2_l2a        s2_off_nadir_deg             4.11064
+  farm_ab_taber              sentinel2_l2a        s2_sun_elevation_deg         58.42869
+  farm_ab_taber              sentinel2_l2a        s2_sun_azimuth_deg           155.96129
+  farm_ab_taber              sentinel2_l2a        s2_cloud_cover_scene_pct     0.00731
+  farm_ab_taber              sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  farm_on_essex              sentinel2_l2a        s2_off_nadir_deg             2.78517
+  farm_on_essex              sentinel2_l2a        s2_sun_elevation_deg         52.26657
+  farm_on_essex              sentinel2_l2a        s2_sun_azimuth_deg           156.16707
+  farm_on_essex              sentinel2_l2a        s2_cloud_cover_scene_pct     0.00308
+  farm_on_essex              sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  farm_sk_quarter            sentinel2_l2a        s2_off_nadir_deg             4.52465
+  farm_sk_quarter            sentinel2_l2a        s2_sun_elevation_deg         50.99656
+  farm_sk_quarter            sentinel2_l2a        s2_sun_azimuth_deg           161.553
+  farm_sk_quarter            sentinel2_l2a        s2_cloud_cover_scene_pct     0.208
+  farm_sk_quarter            sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  farm_us_ia_story           sentinel2_l2a        s2_off_nadir_deg             5.26275
+  farm_us_ia_story           sentinel2_l2a        s2_sun_elevation_deg         53.00129
+  farm_us_ia_story           sentinel2_l2a        s2_sun_azimuth_deg           154.12578
+  farm_us_ia_story           sentinel2_l2a        s2_cloud_cover_scene_pct     0.01712
+  farm_us_ia_story           sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  mine_hvc_bc                sentinel2_l2a        s2_off_nadir_deg             7.38537
+  mine_hvc_bc                sentinel2_l2a        s2_sun_elevation_deg         46.60666
+  mine_hvc_bc                sentinel2_l2a        s2_sun_azimuth_deg           160.60952
+  mine_hvc_bc                sentinel2_l2a        s2_cloud_cover_scene_pct     0.12736
+  mine_hvc_bc                sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  mine_sudbury_on            sentinel2_l2a        s2_off_nadir_deg             3.87352
+  mine_sudbury_on            sentinel2_l2a        s2_sun_elevation_deg         39.35486
+  mine_sudbury_on            sentinel2_l2a        s2_sun_azimuth_deg           165.23775
+  mine_sudbury_on            sentinel2_l2a        s2_cloud_cover_scene_pct     0.17192
+  mine_sudbury_on            sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  mine_syncrude_ab           sentinel2_l2a        s2_off_nadir_deg             8.12288
+  mine_syncrude_ab           sentinel2_l2a        s2_sun_elevation_deg         38.88578
+  mine_syncrude_ab           sentinel2_l2a        s2_sun_azimuth_deg           171.37597
+  mine_syncrude_ab           sentinel2_l2a        s2_cloud_cover_scene_pct     0.08013
+  mine_syncrude_ab           sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  mine_us_bingham_ut         sentinel2_l2a        s2_off_nadir_deg             10.27316
+  mine_us_bingham_ut         sentinel2_l2a        s2_sun_elevation_deg         54.00878
+  mine_us_bingham_ut         sentinel2_l2a        s2_sun_azimuth_deg           158.02947
+  mine_us_bingham_ut         sentinel2_l2a        s2_cloud_cover_scene_pct     0.00034
+  mine_us_bingham_ut         sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  stress_city_toronto_full   sentinel2_l2a        s2_off_nadir_deg             3.67234
+  stress_city_toronto_full   sentinel2_l2a        s2_sun_elevation_deg         65.58881
+  stress_city_toronto_full   sentinel2_l2a        s2_sun_azimuth_deg           149.20476
+  stress_city_toronto_full   sentinel2_l2a        s2_cloud_cover_scene_pct     0.20096
+  stress_city_toronto_full   sentinel2_l2a        s2_cloud_cover_aoi_pct       0.02122
+  stress_mine_hvc_full       sentinel2_l2a        s2_off_nadir_deg             7.38537
+  stress_mine_hvc_full       sentinel2_l2a        s2_sun_elevation_deg         46.60666
+  stress_mine_hvc_full       sentinel2_l2a        s2_sun_azimuth_deg           160.60952
+  stress_mine_hvc_full       sentinel2_l2a        s2_cloud_cover_scene_pct     0.12736
+  stress_mine_hvc_full       sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+  stress_oilsands_region     sentinel2_l2a        s2_off_nadir_deg             8.12288
+  stress_oilsands_region     sentinel2_l2a        s2_sun_elevation_deg         38.88578
+  stress_oilsands_region     sentinel2_l2a        s2_sun_azimuth_deg           171.37597
+  stress_oilsands_region     sentinel2_l2a        s2_cloud_cover_scene_pct     0.08013
+  stress_oilsands_region     sentinel2_l2a        s2_cloud_cover_aoi_pct       0.0
+== sentinel2_l2a done in 19s
+== landsat_c2l2_st
+  city_montreal_core         landsat_c2l2_st      lst_off_nadir_deg            0
+  city_montreal_core         landsat_c2l2_st      lst_sun_elevation_deg        45.48142
+  city_montreal_core         landsat_c2l2_st      lst_sun_azimuth_deg          154.66028
+  city_montreal_core         landsat_c2l2_st      lst_cloud_cover_scene_pct    0.52
+  city_montreal_core         landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  city_toronto_core          landsat_c2l2_st      lst_off_nadir_deg            0
+  city_toronto_core          landsat_c2l2_st      lst_sun_elevation_deg        58.258
+  city_toronto_core          landsat_c2l2_st      lst_sun_azimuth_deg          144.45006
+  city_toronto_core          landsat_c2l2_st      lst_cloud_cover_scene_pct    0.05
+  city_toronto_core          landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.69663
+  city_us_detroit_mi         landsat_c2l2_st      lst_off_nadir_deg            0
+  city_us_detroit_mi         landsat_c2l2_st      lst_sun_elevation_deg        45.56832
+  city_us_detroit_mi         landsat_c2l2_st      lst_sun_azimuth_deg          154.11631
+  city_us_detroit_mi         landsat_c2l2_st      lst_cloud_cover_scene_pct    0.09
+  city_us_detroit_mi         landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  city_windsor_on            landsat_c2l2_st      lst_off_nadir_deg            0
+  city_windsor_on            landsat_c2l2_st      lst_sun_elevation_deg        45.56832
+  city_windsor_on            landsat_c2l2_st      lst_sun_azimuth_deg          154.11631
+  city_windsor_on            landsat_c2l2_st      lst_cloud_cover_scene_pct    0.09
+  city_windsor_on            landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  farm_ab_taber              landsat_c2l2_st      lst_off_nadir_deg            0
+  farm_ab_taber              landsat_c2l2_st      lst_sun_elevation_deg        42.95637
+  farm_ab_taber              landsat_c2l2_st      lst_sun_azimuth_deg          157.44607
+  farm_ab_taber              landsat_c2l2_st      lst_cloud_cover_scene_pct    0.03
+  farm_ab_taber              landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  farm_on_essex              landsat_c2l2_st      lst_off_nadir_deg            0
+  farm_on_essex              landsat_c2l2_st      lst_sun_elevation_deg        45.56832
+  farm_on_essex              landsat_c2l2_st      lst_sun_azimuth_deg          154.11631
+  farm_on_essex              landsat_c2l2_st      lst_cloud_cover_scene_pct    0.09
+  farm_on_essex              landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  farm_sk_quarter            landsat_c2l2_st      lst_off_nadir_deg            0
+  farm_sk_quarter            landsat_c2l2_st      lst_sun_elevation_deg        45.80333
+  farm_sk_quarter            landsat_c2l2_st      lst_sun_azimuth_deg          155.80631
+  farm_sk_quarter            landsat_c2l2_st      lst_cloud_cover_scene_pct    0.03
+  farm_sk_quarter            landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  farm_us_ia_story           landsat_c2l2_st      lst_off_nadir_deg            0
+  farm_us_ia_story           landsat_c2l2_st      lst_sun_elevation_deg        42.47616
+  farm_us_ia_story           landsat_c2l2_st      lst_sun_azimuth_deg          156.68861
+  farm_us_ia_story           landsat_c2l2_st      lst_cloud_cover_scene_pct    0.16
+  farm_us_ia_story           landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  mine_hvc_bc                landsat_c2l2_st      lst_off_nadir_deg            0
+  mine_hvc_bc                landsat_c2l2_st      lst_sun_elevation_deg        59.54141
+  mine_hvc_bc                landsat_c2l2_st      lst_sun_azimuth_deg          148.00417
+  mine_hvc_bc                landsat_c2l2_st      lst_cloud_cover_scene_pct    1.27
+  mine_hvc_bc                landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  mine_sudbury_on            landsat_c2l2_st      lst_off_nadir_deg            0
+  mine_sudbury_on            landsat_c2l2_st      lst_sun_elevation_deg        38.84127
+  mine_sudbury_on            landsat_c2l2_st      lst_sun_azimuth_deg          159.54304
+  mine_sudbury_on            landsat_c2l2_st      lst_cloud_cover_scene_pct    0.0
+  mine_sudbury_on            landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  mine_syncrude_ab           landsat_c2l2_st      lst_off_nadir_deg            0
+  mine_syncrude_ab           landsat_c2l2_st      lst_sun_elevation_deg        28.7808
+  mine_syncrude_ab           landsat_c2l2_st      lst_sun_azimuth_deg          166.96146
+  mine_syncrude_ab           landsat_c2l2_st      lst_cloud_cover_scene_pct    0.8
+  mine_syncrude_ab           landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.0
+  mine_us_bingham_ut         landsat_c2l2_st      lst_off_nadir_deg            0
+  mine_us_bingham_ut         landsat_c2l2_st      lst_sun_elevation_deg        47.36245
+  mine_us_bingham_ut         landsat_c2l2_st      lst_sun_azimuth_deg          152.33994
+  mine_us_bingham_ut         landsat_c2l2_st      lst_cloud_cover_scene_pct    0.48
+  mine_us_bingham_ut         landsat_c2l2_st      lst_cloud_cover_aoi_pct      31.04381
+  stress_city_toronto_full   landsat_c2l2_st      lst_off_nadir_deg            0
+  stress_city_toronto_full   landsat_c2l2_st      lst_sun_elevation_deg        58.258
+  stress_city_toronto_full   landsat_c2l2_st      lst_sun_azimuth_deg          144.45006
+  stress_city_toronto_full   landsat_c2l2_st      lst_cloud_cover_scene_pct    0.05
+  stress_city_toronto_full   landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.61429
+  stress_mine_hvc_full       landsat_c2l2_st      lst_off_nadir_deg            0
+  stress_mine_hvc_full       landsat_c2l2_st      lst_sun_elevation_deg        59.54141
+  stress_mine_hvc_full       landsat_c2l2_st      lst_sun_azimuth_deg          148.00417
+  stress_mine_hvc_full       landsat_c2l2_st      lst_cloud_cover_scene_pct    1.27
+  stress_mine_hvc_full       landsat_c2l2_st      lst_cloud_cover_aoi_pct      3.00185
+  stress_oilsands_region     landsat_c2l2_st      lst_off_nadir_deg            0
+  stress_oilsands_region     landsat_c2l2_st      lst_sun_elevation_deg        28.7808
+  stress_oilsands_region     landsat_c2l2_st      lst_sun_azimuth_deg          166.96146
+  stress_oilsands_region     landsat_c2l2_st      lst_cloud_cover_scene_pct    0.8
+  stress_oilsands_region     landsat_c2l2_st      lst_cloud_cover_aoi_pct      0.00359
+== landsat_c2l2_st done in 12s
+== sentinel1_rtc
+  city_montreal_core         sentinel1_rtc        s1_incidence_deg             44.3337
+  city_toronto_core          sentinel1_rtc        s1_incidence_deg             44.11881
+  city_us_detroit_mi         sentinel1_rtc        s1_incidence_deg             35.0105
+  city_windsor_on            sentinel1_rtc        s1_incidence_deg             35.12983
+  farm_ab_taber              sentinel1_rtc        s1_incidence_deg             39.5655
+  farm_on_essex              sentinel1_rtc        s1_incidence_deg             36.38753
+  farm_sk_quarter            sentinel1_rtc        s1_incidence_deg             43.08837
+  farm_us_ia_story           sentinel1_rtc        s1_incidence_deg             33.25853
+  mine_hvc_bc                sentinel1_rtc        s1_incidence_deg             40.38748
+  mine_sudbury_on            sentinel1_rtc        s1_incidence_deg             39.74087
+  mine_syncrude_ab           sentinel1_rtc        s1_incidence_deg             43.70282
+  mine_us_bingham_ut         sentinel1_rtc        s1_incidence_deg             38.66034
+  stress_city_toronto_full   sentinel1_rtc        s1_incidence_deg             44.20779
+  stress_mine_hvc_full       sentinel1_rtc        s1_incidence_deg             40.38748
+  stress_oilsands_region     sentinel1_rtc        s1_incidence_deg             43.70282
+== sentinel1_rtc done in 13s
+             source                       feature     status  n_aois_with_value                                                                                                                                                                                                                                                                                                                    reason
+19    sentinel2_l2a              s2_off_nadir_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+20    sentinel2_l2a          s2_sun_elevation_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+21    sentinel2_l2a            s2_sun_azimuth_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+22    sentinel2_l2a      s2_cloud_cover_scene_pct  validated                 15                                                                                                                                                                                                                                                                                                                          
+23    sentinel2_l2a        s2_cloud_cover_aoi_pct  validated                 15                                                                                                                                                                                                                                                                                                                          
+24  landsat_c2l2_st             lst_off_nadir_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+25  landsat_c2l2_st         lst_sun_elevation_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+26  landsat_c2l2_st           lst_sun_azimuth_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+27  landsat_c2l2_st     lst_cloud_cover_scene_pct  validated                 15                                                                                                                                                                                                                                                                                                                          
+28  landsat_c2l2_st       lst_cloud_cover_aoi_pct  validated                 15                                                                                                                                                                                                                                                                                                                          
+29    sentinel1_rtc              s1_incidence_deg  validated                 15                                                                                                                                                                                                                                                                                                                          
+0        maxar_open             maxar_reflectance    dropped                  0                                                                                                                                                                                                 no AOI coverage: none of 55 event collections (event-based hurricane/flood/fire footprints) intersects any of the 15 AOIs
+1        maxar_open           maxar_off_nadir_deg    dropped                  0                                                                                                                                                                                                 no AOI coverage: none of 55 event collections (event-based hurricane/flood/fire footprints) intersects any of the 15 AOIs
+2        maxar_open           maxar_incidence_deg    dropped                  0                                                                                                                                                                                                 no AOI coverage: none of 55 event collections (event-based hurricane/flood/fire footprints) intersects any of the 15 AOIs
+3        maxar_open       maxar_sun_elevation_deg    dropped                  0                                                                                                                                                                                                 no AOI coverage: none of 55 event collections (event-based hurricane/flood/fire footprints) intersects any of the 15 AOIs
+4        maxar_open   maxar_cloud_cover_scene_pct    dropped                  0                                                                                                                                                                                                 no AOI coverage: none of 55 event collections (event-based hurricane/flood/fire footprints) intersects any of the 15 AOIs
+5        umbra_open         umbra_sar_backscatter  validated                  2                                                                                                                                                                                                                                                                                                                       NaN
+6        umbra_open           umbra_incidence_deg  validated                  2                                                                                                                                                                                                                                                                                                                       NaN
+7      capella_open       capella_sar_backscatter  validated                  2                                                                                                                                                                                                                                                                                                                       NaN
+8      capella_open         capella_incidence_deg  validated                  2                                                                                                                                                                                                                                                                                                                       NaN
+9      capella_open        capella_look_angle_deg  validated                  2                                                                                                                                                                                                                                                                                                                       NaN
+10       iceye_open         iceye_sar_backscatter  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
+11       iceye_open           iceye_off_nadir_deg  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
+12       iceye_open           iceye_incidence_deg  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
+13      planet_open            planet_reflectance    dropped                  0  the only items intersecting an AOI are Tanager scenes (hyperspectral); no multispectral Planet open item covers any AOI; Tanager surface reflectance is only published as HDF5 (ortho_sr_hdf5/basic_sr_hdf5); the geoquery env has no h5py and no GDAL HDF5 driver, so it cannot be window-read; not installing packages
+14      planet_open  planet_hyperspec_reflectance    dropped                  0                                                                                                                           Tanager surface reflectance is only published as HDF5 (ortho_sr_hdf5/basic_sr_hdf5); the geoquery env has no h5py and no GDAL HDF5 driver, so it cannot be window-read; not installing packages
+15      planet_open          planet_off_nadir_deg  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
+16      planet_open      planet_sun_elevation_deg  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
+17      planet_open  planet_cloud_cover_scene_pct  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
+18      planet_open       planet_quality_category  validated                  3                                                                                                                                                                                                                                                                                                                       NaN
