@@ -307,7 +307,8 @@ const SPEC = [
     { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
       ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"]] },
     { name: "ObservationType", kind: "is one of", opts: [["satellite"], ["aerial"], ["surface vehicle"], ["fixed sensor"],
-      ["crowdsourced"], ["survey"], ["blended"]] },
+      ["crowdsourced"], ["survey"], ["blended"]],
+      note: "How the data was collected; a modelled product takes the type of its inputs, and one built from several types is blended." },
     { name: "Feature", kind: "is composed of", rows: [
       ["feature", "text"], ["family", "FeatureFamily"], ["value", "any"], ["SI_unit", "text"]] },
     { name: "Observation", kind: "is composed of", rows: [
@@ -343,7 +344,7 @@ const def = t => `<li class="def" id="t-${t.name}">
   <ul>${t.opts
     ? t.opts.map(([o, note]) => `<li><code class="t">${esc(o)}</code>${note ? ` <span class="k">· ${esc(note)}</span>` : ""}</li>`).join("")
     : t.rows.map(([f, ty]) => `<li><code>${esc(f)}</code>: ${typeExpr(ty)}</li>`).join("")}</ul>
-  ${t.example ? `<p class="ex">e.g. ${esc(t.example)}</p>` : ""}
+  ${t.note ? `<p class="ex">${esc(t.note)}</p>` : ""}${t.example ? `<p class="ex">e.g. ${esc(t.example)}</p>` : ""}
 </li>`;
 document.getElementById("sig").innerHTML =
   SPEC.map(g => `<h3>${g.group}</h3><ul>${g.types.map(def).join("")}</ul>`).join("");
