@@ -17,7 +17,7 @@ from metasmith.models.dag_layout import layout
 
 FAMILIES = [
     "Socio-economic", "Infrastructure & industry", "Hazards", "Macrobiology", "Geology",
-    "Microbiology & health", "Climate", "Spectral", "Water bodies", "Latent",
+    "Microbiology & health", "Climate", "Spectral", "Water bodies", "Latent", "Quality",
 ]
 
 BLURBS = [
@@ -31,12 +31,13 @@ BLURBS = [
     "Sensor pixels: Sentinel-2 optical and band signatures, Sentinel-1 and PALSAR radar, Landsat thermal.",
     "Liquid water in lakes, rivers, oceans and aquifers.",
     "Embeddings from foundation models, read by fitting a model, not by looking up a value.",
+    "How good one observation is: off-nadir, sun elevation, cloud cover, camera pitch, station distance.",
 ]
 
 # keys used by layer_families.md and the reconciled tables, in FAMILIES order
 FAMILY_KEYS = [
     "socio-economic", "infrastructure", "hazards", "macrobiology", "geology",
-    "public health & microbiology", "climate", "spectral", "water bodies", "latent",
+    "public health & microbiology", "climate", "spectral", "water bodies", "latent", "quality",
 ]
 PC = "https://planetarycomputer.microsoft.com/dataset/"
 OVT = "https://docs.overturemaps.org/guides/"
@@ -160,11 +161,25 @@ def features_by_family(long_csv: Path) -> list[list[dict]]:
             seen.add(name)
             out[FAMILY_KEYS.index(r["family"])].append(
                 {"name": name, "description": describe(name, slot), "source": adapter, "layer": slot,
-                 "module": r["module_id"], "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[adapter]}
+                 "module": r["module_id"], "licence": licence_tier(r["licence"]), "url": SOURCE_URLS[adapter],
+                 "source_type": r["source_type"], "probed": False}
             )
-    for fam in out:
-        fam.sort(key=lambda f: (f["layer"], f["name"]))
     return out
+
+
+def add_probed(out: list[list[dict]], probed_csv: Path) -> None:
+    with probed_csv.open() as fh:
+        for r in csv.DictReader(fh):
+            out[FAMILY_KEYS.index(r["family"])].append(
+                {"name": r["feature"], "description": r["description"], "source": r["source"], "layer": r["gap"],
+                 "module": "", "licence": licence_tier(r["licence"]), "url": r["source_url"],
+                 "source_type": r["source_type"], "probed": True}
+            )
+
+
+def sort_features(out: list[list[dict]]) -> None:
+    for fam in out:
+        fam.sort(key=lambda f: (f["probed"], f["layer"], f["name"]))
 
 
 def failed_sources(reconciliation_csv: Path) -> list[dict]:
@@ -208,7 +223,11 @@ def vibe_variants() -> None:
 
 def main() -> None:
     vibe_variants()
-    families = features_by_family(HERE.parents[1] / "reports" / "feature_values_long.csv")
+    reports = HERE.parents[1] / "reports"
+    families = features_by_family(reports / "feature_values_long.csv")
+    probed_csv = reports / "probed_features.csv"
+    add_probed(families, probed_csv)
+    sort_features(families)
     data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
     failed = failed_sources(HERE.parents[1] / "reports" / "catalogue_reconciliation.csv")
@@ -219,6 +238,9 @@ def main() -> None:
                       ("modules probed in triage", "N_PROBED"), ("modules implemented as adapters", "N_BUILT"),
                       ("modules with a working adapter", "N_WORKING")]:
         page = page.replace(f"{{{{{slot}}}}}", str(funnel[key]))
+    adapters = {f["source"] for fam in families for f in fam if not f["probed"]}
+    probed = {f["source"] for fam in families for f in fam if f["probed"]}
+    page = page.replace("{{N_PROBED_SOURCES}}", str(len(probed - adapters)))
     page = page.replace("<!--DAG-LIGHT-->", dag_svg(LIGHT)).replace("<!--DAG-DARK-->", dag_svg(DARK))
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
