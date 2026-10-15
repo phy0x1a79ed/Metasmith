@@ -40,8 +40,8 @@ eccc_ghgrp,hazards,health_env,emissions_releases,eccc_ghgrp,survey,OGL-Canada-2.
 eccc_npri,hazards,health_env,emissions_releases,eccc_npri,survey,OGL-Canada-2.0,12,0,3,18,0.05,out of coverage (NPRI is Canada-only),working,eccc_npri
 epa_frs,infrastructure,health_env,emissions_releases,epa_echo_tri,survey,public-domain (US EPA),3,0,12,10,0.0,out of coverage (EPA ECHO/TRI is US-only),working,epa_frs
 epa_frs,infrastructure,health_env,facility_compliance,epa_echo,survey,public-domain (US EPA),3,0,12,16,0.0,out of coverage (EPA ECHO is US-only),working,epa_frs
-wastewater,public health & microbiology,health_env,wastewater_surveillance,cdc_nwss,survey,public-domain (US CDC),3,0,12,11,0.0,out of coverage (CDC NWSS is US-only),working,wastewater
-wastewater,public health & microbiology,health_env,wastewater_surveillance,phac_wastewater,survey,OGL-Canada-2.0,12,0,3,10,0.01,out of coverage (PHAC wastewater is Canada-only),working,wastewater
+wastewater,public health & microbiology,health_env,wastewater_surveillance,cdc_nwss,field sample,public-domain (US CDC),3,0,12,11,0.0,out of coverage (CDC NWSS is US-only),working,wastewater
+wastewater,public health & microbiology,health_env,wastewater_surveillance,phac_wastewater,field sample,OGL-Canada-2.0,12,0,3,10,0.01,out of coverage (PHAC wastewater is Canada-only),working,wastewater
 overture,infrastructure,infrastructure,addresses,overture_addresses,survey,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),15,0,0,9,1.57,,working,overture
 overture,infrastructure,infrastructure,addresses,overture_buildings,blended,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),15,0,0,14,0.57,,working,overture
 overture,infrastructure,infrastructure,cell_towers,overture_communication,crowdsourced,ODbL-1.0 (share-alike; OSM via Overture),15,0,0,7,1.12,,working,overture
@@ -67,11 +67,11 @@ esa_worldcover,macrobiology,macrobiology,land_cover,esa_worldcover,satellite,CC-
 nrcan_landcover,macrobiology,macrobiology,land_cover_ca,nrcan_landcover,satellite,OGL-Canada-2.0,10,2,3,12,1.69,out of coverage (Canada-only),working,nrcan_landcover
 gbif,macrobiology,macrobiology,species_occurrence,gbif,crowdsourced,CC-BY / CC0 mixed,15,0,0,2,1.35,,working,gbif
 modis_bio,macrobiology,macrobiology,vegetation_timeseries,modis_13q1,satellite,public-domain (NASA),11,4,0,3,16.32,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,working,modis_bio
-mgnify,public health & microbiology,microbiology,geolocated_sequence,mgnify,survey,EBI terms / open,15,0,0,2,1.54,,working,mgnify
-ena_geo,public health & microbiology,microbiology,geolocated_sequence_insdc,ena_geo,survey,INSDC open,15,0,0,1,2.52,,working,ena_geo
+mgnify,public health & microbiology,microbiology,geolocated_sequence,mgnify,field sample,EBI terms / open,15,0,0,2,1.54,,working,mgnify
+ena_geo,public health & microbiology,microbiology,geolocated_sequence_insdc,ena_geo,field sample,INSDC open,15,0,0,1,2.52,,working,ena_geo
 sentinel2_l2a,spectral,spectral,optical_multispectral,sentinel2_l2a,satellite,CC-BY-4.0 (Copernicus),15,0,0,12,4.95,,working,sentinel2_l2a
 sentinel1_rtc,spectral,spectral,sar_backscatter_c,sentinel1_rtc,satellite,CC-BY-4.0 (Copernicus),15,0,0,1,3.36,,working,sentinel1_rtc
 palsar_mosaic,spectral,spectral,sar_backscatter_l,alos_palsar_mosaic,satellite,JAXA open,15,0,0,4,3.04,,working,palsar_mosaic
 landsat_c2l2,spectral,spectral,thermal_surface_temp,landsat_c2l2_st,satellite,public-domain (USGS),15,0,0,5,2.58,,working,landsat_c2l2
 jrc_gsw,water bodies,water,surface_water_extent,jrc_gsw,satellite,CC-BY-4.0,15,0,0,6,1.63,,working,jrc_gsw
-wqp,hazards,water,water_quality,wqp,survey,public-domain (US),15,0,0,1,0.5,,working,wqp
+wqp,hazards,water,water_quality,wqp,field sample,public-domain (US),15,0,0,1,0.5,,working,wqp

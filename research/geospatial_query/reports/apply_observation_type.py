@@ -6,7 +6,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 
-OBSERVATION_TYPES = {"satellite", "aerial", "surface vehicle", "fixed sensor", "crowdsourced", "survey", "blended"}
+OBSERVATION_TYPES = {"satellite", "aerial", "surface vehicle", "fixed sensor", "crowdsourced", "field sample", "survey", "blended"}
 
 # A modelled or derived product takes the type of its inputs. "blended" marks one built from inputs of several types.
 TYPE_ADAPTERS = {
@@ -19,13 +19,14 @@ TYPE_ADAPTERS = {
     "aerial": ["usgs_namrad"],
     "surface vehicle": ["mapillary_kartaview"],
     "fixed sensor": ["eccc_naps", "epa_aqs_airdata", "usgs_fdsn"],
+    "field sample": ["mgnify", "ena_geo", "cdc_nwss", "phac_wastewater", "wqp"],
     "crowdsourced": [
         "osm_overpass", "wikidata_sparql", "gbif",
         "overture_communication", "overture_divisions", "overture_land_use", "overture_power",
         "overture_power_plant", "overture_transportation", "overture_utility",
     ],
     "survey": [
-        "macrostrat", "gsc_surficial_1880a", "mgnify", "ena_geo", "cdc_nwss", "phac_wastewater", "wqp",
+        "macrostrat", "gsc_surficial_1880a",
         "cdc_places", "lehd_lodes8", "overture_addresses",
         "epa_echo", "epa_echo_tri", "epa_frs_sems", "eccc_npri", "eccc_ghgrp", "tbs_fcsi", "nrcan_900a",
         "usgs_mineplant", "wri_gppd", "natural_earth_10m", "nrcan_permafrost",

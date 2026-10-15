@@ -55,7 +55,7 @@ An observation is a group of features produced together. This matches OGC/ISO 19
 
 An observation only groups features. It carries its source, its observation type and its time. Everything else is a feature.
 
-The observation type says how the data was collected: satellite, aerial (aircraft and drone), surface vehicle, fixed sensor (station, gauge or camera), crowdsourced, survey or blended. A modelled or derived product takes the type of its inputs. A land cover map is satellite and Daymet is fixed sensor. A product built from inputs of several types is blended: CHIRPS, TerraClimate, ERA5. A record compiled by people, such as zoning or a census, is survey.
+The observation type says how the data was collected: satellite, aerial (aircraft and drone), surface vehicle, fixed sensor (station, gauge or camera), crowdsourced, field sample, survey or blended. A modelled or derived product takes the type of its inputs. A land cover map is satellite and Daymet is fixed sensor. A product built from inputs of several types is blended: CHIRPS, TerraClimate, ERA5. A physical sample measured in a lab, such as water quality or wastewater, is field sample. A record determined administratively or drawn by professional cartographers, such as zoning or a geologic map, is survey.
 
 A time is a moment plus an accuracy, read as plus or minus. A scene is its acquisition time, accurate to seconds. A composite is its midpoint, with half its span as the accuracy: July 2023 is 16 July plus or minus 15.5 days. A query time uses the same shape as a search window.
 
