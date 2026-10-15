@@ -52,6 +52,8 @@ An observation is a group of features produced together. This matches OGC/ISO 19
 
 An observation only groups features. It carries its source, its source type and its time. Everything else is a feature.
 
+A time is a moment plus an accuracy, read as plus or minus. A scene is its acquisition time, accurate to seconds. A composite is its midpoint, with half its span as the accuracy: July 2023 is 16 July plus or minus 15.5 days. A query time uses the same shape as a search window.
+
 Quality metrics are features in the `quality` family. A query filters them like any other feature. Only their reading differs. Which quality features an observation carries depends on how it was made:
 
 | Made by | Examples | Quality features |
@@ -130,7 +132,7 @@ Each gap name says what is missing. A source gap (S) lacks data. A query gap (Q)
 ### Q3. Query cannot ask for periodic time
 
 - **Outcome:** one range search binned client-side picks the same best-cloud item as a per-period fan-out in 24/24 months. Planetary Computer needs 15 requests over 15 AOIs, against 360 for a monthly fan-out.
-- **Spec:** `time` is a list of intervals. Expand a periodic request into one interval per period before the query. "Every July" is one interval per year.
+- **Spec:** `time` is a list of moments, each with an accuracy. Expand a periodic request into one moment per period before the query. "Every July" is 16 July plus or minus 15.5 days, once per year.
 
 ### Q4. Query cannot filter on QC
 
@@ -237,5 +239,5 @@ The pipeline to build:
 3. Get a free Mapillary token and fix the POC adapter.
 4. Refactor the POC adapters to return observations, with quality metrics as `quality` features.
 5. Build adapters for the best candidates in the gap table, starting with S7, S8, S5 and S3.
-6. Change the POC query to an AOI, a list of intervals and a list of filters.
+6. Change the POC query to an AOI, a list of moments and a list of filters.
 7. Build the picture-to-location pipeline as an adapter that returns a place and a radius.

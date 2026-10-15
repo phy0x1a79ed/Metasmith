@@ -309,7 +309,7 @@ const SPEC = [
   { group: "Definitions", types: [
     { name: "Point", kind: "is composed of", rows: [["longitude", "number"], ["latitude", "number"]] },
     { name: "AOI", kind: "is composed of", rows: [["outline", "list of Point"]] },
-    { name: "Interval", kind: "is composed of", rows: [["start", "time"], ["end", "time"]] },
+    { name: "Moment", kind: "is composed of", rows: [["time", "time"], ["accuracy", "duration"]] },
     { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
       ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"],
       ["quality", "off-nadir, sun elevation, cloud cover, distance to station"]] },
@@ -318,16 +318,16 @@ const SPEC = [
     { name: "Feature", kind: "is composed of", rows: [
       ["feature", "text"], ["family", "FeatureFamily"], ["value", "any"], ["SI_unit", "text"]] },
     { name: "Observation", kind: "is composed of", rows: [
-      ["source", "text"], ["source_type", "SourceType"], ["time", "Interval"], ["features", "list of Feature"]] },
+      ["source", "text"], ["source_type", "SourceType"], ["time", "Moment"], ["features", "list of Feature"]] },
     { name: "Operation", kind: "is one of", opts: [["regex"], ["="], ["!="], ["<"], ["<="], [">"], [">="]] },
     { name: "Filter", kind: "is composed of", rows: [
       ["feature", "text"], ["operation", "Operation"], ["value", "one of text, number"]] },
     { name: "Error", kind: "is composed of", rows: [
-      ["feature", "text"], ["family", "FeatureFamily"], ["time", "Interval"], ["message", "text"]] },
+      ["feature", "text"], ["family", "FeatureFamily"], ["time", "Moment"], ["message", "text"]] },
   ] },
   { group: "Input", types: [
     { name: "Query", kind: "is composed of", rows: [
-      ["aoi", "AOI"], ["time", "list of Interval"], ["filters", "list of Filter"]] },
+      ["aoi", "AOI"], ["time", "list of Moment"], ["filters", "list of Filter"]] },
   ] },
   { group: "Output", types: [
     { name: "QueryResult", kind: "is composed of", rows: [
