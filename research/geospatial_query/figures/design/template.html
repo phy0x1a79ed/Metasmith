@@ -77,12 +77,13 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .def .t { color: var(--f1); }
 .def .p { color: color-mix(in srgb, var(--f1) 50%, var(--panel)); }
 .def .k { color: var(--muted); font-family: var(--body); font-size: 12.5px; }
+.def .ex { margin: 2px 0 0 22px; font-size: 12.5px; color: var(--muted); }
 .def a { color: inherit; text-decoration: none; border-bottom: 1px dotted currentColor; }
 .def:target > div b { text-decoration: underline; }
 
 /* Feature set */
 #bars { width: 100%; height: 350px; }
-.fams { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.fams { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; border-top: 1px solid var(--rule); }
 .fams details { border-bottom: 1px solid var(--rule); }
 .fams summary {
   display: flex; align-items: center; gap: 10px; padding: 9px 2px; cursor: pointer; list-style: none; font-size: 14px;
@@ -96,6 +97,10 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 .fams details[open] summary::before { transform: rotate(90deg); }
 .fams summary:hover { background: var(--code); }
 .hint { margin: 0; font-size: 12.5px; color: var(--muted); }
+.find { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.find input { flex: 1 1 220px; max-width: 340px; font: 13px var(--mono); color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 2px; padding: 5px 8px; }
+.find input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.find .hint:last-child { margin-left: auto; }
 @media (prefers-reduced-motion: reduce) { .fams summary::before { transition: none; } }
 .fams summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .fams summary .count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted); }
@@ -146,8 +151,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
     <h2><b>3</b>Features</h2>
     <p class="caption">Hybrid LLM + human curation with proof of concept live data retrieval tests produced the following list of obtainable features, grouped into families. Of {{N_CATALOGUE}} catalogued modules, {{N_PROBED}} were probed, {{N_BUILT}} were built as adapters and {{N_WORKING}} returned data. A further {{N_PROBED_SOURCES}} sources, marked probed, returned data in a live probe and have no adapter yet.</p>
     <div id="bars"></div>
-    <div class="csv-row" id="csv-row" hidden><button class="csv" id="csv" type="button">Download features CSV</button><button class="csv" id="csv-failed" type="button">Download failed sources CSV</button><span id="csv-status"></span></div>
-    <p class="hint">Click a row to expand.</p>
+    <div class="csv-row" id="csv-row" hidden><button class="csv" id="csv" type="button">Download features CSV</button><span id="csv-status"></span></div>
+    <div class="find"><p class="hint">Click a row to expand.</p><input type="search" id="q" placeholder="Search features, sources, types" aria-label="Search features" autocomplete="off" spellcheck="false"><p class="hint" id="q-status" aria-live="polite"></p></div>
     <div class="fams" id="fams"></div>
   </section>
 
@@ -159,9 +164,9 @@ body { background: var(--paper); color: var(--ink); font-family: var(--body); }
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.34.0/plotly.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/7.0.0/fuse.min.js"></script>
 <script>
 const DATA = /*FEATURES*/[];
-const FAILED = /*FAILED*/[];
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
@@ -169,7 +174,7 @@ const SPEC = [
   { group: "Definitions", types: [
     { name: "Point", kind: "is composed of", rows: [["longitude", "number"], ["latitude", "number"]] },
     { name: "AOI", kind: "is composed of", rows: [["outline", "list of Point"]] },
-    { name: "Moment", kind: "is composed of", rows: [["time", "time"], ["accuracy", "duration"]] },
+    { name: "Moment", kind: "is composed of", rows: [["time", "time"], ["accuracy", "duration"]], example: "2024-07-16 ± 12 hours" },
     { name: "FeatureFamily", kind: "is one of", opts: [["socio-economic"], ["infrastructure"], ["hazards"], ["macrobiology"],
       ["geology"], ["microbiology-health"], ["climate"], ["spectral"], ["water"], ["latent"]] },
     { name: "ObservationType", kind: "is one of", opts: [["satellite"], ["aerial"], ["surface vehicle"], ["fixed sensor"],
@@ -209,6 +214,7 @@ const def = t => `<li class="def" id="t-${t.name}">
   <ul>${t.opts
     ? t.opts.map(([o, note]) => `<li><code class="t">${esc(o)}</code>${note ? ` <span class="k">· ${esc(note)}</span>` : ""}</li>`).join("")
     : t.rows.map(([f, ty]) => `<li><code>${esc(f)}</code>: ${typeExpr(ty)}</li>`).join("")}</ul>
+  ${t.example ? `<p class="ex">e.g. ${esc(t.example)}</p>` : ""}
 </li>`;
 document.getElementById("sig").innerHTML =
   SPEC.map(g => `<h3>${g.group}</h3><ul>${g.types.map(def).join("")}</ul>`).join("");
@@ -250,19 +256,58 @@ function drawBars() {
 
 document.getElementById("fams").innerHTML = DATA.map((d, i) =>
   `<details id="fam-${i}">
-     <summary><span class="name">${esc(d.family)}<span class="blurb">${esc(d.blurb)}</span></span><span class="count">${d.features.length}</span></summary>
+     <summary><span class="name">${esc(d.family)}<span class="blurb">${esc(d.blurb)}</span></span><span class="count" id="count-${i}">${d.features.length}</span></summary>
      <div class="table"><table>
        <thead><tr><th>Feature</th><th>Description</th><th>Observation type</th><th>Source</th></tr></thead>
-       <tbody>${d.features.map(f => `<tr><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.observation_type)}</td><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.source)}</a>${f.probed ? ' <span class="tag">probed</span>' : ""}</td></tr>`).join("")}</tbody>
+       <tbody>${d.features.map((f, j) => `<tr id="row-${i}-${j}"><td>${esc(f.name)}</td><td>${esc(f.description)}</td><td>${esc(f.observation_type)}</td><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.source)}</a>${f.probed ? ' <span class="tag">probed</span>' : ""}</td></tr>`).join("")}</tbody>
      </table></div>
    </details>`).join("");
+
+const ROWS = DATA.flatMap((d, i) => d.features.map((f, j) =>
+  ({ id: `row-${i}-${j}`, fam: i, name: f.name, description: f.description, source: f.source, type: f.observation_type, family: d.family })));
+const fuse = window.Fuse && new Fuse(ROWS, {
+  keys: [{ name: "name", weight: 3 }, { name: "source", weight: 2 }, "type", "family", "description"],
+  threshold: 0.3, ignoreLocation: true,
+});
+const HAY = new Map(ROWS.map(r => [r.id, [r.name, r.source, r.type, r.family, r.description].join(" ").toLowerCase()]));
+let fuzzy = false;
+const matchWord = w => {
+  const exact = ROWS.filter(r => HAY.get(r.id).includes(w)).map(r => r.id);
+  if (exact.length) return new Set(exact);
+  fuzzy = true;
+  return new Set(fuse.search(w).map(r => r.item.id));
+};
+const search = q => {
+  fuzzy = false;
+  return q.toLowerCase().split(/\s+/).map(matchWord).reduce((a, b) => new Set([...a].filter(id => b.has(id))));
+};
+const filterRows = q => {
+  const hits = q && fuse ? search(q) : null;
+  const shown = DATA.map(() => 0);
+  for (const r of ROWS) {
+    const on = !hits || hits.has(r.id);
+    document.getElementById(r.id).hidden = !on;
+    if (on) shown[r.fam]++;
+  }
+  DATA.forEach((d, i) => {
+    const fam = document.getElementById(`fam-${i}`);
+    fam.hidden = hits && !shown[i];
+    fam.open = Boolean(hits && shown[i]);
+    document.getElementById(`count-${i}`).textContent = hits ? `${shown[i]} / ${d.features.length}` : d.features.length;
+  });
+  document.getElementById("q-status").textContent = hits ? `${hits.size} of ${ROWS.length} features${fuzzy ? ", fuzzy" : ""}` : "";
+};
+let searchTimer;
+document.getElementById("q").addEventListener("input", e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => filterRows(e.target.value.trim()), 120);
+});
+if (!window.Fuse) document.getElementById("q").hidden = true;
 
 const csvCell = v => /[",\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
 const toCsv = rows => rows.map(r => r.map(csvCell).join(",")).join("\n") + "\n";
 const featureCsv = () => toCsv([["family", "feature", "description", "observation_type", "source", "source_url", "licence", "probed"],
   ...DATA.flatMap(d => d.features.map(f => [d.family, f.name, f.description, f.observation_type, f.source, f.url, f.licence, f.probed ? "yes" : "no"]))]);
-const FAILED_COLS = ["outcome", "family", "module_id", "source_name", "triage_candidates", "poc_adapters", "reason"];
-const failedCsv = () => toCsv([FAILED_COLS, ...FAILED.map(f => FAILED_COLS.map(c => f[c]))]);
 (async () => {
   const downloads = await window.claude?.use?.("downloads");
   if (!downloads) return;
@@ -280,7 +325,6 @@ const failedCsv = () => toCsv([FAILED_COLS, ...FAILED.map(f => FAILED_COLS.map(c
     }
   });
   offer("csv", "geospatial_query_features.csv", featureCsv);
-  offer("csv-failed", "geospatial_query_failed_sources.csv", failedCsv);
 })();
 
 const root = document.documentElement, btn = document.getElementById("theme");

@@ -181,18 +181,6 @@ def sort_features(out: list[list[dict]]) -> None:
         fam.sort(key=lambda f: (f["probed"], f["layer"], f["name"]))
 
 
-def failed_sources(reconciliation_csv: Path) -> list[dict]:
-    """Catalogue modules and unmatched triage candidates that did not end with a working adapter."""
-    with reconciliation_csv.open() as fh:
-        return [
-            {"outcome": r["outcome"],
-             "family": FAMILIES[FAMILY_KEYS.index(r["family"])] if r["family"] in FAMILY_KEYS else r["family"],
-             "module_id": r["module_id"], "source_name": r["source_name"],
-             "triage_candidates": r["triage_candidates"], "poc_adapters": r["poc_adapters"], "reason": r["reason"]}
-            for r in csv.DictReader(fh) if r["outcome"] not in ("working", "dropped")
-        ]
-
-
 def dag_svg(theme) -> str:
     nodes = {"query": NodeKind.GIVEN}
     edges, labels = [], {"query": Label(name="")}
@@ -229,9 +217,7 @@ def main() -> None:
     sort_features(families)
     data = [{"family": f, "blurb": b, "features": feats} for f, b, feats in zip(FAMILIES, BLURBS, families)]
     page = (HERE / "template.html").read_text()
-    failed = failed_sources(HERE.parents[1] / "reports" / "catalogue_reconciliation.csv")
     page = page.replace("/*FEATURES*/[]", json.dumps(data, ensure_ascii=False))
-    page = page.replace("/*FAILED*/[]", json.dumps(failed, ensure_ascii=False))
     funnel = json.loads((HERE.parents[1] / "reports" / "funnel_counts.json").read_text())
     for key, slot in [("catalogue modules in scope (317 existing + 11 added)", "N_CATALOGUE"),
                       ("modules probed in triage", "N_PROBED"), ("modules implemented as adapters", "N_BUILT"),
@@ -244,8 +230,6 @@ def main() -> None:
     (HERE / "index.html").write_text(page)
     for f, feats in zip(FAMILIES, families):
         print(f"{len(feats):4d}  {len({x['source'] for x in feats}):3d}  {f}")
-    from collections import Counter
-    print(Counter(x["outcome"] for x in failed))
 
 
 if __name__ == "__main__":
