@@ -1,0 +1,20 @@
+{
+ "records": 1140,
+ "aois": 15,
+ "sources": 75,
+ "status": {
+  "found": 809,
+  "not-attempted": 271,
+  "unavailable": 60
+ },
+ "feature_values": 8546,
+ "distinct_features": 820,
+ "matrix_shape": [
+  15,
+  820
+ ],
+ "matrix_density_pct": 69.1,
+ "median_wall_s_per_fetch": 0.475,
+ "total_wall_s_serial": 2317.9,
+ "per_aoi_serial_s": 154.5
+}

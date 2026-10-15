@@ -1,0 +1,25 @@
+{"core(pipeline.py)": 21, "adapters_health_env": 13, "adapters_census": 16, "adapters_physical": 11, "adapters_infrastructure": 13, "adapters_s2signature": 1, "adapters_embeddings": 1}
+15 AOIs x 76 adapters = 1140 fetches
+  50/1140  11s
+  100/1140  36s
+  150/1140  48s
+  200/1140  57s
+  250/1140  72s
+  300/1140  92s
+  350/1140  104s
+  400/1140  118s
+  450/1140  122s
+  500/1140  135s
+  550/1140  150s
+  600/1140  163s
+  650/1140  176s
+  700/1140  191s
+  750/1140  198s
+  800/1140  209s
+  850/1140  222s
+  900/1140  236s
+  950/1140  245s
+  1000/1140  259s
+  1050/1140  264s
+  1100/1140  276s
+DONE 1140 records in 304s

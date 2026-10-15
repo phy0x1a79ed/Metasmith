@@ -17,5 +17,5 @@ geograph,geograph_photo_n,dropped,0,"Geograph covers Britain and Ireland only; n
 inaturalist,inat_observation_n,validated,15,total_results of /v1/observations over the AOI extent
 inaturalist,inat_gps_accuracy_m,validated,15,median positional_accuracy of the newest 200 observations per AOI
 inaturalist,inat_quality_grade,validated,15,three quality_grade-filtered total_results over the AOI extent
-wikimedia_commons,wikimedia_photo_n,validated,14,"geosearch over the AOI extent, tiled and split on a full page; stress_city_toronto_full (630 km2, tens of thousands of files) hit repeated 429 and was left without a value, not counted as 0"
-wikimedia_commons,wikimedia_camera_heading_deg,validated,4,"EXIF GPSImgDirection in imageinfo metadata, sample of up to 120 files per AOI; stress_city_toronto_full (630 km2, tens of thousands of files) hit repeated 429 and was left without a value, not counted as 0"
+wikimedia_commons,wikimedia_photo_n,validated,15,"geosearch over the AOI extent, tiled and split on a full page"
+wikimedia_commons,wikimedia_camera_heading_deg,validated,5,"EXIF GPSImgDirection in imageinfo metadata, sample of up to 120 files per AOI"

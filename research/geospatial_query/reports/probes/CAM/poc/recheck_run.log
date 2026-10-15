@@ -1,0 +1,9 @@
+panoramax done 659 s
+/home/tony/agentic_workspace/projects/metasmith/geospatial_query/dev/research/geospatial_query/reports/probes/CAM/poc/poc.py:88: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+  return transform(prj, g).distance(transform(prj, Point(lon, lat))) / 1000
+drivebc_webcams done 2 s
+phenocam done 34 s
+gbif_media done 52 s
+geograph done 20 s
+inaturalist done 107 s
+wikimedia_commons done 1087 s

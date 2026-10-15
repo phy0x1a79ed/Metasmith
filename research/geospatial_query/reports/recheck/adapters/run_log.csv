@@ -1,0 +1,1141 @@
+aoi_id,slot,source,family,status,reason,n_features,wall_s,licence,fill_type
+farm_sk_quarter,bedrock_geology,macrostrat,geology,found,,5,0.25,CC-BY-4.0,observed
+farm_sk_quarter,dem_medium_res_ca,mrdem_30,geology,found,,5,1.63,OGL-Canada-2.0,observed
+farm_sk_quarter,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+farm_sk_quarter,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.45,OGL-Canada-2.0,observed
+farm_sk_quarter,land_cover,esa_worldcover,macrobiology,found,,8,2.88,CC-BY-4.0,observed
+farm_sk_quarter,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,3.24,public-domain (USGS),observed
+farm_sk_quarter,species_occurrence,gbif,macrobiology,found,,2,1.09,CC-BY / CC0 mixed,observed
+farm_sk_quarter,land_cover_ca,nrcan_landcover,macrobiology,found,,5,4.07,OGL-Canada-2.0,observed
+farm_sk_quarter,dem_medium_res,cop_dem_glo30,geology,found,,8,4.39,ESA Copernicus DEM EULA,observed
+farm_sk_quarter,biomass,hgb,macrobiology,found,,5,2.7,CC-BY-4.0,observed
+farm_sk_quarter,water_quality,wqp,water,found,,1,0.48,public-domain (US),observed
+farm_sk_quarter,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,5.02,CC-BY-4.0 (Copernicus),observed
+farm_sk_quarter,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.29,public-domain (USGS),observed
+farm_sk_quarter,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,5.14,JAXA open,observed
+farm_sk_quarter,reanalysis_climate,era5_open_meteo,climate,found,,5,0.85,CC-BY-4.0 (ERA5),observed
+farm_sk_quarter,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+farm_sk_quarter,air_quality_monitors,eccc_naps,health_env,found,,20,0.17,OGL-Canada-2.0,observed
+farm_sk_quarter,emissions_releases,eccc_npri,health_env,found,,18,0.12,OGL-Canada-2.0,observed
+farm_sk_quarter,emissions_releases,eccc_ghgrp,health_env,found,,7,0.02,OGL-Canada-2.0,observed
+farm_sk_quarter,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+farm_sk_quarter,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+farm_sk_quarter,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+farm_sk_quarter,infrastructure_osm,osm_overpass,infrastructure,found,,3,1.07,ODbL-1.0 (share-alike),observed
+farm_sk_quarter,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+farm_sk_quarter,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.66,CC-BY-4.0 (CAMS/ECMWF),observed
+farm_sk_quarter,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+farm_sk_quarter,disease_surveillance,phac_rvdss,health_env,found,,6,0.56,OGL-Canada-2.0,observed
+farm_sk_quarter,geolocated_sequence,mgnify,microbiology,found,,2,1.44,EBI terms / open,observed
+farm_sk_quarter,surface_water_extent,jrc_gsw,water,found,,6,2.16,CC-BY-4.0,observed
+farm_sk_quarter,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_sk_quarter,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_sk_quarter,census_demography,statcan_csd_2016,census,found,,16,1.03,OGL-Canada-2.0,observed
+farm_sk_quarter,optical_multispectral,sentinel2_l2a,spectral,found,,12,7.05,CC-BY-4.0 (Copernicus),observed
+farm_sk_quarter,wastewater_surveillance,phac_wastewater,health_env,found,,10,1.65,OGL-Canada-2.0,observed
+farm_sk_quarter,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+farm_sk_quarter,census_demography,statcan_wds_popest,census,found,,6,1.11,OGL-Canada-2.0,observed
+farm_sk_quarter,property_assessment,statcan_dwelling_value,census,found,,4,0.09,OGL-Canada-2.0,observed
+farm_sk_quarter,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Saskatchewan'),0,0.05,CC-BY-4.0 (Quebec),observed
+farm_sk_quarter,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+farm_sk_quarter,healthcare_accessibility,statcan_odhf,census,found,,13,0.05,OGL-Canada-2.0,observed
+farm_sk_quarter,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_sk_quarter,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+farm_sk_quarter,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+farm_sk_quarter,indigenous_lands,nrcan_alta,census,found,,8,0.18,OGL-Canada-2.0,observed
+farm_sk_quarter,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+farm_sk_quarter,urban_extent,io_lulc_annual_v02,census,found,,9,1.83,CC-BY-4.0 (Impact Observatory),observed
+farm_sk_quarter,forest_change,hansen_gfc_v1_13,macrobiology,found,,9,1.75,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+farm_sk_quarter,urban_extent,ghs_smod_r2023a,census,found,,10,3.13,CC-BY-4.0 (JRC GHSL),observed
+farm_sk_quarter,population_gridded,ghs_pop_r2023a,census,found,,8,4.0,CC-BY-4.0 (JRC GHSL),observed
+farm_sk_quarter,glaciers,natural_earth_10m,cryosphere,found,,6,1.6,public-domain (Natural Earth),observed
+farm_sk_quarter,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.98,public-domain (NOAA NCEI),observed
+farm_sk_quarter,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,1.39,OGL-Canada-2.0,observed
+farm_sk_quarter,mines_producing,nrcan_900a,infrastructure,found,,7,0.32,OGL-Canada-2.0,observed
+farm_sk_quarter,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+farm_sk_quarter,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,3.04,public-domain (NOAA/NSIDC CDR),observed
+farm_sk_quarter,pipelines,overture_utility,infrastructure,found,,8,2.83,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_sk_quarter,transmission_lines,overture_power,infrastructure,found,,13,0.04,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_sk_quarter,embeddings,clay_v0_embeddings,embeddings,found,,11,7.0,CC-BY-4.0 (Clay Foundation),observed
+farm_sk_quarter,railways,overture_transportation,infrastructure,found,,11,4.25,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_sk_quarter,power_plants,wri_gppd,infrastructure,found,,11,1.59,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+farm_sk_quarter,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+farm_sk_quarter,power_plants,overture_power_plant,infrastructure,found,,7,2.5,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_sk_quarter,addresses,overture_buildings,infrastructure,found,,7,2.4,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_sk_quarter,addresses,overture_addresses,infrastructure,found,,7,3.65,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+farm_sk_quarter,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,8.79,public-domain (USGS),observed
+farm_sk_quarter,cell_towers,overture_communication,infrastructure,found,,7,1.46,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_sk_quarter,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,1.1,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+farm_sk_quarter,gazetteer,wikidata_sparql,infrastructure,found,,4,1.42,CC0-1.0,observed
+farm_sk_quarter,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,17.0,INSDC open,observed
+farm_sk_quarter,gazetteer,overture_divisions,infrastructure,found,,10,4.28,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_sk_quarter,surficial_geology,gsc_surficial_1880a,geology,found,,5,16.04,OGL-Canada-2.0,observed
+farm_on_essex,optical_multispectral,sentinel2_l2a,spectral,found,,12,5.5,CC-BY-4.0 (Copernicus),observed
+farm_on_essex,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.42,public-domain (USGS),observed
+farm_sk_quarter,industrial_facilities,overture_land_use,infrastructure,found,,7,13.8,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_on_essex,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.19,JAXA open,observed
+farm_on_essex,bedrock_geology,macrostrat,geology,found,,5,0.26,CC-BY-4.0,observed
+farm_on_essex,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,3.08,CC-BY-4.0 (Copernicus),observed
+farm_on_essex,dem_medium_res,cop_dem_glo30,geology,found,,8,3.29,ESA Copernicus DEM EULA,observed
+farm_on_essex,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+farm_sk_quarter,embeddings,s2_signature_v1,embeddings,found,,67,10.25,"CC-BY-4.0 (Copernicus, derived)",observed
+farm_on_essex,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.51,OGL-Canada-2.0,observed
+farm_on_essex,land_cover,esa_worldcover,macrobiology,found,,6,1.39,CC-BY-4.0,observed
+farm_on_essex,dem_medium_res_ca,mrdem_30,geology,found,,5,2.01,OGL-Canada-2.0,observed
+farm_on_essex,land_cover_ca,nrcan_landcover,macrobiology,found,,5,1.57,OGL-Canada-2.0,observed
+farm_on_essex,species_occurrence,gbif,macrobiology,found,,2,0.68,CC-BY / CC0 mixed,observed
+farm_on_essex,water_quality,wqp,water,found,,1,1.17,public-domain (US),observed
+farm_on_essex,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.26,public-domain (USGS),observed
+farm_on_essex,surface_water_extent,jrc_gsw,water,found,,6,1.93,CC-BY-4.0,observed
+farm_on_essex,biomass,hgb,macrobiology,found,,5,2.63,CC-BY-4.0,observed
+farm_on_essex,reanalysis_climate,era5_open_meteo,climate,found,,5,1.49,CC-BY-4.0 (ERA5),observed
+farm_on_essex,air_quality_monitors,eccc_naps,health_env,found,,22,0.29,OGL-Canada-2.0,observed
+farm_on_essex,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+farm_on_essex,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.75,CC-BY-4.0 (CAMS/ECMWF),observed
+farm_on_essex,geolocated_sequence,mgnify,microbiology,found,,2,1.45,EBI terms / open,observed
+farm_on_essex,emissions_releases,eccc_ghgrp,health_env,found,,7,0.15,OGL-Canada-2.0,observed
+farm_on_essex,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+farm_on_essex,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+farm_on_essex,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+farm_on_essex,emissions_releases,eccc_npri,health_env,found,,18,0.37,OGL-Canada-2.0,observed
+farm_on_essex,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+farm_on_essex,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.1,OGL-Canada-2.0,observed
+farm_on_essex,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+farm_on_essex,disease_surveillance,phac_rvdss,health_env,found,,8,0.26,OGL-Canada-2.0,observed
+farm_on_essex,census_demography,statcan_csd_2016,census,found,,13,0.12,OGL-Canada-2.0,observed
+farm_on_essex,census_demography,statcan_wds_popest,census,found,,6,0.75,OGL-Canada-2.0,observed
+farm_on_essex,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_on_essex,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_sk_quarter,embeddings,alphaearth_v1_annual,embeddings,found,,82,15.89,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+farm_sk_quarter,contaminated_sites,tbs_fcsi,health_env,found,,13,33.72,OGL-Canada-2.0,observed
+farm_on_essex,contaminated_sites,tbs_fcsi,health_env,found,,13,4.05,OGL-Canada-2.0,observed
+farm_on_essex,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+farm_on_essex,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+farm_on_essex,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Ontario'),0,0.01,CC-BY-4.0 (Quebec),observed
+farm_on_essex,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+farm_on_essex,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+farm_on_essex,indigenous_lands,nrcan_alta,census,found,,8,0.3,OGL-Canada-2.0,observed
+farm_on_essex,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_on_essex,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+farm_on_essex,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+farm_on_essex,urban_extent,ghs_smod_r2023a,census,found,,11,2.55,CC-BY-4.0 (JRC GHSL),observed
+farm_on_essex,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+farm_on_essex,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 17TLG (1170 of ~57k land tiles published),0,0.02,CC-BY-4.0 (Clay Foundation),observed
+farm_on_essex,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+farm_on_essex,glaciers,natural_earth_10m,cryosphere,found,,6,0.37,public-domain (Natural Earth),observed
+farm_on_essex,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.16,OGL-Canada-2.0,observed
+farm_on_essex,infrastructure_osm,osm_overpass,infrastructure,found,,3,7.01,ODbL-1.0 (share-alike),observed
+farm_on_essex,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.02,OGL-Canada-2.0,observed
+farm_on_essex,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.32,public-domain (USGS),observed
+farm_on_essex,mines_producing,nrcan_900a,infrastructure,found,,7,0.02,OGL-Canada-2.0,observed
+farm_on_essex,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+farm_on_essex,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.4,public-domain (NOAA NCEI),observed
+farm_on_essex,urban_extent,io_lulc_annual_v02,census,found,,9,1.77,CC-BY-4.0 (Impact Observatory),observed
+farm_on_essex,pipelines,overture_utility,infrastructure,found,,9,0.94,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_on_essex,forest_change,hansen_gfc_v1_13,macrobiology,found,,9,2.07,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+farm_on_essex,power_plants,wri_gppd,infrastructure,found,,12,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+farm_on_essex,transmission_lines,overture_power,infrastructure,found,,13,0.71,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_on_essex,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+farm_on_essex,railways,overture_transportation,infrastructure,found,,13,1.2,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_on_essex,addresses,overture_addresses,infrastructure,found,,9,0.48,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+farm_on_essex,addresses,overture_buildings,infrastructure,found,,14,0.4,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_on_essex,industrial_facilities,overture_land_use,infrastructure,found,,8,0.57,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_sk_quarter,vegetation_timeseries,modis_13q1,macrobiology,unavailable,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,0,39.98,public-domain (NASA),observed
+farm_on_essex,gazetteer,wikidata_sparql,infrastructure,found,,4,0.28,CC0-1.0,observed
+farm_on_essex,power_plants,overture_power_plant,infrastructure,found,,7,0.92,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_on_essex,gazetteer,overture_divisions,infrastructure,found,,12,0.44,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_on_essex,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.97,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+farm_on_essex,cell_towers,overture_communication,infrastructure,found,,7,1.02,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.77,public-domain (USGS),observed
+farm_ab_taber,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.66,JAXA open,observed
+farm_ab_taber,optical_multispectral,sentinel2_l2a,spectral,found,,12,5.14,CC-BY-4.0 (Copernicus),observed
+farm_ab_taber,dem_medium_res_ca,mrdem_30,geology,found,,5,0.94,OGL-Canada-2.0,observed
+farm_ab_taber,bedrock_geology,macrostrat,geology,found,,5,0.24,CC-BY-4.0,observed
+farm_ab_taber,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,3.72,CC-BY-4.0 (Copernicus),observed
+farm_ab_taber,dem_medium_res,cop_dem_glo30,geology,found,,8,3.3,ESA Copernicus DEM EULA,observed
+farm_ab_taber,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+farm_on_essex,embeddings,s2_signature_v1,embeddings,found,,67,7.85,"CC-BY-4.0 (Copernicus, derived)",observed
+farm_ab_taber,land_cover,esa_worldcover,macrobiology,found,,7,1.34,CC-BY-4.0,observed
+farm_ab_taber,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.45,OGL-Canada-2.0,observed
+farm_ab_taber,land_cover_ca,nrcan_landcover,macrobiology,found,,7,1.5,OGL-Canada-2.0,observed
+farm_ab_taber,species_occurrence,gbif,macrobiology,found,,2,0.56,CC-BY / CC0 mixed,observed
+farm_ab_taber,water_quality,wqp,water,found,,1,1.09,public-domain (US),observed
+farm_ab_taber,surface_water_extent,jrc_gsw,water,found,,6,1.28,CC-BY-4.0,observed
+farm_ab_taber,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.11,public-domain (USGS),observed
+farm_on_essex,embeddings,alphaearth_v1_annual,embeddings,found,,82,10.08,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+farm_ab_taber,biomass,hgb,macrobiology,found,,5,2.4,CC-BY-4.0,observed
+farm_ab_taber,reanalysis_climate,era5_open_meteo,climate,found,,5,0.84,CC-BY-4.0 (ERA5),observed
+farm_ab_taber,air_quality_monitors,eccc_naps,health_env,found,,20,0.03,OGL-Canada-2.0,observed
+farm_ab_taber,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+farm_ab_taber,geolocated_sequence,mgnify,microbiology,found,,2,1.13,EBI terms / open,observed
+farm_ab_taber,emissions_releases,eccc_npri,health_env,found,,18,0.05,OGL-Canada-2.0,observed
+farm_ab_taber,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+farm_ab_taber,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+farm_ab_taber,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+farm_ab_taber,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+farm_ab_taber,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.66,CC-BY-4.0 (CAMS/ECMWF),observed
+farm_ab_taber,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+farm_ab_taber,disease_surveillance,phac_rvdss,health_env,found,,6,0.03,OGL-Canada-2.0,observed
+farm_ab_taber,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+farm_ab_taber,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.02,OGL-Canada-2.0,observed
+farm_ab_taber,census_demography,statcan_csd_2016,census,found,,13,0.03,OGL-Canada-2.0,observed
+farm_ab_taber,contaminated_sites,tbs_fcsi,health_env,found,,13,0.07,OGL-Canada-2.0,observed
+farm_ab_taber,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_ab_taber,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_ab_taber,infrastructure_osm,osm_overpass,infrastructure,found,,3,1.38,ODbL-1.0 (share-alike),observed
+farm_ab_taber,census_demography,statcan_wds_popest,census,found,,6,0.65,OGL-Canada-2.0,observed
+farm_on_essex,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,21.19,INSDC open,observed
+farm_ab_taber,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+farm_ab_taber,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+farm_ab_taber,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Alberta'),0,0.01,CC-BY-4.0 (Quebec),observed
+farm_ab_taber,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+farm_ab_taber,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+farm_ab_taber,indigenous_lands,nrcan_alta,census,found,,8,0.15,OGL-Canada-2.0,observed
+farm_ab_taber,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_ab_taber,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+farm_ab_taber,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+farm_ab_taber,urban_extent,io_lulc_annual_v02,census,found,,9,1.63,CC-BY-4.0 (Impact Observatory),observed
+farm_ab_taber,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+farm_ab_taber,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 12UVA (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+farm_ab_taber,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.07,public-domain (NOAA/NSIDC CDR),observed
+farm_ab_taber,glaciers,natural_earth_10m,cryosphere,found,,6,0.28,public-domain (Natural Earth),observed
+farm_ab_taber,forest_change,hansen_gfc_v1_13,macrobiology,found,,9,1.54,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+farm_ab_taber,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.09,OGL-Canada-2.0,observed
+farm_ab_taber,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+farm_ab_taber,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.11,public-domain (USGS),observed
+farm_ab_taber,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+farm_ab_taber,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+farm_ab_taber,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.46,public-domain (NOAA NCEI),observed
+farm_ab_taber,urban_extent,ghs_smod_r2023a,census,found,,13,3.4,CC-BY-4.0 (JRC GHSL),observed
+farm_ab_taber,railways,overture_transportation,infrastructure,found,,13,0.87,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,pipelines,overture_utility,infrastructure,found,,8,0.78,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,power_plants,wri_gppd,infrastructure,found,,11,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+farm_ab_taber,transmission_lines,overture_power,infrastructure,found,,13,0.52,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+farm_ab_taber,power_plants,overture_power_plant,infrastructure,found,,7,0.42,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,addresses,overture_addresses,infrastructure,found,,9,0.4,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+farm_ab_taber,addresses,overture_buildings,infrastructure,found,,12,0.36,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_ab_taber,industrial_facilities,overture_land_use,infrastructure,found,,9,0.81,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,cell_towers,overture_communication,infrastructure,found,,7,0.65,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_ab_taber,gazetteer,wikidata_sparql,infrastructure,found,,4,0.45,CC0-1.0,observed
+farm_ab_taber,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.9,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+farm_ab_taber,gazetteer,overture_divisions,infrastructure,found,,10,0.41,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_ab_taber,population_gridded,ghs_pop_r2023a,census,found,,8,5.7,CC-BY-4.0 (JRC GHSL),observed
+farm_us_ia_story,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.61,public-domain (USGS),observed
+farm_ab_taber,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,9.98,INSDC open,observed
+farm_us_ia_story,optical_multispectral,sentinel2_l2a,spectral,found,,12,6.01,CC-BY-4.0 (Copernicus),observed
+farm_us_ia_story,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.18,JAXA open,observed
+farm_us_ia_story,dem_medium_res_ca,mrdem_30,geology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,bedrock_geology,macrostrat,geology,found,,5,0.28,CC-BY-4.0,observed
+farm_us_ia_story,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,3.56,CC-BY-4.0 (Copernicus),observed
+farm_us_ia_story,land_cover_ca,nrcan_landcover,macrobiology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_ab_taber,embeddings,s2_signature_v1,embeddings,found,,67,7.53,"CC-BY-4.0 (Copernicus, derived)",observed
+farm_us_ia_story,crop_type_ca,aafc_aci,macrobiology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,land_cover,esa_worldcover,macrobiology,found,,6,1.39,CC-BY-4.0,observed
+farm_on_essex,vegetation_timeseries,modis_13q1,macrobiology,unavailable,HTTPError: 429 Client Error: Too Many Requests for url: https://planetarycomputer.microsoft.com/api/sas/v1/token/modiseuwest/modis-061-cogs,0,36.26,public-domain (NASA),observed
+farm_us_ia_story,species_occurrence,gbif,macrobiology,found,,2,1.3,CC-BY / CC0 mixed,observed
+farm_ab_taber,embeddings,alphaearth_v1_annual,embeddings,found,,82,9.56,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+farm_us_ia_story,crop_type_us,usda_cdl,macrobiology,found,,13,2.55,public-domain (USDA),observed
+farm_us_ia_story,biomass,hgb,macrobiology,found,,5,2.43,CC-BY-4.0,observed
+farm_us_ia_story,water_quality,wqp,water,found,,1,0.66,public-domain (US),observed
+farm_us_ia_story,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.79,public-domain (USGS),observed
+farm_us_ia_story,dem_medium_res,cop_dem_glo30,geology,found,,8,4.56,ESA Copernicus DEM EULA,observed
+farm_us_ia_story,reanalysis_climate,era5_open_meteo,climate,found,,5,1.15,CC-BY-4.0 (ERA5),observed
+farm_us_ia_story,air_quality_monitors,eccc_naps,health_env,not-attempted,out of coverage (NAPS is Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,air_quality_monitors,epa_aqs_airdata,health_env,found,,12,0.18,public-domain (US EPA),observed
+farm_us_ia_story,surface_water_extent,jrc_gsw,water,found,,6,1.66,CC-BY-4.0,observed
+farm_us_ia_story,emissions_releases,eccc_npri,health_env,not-attempted,out of coverage (NPRI is Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,emissions_releases,eccc_ghgrp,health_env,not-attempted,out of coverage (ECCC GHGRP is Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.79,CC-BY-4.0 (CAMS/ECMWF),observed
+farm_us_ia_story,geolocated_sequence,mgnify,microbiology,found,,2,1.43,EBI terms / open,observed
+farm_us_ia_story,facility_compliance,epa_echo,health_env,found,,16,0.61,public-domain (US EPA),observed
+farm_us_ia_story,disease_surveillance,phac_rvdss,health_env,not-attempted,out of coverage (PHAC RVDSS is Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,2.13,INSDC open,observed
+farm_us_ia_story,wastewater_surveillance,phac_wastewater,health_env,not-attempted,out of coverage (PHAC wastewater is Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,disease_surveillance,cdc_nndss,health_env,found,,14,1.05,public-domain (US CDC),observed
+farm_us_ia_story,contaminated_sites,tbs_fcsi,health_env,not-attempted,out of coverage (FCSI is Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,census_demography,statcan_csd_2016,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,census_demography,statcan_wds_popest,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,census_demography,tigerweb_blocks2020,census,found,,11,0.21,public-domain (US Census),observed
+farm_us_ia_story,emissions_releases,epa_echo_tri,health_env,found,,10,2.31,public-domain (US EPA),observed
+farm_us_ia_story,contaminated_sites,epa_frs_sems,health_env,found,,5,1.67,public-domain (US EPA),observed
+farm_us_ia_story,census_demography,acs5_api,census,unavailable,ConnectionError: api.census.gov ACS5 requires an API key (missing key); metadata endpoint HTTP 200 so the host is reachable. No key embedded by design -- set one up at api.censu,0,2.38,public-domain (US Census),observed
+farm_us_ia_story,wastewater_surveillance,cdc_nwss,health_env,found,,4,3.77,public-domain (US CDC),observed
+farm_us_ia_story,mobility_flows,lehd_lodes8,census,found,,18,0.44,public-domain (US Census),observed
+farm_us_ia_story,property_assessment,statcan_dwelling_value,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only),0,0.0,CC-BY-4.0 (Quebec),observed
+farm_us_ia_story,healthcare_accessibility,statcan_odhf,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,healthcare_accessibility,cdc_places,census,found,,9,0.41,public-domain (US CDC),observed
+farm_us_ia_story,indigenous_lands,nrcan_alta,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,urban_extent,ghs_smod_r2023a,census,found,,12,2.54,CC-BY-4.0 (JRC GHSL),observed
+farm_us_ia_story,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (BC Data Catalogue is Canada/BC-only),0,0.0,Open Government Licence - BC,observed
+farm_us_ia_story,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (BC Data Catalogue is Canada/BC-only),0,0.0,Open Government Licence - BC,observed
+farm_us_ia_story,urban_extent,io_lulc_annual_v02,census,found,,10,1.47,CC-BY-4.0 (Impact Observatory),observed
+farm_us_ia_story,indigenous_lands,tigerweb_aiannh,census,found,,6,0.24,public-domain (US Census),observed
+farm_us_ia_story,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 15TVG (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+farm_us_ia_story,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+farm_us_ia_story,glaciers,natural_earth_10m,cryosphere,found,,6,0.27,public-domain (Natural Earth),observed
+farm_us_ia_story,permafrost_extent,nrcan_permafrost,cryosphere,not-attempted,out of coverage (Permafrost Atlas of Canada is CA-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.48,public-domain (NOAA NCEI),observed
+farm_us_ia_story,surficial_geology,gsc_surficial_1880a,geology,not-attempted,out of coverage (GSC surficial geology is CA-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,gamma_radiometrics,usgs_namrad,geology,found,,9,0.21,public-domain (USGS),observed
+farm_us_ia_story,mines_producing,nrcan_900a,infrastructure,not-attempted,out of coverage (NRCan Map 900A is CA-only),0,0.0,OGL-Canada-2.0,observed
+farm_us_ia_story,mines_producing,usgs_mineplant,infrastructure,found,,9,0.67,public-domain (USGS),observed
+farm_us_ia_story,forest_change,hansen_gfc_v1_13,macrobiology,found,,9,2.63,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+farm_ab_taber,vegetation_timeseries,modis_13q1,macrobiology,found,,3,30.02,public-domain (NASA),observed
+farm_us_ia_story,vegetation_timeseries,modis_13q1,macrobiology,found,,3,16.13,public-domain (NASA),observed
+farm_us_ia_story,population_gridded,ghs_pop_r2023a,census,found,,8,16.83,CC-BY-4.0 (JRC GHSL),observed
+farm_us_ia_story,power_plants,wri_gppd,infrastructure,found,,12,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+farm_us_ia_story,railways,overture_transportation,infrastructure,found,,12,11.95,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_us_ia_story,industrial_facilities,overture_land_use,infrastructure,found,,8,1.02,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_us_ia_story,industrial_facilities,epa_echo,infrastructure,found,,12,0.64,public-domain (US EPA),observed
+farm_us_ia_story,transmission_lines,overture_power,infrastructure,found,,13,10.2,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_us_ia_story,pipelines,overture_utility,infrastructure,found,,8,11.93,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_us_ia_story,power_plants,overture_power_plant,infrastructure,found,,7,7.77,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_us_ia_story,addresses,overture_buildings,infrastructure,found,,12,0.51,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_us_ia_story,addresses,overture_addresses,infrastructure,found,,9,0.71,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+farm_us_ia_story,gazetteer,wikidata_sparql,infrastructure,found,,8,0.53,CC0-1.0,observed
+farm_us_ia_story,field_boundaries,usda_csb_fiboa,macrobiology,found,,6,15.18,public-domain (USDA NASS),observed
+farm_us_ia_story,cell_towers,overture_communication,infrastructure,found,,7,0.79,ODbL-1.0 (share-alike; OSM via Overture),observed
+farm_us_ia_story,gazetteer,overture_divisions,infrastructure,found,,12,0.42,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+farm_us_ia_story,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.97,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+mine_hvc_bc,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,1.96,public-domain (USGS),observed
+mine_hvc_bc,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.1,JAXA open,observed
+mine_hvc_bc,dem_medium_res_ca,mrdem_30,geology,found,,5,0.97,OGL-Canada-2.0,observed
+mine_hvc_bc,bedrock_geology,macrostrat,geology,found,,5,0.26,CC-BY-4.0,observed
+mine_hvc_bc,dem_medium_res,cop_dem_glo30,geology,found,,8,2.76,ESA Copernicus DEM EULA,observed
+mine_hvc_bc,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,5.11,CC-BY-4.0 (Copernicus),observed
+mine_hvc_bc,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+mine_hvc_bc,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.46,OGL-Canada-2.0,observed
+mine_hvc_bc,land_cover_ca,nrcan_landcover,macrobiology,unavailable,LookupError: AOI does not intersect raster footprint,0,1.49,OGL-Canada-2.0,observed
+mine_hvc_bc,land_cover,esa_worldcover,macrobiology,found,,8,1.88,CC-BY-4.0,observed
+mine_hvc_bc,species_occurrence,gbif,macrobiology,found,,2,0.56,CC-BY / CC0 mixed,observed
+mine_hvc_bc,optical_multispectral,sentinel2_l2a,spectral,found,,12,7.11,CC-BY-4.0 (Copernicus),observed
+farm_us_ia_story,embeddings,s2_signature_v1,embeddings,found,,67,8.22,"CC-BY-4.0 (Copernicus, derived)",observed
+mine_hvc_bc,surface_water_extent,jrc_gsw,water,found,,6,1.25,CC-BY-4.0,observed
+mine_hvc_bc,water_quality,wqp,water,found,,1,1.01,public-domain (US),observed
+mine_hvc_bc,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.14,public-domain (USGS),observed
+mine_hvc_bc,biomass,hgb,macrobiology,found,,5,2.61,CC-BY-4.0,observed
+mine_hvc_bc,reanalysis_climate,era5_open_meteo,climate,found,,5,0.9,CC-BY-4.0 (ERA5),observed
+mine_hvc_bc,air_quality_monitors,eccc_naps,health_env,found,,6,0.02,OGL-Canada-2.0,observed
+mine_hvc_bc,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+mine_hvc_bc,geolocated_sequence,mgnify,microbiology,found,,2,1.26,EBI terms / open,observed
+mine_hvc_bc,emissions_releases,eccc_npri,health_env,found,,17,0.06,OGL-Canada-2.0,observed
+mine_hvc_bc,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+mine_hvc_bc,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+mine_hvc_bc,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+mine_hvc_bc,disease_surveillance,phac_rvdss,health_env,found,,8,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+mine_hvc_bc,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+mine_hvc_bc,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.67,CC-BY-4.0 (CAMS/ECMWF),observed
+mine_hvc_bc,census_demography,statcan_csd_2016,census,found,,16,0.05,OGL-Canada-2.0,observed
+mine_hvc_bc,contaminated_sites,tbs_fcsi,health_env,found,,13,0.07,OGL-Canada-2.0,observed
+mine_hvc_bc,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_hvc_bc,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+farm_us_ia_story,embeddings,alphaearth_v1_annual,embeddings,found,,82,10.14,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+mine_hvc_bc,census_demography,statcan_wds_popest,census,found,,6,0.61,OGL-Canada-2.0,observed
+mine_hvc_bc,urban_extent,io_lulc_annual_v02,census,found,,11,1.11,CC-BY-4.0 (Impact Observatory),observed
+mine_hvc_bc,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+mine_hvc_bc,property_assessment,statcan_dwelling_value,census,found,,4,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'British Columbia'),0,0.01,CC-BY-4.0 (Quebec),observed
+mine_hvc_bc,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+mine_hvc_bc,indigenous_lands,nrcan_alta,census,found,,8,0.25,OGL-Canada-2.0,observed
+mine_hvc_bc,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_hvc_bc,parcels_cadastre,bc_pmbc_parcel_fabric,census,found,,11,0.13,Open Government Licence - BC,observed
+mine_hvc_bc,crown_land,bc_tantalis_crown,census,found,,17,0.39,Open Government Licence - BC,observed
+mine_hvc_bc,infrastructure_osm,osm_overpass,infrastructure,found,,3,4.17,ODbL-1.0 (share-alike),observed
+mine_hvc_bc,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+mine_hvc_bc,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 10UFA (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+mine_hvc_bc,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+mine_hvc_bc,glaciers,natural_earth_10m,cryosphere,found,,6,0.32,public-domain (Natural Earth),observed
+mine_hvc_bc,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.09,OGL-Canada-2.0,observed
+mine_hvc_bc,urban_extent,ghs_smod_r2023a,census,found,,10,2.83,CC-BY-4.0 (JRC GHSL),observed
+mine_hvc_bc,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.22,public-domain (USGS),observed
+mine_hvc_bc,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+mine_hvc_bc,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+mine_hvc_bc,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.44,public-domain (NOAA NCEI),observed
+farm_us_ia_story,infrastructure_osm,osm_overpass,infrastructure,unavailable,ConnectionError: overpass server busy/blocked after retries (HTTP 500),0,35.68,ODbL-1.0 (share-alike),observed
+mine_hvc_bc,population_gridded,ghs_pop_r2023a,census,found,,8,3.99,CC-BY-4.0 (JRC GHSL),observed
+mine_hvc_bc,pipelines,overture_utility,infrastructure,found,,9,1.15,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_hvc_bc,transmission_lines,overture_power,infrastructure,found,,13,0.71,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_hvc_bc,power_plants,wri_gppd,infrastructure,found,,11,0.04,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+mine_hvc_bc,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+mine_hvc_bc,power_plants,overture_power_plant,infrastructure,found,,7,0.72,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_hvc_bc,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,2.21,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+mine_hvc_bc,addresses,overture_buildings,infrastructure,found,,7,0.36,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_hvc_bc,railways,overture_transportation,infrastructure,found,,14,1.9,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_hvc_bc,industrial_facilities,overture_land_use,infrastructure,found,,11,0.83,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_hvc_bc,cell_towers,overture_communication,infrastructure,found,,7,0.8,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_hvc_bc,addresses,overture_addresses,infrastructure,found,,7,1.14,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+mine_hvc_bc,gazetteer,wikidata_sparql,infrastructure,found,,8,0.51,CC0-1.0,observed
+mine_hvc_bc,gazetteer,overture_divisions,infrastructure,found,,10,0.43,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_hvc_bc,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,7.23,INSDC open,observed
+mine_hvc_bc,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.93,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+mine_syncrude_ab,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,1.96,public-domain (USGS),observed
+mine_syncrude_ab,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.59,JAXA open,observed
+mine_syncrude_ab,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,4.01,CC-BY-4.0 (Copernicus),observed
+mine_syncrude_ab,bedrock_geology,macrostrat,geology,found,,5,0.25,CC-BY-4.0,observed
+mine_syncrude_ab,dem_medium_res_ca,mrdem_30,geology,found,,5,0.97,OGL-Canada-2.0,observed
+mine_syncrude_ab,dem_medium_res,cop_dem_glo30,geology,found,,8,2.74,ESA Copernicus DEM EULA,observed
+mine_syncrude_ab,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+mine_syncrude_ab,optical_multispectral,sentinel2_l2a,spectral,found,,12,4.8,CC-BY-4.0 (Copernicus),observed
+mine_syncrude_ab,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.47,OGL-Canada-2.0,observed
+mine_syncrude_ab,land_cover,esa_worldcover,macrobiology,found,,11,1.31,CC-BY-4.0,observed
+mine_syncrude_ab,land_cover_ca,nrcan_landcover,macrobiology,found,,10,1.51,OGL-Canada-2.0,observed
+mine_syncrude_ab,species_occurrence,gbif,macrobiology,found,,2,0.65,CC-BY / CC0 mixed,observed
+mine_syncrude_ab,water_quality,wqp,water,found,,1,0.37,public-domain (US),observed
+mine_syncrude_ab,surface_water_extent,jrc_gsw,water,found,,6,2.44,CC-BY-4.0,observed
+mine_hvc_bc,vegetation_timeseries,modis_13q1,macrobiology,found,,3,18.18,public-domain (NASA),observed
+mine_syncrude_ab,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.57,public-domain (USGS),observed
+mine_syncrude_ab,reanalysis_climate,era5_open_meteo,climate,found,,5,2.66,CC-BY-4.0 (ERA5),observed
+mine_hvc_bc,embeddings,s2_signature_v1,embeddings,found,,67,10.54,"CC-BY-4.0 (Copernicus, derived)",observed
+mine_syncrude_ab,air_quality_monitors,eccc_naps,health_env,found,,20,0.03,OGL-Canada-2.0,observed
+mine_syncrude_ab,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+mine_hvc_bc,embeddings,alphaearth_v1_annual,embeddings,found,,82,10.4,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+mine_syncrude_ab,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,0.98,INSDC open,observed
+mine_syncrude_ab,emissions_releases,eccc_ghgrp,health_env,found,,7,0.02,OGL-Canada-2.0,observed
+mine_syncrude_ab,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+mine_syncrude_ab,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+mine_syncrude_ab,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+mine_syncrude_ab,disease_surveillance,phac_rvdss,health_env,found,,6,0.03,OGL-Canada-2.0,observed
+mine_syncrude_ab,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+mine_syncrude_ab,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+mine_syncrude_ab,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+mine_syncrude_ab,emissions_releases,eccc_npri,health_env,found,,18,0.1,OGL-Canada-2.0,observed
+mine_syncrude_ab,geolocated_sequence,mgnify,microbiology,found,,2,1.32,EBI terms / open,observed
+mine_syncrude_ab,census_demography,statcan_csd_2016,census,found,,16,0.14,OGL-Canada-2.0,observed
+mine_syncrude_ab,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_syncrude_ab,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_syncrude_ab,contaminated_sites,tbs_fcsi,health_env,found,,13,0.24,OGL-Canada-2.0,observed
+mine_syncrude_ab,biomass,hgb,macrobiology,found,,5,5.84,CC-BY-4.0,observed
+mine_syncrude_ab,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.68,CC-BY-4.0 (CAMS/ECMWF),observed
+mine_syncrude_ab,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+mine_syncrude_ab,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+mine_syncrude_ab,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Alberta'),0,0.02,CC-BY-4.0 (Quebec),observed
+mine_syncrude_ab,healthcare_accessibility,statcan_odhf,census,found,,13,0.02,OGL-Canada-2.0,observed
+mine_syncrude_ab,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+mine_syncrude_ab,indigenous_lands,nrcan_alta,census,found,,8,0.15,OGL-Canada-2.0,observed
+mine_syncrude_ab,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_syncrude_ab,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+mine_syncrude_ab,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+mine_syncrude_ab,census_demography,statcan_wds_popest,census,found,,6,0.74,OGL-Canada-2.0,observed
+mine_syncrude_ab,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+mine_syncrude_ab,embeddings,clay_v0_embeddings,embeddings,found,,11,0.56,CC-BY-4.0 (Clay Foundation),observed
+mine_syncrude_ab,urban_extent,ghs_smod_r2023a,census,found,,11,1.19,CC-BY-4.0 (JRC GHSL),observed
+mine_syncrude_ab,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+mine_syncrude_ab,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.18,OGL-Canada-2.0,observed
+mine_syncrude_ab,glaciers,natural_earth_10m,cryosphere,found,,6,0.38,public-domain (Natural Earth),observed
+mine_syncrude_ab,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+mine_syncrude_ab,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.19,public-domain (USGS),observed
+mine_syncrude_ab,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+mine_syncrude_ab,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+mine_syncrude_ab,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.46,public-domain (NOAA NCEI),observed
+mine_syncrude_ab,urban_extent,io_lulc_annual_v02,census,found,,14,1.99,CC-BY-4.0 (Impact Observatory),observed
+mine_syncrude_ab,railways,overture_transportation,infrastructure,found,,14,0.59,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_syncrude_ab,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,1.99,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+mine_syncrude_ab,power_plants,wri_gppd,infrastructure,found,,12,0.02,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+mine_syncrude_ab,population_gridded,ghs_pop_r2023a,census,found,,8,2.57,CC-BY-4.0 (JRC GHSL),observed
+mine_syncrude_ab,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+mine_syncrude_ab,pipelines,overture_utility,infrastructure,found,,8,0.86,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_syncrude_ab,transmission_lines,overture_power,infrastructure,found,,13,0.73,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_syncrude_ab,power_plants,overture_power_plant,infrastructure,found,,7,0.72,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_syncrude_ab,addresses,overture_buildings,infrastructure,found,,7,0.41,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_syncrude_ab,addresses,overture_addresses,infrastructure,found,,7,0.91,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+mine_syncrude_ab,cell_towers,overture_communication,infrastructure,found,,7,0.71,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_syncrude_ab,gazetteer,wikidata_sparql,infrastructure,found,,4,0.52,CC0-1.0,observed
+mine_syncrude_ab,industrial_facilities,overture_land_use,infrastructure,found,,10,1.19,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_syncrude_ab,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.92,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+mine_syncrude_ab,gazetteer,overture_divisions,infrastructure,found,,12,0.89,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_sudbury_on,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,3.56,public-domain (USGS),observed
+mine_sudbury_on,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.37,JAXA open,observed
+mine_sudbury_on,optical_multispectral,sentinel2_l2a,spectral,found,,12,4.47,CC-BY-4.0 (Copernicus),observed
+mine_sudbury_on,dem_medium_res_ca,mrdem_30,geology,found,,5,1.29,OGL-Canada-2.0,observed
+mine_sudbury_on,bedrock_geology,macrostrat,geology,found,,5,0.26,CC-BY-4.0,observed
+mine_sudbury_on,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,2.99,CC-BY-4.0 (Copernicus),observed
+mine_syncrude_ab,vegetation_timeseries,modis_13q1,macrobiology,unavailable,LookupError: AOI does not intersect raster footprint,0,16.1,public-domain (NASA),observed
+mine_sudbury_on,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+mine_sudbury_on,dem_medium_res,cop_dem_glo30,geology,found,,8,3.34,ESA Copernicus DEM EULA,observed
+mine_sudbury_on,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.45,OGL-Canada-2.0,observed
+mine_sudbury_on,land_cover,esa_worldcover,macrobiology,found,,8,1.7,CC-BY-4.0,observed
+mine_sudbury_on,land_cover_ca,nrcan_landcover,macrobiology,found,,9,1.6,OGL-Canada-2.0,observed
+mine_sudbury_on,species_occurrence,gbif,macrobiology,found,,2,0.77,CC-BY / CC0 mixed,observed
+mine_sudbury_on,water_quality,wqp,water,found,,1,1.03,public-domain (US),observed
+mine_sudbury_on,biomass,hgb,macrobiology,found,,5,2.51,CC-BY-4.0,observed
+mine_syncrude_ab,embeddings,s2_signature_v1,embeddings,found,,67,10.11,"CC-BY-4.0 (Copernicus, derived)",observed
+mine_sudbury_on,surface_water_extent,jrc_gsw,water,found,,6,1.82,CC-BY-4.0,observed
+mine_sudbury_on,reanalysis_climate,era5_open_meteo,climate,found,,5,0.93,CC-BY-4.0 (ERA5),observed
+mine_sudbury_on,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.74,public-domain (USGS),observed
+mine_sudbury_on,air_quality_monitors,eccc_naps,health_env,found,,20,0.03,OGL-Canada-2.0,observed
+mine_sudbury_on,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+mine_sudbury_on,infrastructure_osm,osm_overpass,infrastructure,found,,3,1.39,ODbL-1.0 (share-alike),observed
+mine_sudbury_on,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.65,CC-BY-4.0 (CAMS/ECMWF),observed
+mine_sudbury_on,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+mine_sudbury_on,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+mine_sudbury_on,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+mine_sudbury_on,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+mine_sudbury_on,disease_surveillance,phac_rvdss,health_env,found,,8,0.04,OGL-Canada-2.0,observed
+mine_sudbury_on,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+mine_sudbury_on,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+mine_sudbury_on,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+mine_sudbury_on,emissions_releases,eccc_npri,health_env,found,,18,0.1,OGL-Canada-2.0,observed
+mine_sudbury_on,contaminated_sites,tbs_fcsi,health_env,found,,13,0.12,OGL-Canada-2.0,observed
+mine_sudbury_on,census_demography,statcan_csd_2016,census,found,,16,0.09,OGL-Canada-2.0,observed
+mine_sudbury_on,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_sudbury_on,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_sudbury_on,geolocated_sequence,mgnify,microbiology,found,,2,1.43,EBI terms / open,observed
+mine_sudbury_on,census_demography,statcan_wds_popest,census,found,,6,0.57,OGL-Canada-2.0,observed
+mine_syncrude_ab,infrastructure_osm,osm_overpass,infrastructure,found,,3,17.7,ODbL-1.0 (share-alike),observed
+mine_sudbury_on,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+mine_sudbury_on,property_assessment,statcan_dwelling_value,census,found,,4,0.05,OGL-Canada-2.0,observed
+mine_sudbury_on,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Ontario'),0,0.01,CC-BY-4.0 (Quebec),observed
+mine_sudbury_on,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+mine_sudbury_on,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+mine_sudbury_on,indigenous_lands,nrcan_alta,census,found,,8,0.19,OGL-Canada-2.0,observed
+mine_sudbury_on,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+mine_sudbury_on,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+mine_sudbury_on,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+mine_sudbury_on,urban_extent,ghs_smod_r2023a,census,found,,13,1.66,CC-BY-4.0 (JRC GHSL),observed
+mine_sudbury_on,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+mine_sudbury_on,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 17TMM (1170 of ~57k land tiles published),0,0.01,CC-BY-4.0 (Clay Foundation),observed
+mine_sudbury_on,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+mine_sudbury_on,glaciers,natural_earth_10m,cryosphere,found,,6,0.31,public-domain (Natural Earth),observed
+mine_sudbury_on,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,1.27,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+mine_sudbury_on,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.14,OGL-Canada-2.0,observed
+mine_sudbury_on,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+mine_sudbury_on,urban_extent,io_lulc_annual_v02,census,found,,12,1.95,CC-BY-4.0 (Impact Observatory),observed
+mine_sudbury_on,mines_producing,nrcan_900a,infrastructure,found,,7,0.05,OGL-Canada-2.0,observed
+mine_sudbury_on,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+mine_sudbury_on,gamma_radiometrics,usgs_namrad,geology,found,,9,0.14,public-domain (USGS),observed
+mine_sudbury_on,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.41,public-domain (NOAA NCEI),observed
+mine_sudbury_on,railways,overture_transportation,infrastructure,found,,19,0.76,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_sudbury_on,pipelines,overture_utility,infrastructure,found,,9,0.83,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_sudbury_on,transmission_lines,overture_power,infrastructure,found,,13,0.63,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_sudbury_on,power_plants,wri_gppd,infrastructure,found,,11,0.02,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+mine_sudbury_on,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+mine_sudbury_on,addresses,overture_addresses,infrastructure,found,,9,0.35,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+mine_sudbury_on,power_plants,overture_power_plant,infrastructure,found,,7,0.46,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_sudbury_on,addresses,overture_buildings,infrastructure,found,,14,0.34,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_sudbury_on,cell_towers,overture_communication,infrastructure,found,,7,0.48,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_sudbury_on,industrial_facilities,overture_land_use,infrastructure,found,,11,1.08,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_sudbury_on,gazetteer,wikidata_sparql,infrastructure,found,,8,0.54,CC0-1.0,observed
+mine_sudbury_on,gazetteer,overture_divisions,infrastructure,found,,12,0.48,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_sudbury_on,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,1.01,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+mine_sudbury_on,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,6.96,INSDC open,observed
+mine_syncrude_ab,embeddings,alphaearth_v1_annual,embeddings,found,,82,18.9,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+mine_us_bingham_ut,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,1.95,public-domain (USGS),observed
+mine_us_bingham_ut,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.17,JAXA open,observed
+mine_us_bingham_ut,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,2.96,CC-BY-4.0 (Copernicus),observed
+mine_us_bingham_ut,dem_medium_res_ca,mrdem_30,geology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,bedrock_geology,macrostrat,geology,found,,5,0.27,CC-BY-4.0,observed
+mine_sudbury_on,vegetation_timeseries,modis_13q1,macrobiology,found,,3,15.93,public-domain (NASA),observed
+mine_us_bingham_ut,land_cover_ca,nrcan_landcover,macrobiology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_sudbury_on,embeddings,s2_signature_v1,embeddings,found,,67,7.61,"CC-BY-4.0 (Copernicus, derived)",observed
+mine_us_bingham_ut,crop_type_ca,aafc_aci,macrobiology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,land_cover,esa_worldcover,macrobiology,found,,8,1.41,CC-BY-4.0,observed
+mine_us_bingham_ut,optical_multispectral,sentinel2_l2a,spectral,found,,12,8.49,CC-BY-4.0 (Copernicus),observed
+mine_us_bingham_ut,biomass,hgb,macrobiology,found,,5,1.44,CC-BY-4.0,observed
+mine_us_bingham_ut,dem_medium_res,cop_dem_glo30,geology,found,,8,3.43,ESA Copernicus DEM EULA,observed
+mine_us_bingham_ut,species_occurrence,gbif,macrobiology,found,,2,0.56,CC-BY / CC0 mixed,observed
+mine_us_bingham_ut,crop_type_us,usda_cdl,macrobiology,found,,8,2.29,public-domain (USDA),observed
+mine_us_bingham_ut,reanalysis_climate,era5_open_meteo,climate,found,,5,0.98,CC-BY-4.0 (ERA5),observed
+mine_us_bingham_ut,surface_water_extent,jrc_gsw,water,found,,6,1.37,CC-BY-4.0,observed
+mine_us_bingham_ut,earthquake_catalogue,usgs_fdsn,hazards,found,,2,1.04,public-domain (USGS),observed
+mine_us_bingham_ut,water_quality,wqp,water,found,,1,1.66,public-domain (US),observed
+mine_us_bingham_ut,air_quality_monitors,eccc_naps,health_env,not-attempted,out of coverage (NAPS is Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,air_quality_monitors,epa_aqs_airdata,health_env,found,,18,0.05,public-domain (US EPA),observed
+mine_us_bingham_ut,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.63,CC-BY-4.0 (CAMS/ECMWF),observed
+mine_us_bingham_ut,emissions_releases,eccc_npri,health_env,not-attempted,out of coverage (NPRI is Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,emissions_releases,eccc_ghgrp,health_env,not-attempted,out of coverage (ECCC GHGRP is Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,geolocated_sequence,mgnify,microbiology,found,,2,1.57,EBI terms / open,observed
+mine_us_bingham_ut,facility_compliance,epa_echo,health_env,found,,16,0.42,public-domain (US EPA),observed
+mine_sudbury_on,embeddings,alphaearth_v1_annual,embeddings,found,,82,12.6,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+mine_us_bingham_ut,disease_surveillance,phac_rvdss,health_env,not-attempted,out of coverage (PHAC RVDSS is Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,emissions_releases,epa_echo_tri,health_env,found,,10,1.97,public-domain (US EPA),observed
+mine_us_bingham_ut,wastewater_surveillance,phac_wastewater,health_env,not-attempted,out of coverage (PHAC wastewater is Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,disease_surveillance,cdc_nndss,health_env,found,,14,1.1,public-domain (US CDC),observed
+mine_us_bingham_ut,contaminated_sites,tbs_fcsi,health_env,not-attempted,out of coverage (FCSI is Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,census_demography,statcan_csd_2016,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,census_demography,statcan_wds_popest,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,census_demography,tigerweb_blocks2020,census,found,,10,0.3,public-domain (US Census),observed
+mine_us_bingham_ut,wastewater_surveillance,cdc_nwss,health_env,found,,11,2.34,public-domain (US CDC),observed
+mine_us_bingham_ut,census_demography,acs5_api,census,unavailable,ConnectionError: api.census.gov ACS5 requires an API key (missing key); metadata endpoint HTTP 200 so the host is reachable. No key embedded by design -- set one up at api.censu,0,1.53,public-domain (US Census),observed
+mine_us_bingham_ut,contaminated_sites,epa_frs_sems,health_env,found,,5,1.93,public-domain (US EPA),observed
+mine_us_bingham_ut,urban_extent,io_lulc_annual_v02,census,found,,9,1.91,CC-BY-4.0 (Impact Observatory),observed
+mine_us_bingham_ut,mobility_flows,lehd_lodes8,census,found,,8,0.31,public-domain (US Census),observed
+mine_us_bingham_ut,property_assessment,statcan_dwelling_value,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only),0,0.0,CC-BY-4.0 (Quebec),observed
+mine_us_bingham_ut,healthcare_accessibility,statcan_odhf,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,healthcare_accessibility,cdc_places,census,found,,9,0.5,public-domain (US CDC),observed
+mine_us_bingham_ut,indigenous_lands,nrcan_alta,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,7.9,INSDC open,observed
+mine_us_bingham_ut,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (BC Data Catalogue is Canada/BC-only),0,0.0,Open Government Licence - BC,observed
+mine_us_bingham_ut,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (BC Data Catalogue is Canada/BC-only),0,0.0,Open Government Licence - BC,observed
+mine_us_bingham_ut,indigenous_lands,tigerweb_aiannh,census,found,,6,0.22,public-domain (US Census),observed
+mine_us_bingham_ut,urban_extent,ghs_smod_r2023a,census,found,,10,3.22,CC-BY-4.0 (JRC GHSL),observed
+mine_us_bingham_ut,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 12TVK (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+mine_us_bingham_ut,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+mine_us_bingham_ut,glaciers,natural_earth_10m,cryosphere,found,,6,0.32,public-domain (Natural Earth),observed
+mine_us_bingham_ut,permafrost_extent,nrcan_permafrost,cryosphere,not-attempted,out of coverage (Permafrost Atlas of Canada is CA-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.45,public-domain (NOAA NCEI),observed
+mine_us_bingham_ut,surficial_geology,gsc_surficial_1880a,geology,not-attempted,out of coverage (GSC surficial geology is CA-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,gamma_radiometrics,usgs_namrad,geology,found,,9,0.19,public-domain (USGS),observed
+mine_us_bingham_ut,mines_producing,nrcan_900a,infrastructure,not-attempted,out of coverage (NRCan Map 900A is CA-only),0,0.0,OGL-Canada-2.0,observed
+mine_us_bingham_ut,mines_producing,usgs_mineplant,infrastructure,found,,9,0.72,public-domain (USGS),observed
+mine_us_bingham_ut,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,2.32,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+mine_us_bingham_ut,infrastructure_osm,osm_overpass,infrastructure,found,,3,10.83,ODbL-1.0 (share-alike),observed
+mine_us_bingham_ut,population_gridded,ghs_pop_r2023a,census,found,,8,7.24,CC-BY-4.0 (JRC GHSL),observed
+mine_us_bingham_ut,transmission_lines,overture_power,infrastructure,found,,13,2.37,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_us_bingham_ut,pipelines,overture_utility,infrastructure,found,,8,2.86,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_us_bingham_ut,power_plants,wri_gppd,infrastructure,found,,12,0.02,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+mine_us_bingham_ut,vegetation_timeseries,modis_13q1,macrobiology,found,,3,15.82,public-domain (NASA),observed
+mine_us_bingham_ut,power_plants,overture_power_plant,infrastructure,found,,7,1.31,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_us_bingham_ut,industrial_facilities,epa_echo,infrastructure,found,,12,0.18,public-domain (US EPA),observed
+mine_us_bingham_ut,railways,overture_transportation,infrastructure,found,,11,3.5,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_us_bingham_ut,addresses,overture_buildings,infrastructure,found,,12,0.33,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_us_bingham_ut,industrial_facilities,overture_land_use,infrastructure,found,,10,0.67,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_us_bingham_ut,cell_towers,overture_communication,infrastructure,found,,7,0.68,ODbL-1.0 (share-alike; OSM via Overture),observed
+mine_us_bingham_ut,gazetteer,overture_divisions,infrastructure,found,,12,0.39,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+mine_us_bingham_ut,gazetteer,wikidata_sparql,infrastructure,found,,8,0.71,CC0-1.0,observed
+mine_us_bingham_ut,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.93,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+mine_us_bingham_ut,field_boundaries,usda_csb_fiboa,macrobiology,found,,3,6.75,public-domain (USDA NASS),observed
+mine_us_bingham_ut,addresses,overture_addresses,infrastructure,found,,7,2.5,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+city_toronto_core,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.41,public-domain (USGS),observed
+city_toronto_core,dem_medium_res,cop_dem_glo30,geology,found,,8,2.58,ESA Copernicus DEM EULA,observed
+city_toronto_core,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,4.62,JAXA open,observed
+city_toronto_core,bedrock_geology,macrostrat,geology,found,,5,0.23,CC-BY-4.0,observed
+city_toronto_core,dem_medium_res_ca,mrdem_30,geology,found,,5,1.14,OGL-Canada-2.0,observed
+city_toronto_core,optical_multispectral,sentinel2_l2a,spectral,found,,12,6.49,CC-BY-4.0 (Copernicus),observed
+city_toronto_core,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+city_toronto_core,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,5.2,CC-BY-4.0 (Copernicus),observed
+city_toronto_core,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.49,OGL-Canada-2.0,observed
+city_toronto_core,land_cover,esa_worldcover,macrobiology,found,,8,1.74,CC-BY-4.0,observed
+city_toronto_core,land_cover_ca,nrcan_landcover,macrobiology,found,,5,1.59,OGL-Canada-2.0,observed
+city_toronto_core,species_occurrence,gbif,macrobiology,found,,2,0.76,CC-BY / CC0 mixed,observed
+city_toronto_core,water_quality,wqp,water,found,,1,1.0,public-domain (US),observed
+city_toronto_core,biomass,hgb,macrobiology,found,,5,2.55,CC-BY-4.0,observed
+city_toronto_core,surface_water_extent,jrc_gsw,water,found,,6,1.91,CC-BY-4.0,observed
+city_toronto_core,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.53,public-domain (USGS),observed
+city_toronto_core,reanalysis_climate,era5_open_meteo,climate,found,,5,0.93,CC-BY-4.0 (ERA5),observed
+mine_us_bingham_ut,embeddings,s2_signature_v1,embeddings,found,,67,10.46,"CC-BY-4.0 (Copernicus, derived)",observed
+city_toronto_core,air_quality_monitors,eccc_naps,health_env,found,,22,0.02,OGL-Canada-2.0,observed
+city_toronto_core,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+mine_us_bingham_ut,embeddings,alphaearth_v1_annual,embeddings,found,,82,10.49,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+city_toronto_core,emissions_releases,eccc_npri,health_env,found,,18,0.05,OGL-Canada-2.0,observed
+city_toronto_core,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+city_toronto_core,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+city_toronto_core,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+city_toronto_core,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+city_toronto_core,disease_surveillance,phac_rvdss,health_env,found,,8,0.01,OGL-Canada-2.0,observed
+city_toronto_core,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+city_toronto_core,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+city_toronto_core,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+city_toronto_core,contaminated_sites,tbs_fcsi,health_env,found,,13,0.02,OGL-Canada-2.0,observed
+city_toronto_core,census_demography,statcan_csd_2016,census,found,,16,0.04,OGL-Canada-2.0,observed
+city_toronto_core,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.69,CC-BY-4.0 (CAMS/ECMWF),observed
+city_toronto_core,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_toronto_core,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_toronto_core,census_demography,statcan_wds_popest,census,found,,6,0.58,OGL-Canada-2.0,observed
+city_toronto_core,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,2.58,INSDC open,observed
+city_toronto_core,geolocated_sequence,mgnify,microbiology,found,,2,2.94,EBI terms / open,observed
+city_toronto_core,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+city_toronto_core,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+city_toronto_core,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Ontario'),0,0.01,CC-BY-4.0 (Quebec),observed
+city_toronto_core,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+city_toronto_core,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+city_toronto_core,indigenous_lands,nrcan_alta,census,found,,8,0.19,OGL-Canada-2.0,observed
+city_toronto_core,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_toronto_core,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+city_toronto_core,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+city_toronto_core,urban_extent,io_lulc_annual_v02,census,found,,8,1.32,CC-BY-4.0 (Impact Observatory),observed
+city_toronto_core,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+city_toronto_core,embeddings,clay_v0_embeddings,embeddings,found,,11,0.44,CC-BY-4.0 (Clay Foundation),observed
+city_toronto_core,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.01,public-domain (NOAA/NSIDC CDR),observed
+city_toronto_core,urban_extent,ghs_smod_r2023a,census,found,,10,3.09,CC-BY-4.0 (JRC GHSL),observed
+city_toronto_core,glaciers,natural_earth_10m,cryosphere,found,,6,0.28,public-domain (Natural Earth),observed
+city_toronto_core,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.15,OGL-Canada-2.0,observed
+city_toronto_core,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+city_toronto_core,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.25,public-domain (USGS),observed
+city_toronto_core,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+city_toronto_core,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+city_toronto_core,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,1.82,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+city_toronto_core,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.41,public-domain (NOAA NCEI),observed
+city_toronto_core,transmission_lines,overture_power,infrastructure,found,,13,0.89,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_toronto_core,pipelines,overture_utility,infrastructure,found,,9,0.97,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_toronto_core,power_plants,wri_gppd,infrastructure,found,,12,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+city_toronto_core,railways,overture_transportation,infrastructure,found,,21,1.71,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_toronto_core,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+city_toronto_core,power_plants,overture_power_plant,infrastructure,found,,7,0.88,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_toronto_core,industrial_facilities,overture_land_use,infrastructure,found,,13,1.05,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_toronto_core,addresses,overture_buildings,infrastructure,found,,14,0.55,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_toronto_core,addresses,overture_addresses,infrastructure,found,,9,1.22,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+city_toronto_core,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.9,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+city_toronto_core,cell_towers,overture_communication,infrastructure,found,,7,1.3,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_toronto_core,gazetteer,wikidata_sparql,infrastructure,found,,8,0.57,CC0-1.0,observed
+city_toronto_core,gazetteer,overture_divisions,infrastructure,found,,13,0.64,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_toronto_core,infrastructure_osm,osm_overpass,infrastructure,found,,3,11.02,ODbL-1.0 (share-alike),observed
+city_toronto_core,vegetation_timeseries,modis_13q1,macrobiology,found,,3,14.01,public-domain (NASA),observed
+city_toronto_core,population_gridded,ghs_pop_r2023a,census,found,,8,11.13,CC-BY-4.0 (JRC GHSL),observed
+city_montreal_core,optical_multispectral,sentinel2_l2a,spectral,found,,12,4.27,CC-BY-4.0 (Copernicus),observed
+city_montreal_core,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.65,public-domain (USGS),observed
+city_montreal_core,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.28,JAXA open,observed
+city_montreal_core,dem_medium_res_ca,mrdem_30,geology,found,,5,0.98,OGL-Canada-2.0,observed
+city_toronto_core,embeddings,s2_signature_v1,embeddings,found,,67,6.38,"CC-BY-4.0 (Copernicus, derived)",observed
+city_montreal_core,bedrock_geology,macrostrat,geology,found,,5,0.23,CC-BY-4.0,observed
+city_montreal_core,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+city_montreal_core,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.46,OGL-Canada-2.0,observed
+city_montreal_core,land_cover,esa_worldcover,macrobiology,found,,7,1.49,CC-BY-4.0,observed
+farm_on_essex,population_gridded,ghs_pop_r2023a,census,found,,8,152.93,CC-BY-4.0 (JRC GHSL),observed
+city_montreal_core,land_cover_ca,nrcan_landcover,macrobiology,found,,5,2.41,OGL-Canada-2.0,observed
+city_montreal_core,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,4.78,CC-BY-4.0 (Copernicus),observed
+city_montreal_core,dem_medium_res,cop_dem_glo30,geology,found,,8,4.0,ESA Copernicus DEM EULA,observed
+city_montreal_core,water_quality,wqp,water,found,,1,0.4,public-domain (US),observed
+city_montreal_core,biomass,hgb,macrobiology,found,,5,2.44,CC-BY-4.0,observed
+city_montreal_core,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.28,public-domain (USGS),observed
+city_montreal_core,reanalysis_climate,era5_open_meteo,climate,found,,5,0.91,CC-BY-4.0 (ERA5),observed
+city_montreal_core,species_occurrence,gbif,macrobiology,found,,2,1.14,CC-BY / CC0 mixed,observed
+city_montreal_core,air_quality_monitors,eccc_naps,health_env,found,,20,0.03,OGL-Canada-2.0,observed
+city_montreal_core,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+city_montreal_core,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.66,CC-BY-4.0 (CAMS/ECMWF),observed
+city_montreal_core,emissions_releases,eccc_npri,health_env,found,,18,0.05,OGL-Canada-2.0,observed
+city_montreal_core,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+city_montreal_core,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+city_montreal_core,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+city_montreal_core,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+city_montreal_core,disease_surveillance,phac_rvdss,health_env,found,,8,0.02,OGL-Canada-2.0,observed
+city_montreal_core,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+city_montreal_core,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+city_montreal_core,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+city_montreal_core,contaminated_sites,tbs_fcsi,health_env,found,,13,0.03,OGL-Canada-2.0,observed
+city_montreal_core,census_demography,statcan_csd_2016,census,found,,16,0.03,OGL-Canada-2.0,observed
+city_montreal_core,census_demography,statcan_wds_popest,census,found,,6,0.64,OGL-Canada-2.0,observed
+city_montreal_core,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_montreal_core,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_montreal_core,surface_water_extent,jrc_gsw,water,found,,6,2.77,CC-BY-4.0,observed
+mine_sudbury_on,population_gridded,ghs_pop_r2023a,census,found,,8,60.12,CC-BY-4.0 (JRC GHSL),observed
+city_montreal_core,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,2.87,INSDC open,observed
+city_montreal_core,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+city_montreal_core,property_assessment,statcan_dwelling_value,census,found,,4,0.01,OGL-Canada-2.0,observed
+city_montreal_core,urban_extent,ghs_smod_r2023a,census,found,,10,1.36,CC-BY-4.0 (JRC GHSL),observed
+city_montreal_core,healthcare_accessibility,statcan_odhf,census,found,,13,0.03,OGL-Canada-2.0,observed
+city_montreal_core,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+city_montreal_core,indigenous_lands,nrcan_alta,census,found,,8,0.22,OGL-Canada-2.0,observed
+city_montreal_core,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_montreal_core,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+city_montreal_core,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+city_montreal_core,geolocated_sequence,mgnify,microbiology,found,,2,3.71,EBI terms / open,observed
+city_montreal_core,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+city_montreal_core,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 18TXR (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+city_montreal_core,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+city_montreal_core,property_assessment,donneesquebec_role,census,found,,2,0.62,CC-BY-4.0 (Quebec),observed
+city_montreal_core,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.16,OGL-Canada-2.0,observed
+city_montreal_core,glaciers,natural_earth_10m,cryosphere,found,,6,0.34,public-domain (Natural Earth),observed
+city_montreal_core,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+city_montreal_core,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.17,public-domain (USGS),observed
+city_montreal_core,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+city_montreal_core,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+city_montreal_core,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.49,public-domain (NOAA NCEI),observed
+city_montreal_core,urban_extent,io_lulc_annual_v02,census,found,,7,1.75,CC-BY-4.0 (Impact Observatory),observed
+city_montreal_core,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,1.51,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+city_montreal_core,railways,overture_transportation,infrastructure,found,,22,2.04,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_montreal_core,power_plants,wri_gppd,infrastructure,found,,11,0.03,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+city_montreal_core,population_gridded,ghs_pop_r2023a,census,found,,8,4.54,CC-BY-4.0 (JRC GHSL),observed
+city_montreal_core,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+city_montreal_core,transmission_lines,overture_power,infrastructure,found,,13,2.57,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_montreal_core,pipelines,overture_utility,infrastructure,found,,9,3.12,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_montreal_core,power_plants,overture_power_plant,infrastructure,found,,7,2.59,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_montreal_core,addresses,overture_addresses,infrastructure,found,,9,1.76,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+city_montreal_core,addresses,overture_buildings,infrastructure,found,,14,0.74,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_montreal_core,industrial_facilities,overture_land_use,infrastructure,found,,12,2.29,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_montreal_core,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.91,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+city_montreal_core,gazetteer,overture_divisions,infrastructure,found,,13,0.71,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_toronto_core,embeddings,alphaearth_v1_annual,embeddings,found,,82,18.38,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+city_montreal_core,gazetteer,wikidata_sparql,infrastructure,found,,8,1.15,CC0-1.0,observed
+city_montreal_core,infrastructure_osm,osm_overpass,infrastructure,found,,3,9.95,ODbL-1.0 (share-alike),observed
+city_windsor_on,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.35,public-domain (USGS),observed
+city_montreal_core,cell_towers,overture_communication,infrastructure,found,,7,3.91,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,optical_multispectral,sentinel2_l2a,spectral,found,,12,3.89,CC-BY-4.0 (Copernicus),observed
+city_windsor_on,dem_medium_res_ca,mrdem_30,geology,found,,5,1.41,OGL-Canada-2.0,observed
+city_windsor_on,bedrock_geology,macrostrat,geology,found,,5,0.24,CC-BY-4.0,observed
+city_windsor_on,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,3.26,CC-BY-4.0 (Copernicus),observed
+city_windsor_on,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+city_windsor_on,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.49,OGL-Canada-2.0,observed
+city_windsor_on,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,4.3,JAXA open,observed
+city_windsor_on,land_cover_ca,nrcan_landcover,macrobiology,found,,7,1.78,OGL-Canada-2.0,observed
+city_windsor_on,land_cover,esa_worldcover,macrobiology,found,,7,1.96,CC-BY-4.0,observed
+city_windsor_on,dem_medium_res,cop_dem_glo30,geology,found,,8,3.47,ESA Copernicus DEM EULA,observed
+city_windsor_on,biomass,hgb,macrobiology,found,,5,1.47,CC-BY-4.0,observed
+city_montreal_core,vegetation_timeseries,modis_13q1,macrobiology,found,,3,16.81,public-domain (NASA),observed
+city_windsor_on,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.21,public-domain (USGS),observed
+city_windsor_on,water_quality,wqp,water,found,,1,0.6,public-domain (US),observed
+city_windsor_on,species_occurrence,gbif,macrobiology,found,,2,0.69,CC-BY / CC0 mixed,observed
+city_windsor_on,surface_water_extent,jrc_gsw,water,found,,6,0.82,CC-BY-4.0,observed
+city_windsor_on,air_quality_monitors,eccc_naps,health_env,found,,22,0.03,OGL-Canada-2.0,observed
+city_windsor_on,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+city_windsor_on,reanalysis_climate,era5_open_meteo,climate,found,,5,0.99,CC-BY-4.0 (ERA5),observed
+city_windsor_on,emissions_releases,eccc_npri,health_env,found,,18,0.06,OGL-Canada-2.0,observed
+city_windsor_on,emissions_releases,eccc_ghgrp,health_env,found,,7,0.07,OGL-Canada-2.0,observed
+city_windsor_on,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+city_windsor_on,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+city_windsor_on,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+city_windsor_on,disease_surveillance,phac_rvdss,health_env,found,,8,0.02,OGL-Canada-2.0,observed
+city_windsor_on,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+city_windsor_on,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.03,OGL-Canada-2.0,observed
+city_windsor_on,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+city_windsor_on,contaminated_sites,tbs_fcsi,health_env,found,,13,0.03,OGL-Canada-2.0,observed
+city_windsor_on,census_demography,statcan_csd_2016,census,found,,16,0.05,OGL-Canada-2.0,observed
+city_windsor_on,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.68,CC-BY-4.0 (CAMS/ECMWF),observed
+city_windsor_on,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_windsor_on,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_montreal_core,embeddings,s2_signature_v1,embeddings,found,,67,7.95,"CC-BY-4.0 (Copernicus, derived)",observed
+city_windsor_on,census_demography,statcan_wds_popest,census,found,,6,0.64,OGL-Canada-2.0,observed
+city_windsor_on,urban_extent,ghs_smod_r2023a,census,found,,10,1.82,CC-BY-4.0 (JRC GHSL),observed
+city_windsor_on,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+city_windsor_on,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+city_windsor_on,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Ontario'),0,0.01,CC-BY-4.0 (Quebec),observed
+city_windsor_on,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+city_windsor_on,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+city_windsor_on,indigenous_lands,nrcan_alta,census,found,,8,0.13,OGL-Canada-2.0,observed
+city_windsor_on,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_windsor_on,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+city_windsor_on,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+city_windsor_on,urban_extent,io_lulc_annual_v02,census,found,,8,1.79,CC-BY-4.0 (Impact Observatory),observed
+city_windsor_on,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+city_windsor_on,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 17TLG (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+city_windsor_on,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+city_windsor_on,glaciers,natural_earth_10m,cryosphere,found,,6,0.26,public-domain (Natural Earth),observed
+city_windsor_on,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.09,OGL-Canada-2.0,observed
+city_windsor_on,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.46,public-domain (NOAA NCEI),observed
+city_windsor_on,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+city_windsor_on,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.26,public-domain (USGS),observed
+city_windsor_on,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+city_windsor_on,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+city_windsor_on,railways,overture_transportation,infrastructure,found,,18,0.93,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,forest_change,hansen_gfc_v1_13,macrobiology,found,,9,2.52,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+city_windsor_on,pipelines,overture_utility,infrastructure,found,,8,0.77,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,transmission_lines,overture_power,infrastructure,found,,13,0.69,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,power_plants,wri_gppd,infrastructure,found,,12,0.02,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+city_windsor_on,geolocated_sequence,mgnify,microbiology,found,,2,7.43,EBI terms / open,observed
+city_windsor_on,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+city_windsor_on,industrial_facilities,overture_land_use,infrastructure,found,,12,1.22,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,power_plants,overture_power_plant,infrastructure,found,,7,1.51,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,addresses,overture_buildings,infrastructure,found,,14,0.55,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_windsor_on,addresses,overture_addresses,infrastructure,found,,9,0.76,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+city_windsor_on,gazetteer,wikidata_sparql,infrastructure,found,,8,0.45,CC0-1.0,observed
+city_windsor_on,cell_towers,overture_communication,infrastructure,found,,7,1.31,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_windsor_on,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.91,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+city_windsor_on,gazetteer,overture_divisions,infrastructure,found,,13,0.44,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_windsor_on,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,11.02,INSDC open,observed
+city_montreal_core,embeddings,alphaearth_v1_annual,embeddings,found,,82,18.0,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+city_windsor_on,infrastructure_osm,osm_overpass,infrastructure,found,,3,12.18,ODbL-1.0 (share-alike),observed
+city_us_detroit_mi,optical_multispectral,sentinel2_l2a,spectral,found,,12,3.81,CC-BY-4.0 (Copernicus),observed
+city_us_detroit_mi,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.16,public-domain (USGS),observed
+city_us_detroit_mi,dem_medium_res_ca,mrdem_30,geology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_windsor_on,population_gridded,ghs_pop_r2023a,census,found,,8,12.44,CC-BY-4.0 (JRC GHSL),observed
+city_us_detroit_mi,bedrock_geology,macrostrat,geology,found,,5,0.41,CC-BY-4.0,observed
+city_us_detroit_mi,land_cover_ca,nrcan_landcover,macrobiology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,2.67,JAXA open,observed
+city_us_detroit_mi,crop_type_ca,aafc_aci,macrobiology,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_windsor_on,vegetation_timeseries,modis_13q1,macrobiology,found,,3,15.77,public-domain (NASA),observed
+city_us_detroit_mi,land_cover,esa_worldcover,macrobiology,found,,8,0.66,CC-BY-4.0,observed
+city_us_detroit_mi,dem_medium_res,cop_dem_glo30,geology,found,,8,1.17,ESA Copernicus DEM EULA,observed
+city_us_detroit_mi,species_occurrence,gbif,macrobiology,found,,2,0.82,CC-BY / CC0 mixed,observed
+city_us_detroit_mi,surface_water_extent,jrc_gsw,water,found,,6,1.85,CC-BY-4.0,observed
+city_us_detroit_mi,water_quality,wqp,water,found,,1,1.29,public-domain (US),observed
+city_us_detroit_mi,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,4.13,CC-BY-4.0 (Copernicus),observed
+city_us_detroit_mi,crop_type_us,usda_cdl,macrobiology,found,,9,2.56,public-domain (USDA),observed
+city_windsor_on,embeddings,s2_signature_v1,embeddings,found,,67,7.33,"CC-BY-4.0 (Copernicus, derived)",observed
+city_us_detroit_mi,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.18,public-domain (USGS),observed
+city_us_detroit_mi,air_quality_monitors,eccc_naps,health_env,not-attempted,out of coverage (NAPS is Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,biomass,hgb,macrobiology,found,,5,2.49,CC-BY-4.0,observed
+city_us_detroit_mi,air_quality_monitors,epa_aqs_airdata,health_env,found,,18,0.13,public-domain (US EPA),observed
+city_us_detroit_mi,emissions_releases,eccc_npri,health_env,not-attempted,out of coverage (NPRI is Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,emissions_releases,eccc_ghgrp,health_env,not-attempted,out of coverage (ECCC GHGRP is Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,reanalysis_climate,era5_open_meteo,climate,found,,5,0.91,CC-BY-4.0 (ERA5),observed
+city_us_detroit_mi,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.65,CC-BY-4.0 (CAMS/ECMWF),observed
+city_us_detroit_mi,emissions_releases,epa_echo_tri,health_env,found,,10,0.8,public-domain (US EPA),observed
+city_us_detroit_mi,disease_surveillance,phac_rvdss,health_env,not-attempted,out of coverage (PHAC RVDSS is Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,facility_compliance,epa_echo,health_env,found,,16,0.5,public-domain (US EPA),observed
+city_us_detroit_mi,wastewater_surveillance,phac_wastewater,health_env,not-attempted,out of coverage (PHAC wastewater is Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,1.71,INSDC open,observed
+city_us_detroit_mi,contaminated_sites,tbs_fcsi,health_env,not-attempted,out of coverage (FCSI is Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,census_demography,statcan_csd_2016,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,census_demography,statcan_wds_popest,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,disease_surveillance,cdc_nndss,health_env,found,,14,0.99,public-domain (US CDC),observed
+city_us_detroit_mi,wastewater_surveillance,cdc_nwss,health_env,found,,9,1.38,public-domain (US CDC),observed
+city_us_detroit_mi,census_demography,tigerweb_blocks2020,census,found,,11,0.7,public-domain (US Census),observed
+city_us_detroit_mi,contaminated_sites,epa_frs_sems,health_env,found,,5,1.96,public-domain (US EPA),observed
+city_us_detroit_mi,census_demography,acs5_api,census,unavailable,ConnectionError: api.census.gov ACS5 requires an API key (missing key); metadata endpoint HTTP 200 so the host is reachable. No key embedded by design -- set one up at api.censu,0,1.89,public-domain (US Census),observed
+city_us_detroit_mi,urban_extent,io_lulc_annual_v02,census,found,,8,0.82,CC-BY-4.0 (Impact Observatory),observed
+city_us_detroit_mi,property_assessment,statcan_dwelling_value,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only),0,0.0,CC-BY-4.0 (Quebec),observed
+city_us_detroit_mi,healthcare_accessibility,statcan_odhf,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,urban_extent,ghs_smod_r2023a,census,found,,10,1.61,CC-BY-4.0 (JRC GHSL),observed
+city_us_detroit_mi,indigenous_lands,nrcan_alta,census,not-attempted,out of coverage (Canada-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,indigenous_lands,tigerweb_aiannh,census,found,,6,0.48,public-domain (US Census),observed
+city_us_detroit_mi,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (BC Data Catalogue is Canada/BC-only),0,0.0,Open Government Licence - BC,observed
+city_us_detroit_mi,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (BC Data Catalogue is Canada/BC-only),0,0.0,Open Government Licence - BC,observed
+city_us_detroit_mi,healthcare_accessibility,cdc_places,census,found,,9,1.04,public-domain (US CDC),observed
+city_us_detroit_mi,mobility_flows,lehd_lodes8,census,found,,18,1.24,public-domain (US Census),observed
+city_us_detroit_mi,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 17TLG (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+city_us_detroit_mi,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.01,public-domain (NOAA/NSIDC CDR),observed
+city_us_detroit_mi,glaciers,natural_earth_10m,cryosphere,found,,6,0.3,public-domain (Natural Earth),observed
+city_us_detroit_mi,permafrost_extent,nrcan_permafrost,cryosphere,not-attempted,out of coverage (Permafrost Atlas of Canada is CA-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,infrastructure_osm,osm_overpass,infrastructure,found,,3,5.35,ODbL-1.0 (share-alike),observed
+city_us_detroit_mi,surficial_geology,gsc_surficial_1880a,geology,not-attempted,out of coverage (GSC surficial geology is CA-only),0,0.0,OGL-Canada-2.0,observed
+city_windsor_on,embeddings,alphaearth_v1_annual,embeddings,found,,82,12.82,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+city_us_detroit_mi,mines_producing,nrcan_900a,infrastructure,not-attempted,out of coverage (NRCan Map 900A is CA-only),0,0.0,OGL-Canada-2.0,observed
+city_us_detroit_mi,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.34,public-domain (USGS),observed
+city_us_detroit_mi,mines_producing,usgs_mineplant,infrastructure,found,,9,0.12,public-domain (USGS),observed
+city_us_detroit_mi,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.51,public-domain (NOAA NCEI),observed
+city_us_detroit_mi,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,1.68,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+city_us_detroit_mi,vegetation_timeseries,modis_13q1,macrobiology,found,,3,12.6,public-domain (NASA),observed
+city_us_detroit_mi,power_plants,wri_gppd,infrastructure,found,,12,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+city_us_detroit_mi,geolocated_sequence,mgnify,microbiology,found,,2,11.69,EBI terms / open,observed
+city_us_detroit_mi,industrial_facilities,epa_echo,infrastructure,found,,12,0.18,public-domain (US EPA),observed
+city_us_detroit_mi,industrial_facilities,overture_land_use,infrastructure,found,,12,2.9,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_us_detroit_mi,railways,overture_transportation,infrastructure,found,,20,8.12,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_us_detroit_mi,pipelines,overture_utility,infrastructure,found,,9,8.26,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_us_detroit_mi,transmission_lines,overture_power,infrastructure,found,,13,8.32,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_us_detroit_mi,addresses,overture_buildings,infrastructure,found,,14,0.88,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_us_detroit_mi,population_gridded,ghs_pop_r2023a,census,found,,8,11.81,CC-BY-4.0 (JRC GHSL),observed
+city_us_detroit_mi,power_plants,overture_power_plant,infrastructure,found,,7,8.03,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_us_detroit_mi,gazetteer,overture_divisions,infrastructure,found,,13,0.5,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+city_us_detroit_mi,addresses,overture_addresses,infrastructure,found,,7,3.02,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+city_us_detroit_mi,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.91,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+city_us_detroit_mi,cell_towers,overture_communication,infrastructure,found,,7,1.54,ODbL-1.0 (share-alike; OSM via Overture),observed
+city_us_detroit_mi,field_boundaries,usda_csb_fiboa,macrobiology,found,,3,10.74,public-domain (USDA NASS),observed
+city_us_detroit_mi,gazetteer,wikidata_sparql,infrastructure,found,,8,1.56,CC0-1.0,observed
+stress_mine_hvc_full,dem_medium_res,cop_dem_glo30,geology,found,,8,0.85,ESA Copernicus DEM EULA,observed
+stress_mine_hvc_full,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,1.7,public-domain (USGS),observed
+stress_mine_hvc_full,dem_medium_res_ca,mrdem_30,geology,found,,5,0.97,OGL-Canada-2.0,observed
+stress_mine_hvc_full,bedrock_geology,macrostrat,geology,found,,5,0.26,CC-BY-4.0,observed
+stress_mine_hvc_full,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+stress_mine_hvc_full,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.47,OGL-Canada-2.0,observed
+stress_mine_hvc_full,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,2.3,CC-BY-4.0 (Copernicus),observed
+stress_mine_hvc_full,land_cover_ca,nrcan_landcover,macrobiology,unavailable,LookupError: AOI does not intersect raster footprint,0,1.16,OGL-Canada-2.0,observed
+stress_mine_hvc_full,land_cover,esa_worldcover,macrobiology,found,,9,1.24,CC-BY-4.0,observed
+stress_mine_hvc_full,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,3.1,JAXA open,observed
+stress_mine_hvc_full,water_quality,wqp,water,found,,1,1.36,public-domain (US),observed
+stress_mine_hvc_full,species_occurrence,gbif,macrobiology,found,,2,3.54,CC-BY / CC0 mixed,observed
+stress_mine_hvc_full,surface_water_extent,jrc_gsw,water,found,,6,3.53,CC-BY-4.0,observed
+stress_mine_hvc_full,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.42,public-domain (USGS),observed
+stress_mine_hvc_full,reanalysis_climate,era5_open_meteo,climate,found,,5,3.04,CC-BY-4.0 (ERA5),observed
+stress_mine_hvc_full,biomass,hgb,macrobiology,found,,5,5.43,CC-BY-4.0,observed
+stress_mine_hvc_full,air_quality_monitors,eccc_naps,health_env,found,,6,0.03,OGL-Canada-2.0,observed
+stress_mine_hvc_full,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+stress_mine_hvc_full,optical_multispectral,sentinel2_l2a,spectral,found,,12,8.42,CC-BY-4.0 (Copernicus),observed
+stress_mine_hvc_full,emissions_releases,eccc_npri,health_env,found,,17,0.03,OGL-Canada-2.0,observed
+stress_mine_hvc_full,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+stress_mine_hvc_full,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+stress_mine_hvc_full,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+stress_mine_hvc_full,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+stress_mine_hvc_full,disease_surveillance,phac_rvdss,health_env,found,,8,0.03,OGL-Canada-2.0,observed
+stress_mine_hvc_full,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+stress_mine_hvc_full,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.02,OGL-Canada-2.0,observed
+stress_mine_hvc_full,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+stress_mine_hvc_full,contaminated_sites,tbs_fcsi,health_env,found,,13,0.03,OGL-Canada-2.0,observed
+stress_mine_hvc_full,census_demography,statcan_csd_2016,census,found,,16,0.03,OGL-Canada-2.0,observed
+stress_mine_hvc_full,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,0.88,INSDC open,observed
+stress_mine_hvc_full,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_mine_hvc_full,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+city_us_detroit_mi,embeddings,s2_signature_v1,embeddings,found,,67,9.11,"CC-BY-4.0 (Copernicus, derived)",observed
+stress_mine_hvc_full,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.64,CC-BY-4.0 (CAMS/ECMWF),observed
+stress_mine_hvc_full,geolocated_sequence,mgnify,microbiology,found,,2,1.6,EBI terms / open,observed
+stress_mine_hvc_full,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+stress_mine_hvc_full,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+stress_mine_hvc_full,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'British Columbia'),0,0.02,CC-BY-4.0 (Quebec),observed
+stress_mine_hvc_full,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+stress_mine_hvc_full,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+stress_mine_hvc_full,indigenous_lands,nrcan_alta,census,found,,8,0.12,OGL-Canada-2.0,observed
+stress_mine_hvc_full,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_mine_hvc_full,parcels_cadastre,bc_pmbc_parcel_fabric,census,found,,11,0.23,Open Government Licence - BC,observed
+stress_mine_hvc_full,census_demography,statcan_wds_popest,census,found,,6,0.57,OGL-Canada-2.0,observed
+stress_mine_hvc_full,crown_land,bc_tantalis_crown,census,found,,17,0.4,Open Government Licence - BC,observed
+stress_mine_hvc_full,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+stress_mine_hvc_full,embeddings,clay_v0_embeddings,embeddings,unavailable,LookupError: no Clay embedding tile for MGRS 10UFA (1170 of ~57k land tiles published),0,0.0,CC-BY-4.0 (Clay Foundation),observed
+stress_mine_hvc_full,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.01,public-domain (NOAA/NSIDC CDR),observed
+stress_mine_hvc_full,glaciers,natural_earth_10m,cryosphere,found,,6,0.22,public-domain (Natural Earth),observed
+stress_mine_hvc_full,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.09,OGL-Canada-2.0,observed
+stress_mine_hvc_full,urban_extent,ghs_smod_r2023a,census,found,,10,1.36,CC-BY-4.0 (JRC GHSL),observed
+stress_mine_hvc_full,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+stress_mine_hvc_full,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.28,public-domain (USGS),observed
+stress_mine_hvc_full,mines_producing,nrcan_900a,infrastructure,found,,7,0.02,OGL-Canada-2.0,observed
+stress_mine_hvc_full,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+stress_mine_hvc_full,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.51,public-domain (NOAA NCEI),observed
+stress_mine_hvc_full,urban_extent,io_lulc_annual_v02,census,found,,12,1.76,CC-BY-4.0 (Impact Observatory),observed
+stress_mine_hvc_full,pipelines,overture_utility,infrastructure,found,,9,0.65,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,transmission_lines,overture_power,infrastructure,found,,13,0.61,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,power_plants,wri_gppd,infrastructure,found,,11,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+stress_mine_hvc_full,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,2.17,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+stress_mine_hvc_full,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+stress_mine_hvc_full,power_plants,overture_power_plant,infrastructure,found,,7,0.58,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,railways,overture_transportation,infrastructure,found,,14,1.34,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,addresses,overture_buildings,infrastructure,found,,14,0.5,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+stress_mine_hvc_full,industrial_facilities,overture_land_use,infrastructure,found,,11,1.07,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,cell_towers,overture_communication,infrastructure,found,,7,0.64,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,population_gridded,ghs_pop_r2023a,census,found,,8,3.8,CC-BY-4.0 (JRC GHSL),observed
+stress_mine_hvc_full,addresses,overture_addresses,infrastructure,found,,7,1.19,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+stress_mine_hvc_full,gazetteer,wikidata_sparql,infrastructure,found,,8,0.54,CC0-1.0,observed
+stress_mine_hvc_full,gazetteer,overture_divisions,infrastructure,found,,10,0.46,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+stress_mine_hvc_full,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,0.94,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+stress_oilsands_region,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.32,public-domain (USGS),observed
+stress_oilsands_region,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,2.4,JAXA open,observed
+stress_oilsands_region,dem_medium_res,cop_dem_glo30,geology,found,,8,2.87,ESA Copernicus DEM EULA,observed
+stress_mine_hvc_full,embeddings,s2_signature_v1,embeddings,found,,67,6.24,"CC-BY-4.0 (Copernicus, derived)",observed
+stress_oilsands_region,bedrock_geology,macrostrat,geology,found,,5,0.26,CC-BY-4.0,observed
+stress_oilsands_region,optical_multispectral,sentinel2_l2a,spectral,found,,12,6.3,CC-BY-4.0 (Copernicus),observed
+stress_oilsands_region,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,4.11,CC-BY-4.0 (Copernicus),observed
+stress_oilsands_region,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+stress_oilsands_region,dem_medium_res_ca,mrdem_30,geology,found,,5,1.27,OGL-Canada-2.0,observed
+stress_oilsands_region,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.47,OGL-Canada-2.0,observed
+stress_oilsands_region,land_cover,esa_worldcover,macrobiology,found,,12,1.32,CC-BY-4.0,observed
+stress_mine_hvc_full,vegetation_timeseries,modis_13q1,macrobiology,found,,3,17.59,public-domain (NASA),observed
+stress_mine_hvc_full,embeddings,alphaearth_v1_annual,embeddings,found,,82,8.37,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+stress_oilsands_region,species_occurrence,gbif,macrobiology,found,,2,1.39,CC-BY / CC0 mixed,observed
+stress_oilsands_region,land_cover_ca,nrcan_landcover,macrobiology,found,,12,2.74,OGL-Canada-2.0,observed
+stress_oilsands_region,water_quality,wqp,water,found,,1,1.07,public-domain (US),observed
+stress_oilsands_region,surface_water_extent,jrc_gsw,water,found,,6,1.42,CC-BY-4.0,observed
+city_us_detroit_mi,embeddings,alphaearth_v1_annual,embeddings,found,,82,22.47,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+stress_oilsands_region,earthquake_catalogue,usgs_fdsn,hazards,found,,2,0.54,public-domain (USGS),observed
+stress_oilsands_region,air_quality_monitors,eccc_naps,health_env,found,,20,0.02,OGL-Canada-2.0,observed
+stress_oilsands_region,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+stress_oilsands_region,reanalysis_climate,era5_open_meteo,climate,found,,5,1.04,CC-BY-4.0 (ERA5),observed
+stress_oilsands_region,emissions_releases,eccc_npri,health_env,found,,18,0.06,OGL-Canada-2.0,observed
+stress_oilsands_region,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+stress_oilsands_region,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+stress_oilsands_region,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+stress_oilsands_region,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+stress_oilsands_region,disease_surveillance,phac_rvdss,health_env,found,,6,0.01,OGL-Canada-2.0,observed
+stress_oilsands_region,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+stress_oilsands_region,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+stress_oilsands_region,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+stress_oilsands_region,contaminated_sites,tbs_fcsi,health_env,found,,13,0.02,OGL-Canada-2.0,observed
+stress_oilsands_region,census_demography,statcan_csd_2016,census,found,,16,0.05,OGL-Canada-2.0,observed
+stress_oilsands_region,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.65,CC-BY-4.0 (CAMS/ECMWF),observed
+stress_oilsands_region,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_oilsands_region,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_oilsands_region,census_demography,statcan_wds_popest,census,found,,6,0.63,OGL-Canada-2.0,observed
+stress_oilsands_region,biomass,hgb,macrobiology,found,,5,3.96,CC-BY-4.0,observed
+stress_oilsands_region,urban_extent,ghs_smod_r2023a,census,found,,11,1.33,CC-BY-4.0 (JRC GHSL),observed
+stress_oilsands_region,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+stress_oilsands_region,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+stress_oilsands_region,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Alberta'),0,0.01,CC-BY-4.0 (Quebec),observed
+stress_oilsands_region,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+stress_oilsands_region,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+stress_oilsands_region,indigenous_lands,nrcan_alta,census,found,,8,0.07,OGL-Canada-2.0,observed
+stress_oilsands_region,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_oilsands_region,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+stress_oilsands_region,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+stress_oilsands_region,geolocated_sequence,mgnify,microbiology,found,,2,3.05,EBI terms / open,observed
+stress_oilsands_region,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+stress_oilsands_region,embeddings,clay_v0_embeddings,embeddings,found,,11,0.53,CC-BY-4.0 (Clay Foundation),observed
+stress_oilsands_region,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.01,public-domain (NOAA/NSIDC CDR),observed
+stress_oilsands_region,population_gridded,ghs_pop_r2023a,census,found,,8,2.71,CC-BY-4.0 (JRC GHSL),observed
+stress_oilsands_region,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.13,OGL-Canada-2.0,observed
+stress_oilsands_region,glaciers,natural_earth_10m,cryosphere,found,,6,0.23,public-domain (Natural Earth),observed
+stress_oilsands_region,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+stress_oilsands_region,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,3.79,INSDC open,observed
+stress_oilsands_region,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.13,public-domain (USGS),observed
+stress_oilsands_region,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+stress_oilsands_region,mines_producing,nrcan_900a,infrastructure,found,,7,0.07,OGL-Canada-2.0,observed
+stress_oilsands_region,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.45,public-domain (NOAA NCEI),observed
+stress_oilsands_region,urban_extent,io_lulc_annual_v02,census,found,,14,3.31,CC-BY-4.0 (Impact Observatory),observed
+stress_oilsands_region,railways,overture_transportation,infrastructure,found,,17,0.96,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_oilsands_region,power_plants,wri_gppd,infrastructure,found,,12,0.03,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+stress_oilsands_region,transmission_lines,overture_power,infrastructure,found,,13,0.83,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_oilsands_region,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+stress_oilsands_region,pipelines,overture_utility,infrastructure,found,,9,1.11,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_oilsands_region,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,2.18,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+stress_oilsands_region,addresses,overture_buildings,infrastructure,found,,14,0.53,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+stress_oilsands_region,power_plants,overture_power_plant,infrastructure,found,,7,1.01,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_oilsands_region,addresses,overture_addresses,infrastructure,found,,7,0.8,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+stress_oilsands_region,cell_towers,overture_communication,infrastructure,found,,7,0.97,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_oilsands_region,industrial_facilities,overture_land_use,infrastructure,found,,12,1.19,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_oilsands_region,gazetteer,overture_divisions,infrastructure,found,,12,0.42,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+stress_oilsands_region,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,1.05,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+stress_oilsands_region,gazetteer,wikidata_sparql,infrastructure,found,,8,0.97,CC0-1.0,observed
+stress_oilsands_region,embeddings,alphaearth_v1_annual,embeddings,found,,82,2.19,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+stress_city_toronto_full,thermal_surface_temp,landsat_c2l2_st,spectral,found,,5,2.52,public-domain (USGS),observed
+stress_city_toronto_full,sar_backscatter_l,alos_palsar_mosaic,spectral,found,,4,2.73,JAXA open,observed
+stress_city_toronto_full,optical_multispectral,sentinel2_l2a,spectral,found,,12,3.47,CC-BY-4.0 (Copernicus),observed
+stress_city_toronto_full,bedrock_geology,macrostrat,geology,found,,5,0.23,CC-BY-4.0,observed
+stress_city_toronto_full,dem_medium_res,cop_dem_glo30,geology,found,,8,2.48,ESA Copernicus DEM EULA,observed
+stress_city_toronto_full,dem_medium_res_ca,mrdem_30,geology,found,,5,2.13,OGL-Canada-2.0,observed
+stress_city_toronto_full,crop_type_us,usda_cdl,macrobiology,not-attempted,out of coverage (US-only),0,0.0,public-domain (USDA),observed
+stress_city_toronto_full,land_cover,esa_worldcover,macrobiology,found,,9,2.0,CC-BY-4.0,observed
+stress_oilsands_region,vegetation_timeseries,modis_13q1,macrobiology,unavailable,LookupError: AOI does not intersect raster footprint,0,14.47,public-domain (NASA),observed
+stress_city_toronto_full,crop_type_ca,aafc_aci,macrobiology,unavailable,ConnectionError: endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC hosts (www.agr.gc.ca:404; agriculture.canada.ca:404); triage marked reachable but persisted ,0,0.49,OGL-Canada-2.0,observed
+stress_oilsands_region,embeddings,s2_signature_v1,embeddings,found,,67,6.43,"CC-BY-4.0 (Copernicus, derived)",observed
+stress_city_toronto_full,species_occurrence,gbif,macrobiology,found,,2,0.81,CC-BY / CC0 mixed,observed
+stress_city_toronto_full,sar_backscatter_c,sentinel1_rtc,spectral,found,,1,4.82,CC-BY-4.0 (Copernicus),observed
+stress_city_toronto_full,land_cover_ca,nrcan_landcover,macrobiology,found,,12,2.33,OGL-Canada-2.0,observed
+stress_city_toronto_full,water_quality,wqp,water,found,,1,1.11,public-domain (US),observed
+stress_city_toronto_full,surface_water_extent,jrc_gsw,water,found,,6,1.86,CC-BY-4.0,observed
+stress_city_toronto_full,biomass,hgb,macrobiology,found,,5,2.54,CC-BY-4.0,observed
+stress_city_toronto_full,reanalysis_climate,era5_open_meteo,climate,found,,5,1.5,CC-BY-4.0 (ERA5),observed
+stress_city_toronto_full,air_quality_monitors,eccc_naps,health_env,found,,22,0.05,OGL-Canada-2.0,observed
+stress_city_toronto_full,air_quality_monitors,epa_aqs_airdata,health_env,not-attempted,out of coverage (EPA AQS is US-only),0,0.0,public-domain (US EPA),observed
+stress_city_toronto_full,air_quality_modelled,cams_open_meteo,health_env,found,,17,0.69,CC-BY-4.0 (CAMS/ECMWF),observed
+stress_city_toronto_full,emissions_releases,eccc_npri,health_env,found,,18,0.05,OGL-Canada-2.0,observed
+stress_city_toronto_full,emissions_releases,eccc_ghgrp,health_env,found,,7,0.01,OGL-Canada-2.0,observed
+stress_city_toronto_full,emissions_releases,epa_echo_tri,health_env,not-attempted,out of coverage (EPA ECHO/TRI is US-only),0,0.0,public-domain (US EPA),observed
+stress_city_toronto_full,facility_compliance,epa_echo,health_env,not-attempted,out of coverage (EPA ECHO is US-only),0,0.0,public-domain (US EPA),observed
+stress_city_toronto_full,disease_surveillance,cdc_nndss,health_env,not-attempted,out of coverage (CDC NNDSS is US-only),0,0.0,public-domain (US CDC),observed
+stress_city_toronto_full,disease_surveillance,phac_rvdss,health_env,found,,8,0.01,OGL-Canada-2.0,observed
+stress_city_toronto_full,wastewater_surveillance,cdc_nwss,health_env,not-attempted,out of coverage (CDC NWSS is US-only),0,0.0,public-domain (US CDC),observed
+stress_city_toronto_full,wastewater_surveillance,phac_wastewater,health_env,found,,10,0.01,OGL-Canada-2.0,observed
+stress_city_toronto_full,contaminated_sites,epa_frs_sems,health_env,not-attempted,out of coverage (EPA SEMS/Superfund is US-only),0,0.0,public-domain (US EPA),observed
+stress_city_toronto_full,contaminated_sites,tbs_fcsi,health_env,found,,13,0.02,OGL-Canada-2.0,observed
+stress_city_toronto_full,earthquake_catalogue,usgs_fdsn,hazards,found,,2,1.56,public-domain (USGS),observed
+stress_city_toronto_full,census_demography,statcan_csd_2016,census,found,,16,0.1,OGL-Canada-2.0,observed
+stress_city_toronto_full,census_demography,tigerweb_blocks2020,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_city_toronto_full,census_demography,acs5_api,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_city_toronto_full,geolocated_sequence,mgnify,microbiology,found,,2,1.61,EBI terms / open,observed
+stress_city_toronto_full,census_demography,statcan_wds_popest,census,found,,6,0.61,OGL-Canada-2.0,observed
+stress_city_toronto_full,urban_extent,ghs_smod_r2023a,census,found,,12,1.55,CC-BY-4.0 (JRC GHSL),observed
+stress_city_toronto_full,mobility_flows,lehd_lodes8,census,not-attempted,out of coverage (LODES is US-only),0,0.0,public-domain (US Census),observed
+stress_city_toronto_full,property_assessment,statcan_dwelling_value,census,found,,4,0.02,OGL-Canada-2.0,observed
+stress_city_toronto_full,property_assessment,donneesquebec_role,census,not-attempted,out of coverage (Quebec-only; AOI province 'Ontario'),0,0.01,CC-BY-4.0 (Quebec),observed
+stress_city_toronto_full,healthcare_accessibility,statcan_odhf,census,found,,13,0.01,OGL-Canada-2.0,observed
+stress_city_toronto_full,healthcare_accessibility,cdc_places,census,not-attempted,out of coverage (CDC PLACES is US-only),0,0.0,public-domain (US CDC),observed
+stress_city_toronto_full,indigenous_lands,nrcan_alta,census,found,,8,0.14,OGL-Canada-2.0,observed
+stress_city_toronto_full,indigenous_lands,tigerweb_aiannh,census,not-attempted,out of coverage (US-only),0,0.0,public-domain (US Census),observed
+stress_city_toronto_full,parcels_cadastre,bc_pmbc_parcel_fabric,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+stress_city_toronto_full,crown_land,bc_tantalis_crown,census,not-attempted,out of coverage (outside British Columbia),0,0.0,Open Government Licence - BC,observed
+stress_city_toronto_full,urban_extent,io_lulc_annual_v02,census,found,,13,1.96,CC-BY-4.0 (Impact Observatory),observed
+stress_city_toronto_full,field_boundaries,usda_csb_fiboa,macrobiology,not-attempted,out of coverage (USDA CSB is conterminous-US only),0,0.0,public-domain (USDA NASS),observed
+stress_city_toronto_full,embeddings,clay_v0_embeddings,embeddings,found,,11,0.68,CC-BY-4.0 (Clay Foundation),observed
+stress_city_toronto_full,sea_ice,noaa_nsidc_sic_cdr,cryosphere,found,,7,0.02,public-domain (NOAA/NSIDC CDR),observed
+stress_city_toronto_full,glaciers,natural_earth_10m,cryosphere,found,,6,0.29,public-domain (Natural Earth),observed
+stress_city_toronto_full,permafrost_extent,nrcan_permafrost,cryosphere,found,,7,0.09,OGL-Canada-2.0,observed
+stress_city_toronto_full,geolocated_sequence_insdc,ena_geo,microbiology,found,,1,4.68,INSDC open,observed
+stress_city_toronto_full,surficial_geology,gsc_surficial_1880a,geology,found,,5,0.01,OGL-Canada-2.0,observed
+stress_city_toronto_full,gamma_radiometrics,usgs_namrad,geology,unavailable,LookupError: AOI outside the North American radiometric grid (no surveyed cell),0,0.15,public-domain (USGS),observed
+stress_city_toronto_full,mines_producing,nrcan_900a,infrastructure,found,,7,0.01,OGL-Canada-2.0,observed
+stress_city_toronto_full,mines_producing,usgs_mineplant,infrastructure,not-attempted,out of coverage (USGS mineplant is US-only),0,0.0,public-domain (USGS),observed
+stress_city_toronto_full,bathymetry,etopo_2022_30s_bed,geology,found,,9,0.4,public-domain (NOAA NCEI),observed
+stress_city_toronto_full,forest_change,hansen_gfc_v1_13,macrobiology,found,,10,2.14,CC-BY-4.0 (Hansen/UMD/Google/USGS/NASA),observed
+stress_oilsands_region,infrastructure_osm,osm_overpass,infrastructure,found,,3,20.43,ODbL-1.0 (share-alike),observed
+stress_city_toronto_full,pipelines,overture_utility,infrastructure,found,,9,3.14,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_city_toronto_full,power_plants,wri_gppd,infrastructure,found,,12,0.01,CC-BY-4.0 (WRI GPPD v1.3.0),observed
+stress_city_toronto_full,transmission_lines,overture_power,infrastructure,found,,13,3.19,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_city_toronto_full,industrial_facilities,epa_echo,infrastructure,not-attempted,out of coverage (US-only: EPA ECHO),0,0.0,public-domain (US EPA),observed
+stress_city_toronto_full,infrastructure_osm,osm_overpass,infrastructure,found,,3,9.88,ODbL-1.0 (share-alike),observed
+stress_city_toronto_full,power_plants,overture_power_plant,infrastructure,found,,7,3.78,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_mine_hvc_full,infrastructure_osm,osm_overpass,infrastructure,unavailable,ConnectionError: overpass server busy/blocked after retries (HTTP 500),0,40.63,ODbL-1.0 (share-alike),observed
+stress_city_toronto_full,industrial_facilities,overture_land_use,infrastructure,found,,13,3.06,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_city_toronto_full,population_gridded,ghs_pop_r2023a,census,found,,8,11.28,CC-BY-4.0 (JRC GHSL),observed
+stress_city_toronto_full,ground_level_imagery,mapillary_kartaview,infrastructure,unavailable,ConnectionError: auth-blocked: no keyless street-level imagery route; mapillary HTTP 500 code=190 Invalid OAuth 2.0 Access Token; kartaview apiCode=400 Restricted access!,0,1.58,CC-BY-SA-4.0 (Mapillary) / CC-BY-SA (KartaView),observed
+stress_city_toronto_full,railways,overture_transportation,infrastructure,found,,23,8.01,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_city_toronto_full,cell_towers,overture_communication,infrastructure,found,,7,3.62,ODbL-1.0 (share-alike; OSM via Overture),observed
+stress_city_toronto_full,vegetation_timeseries,modis_13q1,macrobiology,found,,3,15.81,public-domain (NASA),observed
+stress_city_toronto_full,gazetteer,overture_divisions,infrastructure,found,,13,1.25,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+stress_city_toronto_full,addresses,overture_addresses,infrastructure,found,,5,5.65,CDLA-Permissive-2.0 (Overture; per-record OpenAddresses source terms),observed
+stress_city_toronto_full,embeddings,alphaearth_v1_annual,embeddings,found,,82,2.01,"CC-BY-4.0 (Google / Google DeepMind, AlphaEarth Foundations)",observed
+stress_city_toronto_full,addresses,overture_buildings,infrastructure,found,,12,5.84,ODbL-1.0 + CDLA-Permissive-2.0 (mixed: OSM / Google-Microsoft open buildings),observed
+stress_city_toronto_full,embeddings,s2_signature_v1,embeddings,found,,67,5.6,"CC-BY-4.0 (Copernicus, derived)",observed
+stress_city_toronto_full,gazetteer,wikidata_sparql,infrastructure,found,,8,19.63,CC0-1.0,observed
