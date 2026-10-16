@@ -1,0 +1,440 @@
+<style>
+  /* Routing figure: panels side by side on a shared Given / Target / Plan grid. */
+  .rp-entry { background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:16px 18px 18px; min-width:0; }
+  .rp-head { display:flex; align-items:baseline; gap:10px 14px; flex-wrap:wrap; border-bottom:1px solid var(--rule); padding-bottom:12px; margin-bottom:16px; }
+  .rp-head h2 { font-size:15px; font-weight:600; margin:0; }
+  .rp-head .sub { color:var(--muted); font-size:12.5px; }
+  .rp-head p { flex-basis:100%; margin:0; color:var(--muted); font-size:12.5px; }
+  .rp-scroll { overflow-x:auto; }
+  .rp-fig { display:grid; grid-template-columns:1.6rem repeat(3, max-content); column-gap:36px; row-gap:10px; }
+  .rp-rowlbl { grid-column:1; writing-mode:vertical-rl; transform:rotate(180deg); justify-self:center; align-self:center; font-size:11.5px; color:var(--faint); }
+  .rp-panel { margin:0; display:grid; grid-row:1 / span 4; grid-template-rows:subgrid; }
+  .rp-panel figcaption { font-weight:500; font-size:13.5px; display:flex; gap:8px; align-items:baseline; white-space:nowrap; }
+  .rp-panel .letter { font-weight:600; }
+  .rp-cell svg { display:block; }
+  .rp-given { align-self:start; } .rp-target { align-self:end; } .rp-plan { align-self:start; }
+  .rp-dark { display:none; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .rp-light { display:none; }
+    :root:not([data-theme="light"]) .rp-dark { display:block; }
+  }
+  :root[data-theme="dark"] .rp-light { display:none; }
+  :root[data-theme="dark"] .rp-dark { display:block; }
+</style>
+<section class="rp-entry" id="panel-routing" aria-labelledby="rp-title"><div class="rp-head"><h2 id="rp-title">Lineage and routing</h2><span class="sub">A no constraint · B lineage constraint · C rows</span><p>Drawn with metasmith's DAG renderer. A and B ask for the same file; B's lineage constraint names the assembly it must descend from. C runs three samples, two co-assembled: mapping joins each sample to its own assembly, binning groups every BAM on one assembly into one task, and the reference DB, which shares no lineage with any sample, crosses to every bin set. Triangle hues match the solver panel.</p></div><div class="rp-scroll"><div class="rp-fig"><span class="rp-rowlbl" style="grid-row:2">Given</span><span class="rp-rowlbl" style="grid-row:3">Target</span><span class="rp-rowlbl" style="grid-row:4">Plan</span><figure class="rp-panel" style="grid-column:2"><figcaption><span class="letter">A</span><span>No constraint</span></figcaption><div class="rp-cell rp-given rp-light" style="grid-row:2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105" height="101" viewBox="0 0 105 101">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.7 L 24.8,61.6"/>
+</g>
+<g><title></title>
+<polygon points="19.5,30.5 30.2,30.5 24.8,39.7" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="39.8" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start"></text></g>
+<g><title>reads</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="71.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads</text></g>
+</svg></div><div class="rp-cell rp-given rp-dark" style="grid-row:2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105" height="101" viewBox="0 0 105 101">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.7 L 24.8,61.6"/>
+</g>
+<g><title></title>
+<polygon points="19.5,30.5 30.2,30.5 24.8,39.7" fill="#1B1E24" stroke="#DFE3EA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="39.8" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start"></text></g>
+<g><title>reads</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="71.0" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads</text></g>
+</svg></div><div class="rp-cell rp-target rp-light" style="grid-row:3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="101" viewBox="0 0 180 101">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+</g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">compressed file</text></g>
+<g><title></title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start"></text></g>
+</svg></div><div class="rp-cell rp-target rp-dark" style="grid-row:3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="101" viewBox="0 0 180 101">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+</g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">compressed file</text></g>
+<g><title></title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#1B1E24" stroke="#DFE3EA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start"></text></g>
+</svg></div><div class="rp-cell rp-plan rp-light" style="grid-row:4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="133" viewBox="0 0 180 133">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+<path d="M 24.8,70.9 L 24.8,92.8"/>
+</g>
+<g><title>reads</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads</text></g>
+<g><title>compress</title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#FFA15A" stroke="#FFA15A" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">compress</text></g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="97.5" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="102.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">compressed file</text></g>
+</svg></div><div class="rp-cell rp-plan rp-dark" style="grid-row:4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="133" viewBox="0 0 180 133">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+<path d="M 24.8,70.9 L 24.8,92.8"/>
+</g>
+<g><title>reads</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads</text></g>
+<g><title>compress</title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#FFA15A" stroke="#FFA15A" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">compress</text></g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="97.5" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="102.2" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">compressed file</text></g>
+</svg></div></figure><figure class="rp-panel" style="grid-column:3"><figcaption><span class="letter">B</span><span>Lineage constraint</span></figcaption><div class="rp-cell rp-given rp-light" style="grid-row:2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105" height="101" viewBox="0 0 105 101">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.7 L 24.8,61.6"/>
+</g>
+<g><title></title>
+<polygon points="19.5,30.5 30.2,30.5 24.8,39.7" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="39.8" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start"></text></g>
+<g><title>reads</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="71.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads</text></g>
+</svg></div><div class="rp-cell rp-given rp-dark" style="grid-row:2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="105" height="101" viewBox="0 0 105 101">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.7 L 24.8,61.6"/>
+</g>
+<g><title></title>
+<polygon points="19.5,30.5 30.2,30.5 24.8,39.7" fill="#1B1E24" stroke="#DFE3EA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="39.8" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start"></text></g>
+<g><title>reads</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="71.0" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads</text></g>
+</svg></div><div class="rp-cell rp-target rp-light" style="grid-row:3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="133" viewBox="0 0 180 133">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.6"/>
+<path d="M 24.8,71.0 L 24.8,92.9"/>
+</g>
+<g><title>assembly</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">assembly</text></g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="71.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">compressed file</text></g>
+<g><title></title>
+<polygon points="19.5,92.9 30.2,92.9 24.8,102.1" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="102.2" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start"></text></g>
+</svg></div><div class="rp-cell rp-target rp-dark" style="grid-row:3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="133" viewBox="0 0 180 133">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.6"/>
+<path d="M 24.8,71.0 L 24.8,92.9"/>
+</g>
+<g><title>assembly</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">assembly</text></g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="71.0" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">compressed file</text></g>
+<g><title></title>
+<polygon points="19.5,92.9 30.2,92.9 24.8,102.1" fill="#1B1E24" stroke="#DFE3EA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="102.2" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start"></text></g>
+</svg></div><div class="rp-cell rp-plan rp-light" style="grid-row:4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="195" viewBox="0 0 180 195">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+<path d="M 24.8,70.9 L 24.8,92.8"/>
+<path d="M 24.8,102.2 L 24.8,124.1"/>
+<path d="M 24.8,133.3 L 24.8,155.2"/>
+</g>
+<g><title>reads</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads</text></g>
+<g><title>assemble</title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#EF553B" stroke="#EF553B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">assemble</text></g>
+<g><title>assembly</title>
+<circle cx="24.8" cy="97.5" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="102.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">assembly</text></g>
+<g><title>compress</title>
+<polygon points="19.5,124.1 30.2,124.1 24.8,133.3" fill="#FFA15A" stroke="#FFA15A" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="133.4" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">compress</text></g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="159.9" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="164.6" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">compressed file</text></g>
+</svg></div><div class="rp-cell rp-plan rp-dark" style="grid-row:4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="180" height="195" viewBox="0 0 180 195">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+<path d="M 24.8,70.9 L 24.8,92.8"/>
+<path d="M 24.8,102.2 L 24.8,124.1"/>
+<path d="M 24.8,133.3 L 24.8,155.2"/>
+</g>
+<g><title>reads</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads</text></g>
+<g><title>assemble</title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#EF553B" stroke="#EF553B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">assemble</text></g>
+<g><title>assembly</title>
+<circle cx="24.8" cy="97.5" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="102.2" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">assembly</text></g>
+<g><title>compress</title>
+<polygon points="19.5,124.1 30.2,124.1 24.8,133.3" fill="#FFA15A" stroke="#FFA15A" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="133.4" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">compress</text></g>
+<g><title>compressed file</title>
+<circle cx="24.8" cy="159.9" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="164.6" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">compressed file</text></g>
+</svg></div></figure><figure class="rp-panel" style="grid-column:4"><figcaption><span class="letter">C</span><span>Rows: join, group, cross</span></figcaption><div class="rp-cell rp-given rp-light" style="grid-row:2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="195" viewBox="0 0 175 195">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.7 L 24.8,42.2 L 24.8,73.5 L 24.8,104.7 L 24.8,155.2"/>
+<path d="M 41.7,61.6 L 41.7,59.1 A 8.5,8.5 0 0 0 33.3,50.7 A 8.5,8.5 0 0 1 24.8,42.2"/>
+<path d="M 41.7,92.8 L 41.7,90.3 A 8.5,8.5 0 0 0 33.3,81.9 A 8.5,8.5 0 0 1 24.8,73.5"/>
+<path d="M 41.7,124.0 L 41.7,121.5 A 8.5,8.5 0 0 0 33.3,113.1 A 8.5,8.5 0 0 1 24.8,104.7"/>
+</g>
+<g><title></title>
+<polygon points="19.5,30.5 30.2,30.5 24.8,39.7" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="54.2" y="39.8" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start"></text></g>
+<g><title>reads 1</title>
+<circle cx="41.7" cy="66.3" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="71.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads 1</text></g>
+<g><title>reads 2</title>
+<circle cx="41.7" cy="97.5" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="102.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads 2</text></g>
+<g><title>reads 3</title>
+<circle cx="41.7" cy="128.7" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="133.4" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads 3</text></g>
+<g><title>reference DB</title>
+<circle cx="24.8" cy="159.9" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="164.6" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reference DB</text></g>
+</svg></div><div class="rp-cell rp-given rp-dark" style="grid-row:2"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="175" height="195" viewBox="0 0 175 195">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.7 L 24.8,42.2 L 24.8,73.5 L 24.8,104.7 L 24.8,155.2"/>
+<path d="M 41.7,61.6 L 41.7,59.1 A 8.5,8.5 0 0 0 33.3,50.7 A 8.5,8.5 0 0 1 24.8,42.2"/>
+<path d="M 41.7,92.8 L 41.7,90.3 A 8.5,8.5 0 0 0 33.3,81.9 A 8.5,8.5 0 0 1 24.8,73.5"/>
+<path d="M 41.7,124.0 L 41.7,121.5 A 8.5,8.5 0 0 0 33.3,113.1 A 8.5,8.5 0 0 1 24.8,104.7"/>
+</g>
+<g><title></title>
+<polygon points="19.5,30.5 30.2,30.5 24.8,39.7" fill="#1B1E24" stroke="#DFE3EA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="54.2" y="39.8" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start"></text></g>
+<g><title>reads 1</title>
+<circle cx="41.7" cy="66.3" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="64.6" y="71.0" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads 1</text></g>
+<g><title>reads 2</title>
+<circle cx="41.7" cy="97.5" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="64.6" y="102.2" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads 2</text></g>
+<g><title>reads 3</title>
+<circle cx="41.7" cy="128.7" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="64.6" y="133.4" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads 3</text></g>
+<g><title>reference DB</title>
+<circle cx="24.8" cy="159.9" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="64.6" y="164.6" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reference DB</text></g>
+</svg></div><div class="rp-cell rp-target rp-light" style="grid-row:3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="101" viewBox="0 0 128 101">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+</g>
+<g><title>taxonomy</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">taxonomy</text></g>
+<g><title></title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#FFFFFF" stroke="#2B2B2B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start"></text></g>
+</svg></div><div class="rp-cell rp-target rp-dark" style="grid-row:3"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="101" viewBox="0 0 128 101">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 24.8,39.8 L 24.8,61.7"/>
+</g>
+<g><title>taxonomy</title>
+<circle cx="24.8" cy="35.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="47.7" y="39.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">taxonomy</text></g>
+<g><title></title>
+<polygon points="19.5,61.7 30.2,61.7 24.8,70.9" fill="#1B1E24" stroke="#DFE3EA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="37.3" y="71.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start"></text></g>
+</svg></div><div class="rp-cell rp-plan rp-light" style="grid-row:4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="264" height="725" viewBox="0 0 264 725">
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 58.6,39.8 L 58.6,73.5 L 58.6,152.8 L 58.6,155.3"/>
+<path d="M 58.6,164.5 L 58.6,186.4"/>
+<path d="M 58.6,195.8 L 58.6,260.6 A 8.4,8.4 0 0 1 50.2,269.1 A 8.4,8.4 0 0 0 41.7,277.6"/>
+<path d="M 58.6,445.4 L 58.6,447.9 L 58.6,527.1 L 58.6,529.7"/>
+<path d="M 58.6,538.9 L 58.6,560.8"/>
+<path d="M 58.6,570.2 L 58.6,572.6 A 8.4,8.4 0 0 1 50.2,581.1 A 8.4,8.4 0 0 0 41.7,589.5"/>
+<path d="M 41.7,92.9 L 41.7,90.3 A 8.4,8.4 0 0 1 50.2,81.9 A 8.4,8.4 0 0 0 58.6,73.5"/>
+<path d="M 41.7,102.1 L 41.7,124.0"/>
+<path d="M 41.7,133.4 L 41.7,135.8 L 41.7,198.2 L 41.7,277.6 L 41.7,280.1"/>
+<path d="M 41.7,289.3 L 41.7,311.2"/>
+<path d="M 41.7,320.6 L 41.7,371.1 L 41.7,373.7"/>
+<path d="M 41.7,382.9 L 41.7,404.8"/>
+<path d="M 41.7,467.3 L 41.7,464.8 A 8.4,8.4 0 0 1 50.2,456.3 A 8.4,8.4 0 0 0 58.6,447.9"/>
+<path d="M 41.7,476.5 L 41.7,498.4"/>
+<path d="M 41.7,507.8 L 41.7,510.2 L 41.7,589.5 L 41.7,592.1"/>
+<path d="M 41.7,601.3 L 41.7,623.2"/>
+<path d="M 41.7,632.6 L 41.7,652.0 L 41.7,654.5"/>
+<path d="M 41.7,663.7 L 41.7,685.6"/>
+<path d="M 24.8,71.0 L 24.8,73.5 L 24.8,215.2 L 24.8,217.7"/>
+<path d="M 24.8,226.9 L 24.8,248.8"/>
+<path d="M 24.8,258.2 L 24.8,260.6 A 8.5,8.5 0 0 0 33.3,269.1 A 8.5,8.5 0 0 1 41.7,277.6"/>
+<path d="M 24.8,351.8 L 24.8,354.2 L 24.8,635.0 A 8.5,8.5 0 0 0 33.3,643.5 A 8.5,8.5 0 0 1 41.7,652.0"/>
+<path d="M 24.8,73.5 A 8.5,8.5 0 0 0 33.3,81.9 A 8.5,8.5 0 0 1 41.7,90.3"/>
+<path d="M 41.7,135.8 A 8.4,8.4 0 0 0 50.2,144.3 A 8.4,8.4 0 0 1 58.6,152.8"/>
+<path d="M 41.7,198.2 A 8.5,8.5 0 0 1 33.3,206.7 A 8.5,8.5 0 0 0 24.8,215.2"/>
+<path d="M 24.8,354.2 A 8.5,8.5 0 0 0 33.3,362.7 A 8.5,8.5 0 0 1 41.7,371.1"/>
+<path d="M 41.7,510.2 A 8.4,8.4 0 0 0 50.2,518.7 A 8.4,8.4 0 0 1 58.6,527.1"/>
+</g>
+<g><title>reads 1</title>
+<circle cx="58.6" cy="35.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads 1</text></g>
+<g><title>reads 2</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="71.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads 2</text></g>
+<g><title>assemble (group)</title>
+<polygon points="36.4,92.9 47.1,92.9 41.7,102.1" fill="#EF553B" stroke="#EF553B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="102.2" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">assemble (group)</text></g>
+<g><title>co-assembly 1+2</title>
+<circle cx="41.7" cy="128.7" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="133.4" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">co-assembly 1+2</text></g>
+<g><title>map (join)</title>
+<polygon points="53.3,155.3 64.0,155.3 58.6,164.5" fill="#636EFA" stroke="#636EFA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="164.6" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">map (join)</text></g>
+<g><title>BAM 1</title>
+<circle cx="58.6" cy="191.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="195.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">BAM 1</text></g>
+<g><title>map (join) </title>
+<polygon points="19.5,217.7 30.2,217.7 24.8,226.9" fill="#636EFA" stroke="#636EFA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="227.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">map (join) </text></g>
+<g><title>BAM 2</title>
+<circle cx="24.8" cy="253.5" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="258.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">BAM 2</text></g>
+<g><title>bin (group by assembly)</title>
+<polygon points="36.4,280.1 47.1,280.1 41.7,289.3" fill="#00CC96" stroke="#00CC96" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="289.4" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">bin (group by assembly)</text></g>
+<g><title>bins 1+2</title>
+<circle cx="41.7" cy="315.9" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="320.6" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">bins 1+2</text></g>
+<g><title>reference DB</title>
+<circle cx="24.8" cy="347.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="351.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reference DB</text></g>
+<g><title>classify (cross)</title>
+<polygon points="36.4,373.7 47.1,373.7 41.7,382.9" fill="#AB63FA" stroke="#AB63FA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="383.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">classify (cross)</text></g>
+<g><title>taxonomy 1+2</title>
+<circle cx="41.7" cy="409.5" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="414.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">taxonomy 1+2</text></g>
+<g><title>reads 3</title>
+<circle cx="58.6" cy="440.7" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="445.4" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">reads 3</text></g>
+<g><title>assemble</title>
+<polygon points="36.4,467.3 47.1,467.3 41.7,476.5" fill="#EF553B" stroke="#EF553B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="476.6" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">assemble</text></g>
+<g><title>assembly 3</title>
+<circle cx="41.7" cy="503.1" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="507.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">assembly 3</text></g>
+<g><title>map (join)  </title>
+<polygon points="53.3,529.7 64.0,529.7 58.6,538.9" fill="#636EFA" stroke="#636EFA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="539.0" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">map (join)  </text></g>
+<g><title>BAM 3</title>
+<circle cx="58.6" cy="565.5" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="570.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">BAM 3</text></g>
+<g><title>bin</title>
+<polygon points="36.4,592.1 47.1,592.1 41.7,601.3" fill="#00CC96" stroke="#00CC96" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="601.4" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">bin</text></g>
+<g><title>bins 3</title>
+<circle cx="41.7" cy="627.9" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="632.6" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">bins 3</text></g>
+<g><title>classify (cross) </title>
+<polygon points="36.4,654.5 47.1,654.5 41.7,663.7" fill="#AB63FA" stroke="#AB63FA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="663.8" font-family="Arial" font-size="13" fill="#111111" font-weight="normal" text-anchor="start">classify (cross) </text></g>
+<g><title>taxonomy 3</title>
+<circle cx="41.7" cy="690.3" r="4.7" fill="#2B2B2B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="81.5" y="695.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">taxonomy 3</text></g>
+</svg></div><div class="rp-cell rp-plan rp-dark" style="grid-row:4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="264" height="725" viewBox="0 0 264 725">
+<g fill="none" stroke="#8D97A8" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 58.6,39.8 L 58.6,73.5 L 58.6,152.8 L 58.6,155.3"/>
+<path d="M 58.6,164.5 L 58.6,186.4"/>
+<path d="M 58.6,195.8 L 58.6,260.6 A 8.4,8.4 0 0 1 50.2,269.1 A 8.4,8.4 0 0 0 41.7,277.6"/>
+<path d="M 58.6,445.4 L 58.6,447.9 L 58.6,527.1 L 58.6,529.7"/>
+<path d="M 58.6,538.9 L 58.6,560.8"/>
+<path d="M 58.6,570.2 L 58.6,572.6 A 8.4,8.4 0 0 1 50.2,581.1 A 8.4,8.4 0 0 0 41.7,589.5"/>
+<path d="M 41.7,92.9 L 41.7,90.3 A 8.4,8.4 0 0 1 50.2,81.9 A 8.4,8.4 0 0 0 58.6,73.5"/>
+<path d="M 41.7,102.1 L 41.7,124.0"/>
+<path d="M 41.7,133.4 L 41.7,135.8 L 41.7,198.2 L 41.7,277.6 L 41.7,280.1"/>
+<path d="M 41.7,289.3 L 41.7,311.2"/>
+<path d="M 41.7,320.6 L 41.7,371.1 L 41.7,373.7"/>
+<path d="M 41.7,382.9 L 41.7,404.8"/>
+<path d="M 41.7,467.3 L 41.7,464.8 A 8.4,8.4 0 0 1 50.2,456.3 A 8.4,8.4 0 0 0 58.6,447.9"/>
+<path d="M 41.7,476.5 L 41.7,498.4"/>
+<path d="M 41.7,507.8 L 41.7,510.2 L 41.7,589.5 L 41.7,592.1"/>
+<path d="M 41.7,601.3 L 41.7,623.2"/>
+<path d="M 41.7,632.6 L 41.7,652.0 L 41.7,654.5"/>
+<path d="M 41.7,663.7 L 41.7,685.6"/>
+<path d="M 24.8,71.0 L 24.8,73.5 L 24.8,215.2 L 24.8,217.7"/>
+<path d="M 24.8,226.9 L 24.8,248.8"/>
+<path d="M 24.8,258.2 L 24.8,260.6 A 8.5,8.5 0 0 0 33.3,269.1 A 8.5,8.5 0 0 1 41.7,277.6"/>
+<path d="M 24.8,351.8 L 24.8,354.2 L 24.8,635.0 A 8.5,8.5 0 0 0 33.3,643.5 A 8.5,8.5 0 0 1 41.7,652.0"/>
+<path d="M 24.8,73.5 A 8.5,8.5 0 0 0 33.3,81.9 A 8.5,8.5 0 0 1 41.7,90.3"/>
+<path d="M 41.7,135.8 A 8.4,8.4 0 0 0 50.2,144.3 A 8.4,8.4 0 0 1 58.6,152.8"/>
+<path d="M 41.7,198.2 A 8.5,8.5 0 0 1 33.3,206.7 A 8.5,8.5 0 0 0 24.8,215.2"/>
+<path d="M 24.8,354.2 A 8.5,8.5 0 0 0 33.3,362.7 A 8.5,8.5 0 0 1 41.7,371.1"/>
+<path d="M 41.7,510.2 A 8.4,8.4 0 0 0 50.2,518.7 A 8.4,8.4 0 0 1 58.6,527.1"/>
+</g>
+<g><title>reads 1</title>
+<circle cx="58.6" cy="35.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="39.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads 1</text></g>
+<g><title>reads 2</title>
+<circle cx="24.8" cy="66.3" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="71.0" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads 2</text></g>
+<g><title>assemble (group)</title>
+<polygon points="36.4,92.9 47.1,92.9 41.7,102.1" fill="#EF553B" stroke="#EF553B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="102.2" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">assemble (group)</text></g>
+<g><title>co-assembly 1+2</title>
+<circle cx="41.7" cy="128.7" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="133.4" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">co-assembly 1+2</text></g>
+<g><title>map (join)</title>
+<polygon points="53.3,155.3 64.0,155.3 58.6,164.5" fill="#636EFA" stroke="#636EFA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="164.6" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">map (join)</text></g>
+<g><title>BAM 1</title>
+<circle cx="58.6" cy="191.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="195.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">BAM 1</text></g>
+<g><title>map (join) </title>
+<polygon points="19.5,217.7 30.2,217.7 24.8,226.9" fill="#636EFA" stroke="#636EFA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="227.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">map (join) </text></g>
+<g><title>BAM 2</title>
+<circle cx="24.8" cy="253.5" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="258.2" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">BAM 2</text></g>
+<g><title>bin (group by assembly)</title>
+<polygon points="36.4,280.1 47.1,280.1 41.7,289.3" fill="#00CC96" stroke="#00CC96" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="289.4" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">bin (group by assembly)</text></g>
+<g><title>bins 1+2</title>
+<circle cx="41.7" cy="315.9" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="320.6" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">bins 1+2</text></g>
+<g><title>reference DB</title>
+<circle cx="24.8" cy="347.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="351.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reference DB</text></g>
+<g><title>classify (cross)</title>
+<polygon points="36.4,373.7 47.1,373.7 41.7,382.9" fill="#AB63FA" stroke="#AB63FA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="383.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">classify (cross)</text></g>
+<g><title>taxonomy 1+2</title>
+<circle cx="41.7" cy="409.5" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="414.2" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">taxonomy 1+2</text></g>
+<g><title>reads 3</title>
+<circle cx="58.6" cy="440.7" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="445.4" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">reads 3</text></g>
+<g><title>assemble</title>
+<polygon points="36.4,467.3 47.1,467.3 41.7,476.5" fill="#EF553B" stroke="#EF553B" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="476.6" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">assemble</text></g>
+<g><title>assembly 3</title>
+<circle cx="41.7" cy="503.1" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="507.8" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">assembly 3</text></g>
+<g><title>map (join)  </title>
+<polygon points="53.3,529.7 64.0,529.7 58.6,538.9" fill="#636EFA" stroke="#636EFA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="539.0" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">map (join)  </text></g>
+<g><title>BAM 3</title>
+<circle cx="58.6" cy="565.5" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="570.2" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">BAM 3</text></g>
+<g><title>bin</title>
+<polygon points="36.4,592.1 47.1,592.1 41.7,601.3" fill="#00CC96" stroke="#00CC96" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="601.4" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">bin</text></g>
+<g><title>bins 3</title>
+<circle cx="41.7" cy="627.9" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="632.6" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">bins 3</text></g>
+<g><title>classify (cross) </title>
+<polygon points="36.4,654.5 47.1,654.5 41.7,663.7" fill="#AB63FA" stroke="#AB63FA" stroke-width="1.3" stroke-linejoin="round"/>
+<text x="71.1" y="663.8" font-family="Arial" font-size="13" fill="#DFE3EA" font-weight="normal" text-anchor="start">classify (cross) </text></g>
+<g><title>taxonomy 3</title>
+<circle cx="41.7" cy="690.3" r="4.7" fill="#DFE3EA" stroke="#DFE3EA" stroke-width="1.3"/>
+<text x="81.5" y="695.0" font-family="Arial" font-size="13" fill="#8D97A8" font-weight="normal" text-anchor="start">taxonomy 3</text></g>
+</svg></div></figure></div></div></section>
