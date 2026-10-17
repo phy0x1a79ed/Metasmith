@@ -1,0 +1,1084 @@
+{
+ "nodes": {
+  "sequences::study": {
+   "kind": "GIVEN",
+   "name": "study",
+   "namespace": "sequences"
+  },
+  "e3::nanopore_reads": {
+   "kind": "GIVEN",
+   "name": "nanopore_reads",
+   "namespace": "e3"
+  },
+  "sequences::read_metadata": {
+   "kind": "GIVEN",
+   "name": "read_metadata",
+   "namespace": "sequences"
+  },
+  "sequences::short_reads_pe": {
+   "kind": "GIVEN",
+   "name": "short_reads_pe",
+   "namespace": "sequences"
+  },
+  "ref::genomad": {
+   "kind": "GIVEN",
+   "name": "genomad",
+   "namespace": "ref"
+  },
+  "ref::checkv_db": {
+   "kind": "GIVEN",
+   "name": "checkv_db",
+   "namespace": "ref"
+  },
+  "ref::vibrant_db": {
+   "kind": "GIVEN",
+   "name": "vibrant_db",
+   "namespace": "ref"
+  },
+  "annotation::virsorter2_db": {
+   "kind": "GIVEN",
+   "name": "virsorter2_db",
+   "namespace": "annotation"
+  },
+  "bench::checkm2_database": {
+   "kind": "GIVEN",
+   "name": "checkm2_database",
+   "namespace": "bench"
+  },
+  "modelling::media": {
+   "kind": "GIVEN",
+   "name": "media",
+   "namespace": "modelling"
+  },
+  "modelling::medium_name": {
+   "kind": "GIVEN",
+   "name": "medium_name",
+   "namespace": "modelling"
+  },
+  "1 seqkit_reads": {
+   "kind": "TRANSFORM",
+   "name": "seqkit_reads",
+   "namespace": ""
+  },
+  "rnf7B5rigr": {
+   "kind": "TARGET",
+   "name": "read_qc_stats",
+   "namespace": "sequences"
+  },
+  "2 bbduk": {
+   "kind": "TRANSFORM",
+   "name": "bbduk",
+   "namespace": ""
+  },
+  "ROs4tUYnGj": {
+   "kind": "DATA",
+   "name": "clean_short_reads",
+   "namespace": "sequences"
+  },
+  "CVDOUwVkRQ": {
+   "kind": "DATA",
+   "name": "discarded_short_reads",
+   "namespace": "sequences"
+  },
+  "3 megahit": {
+   "kind": "TRANSFORM",
+   "name": "megahit",
+   "namespace": ""
+  },
+  "OMYW4Q5Jo9": {
+   "kind": "DATA",
+   "name": "megahit_assembly",
+   "namespace": "sequences"
+  },
+  "r1ovalAs3Q": {
+   "kind": "DATA",
+   "name": "megahit_assembly_graph",
+   "namespace": "sequences"
+  },
+  "4 opera_ms": {
+   "kind": "TRANSFORM",
+   "name": "opera_ms",
+   "namespace": ""
+  },
+  "sxwPzB08PQ": {
+   "kind": "TARGET",
+   "name": "opera_ms_assembly",
+   "namespace": "e5"
+  },
+  "5 splitContigsForAmr": {
+   "kind": "TRANSFORM",
+   "name": "splitContigsForAmr",
+   "namespace": ""
+  },
+  "kwKNs283Wh": {
+   "kind": "DATA",
+   "name": "contig_batch",
+   "namespace": "sequences"
+  },
+  "6 prodigal": {
+   "kind": "TRANSFORM",
+   "name": "prodigal",
+   "namespace": ""
+  },
+  "RJR4dIZ397": {
+   "kind": "DATA",
+   "name": "orfs",
+   "namespace": "sequences"
+  },
+  "sh2m5OFy7s": {
+   "kind": "DATA",
+   "name": "gff",
+   "namespace": "sequences"
+  },
+  "7 assembly_stats": {
+   "kind": "TRANSFORM",
+   "name": "assembly_stats",
+   "namespace": ""
+  },
+  "Ni2WxPmshR": {
+   "kind": "DATA",
+   "name": "assembly_stats",
+   "namespace": "sequences"
+  },
+  "E0t8uhCRil": {
+   "kind": "DATA",
+   "name": "assembly_per_contig_coverage",
+   "namespace": "sequences"
+  },
+  "d88NoHU303": {
+   "kind": "DATA",
+   "name": "assembly_per_bp_coverage",
+   "namespace": "sequences"
+  },
+  "e1oUNWe3Xr": {
+   "kind": "DATA",
+   "name": "bam",
+   "namespace": "alignment"
+  },
+  "8 deepvirfinder": {
+   "kind": "TRANSFORM",
+   "name": "deepvirfinder",
+   "namespace": ""
+  },
+  "OcUqSLyaxy": {
+   "kind": "DATA",
+   "name": "deepvirfinder_candidate_virus",
+   "namespace": "e3"
+  },
+  "9 vibrant": {
+   "kind": "TRANSFORM",
+   "name": "vibrant",
+   "namespace": ""
+  },
+  "fizkMGM4Pq": {
+   "kind": "DATA",
+   "name": "vibrant_genome_quality",
+   "namespace": "viromics"
+  },
+  "9Uclgyqobo": {
+   "kind": "DATA",
+   "name": "vibrant_lifestyle_table",
+   "namespace": "viromics"
+  },
+  "sxyrv3IY88": {
+   "kind": "DATA",
+   "name": "vibrant_amgs",
+   "namespace": "viromics"
+  },
+  "POxXVt8hdt": {
+   "kind": "DATA",
+   "name": "vibrant_candidate_virus",
+   "namespace": "viromics"
+  },
+  "10 virsorter2": {
+   "kind": "TRANSFORM",
+   "name": "virsorter2",
+   "namespace": ""
+  },
+  "U10BcXuB3n": {
+   "kind": "DATA",
+   "name": "virsorter2_viral_sequences",
+   "namespace": "annotation"
+  },
+  "X1JzUrTG8U": {
+   "kind": "DATA",
+   "name": "virsorter2_scores",
+   "namespace": "annotation"
+  },
+  "jysJwN0oGH": {
+   "kind": "DATA",
+   "name": "virsorter2_boundary",
+   "namespace": "annotation"
+  },
+  "lrCxCFdWcm": {
+   "kind": "DATA",
+   "name": "virsorter2_candidate_virus",
+   "namespace": "viromics"
+  },
+  "11 genomad": {
+   "kind": "TRANSFORM",
+   "name": "genomad",
+   "namespace": ""
+  },
+  "o29cBBt8h5": {
+   "kind": "DATA",
+   "name": "genomad_virus_summary",
+   "namespace": "taxonomy"
+  },
+  "L8tpGNbRlb": {
+   "kind": "DATA",
+   "name": "genomad_plasmid_summary",
+   "namespace": "taxonomy"
+  },
+  "7YYuXjJB98": {
+   "kind": "DATA",
+   "name": "genomad_virus_genes",
+   "namespace": "taxonomy"
+  },
+  "UgaunUqEuW": {
+   "kind": "DATA",
+   "name": "genomad_taxonomy",
+   "namespace": "taxonomy"
+  },
+  "LBnULMzays": {
+   "kind": "DATA",
+   "name": "genomad_candidate_virus",
+   "namespace": "viromics"
+  },
+  "12 comebin": {
+   "kind": "TRANSFORM",
+   "name": "comebin",
+   "namespace": ""
+  },
+  "RMwQ96tR8z": {
+   "kind": "DATA",
+   "name": "comebin_contig_to_bin_table",
+   "namespace": "binning"
+  },
+  "13 semibin2": {
+   "kind": "TRANSFORM",
+   "name": "semibin2",
+   "namespace": ""
+  },
+  "4MV5xLr2aF": {
+   "kind": "DATA",
+   "name": "semibin2_bin_fasta",
+   "namespace": "sequences"
+  },
+  "bSVf7BTw4Y": {
+   "kind": "DATA",
+   "name": "semibin2_contig_to_bin_table",
+   "namespace": "binning"
+  },
+  "14 metabat2": {
+   "kind": "TRANSFORM",
+   "name": "metabat2",
+   "namespace": ""
+  },
+  "4PnQxwuYnL": {
+   "kind": "DATA",
+   "name": "metabat2_bin_fasta",
+   "namespace": "sequences"
+  },
+  "wpaCvW9sHd": {
+   "kind": "DATA",
+   "name": "metabat2_contig_to_bin_table",
+   "namespace": "binning"
+  },
+  "15 das_tool": {
+   "kind": "TRANSFORM",
+   "name": "das_tool",
+   "namespace": ""
+  },
+  "tRWxuYHTV0": {
+   "kind": "TARGET",
+   "name": "das_tool_bin_fasta",
+   "namespace": "sequences"
+  },
+  "urMkLu4Hsc": {
+   "kind": "TARGET",
+   "name": "das_tool_contig_to_bin_table",
+   "namespace": "binning"
+  },
+  "8mxeuHkh5B": {
+   "kind": "DATA",
+   "name": "das_tool_summary",
+   "namespace": "binning"
+  },
+  "16 viral_merge_calls": {
+   "kind": "TRANSFORM",
+   "name": "viral_merge_calls",
+   "namespace": ""
+  },
+  "VzL2RR4Unp": {
+   "kind": "TARGET",
+   "name": "dereplicated_candidate_virus",
+   "namespace": "viromics"
+  },
+  "ueZnqGR4vC": {
+   "kind": "DATA",
+   "name": "candidate_call_provenance",
+   "namespace": "viromics"
+  },
+  "17 viral_split": {
+   "kind": "TRANSFORM",
+   "name": "viral_split",
+   "namespace": ""
+  },
+  "CzpiU9nasC": {
+   "kind": "DATA",
+   "name": "viral_contig_batch",
+   "namespace": "e3"
+  },
+  "18 contig_length_table": {
+   "kind": "TRANSFORM",
+   "name": "contig_length_table",
+   "namespace": ""
+  },
+  "8cKDTqsdoE": {
+   "kind": "TARGET",
+   "name": "contig_length_table",
+   "namespace": "viromics"
+  },
+  "19 mag_orfs": {
+   "kind": "TRANSFORM",
+   "name": "mag_orfs",
+   "namespace": ""
+  },
+  "rjVWTXi487": {
+   "kind": "TARGET",
+   "name": "bin_orfs",
+   "namespace": "sequences"
+  },
+  "20 checkm2": {
+   "kind": "TRANSFORM",
+   "name": "checkm2",
+   "namespace": ""
+  },
+  "092HJ6UDHy": {
+   "kind": "TARGET",
+   "name": "checkm2_quality",
+   "namespace": "bench"
+  },
+  "21 checkv_batch": {
+   "kind": "TRANSFORM",
+   "name": "checkv_batch",
+   "namespace": ""
+  },
+  "Fr8WG2DR4x": {
+   "kind": "DATA",
+   "name": "checkv_contamination_batch",
+   "namespace": "e3"
+  },
+  "YuBMRUEVGe": {
+   "kind": "DATA",
+   "name": "checkv_quality_summary_batch",
+   "namespace": "e3"
+  },
+  "lMcsESoxLm": {
+   "kind": "DATA",
+   "name": "checkv_completeness_batch",
+   "namespace": "e3"
+  },
+  "ojF8gxIQGk": {
+   "kind": "DATA",
+   "name": "checkv_complete_genomes_batch",
+   "namespace": "e3"
+  },
+  "FX19Y91KWg": {
+   "kind": "DATA",
+   "name": "checkv_viruses_batch",
+   "namespace": "e3"
+  },
+  "0H7NM7p7M3": {
+   "kind": "DATA",
+   "name": "checkv_proviruses_batch",
+   "namespace": "e3"
+  },
+  "22 carveme_from_orfs": {
+   "kind": "TRANSFORM",
+   "name": "carveme_from_orfs",
+   "namespace": ""
+  },
+  "iS7jxz6iiu": {
+   "kind": "TARGET",
+   "name": "carveme_model",
+   "namespace": "modelling"
+  },
+  "23 memote_score": {
+   "kind": "TRANSFORM",
+   "name": "memote_score",
+   "namespace": ""
+  },
+  "8huBNLMYTc": {
+   "kind": "DATA",
+   "name": "memote_report",
+   "namespace": "modelling"
+  },
+  "UoVLzsUeLa": {
+   "kind": "DATA",
+   "name": "memote_results",
+   "namespace": "modelling"
+  },
+  "aCeAbgRoz6": {
+   "kind": "TARGET",
+   "name": "memote_score",
+   "namespace": "modelling"
+  },
+  "24 votu_curate_batch": {
+   "kind": "TRANSFORM",
+   "name": "votu_curate_batch",
+   "namespace": ""
+  },
+  "CK4aES8Gzv": {
+   "kind": "DATA",
+   "name": "curated_candidate_virus_batch",
+   "namespace": "e3"
+  },
+  "25 checkv_merge": {
+   "kind": "TRANSFORM",
+   "name": "checkv_merge",
+   "namespace": ""
+  },
+  "EMziYwpQtK": {
+   "kind": "TARGET",
+   "name": "checkv_contamination",
+   "namespace": "viromics"
+  },
+  "lBHJHVGnR3": {
+   "kind": "TARGET",
+   "name": "checkv_quality_summary",
+   "namespace": "viromics"
+  },
+  "r981Gx7GsU": {
+   "kind": "DATA",
+   "name": "checkv_completeness",
+   "namespace": "viromics"
+  },
+  "1irkOfvfcK": {
+   "kind": "DATA",
+   "name": "checkv_complete_genomes",
+   "namespace": "viromics"
+  },
+  "26 votu_curate_merge": {
+   "kind": "TRANSFORM",
+   "name": "votu_curate_merge",
+   "namespace": ""
+  },
+  "RgulwzbZJ6": {
+   "kind": "TARGET",
+   "name": "curated_candidate_virus",
+   "namespace": "e3"
+  },
+  "27 votu_cluster": {
+   "kind": "TRANSFORM",
+   "name": "votu_cluster",
+   "namespace": ""
+  },
+  "eySk3E29X6": {
+   "kind": "TARGET",
+   "name": "votu_cluster_table",
+   "namespace": "viromics"
+  },
+  "28 votu_representatives": {
+   "kind": "TRANSFORM",
+   "name": "votu_representatives",
+   "namespace": ""
+  },
+  "lZXZXmMNh0": {
+   "kind": "DATA",
+   "name": "votu_representatives",
+   "namespace": "e3"
+  },
+  "29 votu_island_annotate": {
+   "kind": "TRANSFORM",
+   "name": "votu_island_annotate",
+   "namespace": ""
+  },
+  "Qv0i6PujcN": {
+   "kind": "DATA",
+   "name": "genomad_island_genes",
+   "namespace": "e3"
+  },
+  "30 votu_island_filter": {
+   "kind": "TRANSFORM",
+   "name": "votu_island_filter",
+   "namespace": ""
+  },
+  "XjlQPjnBtu": {
+   "kind": "TARGET",
+   "name": "final_votu_representatives",
+   "namespace": "e3"
+  }
+ },
+ "edges": [
+  [
+   "sequences::study",
+   "e3::nanopore_reads"
+  ],
+  [
+   "sequences::read_metadata",
+   "e3::nanopore_reads"
+  ],
+  [
+   "sequences::study",
+   "sequences::short_reads_pe"
+  ],
+  [
+   "sequences::read_metadata",
+   "sequences::short_reads_pe"
+  ],
+  [
+   "sequences::study",
+   "sequences::read_metadata"
+  ],
+  [
+   "sequences::short_reads_pe",
+   "1 seqkit_reads"
+  ],
+  [
+   "1 seqkit_reads",
+   "rnf7B5rigr"
+  ],
+  [
+   "sequences::read_metadata",
+   "2 bbduk"
+  ],
+  [
+   "sequences::short_reads_pe",
+   "2 bbduk"
+  ],
+  [
+   "rnf7B5rigr",
+   "2 bbduk"
+  ],
+  [
+   "2 bbduk",
+   "ROs4tUYnGj"
+  ],
+  [
+   "2 bbduk",
+   "CVDOUwVkRQ"
+  ],
+  [
+   "sequences::read_metadata",
+   "3 megahit"
+  ],
+  [
+   "ROs4tUYnGj",
+   "3 megahit"
+  ],
+  [
+   "3 megahit",
+   "OMYW4Q5Jo9"
+  ],
+  [
+   "3 megahit",
+   "r1ovalAs3Q"
+  ],
+  [
+   "sequences::read_metadata",
+   "4 opera_ms"
+  ],
+  [
+   "OMYW4Q5Jo9",
+   "4 opera_ms"
+  ],
+  [
+   "ROs4tUYnGj",
+   "4 opera_ms"
+  ],
+  [
+   "e3::nanopore_reads",
+   "4 opera_ms"
+  ],
+  [
+   "4 opera_ms",
+   "sxwPzB08PQ"
+  ],
+  [
+   "sxwPzB08PQ",
+   "5 splitContigsForAmr"
+  ],
+  [
+   "5 splitContigsForAmr",
+   "kwKNs283Wh"
+  ],
+  [
+   "sxwPzB08PQ",
+   "6 prodigal"
+  ],
+  [
+   "6 prodigal",
+   "RJR4dIZ397"
+  ],
+  [
+   "6 prodigal",
+   "sh2m5OFy7s"
+  ],
+  [
+   "sequences::read_metadata",
+   "7 assembly_stats"
+  ],
+  [
+   "sequences::short_reads_pe",
+   "7 assembly_stats"
+  ],
+  [
+   "rnf7B5rigr",
+   "7 assembly_stats"
+  ],
+  [
+   "sxwPzB08PQ",
+   "7 assembly_stats"
+  ],
+  [
+   "7 assembly_stats",
+   "Ni2WxPmshR"
+  ],
+  [
+   "7 assembly_stats",
+   "E0t8uhCRil"
+  ],
+  [
+   "7 assembly_stats",
+   "d88NoHU303"
+  ],
+  [
+   "7 assembly_stats",
+   "e1oUNWe3Xr"
+  ],
+  [
+   "kwKNs283Wh",
+   "8 deepvirfinder"
+  ],
+  [
+   "8 deepvirfinder",
+   "OcUqSLyaxy"
+  ],
+  [
+   "ref::vibrant_db",
+   "9 vibrant"
+  ],
+  [
+   "kwKNs283Wh",
+   "9 vibrant"
+  ],
+  [
+   "9 vibrant",
+   "fizkMGM4Pq"
+  ],
+  [
+   "9 vibrant",
+   "9Uclgyqobo"
+  ],
+  [
+   "9 vibrant",
+   "sxyrv3IY88"
+  ],
+  [
+   "9 vibrant",
+   "POxXVt8hdt"
+  ],
+  [
+   "kwKNs283Wh",
+   "10 virsorter2"
+  ],
+  [
+   "annotation::virsorter2_db",
+   "10 virsorter2"
+  ],
+  [
+   "10 virsorter2",
+   "U10BcXuB3n"
+  ],
+  [
+   "10 virsorter2",
+   "X1JzUrTG8U"
+  ],
+  [
+   "10 virsorter2",
+   "jysJwN0oGH"
+  ],
+  [
+   "10 virsorter2",
+   "lrCxCFdWcm"
+  ],
+  [
+   "kwKNs283Wh",
+   "11 genomad"
+  ],
+  [
+   "ref::genomad",
+   "11 genomad"
+  ],
+  [
+   "11 genomad",
+   "o29cBBt8h5"
+  ],
+  [
+   "11 genomad",
+   "L8tpGNbRlb"
+  ],
+  [
+   "11 genomad",
+   "7YYuXjJB98"
+  ],
+  [
+   "11 genomad",
+   "UgaunUqEuW"
+  ],
+  [
+   "11 genomad",
+   "LBnULMzays"
+  ],
+  [
+   "sxwPzB08PQ",
+   "12 comebin"
+  ],
+  [
+   "e1oUNWe3Xr",
+   "12 comebin"
+  ],
+  [
+   "12 comebin",
+   "RMwQ96tR8z"
+  ],
+  [
+   "sxwPzB08PQ",
+   "13 semibin2"
+  ],
+  [
+   "e1oUNWe3Xr",
+   "13 semibin2"
+  ],
+  [
+   "13 semibin2",
+   "4MV5xLr2aF"
+  ],
+  [
+   "13 semibin2",
+   "bSVf7BTw4Y"
+  ],
+  [
+   "sxwPzB08PQ",
+   "14 metabat2"
+  ],
+  [
+   "e1oUNWe3Xr",
+   "14 metabat2"
+  ],
+  [
+   "14 metabat2",
+   "4PnQxwuYnL"
+  ],
+  [
+   "14 metabat2",
+   "wpaCvW9sHd"
+  ],
+  [
+   "sxwPzB08PQ",
+   "15 das_tool"
+  ],
+  [
+   "RJR4dIZ397",
+   "15 das_tool"
+  ],
+  [
+   "wpaCvW9sHd",
+   "15 das_tool"
+  ],
+  [
+   "bSVf7BTw4Y",
+   "15 das_tool"
+  ],
+  [
+   "RMwQ96tR8z",
+   "15 das_tool"
+  ],
+  [
+   "15 das_tool",
+   "tRWxuYHTV0"
+  ],
+  [
+   "15 das_tool",
+   "urMkLu4Hsc"
+  ],
+  [
+   "15 das_tool",
+   "8mxeuHkh5B"
+  ],
+  [
+   "sequences::study",
+   "16 viral_merge_calls"
+  ],
+  [
+   "sequences::read_metadata",
+   "16 viral_merge_calls"
+  ],
+  [
+   "sxwPzB08PQ",
+   "16 viral_merge_calls"
+  ],
+  [
+   "kwKNs283Wh",
+   "16 viral_merge_calls"
+  ],
+  [
+   "LBnULMzays",
+   "16 viral_merge_calls"
+  ],
+  [
+   "lrCxCFdWcm",
+   "16 viral_merge_calls"
+  ],
+  [
+   "POxXVt8hdt",
+   "16 viral_merge_calls"
+  ],
+  [
+   "OcUqSLyaxy",
+   "16 viral_merge_calls"
+  ],
+  [
+   "16 viral_merge_calls",
+   "VzL2RR4Unp"
+  ],
+  [
+   "16 viral_merge_calls",
+   "ueZnqGR4vC"
+  ],
+  [
+   "VzL2RR4Unp",
+   "17 viral_split"
+  ],
+  [
+   "17 viral_split",
+   "CzpiU9nasC"
+  ],
+  [
+   "VzL2RR4Unp",
+   "18 contig_length_table"
+  ],
+  [
+   "18 contig_length_table",
+   "8cKDTqsdoE"
+  ],
+  [
+   "sxwPzB08PQ",
+   "19 mag_orfs"
+  ],
+  [
+   "RJR4dIZ397",
+   "19 mag_orfs"
+  ],
+  [
+   "tRWxuYHTV0",
+   "19 mag_orfs"
+  ],
+  [
+   "19 mag_orfs",
+   "rjVWTXi487"
+  ],
+  [
+   "bench::checkm2_database",
+   "20 checkm2"
+  ],
+  [
+   "tRWxuYHTV0",
+   "20 checkm2"
+  ],
+  [
+   "20 checkm2",
+   "092HJ6UDHy"
+  ],
+  [
+   "ref::checkv_db",
+   "21 checkv_batch"
+  ],
+  [
+   "CzpiU9nasC",
+   "21 checkv_batch"
+  ],
+  [
+   "21 checkv_batch",
+   "Fr8WG2DR4x"
+  ],
+  [
+   "21 checkv_batch",
+   "YuBMRUEVGe"
+  ],
+  [
+   "21 checkv_batch",
+   "lMcsESoxLm"
+  ],
+  [
+   "21 checkv_batch",
+   "ojF8gxIQGk"
+  ],
+  [
+   "21 checkv_batch",
+   "FX19Y91KWg"
+  ],
+  [
+   "21 checkv_batch",
+   "0H7NM7p7M3"
+  ],
+  [
+   "rjVWTXi487",
+   "22 carveme_from_orfs"
+  ],
+  [
+   "modelling::media",
+   "22 carveme_from_orfs"
+  ],
+  [
+   "modelling::medium_name",
+   "22 carveme_from_orfs"
+  ],
+  [
+   "22 carveme_from_orfs",
+   "iS7jxz6iiu"
+  ],
+  [
+   "iS7jxz6iiu",
+   "23 memote_score"
+  ],
+  [
+   "23 memote_score",
+   "8huBNLMYTc"
+  ],
+  [
+   "23 memote_score",
+   "UoVLzsUeLa"
+  ],
+  [
+   "23 memote_score",
+   "aCeAbgRoz6"
+  ],
+  [
+   "VzL2RR4Unp",
+   "24 votu_curate_batch"
+  ],
+  [
+   "CzpiU9nasC",
+   "24 votu_curate_batch"
+  ],
+  [
+   "FX19Y91KWg",
+   "24 votu_curate_batch"
+  ],
+  [
+   "0H7NM7p7M3",
+   "24 votu_curate_batch"
+  ],
+  [
+   "YuBMRUEVGe",
+   "24 votu_curate_batch"
+  ],
+  [
+   "24 votu_curate_batch",
+   "CK4aES8Gzv"
+  ],
+  [
+   "VzL2RR4Unp",
+   "25 checkv_merge"
+  ],
+  [
+   "CzpiU9nasC",
+   "25 checkv_merge"
+  ],
+  [
+   "Fr8WG2DR4x",
+   "25 checkv_merge"
+  ],
+  [
+   "YuBMRUEVGe",
+   "25 checkv_merge"
+  ],
+  [
+   "lMcsESoxLm",
+   "25 checkv_merge"
+  ],
+  [
+   "ojF8gxIQGk",
+   "25 checkv_merge"
+  ],
+  [
+   "25 checkv_merge",
+   "EMziYwpQtK"
+  ],
+  [
+   "25 checkv_merge",
+   "lBHJHVGnR3"
+  ],
+  [
+   "25 checkv_merge",
+   "r981Gx7GsU"
+  ],
+  [
+   "25 checkv_merge",
+   "1irkOfvfcK"
+  ],
+  [
+   "VzL2RR4Unp",
+   "26 votu_curate_merge"
+  ],
+  [
+   "CzpiU9nasC",
+   "26 votu_curate_merge"
+  ],
+  [
+   "CK4aES8Gzv",
+   "26 votu_curate_merge"
+  ],
+  [
+   "26 votu_curate_merge",
+   "RgulwzbZJ6"
+  ],
+  [
+   "RgulwzbZJ6",
+   "27 votu_cluster"
+  ],
+  [
+   "27 votu_cluster",
+   "eySk3E29X6"
+  ],
+  [
+   "RgulwzbZJ6",
+   "28 votu_representatives"
+  ],
+  [
+   "eySk3E29X6",
+   "28 votu_representatives"
+  ],
+  [
+   "28 votu_representatives",
+   "lZXZXmMNh0"
+  ],
+  [
+   "ref::genomad",
+   "29 votu_island_annotate"
+  ],
+  [
+   "lZXZXmMNh0",
+   "29 votu_island_annotate"
+  ],
+  [
+   "29 votu_island_annotate",
+   "Qv0i6PujcN"
+  ],
+  [
+   "lZXZXmMNh0",
+   "30 votu_island_filter"
+  ],
+  [
+   "Qv0i6PujcN",
+   "30 votu_island_filter"
+  ],
+  [
+   "30 votu_island_filter",
+   "XjlQPjnBtu"
+  ]
+ ]
+}

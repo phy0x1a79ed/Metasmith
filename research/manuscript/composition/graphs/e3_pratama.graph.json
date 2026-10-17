@@ -1,0 +1,1347 @@
+{
+ "nodes": {
+  "given": {
+   "kind": "TRANSFORM",
+   "name": "given",
+   "namespace": ""
+  },
+  "viromics::contig_study": {
+   "kind": "DATA",
+   "name": "contig_study",
+   "namespace": "viromics"
+  },
+  "sequences::read_metadata": {
+   "kind": "DATA",
+   "name": "read_metadata",
+   "namespace": "sequences"
+  },
+  "sequences::read_pair": {
+   "kind": "DATA",
+   "name": "read_pair",
+   "namespace": "sequences"
+  },
+  "e3::nanopore_reads": {
+   "kind": "DATA",
+   "name": "nanopore_reads",
+   "namespace": "e3"
+  },
+  "sequences::short_reads_pe": {
+   "kind": "DATA",
+   "name": "short_reads_pe",
+   "namespace": "sequences"
+  },
+  "bench::deepvirfinder.env": {
+   "kind": "DATA",
+   "name": "deepvirfinder.env",
+   "namespace": "bench"
+  },
+  "ref::genomad": {
+   "kind": "DATA",
+   "name": "genomad",
+   "namespace": "ref"
+  },
+  "pratama::published_votus": {
+   "kind": "DATA",
+   "name": "published_votus",
+   "namespace": "pratama"
+  },
+  "ref::checkv_db": {
+   "kind": "DATA",
+   "name": "checkv_db",
+   "namespace": "ref"
+  },
+  "ref::vibrant_db": {
+   "kind": "DATA",
+   "name": "vibrant_db",
+   "namespace": "ref"
+  },
+  "annotation::virsorter2_db": {
+   "kind": "DATA",
+   "name": "virsorter2_db",
+   "namespace": "annotation"
+  },
+  "1 seqkit_reads": {
+   "kind": "TRANSFORM",
+   "name": "seqkit_reads",
+   "namespace": ""
+  },
+  "66A4xTOK8z": {
+   "kind": "TARGET",
+   "name": "read_qc_stats",
+   "namespace": "sequences"
+  },
+  "2 bbduk_pratama": {
+   "kind": "TRANSFORM",
+   "name": "bbduk_pratama",
+   "namespace": ""
+  },
+  "x7ht1fAOJO": {
+   "kind": "DATA",
+   "name": "clean_short_reads",
+   "namespace": "sequences"
+  },
+  "3 fastp_report_pratama": {
+   "kind": "TRANSFORM",
+   "name": "fastp_report_pratama",
+   "namespace": ""
+  },
+  "gKGxl31f5b": {
+   "kind": "TARGET",
+   "name": "fastp_report_json",
+   "namespace": "e3"
+  },
+  "fKuPMD5eu2": {
+   "kind": "TARGET",
+   "name": "fastp_report_html",
+   "namespace": "e3"
+  },
+  "4 megahit": {
+   "kind": "TRANSFORM",
+   "name": "megahit",
+   "namespace": ""
+  },
+  "00Pk8CMZB0": {
+   "kind": "TARGET",
+   "name": "megahit_assembly",
+   "namespace": "sequences"
+  },
+  "MHvm0KUGRq": {
+   "kind": "DATA",
+   "name": "megahit_assembly_graph",
+   "namespace": "sequences"
+  },
+  "5 spades_pratama": {
+   "kind": "TRANSFORM",
+   "name": "spades_pratama",
+   "namespace": ""
+  },
+  "Vjrw76DT5r": {
+   "kind": "TARGET",
+   "name": "spades_assembly",
+   "namespace": "sequences"
+  },
+  "6 spades_hybrid_pratama": {
+   "kind": "TRANSFORM",
+   "name": "spades_hybrid_pratama",
+   "namespace": ""
+  },
+  "PTiHXSBMhT": {
+   "kind": "TARGET",
+   "name": "hybrid_spades_assembly",
+   "namespace": "e3"
+  },
+  "7 split_hybrid_contigs_pratama": {
+   "kind": "TRANSFORM",
+   "name": "split_hybrid_contigs_pratama",
+   "namespace": ""
+  },
+  "yA0ajmlVbF": {
+   "kind": "DATA",
+   "name": "contig_batch",
+   "namespace": "sequences"
+  },
+  "8 splitContigsForAmr": {
+   "kind": "TRANSFORM",
+   "name": "splitContigsForAmr",
+   "namespace": ""
+  },
+  "dzOb3Cy8ht": {
+   "kind": "DATA",
+   "name": "contig_batch",
+   "namespace": "sequences"
+  },
+  "9 splitContigsForAmr": {
+   "kind": "TRANSFORM",
+   "name": "splitContigsForAmr",
+   "namespace": ""
+  },
+  "bF4EY8SeUk": {
+   "kind": "DATA",
+   "name": "contig_batch",
+   "namespace": "sequences"
+  },
+  "10 deepvirfinder_pratama": {
+   "kind": "TRANSFORM",
+   "name": "deepvirfinder_pratama",
+   "namespace": ""
+  },
+  "hCdS2oOFsE": {
+   "kind": "DATA",
+   "name": "deepvirfinder_candidate_virus",
+   "namespace": "e3"
+  },
+  "11 deepvirfinder_pratama": {
+   "kind": "TRANSFORM",
+   "name": "deepvirfinder_pratama",
+   "namespace": ""
+  },
+  "YoWZPBzGE4": {
+   "kind": "DATA",
+   "name": "deepvirfinder_candidate_virus",
+   "namespace": "e3"
+  },
+  "12 deepvirfinder_pratama": {
+   "kind": "TRANSFORM",
+   "name": "deepvirfinder_pratama",
+   "namespace": ""
+  },
+  "LF4C4Odyee": {
+   "kind": "DATA",
+   "name": "deepvirfinder_candidate_virus",
+   "namespace": "e3"
+  },
+  "13 vibrant_pratama": {
+   "kind": "TRANSFORM",
+   "name": "vibrant_pratama",
+   "namespace": ""
+  },
+  "IWBTgxvcOe": {
+   "kind": "DATA",
+   "name": "vibrant_genome_quality",
+   "namespace": "viromics"
+  },
+  "QZ844r3NMJ": {
+   "kind": "DATA",
+   "name": "vibrant_lifestyle_table",
+   "namespace": "viromics"
+  },
+  "IFL0R9O7KX": {
+   "kind": "DATA",
+   "name": "vibrant_amgs",
+   "namespace": "viromics"
+  },
+  "SIJUH2NXEg": {
+   "kind": "DATA",
+   "name": "vibrant_candidate_virus",
+   "namespace": "viromics"
+  },
+  "14 virsorter2_pratama": {
+   "kind": "TRANSFORM",
+   "name": "virsorter2_pratama",
+   "namespace": ""
+  },
+  "kiC6oQGFDm": {
+   "kind": "DATA",
+   "name": "virsorter2_viral_sequences",
+   "namespace": "annotation"
+  },
+  "JnSWQ151RM": {
+   "kind": "DATA",
+   "name": "virsorter2_scores",
+   "namespace": "annotation"
+  },
+  "QqfLmjJjoM": {
+   "kind": "DATA",
+   "name": "virsorter2_boundary",
+   "namespace": "annotation"
+  },
+  "ZWDaQqbOs1": {
+   "kind": "DATA",
+   "name": "virsorter2_candidate_virus",
+   "namespace": "viromics"
+  },
+  "15 genomad_pratama": {
+   "kind": "TRANSFORM",
+   "name": "genomad_pratama",
+   "namespace": ""
+  },
+  "QA1VMvmVsM": {
+   "kind": "DATA",
+   "name": "genomad_virus_summary",
+   "namespace": "taxonomy"
+  },
+  "61KDTlEIxZ": {
+   "kind": "DATA",
+   "name": "genomad_plasmid_summary",
+   "namespace": "taxonomy"
+  },
+  "YHwMlHtW3o": {
+   "kind": "DATA",
+   "name": "genomad_virus_genes",
+   "namespace": "taxonomy"
+  },
+  "CckgTxkyLS": {
+   "kind": "DATA",
+   "name": "genomad_taxonomy",
+   "namespace": "taxonomy"
+  },
+  "BsPa8wDQzA": {
+   "kind": "DATA",
+   "name": "genomad_candidate_virus",
+   "namespace": "viromics"
+  },
+  "16 vibrant_pratama": {
+   "kind": "TRANSFORM",
+   "name": "vibrant_pratama",
+   "namespace": ""
+  },
+  "LaVXw0bStD": {
+   "kind": "DATA",
+   "name": "vibrant_genome_quality",
+   "namespace": "viromics"
+  },
+  "M1nxZ08cfu": {
+   "kind": "DATA",
+   "name": "vibrant_lifestyle_table",
+   "namespace": "viromics"
+  },
+  "59HWtk9tce": {
+   "kind": "DATA",
+   "name": "vibrant_amgs",
+   "namespace": "viromics"
+  },
+  "eyvg4tRNGC": {
+   "kind": "DATA",
+   "name": "vibrant_candidate_virus",
+   "namespace": "viromics"
+  },
+  "17 virsorter2_pratama": {
+   "kind": "TRANSFORM",
+   "name": "virsorter2_pratama",
+   "namespace": ""
+  },
+  "18Z8Si4qdm": {
+   "kind": "DATA",
+   "name": "virsorter2_viral_sequences",
+   "namespace": "annotation"
+  },
+  "KsPb5Hm8cw": {
+   "kind": "DATA",
+   "name": "virsorter2_scores",
+   "namespace": "annotation"
+  },
+  "TnKHqZxalr": {
+   "kind": "DATA",
+   "name": "virsorter2_boundary",
+   "namespace": "annotation"
+  },
+  "iX3MAWwUGW": {
+   "kind": "DATA",
+   "name": "virsorter2_candidate_virus",
+   "namespace": "viromics"
+  },
+  "18 genomad_pratama": {
+   "kind": "TRANSFORM",
+   "name": "genomad_pratama",
+   "namespace": ""
+  },
+  "twYDBdKYR6": {
+   "kind": "DATA",
+   "name": "genomad_virus_summary",
+   "namespace": "taxonomy"
+  },
+  "utCXiVzZw7": {
+   "kind": "DATA",
+   "name": "genomad_plasmid_summary",
+   "namespace": "taxonomy"
+  },
+  "RtUAMv3gUV": {
+   "kind": "DATA",
+   "name": "genomad_virus_genes",
+   "namespace": "taxonomy"
+  },
+  "9R6cAh17P6": {
+   "kind": "DATA",
+   "name": "genomad_taxonomy",
+   "namespace": "taxonomy"
+  },
+  "bzwsP3Xq5b": {
+   "kind": "DATA",
+   "name": "genomad_candidate_virus",
+   "namespace": "viromics"
+  },
+  "19 vibrant_pratama": {
+   "kind": "TRANSFORM",
+   "name": "vibrant_pratama",
+   "namespace": ""
+  },
+  "1m2RJRNzGF": {
+   "kind": "DATA",
+   "name": "vibrant_genome_quality",
+   "namespace": "viromics"
+  },
+  "eGGlHguDzr": {
+   "kind": "DATA",
+   "name": "vibrant_lifestyle_table",
+   "namespace": "viromics"
+  },
+  "m8HRTKNta0": {
+   "kind": "DATA",
+   "name": "vibrant_amgs",
+   "namespace": "viromics"
+  },
+  "4uE2VKuPxi": {
+   "kind": "DATA",
+   "name": "vibrant_candidate_virus",
+   "namespace": "viromics"
+  },
+  "20 virsorter2_pratama": {
+   "kind": "TRANSFORM",
+   "name": "virsorter2_pratama",
+   "namespace": ""
+  },
+  "6u7H535vWY": {
+   "kind": "DATA",
+   "name": "virsorter2_viral_sequences",
+   "namespace": "annotation"
+  },
+  "L7aW0q93fM": {
+   "kind": "DATA",
+   "name": "virsorter2_scores",
+   "namespace": "annotation"
+  },
+  "WanCkqAQde": {
+   "kind": "DATA",
+   "name": "virsorter2_boundary",
+   "namespace": "annotation"
+  },
+  "juRGfStOax": {
+   "kind": "DATA",
+   "name": "virsorter2_candidate_virus",
+   "namespace": "viromics"
+  },
+  "21 genomad_pratama": {
+   "kind": "TRANSFORM",
+   "name": "genomad_pratama",
+   "namespace": ""
+  },
+  "uUO7pqqchN": {
+   "kind": "DATA",
+   "name": "genomad_virus_summary",
+   "namespace": "taxonomy"
+  },
+  "FdQtankfQf": {
+   "kind": "DATA",
+   "name": "genomad_plasmid_summary",
+   "namespace": "taxonomy"
+  },
+  "1goPeVoaZV": {
+   "kind": "DATA",
+   "name": "genomad_virus_genes",
+   "namespace": "taxonomy"
+  },
+  "is4k138c6V": {
+   "kind": "DATA",
+   "name": "genomad_taxonomy",
+   "namespace": "taxonomy"
+  },
+  "Z1OybGMann": {
+   "kind": "DATA",
+   "name": "genomad_candidate_virus",
+   "namespace": "viromics"
+  },
+  "22 merge_candidate_calls_pratama": {
+   "kind": "TRANSFORM",
+   "name": "merge_candidate_calls_pratama",
+   "namespace": ""
+  },
+  "UwbpHHcocZ": {
+   "kind": "TARGET",
+   "name": "dereplicated_candidate_virus",
+   "namespace": "viromics"
+  },
+  "wo02p8N9Bn": {
+   "kind": "DATA",
+   "name": "candidate_call_provenance",
+   "namespace": "viromics"
+  },
+  "23 split_viral_contigs_pratama": {
+   "kind": "TRANSFORM",
+   "name": "split_viral_contigs_pratama",
+   "namespace": ""
+  },
+  "0bjiBWfpTd": {
+   "kind": "DATA",
+   "name": "viral_contig_batch",
+   "namespace": "e3"
+  },
+  "24 contig_length_table": {
+   "kind": "TRANSFORM",
+   "name": "contig_length_table",
+   "namespace": ""
+  },
+  "gBLXv4d3SU": {
+   "kind": "TARGET",
+   "name": "contig_length_table",
+   "namespace": "viromics"
+  },
+  "25 pratama_votu_recovery": {
+   "kind": "TRANSFORM",
+   "name": "pratama_votu_recovery",
+   "namespace": ""
+  },
+  "58fS1WE1Na": {
+   "kind": "TARGET",
+   "name": "votu_recovery_table",
+   "namespace": "pratama"
+  },
+  "26 checkv_batch_pratama": {
+   "kind": "TRANSFORM",
+   "name": "checkv_batch_pratama",
+   "namespace": ""
+  },
+  "elWYk9PzQY": {
+   "kind": "DATA",
+   "name": "checkv_contamination_batch",
+   "namespace": "e3"
+  },
+  "sVgrVaTMaP": {
+   "kind": "DATA",
+   "name": "checkv_quality_summary_batch",
+   "namespace": "e3"
+  },
+  "NsSq2emlsa": {
+   "kind": "DATA",
+   "name": "checkv_completeness_batch",
+   "namespace": "e3"
+  },
+  "qClcFcH4J1": {
+   "kind": "DATA",
+   "name": "checkv_complete_genomes_batch",
+   "namespace": "e3"
+  },
+  "eL2zvbs88n": {
+   "kind": "DATA",
+   "name": "checkv_viruses_batch",
+   "namespace": "e3"
+  },
+  "RK5Ymf2lpY": {
+   "kind": "DATA",
+   "name": "checkv_proviruses_batch",
+   "namespace": "e3"
+  },
+  "27 curate_trim_batch_pratama": {
+   "kind": "TRANSFORM",
+   "name": "curate_trim_batch_pratama",
+   "namespace": ""
+  },
+  "rfanSc0CRE": {
+   "kind": "DATA",
+   "name": "curated_candidate_virus_batch",
+   "namespace": "e3"
+  },
+  "28 checkv_merge_pratama": {
+   "kind": "TRANSFORM",
+   "name": "checkv_merge_pratama",
+   "namespace": ""
+  },
+  "blGrLWxWY1": {
+   "kind": "TARGET",
+   "name": "checkv_contamination",
+   "namespace": "viromics"
+  },
+  "uJczDdrWjt": {
+   "kind": "TARGET",
+   "name": "checkv_quality_summary",
+   "namespace": "viromics"
+  },
+  "JOFkOkM387": {
+   "kind": "DATA",
+   "name": "checkv_completeness",
+   "namespace": "viromics"
+  },
+  "4pWlXpE5U3": {
+   "kind": "DATA",
+   "name": "checkv_complete_genomes",
+   "namespace": "viromics"
+  },
+  "29 curate_merge_pratama": {
+   "kind": "TRANSFORM",
+   "name": "curate_merge_pratama",
+   "namespace": ""
+  },
+  "rRUSE52nqU": {
+   "kind": "TARGET",
+   "name": "curated_candidate_virus",
+   "namespace": "e3"
+  },
+  "30 mmseqs_votu_pratama": {
+   "kind": "TRANSFORM",
+   "name": "mmseqs_votu_pratama",
+   "namespace": ""
+  },
+  "cQIhnIpMid": {
+   "kind": "TARGET",
+   "name": "votu_cluster_table",
+   "namespace": "viromics"
+  },
+  "31 votu_representatives_pratama": {
+   "kind": "TRANSFORM",
+   "name": "votu_representatives_pratama",
+   "namespace": ""
+  },
+  "aGPw0Nmi0n": {
+   "kind": "DATA",
+   "name": "votu_representatives",
+   "namespace": "e3"
+  },
+  "32 genomad_island_annotate_pratama": {
+   "kind": "TRANSFORM",
+   "name": "genomad_island_annotate_pratama",
+   "namespace": ""
+  },
+  "EJXrsCCavG": {
+   "kind": "DATA",
+   "name": "genomad_island_genes",
+   "namespace": "e3"
+  },
+  "33 island_filter_pratama": {
+   "kind": "TRANSFORM",
+   "name": "island_filter_pratama",
+   "namespace": ""
+  },
+  "8s7BNzxazV": {
+   "kind": "TARGET",
+   "name": "final_votu_representatives",
+   "namespace": "e3"
+  },
+  "34 final_votu_recovery_pratama": {
+   "kind": "TRANSFORM",
+   "name": "final_votu_recovery_pratama",
+   "namespace": ""
+  },
+  "xDPQjNZnvS": {
+   "kind": "TARGET",
+   "name": "final_votu_recovery_table",
+   "namespace": "e3"
+  }
+ },
+ "edges": [
+  [
+   "viromics::contig_study",
+   "sequences::read_metadata"
+  ],
+  [
+   "given",
+   "sequences::read_metadata"
+  ],
+  [
+   "viromics::contig_study",
+   "sequences::read_pair"
+  ],
+  [
+   "sequences::read_metadata",
+   "sequences::read_pair"
+  ],
+  [
+   "given",
+   "sequences::read_pair"
+  ],
+  [
+   "given",
+   "viromics::contig_study"
+  ],
+  [
+   "viromics::contig_study",
+   "e3::nanopore_reads"
+  ],
+  [
+   "sequences::read_metadata",
+   "e3::nanopore_reads"
+  ],
+  [
+   "sequences::read_pair",
+   "e3::nanopore_reads"
+  ],
+  [
+   "given",
+   "e3::nanopore_reads"
+  ],
+  [
+   "viromics::contig_study",
+   "sequences::short_reads_pe"
+  ],
+  [
+   "sequences::read_metadata",
+   "sequences::short_reads_pe"
+  ],
+  [
+   "sequences::read_pair",
+   "sequences::short_reads_pe"
+  ],
+  [
+   "given",
+   "sequences::short_reads_pe"
+  ],
+  [
+   "given",
+   "bench::deepvirfinder.env"
+  ],
+  [
+   "given",
+   "ref::genomad"
+  ],
+  [
+   "given",
+   "pratama::published_votus"
+  ],
+  [
+   "given",
+   "ref::checkv_db"
+  ],
+  [
+   "given",
+   "ref::vibrant_db"
+  ],
+  [
+   "given",
+   "annotation::virsorter2_db"
+  ],
+  [
+   "sequences::short_reads_pe",
+   "1 seqkit_reads"
+  ],
+  [
+   "1 seqkit_reads",
+   "66A4xTOK8z"
+  ],
+  [
+   "sequences::read_metadata",
+   "2 bbduk_pratama"
+  ],
+  [
+   "sequences::short_reads_pe",
+   "2 bbduk_pratama"
+  ],
+  [
+   "2 bbduk_pratama",
+   "x7ht1fAOJO"
+  ],
+  [
+   "sequences::read_metadata",
+   "3 fastp_report_pratama"
+  ],
+  [
+   "sequences::short_reads_pe",
+   "3 fastp_report_pratama"
+  ],
+  [
+   "3 fastp_report_pratama",
+   "gKGxl31f5b"
+  ],
+  [
+   "3 fastp_report_pratama",
+   "fKuPMD5eu2"
+  ],
+  [
+   "sequences::read_metadata",
+   "4 megahit"
+  ],
+  [
+   "x7ht1fAOJO",
+   "4 megahit"
+  ],
+  [
+   "4 megahit",
+   "00Pk8CMZB0"
+  ],
+  [
+   "4 megahit",
+   "MHvm0KUGRq"
+  ],
+  [
+   "sequences::read_metadata",
+   "5 spades_pratama"
+  ],
+  [
+   "x7ht1fAOJO",
+   "5 spades_pratama"
+  ],
+  [
+   "5 spades_pratama",
+   "Vjrw76DT5r"
+  ],
+  [
+   "sequences::read_metadata",
+   "6 spades_hybrid_pratama"
+  ],
+  [
+   "x7ht1fAOJO",
+   "6 spades_hybrid_pratama"
+  ],
+  [
+   "sequences::read_pair",
+   "6 spades_hybrid_pratama"
+  ],
+  [
+   "e3::nanopore_reads",
+   "6 spades_hybrid_pratama"
+  ],
+  [
+   "6 spades_hybrid_pratama",
+   "PTiHXSBMhT"
+  ],
+  [
+   "PTiHXSBMhT",
+   "7 split_hybrid_contigs_pratama"
+  ],
+  [
+   "7 split_hybrid_contigs_pratama",
+   "yA0ajmlVbF"
+  ],
+  [
+   "00Pk8CMZB0",
+   "8 splitContigsForAmr"
+  ],
+  [
+   "8 splitContigsForAmr",
+   "dzOb3Cy8ht"
+  ],
+  [
+   "Vjrw76DT5r",
+   "9 splitContigsForAmr"
+  ],
+  [
+   "9 splitContigsForAmr",
+   "bF4EY8SeUk"
+  ],
+  [
+   "bench::deepvirfinder.env",
+   "10 deepvirfinder_pratama"
+  ],
+  [
+   "yA0ajmlVbF",
+   "10 deepvirfinder_pratama"
+  ],
+  [
+   "10 deepvirfinder_pratama",
+   "hCdS2oOFsE"
+  ],
+  [
+   "bench::deepvirfinder.env",
+   "11 deepvirfinder_pratama"
+  ],
+  [
+   "dzOb3Cy8ht",
+   "11 deepvirfinder_pratama"
+  ],
+  [
+   "11 deepvirfinder_pratama",
+   "YoWZPBzGE4"
+  ],
+  [
+   "bench::deepvirfinder.env",
+   "12 deepvirfinder_pratama"
+  ],
+  [
+   "bF4EY8SeUk",
+   "12 deepvirfinder_pratama"
+  ],
+  [
+   "12 deepvirfinder_pratama",
+   "LF4C4Odyee"
+  ],
+  [
+   "ref::vibrant_db",
+   "13 vibrant_pratama"
+  ],
+  [
+   "yA0ajmlVbF",
+   "13 vibrant_pratama"
+  ],
+  [
+   "13 vibrant_pratama",
+   "IWBTgxvcOe"
+  ],
+  [
+   "13 vibrant_pratama",
+   "QZ844r3NMJ"
+  ],
+  [
+   "13 vibrant_pratama",
+   "IFL0R9O7KX"
+  ],
+  [
+   "13 vibrant_pratama",
+   "SIJUH2NXEg"
+  ],
+  [
+   "yA0ajmlVbF",
+   "14 virsorter2_pratama"
+  ],
+  [
+   "annotation::virsorter2_db",
+   "14 virsorter2_pratama"
+  ],
+  [
+   "14 virsorter2_pratama",
+   "kiC6oQGFDm"
+  ],
+  [
+   "14 virsorter2_pratama",
+   "JnSWQ151RM"
+  ],
+  [
+   "14 virsorter2_pratama",
+   "QqfLmjJjoM"
+  ],
+  [
+   "14 virsorter2_pratama",
+   "ZWDaQqbOs1"
+  ],
+  [
+   "yA0ajmlVbF",
+   "15 genomad_pratama"
+  ],
+  [
+   "ref::genomad",
+   "15 genomad_pratama"
+  ],
+  [
+   "15 genomad_pratama",
+   "QA1VMvmVsM"
+  ],
+  [
+   "15 genomad_pratama",
+   "61KDTlEIxZ"
+  ],
+  [
+   "15 genomad_pratama",
+   "YHwMlHtW3o"
+  ],
+  [
+   "15 genomad_pratama",
+   "CckgTxkyLS"
+  ],
+  [
+   "15 genomad_pratama",
+   "BsPa8wDQzA"
+  ],
+  [
+   "ref::vibrant_db",
+   "16 vibrant_pratama"
+  ],
+  [
+   "dzOb3Cy8ht",
+   "16 vibrant_pratama"
+  ],
+  [
+   "16 vibrant_pratama",
+   "LaVXw0bStD"
+  ],
+  [
+   "16 vibrant_pratama",
+   "M1nxZ08cfu"
+  ],
+  [
+   "16 vibrant_pratama",
+   "59HWtk9tce"
+  ],
+  [
+   "16 vibrant_pratama",
+   "eyvg4tRNGC"
+  ],
+  [
+   "dzOb3Cy8ht",
+   "17 virsorter2_pratama"
+  ],
+  [
+   "annotation::virsorter2_db",
+   "17 virsorter2_pratama"
+  ],
+  [
+   "17 virsorter2_pratama",
+   "18Z8Si4qdm"
+  ],
+  [
+   "17 virsorter2_pratama",
+   "KsPb5Hm8cw"
+  ],
+  [
+   "17 virsorter2_pratama",
+   "TnKHqZxalr"
+  ],
+  [
+   "17 virsorter2_pratama",
+   "iX3MAWwUGW"
+  ],
+  [
+   "dzOb3Cy8ht",
+   "18 genomad_pratama"
+  ],
+  [
+   "ref::genomad",
+   "18 genomad_pratama"
+  ],
+  [
+   "18 genomad_pratama",
+   "twYDBdKYR6"
+  ],
+  [
+   "18 genomad_pratama",
+   "utCXiVzZw7"
+  ],
+  [
+   "18 genomad_pratama",
+   "RtUAMv3gUV"
+  ],
+  [
+   "18 genomad_pratama",
+   "9R6cAh17P6"
+  ],
+  [
+   "18 genomad_pratama",
+   "bzwsP3Xq5b"
+  ],
+  [
+   "ref::vibrant_db",
+   "19 vibrant_pratama"
+  ],
+  [
+   "bF4EY8SeUk",
+   "19 vibrant_pratama"
+  ],
+  [
+   "19 vibrant_pratama",
+   "1m2RJRNzGF"
+  ],
+  [
+   "19 vibrant_pratama",
+   "eGGlHguDzr"
+  ],
+  [
+   "19 vibrant_pratama",
+   "m8HRTKNta0"
+  ],
+  [
+   "19 vibrant_pratama",
+   "4uE2VKuPxi"
+  ],
+  [
+   "bF4EY8SeUk",
+   "20 virsorter2_pratama"
+  ],
+  [
+   "annotation::virsorter2_db",
+   "20 virsorter2_pratama"
+  ],
+  [
+   "20 virsorter2_pratama",
+   "6u7H535vWY"
+  ],
+  [
+   "20 virsorter2_pratama",
+   "L7aW0q93fM"
+  ],
+  [
+   "20 virsorter2_pratama",
+   "WanCkqAQde"
+  ],
+  [
+   "20 virsorter2_pratama",
+   "juRGfStOax"
+  ],
+  [
+   "bF4EY8SeUk",
+   "21 genomad_pratama"
+  ],
+  [
+   "ref::genomad",
+   "21 genomad_pratama"
+  ],
+  [
+   "21 genomad_pratama",
+   "uUO7pqqchN"
+  ],
+  [
+   "21 genomad_pratama",
+   "FdQtankfQf"
+  ],
+  [
+   "21 genomad_pratama",
+   "1goPeVoaZV"
+  ],
+  [
+   "21 genomad_pratama",
+   "is4k138c6V"
+  ],
+  [
+   "21 genomad_pratama",
+   "Z1OybGMann"
+  ],
+  [
+   "viromics::contig_study",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "sequences::read_pair",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "Vjrw76DT5r",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "bF4EY8SeUk",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "Z1OybGMann",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "juRGfStOax",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "4uE2VKuPxi",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "LF4C4Odyee",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "00Pk8CMZB0",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "dzOb3Cy8ht",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "bzwsP3Xq5b",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "iX3MAWwUGW",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "eyvg4tRNGC",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "YoWZPBzGE4",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "PTiHXSBMhT",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "yA0ajmlVbF",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "BsPa8wDQzA",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "ZWDaQqbOs1",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "SIJUH2NXEg",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "hCdS2oOFsE",
+   "22 merge_candidate_calls_pratama"
+  ],
+  [
+   "22 merge_candidate_calls_pratama",
+   "UwbpHHcocZ"
+  ],
+  [
+   "22 merge_candidate_calls_pratama",
+   "wo02p8N9Bn"
+  ],
+  [
+   "UwbpHHcocZ",
+   "23 split_viral_contigs_pratama"
+  ],
+  [
+   "23 split_viral_contigs_pratama",
+   "0bjiBWfpTd"
+  ],
+  [
+   "UwbpHHcocZ",
+   "24 contig_length_table"
+  ],
+  [
+   "24 contig_length_table",
+   "gBLXv4d3SU"
+  ],
+  [
+   "pratama::published_votus",
+   "25 pratama_votu_recovery"
+  ],
+  [
+   "UwbpHHcocZ",
+   "25 pratama_votu_recovery"
+  ],
+  [
+   "25 pratama_votu_recovery",
+   "58fS1WE1Na"
+  ],
+  [
+   "ref::checkv_db",
+   "26 checkv_batch_pratama"
+  ],
+  [
+   "0bjiBWfpTd",
+   "26 checkv_batch_pratama"
+  ],
+  [
+   "26 checkv_batch_pratama",
+   "elWYk9PzQY"
+  ],
+  [
+   "26 checkv_batch_pratama",
+   "sVgrVaTMaP"
+  ],
+  [
+   "26 checkv_batch_pratama",
+   "NsSq2emlsa"
+  ],
+  [
+   "26 checkv_batch_pratama",
+   "qClcFcH4J1"
+  ],
+  [
+   "26 checkv_batch_pratama",
+   "eL2zvbs88n"
+  ],
+  [
+   "26 checkv_batch_pratama",
+   "RK5Ymf2lpY"
+  ],
+  [
+   "UwbpHHcocZ",
+   "27 curate_trim_batch_pratama"
+  ],
+  [
+   "0bjiBWfpTd",
+   "27 curate_trim_batch_pratama"
+  ],
+  [
+   "eL2zvbs88n",
+   "27 curate_trim_batch_pratama"
+  ],
+  [
+   "RK5Ymf2lpY",
+   "27 curate_trim_batch_pratama"
+  ],
+  [
+   "sVgrVaTMaP",
+   "27 curate_trim_batch_pratama"
+  ],
+  [
+   "27 curate_trim_batch_pratama",
+   "rfanSc0CRE"
+  ],
+  [
+   "UwbpHHcocZ",
+   "28 checkv_merge_pratama"
+  ],
+  [
+   "0bjiBWfpTd",
+   "28 checkv_merge_pratama"
+  ],
+  [
+   "elWYk9PzQY",
+   "28 checkv_merge_pratama"
+  ],
+  [
+   "sVgrVaTMaP",
+   "28 checkv_merge_pratama"
+  ],
+  [
+   "NsSq2emlsa",
+   "28 checkv_merge_pratama"
+  ],
+  [
+   "qClcFcH4J1",
+   "28 checkv_merge_pratama"
+  ],
+  [
+   "28 checkv_merge_pratama",
+   "blGrLWxWY1"
+  ],
+  [
+   "28 checkv_merge_pratama",
+   "uJczDdrWjt"
+  ],
+  [
+   "28 checkv_merge_pratama",
+   "JOFkOkM387"
+  ],
+  [
+   "28 checkv_merge_pratama",
+   "4pWlXpE5U3"
+  ],
+  [
+   "UwbpHHcocZ",
+   "29 curate_merge_pratama"
+  ],
+  [
+   "0bjiBWfpTd",
+   "29 curate_merge_pratama"
+  ],
+  [
+   "rfanSc0CRE",
+   "29 curate_merge_pratama"
+  ],
+  [
+   "29 curate_merge_pratama",
+   "rRUSE52nqU"
+  ],
+  [
+   "rRUSE52nqU",
+   "30 mmseqs_votu_pratama"
+  ],
+  [
+   "30 mmseqs_votu_pratama",
+   "cQIhnIpMid"
+  ],
+  [
+   "rRUSE52nqU",
+   "31 votu_representatives_pratama"
+  ],
+  [
+   "cQIhnIpMid",
+   "31 votu_representatives_pratama"
+  ],
+  [
+   "31 votu_representatives_pratama",
+   "aGPw0Nmi0n"
+  ],
+  [
+   "ref::genomad",
+   "32 genomad_island_annotate_pratama"
+  ],
+  [
+   "aGPw0Nmi0n",
+   "32 genomad_island_annotate_pratama"
+  ],
+  [
+   "32 genomad_island_annotate_pratama",
+   "EJXrsCCavG"
+  ],
+  [
+   "aGPw0Nmi0n",
+   "33 island_filter_pratama"
+  ],
+  [
+   "EJXrsCCavG",
+   "33 island_filter_pratama"
+  ],
+  [
+   "33 island_filter_pratama",
+   "8s7BNzxazV"
+  ],
+  [
+   "pratama::published_votus",
+   "34 final_votu_recovery_pratama"
+  ],
+  [
+   "8s7BNzxazV",
+   "34 final_votu_recovery_pratama"
+  ],
+  [
+   "34 final_votu_recovery_pratama",
+   "xDPQjNZnvS"
+  ]
+ ]
+}
