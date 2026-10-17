@@ -1,0 +1,675 @@
+{
+ "nodes": {
+  "given": {
+   "kind": "TRANSFORM",
+   "name": "given",
+   "namespace": ""
+  },
+  "read_metadata": {
+   "kind": "DATA",
+   "name": "read_metadata",
+   "namespace": ""
+  },
+  "read_metadata\u0000short_reads_1": {
+   "kind": "DATA",
+   "name": "short_reads_1",
+   "namespace": ""
+  },
+  "read_metadata\u0000short_reads_2": {
+   "kind": "DATA",
+   "name": "short_reads_2",
+   "namespace": ""
+  },
+  "bowtie2.env": {
+   "kind": "DATA",
+   "name": "bowtie2.env",
+   "namespace": ""
+  },
+  "checkm2.env": {
+   "kind": "DATA",
+   "name": "checkm2.env",
+   "namespace": ""
+  },
+  "comebin.env": {
+   "kind": "DATA",
+   "name": "comebin.env",
+   "namespace": ""
+  },
+  "das_tool.env": {
+   "kind": "DATA",
+   "name": "das_tool.env",
+   "namespace": ""
+  },
+  "fastp.env": {
+   "kind": "DATA",
+   "name": "fastp.env",
+   "namespace": ""
+  },
+  "fastqc.env": {
+   "kind": "DATA",
+   "name": "fastqc.env",
+   "namespace": ""
+  },
+  "jgi_depth.env": {
+   "kind": "DATA",
+   "name": "jgi_depth.env",
+   "namespace": ""
+  },
+  "megahit.env": {
+   "kind": "DATA",
+   "name": "megahit.env",
+   "namespace": ""
+  },
+  "metabat2.env": {
+   "kind": "DATA",
+   "name": "metabat2.env",
+   "namespace": ""
+  },
+  "minimap2.env": {
+   "kind": "DATA",
+   "name": "minimap2.env",
+   "namespace": ""
+  },
+  "semibin2.env": {
+   "kind": "DATA",
+   "name": "semibin2.env",
+   "namespace": ""
+  },
+  "checkm2_database": {
+   "kind": "DATA",
+   "name": "checkm2_database",
+   "namespace": ""
+  },
+  "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads": {
+   "kind": "TRANSFORM",
+   "name": "fastp",
+   "namespace": ""
+  },
+  "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000trimmed_short_reads": {
+   "kind": "TARGET",
+   "name": "trimmed_short_reads",
+   "namespace": ""
+  },
+  "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000fastp_json": {
+   "kind": "TARGET",
+   "name": "fastp_json",
+   "namespace": ""
+  },
+  "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000fastp_html": {
+   "kind": "TARGET",
+   "name": "fastp_html",
+   "namespace": ""
+  },
+  "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports": {
+   "kind": "TRANSFORM",
+   "name": "fastqc_trimmed",
+   "namespace": ""
+  },
+  "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports\u0000fastqc_trimmed_reports": {
+   "kind": "TARGET",
+   "name": "fastqc_trimmed_reports",
+   "namespace": ""
+  },
+  "megahit\u0000read_metadata\u0000->\u0000megahit_assembly": {
+   "kind": "TRANSFORM",
+   "name": "megahit",
+   "namespace": ""
+  },
+  "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly": {
+   "kind": "TARGET",
+   "name": "megahit_assembly",
+   "namespace": ""
+  },
+  "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam": {
+   "kind": "TRANSFORM",
+   "name": "bowtie2_binning_bam",
+   "namespace": ""
+  },
+  "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam": {
+   "kind": "TARGET",
+   "name": "binning_bam",
+   "namespace": ""
+  },
+  "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin": {
+   "kind": "TRANSFORM",
+   "name": "comebin",
+   "namespace": ""
+  },
+  "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin\u0000comebin_bin": {
+   "kind": "TARGET",
+   "name": "comebin_bin",
+   "namespace": ""
+  },
+  "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin\u0000comebin_contig_to_bin": {
+   "kind": "TARGET",
+   "name": "comebin_contig_to_bin",
+   "namespace": ""
+  },
+  "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin": {
+   "kind": "TRANSFORM",
+   "name": "semibin2",
+   "namespace": ""
+  },
+  "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin\u0000semibin2_bin": {
+   "kind": "TARGET",
+   "name": "semibin2_bin",
+   "namespace": ""
+  },
+  "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin\u0000semibin2_contig_to_bin": {
+   "kind": "TARGET",
+   "name": "semibin2_contig_to_bin",
+   "namespace": ""
+  },
+  "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin": {
+   "kind": "TRANSFORM",
+   "name": "metabat2",
+   "namespace": ""
+  },
+  "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin\u0000metabat2_bin": {
+   "kind": "TARGET",
+   "name": "metabat2_bin",
+   "namespace": ""
+  },
+  "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin\u0000metabat2_contig_to_bin": {
+   "kind": "TARGET",
+   "name": "metabat2_contig_to_bin",
+   "namespace": ""
+  },
+  "checkm2": {
+   "kind": "TRANSFORM",
+   "name": "checkm2",
+   "namespace": ""
+  },
+  "checkm2\u0000checkm2_quality": {
+   "kind": "TARGET",
+   "name": "checkm2_quality",
+   "namespace": ""
+  },
+  "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary": {
+   "kind": "TRANSFORM",
+   "name": "das_tool",
+   "namespace": ""
+  },
+  "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_bin": {
+   "kind": "TARGET",
+   "name": "das_tool_bin",
+   "namespace": ""
+  },
+  "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_contig_to_bin": {
+   "kind": "TARGET",
+   "name": "das_tool_contig_to_bin",
+   "namespace": ""
+  },
+  "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_summary": {
+   "kind": "TARGET",
+   "name": "das_tool_summary",
+   "namespace": ""
+  },
+  "read_metadata\u0000long_reads": {
+   "kind": "DATA",
+   "name": "long_reads",
+   "namespace": ""
+  },
+  "chopper.env": {
+   "kind": "DATA",
+   "name": "chopper.env",
+   "namespace": ""
+  },
+  "flye.env": {
+   "kind": "DATA",
+   "name": "flye.env",
+   "namespace": ""
+  },
+  "porechop_abi.env": {
+   "kind": "DATA",
+   "name": "porechop_abi.env",
+   "namespace": ""
+  },
+  "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads": {
+   "kind": "TRANSFORM",
+   "name": "porechop_abi",
+   "namespace": ""
+  },
+  "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads\u0000adapter_trimmed_long_reads": {
+   "kind": "DATA",
+   "name": "adapter_trimmed_long_reads",
+   "namespace": ""
+  },
+  "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads": {
+   "kind": "TRANSFORM",
+   "name": "chopper",
+   "namespace": ""
+  },
+  "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads\u0000filtered_long_reads": {
+   "kind": "TARGET",
+   "name": "filtered_long_reads",
+   "namespace": ""
+  },
+  "flye\u0000read_metadata\u0000->\u0000flye_assembly": {
+   "kind": "TRANSFORM",
+   "name": "flye",
+   "namespace": ""
+  },
+  "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly": {
+   "kind": "TARGET",
+   "name": "flye_assembly",
+   "namespace": ""
+  },
+  "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam": {
+   "kind": "TRANSFORM",
+   "name": "minimap2_binning_bam",
+   "namespace": ""
+  },
+  "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam": {
+   "kind": "TARGET",
+   "name": "binning_bam",
+   "namespace": ""
+  }
+ },
+ "edges": [
+  [
+   "given",
+   "read_metadata"
+  ],
+  [
+   "read_metadata",
+   "read_metadata\u0000short_reads_1"
+  ],
+  [
+   "given",
+   "read_metadata\u0000short_reads_1"
+  ],
+  [
+   "read_metadata",
+   "read_metadata\u0000short_reads_2"
+  ],
+  [
+   "given",
+   "read_metadata\u0000short_reads_2"
+  ],
+  [
+   "given",
+   "bowtie2.env"
+  ],
+  [
+   "given",
+   "checkm2.env"
+  ],
+  [
+   "given",
+   "comebin.env"
+  ],
+  [
+   "given",
+   "das_tool.env"
+  ],
+  [
+   "given",
+   "fastp.env"
+  ],
+  [
+   "given",
+   "fastqc.env"
+  ],
+  [
+   "given",
+   "jgi_depth.env"
+  ],
+  [
+   "given",
+   "megahit.env"
+  ],
+  [
+   "given",
+   "metabat2.env"
+  ],
+  [
+   "given",
+   "minimap2.env"
+  ],
+  [
+   "given",
+   "semibin2.env"
+  ],
+  [
+   "given",
+   "checkm2_database"
+  ],
+  [
+   "fastp.env",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads"
+  ],
+  [
+   "read_metadata",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads"
+  ],
+  [
+   "read_metadata\u0000short_reads_1",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads"
+  ],
+  [
+   "read_metadata\u0000short_reads_2",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads"
+  ],
+  [
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000trimmed_short_reads"
+  ],
+  [
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000fastp_json"
+  ],
+  [
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads",
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000fastp_html"
+  ],
+  [
+   "fastqc.env",
+   "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports"
+  ],
+  [
+   "read_metadata",
+   "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports"
+  ],
+  [
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000trimmed_short_reads",
+   "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports"
+  ],
+  [
+   "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports",
+   "fastqc_trimmed\u0000read_metadata\u0000->\u0000fastqc_trimmed_reports\u0000fastqc_trimmed_reports"
+  ],
+  [
+   "megahit.env",
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly"
+  ],
+  [
+   "read_metadata",
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly"
+  ],
+  [
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000trimmed_short_reads",
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly"
+  ],
+  [
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly",
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly"
+  ],
+  [
+   "bowtie2.env",
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "read_metadata",
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "fastp\u0000read_metadata\u0000->\u0000fastp_html\u0000fastp_json\u0000trimmed_short_reads\u0000trimmed_short_reads",
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly",
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam",
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam"
+  ],
+  [
+   "comebin.env",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "read_metadata",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin\u0000comebin_bin"
+  ],
+  [
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "semibin2.env",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "read_metadata",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin\u0000semibin2_bin"
+  ],
+  [
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "jgi_depth.env",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "metabat2.env",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "read_metadata",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "bowtie2_binning_bam\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin\u0000metabat2_bin"
+  ],
+  [
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "checkm2.env",
+   "checkm2"
+  ],
+  [
+   "checkm2_database",
+   "checkm2"
+  ],
+  [
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin\u0000comebin_bin",
+   "checkm2"
+  ],
+  [
+   "checkm2",
+   "checkm2\u0000checkm2_quality"
+  ],
+  [
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin\u0000semibin2_bin",
+   "checkm2"
+  ],
+  [
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin\u0000metabat2_bin",
+   "checkm2"
+  ],
+  [
+   "das_tool.env",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ],
+  [
+   "read_metadata",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ],
+  [
+   "megahit\u0000read_metadata\u0000->\u0000megahit_assembly\u0000megahit_assembly",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ],
+  [
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin\u0000metabat2_contig_to_bin",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ],
+  [
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin\u0000semibin2_contig_to_bin",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ],
+  [
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin\u0000comebin_contig_to_bin",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ],
+  [
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_bin"
+  ],
+  [
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_contig_to_bin"
+  ],
+  [
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_summary"
+  ],
+  [
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary\u0000das_tool_bin",
+   "checkm2"
+  ],
+  [
+   "read_metadata",
+   "read_metadata\u0000long_reads"
+  ],
+  [
+   "given",
+   "read_metadata\u0000long_reads"
+  ],
+  [
+   "given",
+   "chopper.env"
+  ],
+  [
+   "given",
+   "flye.env"
+  ],
+  [
+   "given",
+   "porechop_abi.env"
+  ],
+  [
+   "porechop_abi.env",
+   "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads"
+  ],
+  [
+   "read_metadata",
+   "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads"
+  ],
+  [
+   "read_metadata\u0000long_reads",
+   "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads"
+  ],
+  [
+   "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads",
+   "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads\u0000adapter_trimmed_long_reads"
+  ],
+  [
+   "chopper.env",
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads"
+  ],
+  [
+   "read_metadata",
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads"
+  ],
+  [
+   "porechop_abi\u0000read_metadata\u0000->\u0000adapter_trimmed_long_reads\u0000adapter_trimmed_long_reads",
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads"
+  ],
+  [
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads",
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads\u0000filtered_long_reads"
+  ],
+  [
+   "flye.env",
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly"
+  ],
+  [
+   "read_metadata",
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly"
+  ],
+  [
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads\u0000filtered_long_reads",
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly"
+  ],
+  [
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly",
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly"
+  ],
+  [
+   "minimap2.env",
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "read_metadata",
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "chopper\u0000read_metadata\u0000->\u0000filtered_long_reads\u0000filtered_long_reads",
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly",
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam"
+  ],
+  [
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam",
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam"
+  ],
+  [
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam",
+   "comebin\u0000binning_bam\u0000comebin.env\u0000read_metadata\u0000->\u0000comebin_bin\u0000comebin_contig_to_bin"
+  ],
+  [
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam",
+   "semibin2\u0000binning_bam\u0000read_metadata\u0000semibin2.env\u0000->\u0000semibin2_bin\u0000semibin2_contig_to_bin"
+  ],
+  [
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "minimap2_binning_bam\u0000minimap2.env\u0000read_metadata\u0000->\u0000binning_bam\u0000binning_bam",
+   "metabat2\u0000binning_bam\u0000jgi_depth.env\u0000metabat2.env\u0000read_metadata\u0000->\u0000metabat2_bin\u0000metabat2_contig_to_bin"
+  ],
+  [
+   "flye\u0000read_metadata\u0000->\u0000flye_assembly\u0000flye_assembly",
+   "das_tool\u0000comebin_contig_to_bin\u0000das_tool.env\u0000metabat2_contig_to_bin\u0000read_metadata\u0000semibin2_contig_to_bin\u0000->\u0000das_tool_bin\u0000das_tool_contig_to_bin\u0000das_tool_summary"
+  ]
+ ]
+}

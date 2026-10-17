@@ -1,0 +1,196 @@
+{
+ "nodes": {
+  "given": {
+   "kind": "TRANSFORM",
+   "name": "given",
+   "namespace": ""
+  },
+  "sequences::bin_orfs": {
+   "kind": "DATA",
+   "name": "bin_orfs",
+   "namespace": "sequences"
+  },
+  "e4::carveme_122.env": {
+   "kind": "DATA",
+   "name": "carveme_122.env",
+   "namespace": "e4"
+  },
+  "e4::diamond_0930.env": {
+   "kind": "DATA",
+   "name": "diamond_0930.env",
+   "namespace": "e4"
+  },
+  "e4::memote_0913.env": {
+   "kind": "DATA",
+   "name": "memote_0913.env",
+   "namespace": "e4"
+  },
+  "modelling::cplex_installation": {
+   "kind": "DATA",
+   "name": "cplex_installation",
+   "namespace": "modelling"
+  },
+  "bench::metagem_media_db": {
+   "kind": "DATA",
+   "name": "metagem_media_db",
+   "namespace": "bench"
+  },
+  "modelling::medium_name": {
+   "kind": "DATA",
+   "name": "medium_name",
+   "namespace": "modelling"
+  },
+  "e4::carveme_bigg_proteins": {
+   "kind": "DATA",
+   "name": "carveme_bigg_proteins",
+   "namespace": "e4"
+  },
+  "1 carveme_init_db": {
+   "kind": "TRANSFORM",
+   "name": "carveme_init_db",
+   "namespace": ""
+  },
+  "e4::bigg_diamond_db_0930": {
+   "kind": "DATA",
+   "name": "bigg_diamond_db_0930",
+   "namespace": "e4"
+  },
+  "2 carveme_annotate_bigg": {
+   "kind": "TRANSFORM",
+   "name": "carveme_annotate_bigg",
+   "namespace": ""
+  },
+  "bench::bigg_diamond_hits": {
+   "kind": "TARGET",
+   "name": "bigg_diamond_hits",
+   "namespace": "bench"
+  },
+  "3 carveme_carve_gapfill": {
+   "kind": "TRANSFORM",
+   "name": "carveme_carve_gapfill",
+   "namespace": ""
+  },
+  "modelling::carveme_model_cplex": {
+   "kind": "TARGET",
+   "name": "carveme_model_cplex",
+   "namespace": "modelling"
+  },
+  "4 memote_metagem": {
+   "kind": "TRANSFORM",
+   "name": "memote_metagem",
+   "namespace": ""
+  },
+  "modelling::memote_report": {
+   "kind": "TARGET",
+   "name": "memote_report",
+   "namespace": "modelling"
+  },
+  "modelling::memote_results": {
+   "kind": "TARGET",
+   "name": "memote_results",
+   "namespace": "modelling"
+  }
+ },
+ "edges": [
+  [
+   "given",
+   "sequences::bin_orfs"
+  ],
+  [
+   "given",
+   "e4::carveme_122.env"
+  ],
+  [
+   "given",
+   "e4::diamond_0930.env"
+  ],
+  [
+   "given",
+   "e4::memote_0913.env"
+  ],
+  [
+   "given",
+   "modelling::cplex_installation"
+  ],
+  [
+   "given",
+   "bench::metagem_media_db"
+  ],
+  [
+   "given",
+   "modelling::medium_name"
+  ],
+  [
+   "given",
+   "e4::carveme_bigg_proteins"
+  ],
+  [
+   "e4::diamond_0930.env",
+   "1 carveme_init_db"
+  ],
+  [
+   "e4::carveme_bigg_proteins",
+   "1 carveme_init_db"
+  ],
+  [
+   "1 carveme_init_db",
+   "e4::bigg_diamond_db_0930"
+  ],
+  [
+   "e4::diamond_0930.env",
+   "2 carveme_annotate_bigg"
+  ],
+  [
+   "e4::bigg_diamond_db_0930",
+   "2 carveme_annotate_bigg"
+  ],
+  [
+   "sequences::bin_orfs",
+   "2 carveme_annotate_bigg"
+  ],
+  [
+   "2 carveme_annotate_bigg",
+   "bench::bigg_diamond_hits"
+  ],
+  [
+   "e4::carveme_122.env",
+   "3 carveme_carve_gapfill"
+  ],
+  [
+   "bench::bigg_diamond_hits",
+   "3 carveme_carve_gapfill"
+  ],
+  [
+   "bench::metagem_media_db",
+   "3 carveme_carve_gapfill"
+  ],
+  [
+   "modelling::medium_name",
+   "3 carveme_carve_gapfill"
+  ],
+  [
+   "modelling::cplex_installation",
+   "3 carveme_carve_gapfill"
+  ],
+  [
+   "3 carveme_carve_gapfill",
+   "modelling::carveme_model_cplex"
+  ],
+  [
+   "e4::memote_0913.env",
+   "4 memote_metagem"
+  ],
+  [
+   "modelling::carveme_model_cplex",
+   "4 memote_metagem"
+  ],
+  [
+   "4 memote_metagem",
+   "modelling::memote_report"
+  ],
+  [
+   "4 memote_metagem",
+   "modelling::memote_results"
+  ]
+ ]
+}
