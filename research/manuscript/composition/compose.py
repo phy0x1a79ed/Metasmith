@@ -15,7 +15,10 @@ import re
 import sys
 from collections import Counter, defaultdict
 from dataclasses import replace
+from html import unescape
 from pathlib import Path
+
+from PIL import ImageFont
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[2] / "src"))
@@ -262,6 +265,16 @@ def rows(svg):
     return out, w, h
 
 
+ARIAL = ImageFont.truetype("LiberationSans-Regular.ttf", 13)  # Arial's metrics
+TITLE = ImageFont.truetype("LiberationSans-Bold.ttf", 26)
+
+
+def text_right(svg):
+    """The right edge of the drawing's widest step name; the renderer's own width budgets for 32 characters."""
+    return max(float(x) + ARIAL.getlength(unescape(t))
+               for x, t in re.findall(r'<text x="([\d.]+)"[^>]*>([^<]+)</text>', svg))
+
+
 def inner(svg):
     return re.sub(r"^.*?<svg[^>]*>", "", svg, flags=re.S).rsplit("</svg>", 1)[0]
 
@@ -299,19 +312,21 @@ def compose(theme, titles):
     for letter, title, r in panels:
         svg = r.to_svg()
         rs, w, h = rows(svg)
-        drawn[letter] = dict(letter=letter, title=title, svg=svg, rows=rs, w=w, h=h, steps=len(rs),
+        drawn[letter] = dict(letter=letter, title=title, svg=svg, rows=rs, w=text_right(svg), h=h, steps=len(rs),
                              top=min(y for _, y in rs) - ROW / 2, bottom=max(y for _, y in rs) + ROW / 2)
     A, B, C, D = (drawn[k] for k in "ABCD")
-    span = lambda d: d["bottom"] - d["top"] + CAP  # noqa: E731
+    # a panel shorter than its name gets room above and below, and its bar is stretched to cover the name
+    slack = lambda d: max(0, TITLE.getlength(d["title"]) + 16 - (d["bottom"] - d["top"]))  # noqa: E731
+    span = lambda d: d["bottom"] - d["top"] + CAP + slack(d)  # noqa: E731
 
-    CAP, PAD, VGAP, FLOW_W, TOP, KEY_W, LEFT = 0, 10, 14, 230, 4, 84, 32
+    CAP, PAD, VGAP, FLOW_W, TOP, KEY_W, LEFT = 0, 10, 14, 150, 4, 96, 44
     l_w = LEFT + max(A["w"], B["w"], C["w"]) + 2 * PAD
     left_h = span(A) + span(B) + span(C) + 2 * VGAP
     H = TOP + max(left_h, span(D)) + 6
     y = TOP + (H - 6 - TOP - left_h) / 2
     for d in (A, B, C):
         d["col"] = (LEFT, l_w)
-        d["x"], d["y"] = LEFT + PAD, y + CAP - d["top"]
+        d["x"], d["y"] = LEFT + PAD, y + CAP + slack(d) / 2 - d["top"]
         y += span(d) + VGAP
     D["col"] = (l_w + FLOW_W, l_w + FLOW_W + D["w"] + 2 * PAD)
     D["x"], D["y"] = D["col"][0] + PAD, TOP + (H - 6 - TOP - span(D)) / 2 + CAP - D["top"]
@@ -351,24 +366,27 @@ def compose(theme, titles):
                 cursor = u1
                 ribbon(m, xa, s0, s1, xb, u0, u1)
 
-    font = 'font-family="Arial" font-size="13"'  # the step names' face and size
+    font = 'font-family="Arial"'
+    SIZE = 13  # the step names' size; a panel's name is twice it
     edge = "#8D97A8" if dark else "#666666"  # the DAGs' edge colour
 
-    def bar(x, y0, y1, fill, text, fg, gap):
+    def bar(x, y0, y1, fill, text, fg, gap, size=SIZE, weight="normal"):
         """A 4-wide bar over [y0, y1] with its label read downward, `gap` from the bar's left edge."""
         front.append(f'<rect x="{x:.1f}" y="{y0 + 1:.1f}" width="4" height="{y1 - y0 - 2:.1f}" rx="2" fill="{fill}"/>')
         front.append(f'<text transform="translate({x + gap:.1f} {(y0 + y1) / 2:.1f}) rotate(90)" {font} '
-                     f'fill="{fg}" text-anchor="middle">{text}</text>')
+                     f'font-size="{size}" font-weight="{weight}" fill="{fg}" text-anchor="middle">{text}</text>')
 
-    def title(d):
-        return f'<tspan font-weight="bold">{d["letter"]}</tspan><tspan dx="6">{d["title"]}</tspan>'
+    def title(x, d, gap):
+        y0, y1 = d["y"] + d["top"] + INSET, d["y"] + d["bottom"] - INSET
+        over = max(0, (TITLE.getlength(d["title"]) + 12 - (y1 - y0)) / 2)
+        bar(x, y0 - over, y1 + over, edge, d["title"], ink, gap, 2 * SIZE, "bold")
 
     for d in drawn.values():
         front.append(f'<g transform="translate({d["x"]:.1f} {d["y"]:.1f})">{inner(d["svg"])}</g>')
     # rotated text's glyphs lie on the +x side of its baseline, so a label left of its bar sits a glyph
     # height further from it than one on the right
     for d in (A, B, C):
-        bar(LEFT - 10, d["y"] + d["top"] + INSET, d["y"] + d["bottom"] - INSET, edge, title(d), ink, -15)
+        title(LEFT - 10, d, -25)
 
     # the key: each module named beside its rows in E5, reading downward
     for m, runs in D["bands"].items():
@@ -378,7 +396,7 @@ def compose(theme, titles):
     # the three read lanes bracketed together as assembly, outside their own key entries
     y0, y1 = hull(D["bands"]["short"])[0], hull(D["bands"]["long"])[1]
     bar(key_x + 30, y0, y1, edge, "Assembly", muted, 12)
-    bar(key_x + 60, D["y"] + D["top"] + INSET, D["y"] + D["bottom"] - INSET, edge, title(D), ink, 12)
+    title(key_x + 60, D, 13)
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * SCALE:.0f}" height="{H * SCALE:.0f}" '
            f'viewBox="0 0 {W:.0f} {H:.0f}"><rect width="100%" height="100%" fill="{surface}"/>'
