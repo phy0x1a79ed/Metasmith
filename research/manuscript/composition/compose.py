@@ -269,6 +269,10 @@ ARIAL = ImageFont.truetype("LiberationSans-Regular.ttf", 13)  # Arial's metrics
 TITLE = ImageFont.truetype("LiberationSans-Bold.ttf", 26)
 
 
+def text_left(svg):
+    return min(float(x) for x in re.findall(r'<text x="([\d.]+)"', svg))
+
+
 def text_right(svg):
     """The right edge of the drawing's widest step name; the renderer's own width budgets for 32 characters."""
     return max(float(x) + ARIAL.getlength(unescape(t))
@@ -312,7 +316,7 @@ def compose(theme, titles):
     for letter, title, r in panels:
         svg = r.to_svg()
         rs, w, h = rows(svg)
-        drawn[letter] = dict(letter=letter, title=title, svg=svg, rows=rs, w=text_right(svg), h=h, steps=len(rs),
+        drawn[letter] = dict(letter=letter, title=title, svg=svg, rows=rs, w=text_right(svg), lx=text_left(svg), h=h, steps=len(rs),
                              top=min(y for _, y in rs) - ROW / 2, bottom=max(y for _, y in rs) + ROW / 2)
     A, B, C, D = (drawn[k] for k in "ABCD")
     # a panel shorter than its name gets room above and below, and its bar is stretched to cover the name
@@ -320,13 +324,15 @@ def compose(theme, titles):
     span = lambda d: d["bottom"] - d["top"] + CAP + slack(d)  # noqa: E731
 
     CAP, PAD, VGAP, FLOW_W, TOP, KEY_W, LEFT = 0, 10, 14, 150, 4, 96, 44
-    l_w = LEFT + max(A["w"], B["w"], C["w"]) + 2 * PAD
+    # the left panels' step names share one column, so each drawing shifts right by its label offset
+    lx = max(d["lx"] for d in (A, B, C))
+    l_w = LEFT + max(lx - d["lx"] + d["w"] for d in (A, B, C)) + 2 * PAD
     left_h = span(A) + span(B) + span(C) + 2 * VGAP
     H = TOP + max(left_h, span(D)) + 6
     y = TOP + (H - 6 - TOP - left_h) / 2
     for d in (A, B, C):
         d["col"] = (LEFT, l_w)
-        d["x"], d["y"] = LEFT + PAD, y + CAP + slack(d) / 2 - d["top"]
+        d["x"], d["y"] = LEFT + PAD + lx - d["lx"], y + CAP + slack(d) / 2 - d["top"]
         y += span(d) + VGAP
     D["col"] = (l_w + FLOW_W, l_w + FLOW_W + D["w"] + 2 * PAD)
     D["x"], D["y"] = D["col"][0] + PAD, TOP + (H - 6 - TOP - span(D)) / 2 + CAP - D["top"]
