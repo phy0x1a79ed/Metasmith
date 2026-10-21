@@ -157,6 +157,9 @@ def build_targets(shape):
         # The MetaPathways stage: EC consensus over the GPR lanes, and a PathoLogic PGDB per assembly.
         for dtype in ("annotation::ec_consensus", "annotation::pgdb_archive", "annotation::pathway_table"):
             t.add(dtype, orfs)
+        # Resistance and mobile elements: BacMet on the ORFs, and geNomad's plasmid calls on the assembly.
+        t.add("annotation::bacmet_diamond_results", orfs)
+        t.add("taxonomy::genomad_plasmid_summary", asm)
 
     if "viral" in lanes:
         # Pooled tools name the frozen set outright, and per-contig tools pin to the assembly: a per-contig

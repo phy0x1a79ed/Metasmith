@@ -338,8 +338,7 @@ groups:
         cyanoverse: partial
       - stage: AMR, virulence, MGEs
         diff: true
-        open: U5
-        engcyc: "-"
+        engcyc: "BacMet (DIAMOND 2.1.8) on the ORFs, plus geNomad 1.11.0's plasmid calls. RGI, AMRFinderPlus, VFDB, MEGARes, PathoFact, IntegronFinder, MobileElementFinder and crAssphage run only for a dataset that asks (Tony)"
         e5: "-"
         sl_metag: "W4: RGI 6.0.8, AMRFinderPlus, BacMet, VFDB, MEGARes, PathoFact, IntegronFinder, MobileElementFinder, crAssphage"
         sl_virome: "-"
@@ -385,7 +384,7 @@ open:
   U2: "Virome assembly: MEGAHIT only, as E5, SL metag and the viromics port do? Recommended for the pilot. Antonio pooled metaSPAdes 4.2.0 and MEGAHIT contigs."
   U3: "Viral callers: geNomad, VirSorter2 and VIBRANT (the standard library)? Recommended. E5 also pooled DeepVirFinder, and Antonio called with geNomad alone."
   U4: "Annotation layer: the 4-lane GPR plus InterProScan, Bakta (ncRNA), antiSMASH, BUSCO and PredicTF? DeepEC is dropped (Tony, 2026-10-20), since CLEAN already calls EC numbers. The other choices are GPR only, or adding EggNOG-mapper, DeepTFactor and PromoTech as SL metag did."
-  U5: "Spanish Lakes extras: leave the read classifiers (kraken2, centrifuger, ganon2, MetaPhlAn, sylph) and the W4 AMR sweep out of the initial pipeline? Recommended. Their results stay importable for the SL datasets."
+  U5: "Spanish Lakes read classifiers (kraken2, centrifuger, ganon2, MetaPhlAn, sylph): leave them out of the initial pipeline, keeping their results importable for the SL datasets? Recommended. The AMR half is decided: BacMet everywhere, geNomad plasmids, the rest on request."
   U6: "Output layout: the catalogue form (<namespace-type>/<sample>.<ext> plus pooled tables, recommended) or the AB48 per-sample tree?"
   U7: "The 101 Spanish Lakes samples: the manifest flags them as viral-fraction metagenomes, yet SL metag W3 binned them into 31,149 bins. Run them as the full short-read shape, importing W1-W3 (recommended), or as the virome shape with no MAG lane?"
   U8: "Duplicate MAGs: skani only labels the 95% ANI clusters, so a genome all three binners recover reaches GTDB-Tk and CarveMe up to three times. Pass only the 95% centroids downstream (recommended, one small new transform), or keep every quality bin?"
