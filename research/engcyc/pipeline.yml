@@ -355,25 +355,25 @@ groups:
     open: U6
     rows:
       - stage: Unit
-        engcyc: one folder per dataset
+        engcyc: one folder per dataset, as LAYOUT.md (engcyc portal draft, feat/engcyc/omd-mp) defines
         e5: one metasmith run per batch
         sl_metag: one publish dir per study
         sl_virome: "- (never ran in metasmith)"
         cyanoverse: one catalogue
       - stage: Files
-        engcyc: <namespace-type>/<sample>.<ext>
+        engcyc: "<subject>/<product>/<stem>[.<set>].<ext>; bins <sample>.<binner>.NNN; once-per-dataset products under the dataset id"
         e5: results/<namespace-type>/<instance>.<ext>, hashed names
         sl_metag: assemblies/, orfs/, binning/fna_<binner>/, taxonomy_reads/<tool>_<product>/
         sl_virome: "-"
         cyanoverse: <namespace-type>/<SRA>.<ext>
       - stage: Pooled tables
-        engcyc: tables/ with contig_stats, gpr, mags and votus parquet
+        engcyc: tables/ with summary tables only (contig_stats, mags, votus, gpr parquet)
         e5: results/e5/*.tsv
         sl_metag: per-tool TSVs
         sl_virome: "-"
         cyanoverse: contig_stats.parquet, DuckDB per annotator
       - stage: Logs
-        engcyc: _logs/ tarball
+        engcyc: "_logs/: ledger.tsv (one row per file, imported or regenerated, with sha256), gaps.tsv, runs/<run>.tar.gz"
         e5: run dir
         sl_metag: _logs/<run>/ + tarball
         sl_virome: "-"
@@ -385,7 +385,7 @@ open:
   U3: "Viral callers: geNomad, VirSorter2 and VIBRANT (the standard library)? Recommended. E5 also pooled DeepVirFinder, and Antonio called with geNomad alone."
   U4: "Annotation layer: the 4-lane GPR plus InterProScan, Bakta (ncRNA), antiSMASH, BUSCO and PredicTF? DeepEC is dropped (Tony, 2026-10-20), since CLEAN already calls EC numbers. The other choices are GPR only, or adding EggNOG-mapper, DeepTFactor and PromoTech as SL metag did."
   U5: "Spanish Lakes read classifiers (kraken2, centrifuger, ganon2, MetaPhlAn, sylph): leave them out of the initial pipeline, keeping their results importable for the SL datasets? Recommended. The AMR half is decided: BacMet everywhere, geNomad plasmids, the rest on request."
-  U6: "Output layout: the catalogue form (<namespace-type>/<sample>.<ext> plus pooled tables, recommended) or the AB48 per-sample tree?"
+  U6: "Output layout: adopt LAYOUT.md, the engcyc portal session's draft on feat/engcyc/omd-mp, as the contract (recommended)? It leaves two choices to you: grouping by subject or by data type, and the tables/ and _logs/ convention. MAG naming and the AMR subjects are settled."
   U7: "The 101 Spanish Lakes samples: the manifest flags them as viral-fraction metagenomes, yet SL metag W3 binned them into 31,149 bins. Run them as the full short-read shape, importing W1-W3 (recommended), or as the virome shape with no MAG lane?"
   U8: "Duplicate MAGs: skani only labels the 95% ANI clusters, so a genome all three binners recover reaches GTDB-Tk and CarveMe up to three times. Pass only the 95% centroids downstream (recommended, one small new transform), or keep every quality bin?"
   U9: "Host prediction for datasets that are not binned: iPHoP needs our own MAGs in its database and CCTyper reads the MAGs, so these datasets get no host predictions or spacer links. Leave it that way (the plan as drawn), or add iPHoP on the stock Jun25_rw database and CCTyper on the whole assembly?"
