@@ -1,0 +1,21 @@
+# The paper pipeline's types: one batch of semdb papers, cut into shards for kb's Cognee build.
+#
+# The batch, its ledger and the merge into kb's main store live in the kb repository (pipeline/ and
+# kb.pipeline). A run here takes the shards of one selected batch and builds each on a GPU.
+types:
+  shard_inputs:
+    properties:
+      _: one shard of a paper batch -- a directory holding papers.jsonl and chunks.parquet, each chunk with its bge-large vector
+  kb_source:
+    properties:
+      _: a kb checkout on the cluster whose pipeline/ and research/shards/ scripts the steps run
+  kb_root:
+    properties:
+      _: kb's cluster root -- env/ (the python environment), models/ (bge-large gguf) and hf/
+  llm_weights:
+    properties:
+      _: the extraction model's weights, Mistral-Small 3.2 24B instruct as a Q4_K_M gguf
+      ext: gguf
+  shard_build:
+    properties:
+      _: one built shard -- its inputs, Mistral's extract.jsonl and store/, a Cognee store ready to merge
