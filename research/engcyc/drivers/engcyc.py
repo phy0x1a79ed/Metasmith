@@ -13,8 +13,9 @@ A plan takes one read shape, so each shape solves on its own:
   given_unbinned  an existing assembly that is not a metagenome: no MAG lane, so no host prediction
 
 After the front end every shape runs the same lanes on its assembly: the MAG lane (three binners,
-the CheckM2 filter, skani, GTDB-Tk, CarveMe and MEMOTE), the annotation layer (the 4-lane GPR and
-Cyanoverse's annotators less DeepEC), and the viral lane, whose callers run per sample and whose catalogue
+the CheckM2 filter, skani, GTDB-Tk, CarveMe, MEMOTE and a PathoLogic PGDB per MAG), the annotation
+layer (the 4-lane GPR, Cyanoverse's annotators less DeepEC, tRNA and rRNA calls, contig LCA*
+taxonomy, the EC consensus and a PathoLogic PGDB per assembly), and the viral lane, whose callers run per sample and whose catalogue
 tools run once per dataset on the merged, frozen candidate set.
 
 `solve` builds every input as a deferred placeholder, solves and runs nothing. --dag renders each plan
@@ -141,6 +142,8 @@ def build_targets(shape):
         t.add("taxonomy::gtdbtk_quality", mags)
         gem = t.add("modelling::carveme_model", t.add("sequences::bin_orfs", mags))
         t.add("modelling::memote_score", gem)
+        for dtype in ("annotation::bin_pgdb_archive", "annotation::bin_pathway_table"):
+            t.add(dtype, mags)
 
     if "annotation" in lanes:
         for dtype in ("annotation::gpr_table", "annotation::kofamscan_results", "annotation::clean_predictions",
@@ -148,8 +151,12 @@ def build_targets(shape):
                       "annotation::interproscan_results",
                       "annotation::busco_results", "annotation::predictf_results"):
             t.add(dtype, orfs)
-        for dtype in ("annotation::bakta_tsv", "annotation::antismash_json"):
+        for dtype in ("annotation::bakta_tsv", "annotation::antismash_json", "annotation::trna_gff",
+                      "annotation::rrna_gff", "taxonomy::contig_lcastar"):
             t.add(dtype, asm)
+        # The MetaPathways stage: EC consensus over the GPR lanes, and a PathoLogic PGDB per assembly.
+        for dtype in ("annotation::ec_consensus", "annotation::pgdb_archive", "annotation::pathway_table"):
+            t.add(dtype, orfs)
 
     if "viral" in lanes:
         # Pooled tools name the frozen set outright, and per-contig tools pin to the assembly: a per-contig
