@@ -29,13 +29,16 @@ Subjects:
 | `taxonomy_contigs` | per-contig taxonomy, such as Metabuli |
 | `annotation_orfs` | ORF-level annotators, including the GPR lanes |
 | `annotation_contigs` | contig-level annotators, such as Bakta ncRNA and antiSMASH |
-| `amr` | resistome and mobile-element products, at ORF, contig or read level |
+| `amr` | resistance and virulence genes, such as BacMet |
+| `mobilome` | plasmids, integrons and mobile elements, such as the geNomad plasmid summary |
 | `binning` | bins, contig-to-bin tables, bin QC |
 | `taxonomy_binning` | GTDB-Tk and other per-bin taxonomy |
 | `models` | per-bin metabolic models (GEMs, MEMOTE) and PGDBs |
-| `viral` | per-sample viral calls that feed the dataset's viral catalogue |
+| `viral` | per-sample viral calls and the dataset's vOTU catalogue |
 
 **CAUTION** Never nest a per-sample directory inside a product. A tool that writes several files per sample gets one product per file kind.
+
+Put a product that a dataset requests beyond the standard pipeline under the subject its content fits, such as RGI under `amr` or IntegronFinder under `mobilome`. Spanish Lakes and Spanish Rivers keep their `amr-orf-level`, `amr-contig-level` and `amr-read-level` directories as published. Their README describes them.
 
 ## Products
 
