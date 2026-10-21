@@ -92,7 +92,9 @@ groups:
         sl_virome: "-"
         cyanoverse: "-"
       - stage: Contig taxonomy
-        engcyc: Metabuli 1.2.0, gtdb232
+        diff: true
+        open: U11
+        engcyc: Metabuli 1.2.0 (GTDB r232), then a contig LCA* vote over UniRef50 hits (5 per ORF), rRNA calls and Metabuli, all mapped to GTDB r232 first
         e5: "-"
         sl_metag: "Metabuli = ?"
         sl_virome: "-"
@@ -138,7 +140,7 @@ groups:
         cyanoverse: "-"
       - stage: GEMs
         diff: true
-        engcyc: CarveMe 1.6.6 (override of the 1.6.1 pin), SCIP, M8 medium, on every quality MAG
+        engcyc: CarveMe 1.6.6 (now the library pin), SCIP gap fill, M8 medium, on every quality MAG
         e5: "= (on DAS Tool MAGs)"
         sl_metag: "-"
         sl_virome: "-"
@@ -257,6 +259,34 @@ groups:
         sl_metag: "= ?"
         sl_virome: "-"
         cyanoverse: "="
+      - stage: tRNA
+        diff: true
+        engcyc: ARAGORN 1.2.41 (tRNAscan-SE agreed on 95% of calls at 150x the CPU)
+        e5: "-"
+        sl_metag: "-"
+        sl_virome: "-"
+        cyanoverse: "Bakta's tRNA calls"
+      - stage: rRNA and its taxonomy
+        diff: true
+        engcyc: barrnap 0.9, then BLAST 2.16.0 against GTDB r232 SSU and LSU
+        e5: "-"
+        sl_metag: "-"
+        sl_virome: "-"
+        cyanoverse: "Bakta's rRNA calls, no taxonomy"
+      - stage: EC consensus
+        diff: true
+        engcyc: LCA* over the GPR lanes' EC calls (the published algorithm)
+        e5: "-"
+        sl_metag: "-"
+        sl_virome: "-"
+        cyanoverse: "LCA* port that picks the minority branch on split votes"
+      - stage: Pathways
+        diff: true
+        engcyc: "PathoLogic (Pathway Tools; image txyliu/pathologic:latest, version still to pin) per assembly and per quality MAG, from CLEAN's EC calls above the score floor"
+        e5: "-"
+        sl_metag: "-"
+        sl_virome: "-"
+        cyanoverse: "-"
       - stage: BGCs
         engcyc: antiSMASH 7.1.0
         e5: "-"
@@ -407,5 +437,9 @@ findings:
     body: GTDB-Tk de_novo_wf infers a FastTree over about 190,000 taxa, once per dataset, near fir's 7-day limit. Only iPHoP's MAG-augmented host database needs it. Running iPHoP against the stock Jun25_rw database removes it.
   - title: DIAMOND keeps 5 hits everywhere
     body: Tony standardised every Engcyc collection on 5 UniRef50 hits per ORF, which the contig LCA* vote needs. The GPR still reads the best hit. Results searched with 1 hit, including Cyanoverse's 99M ORFs, are imported under a legacy type, so the plan searches them again.
+  - title: The MetaPathways stage is in the plan
+    body: "The metapathways session's transforms solve in every shape: ARAGORN tRNAs, barrnap rRNAs with GTDB taxonomy, a contig LCA* vote, an EC consensus, and PathoLogic PGDBs per assembly and per quality MAG. CarveMe 1.6.6 is now the library pin. On the SG8W14 pilot, PathoLogic took 3.7 GB and 30 min per assembly and about 2.5 min per MAG, and CarveMe 1.3 GB and about 11 min per MAG."
+  - title: GTDB-Tk on the quality pool has its own type
+    body: As a second producer of taxonomy::gtdbtk, gtdbtk_quality answered the per-binner GTDB-Tk targets of the shipped metagenomics_from_paired_reads template, which stopped solving. Its product is now taxonomy::gtdbtk_quality, and all 12 templates build.
   - title: No de novo hybrid lane
     body: OPERA-MS is only in E5's bench library. Every hybrid dataset already has an E5 assembly, so hybrids enter as the existing-assembly shape.
