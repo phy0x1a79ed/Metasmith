@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="394" height="1880" viewBox="0 0 394 1880">
-<rect width="394" height="1880" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="394" height="1973" viewBox="0 0 394 1973">
+<rect width="394" height="1973" fill="#FFFFFF"/>
 <g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
 <path d="M 109.3,39.7 L 109.3,42.2 L 109.3,73.5 L 109.3,104.7 L 109.3,260.6 A 8.5,8.5 0 0 1 100.9,269.1 A 8.5,8.5 0 0 0 92.4,277.6" stroke="#636EFA"/>
-<path d="M 109.3,436.1 L 109.3,433.6 A 8.5,8.5 0 0 0 100.9,425.1 A 8.5,8.5 0 0 1 92.4,416.6" stroke="#636EFA"/>
-<path d="M 109.3,445.3 L 109.3,479.1 A 8.5,8.5 0 0 0 117.8,487.5" stroke="#636EFA"/>
+<path d="M 109.3,404.9 L 109.3,402.4 A 8.5,8.5 0 0 0 100.9,393.9 A 8.5,8.5 0 0 1 92.4,385.4" stroke="#636EFA"/>
+<path d="M 109.3,414.1 L 109.3,479.1 A 8.5,8.5 0 0 0 117.8,487.5" stroke="#636EFA"/>
 <path d="M 109.3,560.9 L 109.3,558.4 A 8.5,8.5 0 0 1 117.8,549.9 L 134.7,549.9 A 8.5,8.5 0 0 0 143.1,541.5" stroke="#EF553B"/>
 <path d="M 109.3,570.1 L 109.3,620.8" stroke="#636EFA"/>
 <path d="M 109.3,623.3 L 109.3,620.8 A 8.4,8.4 0 0 1 117.8,612.3 L 134.7,612.3 A 8.5,8.5 0 0 0 143.1,603.9" stroke="#EF553B"/>
@@ -21,9 +21,12 @@
 <path d="M 109.3,1474.9 L 109.3,1494.3 L 109.3,1496.9" stroke="#636EFA"/>
 <path d="M 109.3,1506.1 L 109.3,1508.7 L 109.3,1681.5 L 109.3,1684.1" stroke="#EF553B"/>
 <path d="M 109.3,1693.3 L 109.3,1712.8 L 109.3,1715.3" stroke="#EF553B"/>
+<path d="M 109.3,1871.3 L 109.3,1868.8 A 8.5,8.5 0 0 0 100.9,1860.3 A 8.5,8.5 0 0 1 92.4,1851.8" stroke="#EF553B"/>
+<path d="M 109.3,1880.5 L 109.3,1902.5" stroke="#EF553B"/>
+<path d="M 109.3,1911.7 L 109.3,1931.2 L 109.3,1933.7" stroke="#EF553B"/>
 <path d="M 126.2,61.7 L 126.2,59.1 A 8.4,8.4 0 0 0 117.8,50.7 A 8.4,8.4 0 0 1 109.3,42.2" stroke="#636EFA"/>
 <path d="M 126.2,311.3 L 126.2,308.8 A 8.5,8.5 0 0 0 117.8,300.3 L 100.9,300.3 A 8.5,8.5 0 0 1 92.4,291.9" stroke="#636EFA"/>
-<path d="M 126.2,320.5 L 126.2,354.2 L 126.2,479.1 A 8.4,8.4 0 0 0 134.7,487.5" stroke="#636EFA"/>
+<path d="M 126.2,320.5 L 126.2,416.6 L 126.2,479.1 A 8.4,8.4 0 0 0 134.7,487.5" stroke="#636EFA"/>
 <path d="M 126.2,529.7 L 126.2,527.1 A 8.4,8.4 0 0 1 134.7,518.7 A 8.4,8.4 0 0 0 143.1,510.2" stroke="#EF553B"/>
 <path d="M 126.2,592.1 L 126.2,589.5 A 8.4,8.4 0 0 1 134.7,581.1 A 8.4,8.4 0 0 0 143.1,572.6" stroke="#EF553B"/>
 <path d="M 126.2,601.3 L 126.2,603.9 A 8.4,8.4 0 0 1 117.8,612.3" stroke="#EF553B"/>
@@ -37,17 +40,16 @@
 <path d="M 92.4,92.9 L 92.4,90.3 A 8.5,8.5 0 0 1 100.9,81.9 A 8.5,8.5 0 0 0 109.3,73.5" stroke="#636EFA"/>
 <path d="M 92.4,102.1 L 92.4,104.7 L 92.4,277.6" stroke="#636EFA"/>
 <path d="M 92.4,280.1 L 92.4,277.6 A 8.5,8.5 0 0 0 84.0,269.1 A 8.5,8.5 0 0 1 75.5,260.6" stroke="#00CC96"/>
-<path d="M 92.4,289.3 L 92.4,291.9 L 92.4,323.1 L 92.4,402.4 L 92.4,404.9" stroke="#636EFA"/>
-<path d="M 92.4,414.1 L 92.4,416.6 L 92.4,479.1 A 8.5,8.5 0 0 0 100.9,487.5" stroke="#636EFA"/>
+<path d="M 92.4,289.3 L 92.4,291.9 L 92.4,323.1 L 92.4,371.1 L 92.4,373.7" stroke="#636EFA"/>
+<path d="M 92.4,382.9 L 92.4,385.4 L 92.4,479.1 A 8.5,8.5 0 0 0 100.9,487.5" stroke="#636EFA"/>
 <path d="M 92.4,904.1 L 92.4,901.5 A 8.5,8.5 0 0 0 84.0,893.1 L 67.1,893.1 A 8.5,8.5 0 0 1 58.6,884.6" stroke="#636EFA"/>
 <path d="M 92.4,913.3 L 92.4,932.8 L 92.4,935.3" stroke="#636EFA"/>
 <path d="M 92.4,944.5 L 92.4,947.0 L 92.4,978.2 L 92.4,1009.5 L 92.4,1040.7 L 92.4,1071.8 L 92.4,1103.0 L 92.4,1153.7" stroke="#EF553B"/>
 <path d="M 92.4,1247.3 L 92.4,1244.8 A 8.5,8.5 0 0 0 84.0,1236.3 A 8.5,8.5 0 0 1 75.5,1227.8" stroke="#00CC96"/>
-<path d="M 92.4,1256.5 L 92.4,1259.0 L 92.4,1290.2 L 92.4,1321.5 L 92.4,1352.7 L 92.4,1383.8 L 92.4,1415.0 L 92.4,1477.5 L 92.4,1508.7 L 92.4,1571.0 L 92.4,1633.5 L 92.4,1664.7 L 92.4,1695.8 L 92.4,1758.2 L 92.4,1837.5" stroke="#EF553B"/>
-<path d="M 92.4,1840.1 L 92.4,1837.5 A 8.5,8.5 0 0 0 84.0,1829.1 L 67.1,1829.1 A 8.5,8.5 0 0 1 58.6,1820.7 L 58.6,1818.1" stroke="#636EFA"/>
+<path d="M 92.4,1256.5 L 92.4,1259.0 L 92.4,1290.2 L 92.4,1321.5 L 92.4,1352.7 L 92.4,1383.8 L 92.4,1415.0 L 92.4,1477.5 L 92.4,1508.7 L 92.4,1571.0 L 92.4,1633.5 L 92.4,1664.7 L 92.4,1695.8 L 92.4,1758.2 L 92.4,1820.7 L 92.4,1851.8 L 92.4,1914.2 A 8.5,8.5 0 0 0 100.9,1922.7 A 8.5,8.5 0 0 1 109.3,1931.2" stroke="#EF553B"/>
 <path d="M 75.5,124.1 L 75.5,121.5 A 8.5,8.5 0 0 1 84.0,113.1 L 100.9,113.1 A 8.5,8.5 0 0 0 109.3,104.7" stroke="#636EFA"/>
 <path d="M 75.5,133.3 L 75.5,155.3" stroke="#EF553B"/>
-<path d="M 75.5,164.5 L 75.5,167.1 L 75.5,198.2 L 75.5,229.4 L 75.5,260.6 L 75.5,291.9 L 75.5,323.1 L 75.5,385.4 L 75.5,479.1 L 75.5,541.5 L 75.5,759.9 L 75.5,915.9 L 75.5,1165.5 L 75.5,1196.7 L 75.5,1227.8 L 75.5,1321.5 L 75.5,1525.5" stroke="#00CC96"/>
+<path d="M 75.5,164.5 L 75.5,167.1 L 75.5,198.2 L 75.5,229.4 L 75.5,260.6 L 75.5,291.9 L 75.5,323.1 L 75.5,354.2 L 75.5,479.1 L 75.5,541.5 L 75.5,759.9 L 75.5,915.9 L 75.5,1165.5 L 75.5,1196.7 L 75.5,1227.8 L 75.5,1321.5 L 75.5,1525.5" stroke="#00CC96"/>
 <path d="M 75.5,1528.1 L 75.5,1525.5 A 8.5,8.5 0 0 1 84.0,1517.1 L 100.9,1517.1 A 8.5,8.5 0 0 0 109.3,1508.7" stroke="#EF553B"/>
 <path d="M 75.5,1621.7 L 75.5,1619.2 A 8.4,8.4 0 0 0 67.1,1610.7 A 8.4,8.4 0 0 1 58.6,1602.2" stroke="#636EFA"/>
 <path d="M 75.5,1630.9 L 75.5,1650.3 L 75.5,1652.9" stroke="#636EFA"/>
@@ -63,9 +65,10 @@
 <path d="M 58.6,788.5 L 58.6,791.0 L 58.6,822.2 L 58.6,853.5 L 58.6,884.6 L 58.6,915.9 A 8.5,8.5 0 0 0 67.1,924.3" stroke="#636EFA"/>
 <path d="M 58.6,1434.5 L 58.6,1432.0 A 8.5,8.5 0 0 1 67.1,1423.5 L 84.0,1423.5 A 8.5,8.5 0 0 0 92.4,1415.0" stroke="#EF553B"/>
 <path d="M 58.6,1443.7 L 58.6,1446.2 L 58.6,1539.8 L 58.6,1602.2 L 58.6,1727.0 L 58.6,1808.9" stroke="#636EFA"/>
+<path d="M 58.6,1818.1 L 58.6,1837.5 L 58.6,1840.1" stroke="#636EFA"/>
 <path d="M 100.9,300.3 L 84.0,300.3 A 8.5,8.5 0 0 1 75.5,291.9" stroke="#00CC96"/>
-<path d="M 143.1,373.7 L 143.1,371.1 A 8.4,8.4 0 0 0 134.7,362.7 A 8.4,8.4 0 0 1 126.2,354.2" stroke="#636EFA"/>
-<path d="M 143.1,382.9 L 143.1,495.9 L 143.1,498.5" stroke="#636EFA"/>
+<path d="M 143.1,436.1 L 143.1,433.6 A 8.4,8.4 0 0 0 134.7,425.1 A 8.4,8.4 0 0 1 126.2,416.6" stroke="#636EFA"/>
+<path d="M 143.1,445.3 L 143.1,495.9 L 143.1,498.5" stroke="#636EFA"/>
 <path d="M 143.1,507.7 L 143.1,510.2 L 143.1,541.5 L 143.1,572.6 L 143.1,603.9 L 143.1,635.0 L 143.1,728.6 L 143.1,1338.3 L 143.1,1340.9" stroke="#EF553B"/>
 <path d="M 24.8,810.5 L 24.8,808.0 A 8.5,8.5 0 0 1 33.3,799.5 L 50.2,799.5 A 8.5,8.5 0 0 0 58.6,791.0" stroke="#636EFA"/>
 <path d="M 24.8,819.7 L 24.8,822.2 L 24.8,915.9 A 8.5,8.5 0 0 0 33.3,924.3 L 50.2,924.3 L 67.1,924.3 L 84.0,924.3 A 8.5,8.5 0 0 1 92.4,932.8" stroke="#636EFA"/>
@@ -84,7 +87,7 @@
 <path d="M 100.9,1329.9 L 84.0,1329.9 A 8.5,8.5 0 0 1 75.5,1321.5" stroke="#00CC96"/>
 <path d="M 92.4,104.7 A 8.5,8.5 0 0 1 84.0,113.1" stroke="#636EFA"/>
 <path d="M 75.5,323.1 A 8.4,8.4 0 0 1 67.1,331.5" stroke="#00CC96"/>
-<path d="M 75.5,385.4 A 8.5,8.5 0 0 0 84.0,393.9 A 8.5,8.5 0 0 1 92.4,402.4" stroke="#00CC96"/>
+<path d="M 75.5,354.2 A 8.5,8.5 0 0 0 84.0,362.7 A 8.5,8.5 0 0 1 92.4,371.1" stroke="#00CC96"/>
 <path d="M 75.5,479.1 A 8.5,8.5 0 0 0 84.0,487.5" stroke="#00CC96"/>
 <path d="M 75.5,541.5 A 8.5,8.5 0 0 0 84.0,549.9 L 100.9,549.9 A 8.5,8.5 0 0 1 109.3,558.4" stroke="#00CC96"/>
 <path d="M 75.5,915.9 A 8.5,8.5 0 0 0 84.0,924.3" stroke="#00CC96"/>
@@ -99,6 +102,7 @@
 <path d="M 92.4,1664.7 A 8.5,8.5 0 0 0 100.9,1673.1" stroke="#EF553B"/>
 <path d="M 92.4,1695.8 A 8.5,8.5 0 0 0 100.9,1704.3 A 8.5,8.5 0 0 1 109.3,1712.8" stroke="#EF553B"/>
 <path d="M 92.4,1758.2 A 8.5,8.5 0 0 1 84.0,1766.7 A 8.5,8.5 0 0 0 75.5,1775.2" stroke="#EF553B"/>
+<path d="M 92.4,1820.7 A 8.5,8.5 0 0 1 84.0,1829.1 L 67.1,1829.1 A 8.5,8.5 0 0 0 58.6,1837.5" stroke="#EF553B"/>
 <path d="M 126.2,1290.2 A 8.4,8.4 0 0 1 117.8,1298.7 A 8.4,8.4 0 0 0 109.3,1307.2" stroke="#EF553B"/>
 <path d="M 109.3,1321.5 A 8.5,8.5 0 0 0 117.8,1329.9" stroke="#EF553B"/>
 </g>
@@ -135,14 +139,14 @@
 <g><title>metabat2</title>
 <polygon points="53.3,342.5 64.0,342.5 58.6,351.7" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
 <text x="155.6" y="351.8" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">metabat2</text></g>
-<g><title>checkm</title>
-<polygon points="137.8,373.7 148.5,373.7 143.1,382.9" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
-<text x="155.6" y="383.0" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">checkm</text></g>
 <g><title>comebin</title>
-<polygon points="87.1,404.9 97.8,404.9 92.4,414.1" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
-<text x="155.6" y="414.2" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">comebin</text></g>
+<polygon points="87.1,373.7 97.8,373.7 92.4,382.9" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="155.6" y="383.0" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">comebin</text></g>
 <g><title>checkm</title>
-<polygon points="104.0,436.1 114.7,436.1 109.3,445.3" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="104.0,404.9 114.7,404.9 109.3,414.1" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="155.6" y="414.2" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">checkm</text></g>
+<g><title>checkm</title>
+<polygon points="137.8,436.1 148.5,436.1 143.1,445.3" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
 <text x="155.6" y="445.4" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">checkm</text></g>
 <g><title>checkm</title>
 <polygon points="36.4,467.3 47.1,467.3 41.7,476.5" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
@@ -277,6 +281,15 @@
 <polygon points="53.3,1808.9 64.0,1808.9 58.6,1818.1" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
 <text x="155.6" y="1818.2" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">interproscan</text></g>
 <g><title>merge_interproscan</title>
-<polygon points="87.1,1840.1 97.8,1840.1 92.4,1849.3" fill="#FFFFFF" stroke="#EF553B" stroke-width="2.0" stroke-linejoin="round"/>
+<polygon points="53.3,1840.1 64.0,1840.1 58.6,1849.3" fill="#FFFFFF" stroke="#EF553B" stroke-width="2.0" stroke-linejoin="round"/>
 <text x="155.6" y="1849.4" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">merge_interproscan</text></g>
+<g><title>splitOrfsForAmr</title>
+<polygon points="104.0,1871.3 114.7,1871.3 109.3,1880.5" fill="#FFFFFF" stroke="#EF553B" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="155.6" y="1880.6" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">splitOrfsForAmr</text></g>
+<g><title>bacmet</title>
+<polygon points="104.0,1902.5 114.7,1902.5 109.3,1911.7" fill="#FFFFFF" stroke="#EF553B" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="155.6" y="1911.8" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">bacmet</text></g>
+<g><title>merge_bacmet</title>
+<polygon points="104.0,1933.7 114.7,1933.7 109.3,1942.9" fill="#FFFFFF" stroke="#EF553B" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="155.6" y="1943.0" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">merge_bacmet</text></g>
 </svg>
