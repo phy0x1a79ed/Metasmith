@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Build one kb paper batch's shards on sockeye through metasmith: one GPU task per shard.
+"""Build kb paper batches' shards on sockeye through metasmith: one GPU task per shard.
 
     papers_run.py deploy
-    papers_run.py run BATCH [--nice N]
-    papers_run.py check BATCH
+    papers_run.py run BATCH [--nice N] [--dry]
+    papers_run.py sweep
 
-kb's pipeline selects the batch (kb.pipeline select) into P/batches/BATCH/s*/ and merges it afterwards
-(pipeline/merge.sbatch). `run` plans buildShard over the batch's shards and launches it. `check` reads the run's
-done and failed sentinels, and links each built store to P/batches/BATCH/stores/<shard>, where the merge reads it.
+kb's pipeline selects each batch (kb.pipeline select) into P/batches/BATCH/s*/ and merges it afterwards
+(pipeline/merge.sbatch). Its tick, run with SUBMIT=msm, queues each batch to submit in P/msm/pending. `sweep`, run
+nightly from altair after the tick, launches the queued batches, and hands each finished run to the merge. `run`
+launches one batch by hand. `deploy` prepares the agent home and imports the inputs every batch shares.
 """
 import argparse
 import json
@@ -91,11 +92,6 @@ def inputs(batch: str) -> DataInstanceLibrary:
     )
 
 
-def keys() -> dict:
-    f = CACHE / "task_keys.json"
-    return json.loads(f.read_text()) if f.exists() else {}
-
-
 def cmd_deploy(a):
     ssh(f"mkdir -p {HOME}/dev")
     src = Path(metasmith.__file__).parent
@@ -107,9 +103,10 @@ def cmd_deploy(a):
     imports([(p, t, n) for n, (p, t) in INPUT_TYPES.items()])
 
 
-def cmd_run(a):
+def launch(batch: str, nice: int, dry: bool = False) -> str | None:
+    """Plan buildShard over the batch's shards, stage it and start it. Returns the task key."""
     CACHE.mkdir(parents=True, exist_ok=True)
-    lib = inputs(a.batch)
+    lib = inputs(batch)
     task = Spec(
         input_library=lib,
         target_types=["papers::shard_build"],
@@ -117,10 +114,10 @@ def cmd_run(a):
         resource_libraries=[A.envs()],
     ).Solve(seed=1)
     if not task.ok or not task.plan.steps:
-        raise SystemExit(f"no plan for {a.batch}: {task.plan}")
+        raise SystemExit(f"no plan for {batch}: {task.plan}")
     print(f"{len(task.plan.steps)} steps: " + ", ".join(sorted({s.transform.name for s in task.plan.steps})))
-    if a.dry:
-        return
+    if dry:
+        return None
     smith = agent()
     smith.StageWorkflow(task, on_exist="clear", verify_external_paths=False)
     # A compute node has no route to a registry, so the tool images are fetched here, on the login node.
@@ -129,24 +126,54 @@ def cmd_run(a):
     gpu = Gpu(memory=Size.GB(32), count=1, extra=["--partition=gpu", "--constraint=gpu_mem_32"])
     smith.RunWorkflow(task=task, config_file=smith.GetNxfConfigPresets()["slurm"], gpus=gpu, params=dict(
         slurmAccount=ACCOUNT, executor=dict(queueSize=50),
-        process=dict(tries=2, clusterOptions=f"--nodes=1 --ntasks=1 --account={ACCOUNT} --nice={a.nice}")))
-    k = keys()
-    k[a.batch] = task.GetKey()
-    (CACHE / "task_keys.json").write_text(json.dumps(k, indent=2))
-    print(json.dumps({"batch": a.batch, "task": task.GetKey(), "steps": len(task.plan.steps)}))
+        process=dict(tries=2, clusterOptions=f"--nodes=1 --ntasks=1 --account={ACCOUNT} --nice={nice}")))
+    print(json.dumps({"batch": batch, "task": task.GetKey(), "steps": len(task.plan.steps)}))
+    return task.GetKey()
 
 
-def cmd_check(a):
-    key = keys()[a.batch]
-    print(json.dumps(agent().CheckWorkflow(key), default=str, indent=2))
-    # Each product is a directory named for its shard's build; its papers.jsonl copy says which shard it was.
-    runs = HOME / "runs" / key
-    script = (f"for d in $(find {runs} -name build.json -printf '%h\\n'); do "
-              f"s=$(grep -l . {P}/batches/{a.batch}/s*/papers.jsonl | while read f; do "
-              f"cmp -s $f $d/papers.jsonl && basename $(dirname $f); done); "
-              f"[ -n \"$s\" ] && mkdir -p {P}/batches/{a.batch}/stores && "
-              f"ln -sfn $d/store {P}/batches/{a.batch}/stores/$s && echo $s; done")
-    print(ssh(script, timeout=600))
+def cmd_run(a):
+    launch(a.batch, a.nice, a.dry)
+
+
+def link_stores(batch: str, key: str) -> tuple[int, int]:
+    """Link each built store to P/batches/BATCH/stores/<shard>, where the merge reads it. A product directory is named
+    for its build, not its shard, so the copy of papers.jsonl it carries says which shard it was. Returns (linked,
+    shards)."""
+    b = P / "batches" / batch
+    script = (f"mkdir -p {b}/stores; "
+              f"for d in $(find {HOME}/runs/{key}/results -name build.json -printf '%h\\n'); do "
+              f"for f in {b}/s[0-9]*/papers.jsonl; do cmp -s $f $d/papers.jsonl && "
+              f"ln -sfn $(realpath $d/store) {b}/stores/$(basename $(dirname $f)) && echo linked; done; done; "
+              f"ls -d {b}/s[0-9]* | wc -l")
+    out = ssh(script, timeout=600).split()
+    return out.count("linked"), int(out[-1])
+
+
+def cmd_sweep(a):
+    """Launch every batch the sockeye tick queued, and hand every finished run to kb's merge. A run whose shards did
+    not all build marks its batch failed, so the next tick retries it, and the shards that did build come back from
+    metasmith's cache."""
+    q = P / "msm"
+    ssh(f"mkdir -p {q}/runs && touch {q}/pending")
+    for line in ssh(f"cat {q}/pending && : > {q}/pending").splitlines():
+        batch, nice = line.split()
+        key = launch(batch, int(nice))
+        ssh(f"echo '{key} {nice}' > {q}/runs/{batch}")
+    for path in ssh(f"ls {q}/runs").split():
+        key, nice = ssh(f"cat {q}/runs/{path}").split()
+        log = HOME / "runs" / key / "_metasmith/logs.latest/main.log"
+        if "run completed at" not in ssh(f"tail -3 {log} 2>/dev/null || true"):
+            print(json.dumps({"batch": path, "task": key, "state": "running"}))
+            continue
+        linked, shards = link_stores(path, key)
+        if linked == shards:
+            out = ssh(f"cd {P} && MERGE_ONLY=1 bash {SRC}/pipeline/submit.sh batches/{path} {nice}", timeout=600)
+            state = "merging " + out.strip()
+        else:
+            ssh(f"cd {P} && PYTHONPATH={SRC}/src {K}/env/bin/python -m kb.pipeline finish ledger.db {path} --failed")
+            state = f"failed: {linked} of {shards} shards built"
+        ssh(f"rm {q}/runs/{path}")
+        print(json.dumps({"batch": path, "task": key, "state": state}))
 
 
 def main():
@@ -158,9 +185,7 @@ def main():
     r.add_argument("--nice", type=int, default=0)
     r.add_argument("--dry", action="store_true", help="plan only")
     r.set_defaults(func=cmd_run)
-    c = sub.add_parser("check")
-    c.add_argument("batch")
-    c.set_defaults(func=cmd_check)
+    sub.add_parser("sweep").set_defaults(func=cmd_sweep)
     a = ap.parse_args()
     a.func(a)
 
