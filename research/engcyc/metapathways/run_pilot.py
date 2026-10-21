@@ -36,8 +36,9 @@ REFS = PILOT / "refs"
 SL = Path("/project/rpp-shallam/phyberos/spanish_lakes/metagenomics")
 
 SAMPLES = {
-    # The MAG is a hardlink of the genome: one path cannot be both a given and its own child.
-    "smoke": (Path("/scratch/phyberos/engcyc/batches/pilot00003/ENG000030922.fa"),
+    # Both paths are hardlinks of OMD genome ENG000030922, whose batch directory is gone: one
+    # path cannot be both a given and its own child.
+    "smoke": (PILOT / "inputs" / "ENG000030922.fa",
               [PILOT / "inputs" / "ENG000030922.mag.fna"]),
     "sg8w14": (SL / "assembly" / "fna" / "SG8W14.fna",
                [SL / "binning" / "fna_comebin" / f"SG8W14.comebin.{b}.fa" for b in ("041", "072", "018")]),
@@ -65,7 +66,7 @@ TYPE_LIBS = [c.MLIB / "data_types" / t for t in (
 # The licensed Pathway Tools image cannot be pulled. It is adopted into the store under the name
 # the engine derives from env::pathologic.env's container URI, and the store stays mode 700.
 LOCAL_IMAGES = {
-    "docker..quay.io_txyliu_pathologic..latest.sif": Path("/scratch/phyberos/mp4/private/pathologic.sif"),
+    "docker..quay.io_txyliu_pathologic..27.0.sif": Path("/scratch/phyberos/engcyc/licensed/pathologic.sif"),
 }
 SETUP_COMMANDS = [*c.SETUP_COMMANDS, f"export APPTAINER_CACHEDIR={HOME / 'container_images'}"]
 AGENT_IMAGE = os.environ.get("MSM_AGENT_IMAGE", "docker://quay.io/hallamlab/metasmith:0.24.2")
@@ -88,8 +89,11 @@ def declare_sample(smith, sample, ensure):
     givens = smith.PoolGivens()
     tags = ["engcyc", "mp_pilot", sample]
     asm = c.add_file(givens, f"mp_pilot/{sample}/assembly", asm_path, "sequences::assembly", tags=tags)
+    # A MAG's pool name moves with its assembly's path too, or a moved assembly leaves the MAG
+    # cited under the old parent.
     for mag in mags:
-        c.add_file(givens, f"mp_pilot/{sample}/{mag.stem}", mag, "binning_local::quality_bin_fasta",
+        c.add_file(givens, c.given_name(f"mp_pilot/{sample}/{mag.stem}", asm_path), mag,
+                   "binning_local::quality_bin_fasta",
                    parents=[asm], tags=tags)
     return c.cite(givens, CACHE_DIR / sample / "inputs.xgdb", TYPE_LIBS, ensure)
 
