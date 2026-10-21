@@ -282,7 +282,7 @@ groups:
         cyanoverse: "LCA* port that picks the minority branch on split votes"
       - stage: Pathways
         diff: true
-        engcyc: "PathoLogic (Pathway Tools; image txyliu/pathologic:latest, version still to pin) per assembly and per quality MAG, from CLEAN's EC calls above the score floor"
+        engcyc: "PathoLogic (Pathway Tools 27.0, licensed fir SIF sha256 86fd8d9c) per assembly and per quality MAG, from CLEAN's EC calls above the score floor"
         e5: "-"
         sl_metag: "-"
         sl_virome: "-"
