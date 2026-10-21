@@ -87,11 +87,13 @@ Publish one assembly per sample. When a dataset holds several assemblies of one 
 | A tool's own format | the tool's extension (`.json`, `.bam`, `.html`, `.pkl`) |
 | Archive of a tool's output directory | `.tar.gz` |
 
-Append `.gz` only to a full extension, such as `.tsv.gz`. Write a headerless BLAST6 table as `.tsv` and name its columns in the dataset README.
+Publish a tool's own CSV as `.csv`. Never rewrite its bytes as TSV. Rename a `.tgz` archive to `.tar.gz` without repacking it. Append `.gz` only to a full extension, such as `.tsv.gz`. Write a headerless BLAST6 table as `.tsv` and name its columns in the dataset README.
 
 ## Pooled tables
 
 A summary table over the whole dataset goes in `<dataset>/tables/`, never in a product directory. A dataset-level product that is not a summary table, such as a FASTA or a network, is a product with the dataset stem. Examples of tables: `contig_stats.parquet`, `mags.parquet`, `bin_clusters.tsv`, `votus.parquet`, `gpr.parquet`, `feast_proportions.tsv`.
+
+Publish a pooled table's rows once. When a per-sample product pools into a table, as each sample's GPR table pools into `gpr.parquet`, publish the table and leave the per-sample product out of the tree.
 
 `mags.parquet` has one row per bin: `bin`, `sample`, `binner`, `completeness`, `contamination`, `is_quality`, `cluster`, `is_representative` and `gtdb_taxonomy`. `is_quality` marks the bins at or above the dataset's quality threshold, which the README states.
 
