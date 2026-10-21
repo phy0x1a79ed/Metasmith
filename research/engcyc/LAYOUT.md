@@ -48,7 +48,7 @@ A product directory holds one file per stem and nothing else. Keep superseded ou
 
 Per-binner products put the binner in the product name: `<binner>_bins`, `<binner>_contig_to_bin`, `checkm2_<binner>`.
 
-The quality bins are a subset of the per-binner bins, flagged in `mags.parquet`. Never copy them into a product of their own. A product built only on the quality bins ends in `_quality`, such as `gtdbtk_quality`, and its stems are bin stems.
+The quality bins are a subset of the per-binner bins, flagged in `mags.parquet`. Never copy them into a product of their own. A product built only on the quality bins ends in `_quality`, such as `gtdbtk_quality`. Its stems are bin stems when it writes one file per bin. They are sample stems when one file covers a sample's whole quality pool, as `gtdbtk_quality` does.
 
 Per-bin products for metabolic models:
 
@@ -64,7 +64,7 @@ Per-bin products for metabolic models:
 - **Characters.** A stem uses only letters, digits and `_`. Replace every other character with `_`, so the versioned accession `GCF_000001405.1` becomes `GCF_000001405_1`. `samples.tsv` keeps the true accession.
 - **Bin.** `<sample>.<binner>.<NNN>`, with `NNN` the binner's own index zero-padded to three digits. The binner stays in the stem as well as the product, so a flat listing of every bin stays unique.
 - **Genome dataset.** For a dataset of isolate or MAG genomes, the genome is the sample.
-- **Dataset.** A product built once over the whole dataset, such as the viral catalogue's vOTU FASTA or the vConTACT3 network, uses the `dataset_id` as its stem: `viral/votu_representatives/<dataset>.fna`. IDs inside it carry the `<sample>~` prefix.
+- **Dataset.** A product built once over the whole dataset, such as the viral catalogue's frozen candidate FASTA, its vOTU membership table or the vConTACT3 network, uses the `dataset_id` as its stem: `viral/votu_cluster_table/<dataset>.tsv`. IDs inside it carry the `<sample>~` prefix.
 
 Publish one assembly per sample. When a dataset holds several assemblies of one sample, such as MEGAHIT and SPAdes, publish the one the pipeline carries forward. Move the others to `_redundant/<dataset>/`. `samples.tsv` names the assembler.
 
