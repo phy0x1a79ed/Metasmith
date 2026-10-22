@@ -1,0 +1,6 @@
+outs:
+- md5: dfa0e4ae00115a320244979608666c30.dir
+  size: 55678542
+  nfiles: 9
+  hash: md5
+  path: bacmet
