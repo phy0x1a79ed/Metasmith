@@ -310,7 +310,7 @@ groups:
       - stage: Phylogenetic placement of marker genes
         diff: true
         open: U14
-        engcyc: "TreeSAPP assign on the ORFs, proposed. Not in the library yet; reference packages and their curation to be settled (U14)"
+        engcyc: "- (deferred, Tony 2026-10-22: add later as a targeted lane once a package set is chosen) (U14)"
         e5: "-"
         sl_metag: "- (per-study TreeSAPP work sits on chinook, outside W1-W4)"
         sl_virome: "-"
@@ -334,9 +334,9 @@ groups:
         open: U4
         engcyc: "-"
         e5: "-"
-        sl_metag: DeepTFactor 1.0
+        sl_metag: DeepTFactor 1.0 (SL W2: 98 of 101 samples after chunking)
         sl_virome: "-"
-        cyanoverse: incomplete
+        cyanoverse: "DeepTFactor, incomplete: 2,818 of 2,844 after wall-time kills and a reset that lost 2,821 results"
       - stage: Promoters
         diff: true
         open: U4
@@ -402,7 +402,7 @@ open:
   U11: "Metabuli GTDB r232. Inodes are not the cost: a Metabuli index is about a dozen files (fir's GTDB 214.1 copy is 11 files, 101 GB), so r232 is about 12 files and 744 GB. A hybrid plan is not possible inside one run: a metasmith run drives one agent, and Nextflow needs one shared work dir. Hybrid works only as two runs with a seam: export every contig, classify on the Arbutus Metabuli service, import the calls as givens. Arbutus caps at 120 GB RAM, so it streams the index about 7 times per chunk, about 700 s per chunk, one job at a time (parallel workers contend for one Ceph stream). An estimated 360 Gbp of Engcyc contigs would be about 1,000 chunks, about 200 h serial. fir's 768 GB nodes hold the whole index, so a job needs one pass and jobs run in parallel. Recommended: download r232 once into /project/rpp-shallam (35 TiB free, out of reach of scratch purges), streaming the tarball through tar so the peak is 744 GB, not 1.4 TB, and run Metabuli on fir."
   U12: "Reuse rule (Tony: reuse where methods match, regenerate where they differ). Where a source never recorded its tool version (the = ? cells, mostly Spanish Lakes annotation), reuse it or regenerate it?"
   U13: "CarveMe from the 4-lane calls (Tony: test it, report like E4 Fig 1). Two shapes. (a) Score CarveMe's own BiGG universe from the 4-lane calls: translate each ORF's MNXR or EC call to BiGG reactions and pass it as CarveMe's eggNOG-style input, so carving and gap fill stay stock. Needs an MNXR-to-BiGG crosswalk, and BiGG and MetaNetX 4.5 disagree on 1,231 of 2,751 reactions. (b) The library's existing GPR lane: a draft in MetaNetX ids (gem_from_gpr), then CarveMe's biomass, transport and gap fill. On its one test (e_coli_core) both gap fillers came back infeasible. Recommended: (a), tested on the six E. coli strains from mm_compare and a batch of E5 MAGs, scored as reaction Jaccard against the DIAMOND lane and against iML1515, plus MEMOTE by section."
-  U14: "TreeSAPP (Hallam lab, Morgan-Lang 2020): HMM search per reference package, then placement on that package's tree. Its cost grows with the number of packages, and nothing in the library runs it, so it needs a new transform and a pinned package set. Recommended: hand the package set and its curation to John, who already builds packages (the PR_22 rhodopsin package). This lane wires TreeSAPP assign on the pipeline's ORFs and times one pilot sample on fir before it scales out."
+  U14: "TreeSAPP, deferred (Tony 2026-10-22: maybe add later). TreeSAPP is a targeted tool, not a general annotator: it places only the genes of the families it has a reference package for (an HMM, a tree and a placement model each), so it answers questions about chosen marker genes and says nothing about the rest. Nothing in the library runs it. To add it later: pick the gene families the Engcyc questions need, take the curated packages for them (John already builds packages, e.g. the PR_22 rhodopsin package), write one transform for treesapp assign on the pipeline's ORFs, and time one sample on fir."
 
 # One entry per read shape the driver solves. `datasets` names the manifest rows that take the shape.
 shapes:
