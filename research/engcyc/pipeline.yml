@@ -334,7 +334,7 @@ groups:
         open: U4
         engcyc: "-"
         e5: "-"
-        sl_metag: DeepTFactor 1.0 (SL W2: 98 of 101 samples after chunking)
+        sl_metag: "DeepTFactor 1.0, 98 of 101 samples after chunking (W2)"
         sl_virome: "-"
         cyanoverse: "DeepTFactor, incomplete: 2,818 of 2,844 after wall-time kills and a reset that lost 2,821 results"
       - stage: Promoters
