@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="377" height="1911" viewBox="0 0 377 1911">
-<rect width="377" height="1911" fill="#FFFFFF"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="377" height="1880" viewBox="0 0 377 1880">
+<rect width="377" height="1880" fill="#FFFFFF"/>
 <g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
 <path d="M 109.3,133.3 L 109.3,135.8 L 109.3,167.1 L 109.3,198.2 A 8.5,8.5 0 0 1 100.9,206.7 A 8.5,8.5 0 0 0 92.4,215.2" stroke="#636EFA"/>
 <path d="M 109.3,248.9 L 109.3,246.3 A 8.5,8.5 0 0 0 100.9,237.9 A 8.5,8.5 0 0 1 92.4,229.4" stroke="#EF553B"/>
@@ -25,8 +25,7 @@
 <path d="M 109.3,1621.7 L 109.3,1619.2 A 8.4,8.4 0 0 1 117.8,1610.7 A 8.4,8.4 0 0 0 126.2,1602.2" stroke="#EF553B"/>
 <path d="M 109.3,1630.9 L 109.3,1650.3 L 109.3,1652.9" stroke="#EF553B"/>
 <path d="M 109.3,1662.1 L 109.3,1744.0 L 109.3,1746.5" stroke="#636EFA"/>
-<path d="M 109.3,1755.7 L 109.3,1775.2 L 109.3,1777.7" stroke="#636EFA"/>
-<path d="M 109.3,1818.1 L 109.3,1868.8 L 109.3,1871.3" stroke="#8A8A8A"/>
+<path d="M 109.3,1786.9 L 109.3,1837.5 L 109.3,1840.1" stroke="#8A8A8A"/>
 <path d="M 126.2,155.3 L 126.2,152.8 A 8.4,8.4 0 0 0 117.8,144.3 A 8.4,8.4 0 0 1 109.3,135.8" stroke="#636EFA"/>
 <path d="M 126.2,280.1 L 126.2,277.6 A 8.4,8.4 0 0 0 117.8,269.1 A 8.4,8.4 0 0 1 109.3,260.6" stroke="#EF553B"/>
 <path d="M 126.2,289.3 L 126.2,433.6 L 126.2,436.1" stroke="#EF553B"/>
@@ -34,7 +33,7 @@
 <path d="M 126.2,1403.3 L 126.2,1400.8 A 8.5,8.5 0 0 0 117.8,1392.3 L 100.9,1392.3 A 8.5,8.5 0 0 1 92.4,1383.8" stroke="#636EFA"/>
 <path d="M 126.2,1412.5 L 126.2,1415.0 L 126.2,1477.5 L 126.2,1539.8 L 126.2,1602.2 L 126.2,1684.1" stroke="#EF553B"/>
 <path d="M 126.2,1693.3 L 126.2,1712.8 L 126.2,1715.3" stroke="#EF553B"/>
-<path d="M 126.2,1724.5 L 126.2,1727.0 L 126.2,1851.8 A 8.4,8.4 0 0 1 117.8,1860.3 A 8.4,8.4 0 0 0 109.3,1868.8" stroke="#636EFA"/>
+<path d="M 126.2,1724.5 L 126.2,1727.0 L 126.2,1820.7 A 8.4,8.4 0 0 1 117.8,1829.1 A 8.4,8.4 0 0 0 109.3,1837.5" stroke="#636EFA"/>
 <path d="M 92.4,186.5 L 92.4,183.9 A 8.5,8.5 0 0 1 100.9,175.5 A 8.5,8.5 0 0 0 109.3,167.1" stroke="#636EFA"/>
 <path d="M 92.4,195.7 L 92.4,215.2 L 92.4,217.7" stroke="#636EFA"/>
 <path d="M 92.4,226.9 L 92.4,229.4 L 92.4,291.9 L 92.4,373.7" stroke="#EF553B"/>
@@ -45,7 +44,7 @@
 <path d="M 92.4,997.7 L 92.4,995.1 A 8.5,8.5 0 0 0 84.0,986.7 A 8.5,8.5 0 0 1 75.5,978.2" stroke="#EF553B"/>
 <path d="M 92.4,1028.9 L 92.4,1026.3 A 8.5,8.5 0 0 0 84.0,1017.9 A 8.5,8.5 0 0 1 75.5,1009.5" stroke="#EF553B"/>
 <path d="M 92.4,1060.1 L 92.4,1057.5 A 8.5,8.5 0 0 0 84.0,1049.1 A 8.5,8.5 0 0 1 75.5,1040.7" stroke="#EF553B"/>
-<path d="M 92.4,1131.7 L 92.4,1134.2 L 92.4,1165.5 L 92.4,1196.7 L 92.4,1227.8 L 92.4,1259.0 L 92.4,1290.2 L 92.4,1352.7 L 92.4,1383.8 L 92.4,1446.2 L 92.4,1508.7 L 92.4,1571.0 L 92.4,1633.5 L 92.4,1695.8 L 92.4,1727.0 L 92.4,1758.2 L 92.4,1851.8 A 8.5,8.5 0 0 0 100.9,1860.3" stroke="#636EFA"/>
+<path d="M 92.4,1131.7 L 92.4,1134.2 L 92.4,1165.5 L 92.4,1196.7 L 92.4,1227.8 L 92.4,1259.0 L 92.4,1290.2 L 92.4,1352.7 L 92.4,1383.8 L 92.4,1446.2 L 92.4,1508.7 L 92.4,1571.0 L 92.4,1633.5 L 92.4,1695.8 L 92.4,1727.0 L 92.4,1820.7 A 8.5,8.5 0 0 0 100.9,1829.1" stroke="#636EFA"/>
 <path d="M 58.6,311.3 L 58.6,308.8 A 8.5,8.5 0 0 1 67.1,300.3 L 84.0,300.3 A 8.5,8.5 0 0 0 92.4,291.9" stroke="#EF553B"/>
 <path d="M 58.6,320.5 L 58.6,323.1 L 58.6,416.6 A 8.5,8.5 0 0 0 67.1,425.1" stroke="#EF553B"/>
 <path d="M 58.6,726.1 L 58.6,728.6 L 58.6,759.9 L 58.6,791.0 L 58.6,822.2 L 58.6,853.5 A 8.4,8.4 0 0 0 67.1,861.9" stroke="#636EFA"/>
@@ -66,7 +65,7 @@
 <path d="M 75.5,1559.3 L 75.5,1556.8 A 8.5,8.5 0 0 1 84.0,1548.3 L 117.8,1548.3 A 8.5,8.5 0 0 0 126.2,1539.8" stroke="#EF553B"/>
 <path d="M 75.5,1568.5 L 75.5,1588.0 L 75.5,1590.5" stroke="#EF553B"/>
 <path d="M 75.5,1599.7 L 75.5,1727.0 A 8.5,8.5 0 0 0 84.0,1735.5" stroke="#636EFA"/>
-<path d="M 75.5,1849.3 L 75.5,1851.8 A 8.5,8.5 0 0 0 84.0,1860.3 L 100.9,1860.3 A 8.5,8.5 0 0 1 109.3,1868.8" stroke="#8A8A8A"/>
+<path d="M 75.5,1818.1 L 75.5,1820.7 A 8.5,8.5 0 0 0 84.0,1829.1 L 100.9,1829.1 A 8.5,8.5 0 0 1 109.3,1837.5" stroke="#8A8A8A"/>
 <path d="M 24.8,498.5 L 24.8,495.9 A 8.5,8.5 0 0 1 33.3,487.5 L 117.8,487.5 A 8.5,8.5 0 0 0 126.2,479.1" stroke="#636EFA"/>
 <path d="M 24.8,507.7 L 24.8,558.4 L 24.8,560.9" stroke="#636EFA"/>
 <path d="M 24.8,570.1 L 24.8,932.8" stroke="#636EFA"/>
@@ -83,7 +82,6 @@
 <path d="M 92.4,1633.5 A 8.5,8.5 0 0 0 100.9,1641.9 A 8.5,8.5 0 0 1 109.3,1650.3" stroke="#636EFA"/>
 <path d="M 92.4,1695.8 A 8.5,8.5 0 0 0 100.9,1704.3 L 117.8,1704.3 A 8.5,8.5 0 0 1 126.2,1712.8" stroke="#636EFA"/>
 <path d="M 92.4,1727.0 A 8.5,8.5 0 0 0 100.9,1735.5" stroke="#636EFA"/>
-<path d="M 92.4,1758.2 A 8.5,8.5 0 0 0 100.9,1766.7 A 8.5,8.5 0 0 1 109.3,1775.2" stroke="#636EFA"/>
 <path d="M 58.6,1165.5 A 8.4,8.4 0 0 0 67.1,1173.9 A 8.4,8.4 0 0 1 75.5,1182.3" stroke="#636EFA"/>
 <path d="M 126.2,1727.0 A 8.4,8.4 0 0 1 117.8,1735.5 A 8.4,8.4 0 0 0 109.3,1744.0" stroke="#636EFA"/>
 </g>
@@ -255,16 +253,13 @@
 <g><title>gpr_4lane</title>
 <polygon points="104.0,1746.5 114.7,1746.5 109.3,1755.7" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
 <text x="138.7" y="1755.8" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">gpr_4lane</text></g>
-<g><title>lcastar_ec</title>
-<polygon points="104.0,1777.7 114.7,1777.7 109.3,1786.9" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
-<text x="138.7" y="1787.0" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">lcastar_ec</text></g>
 <g><title>metabuli</title>
-<polygon points="104.0,1808.9 114.7,1808.9 109.3,1818.1" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="2.0" stroke-linejoin="round"/>
-<text x="138.7" y="1818.2" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">metabuli</text></g>
+<polygon points="104.0,1777.7 114.7,1777.7 109.3,1786.9" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="138.7" y="1787.0" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">metabuli</text></g>
 <g><title>rrna_scan</title>
-<polygon points="70.2,1840.1 80.9,1840.1 75.5,1849.3" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="2.0" stroke-linejoin="round"/>
-<text x="138.7" y="1849.4" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">rrna_scan</text></g>
+<polygon points="70.2,1808.9 80.9,1808.9 75.5,1818.1" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="138.7" y="1818.2" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">rrna_scan</text></g>
 <g><title>lcastar_contig_taxonomy</title>
-<polygon points="104.0,1871.3 114.7,1871.3 109.3,1880.5" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="2.0" stroke-linejoin="round"/>
-<text x="138.7" y="1880.6" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">lcastar_contig_taxonomy</text></g>
+<polygon points="104.0,1840.1 114.7,1840.1 109.3,1849.3" fill="#FFFFFF" stroke="#8A8A8A" stroke-width="2.0" stroke-linejoin="round"/>
+<text x="138.7" y="1849.4" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">lcastar_contig_taxonomy</text></g>
 </svg>

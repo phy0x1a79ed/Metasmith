@@ -13,6 +13,15 @@ Modes:
                         then per-channel dynamic int8 on q/k/v/fc1; out_proj, fc2 and the rest bf16
   ao_int8wo, ao_int4wo  torchao weight-only int8 / int4 (group 128), bf16 activations (torch 2.5)
   ao_int8dyn            torchao int8 per-token activations with int8 per-channel weights (torch 2.5)
+
+On cuda (prepare_cuda, torch 2.5 + torchao 0.7) every mode below bf16 runs on bf16 weights with
+per-projection attention, so bf16pp is the baseline they are timed against:
+  fp32, bf16            stock weights, bf16 under CUDA autocast
+  bf16pp                bf16 weights, per-projection attention, no quantisation
+  ao_int8wo, ao_int4wo, ao_int8dyn   as on cpu
+  ao_fp8wo              float8 e4m3 weights, bf16 activations
+  ao_fp8dyn, ao_fp8row  float8 e4m3 weights and dynamic activations, per tensor or per row
+  ao_fp8row_ffn         ao_fp8row on fc1 and fc2 only
 """
 import contextlib
 
@@ -137,6 +146,29 @@ def prepare(model, mode, calib=()):
         quantize_(model, scheme, filter_fn=lambda m, fqn: fqn in names)
         return model, off
     raise ValueError(mode)
+
+
+def prepare_cuda(model, mode):
+    if mode == "fp32":
+        return model, torch.autocast("cuda", enabled=False)
+    if mode == "bf16":
+        return model, torch.autocast("cuda", dtype=torch.bfloat16)
+    from torchao.quantization import (PerRow, PerTensor, float8_dynamic_activation_float8_weight,
+                                      float8_weight_only, int4_weight_only,
+                                      int8_dynamic_activation_int8_weight, int8_weight_only, quantize_)
+    per_projection_attention(model)
+    model = bf16_weights(model)
+    if mode == "bf16pp":
+        return model, contextlib.nullcontext()
+    suffixes = ("fc1", "fc2") if mode.endswith("_ffn") else LAYER_LINEARS
+    names = set(layer_linears(model, suffixes))
+    scheme = {"ao_int8wo": int8_weight_only, "ao_int4wo": lambda: int4_weight_only(group_size=128),
+              "ao_int8dyn": int8_dynamic_activation_int8_weight, "ao_fp8wo": float8_weight_only,
+              "ao_fp8dyn": lambda: float8_dynamic_activation_float8_weight(granularity=PerTensor()),
+              "ao_fp8row": lambda: float8_dynamic_activation_float8_weight(granularity=PerRow()),
+              "ao_fp8row_ffn": lambda: float8_dynamic_activation_float8_weight(granularity=PerRow())}[mode]()
+    quantize_(model, scheme, filter_fn=lambda m, fqn: fqn in names)
+    return model, contextlib.nullcontext()
 
 
 MODES = ["fp32", "bf16", "bf16pure", "int8", "int8ffn", "int8pc", "pc_fc1", "pc_ffn", "sq_int8",

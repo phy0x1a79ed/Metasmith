@@ -75,9 +75,10 @@ def worker(rank, items, calib_items, a, out):
     if a.mode.startswith("ort_"):
         pass
     elif a.device == "cuda":
-        model = model.cuda()
-        ctx = (torch.autocast("cuda", dtype=torch.bfloat16) if a.mode == "bf16"
-               else torch.autocast("cuda", enabled=False))
+        import quant
+        model, ctx = quant.prepare_cuda(model.cuda(), a.mode)
+        if a.compile:
+            model = torch.compile(model, dynamic=True)
         if rank == 0:
             print(json.dumps({"cuda_visible": os.environ.get("CUDA_VISIBLE_DEVICES"),
                               "device": torch.cuda.get_device_name(0),
@@ -120,10 +121,11 @@ def worker(rank, items, calib_items, a, out):
     if cur:
         batches.append(cur)
 
-    ids, embs, residues = [], [], 0
+    ids, embs, residues, batch_s = [], [], 0, []
     t0 = time.time()
     with torch.inference_mode(), ctx:
         for b in batches:
+            tb = time.time()
             _, _, toks = convert([(n, s[:TRUNC]) for n, s in b])
             if a.device == "cuda":
                 toks = toks.cuda(non_blocking=True)
@@ -133,10 +135,15 @@ def worker(rank, items, calib_items, a, out):
                 ids.append(n)
                 embs.append(rep[i, 1:L + 1].mean(0).numpy())
                 residues += L
+            batch_s.append((time.time() - tb, sum(min(len(s), TRUNC) for _, s in b)))
     wall = time.time() - t0
+    # Batches are length-sorted, so the first tenth carries compile and warm-up; the rest is steady.
+    tail = batch_s[len(batch_s) // 10:]
+    steady = sum(r for _, r in tail) / max(sum(t for t, _ in tail), 1e-9)
     gpu_peak = round(torch.cuda.max_memory_allocated() / 1e9, 2) if a.device == "cuda" else None
     np.save(f"{out}.r{rank}.npy", np.stack(embs).astype(np.float32))
-    json.dump({"ids": ids, "wall": wall, "orfs": len(ids), "residues": residues, "batches": len(batches), "gpu_peak_gb": gpu_peak}, open(f"{out}.r{rank}.json", "w"))
+    json.dump({"ids": ids, "wall": wall, "orfs": len(ids), "residues": residues, "batches": len(batches), "gpu_peak_gb": gpu_peak,
+               "steady_res_per_s": round(steady, 1)}, open(f"{out}.r{rank}.json", "w"))
 
 
 def main():
@@ -144,7 +151,7 @@ def main():
     p.add_argument("--fasta", required=True)
     p.add_argument("--n", type=int, default=0, help="sample this many ORFs; 0 takes them all")
     p.add_argument("--seed", type=int, default=7)
-    p.add_argument("--mode", default="fp32", help="see quant.py; on cuda only fp32 and bf16")
+    p.add_argument("--mode", default="fp32", help="see quant.py")
     p.add_argument("--device", choices=["cpu", "cuda"], default="cpu")
     p.add_argument("--onnx-dir", default="", help="ort_* modes: the directory ort_export.py wrote")
     p.add_argument("--procs", type=int, default=1)
@@ -157,6 +164,7 @@ def main():
     p.add_argument("--model", default=MODEL, help="ESM-1b checkpoint, e.g. one written by slim_ckpt.py")
     p.add_argument("--sdpa", action="store_true", help="drop ESM's unused attention weights")
     p.add_argument("--ipex", action="store_true", help="ipex.optimize the model (needs an IPEX overlay)")
+    p.add_argument("--compile", action="store_true", help="cuda: torch.compile the prepared model (torch 2.5)")
     a = p.parse_args()
     if a.cpuset:
         os.sched_setaffinity(0, parse_cpus(a.cpuset))
@@ -189,7 +197,8 @@ def main():
     summary = {"mode": a.mode, "procs": a.procs, "threads": a.threads, "toks": a.toks, "orfs": orfs,
                "pin": a.pin, "cpuset": a.cpuset, "sdpa": a.sdpa, "ipex": a.ipex, "n_batches_r0": parts[0].get("batches"),
                "per_proc_wall": [round(q["wall"], 1) for q in parts], "device": a.device,
-               "gpu_peak_gb": parts[0].get("gpu_peak_gb"),
+               "gpu_peak_gb": parts[0].get("gpu_peak_gb"), "compile": a.compile,
+               "steady_res_per_s": parts[0].get("steady_res_per_s"),
                "residues": sum(q["residues"] for q in parts), "embed_wall_s": round(compute, 1),
                "total_wall_s": round(total, 1), "orf_per_s": round(orfs / compute, 3),
                "orf_per_s_per_core": round(orfs / compute / (a.procs * a.threads), 4), "ids": ids}

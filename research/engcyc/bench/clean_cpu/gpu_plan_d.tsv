@@ -1,0 +1,15 @@
+name	mode	toks	n	input	save	compile
+t_bf16_20k	bf16	4096	20000	mg	0	0
+t_bf16pp_20k	bf16pp	4096	20000	mg	0	0
+t_ao_fp8row_20k	ao_fp8row	4096	20000	mg	0	0
+t_ao_fp8dyn_20k	ao_fp8dyn	4096	20000	mg	0	0
+t_ao_fp8wo_20k	ao_fp8wo	4096	20000	mg	0	0
+t_ao_int8dyn_20k	ao_int8dyn	4096	20000	mg	0	0
+t_ao_int8wo_20k	ao_int8wo	4096	20000	mg	0	0
+t_ao_int4wo_20k	ao_int4wo	4096	20000	mg	0	0
+tc_bf16_20k	bf16	4096	20000	mg	0	1
+tc_bf16pp_20k	bf16pp	4096	20000	mg	0	1
+tc_ao_fp8row_20k	ao_fp8row	4096	20000	mg	0	1
+tc_ao_fp8dyn_20k	ao_fp8dyn	4096	20000	mg	0	1
+tc_ao_int8dyn_20k	ao_int8dyn	4096	20000	mg	0	1
+tc_ao_int4wo_20k	ao_int4wo	4096	20000	mg	0	1
