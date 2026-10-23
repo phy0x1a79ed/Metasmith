@@ -1,7 +1,7 @@
 {
- "steps": 85,
- "tools": 60,
- "targets": 53,
+ "steps": 84,
+ "tools": 59,
+ "targets": 52,
  "transforms": [
   "aggregator",
   "antismash",
@@ -30,7 +30,6 @@
   "iphop_predict",
   "kofamscan",
   "lcastar_contig_taxonomy",
-  "lcastar_ec",
   "memote_score",
   "merge_bacmet",
   "merge_candidate_calls",

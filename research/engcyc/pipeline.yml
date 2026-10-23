@@ -276,7 +276,7 @@ groups:
         cyanoverse: "Bakta's rRNA calls, no taxonomy"
       - stage: EC consensus
         diff: true
-        engcyc: LCA* over the GPR lanes' EC calls (the published algorithm)
+        engcyc: "- (removed, Tony 2026-10-22)"
         e5: "-"
         sl_metag: "-"
         sl_virome: "-"
@@ -448,7 +448,7 @@ findings:
   - title: DIAMOND keeps 5 hits everywhere
     body: Tony standardised every Engcyc collection on 5 UniRef50 hits per ORF, which the contig LCA* vote needs. The GPR still reads the best hit. Results searched with 1 hit, including Cyanoverse's 99M ORFs, are imported under a legacy type, so the plan searches them again.
   - title: The MetaPathways stage is in the plan
-    body: "The metapathways session's transforms solve in every shape: ARAGORN tRNAs, barrnap rRNAs with GTDB taxonomy, a contig LCA* vote, an EC consensus, and PathoLogic PGDBs per assembly and per quality MAG. CarveMe 1.6.6 is now the library pin. On the SG8W14 pilot, PathoLogic took 3.7 GB and 30 min per assembly and about 2.5 min per MAG, and CarveMe 1.3 GB and about 11 min per MAG."
+    body: "The metapathways session's transforms solve in every shape: ARAGORN tRNAs, barrnap rRNAs with GTDB taxonomy, a contig LCA* vote and PathoLogic PGDBs per assembly and per quality MAG. CarveMe 1.6.6 is now the library pin. On the SG8W14 pilot, PathoLogic took 3.7 GB and 30 min per assembly and about 2.5 min per MAG, and CarveMe 1.3 GB and about 11 min per MAG."
   - title: GTDB-Tk on the quality pool has its own type
     body: As a second producer of taxonomy::gtdbtk, gtdbtk_quality answered the per-binner GTDB-Tk targets of the shipped metagenomics_from_paired_reads template, which stopped solving. Its product is now taxonomy::gtdbtk_quality, and all 12 templates build.
   - title: No de novo hybrid lane

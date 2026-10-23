@@ -154,8 +154,8 @@ def build_targets(shape):
         for dtype in ("annotation::bakta_tsv", "annotation::antismash_json", "annotation::trna_gff",
                       "annotation::rrna_gff", "taxonomy::contig_lcastar"):
             t.add(dtype, asm)
-        # The MetaPathways stage: EC consensus over the GPR lanes, and a PathoLogic PGDB per assembly.
-        for dtype in ("annotation::ec_consensus", "annotation::pgdb_archive", "annotation::pathway_table"):
+        # The MetaPathways stage: a PathoLogic PGDB per assembly.
+        for dtype in ("annotation::pgdb_archive", "annotation::pathway_table"):
             t.add(dtype, orfs)
         # Resistance and mobile elements: BacMet on the ORFs, and geNomad's plasmid calls on the assembly.
         t.add("annotation::bacmet_diamond_results", orfs)
