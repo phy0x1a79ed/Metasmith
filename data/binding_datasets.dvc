@@ -1,0 +1,6 @@
+outs:
+- md5: 9c6a4c56dcf42e21d51e838433194b32.dir
+  size: 15235
+  nfiles: 3
+  hash: md5
+  path: binding_datasets
