@@ -2,7 +2,7 @@
 
 ## Purpose & Contents
 
-This file records how fast CLEAN's ESM-1b embedding step runs on fir CPU nodes and on fir's H100 MIG slices, and how accurate each precision and quantisation is. It also gives the CPU setup to use and its cost compared with the GPU route. All runs took place on 2026-10-20 on fir `turin` nodes. Each node has 2× AMD EPYC 9655 (Zen 5), 192 cores, 8 NUMA domains of 24 cores, 24 L3 domains of 8 cores, and AVX-512 BF16 and VNNI.
+This file records how fast CLEAN's ESM-1b embedding step runs on fir CPU nodes and on fir's H100 MIG slices, and how accurate each precision and quantisation is, on CPU and on the GPU. It also gives the CPU setup to use and its cost compared with the GPU route. The CPU and fp32/bf16 GPU runs took place on 2026-10-20 on fir `turin` nodes, and the GPU quantisation runs on 2026-10-26. Each node has 2× AMD EPYC 9655 (Zen 5), 192 cores, 8 NUMA domains of 24 cores, 24 L3 domains of 8 cores, and AVX-512 BF16 and VNNI.
 
 Every number in this file is from a run on fir unless it carries the label **UNVERIFIED**. A projection or a length rescale is UNVERIFIED. `summary.tsv` holds every embed run, one row each, written by `summarize.py`. The scripts are in this directory, and the fir copy is at `/scratch/phyberos/engcyc_pipeline/bench/clean_cpu/`. Logs are in its `logs/`, named `<jobname>_<jobid>.log`, or `<arrayjob>_<index>.log` for the array rows.
 
@@ -266,6 +266,33 @@ The commands were `sbatch scale.sbatch plan_g.tsv` (66166448) for the MG rows an
 - **DH10B F1 is not a sufficient gate.** Every int8 variant scored on DH10B, except round 1's, stays within 0.001 F1 of fp32 on DH10B, including ones that change the top EC on 8-19% of metagenome ORFs. DH10B's adjudicable proteins are well characterised, and CLEAN calls them with high confidence. The metagenome ORFs, mostly dark, are where precision loss shows.
 
 **Recommendation: keep bf16.** By the letter of the criterion, ORT dynamic int8 (per-tensor, or SmoothQuant on every MatMul) beats bf16 on ORF/s per core by 3-7%, with DH10B F1 within 0.0008 of fp32. But it changes the lane-kept EC set on 4-7% of metagenome ORFs, against 0.7% for bf16. It also needs an ONNX export and a second runtime. Neither cost is worth 3-7%. No quantisation variant both beats bf16 and keeps bf16's agreement with fp32.
+
+## Below bf16 on the GPU
+
+Run on 2026-10-26 on one 3g.40gb H100 slice per job. The image's torch 2.0 has no fp8 or CUDA int8 kernels, so `gpu_lowp.sbatch` installs torch 2.5.1+cu124, torchao 0.7.0 and PyPI triton 3.1.0 over it onto `$SLURM_TMPDIR`. The modes are `quant.prepare_cuda`. Every torchao mode runs on bf16 weights with per-projection attention, so `bf16pp` is their like-for-like baseline. Accuracy is against CPU fp32 (`g_fp32`, the same 2,400 metagenome ORFs, seed 7) and against GPU fp32 on DH10B (`q_fp32_dh`). Speed is the 20,000-ORF sample, eager, toks 4096.
+
+| mode | MG kept set | MG top EC | DH top EC | DH F1 @0.02 | ORF/s (20k) | vs bf16 |
+|---|---|---|---|---|---|---|
+| bf16 autocast | 99.25% | 97.6% | 98.6% | 0.9291 | 162.4 | 1.00 |
+| bf16pp (bf16 weights, per-projection attention) | 99.1% | 97.1% | 97.7% | 0.9295 | 148.9 | 0.92 |
+| int8 weight-only | 98.1% | 95.0% | 95.8% | 0.9283 | 124.8 | 0.77 |
+| fp8 per-row, fc1 and fc2 only | 97.7% | 92.5% | 93.6% | 0.9290 | not timed | |
+| fp8 weight-only | 96.9% | 91.7% | 92.9% | 0.9279 | 136.5 | 0.84 |
+| fp8 dynamic, per row | 96.6% | 89.3% | 91.2% | 0.9283 | 112.7 | 0.69 |
+| fp8 dynamic, per tensor | 95.9% | 87.5% | 89.7% | 0.9271 | 113.2 | 0.70 |
+| int8 dynamic | 94.7% | 83.8% | 87.2% | 0.9302 | 42.6 | 0.26 |
+| int4 weight-only, group 128 | 88.3% | 61.9% | 68.2% | 0.9196 | 24.5 | 0.15 |
+
+Under `torch.compile(dynamic=True)` every mode got slower: bf16 67.9 ORF/s, bf16pp 72.2, fp8 per row 15.2, fp8 per tensor 20.1, including compile time. The steady rate after the first tenth of the batches was also below eager (bf16 28.2k against 40.4k residues/s). The int8-dynamic and int4 compiled rows were cancelled unrun.
+
+The jobs were 640774 (`gpu_plan_c.tsv`, accuracy) and 640775 (`gpu_plan_d.tsv`, speed, cancelled after `tc_ao_fp8dyn_20k`). Scores: `python compare2.py out/gpu g_fp32 q_<mode>_mg ...`, `python compare2.py out/gpu q_fp32_dh q_<mode>_dh ...` and `python score.py . out/gpu/q_<mode>_dh.fast.calls.tsv ...`, with `out/scale/g_fp32.*` linked into `out/gpu/`.
+
+- **Nothing below bf16 is faster on a slice.** A 4,096-token batch gives GEMMs too small for fp8 or int8 tensor cores to pay for the per-call activation quantisation, and weight-only modes dequantise on every call.
+- **Accuracy fails as on CPU.** Each mode moves 2-12% of the lane-kept EC sets on metagenome ORFs, against 0.75% for bf16, while DH10B F1 stays within 0.002 of fp32 for all but int4.
+- **bf16 weights halve the memory.** `bf16pp` peaks at 2.7 GB against 5.0 GB for bf16 autocast, at 0.92x the speed. Use it only where a 1g.10gb slice runs out of memory.
+- **Not tested:** compiling over fixed padded length buckets instead of dynamic shapes, and a full H100 card, where larger batches could favour fp8 GEMMs. Neither fixes the accuracy loss.
+
+**Recommendation: keep bf16 autocast on the GPU.**
 
 ## Recommended `Resources(...)` for a CPU variant of clean.py
 
