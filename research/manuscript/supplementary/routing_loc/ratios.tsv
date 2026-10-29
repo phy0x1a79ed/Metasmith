@@ -1,0 +1,9 @@
+side	metric	value
+nfcore	modules	31
+nfcore	procedure lines	871
+nfcore	interface lines (input:/output:)	236
+nfcore	routing lines (workflow code)	427
+metasmith	transforms	14
+metasmith	procedure lines	290
+metasmith	contract lines	173
+metasmith	routing lines	0
