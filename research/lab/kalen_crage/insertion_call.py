@@ -17,10 +17,14 @@ Stdlib only, plus apptainer images already cached on fir.
 """
 
 import json
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
+
+# Which assemblies to call against: the vendor's by default, or our own once they exist.
+ASM_DIR = os.environ.get("ASM_DIR", "plasmidsaurus")
 
 IMG = Path("/scratch/phyberos/cache/apptainer")
 BLAST = IMG / "docker..quay.io_biocontainers_blast..2.16.0--hc155240_2.sif"
@@ -252,13 +256,20 @@ def main() -> None:
 
     calls, md = [], ["# Is the cargo in the landing pad?", ""]
     for colony in colonies:
-        asm_fa = root / "plasmidsaurus" / colony / f"{colony}_1_reference.fasta"
+        asm_fa = root / ASM_DIR / colony / f"{colony}_1_reference.fasta"
         if not asm_fa.exists():
             md += [f"## {colony}", "", "No assembly for this colony.", ""]
             continue
         asm = read_fasta(asm_fa)
-        contig, seq = next(iter(asm.items()))
         best = search(asm_fa)
+        # A flye assembly can be several linear contigs. The cargo sits on one of them, so the
+        # span and its flanks must come from that contig, not from whichever one is listed first.
+        weight = {}
+        for n, h in best.items():
+            if h["cov"] >= PRESENT and n not in in_parent:
+                weight[h["s"]] = weight.get(h["s"], 0) + h["ln"]
+        contig = max(weight, key=weight.get) if weight else next(iter(asm))
+        seq = asm[contig]
 
         with open(out / f"features_{colony}.tsv", "w") as f:
             f.write("feature\tpresent\tpercent_identity\tfraction_covered\tcolony_start\tcolony_end\tstrand\n")
@@ -282,7 +293,8 @@ def main() -> None:
         callable_cargo = list(dict.fromkeys(
             n for n in names if n not in BACKBONE and n not in SITES and n not in short_names))
 
-        anchors = [best[n] for n in present if n not in in_parent and n not in short_names]
+        anchors = [best[n] for n in present if n not in in_parent and n not in short_names
+                   and best[n]["s"] == contig]
         span = cargo_span(anchors, len(seq), len(pseq))
         junctions, lost = {}, None
         if span:
