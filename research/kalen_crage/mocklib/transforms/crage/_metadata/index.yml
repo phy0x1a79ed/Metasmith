@@ -1,0 +1,38 @@
+manifest:
+  cargo_blast.py:
+    instance_id: 1e20161c2bedd09c03dbd447cf97d039d6528541b72a8d8c76f869f049e9b5752845
+    origin: leaf
+    type: transforms::transform
+  cargo_locus.py:
+    instance_id: 1e20bd87161dd9f5016489b25b8944e23f4e0e27050366bbe7914a7b43ff81075630
+    origin: leaf
+    type: transforms::transform
+  clone_compare.py:
+    instance_id: 1e2096ad347eb70225a5dcc7b141a5ee4811421c11422e7be890a734f77c46b0a48f
+    origin: leaf
+    type: transforms::transform
+  colony_annotation.py:
+    instance_id: 1e200a68d5de2f64582a389fc554c0b96e1f3fd4553dd91dd8a3041c4ed14209afc5
+    origin: leaf
+    type: transforms::transform
+  crage_report.py:
+    instance_id: 1e20b8a58d619bc2ddf9502959139194a644bad00dd893cf06c80b293a4dc48cead1
+    origin: leaf
+    type: transforms::transform
+  methylation_pileup.py:
+    instance_id: 1e20c9e7862396d562186bc3779cc314aecce462c0f77410f2a103362300c6be480b
+    origin: leaf
+    type: transforms::transform
+  motif_methylation.py:
+    instance_id: 1e206899dc2c53a10757853ba94742555afec43d684bb86466294896a393a5be6ba5
+    origin: leaf
+    type: transforms::transform
+  plasmid_features.py:
+    instance_id: 1e2004f762caa92ec79ec08667e5eb733570970d8e64fda148d5dc674ff4c0fe023c
+    origin: leaf
+    type: transforms::transform
+  reference_diff.py:
+    instance_id: 1e20c36eeaac65b4b63205ab6685aac192a6612de020ca3bd881de9064df3bb86853
+    origin: leaf
+    type: transforms::transform
+schema: v1

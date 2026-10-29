@@ -1,0 +1,19 @@
+ontology:
+  doi: https://doi.org/10.1093/bioinformatics/btt113
+  name: EDAM
+  strict: false
+  version: '1.25'
+schema: v1
+types:
+  diamond_uniref50_descriptions:
+    properties:
+      Format: TSV
+      _:
+      - UniRef50 cluster id to its subject title
+      ext: tsv
+  kofamscan_descriptions:
+    properties:
+      Format: CSV
+      _:
+      - KO to its ko_list definition
+      ext: csv

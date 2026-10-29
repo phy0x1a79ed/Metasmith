@@ -1,0 +1,72 @@
+ontology:
+  doi: https://doi.org/10.1093/bioinformatics/btt113
+  name: EDAM
+  strict: false
+  version: '1.25'
+schema: v1
+types:
+  annotation_summary:
+    properties:
+      _:
+      - one colony's annotated genes, with the cargo's own genes marked
+      ext: tsv
+  cargo_hits:
+    properties:
+      _:
+      - insertion-plasmid features aligned to one colony assembly, with coordinates
+      ext: tsv
+  cargo_locus:
+    properties:
+      _:
+      - where the cargo sits in one colony, its junctions, and which features survived
+      ext: tsv
+  clone_relatedness:
+    properties:
+      _:
+      - every pair of colonies in one order, by aligned length and differing bases
+      ext: tsv
+  insertion_plasmid:
+    properties:
+      _:
+      - the CRAGE insertion plasmid as delivered by the depositor, annotated
+      ext: gb
+  methylation_profile:
+    properties:
+      _:
+      - per-site methylation fraction and read depth for one colony
+      ext: tsv
+  modified_base_bam:
+    properties:
+      _:
+      - basecaller alignment carrying per-read modified-base tags
+      ext: bam
+  motif_report:
+    properties:
+      _:
+      - methylation at each motif the transferred methyltransferases target
+      ext: tsv
+  plasmid_features:
+    properties:
+      _:
+      - each annotated feature of the insertion plasmid as its own nucleotide record
+      ext: fna
+  report:
+    properties:
+      _:
+      - one readable account of the cargo, the genome differences and the methylation
+      ext: html
+  run:
+    properties:
+      _:
+      - 'one Plasmidsaurus order: the colonies sequenced together'
+      ext: txt
+  small_variants:
+    properties:
+      _:
+      - SNPs and short indels of one colony against the parent genome, in gene context
+      ext: tsv
+  structural_diff:
+    properties:
+      _:
+      - insertions, deletions and duplications of one colony against the parent genome
+      ext: tsv

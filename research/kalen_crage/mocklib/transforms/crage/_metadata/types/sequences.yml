@@ -1,0 +1,53 @@
+ontology:
+  doi: https://doi.org/10.1093/bioinformatics/btt113
+  name: EDAM
+  strict: false
+  version: '1.25'
+schema: v1
+types:
+  assembly:
+    properties:
+      Data: nucleic acid sequence
+      Format: FASTA
+      ext: fna
+      origin: assembler
+  assembly_stats:
+    properties:
+      _:
+      - assembly stats
+      ext: json
+      fields:
+      - GC
+      - N50
+      - fraction_reads_mapped
+      - length
+      - number_of_contigs
+  flye_assembly:
+    properties:
+      Data: nucleic acid sequence
+      Format: FASTA
+      ext: fna
+      method: flye
+      origin: assembler
+  isolate_assembly:
+    properties:
+      Data: nucleic acid sequence
+      Format: FASTA
+      ext: fna
+      genome_scope: single
+      origin: assembler
+      subject: isolate
+  putative_genome:
+    properties:
+      Data: nucleic acid sequence
+      Format: FASTA
+      ext: fna
+      genome_scope: single
+  read_metadata:
+    properties:
+      _:
+      - read metadata
+      ext: json
+      fields:
+      - length_class
+      - parity
