@@ -1,0 +1,300 @@
+<title>CRAGE Colony Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* One column of prose at reading width; the DAG sits in its own light plate, the step
+     table in its own scroller. Nothing competes for width. */
+  :root {
+    --paper: #f7f6f3;
+    --card: #ffffff;
+    --ink: #1b2422;
+    --ink-soft: #55615d;
+    --rule: #d8dad5;
+    --real: #0d6b63;
+    --proposed: #9a5b12;
+    --flag: #a33a2a;
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #121716;
+      --card: #1b2220;
+      --ink: #e8ebe8;
+      --ink-soft: #9aa8a4;
+      --rule: #2d3734;
+      --real: #5fc9bd;
+      --proposed: #e0a95a;
+      --flag: #f0907c;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #121716;
+    --card: #1b2220;
+    --ink: #e8ebe8;
+    --ink-soft: #9aa8a4;
+    --rule: #2d3734;
+    --real: #5fc9bd;
+    --proposed: #e0a95a;
+    --flag: #f0907c;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0 4rem;
+  }
+  main { max-width: 46rem; margin: 0 auto; }
+
+  .bar {
+    display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap;
+    padding-block: 1.25rem .5rem;
+  }
+  .bar .who {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .bar button {
+    margin-left: auto; font: inherit; font-family: var(--mono); font-size: .72rem;
+    letter-spacing: .06em; text-transform: uppercase;
+    background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 2px; padding: .3rem .6rem; cursor: pointer;
+  }
+  .bar button:hover { color: var(--ink); border-color: var(--ink-soft); }
+  .bar button:focus-visible { outline: 2px solid var(--real); outline-offset: 2px; }
+
+  h1 {
+    font-family: var(--display); font-weight: 600; font-size: clamp(1.7rem, 5vw, 2.5rem);
+    line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; margin: .2rem 0 .6rem;
+  }
+  .standfirst { font-size: 1.1rem; color: var(--ink-soft); text-wrap: balance; margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 1.18rem; letter-spacing: -.005em;
+    text-wrap: balance; margin: 2.4rem 0 .2rem; padding-bottom: .35rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 { font-family: var(--display); font-weight: 600; font-size: .98rem; margin: 1.4rem 0 .1rem; }
+  p { margin: .7rem 0; }
+  ul { margin: .7rem 0; padding-left: 1.1rem; }
+  li { margin: .35rem 0; }
+  code, .t { font-family: var(--mono); font-size: .86em; }
+  .t { color: var(--real); overflow-wrap: anywhere; }
+  a { color: var(--real); }
+
+  .decide { display: grid; gap: .9rem; margin-top: 1rem; }
+  .decide > div {
+    border-left: 3px solid var(--flag); padding: .1rem 0 .1rem .9rem;
+  }
+  .decide .q { font-family: var(--display); font-weight: 600; }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .1rem 1.2rem; margin: 1.2rem 0; }
+  .facts div { padding-block: .45rem; border-top: 1px solid var(--rule); min-width: 0; }
+  .facts dt, .facts .k {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .facts .v { font-family: var(--display); font-weight: 600; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+
+  figure { margin: 1.2rem 0; }
+  .plate {
+    background: #ffffff; border: 1px solid var(--rule); border-radius: 3px;
+    overflow: auto; max-height: 34rem; padding: .5rem;
+  }
+  .plate.tall { max-height: none; }
+  .plate svg { display: block; width: 100%; height: auto; max-width: 100%; }
+  figcaption { font-size: .85rem; color: var(--ink-soft); margin-top: .5rem; }
+  figcaption button {
+    font: inherit; font-family: var(--mono); font-size: .7rem; letter-spacing: .06em;
+    text-transform: uppercase; background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 2px; padding: .25rem .5rem; cursor: pointer;
+  }
+  figcaption button:hover { color: var(--ink); }
+
+  .wrap { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th, td { text-align: left; padding: .4rem .6rem .4rem 0; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  th {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 400; white-space: nowrap;
+  }
+  td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink-soft); white-space: nowrap; }
+  td.s { font-family: var(--mono); font-size: .84rem; white-space: nowrap; }
+  td.m { font-size: .84rem; color: var(--ink-soft); }
+  .tag {
+    font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; text-transform: uppercase;
+    border: 1px solid currentColor; border-radius: 2px; padding: .05rem .3rem; white-space: nowrap;
+  }
+  .tag.real { color: var(--real); }
+  .tag.prop { color: var(--proposed); }
+
+  footer { margin-top: 3rem; padding-top: .8rem; border-top: 1px solid var(--rule); font-size: .82rem; color: var(--ink-soft); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400&display=swap">
+
+<main>
+  <div class="bar">
+    <span class="who">Hallam Lab · for Tony · not sent to Kalen</span>
+    <button id="theme" type="button">Theme</button>
+  </div>
+
+  <h1>Three CRAGE colonies, one plan</h1>
+  <p class="standfirst">Kalen sent three nanopore read sets from colonies picked after a CRAGE
+  transformation of <em>E.&nbsp;coli</em> EPI300, and wants to know whether his cargo landed in the
+  landing pad. This is the metasmith plan for answering that, built on the library's isolate
+  genome pipeline. Nothing has been run, and Kalen has not been shown any of it.</p>
+
+  <div class="facts">
+    <div><div class="k">Colonies</div><div class="v">__NCOL__</div></div>
+    <div><div class="k">Plan steps</div><div class="v">__NSTEP__</div></div>
+    <div><div class="k">Already in the library</div><div class="v">__NREAL__</div></div>
+    <div><div class="k">To be written</div><div class="v">__NPROP__</div></div>
+  </div>
+
+  <h2>What I need from you</h2>
+  <div class="decide">
+    <div>
+      <div class="q">1. The assembler. The shipped isolate pipeline names hifiasm&#8209;meta; I
+      used flye instead.</div>
+      <p><span class="t">isolate_assembly_from_long_reads</span> targets
+      <span class="t">sequences::hifiasm_meta_assembly</span>, and hifiasm&#8209;meta is a HiFi
+      assembler. These are nanopore reads at median Q23, which is flye's
+      <span class="t">--nano-hq</span> tier, so the plan routes through
+      <span class="t">assembly/flye</span> and the read metadata carries
+      <span class="t">long_read_platform: ont</span>. Say the word if you want the template
+      followed literally instead.</p>
+      <p>One knock&#8209;on: <span class="t">assembly/select_chromosomal_contigs</span> requires a
+      hifiasm&#8209;meta assembly, so the flye route cannot reach
+      <span class="t">sequences::chromosomal_contig</span> without a change to that transform. The
+      plan does not use it; all three assemblies came back as one circular contig anyway.</p>
+    </div>
+    <div>
+      <div class="q">2. The nine steps that do not exist yet.</div>
+      <p>The cargo, comparison and methylation work has no transform in the library, so those
+      steps are stubs: the model is the proposal, the body touches only its outputs. Approving the
+      shape is what lets me write them for real. Three of the nine already have working code
+      behind them in this scope, from the quick pass described at the bottom.</p>
+    </div>
+    <div>
+      <div class="q">3. The reads are not in the delivery.</div>
+      <p>The Globus folder holds Plasmidsaurus's own assemblies and annotation, but no FASTQ and no
+      modified&#8209;base BAM. So the plan cannot run as drawn: every lane starts from
+      <span class="t">sequences::long_reads</span>. I have asked Kalen for both. Methylation in
+      particular needs the basecaller's modified&#8209;base tags, which neither plain reads nor an
+      assembly can substitute for.</p>
+    </div>
+  </div>
+
+  <h2>The DAG</h2>
+  <figure>
+    <div class="plate" id="plate">__SVG__</div>
+    <figcaption>
+      Solved by metasmith against this worktree's standard library: __NSTEP__ steps, no dropped
+      targets. Steps marked <span class="tag prop">proposed</span> in the table below are the
+      <span class="t">crage</span> stubs; the rest come from the library as it stands.
+      <button id="grow" type="button">Full height</button>
+    </figcaption>
+  </figure>
+
+  <h2>How the plan answers the question</h2>
+  <p>One target was named, <span class="t">crage::report</span>. A metasmith target is a slot the
+  planner has to satisfy consistently with every other slot, so naming each wanted output
+  multiplies the search instead of adding to it; everything the report requires falls out of the
+  plan anyway. Naming all nine returned no plan at all.</p>
+
+  <h3>Reads to genome</h3>
+  <p>Each colony's reads go through <span class="t">nanoplot</span> and
+  <span class="t">filtlong</span>, then flye, which reads the quality off the QC stats and picks
+  its own preset. <span class="t">prodigal</span> calls genes on the result and
+  <span class="t">diamond_uniref50</span> and <span class="t">kofamscan</span> annotate them.</p>
+  <p>The annotation is required to descend from the colony's own assembly. Without that
+  constraint the planner answered it with the parent genome's ORFs, which arrive free with the
+  reference download, and the pipeline would have annotated the wrong genome.</p>
+
+  <h3>The parent genome</h3>
+  <p><span class="t">getNcbiAssembly</span> fetches __PARENT__ (__ACC__). It is required under the
+  genome name the accession hangs off, because only the download descends from that. Asking for a
+  bare <span class="t">sequences::isolate_assembly</span> let the planner satisfy the reference by
+  assembling Kalen's own reads a second way, through hifiasm, which would have compared each
+  colony against itself.</p>
+
+  <h3>The cargo</h3>
+  <p>Each annotated feature of Kalen's plasmid becomes its own record, then is aligned to each
+  colony. Reading features rather than the whole plasmid is what separates an integrated cargo
+  from the delivery backbone, which should not be present at all.
+  <span class="t">cargo_locus</span> merges the hits into one span and reads the colony sequence
+  just outside each end back onto the parent genome, which is what names the junctions. Both
+  recombinase sites with an intact cargo between them is an insertion that went in as intended;
+  backbone still attached, or only one site, is not.</p>
+
+  <h3>Everything else that changed</h3>
+  <p><span class="t">reference_diff</span> aligns each colony to the parent and calls the
+  differences, naming each one by the genes it covers, and labelling the cargo span as the
+  insertion rather than counting it as a difference. <span class="t">clone_compare</span> aligns
+  the colonies to each other: colonies picked from one transformation are often siblings rather
+  than independent events, and that changes what a difference in a single colony means.</p>
+
+  <h3>Methylation</h3>
+  <p>The plasmid carries four methyltransferases, and its annotation names each one's target motif
+  &mdash; <code>CTCGAG</code>, <code>CTGCAG</code>, <code>GGCC</code> and <code>ATTAAT</code>.
+  Methylation at those motifs and not elsewhere is what shows the transferred enzymes are working
+  rather than merely present. This arm is blocked until a modified&#8209;base BAM arrives.</p>
+
+  <h2>Every step</h2>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>#</th><th>Step</th><th>Source</th><th>Makes</th></tr></thead>
+      <tbody>__ROWS__</tbody>
+    </table>
+  </div>
+
+  <h2>One thing already measured</h2>
+  <p>Before your direction arrived I ran a quick comparison by hand on fir, starting from
+  Plasmidsaurus's assemblies rather than from reads. I am holding it back from Kalen, and it needs
+  redoing through this pipeline before it is worth anything, but it says the question is
+  answerable: all three colonies carry the cargo, the colonies are not all independent, and one of
+  them has lost a sizeable stretch of the parent genome. The scripts are in this scope at
+  <span class="t">research/lab/kalen_crage/</span>; two of the proposed steps stand in for them
+  directly.</p>
+  <p>Its one clear defect is worth naming, because the new step has to avoid it: assembly
+  coordinates are circular, and my script reported two junctions at position zero rather than
+  resolving them the long way round. <span class="t">cargo_locus</span> says so in its own note.</p>
+
+  <h2>If you approve</h2>
+  <ul>
+    <li>Write the nine proposed transforms for real, starting with the three that already have
+      code behind them.</li>
+    <li>Get the reads from Kalen, and the modified&#8209;base BAM if Plasmidsaurus offers one.</li>
+    <li>Run on Sockeye or fir, never here.</li>
+    <li>Then show Kalen the result, not this page.</li>
+  </ul>
+
+  <footer>
+    Plan built in scope <span class="t">metasmith/lab/kalen-dofher</span>, branch
+    <span class="t">feat/lab/kalen-dofher</span>. Rebuild with
+    <span class="t">research/kalen_crage/build.sh</span>. Private: Kalen has not seen it.
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById("theme").addEventListener("click", function () {
+      var dark = getComputedStyle(root).getPropertyValue("--paper").trim() === "#121716";
+      root.setAttribute("data-theme", dark ? "light" : "dark");
+    });
+    var plate = document.getElementById("plate"), grow = document.getElementById("grow");
+    grow.addEventListener("click", function () {
+      var tall = plate.classList.toggle("tall");
+      grow.textContent = tall ? "Shrink" : "Full height";
+    });
+  })();
+</script>

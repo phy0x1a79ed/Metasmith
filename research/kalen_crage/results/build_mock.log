@@ -1,0 +1,56 @@
+2026-10-29_14-48-32  | adding [3] types from [alignment]
+2026-10-29_14-48-32  | adding [30] types from [taxonomy]
+2026-10-29_14-48-32  | adding [16] types from [modelling]
+2026-10-29_14-48-32  | adding [27] types from [viromics]
+2026-10-29_14-48-32  | adding [85] types from [aspire]
+2026-10-29_14-48-32  | adding [124] types from [annotation]
+2026-10-29_14-48-32  | adding [8] types from [amplicon]
+2026-10-29_14-48-32  | adding [73] types from [sequences]
+2026-10-29_14-48-32  | adding [6] types from [metabolomics]
+2026-10-29_14-48-32  | adding [12] types from [fabfos]
+2026-10-29_14-48-32  | adding [2] types from [binning_local]
+2026-10-29_14-48-32  | adding [1] types from [comparative]
+2026-10-29_14-48-32  | adding [56] types from [ref]
+2026-10-29_14-48-32  | adding [13] types from [ecspr]
+2026-10-29_14-48-32  | adding [9] types from [media_optimization]
+2026-10-29_14-48-32  | adding [5] types from [ncbi]
+2026-10-29_14-48-32  | adding [26] types from [lib]
+2026-10-29_14-48-32  | adding [7] types from [pangenome]
+2026-10-29_14-48-32  | adding [5] types from [clustering]
+2026-10-29_14-48-32  | adding [25] types from [transcriptomics]
+2026-10-29_14-48-32  | adding [18] types from [binning]
+2026-10-29_14-48-32  | adding [4] types from [pratama]
+2026-10-29_14-48-32  | adding [1] types from [algorithm]
+2026-10-29_14-48-32  | adding [108] types from [env]
+2026-10-29_14-48-32  | adding [13] types from [crage]
+2026-10-29_14-48-33  | compiled [9] transforms from [crage]
+types:
+  alignment: 3
+  taxonomy: 30
+  modelling: 16
+  viromics: 27
+  aspire: 85
+  annotation: 124
+  amplicon: 8
+  sequences: 73
+  metabolomics: 6
+  fabfos: 12
+  binning_local: 2
+  comparative: 1
+  ref: 56
+  ecspr: 13
+  media_optimization: 9
+  ncbi: 5
+  lib: 26
+  pangenome: 7
+  clustering: 5
+  transcriptomics: 25
+  binning: 18
+  pratama: 4
+  algorithm: 1
+  env: 108
+  crage: 13
+uniques: (empty)
+transforms:
+  library: /home/tony/agentic_workspace/projects/metasmith/lab/kalen-dofher/research/kalen_crage/mocklib/transforms/crage
+  count: 9

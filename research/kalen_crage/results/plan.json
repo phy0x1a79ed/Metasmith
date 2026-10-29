@@ -1,0 +1,349 @@
+{
+  "ok": true,
+  "targets": [
+    "crage::report"
+  ],
+  "colonies": [
+    "XQTPYV_1_Colony_1",
+    "XQTPYV_2_Colony_2",
+    "XQTPYV_3_Colony_3"
+  ],
+  "parent": [
+    "Escherichia coli EPI300",
+    "GCF_052692645.1"
+  ],
+  "platform": "ont",
+  "steps": [
+    {
+      "order": 1,
+      "name": "downloadKofamDB",
+      "library": "logistics",
+      "uses": [],
+      "makes": [
+        "ref::kofam_sources"
+      ]
+    },
+    {
+      "order": 2,
+      "name": "downloadUniRef50DB",
+      "library": "logistics",
+      "uses": [],
+      "makes": [
+        "ref::uniref50_fasta"
+      ]
+    },
+    {
+      "order": 3,
+      "name": "plasmid_features",
+      "library": "crage",
+      "uses": [
+        "crage::insertion_plasmid"
+      ],
+      "makes": [
+        "crage::plasmid_features"
+      ]
+    },
+    {
+      "order": 4,
+      "name": "seqkit_reads",
+      "library": "assembly",
+      "uses": [
+        "sequences::long_reads"
+      ],
+      "makes": [
+        "sequences::read_qc_stats"
+      ]
+    },
+    {
+      "order": 5,
+      "name": "nanoplot",
+      "library": "kbase",
+      "uses": [
+        "sequences::long_reads"
+      ],
+      "makes": [
+        "sequences::nanoplot_html_report",
+        "sequences::nanoplot_raw_report",
+        "sequences::read_qc_stats"
+      ]
+    },
+    {
+      "order": 6,
+      "name": "filtlong",
+      "library": "assembly",
+      "uses": [
+        "sequences::long_reads"
+      ],
+      "makes": [
+        "sequences::clean_long_reads",
+        "sequences::discarded_long_reads"
+      ]
+    },
+    {
+      "order": 7,
+      "name": "getNcbiAssembly",
+      "library": "logistics",
+      "uses": [
+        "ncbi::assembly_accession",
+        "ncbi::genome_name"
+      ],
+      "makes": [
+        "sequences::gbk",
+        "sequences::gff",
+        "sequences::isolate_assembly",
+        "sequences::orfs"
+      ]
+    },
+    {
+      "order": 8,
+      "name": "buildKofamDB",
+      "library": "logistics",
+      "uses": [
+        "ref::kofam_sources"
+      ],
+      "makes": [
+        "ref::kofamscan_ko_list",
+        "ref::kofamscan_profiles"
+      ]
+    },
+    {
+      "order": 9,
+      "name": "buildUniRef50DB",
+      "library": "logistics",
+      "uses": [
+        "ref::uniref50_fasta"
+      ],
+      "makes": [
+        "ref::uniref50_diamond_db"
+      ]
+    },
+    {
+      "order": 10,
+      "name": "flye",
+      "library": "assembly",
+      "uses": [
+        "sequences::clean_long_reads",
+        "sequences::long_reads",
+        "sequences::read_qc_stats"
+      ],
+      "makes": [
+        "sequences::flye_assembly"
+      ]
+    },
+    {
+      "order": 11,
+      "name": "prodigal",
+      "library": "metagenomics",
+      "uses": [
+        "sequences::flye_assembly"
+      ],
+      "makes": [
+        "sequences::gff",
+        "sequences::orfs"
+      ]
+    },
+    {
+      "order": 12,
+      "name": "clone_compare",
+      "library": "crage",
+      "uses": [
+        "crage::run",
+        "sequences::flye_assembly"
+      ],
+      "makes": [
+        "crage::clone_relatedness"
+      ]
+    },
+    {
+      "order": 13,
+      "name": "methylation_pileup",
+      "library": "crage",
+      "uses": [
+        "crage::modified_base_bam",
+        "crage::run",
+        "sequences::flye_assembly",
+        "sequences::read_metadata"
+      ],
+      "makes": [
+        "crage::methylation_profile"
+      ]
+    },
+    {
+      "order": 14,
+      "name": "cargo_blast",
+      "library": "crage",
+      "uses": [
+        "crage::plasmid_features",
+        "crage::run",
+        "sequences::flye_assembly",
+        "sequences::read_metadata"
+      ],
+      "makes": [
+        "crage::cargo_hits"
+      ]
+    },
+    {
+      "order": 15,
+      "name": "reference_diff",
+      "library": "crage",
+      "uses": [
+        "crage::run",
+        "ncbi::genome_name",
+        "sequences::flye_assembly",
+        "sequences::isolate_assembly",
+        "sequences::read_metadata"
+      ],
+      "makes": [
+        "crage::small_variants",
+        "crage::structural_diff"
+      ]
+    },
+    {
+      "order": 16,
+      "name": "assembly_stats",
+      "library": "assembly",
+      "uses": [
+        "sequences::flye_assembly",
+        "sequences::long_reads",
+        "sequences::read_metadata",
+        "sequences::read_qc_stats"
+      ],
+      "makes": [
+        "alignment::bam",
+        "sequences::assembly_per_bp_coverage",
+        "sequences::assembly_per_contig_coverage",
+        "sequences::assembly_stats"
+      ]
+    },
+    {
+      "order": 17,
+      "name": "chunkOrfsForAnnotation",
+      "library": "logistics",
+      "uses": [
+        "sequences::orfs"
+      ],
+      "makes": [
+        "sequences::orf_chunk"
+      ]
+    },
+    {
+      "order": 18,
+      "name": "motif_methylation",
+      "library": "crage",
+      "uses": [
+        "crage::methylation_profile",
+        "crage::plasmid_features",
+        "crage::run",
+        "sequences::flye_assembly",
+        "sequences::read_metadata"
+      ],
+      "makes": [
+        "crage::motif_report"
+      ]
+    },
+    {
+      "order": 19,
+      "name": "cargo_locus",
+      "library": "crage",
+      "uses": [
+        "crage::cargo_hits",
+        "crage::run",
+        "ncbi::genome_name",
+        "sequences::flye_assembly",
+        "sequences::isolate_assembly",
+        "sequences::read_metadata"
+      ],
+      "makes": [
+        "crage::cargo_locus"
+      ]
+    },
+    {
+      "order": 20,
+      "name": "diamond_uniref50",
+      "library": "functionalAnnotation",
+      "uses": [
+        "ref::uniref50_diamond_db",
+        "sequences::orf_chunk"
+      ],
+      "makes": [
+        "annotation::diamond_uniref50_descriptions_chunk",
+        "annotation::diamond_uniref50_results_chunk"
+      ]
+    },
+    {
+      "order": 21,
+      "name": "kofamscan",
+      "library": "functionalAnnotation",
+      "uses": [
+        "ref::kofamscan_ko_list",
+        "ref::kofamscan_profiles",
+        "sequences::orf_chunk"
+      ],
+      "makes": [
+        "annotation::kofamscan_descriptions_chunk",
+        "annotation::kofamscan_results_chunk"
+      ]
+    },
+    {
+      "order": 22,
+      "name": "merge_kofamscan",
+      "library": "functionalAnnotation",
+      "uses": [
+        "annotation::kofamscan_descriptions_chunk",
+        "annotation::kofamscan_results_chunk",
+        "sequences::orfs"
+      ],
+      "makes": [
+        "annotation::kofamscan_descriptions",
+        "annotation::kofamscan_results"
+      ]
+    },
+    {
+      "order": 23,
+      "name": "merge_diamond_uniref50",
+      "library": "functionalAnnotation",
+      "uses": [
+        "annotation::diamond_uniref50_descriptions_chunk",
+        "annotation::diamond_uniref50_results_chunk",
+        "sequences::orfs"
+      ],
+      "makes": [
+        "annotation::diamond_uniref50_descriptions",
+        "annotation::diamond_uniref50_results"
+      ]
+    },
+    {
+      "order": 24,
+      "name": "colony_annotation",
+      "library": "crage",
+      "uses": [
+        "annotation::diamond_uniref50_descriptions",
+        "annotation::kofamscan_descriptions",
+        "crage::run",
+        "sequences::flye_assembly",
+        "sequences::read_metadata"
+      ],
+      "makes": [
+        "crage::annotation_summary"
+      ]
+    },
+    {
+      "order": 25,
+      "name": "crage_report",
+      "library": "crage",
+      "uses": [
+        "crage::annotation_summary",
+        "crage::cargo_locus",
+        "crage::clone_relatedness",
+        "crage::motif_report",
+        "crage::run",
+        "crage::small_variants",
+        "crage::structural_diff",
+        "sequences::assembly_stats"
+      ],
+      "makes": [
+        "crage::report"
+      ]
+    }
+  ]
+}
