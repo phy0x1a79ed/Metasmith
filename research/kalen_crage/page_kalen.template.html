@@ -1,0 +1,293 @@
+<title>CRAGE Colony Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+  /* One column of prose at reading width; the pipeline diagram sits in its own light plate,
+     the step table in its own scroller. Nothing competes for width. */
+  :root {
+    --paper: #f7f6f3;
+    --card: #ffffff;
+    --ink: #1b2422;
+    --ink-soft: #55615d;
+    --rule: #d8dad5;
+    --real: #0d6b63;
+    --proposed: #9a5b12;
+    --flag: #a33a2a;
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #121716;
+      --card: #1b2220;
+      --ink: #e8ebe8;
+      --ink-soft: #9aa8a4;
+      --rule: #2d3734;
+      --real: #5fc9bd;
+      --proposed: #e0a95a;
+      --flag: #f0907c;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #121716;
+    --card: #1b2220;
+    --ink: #e8ebe8;
+    --ink-soft: #9aa8a4;
+    --rule: #2d3734;
+    --real: #5fc9bd;
+    --proposed: #e0a95a;
+    --flag: #f0907c;
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0 4rem;
+  }
+  main { max-width: 46rem; margin: 0 auto; }
+
+  .bar {
+    display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap;
+    padding-block: 1.25rem .5rem;
+  }
+  .bar .who {
+    font-family: var(--mono); font-size: .72rem; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .bar button {
+    margin-left: auto; font: inherit; font-family: var(--mono); font-size: .72rem;
+    letter-spacing: .06em; text-transform: uppercase;
+    background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 2px; padding: .3rem .6rem; cursor: pointer;
+  }
+  .bar button:hover { color: var(--ink); border-color: var(--ink-soft); }
+  .bar button:focus-visible { outline: 2px solid var(--real); outline-offset: 2px; }
+
+  h1 {
+    font-family: var(--display); font-weight: 600; font-size: clamp(1.7rem, 5vw, 2.5rem);
+    line-height: 1.12; letter-spacing: -.015em; text-wrap: balance; margin: .2rem 0 .6rem;
+  }
+  .standfirst { font-size: 1.1rem; color: var(--ink-soft); text-wrap: balance; margin-bottom: 1.5rem; }
+
+  h2 {
+    font-family: var(--display); font-weight: 600; font-size: 1.18rem; letter-spacing: -.005em;
+    text-wrap: balance; margin: 2.4rem 0 .2rem; padding-bottom: .35rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 { font-family: var(--display); font-weight: 600; font-size: .98rem; margin: 1.4rem 0 .1rem; }
+  p { margin: .7rem 0; }
+  ul, ol { margin: .7rem 0; padding-left: 1.2rem; }
+  li { margin: .35rem 0; }
+  code, .t { font-family: var(--mono); font-size: .86em; }
+  .t { color: var(--real); overflow-wrap: anywhere; }
+
+  .need { display: grid; gap: .9rem; margin-top: 1rem; }
+  .need > div { border-left: 3px solid var(--flag); padding: .1rem 0 .1rem .9rem; }
+  .need .q { font-family: var(--display); font-weight: 600; }
+
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: .1rem 1.2rem; margin: 1.2rem 0; }
+  .facts div { padding-block: .45rem; border-top: 1px solid var(--rule); min-width: 0; }
+  .facts .k {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .facts .v { font-family: var(--display); font-weight: 600; font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+
+  figure { margin: 1.2rem 0; }
+  .plate {
+    background: #ffffff; border: 1px solid var(--rule); border-radius: 3px;
+    overflow: auto; max-height: 34rem; padding: .5rem;
+  }
+  .plate.tall { max-height: none; }
+  .plate svg { display: block; width: 100%; height: auto; max-width: 100%; }
+  figcaption { font-size: .85rem; color: var(--ink-soft); margin-top: .5rem; }
+  figcaption button {
+    font: inherit; font-family: var(--mono); font-size: .7rem; letter-spacing: .06em;
+    text-transform: uppercase; background: transparent; color: var(--ink-soft);
+    border: 1px solid var(--rule); border-radius: 2px; padding: .25rem .5rem; cursor: pointer;
+  }
+  figcaption button:hover { color: var(--ink); }
+
+  .wrap { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th, td { text-align: left; padding: .4rem .6rem .4rem 0; vertical-align: top; border-bottom: 1px solid var(--rule); }
+  th {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 400; white-space: nowrap;
+  }
+  td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink-soft); white-space: nowrap; }
+  td.s { font-family: var(--mono); font-size: .84rem; white-space: nowrap; }
+  td.m { font-size: .84rem; color: var(--ink-soft); }
+  .tag {
+    font-family: var(--mono); font-size: .64rem; letter-spacing: .07em; text-transform: uppercase;
+    border: 1px solid currentColor; border-radius: 2px; padding: .05rem .3rem; white-space: nowrap;
+  }
+  .tag.real { color: var(--real); }
+  .tag.prop { color: var(--proposed); }
+
+  .motifs { display: flex; flex-wrap: wrap; gap: .4rem; margin: .8rem 0; }
+  .motifs span {
+    font-family: var(--mono); font-size: .82rem; letter-spacing: .04em;
+    border: 1px solid var(--rule); border-radius: 2px; padding: .2rem .45rem; background: var(--card);
+  }
+
+  footer { margin-top: 3rem; padding-top: .8rem; border-top: 1px solid var(--rule); font-size: .82rem; color: var(--ink-soft); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400&display=swap">
+
+<main>
+  <div class="bar">
+    <span class="who">For Kalen · Hallam Lab · order XQTPYV</span>
+    <button id="theme" type="button">Theme</button>
+  </div>
+
+  <h1>Checking the landing pad in three colonies</h1>
+  <p class="standfirst">Here is what I plan to do with the three colonies you sequenced, and what I
+  still need from you before it can run. The short version: I can answer whether each colony
+  carries your cargo and where it went, but the folder you pointed me at has the finished
+  assemblies rather than the reads, and the methylation question needs a file that is not in
+  there.</p>
+
+  <div class="facts">
+    <div><div class="k">Colonies</div><div class="v">__NCOL__</div></div>
+    <div><div class="k">Pipeline steps</div><div class="v">__NSTEP__</div></div>
+    <div><div class="k">Parent genome</div><div class="v">EPI300</div></div>
+    <div><div class="k">Your construct</div><div class="v">pw34</div></div>
+  </div>
+
+  <h2>What I need from you</h2>
+  <div class="need">
+    <div>
+      <div class="q">1. The raw reads, as FASTQ.</div>
+      <p>Your Globus folder has the assemblies Plasmidsaurus built, their annotation and their QC
+      plots, which is a good delivery, but not the reads themselves. I would rather assemble from
+      the reads than take someone else's assembly on trust: an insertion sits at a join between
+      your cargo and the genome, and a join is exactly where an assembler can go wrong. Starting
+      from reads means I can check the coverage across each junction instead of assuming it.</p>
+      <p>Your order page should have a reads download. Dropping it into the same folder is easiest.</p>
+    </div>
+    <div>
+      <div class="q">2. The modified-base file, if Plasmidsaurus will give you one.</div>
+      <p>Methylation is not readable from an assembly or from plain FASTQ. It needs the file the
+      basecaller writes with per-read modified-base tags, usually a BAM. If your order includes
+      methylation, that file exists; if it does not, the methylation part of this cannot run and
+      the rest still can.</p>
+    </div>
+  </div>
+
+  <h2>What the pipeline does</h2>
+  <p>It runs per colony, and every colony meets the same reference and the same copy of your
+  construct, so the three results are comparable.</p>
+
+  <ol>
+    <li><strong>Read quality, then trimming.</strong> Your reads are nanopore at a median quality
+      around Q23, which is good enough that the assembler uses its high-accuracy setting rather
+      than its raw-nanopore one.</li>
+    <li><strong>Assemble each colony</strong> with flye. Plasmidsaurus got one closed circular
+      contig per colony, so I expect the same.</li>
+    <li><strong>Call and annotate the genes</strong> with prodigal, then UniRef50 and KOfam, on
+      each colony's own assembly.</li>
+    <li><strong>Fetch the published EPI300 genome</strong> (__ACC__) to compare against.</li>
+    <li><strong>Find your cargo</strong> and say where it sits.</li>
+    <li><strong>List everything else that differs</strong> from EPI300.</li>
+    <li><strong>Compare the colonies to each other.</strong></li>
+    <li><strong>Methylation</strong>, if the modified-base file arrives.</li>
+  </ol>
+
+  <h3>How I tell a clean insertion from a messy one</h3>
+  <p>Rather than searching for your plasmid as one block, I cut it into its annotated features
+  first and look for each one separately. That distinction matters: if the whole plasmid is
+  present, including the delivery backbone and its origin of replication, then it is sitting in
+  the cell as a plasmid rather than having gone into the landing pad. A clean insertion looks like
+  the cargo between the two recombinase sites and nothing from the backbone.</p>
+  <p>Then I take the colony sequence just outside each end of the cargo and look up where it falls
+  in EPI300. That is what names the insertion site, and it tells you whether both junctions landed
+  where the landing pad is meant to be. One junction in the right place and one somewhere else
+  means something other than the intended recombination happened.</p>
+  <p>You also get a per-feature identity table, so if part of the cargo is truncated or carries a
+  mutation, it is named rather than hidden inside an overall percentage.</p>
+
+  <h3>Everything else that changed</h3>
+  <p>Each colony is aligned to EPI300 and the differences are listed with the genes they affect:
+  single-base changes, small insertions and deletions, and anything larger. The cargo itself comes
+  back as an insertion, so it is labelled as the insertion rather than counted as damage.</p>
+  <p>The colonies are also aligned to each other. Colonies picked off one plate after one
+  transformation are often siblings rather than independent events, and that changes how you read
+  a difference found in only one of them: in a sibling it is probably something that happened
+  during growth, not three independent confirmations of the same thing.</p>
+
+  <h3>Methylation</h3>
+  <p>Your construct carries four methyltransferases, and its annotation names what each one
+  targets:</p>
+  <div class="motifs"><span>CTCGAG</span><span>CTGCAG</span><span>GGCC</span><span>ATTAAT</span></div>
+  <p>So the useful test is not whether the genome is methylated but whether it is methylated
+  <em>at those motifs and not elsewhere</em>. That is what separates enzymes that are present from
+  enzymes that are working, and it is measured against the colony's own background rather than
+  against an expectation.</p>
+
+  <h2>The pipeline, drawn</h2>
+  <figure>
+    <div class="plate" id="plate">__SVG__</div>
+    <figcaption>
+      Each box is one processing step and the arrows are the files passing between them;
+      __NSTEP__ steps in all. The steps marked <span class="tag prop">proposed</span> are the ones
+      specific to this question, which I am writing now; the rest already exist and are what we
+      run on other genomes.
+      <button id="grow" type="button">Full height</button>
+    </figcaption>
+  </figure>
+
+  <h2>Every step</h2>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>#</th><th>Step</th><th>Source</th><th>Produces</th></tr></thead>
+      <tbody>__ROWS__</tbody>
+    </table>
+  </div>
+
+  <h2>What you get at the end</h2>
+  <ul>
+    <li>For each colony: is the cargo there, is it complete, and where did it insert, with both
+      junction coordinates.</li>
+    <li>A table of every feature of your construct, present or absent, with its identity.</li>
+    <li>A list of every other difference from EPI300, named by the genes affected.</li>
+    <li>Whether the three colonies are independent or siblings.</li>
+    <li>The assembled genome and its annotation for each colony, yours to keep.</li>
+    <li>Methylation at your four target motifs, if the modified-base file turns up.</li>
+  </ul>
+
+  <h2>One thing worth deciding now</h2>
+  <p>If what you actually need is a yes or no on the insertion for picking a colony to carry
+  forward, say so and I will do the cargo and junction part first and send it before the rest.
+  That is the quick half. The genome-wide comparison and the annotation take longer and are more
+  useful later, when you want to know what else came along.</p>
+
+  <footer>
+    Plasmidsaurus order XQTPYV, three colonies, delivered 2026-10-30. Parent strain
+    <em>Escherichia coli</em> EPI300, compared against the published genome __ACC__. Send the
+    reads and I will start. &mdash; Opal
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    document.getElementById("theme").addEventListener("click", function () {
+      var dark = getComputedStyle(root).getPropertyValue("--paper").trim() === "#121716";
+      root.setAttribute("data-theme", dark ? "light" : "dark");
+    });
+    var plate = document.getElementById("plate"), grow = document.getElementById("grow");
+    grow.addEventListener("click", function () {
+      var tall = plate.classList.toggle("tall");
+      grow.textContent = tall ? "Shrink" : "Full height";
+    });
+  })();
+</script>
