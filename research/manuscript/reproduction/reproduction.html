@@ -303,7 +303,7 @@ code { font-family: var(--mono); font-size: 0.88em; }
     k.strip();
     late.forEach((f) => f());
     const ref = v("--ref"), ms = v("--ms");
-    k.grid(COLS.A[0], ["MQ bins", "HQ bins"], [FADE, 1], [["nf-core/MAG", ref], ["Metasmith", ms]]);
+    k.grid(COLS.A[0], ["MQ bins", "HQ bins"], [FADE, 1], [["nf-core/mag", ref], ["Metasmith", ms]]);
     // B, as C: source on the left, assembler on the right, each bar spanning the rows its label covers; two swatch columns for unmatched and matched
     const bx = COLS.B[0] + k.px(88), bc2 = bx + k.px(BOX + 5), brow = (r) => 22 + r * PITCH;
     const bl = bx - k.px(6), br = bc2 + k.px(BOX + 6), brx = br + k.px(6);
@@ -348,7 +348,7 @@ code { font-family: var(--mono); font-size: 0.88em; }
     const M = { l: 58, r: 8, t: 34, b: 56 };
     k.paper("figS", 566, M);
     k.strip();
-    k.grid(0, ["MQ bins", "HQ bins"], [FADE, 1], [["nf-core/MAG", k.v("--ref")], ["Metasmith", k.v("--ms")]]);
+    k.grid(0, ["MQ bins", "HQ bins"], [FADE, 1], [["nf-core/mag", k.v("--ref")], ["Metasmith", k.v("--ms")]]);
     const ident = { range: [0, 101], dtick: 20, ticksuffix: "%" };
     Plotly.react("figS", k.traces, Object.assign({}, k.base, {
       height: 566, margin: M, showlegend: false, shapes: k.shapes,
