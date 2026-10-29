@@ -1,0 +1,219 @@
+{
+ "n_reactions": {
+  "122": 4343,
+  "166": 5532
+ },
+ "shared": 3508,
+ "only_122": 835,
+ "only_166": 2024,
+ "122:all": {
+  "reactions": 4343,
+  "internal": 3834,
+  "boundary_or_biomass": 509,
+  "metabolites_used": 2383,
+  "metabolites_used_without_formula": 0,
+  "metabolites_used_without_charge": 307,
+  "mass": {
+   "balanced": 2558,
+   "other": 1213,
+   "H_only": 63
+  },
+  "charge": {
+   "balanced": 3126,
+   "no_charge": 673,
+   "unbalanced": 35
+  },
+  "mass_unbalanced_or_unknown": 1276,
+  "mass_unbalanced_determinable": 1276,
+  "charge_unbalanced_determinable": 35
+ },
+ "122:shared": {
+  "reactions": 3508,
+  "internal": 3075,
+  "boundary_or_biomass": 433,
+  "metabolites_used": 1938,
+  "metabolites_used_without_formula": 0,
+  "metabolites_used_without_charge": 225,
+  "mass": {
+   "balanced": 2084,
+   "other": 963,
+   "H_only": 28
+  },
+  "charge": {
+   "balanced": 2618,
+   "no_charge": 434,
+   "unbalanced": 23
+  },
+  "mass_unbalanced_or_unknown": 991,
+  "mass_unbalanced_determinable": 991,
+  "charge_unbalanced_determinable": 23
+ },
+ "122:only": {
+  "reactions": 835,
+  "internal": 759,
+  "boundary_or_biomass": 76,
+  "metabolites_used": 880,
+  "metabolites_used_without_formula": 0,
+  "metabolites_used_without_charge": 126,
+  "mass": {
+   "balanced": 474,
+   "other": 250,
+   "H_only": 35
+  },
+  "charge": {
+   "balanced": 508,
+   "no_charge": 239,
+   "unbalanced": 12
+  },
+  "mass_unbalanced_or_unknown": 285,
+  "mass_unbalanced_determinable": 285,
+  "charge_unbalanced_determinable": 12
+ },
+ "166:all": {
+  "reactions": 5532,
+  "internal": 4873,
+  "boundary_or_biomass": 659,
+  "metabolites_used": 2861,
+  "metabolites_used_without_formula": 0,
+  "metabolites_used_without_charge": 781,
+  "mass": {
+   "balanced": 4864,
+   "H_only": 9
+  },
+  "charge": {
+   "balanced": 3619,
+   "no_charge": 1123,
+   "unbalanced": 131
+  },
+  "mass_unbalanced_or_unknown": 9,
+  "mass_unbalanced_determinable": 9,
+  "charge_unbalanced_determinable": 131
+ },
+ "166:shared": {
+  "reactions": 3508,
+  "internal": 3075,
+  "boundary_or_biomass": 433,
+  "metabolites_used": 1938,
+  "metabolites_used_without_formula": 0,
+  "metabolites_used_without_charge": 186,
+  "mass": {
+   "balanced": 3072,
+   "H_only": 3
+  },
+  "charge": {
+   "balanced": 2726,
+   "no_charge": 286,
+   "unbalanced": 63
+  },
+  "mass_unbalanced_or_unknown": 3,
+  "mass_unbalanced_determinable": 3,
+  "charge_unbalanced_determinable": 63
+ },
+ "166:only": {
+  "reactions": 2024,
+  "internal": 1798,
+  "boundary_or_biomass": 226,
+  "metabolites_used": 1715,
+  "metabolites_used_without_formula": 0,
+  "metabolites_used_without_charge": 622,
+  "mass": {
+   "balanced": 1792,
+   "H_only": 6
+  },
+  "charge": {
+   "balanced": 893,
+   "no_charge": 837,
+   "unbalanced": 68
+  },
+  "mass_unbalanced_or_unknown": 6,
+  "mass_unbalanced_determinable": 6,
+  "charge_unbalanced_determinable": 68
+ },
+ "122:stoich_all": {
+  "consistent": false,
+  "unconserved": [
+   "M_h2_c",
+   "M_h2_e",
+   "M_h2_p",
+   "M_h_c",
+   "M_h_e",
+   "M_h_p"
+  ]
+ },
+ "122:stoich_shared": {
+  "consistent": false,
+  "unconserved": [
+   "M_h2_c",
+   "M_h2_e",
+   "M_h2_p",
+   "M_h_c",
+   "M_h_e",
+   "M_h_p"
+  ]
+ },
+ "122:stoich_without_H_only": {
+  "consistent": false,
+  "unconserved": [
+   "M_h2_c",
+   "M_h2_e",
+   "M_h2_p",
+   "M_h_c",
+   "M_h_e",
+   "M_h_p"
+  ],
+  "removed": 63
+ },
+ "122:stoich_formula_balanced_only": {
+  "consistent": true,
+  "unconserved": [],
+  "removed": 1276
+ },
+ "166:stoich_all": {
+  "consistent": false,
+  "unconserved": [
+   "M_h2_c",
+   "M_h2_e",
+   "M_h2_p",
+   "M_h_c",
+   "M_h_e",
+   "M_h_p"
+  ]
+ },
+ "166:stoich_shared": {
+  "consistent": false,
+  "unconserved": [
+   "M_h2_c",
+   "M_h2_e",
+   "M_h2_p",
+   "M_h_c",
+   "M_h_e",
+   "M_h_p"
+  ]
+ },
+ "166:stoich_without_H_only": {
+  "consistent": true,
+  "unconserved": [],
+  "removed": 9
+ },
+ "166:stoich_formula_balanced_only": {
+  "consistent": true,
+  "unconserved": [],
+  "removed": 9
+ },
+ "shared_same_stoichiometry": 3451,
+ "shared_changed_stoichiometry": 57,
+ "shared_mass_status_changed": {
+  "other->balanced": 961,
+  "H_only->balanced": 28,
+  "balanced->H_only": 1,
+  "other->H_only": 2
+ },
+ "shared_charge_status_changed": {
+  "no_charge->unbalanced": 32,
+  "balanced->no_charge": 154,
+  "no_charge->balanced": 296,
+  "unbalanced->balanced": 13,
+  "balanced->unbalanced": 47,
+  "unbalanced->no_charge": 17
+ }
+}

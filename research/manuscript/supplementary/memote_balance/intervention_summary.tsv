@@ -1,0 +1,3 @@
+rung	models	consistent_as_built	inconsistent	median_exclusive_held	median_changed_held	median_h_only_held	repaired_by_drop_exclusive	repaired_by_drop_changed	repaired_by_patch_changed	repaired_by_drop_h_only	repaired_by_patch_and_drop
+B	226	0.04	217	188.5	11.0	40.0	0.005	0.834	0.452	0.0	0.751
+U	201	0.771	46	342.0	12.0	3.0	0.0	1.0	0.0	1.0	0.022
