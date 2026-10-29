@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Fill page.template.html from the solved plan and the rendered DAG.
+"""Fill both page templates from the solved plan and the rendered DAG.
 
     python research/kalen_crage/page.py
 
-Reads results/plan.json and results/kalen_crage_dag.svg, writes results/kalen_crage_plan.html.
-The page is for Tony, not for Kalen. Run it after build.sh.
+Reads results/plan.json and results/kalen_crage_dag.svg. Writes two pages from one plan:
+kalen_crage_plan.html for Tony, which carries the choices that are his, and
+kalen_crage_for_kalen.html for the depositor, which carries neither those nor any result.
+Run it after build.sh.
 """
 
 import html
@@ -42,8 +44,7 @@ def main() -> None:
     steps = plan["steps"]
     proposed = [s for s in steps if s["library"] == MOCK_LIBRARY]
 
-    page = (HERE / "page.template.html").read_text()
-    for key, value in {
+    fields = {
         "__SVG__": svg,
         "__ROWS__": rows(steps),
         "__NCOL__": str(len(plan["colonies"])),
@@ -52,14 +53,18 @@ def main() -> None:
         "__NPROP__": str(len(proposed)),
         "__PARENT__": html.escape(plan["parent"][0]),
         "__ACC__": html.escape(plan["parent"][1]),
-    }.items():
-        page = page.replace(key, value)
-    left = sorted(set(re.findall(r"__[A-Z]+__", page)))
-    assert not left, f"unfilled placeholders: {left}"
-
-    out = RESULTS / "kalen_crage_plan.html"
-    out.write_text(page)
-    print(f"{out} ({out.stat().st_size / 1024:.0f} KB), {len(steps)} steps, {len(proposed)} proposed")
+    }
+    for template, name in (("page.template.html", "kalen_crage_plan.html"),
+                           ("page_kalen.template.html", "kalen_crage_for_kalen.html")):
+        page = (HERE / template).read_text()
+        for key, value in fields.items():
+            page = page.replace(key, value)
+        left = sorted(set(re.findall(r"__[A-Z]+__", page)))
+        assert not left, f"{template}: unfilled placeholders: {left}"
+        out = RESULTS / name
+        out.write_text(page)
+        print(f"{out} ({out.stat().st_size / 1024:.0f} KB)")
+    print(f"{len(steps)} steps, {len(proposed)} proposed")
 
 
 if __name__ == "__main__":
