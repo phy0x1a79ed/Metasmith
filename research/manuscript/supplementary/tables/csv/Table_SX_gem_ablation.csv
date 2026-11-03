@@ -1,9 +1,9 @@
-Rung,Change from the rung above,Bins with a model,"Reaction Jaccard vs rung above, median","Reaction Jaccard vs metaGEM, median","Reaction Jaccard vs metaGEM, IQR","Gene Jaccard vs metaGEM, median","MEMOTE 0.17 total, median","MEMOTE 0.17 consistency, median"
-metaGEM,metaGEM's published GEM,1408,,,,,0.218,0.467
-R0,none; the archived reproduction lane,1408,,0.842,0.790-0.883,0.976,0.187,0.386
-R1,none; a second run of the reproduction lane (noise floor),1408,0.999,0.841,0.789-0.883,0.976,0.187,0.386
-B,"CarveMe 1.6.6's BiGG gene reference, on CarveMe 1.2.2",1408,0.67,0.663,0.622-0.695,0.775,0.189,0.391
-U,"CarveMe 1.6.6's BiGG universe, on CarveMe 1.2.2",1408,0.514,0.426,0.397-0.455,0.727,0.349,0.803
+Rung,Change from the rung above,Bins with a model,"Reaction Jaccard vs rung above, median","Reaction Jaccard vs metaGEM, median","Reaction Jaccard vs metaGEM, IQR","Gene Jaccard vs metaGEM, median","MEMOTE 0.17 total, median (CarveMe 1.6.6 SBML writer)","MEMOTE 0.17 consistency, median (CarveMe 1.6.6 SBML writer)"
+metaGEM,metaGEM's published GEM,1408,,,,,0.297,0.466
+R0,none; the archived reproduction lane,1408,,0.842,0.790-0.883,0.976,0.297,0.465
+R1,none; a second run of the reproduction lane (noise floor),1408,0.999,0.841,0.789-0.883,0.976,0.297,0.465
+B,"CarveMe 1.6.6's BiGG gene reference, on CarveMe 1.2.2",1408,0.67,0.663,0.622-0.695,0.775,0.299,0.471
+U,"CarveMe 1.6.6's BiGG universe, on CarveMe 1.2.2",1408,0.514,0.426,0.397-0.455,0.727,0.737,0.945
 V,"CarveMe 1.6.6's code and SBML writer, on CPLEX",1404,0.811,0.422,0.391-0.448,0.726,0.861,0.916
 G,"two-step gap fill with no gene scores, on CPLEX",1405,0.993,0.421,0.390-0.447,0.726,0.86,0.915
 D,DIAMOND 2.1.13 in place of 0.9.30,1404,0.798,0.42,0.392-0.447,0.711,0.86,0.913
