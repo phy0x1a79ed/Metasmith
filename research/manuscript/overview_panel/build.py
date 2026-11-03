@@ -1,4 +1,4 @@
-"""Draw the overview figure's DAG-renderer piece (rows) and splice the figure into the methods-panels page."""
+"""Draw the overview figure's DAG-renderer pieces (specification, plan, sample grid) and splice the figure into the methods-panels page."""
 import argparse
 import json
 import re
@@ -13,8 +13,12 @@ from build import draw  # noqa: E402
 INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5"},
        "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31"}}
 
-ROWS = [("asm", "assemble", "assemble", ["reads"], ["assembly"]),
-        ("map", "map", "map", ["reads", "assembly"], ["BAM"])]
+PLAN = [("asm", None, "assemble", ["reads"], ["assembly"]),
+        ("map", None, "map", ["reads", "assembly"], ["BAM"])]
+# The specification's library holds more than the plan uses: bin is offered and left out.
+LIBRARY = [[("asm", None, "assemble", ["reads"], ["assembly"])],
+           [("map", None, "map", ["reads", "assembly"], ["BAM"])],
+           [("bin", None, "bin", ["assembly", "BAM"], ["MAG"])]]
 SAMPLES = ["S1", "S2", "S3"]
 # Per data row, the sample columns each cell spans: assembly co-assembles S1 and S2.
 CELLS = {"reads": [[0], [1], [2]], "assembly": [[0, 1], [2]], "BAM": [[0], [1], [2]]}
@@ -29,27 +33,43 @@ def data_rows(svg):
     return {t: float(cy) for t, cy in re.findall(r'<g><title>([^<]+)</title>\s*<circle cx="[\d.]+" cy="([\d.]+)"', svg)}
 
 
-def rows(theme):
-    svg = draw(ROWS, theme, given=["reads"], target=["BAM"])
+def plan(theme):
+    return draw(PLAN, theme, given=["reads"], target=["BAM"])
+
+
+def grid(theme):
+    """The sample table for execution, its rows level with the plan's data rows."""
+    svg = plan(theme)
     p, ys, ink = piece(svg), data_rows(svg), INK[theme]
-    cw, ch, gap, x0 = 30.0, 16.0, 4.0, p["w"] + 14
-    out = [p["body"]]
+    cw, ch, gap = 30.0, 16.0, 4.0
+    out = []
     head_y = min(ys.values()) - 26
     for i, s in enumerate(SAMPLES):
-        out.append(f'<text x="{x0 + i * (cw + gap) + cw / 2:.1f}" y="{head_y:.1f}" font-family="Arial" font-size="13" '
+        out.append(f'<text x="{i * (cw + gap) + cw / 2:.1f}" y="{head_y:.1f}" font-family="Arial" font-size="13" '
                    f'fill="{ink["text"]}" text-anchor="middle">{s}</text>')
     for name, spans in CELLS.items():
         y = ys[name] - ch / 2
         for cols in spans:
-            x = x0 + cols[0] * (cw + gap)
+            x = cols[0] * (cw + gap)
             w = len(cols) * cw + (len(cols) - 1) * gap
             out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="{ink["fill"]}" '
                        f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
-    return {"w": x0 + 3 * cw + 2 * gap + 4, "h": p["h"], "body": "".join(out)}
+    return {"w": 3 * cw + 2 * gap + 2, "h": p["h"], "body": "".join(out)}
+
+
+def anchored(svg, row):
+    """A piece with the y of one of its data rows, so a row name can sit level with it."""
+    return {**piece(svg), "anchor": data_rows(svg)[row]}
+
+
+def specification(theme):
+    return {"given": anchored(draw([], theme, given=["reads"]), "reads"),
+            "library": [piece(draw(steps, theme)) for steps in LIBRARY],
+            "targets": anchored(draw([], theme, target=["BAM"]), "BAM")}
 
 
 def data():
-    return {t: {"rows": rows(t)} for t in ("light", "dark")}
+    return {t: {"plan": piece(plan(t)), "grid": grid(t), "spec": specification(t)} for t in ("light", "dark")}
 
 
 def splice(page: Path, section: Path, script: Path):
