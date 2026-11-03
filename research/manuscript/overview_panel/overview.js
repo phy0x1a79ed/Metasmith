@@ -43,22 +43,27 @@
     try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type:" }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
-    // B: the specification in pieces, each row named on the left.
-    const S = d.spec, lib = S.library.map((p) => piece(p)), dots = 34, LG = 28;
+    // B: the specification in pieces, each row named on the left. A row's pieces sit level on their anchors
+    // (the data node for Given and Targets, the transform for the library), and the row's name sits on that level too.
+    const S = d.spec, dots = 34, LG = 28;
+    const anchored = (p) => ({ ...piece(p), a: p.anchor * DS });
+    const lib = S.library.map(anchored);
     const libW = lib.reduce((s, p) => s + p.w, 0) + LG * lib.length + dots;
-    const rowsB = [["Given", [piece(S.given)]], ["Transform library", lib], ["Targets", [piece(S.targets)]]];
-    const labW = Math.max(...rowsB.map(([n]) => textWidth(n, FS))) + 18, RG = 10;
-    const B = { w: labW + Math.max(libW, ...rowsB.map(([, ps]) => ps[0].w)),
-      h: rowsB.reduce((s, [, ps]) => s + Math.max(...ps.map((p) => p.h)), 0) + RG * (rowsB.length - 1),
+    const rowsB = [["Given", [anchored(S.given)]], ["Transform library", lib], ["Targets", [anchored(S.targets)]]].map(([name, ps]) => {
+      const a = Math.max(...ps.map((p) => p.a));
+      return { name, ps, a, h: Math.max(...ps.map((p) => a - p.a + p.h)) };
+    });
+    const labW = Math.max(...rowsB.map((r) => textWidth(r.name, FS))) + 18, RG = 10;
+    const B = { w: labW + Math.max(libW, ...rowsB.map((r) => r.ps[0].w)),
+      h: rowsB.reduce((s, r) => s + r.h, 0) + RG * (rowsB.length - 1),
       inner: (x, y) => {
         let out = "", cy = y;
-        for (const [name, ps] of rowsB) {
-          const h = Math.max(...ps.map((p) => p.h)), src = ps === lib ? null : (name === "Given" ? S.given : S.targets);
-          out += text(x + labW - 18, cy + (src ? (h - ps[0].h) / 2 + src.anchor * DS : h / 2), name, "end");
+        for (const r of rowsB) {
+          out += text(x + labW - 18, cy + r.a, r.name, "end");
           let cx = x + labW;
-          for (const p of ps) { out += p.inner(cx, cy + (h - p.h) / 2); cx += p.w + LG; }
-          if (ps === lib) for (let i = 0; i < 3; i++) out += `<circle cx="${f(cx + 4 + i * 12)}" cy="${f(cy + h / 2)}" r="3.2" fill="${pal.text}"/>`;
-          cy += h + RG;
+          for (const p of r.ps) { out += p.inner(cx, cy + r.a - p.a); cx += p.w + LG; }
+          if (r.ps === lib) for (let i = 0; i < 3; i++) out += `<circle cx="${f(cx + 4 + i * 12)}" cy="${f(cy + r.a)}" r="3.2" fill="${pal.text}"/>`;
+          cy += r.h + RG;
         }
         return out;
       } };

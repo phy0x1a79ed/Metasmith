@@ -81,10 +81,13 @@ def grid(theme):
 
 
 def spec_piece(svg, row=None):
-    """A specification piece: open nodes, no labels; with the y of one data row, so a row name can sit level with it."""
+    """A specification piece: open nodes, no labels. Its anchor is the y of the named data row, else of its transform."""
     rows = data_rows(svg)
     p, dy = bare(hollow(svg))
-    return {**p, "anchor": rows[row] + dy} if row else p
+    if row:
+        return {**p, "anchor": rows[row] + dy}
+    tri = [float(y) for y in re.findall(r"[\d.]+,([\d.]+)", re.search(r'<polygon points="([^"]+)"', svg).group(1))]
+    return {**p, "anchor": sum(tri) / len(tri) + dy}
 
 
 def specification(theme):
