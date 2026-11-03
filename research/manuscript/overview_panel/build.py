@@ -13,9 +13,11 @@ from build import draw  # noqa: E402
 INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5", "job": "#E3E6EC"},
        "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31", "job": "#343944"}}
 
-# The plan's shape: t1 makes several b from one a; t2 runs once per b (group by b), takes a as well, and makes several c.
+# The plan's shape: t1 makes several b from one a; t2 takes a as well and makes several c from each b; t3 runs once
+# per b (group by b) over that b's c, and each of its runs is a job.
 PLAN = [("t1", None, "t1", ["a"], ["b"]),
-        ("t2", None, "t2", ["a", "b"], ["c"])]
+        ("t2", None, "t2", ["a", "b"], ["c"]),
+        ("t3", None, "t3", ["c"], ["d"])]
 # The specification's library holds more than the plan uses: bin is offered and left out.
 LIBRARY = [[("asm", None, "assemble", ["reads"], ["assembly"])],
            [("map", None, "map", ["reads", "assembly"], ["BAM"])],
@@ -60,7 +62,7 @@ def data_rows(svg):
 
 
 def plan(theme):
-    svg = hollow(draw(PLAN, theme, given=["a"], target=["c"]))
+    svg = hollow(draw(PLAN, theme, given=["a"], target=["d"]))
     return re.sub(r'(<circle[^>]*?)stroke-width="[^"]*"', r'\1stroke-width="2.6"', svg)
 
 
@@ -71,10 +73,10 @@ def plan_and_grid(theme):
     p, dy = bare(svg)
     cw, ch, gap = 30.0, 16.0, 4.0
     span_x = lambda cols: (cols[0] * (cw + gap), len(cols) * cw + (len(cols) - 1) * gap)  # noqa: E731
-    top, bot = min(ys.values()) + dy - ch / 2, max(ys.values()) + dy + ch / 2
-    # Each job (one run of t2, one per b) is a grey ribbon down its columns, named below the plan's last triangle.
-    last = max(float(y) for pts in re.findall(r'<polygon points="([^"]+)"', svg) for y in re.findall(r",([\d.]+)", pts)) + dy
-    job_y = last + 16
+    top, bot = min(ys[n] for n in CELLS) + dy - ch / 2, max(ys[n] for n in CELLS) + dy + ch / 2
+    # Each job (one run of t3, one per b) is a grey ribbon down its columns, named level with t3's triangle.
+    t3 = re.search(r'<title>t3</title>\s*<polygon points="([^"]+)"', svg).group(1)
+    job_y = sum(float(y) for y in re.findall(r",([\d.]+)", t3)) / 3 + dy + 4.5
     out = []
     for cols in CELLS["c"]:
         x, w = span_x(cols)
@@ -85,10 +87,10 @@ def plan_and_grid(theme):
             x = cols[0] * (cw + gap)
             w = len(cols) * cw + (len(cols) - 1) * gap
             out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="none" '
-                       f'stroke="{ink["cell"]}" stroke-width="2.4"/>')
+                       f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
             if name in DIVIDED:
                 out.append(f'<line x1="{x + w / 2:.1f}" y1="{y:.1f}" x2="{x + w / 2:.1f}" y2="{y + ch:.1f}" '
-                           f'stroke="{ink["cell"]}" stroke-width="2.4"/>')
+                           f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
     gw = COLUMNS * cw + (COLUMNS - 1) * gap
     label = lambda x, y, t, extra="": (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Arial" font-size="13" fill="{ink["text"]}" '
                                        f'text-anchor="middle"{extra}>{t}</text>')
