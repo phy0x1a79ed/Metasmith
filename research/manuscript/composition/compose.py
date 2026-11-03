@@ -384,10 +384,10 @@ def compose(theme, titles):
         front.append(f'<text transform="translate({x + gap:.1f} {(y0 + y1) / 2:.1f}) rotate(90)" {font} '
                      f'font-size="{size}" font-weight="{weight}" fill="{fg}" text-anchor="middle">{text}</text>')
 
-    def title(x, d, gap):
+    def title(x, d, gap, fill=edge, fg=ink):
         y0, y1 = d["y"] + d["top"] + INSET, d["y"] + d["bottom"] - INSET
         over = max(0, (TITLE.getlength(d["title"]) + 12 - (y1 - y0)) / 2)
-        bar(x, y0 - over, y1 + over, edge, d["title"], ink, gap, SIZE, "bold", width=2)
+        bar(x, y0 - over, y1 + over, fill, d["title"], fg, gap, SIZE, "bold", width=2)
 
     for d in drawn.values():
         front.append(f'<g transform="translate({d["x"]:.1f} {d["y"]:.1f})">{inner(d["svg"])}</g>')
@@ -404,7 +404,7 @@ def compose(theme, titles):
     # the three read lanes bracketed together as assembly, outside their own key entries
     y0, y1 = hull(D["bands"]["short"])[0], hull(D["bands"]["long"])[1]
     bar(key_x + 30, y0, y1, edge, "Assembly", muted, 12)
-    title(key_x + 60, D, 12)
+    title(key_x + 60, D, 12, METASMITH, METASMITH)
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * SCALE:.0f}" height="{H * SCALE:.0f}" '
            f'viewBox="0 0 {W:.0f} {H:.0f}"><rect width="100%" height="100%" fill="{surface}"/>'
