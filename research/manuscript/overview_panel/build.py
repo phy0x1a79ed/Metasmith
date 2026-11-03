@@ -10,6 +10,7 @@ sys.path.insert(0, str(HERE.parent / "routing_panels"))
 
 from build import draw  # noqa: E402
 
+METASMITH = "#636EFA"   # plotly's first colour, Metasmith's in figure 2
 INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5"},
        "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31"}}
 
@@ -60,7 +61,7 @@ def data_rows(svg):
 
 
 def plan(theme):
-    return hollow(draw(PLAN, theme, given=["a"], target=["c"]))
+    return re.sub(r'(<circle[^>]*?)fill="[^"]*"', rf'\1fill="{METASMITH}"', draw(PLAN, theme, given=["a"], target=["c"]))
 
 
 def plan_and_grid(theme):
@@ -75,7 +76,7 @@ def plan_and_grid(theme):
         for cols in spans:
             x = cols[0] * (cw + gap)
             w = len(cols) * cw + (len(cols) - 1) * gap
-            out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="{ink["fill"]}" '
+            out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="{METASMITH}" '
                        f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
             if name in DIVIDED:
                 out.append(f'<line x1="{x + w / 2:.1f}" y1="{y:.1f}" x2="{x + w / 2:.1f}" y2="{y + ch:.1f}" '
