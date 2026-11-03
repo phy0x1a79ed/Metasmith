@@ -18,7 +18,7 @@ PLAN = [("asm", None, "assemble", ["reads"], ["assembly"]),
 # The specification's library holds more than the plan uses: bin is offered and left out.
 LIBRARY = [[("asm", None, "assemble", ["reads"], ["assembly"])],
            [("map", None, "map", ["reads", "assembly"], ["BAM"])],
-           [("bin", None, "bin", ["assembly", "BAM"], ["MAG"])]]
+           [("bin", None, "bin", ["assembly"], ["MAG", "unbinned"])]]
 SAMPLES = ["S1", "S2", "S3"]
 # Per data row, the sample columns each cell spans: assembly co-assembles S1 and S2.
 CELLS = {"reads": [[0], [1], [2]], "assembly": [[0, 1], [2]], "BAM": [[0], [1], [2]]}
@@ -29,12 +29,35 @@ def piece(svg):
     return {"w": float(m.group(1)), "h": float(m.group(2)), "body": m.group(3)}
 
 
+def hollow(svg):
+    """Data nodes drawn open, filled with the background the transforms already use."""
+    bg = re.search(r'<polygon[^>]*fill="([^"]+)"', svg).group(1)
+    return re.sub(r'(<circle[^>]*?)fill="[^"]*"', rf'\1fill="{bg}"', svg)
+
+
+def bare(svg, pad=6.0):
+    """No node labels, and the frame cropped to the graph; returns the piece and its y shift."""
+    svg = re.sub(r"<text[^>]*>[^<]*</text>", "", svg)
+    xs, ys = [], []
+    for x, y in re.findall(r"[ML] ([\d.]+),([\d.]+)", svg) + re.findall(r"A [\d.]+,[\d.]+ \d \d \d ([\d.]+),([\d.]+)", svg):
+        xs.append(float(x)); ys.append(float(y))
+    for cx, cy, r in re.findall(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"', svg):
+        xs += [float(cx) - float(r), float(cx) + float(r)]; ys += [float(cy) - float(r), float(cy) + float(r)]
+    for pts in re.findall(r'<polygon points="([^"]+)"', svg):
+        for x, y in (p.split(",") for p in pts.split()):
+            xs.append(float(x)); ys.append(float(y))
+    p = piece(svg)
+    dx, dy = pad - min(xs), pad - min(ys)
+    return {"w": max(xs) - min(xs) + 2 * pad, "h": max(ys) - min(ys) + 2 * pad,
+            "body": f'<g transform="translate({dx:.1f} {dy:.1f})">{p["body"]}</g>'}, dy
+
+
 def data_rows(svg):
     return {t: float(cy) for t, cy in re.findall(r'<g><title>([^<]+)</title>\s*<circle cx="[\d.]+" cy="([\d.]+)"', svg)}
 
 
 def plan(theme):
-    return draw(PLAN, theme, given=["reads"], target=["BAM"])
+    return hollow(draw(PLAN, theme, given=["reads"], target=["BAM"]))
 
 
 def grid(theme):
@@ -57,15 +80,17 @@ def grid(theme):
     return {"w": 3 * cw + 2 * gap + 2, "h": p["h"], "body": "".join(out)}
 
 
-def anchored(svg, row):
-    """A piece with the y of one of its data rows, so a row name can sit level with it."""
-    return {**piece(svg), "anchor": data_rows(svg)[row]}
+def spec_piece(svg, row=None):
+    """A specification piece: open nodes, no labels; with the y of one data row, so a row name can sit level with it."""
+    rows = data_rows(svg)
+    p, dy = bare(hollow(svg))
+    return {**p, "anchor": rows[row] + dy} if row else p
 
 
 def specification(theme):
-    return {"given": anchored(draw([], theme, given=["reads"]), "reads"),
-            "library": [piece(draw(steps, theme)) for steps in LIBRARY],
-            "targets": anchored(draw([], theme, target=["BAM"]), "BAM")}
+    return {"given": spec_piece(draw([], theme, given=["reads"]), "reads"),
+            "library": [spec_piece(draw(steps, theme)) for steps in LIBRARY],
+            "targets": spec_piece(draw([], theme, target=["BAM"]), "BAM")}
 
 
 def data():

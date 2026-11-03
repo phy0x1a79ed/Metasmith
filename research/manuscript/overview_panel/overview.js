@@ -44,7 +44,7 @@
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, each row named on the left.
-    const S = d.spec, lib = S.library.map((p) => piece(p)), dots = 40, LG = 28;
+    const S = d.spec, lib = S.library.map((p) => piece(p)), dots = 34, LG = 28;
     const libW = lib.reduce((s, p) => s + p.w, 0) + LG * lib.length + dots;
     const rowsB = [["Given", [piece(S.given)]], ["Transform library", lib], ["Targets", [piece(S.targets)]]];
     const labW = Math.max(...rowsB.map(([n]) => textWidth(n, FS))) + 18, RG = 10;
@@ -57,7 +57,7 @@
           out += text(x + labW - 18, cy + (src ? (h - ps[0].h) / 2 + src.anchor * DS : h / 2), name, "end");
           let cx = x + labW;
           for (const p of ps) { out += p.inner(cx, cy + (h - p.h) / 2); cx += p.w + LG; }
-          if (ps === lib) out += text(cx, cy + h / 2, "…");
+          if (ps === lib) for (let i = 0; i < 3; i++) out += `<circle cx="${f(cx + 4 + i * 12)}" cy="${f(cy + h / 2)}" r="3.2" fill="${pal.text}"/>`;
           cy += h + RG;
         }
         return out;
@@ -70,14 +70,14 @@
     };
     const COLS = [["A", "Contract", A], ["B", "Specification", B], ["C", "Plan", C], ["D", "Execution", D]].map((c) => fit(...c));
     const W = PAD * 2 + COLS.reduce((s, c) => s + c[2].w, 0) + G * (COLS.length - 1);
-    // The band spans the full width; each triangle's thick end fades out under its icon.
-    const y0 = PAD, bh = BAND, e = 3.5 / bh, x0 = PAD, x1 = W - PAD, bw = x1 - x0, cy = y0 + bh / 2;
+    // The band spans the full width; each triangle's thick end is the icons' height (2 for their strokes) and fades out under its icon.
+    const y0 = PAD, bh = BAND + 2, x0 = PAD, x1 = W - PAD, bw = x1 - x0, cy = y0 + bh / 2, gx = 3.5 * bw / bh;
     const fade = (id, color, from, to) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${f(from)}" y1="0" x2="${f(to)}" y2="0">`
       + `<stop offset="0" stop-color="${color}" stop-opacity="0"/><stop offset="1" stop-color="${color}" stop-opacity="1"/></linearGradient>`;
     const tri = (pts, fill) => `<polygon points="${pts.map(([x, y]) => `${f(x)},${f(y)}`).join(" ")}" fill="${fill}"/>`;
     let svg = `<defs>${fade("ov-fade-you", op.you, x0 + ICON * 0.35, x0 + FADE)}${fade("ov-fade-ms", op.ms, x1 - ICON * 0.35, x1 - FADE)}</defs>`
-      + tri([[x0, y0], [x0 + bw * (1 - e), y0], [x0, y0 + bh * (1 - e)]], "url(#ov-fade-you)")
-      + tri([[x1, y0 + bh * e], [x1, y0 + bh], [x0 + bw * e, y0 + bh]], "url(#ov-fade-ms)")
+      + tri([[x0, y0], [x1 - gx, y0], [x0, y0 + bh]], "url(#ov-fade-you)")
+      + tri([[x1, y0], [x1, y0 + bh], [x0 + gx, y0 + bh]], "url(#ov-fade-ms)")
       + userIcon(x0 + ICON / 2, cy, ICON, pal.text)
       + serverIcon(x1 - ICON / 2, cy, ICON, pal.text)
       + text(x0 + FADE, y0 + bh * 0.3, "Expressiveness", "start", op.youText)
