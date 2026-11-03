@@ -1171,6 +1171,11 @@
         .reduce((best, e) => (!best || Math.abs(e.cy - e.r - a.ty) < Math.abs(best.cy - best.r - a.ty) ? e : best), null);
       if (hit) svg = svg.replace(hit.s, hit.s.replace(/stroke-width="[\d.]+"/, `stroke-width="${arrowW}"`));
     }
+    // No letters in the contracts; the products of the two cases that do not chain are drawn faint.
+    svg = svg.replace(/<g><text [^>]*><tspan [^>]*>[XYZW]<\/tspan><\/text><\/g>/g, "");
+    const products = [...svg.matchAll(/<polygon points="([-\d.]+),([-\d.]+)[^"]*"[^>]*fill="none"[^>]*\/>/g)]
+      .filter((m) => +m[2] > rowY).sort((a, b) => +a[1] - +b[1]);
+    for (const m of products.slice(1)) svg = svg.replace(m[0], m[0].replace("<polygon ", '<polygon opacity="0.35" '));
     return svg.replace(/<g><path d="M [-\d.]+ ([-\d.]+) L .*?<\/g>/g, (g, y0) =>
       +y0 > rowY ? g.replace(/stroke-width="([\d.]+)"/g, (_, w) => `stroke-width="${f(w / 2)}"`) : g);
   }
