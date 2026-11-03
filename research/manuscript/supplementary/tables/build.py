@@ -53,16 +53,22 @@ def table_s1():
 
 def table_s2():
     summ = {(r["against"], r["rung"]): r for r in rows(INPUTS / "ablation_summary.tsv") if r["scope"] == "pooled"}
+    # CarveMe 1.2.2 (metaGEM, R0-U) and 1.6.6 (V on) write different SBML, and MEMOTE scores the writer as well as
+    # the model. Score the early rungs as rewritten through 1.6.6's writer so every rung shares one writer.
+    rewritten = {"metagem", "R0", "R1", "B", "U"}
     scores = defaultdict(lambda: defaultdict(list))
-    for r in rows(INPUTS / "ablation_memote.tsv"):
-        if r["note"]:
-            continue
-        for k in ("total_score", "consistency"):
-            scores[r["source"]][k].append(float(r[k]))
+    for name, keep in (("ablation_memote_rewritten.tsv", rewritten.__contains__),
+                       ("ablation_memote.tsv", lambda src: src not in rewritten)):
+        for r in rows(INPUTS / name):
+            if r["note"] or not keep(r["source"]):
+                continue
+            for k in ("total_score", "consistency"):
+                scores[r["source"]][k].append(float(r[k]))
     head = ["Rung", "Change from the rung above", "Bins with a model",
             "Reaction Jaccard vs rung above, median", "Reaction Jaccard vs metaGEM, median",
             "Reaction Jaccard vs metaGEM, IQR", "Gene Jaccard vs metaGEM, median",
-            "MEMOTE 0.17 total, median", "MEMOTE 0.17 consistency, median"]
+            "MEMOTE 0.17 total, median (CarveMe 1.6.6 SBML writer)",
+            "MEMOTE 0.17 consistency, median (CarveMe 1.6.6 SBML writer)"]
     body = []
     for rung, change in LADDER:
         src = "metagem" if rung == "metaGEM" else rung
