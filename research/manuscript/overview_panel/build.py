@@ -1,4 +1,4 @@
-"""Draw the overview figure's DAG-renderer pieces (specification, plan, sample grid) and splice the figure into the methods-panels page."""
+"""Draw the overview figure's DAG-renderer pieces (specification, plan, execution grid) and splice the figure into the methods-panels page."""
 import argparse
 import json
 import re
@@ -13,15 +13,18 @@ from build import draw  # noqa: E402
 INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5"},
        "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31"}}
 
-PLAN = [("asm", None, "assemble", ["reads"], ["assembly"]),
-        ("map", None, "map", ["reads", "assembly"], ["BAM"])]
+# The plan's shape: t1 makes several b from one a; t2 runs once per b (group by b), takes a as well, and makes several c.
+PLAN = [("t1", None, "t1", ["a"], ["b"]),
+        ("t2", None, "t2", ["a", "b"], ["c"])]
 # The specification's library holds more than the plan uses: bin is offered and left out.
 LIBRARY = [[("asm", None, "assemble", ["reads"], ["assembly"])],
            [("map", None, "map", ["reads", "assembly"], ["BAM"])],
            [("bin", None, "bin", ["assembly"], ["MAG", "unbinned"])]]
-SAMPLES = ["S1", "S2", "S3"]
-# Per data row, the sample columns each cell spans: assembly co-assembles S1 and S2.
-CELLS = {"reads": [[0], [1], [2]], "assembly": [[0, 1], [2]], "BAM": [[0], [1], [2]]}
+COLUMNS = 4
+# Per data row, the instance columns each cell spans. One a; two b from it; two c from each b, drawn as one cell per b
+# with a line down its middle, since t2 groups by b.
+CELLS = {"a": [[0, 1, 2, 3]], "b": [[0, 1], [2, 3]], "c": [[0, 1], [2, 3]]}
+DIVIDED = {"c"}
 
 
 def piece(svg):
@@ -57,44 +60,27 @@ def data_rows(svg):
 
 
 def plan(theme):
-    return hollow(draw(PLAN, theme, given=["reads"], target=["BAM"]))
+    return hollow(draw(PLAN, theme, given=["a"], target=["c"]))
 
 
-def ink_origin(svg):
-    """The top-left of the drawn shapes, ignoring labels: where a left-aligned title should meet the drawing."""
-    xs, ys = [], []
-    for cx, cy, r in re.findall(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"', svg):
-        xs.append(float(cx) - float(r)); ys.append(float(cy) - float(r))
-    for pts in re.findall(r'<polygon points="([^"]+)"', svg):
-        for x, y in (p.split(",") for p in pts.split()):
-            xs.append(float(x)); ys.append(float(y))
-    for x, y in re.findall(r"[ML] ([\d.]+),([\d.]+)", svg):
-        xs.append(float(x)); ys.append(float(y))
-    return min(xs) - 1, min(ys) - 1
-
-
-def shifted(p, dx, dy):
-    return {"w": p["w"] - dx, "h": p["h"] - dy, "body": f'<g transform="translate({-dx:.1f} {-dy:.1f})">{p["body"]}</g>'}
-
-
-def grid(theme):
-    """The sample table for execution, its rows level with the plan's data rows."""
+def plan_and_grid(theme):
+    """The plan without labels, and the execution grid beside it with each row level with its data node."""
     svg = plan(theme)
-    p, ys, ink = piece(svg), data_rows(svg), INK[theme]
+    ys, ink = data_rows(svg), INK[theme]
+    p, dy = bare(svg)
     cw, ch, gap = 30.0, 16.0, 4.0
     out = []
-    head_y = min(ys.values()) - 26
-    for i, s in enumerate(SAMPLES):
-        out.append(f'<text x="{i * (cw + gap) + cw / 2:.1f}" y="{head_y:.1f}" font-family="Arial" font-size="13" '
-                   f'fill="{ink["text"]}" text-anchor="middle">{s}</text>')
     for name, spans in CELLS.items():
-        y = ys[name] - ch / 2
+        y = ys[name] + dy - ch / 2
         for cols in spans:
             x = cols[0] * (cw + gap)
             w = len(cols) * cw + (len(cols) - 1) * gap
             out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="{ink["fill"]}" '
                        f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
-    return {"w": 3 * cw + 2 * gap + 2, "h": p["h"], "body": "".join(out)}
+            if name in DIVIDED:
+                out.append(f'<line x1="{x + w / 2:.1f}" y1="{y:.1f}" x2="{x + w / 2:.1f}" y2="{y + ch:.1f}" '
+                           f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
+    return p, {"w": COLUMNS * cw + (COLUMNS - 1) * gap + 2, "h": p["h"], "body": "".join(out)}
 
 
 def spec_piece(svg, row=None):
@@ -116,12 +102,8 @@ def specification(theme):
 def data():
     out = {}
     for t in ("light", "dark"):
-        svg = plan(t)
-        dx, dy = ink_origin(svg)
-        g = grid(t)
-        top = min(dy, min(float(y) for y in re.findall(r'<text[^>]* y="([\d.]+)"', g["body"])) - 16)
-        # The grid keeps the plan's rows: both lose the same top margin.
-        out[t] = {"plan": shifted(piece(svg), dx, top), "grid": shifted(g, 0, top), "spec": specification(t)}
+        plan_piece, grid_piece = plan_and_grid(t)
+        out[t] = {"plan": plan_piece, "grid": grid_piece, "spec": specification(t)}
     return out
 
 

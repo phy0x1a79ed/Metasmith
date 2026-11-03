@@ -54,14 +54,14 @@
       return { lines, ps, a, h: Math.max(...ps.map((p) => a - p.a + p.h)) };
     });
     const labW = Math.max(...rowsB.flatMap((r) => r.lines.map((l) => textWidth(l, FS)))), RG = 14;
-    const xRule = labW + RULE, xBody = xRule + RULE - INSET;
+    const xRule = labW + 12, xBody = xRule + RULE - INSET;
     const B = { w: xBody + Math.max(libW, ...rowsB.map((r) => r.ps[0].w)),
       h: rowsB.reduce((s, r) => s + r.h, 0) + RG * (rowsB.length - 1),
       inner: (x, y) => {
         let out = "", cy = y;
         for (const r of rowsB) {
           const mid = cy + r.h / 2, lh = FS * 1.2;
-          r.lines.forEach((l, i) => { out += text(x, mid + (i - (r.lines.length - 1) / 2) * lh, l); });
+          r.lines.forEach((l, i) => { out += text(x + xRule - 12, mid + (i - (r.lines.length - 1) / 2) * lh, l, "end"); });
           out += `<line x1="${f(x + xRule)}" y1="${f(cy + INSET)}" x2="${f(x + xRule)}" y2="${f(cy + r.h - INSET)}" stroke="${pal.text}" stroke-width="1.5"/>`;
           let cx = x + xBody;
           for (const p of r.ps) { out += p.inner(cx, cy + r.a - p.a); cx += p.w + LG; }
@@ -72,8 +72,14 @@
       } };
     const C = piece(d.plan), D = piece(d.grid);
     const COLS = [["A", "Contract", A], ["B", "Specification", B], ["C", "Plan", C], ["D", "Execution", D]]
-      .map(([letter, name, it]) => { const title = `${letter}. ${name}`; return [title, { ...it, w: Math.max(it.w, textWidth(title, FS) * 1.06) }]; });
-    const W = PAD * 2 + COLS.reduce((s, c) => s + c[1].w, 0) + G * (COLS.length - 1);
+      .map(([letter, name, it]) => {
+        const title = `${letter}. ${name}`, w = Math.max(it.w, textWidth(title, FS) * 1.06);
+        // C's plan sits at its column's right edge, against D, whose rows continue its data nodes.
+        const dx = letter === "C" ? w - it.w : 0;
+        return [title, { w, h: it.h, inner: (x, y) => it.inner(x + dx, y) }];
+      });
+    const GAP = [G, G, 14];
+    const W = PAD * 2 + COLS.reduce((s, c) => s + c[1].w, 0) + GAP.reduce((s, g) => s + g, 0);
     // The band spans the full width; each triangle's thick end is the icons' height (2 for their strokes) and fades out under its icon.
     const y0 = PAD, bh = BAND + 2, x0 = PAD, x1 = W - PAD, bw = x1 - x0, cy = y0 + bh / 2, gx = 3.5 * bw / bh;
     const fade = (id, color, from, to) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${f(from)}" y1="0" x2="${f(to)}" y2="0">`
@@ -88,11 +94,11 @@
       + text(x1 - FADE, y0 + bh * 0.72, "Automation", "end", op.msText);
     let cx = PAD, H = 0;
     const yRule = y0 + bh + 20, yTitle = yRule + FS * 0.9, yBody = yTitle + FS;
-    for (const [title, it] of COLS) {
+    for (const [i, [title, it]] of COLS.entries()) {
       svg += `<line x1="${f(cx)}" y1="${f(yRule)}" x2="${f(cx + it.w)}" y2="${f(yRule)}" stroke="${pal.text}" stroke-width="1.5"/>`
         + text(cx, yTitle, title, "start", pal.text, "bold") + it.inner(cx, yBody);
       H = Math.max(H, yBody + it.h);
-      cx += it.w + G;
+      cx += it.w + (GAP[i] ?? 0);
     }
     H += PAD;
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${f(W * SCALE)}" height="${f(H * SCALE)}" viewBox="0 0 ${f(W)} ${f(H)}">`
