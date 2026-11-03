@@ -30,13 +30,18 @@
         .reduce((best, e) => (!best || Math.abs(e.cy - e.r - a.ty) < Math.abs(best.cy - best.r - a.ty) ? e : best), null);
       if (hit) svg = svg.replace(hit.s, hit.s.replace(/stroke-width="[\d.]+"/, `stroke-width="${arrowW}"`));
     }
-    // No letters in the contracts; the products of the two cases that do not chain are drawn faint.
+    // No letters in the contracts; in the two cases that do not chain, the arrow out and its product are drawn faint.
     svg = svg.replace(/<g><text [^>]*><tspan [^>]*>[XYZW]<\/tspan><\/text><\/g>/g, "");
+    const faint = (el) => el.replace(/^<(\w+)([ >])/, '<$1 opacity="0.35"$2');
     const products = [...svg.matchAll(/<polygon points="([-\d.]+),([-\d.]+)[^"]*"[^>]*fill="none"[^>]*\/>/g)]
       .filter((m) => +m[2] > rowY).sort((a, b) => +a[1] - +b[1]);
-    for (const m of products.slice(1)) svg = svg.replace(m[0], m[0].replace("<polygon ", '<polygon opacity="0.35" '));
-    return svg.replace(/<g><path d="M [-\d.]+ ([-\d.]+) L .*?<\/g>/g, (g, y0) =>
-      +y0 > rowY ? g.replace(/stroke-width="([\d.]+)"/g, (_, w) => `stroke-width="${f(w / 2)}"`) : g);
+    for (const m of products.slice(1)) svg = svg.replace(m[0], faint(m[0]));
+    const firstX = Math.min(...[...svg.matchAll(/<g><path d="M ([-\d.]+) ([-\d.]+) L /g)].filter((m) => +m[2] > rowY).map((m) => +m[1]));
+    return svg.replace(/<g><path d="M ([-\d.]+) ([-\d.]+) L .*?<\/g>/g, (g, x0, y0) => {
+      if (+y0 <= rowY) return g;
+      g = g.replace(/stroke-width="([\d.]+)"/g, (_, w) => `stroke-width="${f(w / 2)}"`);
+      return +x0 > firstX ? faint(g) : g;
+    });
   }
   function userIcon(cx, cy, s, ink) {   // the person from the old figure 1A, with its upright head, scaled to height s
     const k = s / 74, X = (x) => f(cx + (x - 24.5) * k), Y = (y) => f(cy + (y - 37) * k);
