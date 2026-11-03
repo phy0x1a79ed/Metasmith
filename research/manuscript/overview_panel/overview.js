@@ -84,9 +84,10 @@
       + text(x0 + FADE, y0 + bh * 0.3, "Expressiveness", "start", op.youText)
       + text(x1 - FADE, y0 + bh * 0.72, "Automation", "end", op.msText);
     let cx = PAD, H = 0;
-    const yTitle = y0 + bh + 30, yBody = yTitle + FS;
+    const yRule = y0 + bh + 20, yTitle = yRule + FS * 0.9, yBody = yTitle + FS;
     for (const [title, it] of COLS) {
-      svg += text(cx, yTitle, title, "start", pal.text, "bold") + it.inner(cx, yBody);
+      svg += `<line x1="${f(cx)}" y1="${f(yRule)}" x2="${f(cx + it.w)}" y2="${f(yRule)}" stroke="${pal.text}" stroke-width="1.5"/>`
+        + text(cx, yTitle, title, "start", pal.text, "bold") + it.inner(cx, yBody);
       H = Math.max(H, yBody + it.h);
       cx += it.w + G;
     }
