@@ -80,7 +80,16 @@ def plan_and_grid(theme):
             if name in DIVIDED:
                 out.append(f'<line x1="{x + w / 2:.1f}" y1="{y:.1f}" x2="{x + w / 2:.1f}" y2="{y + ch:.1f}" '
                            f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
-    return p, {"w": COLUMNS * cw + (COLUMNS - 1) * gap + 2, "h": p["h"], "body": "".join(out)}
+    gw = COLUMNS * cw + (COLUMNS - 1) * gap
+    top, bot = min(ys.values()) + dy - ch / 2, max(ys.values()) + dy + ch / 2
+    label = lambda x, y, t, extra="": (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Arial" font-size="13" fill="{ink["text"]}" '
+                                       f'text-anchor="middle"{extra}>{t}</text>')
+    out.append(label(gw / 2, top - 7, "instances"))
+    out.append(label(gw + 16, (top + bot) / 2, "types", f' transform="rotate(90 {gw + 16:.1f} {(top + bot) / 2:.1f})" dominant-baseline="central"'))
+    for i, cols in enumerate(CELLS["c"]):
+        x = cols[0] * (cw + gap) + (len(cols) * cw + (len(cols) - 1) * gap) / 2
+        out.append(label(x, ys["c"] + dy + ch / 2 + 15, f"job {i + 1}"))
+    return p, {"w": gw + 26, "h": p["h"], "body": "".join(out)}
 
 
 def spec_piece(svg, row=None):

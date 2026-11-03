@@ -43,13 +43,13 @@
     try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
-    // B: the specification in pieces, one section per row. A vertical line spans each section, its name centred beside it;
+    // B: the specification in pieces, one section per row, its name right-aligned and centred beside it;
     // a row's pieces sit level on their anchors (the data node for Given and Targets, the transform for the library).
     const S = d.spec, dots = 34, LG = 28, INSET = 6 * DS, RULE = 16;
     const anchored = (p) => ({ ...piece(p), a: p.anchor * DS });
     const lib = S.library.map(anchored);
     const libW = lib.reduce((s, p) => s + p.w, 0) + LG * (lib.length - 1) + 14 + dots;
-    const rowsB = [[["Given"], [anchored(S.given)]], [["Transform", "library"], lib], [["Targets"], [anchored(S.targets)]]].map(([lines, ps]) => {
+    const rowsB = [[["Given"], [anchored(S.given)]], [["Transforms"], lib], [["Targets"], [anchored(S.targets)]]].map(([lines, ps]) => {
       const a = Math.max(...ps.map((p) => p.a));
       return { lines, ps, a, h: Math.max(...ps.map((p) => a - p.a + p.h)) };
     });
@@ -62,7 +62,6 @@
         for (const r of rowsB) {
           const mid = cy + r.h / 2, lh = FS * 1.2;
           r.lines.forEach((l, i) => { out += text(x + xRule - 12, mid + (i - (r.lines.length - 1) / 2) * lh, l, "end"); });
-          out += `<line x1="${f(x + xRule)}" y1="${f(cy + INSET)}" x2="${f(x + xRule)}" y2="${f(cy + r.h - INSET)}" stroke="${pal.text}" stroke-width="1.5"/>`;
           let cx = x + xBody;
           for (const p of r.ps) { out += p.inner(cx, cy + r.a - p.a); cx += p.w + LG; }
           if (r.ps === lib) for (let i = 0; i < 3; i++) out += `<circle cx="${f(cx - LG + 14 + 4 + i * 12)}" cy="${f(cy + r.a)}" r="3.2" fill="${pal.text}"/>`;
