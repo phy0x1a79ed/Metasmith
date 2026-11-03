@@ -31,7 +31,7 @@ from metasmith.models.dag_renderer import SYNTHETIC, DagMode, DagRenderer, NodeK
 
 # One shade per group; the gaps between bands, the key and the step names tell a group's subgroups apart
 ASM, BIN, VIR, GEM = "#FFA15A", "#00CC96", "#EF553B", "#AB63FA"
-METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 2: every module's background fades into it
+METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 2: each module's band fades into it across E5
 MODULES = [  # (key, label, light, dark) in E5's row order
     ("short", "Short", ASM, ASM),
     ("hybrid", "Hybrid", ASM, ASM),
@@ -345,7 +345,7 @@ def compose(theme, titles):
         d["bands"] = {m: [(d["y"] + y0, d["y"] + y1) for y0, y1 in runs] for m, runs in bands(d["rows"]).items()}
         x0, x1 = d["col"]
         for m, runs in d["bands"].items():
-            fill = METASMITH if d is D else colour[m]
+            fill = f"url(#fade-{m})" if d is D else colour[m]
             for y0, y1 in runs:
                 back.append(f'<rect x="{x0:.1f}" y="{y0 + INSET:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0 - 2 * INSET:.1f}" '
                             f'rx="4" fill="{fill}" fill-opacity="{tint}"/>')
@@ -356,7 +356,7 @@ def compose(theme, titles):
         cx = (xa + xb) / 2
         back.append(f'<path d="M {xa:.1f},{s0:.1f} C {cx:.1f},{s0:.1f} {cx:.1f},{u0:.1f} {xb:.1f},{u0:.1f} '
                     f'L {xb:.1f},{u1:.1f} C {cx:.1f},{u1:.1f} {cx:.1f},{s1:.1f} {xa:.1f},{s1:.1f} Z" '
-                    f'fill="url(#fade-{m})" fill-opacity="{flow}"/>')
+                    f'fill="{colour[m]}" fill-opacity="{flow}"/>')
 
     # each side splits an E5 module's rows among its own sources, in stacking order, as a sankey's do
     for sources, xa, xb in (([A, B, C], l_w, D["col"][0]),):
@@ -408,8 +408,8 @@ def compose(theme, titles):
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * SCALE:.0f}" height="{H * SCALE:.0f}" '
            f'viewBox="0 0 {W:.0f} {H:.0f}"><rect width="100%" height="100%" fill="{surface}"/>'
-           + "<defs>" + "".join(f'<linearGradient id="fade-{m}" gradientUnits="userSpaceOnUse" x1="{l_w:.1f}" y1="0" '
-                                f'x2="{D["col"][0]:.1f}" y2="0"><stop offset="0" stop-color="{colour[m]}"/>'
+           + "<defs>" + "".join(f'<linearGradient id="fade-{m}" gradientUnits="userSpaceOnUse" x1="{D["col"][0]:.1f}" y1="0" '
+                                f'x2="{D["col"][1]:.1f}" y2="0"><stop offset="0" stop-color="{colour[m]}"/>'
                                 f'<stop offset="1" stop-color="{METASMITH}"/></linearGradient>' for m in colour) + "</defs>"
            + "".join(back) + "".join(front) + "</svg>")
     return svg, {k: d["steps"] for k, d in drawn.items()}
