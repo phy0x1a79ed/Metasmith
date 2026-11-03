@@ -963,9 +963,10 @@
           const d = sweep ? `M ${f(dp[0][0])} ${f(dp[0][1])} Q ${f(ctrl[0])} ${f(ctrl[1])} ${f(dp[2][0])} ${f(dp[2][1])}`
             : e.orth ? cornerPath(dp, ST.r * k) : (e.roundness && n > 2 ? smoothPath(dp) : cornerPath(dp, 0));
           const closed = e.type === "line" && n > 2 && Math.hypot(q[0][0] - q[n - 1][0], q[0][1] - q[n - 1][1]) < 1;
-          let g = `<path d="${d}" fill="${closed ? color(e.backgroundColor, "ink", pal) : "none"}" stroke="${c}" stroke-width="${f(sw)}" stroke-linejoin="round"${dash(e, k)}/>`;
-          if (e.endArrowhead) g += arrowHead(e.endArrowhead, q[n - 1], endFrom, sw, len, c, pal.bg);
-          if (e.startArrowhead) g += arrowHead(e.startArrowhead, q[0], startFrom, sw, len, c, pal.bg);
+          const bold = opts.boldArrows && e.type === "arrow", lw = bold ? sw * 2 : sw, lc = bold ? pal.ink : c;
+          let g = `<path d="${d}" fill="${closed ? color(e.backgroundColor, "ink", pal) : "none"}" stroke="${lc}" stroke-width="${f(lw)}" stroke-linejoin="round"${dash(e, k)}/>`;
+          if (e.endArrowhead) g += arrowHead(e.endArrowhead, q[n - 1], endFrom, lw, len, lc, pal.bg);
+          if (e.startArrowhead) g += arrowHead(e.startArrowhead, q[0], startFrom, lw, len, lc, pal.bg);
           out.push(`<g${op}>${g}</g>`);
           for (const p of q) grow(p[0], p[1]);
         } else if (e.type === "text") {
@@ -1180,7 +1181,7 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, boldArrows: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, one section per row, its name right-aligned and centred beside it;
