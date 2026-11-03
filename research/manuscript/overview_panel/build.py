@@ -63,8 +63,9 @@ def data_rows(svg):
 
 def plan(theme):
     svg = hollow(draw(PLAN, theme, given=["a"], target=["d"]))
-    # b, which t3 groups by, and t3 itself are drawn bold
-    return re.sub(r'(<g><title>(?:b|t3)</title>\s*<(?:circle|polygon)[^>]*?)stroke-width="[^"]*"', r'\1stroke-width="2.6"', svg)
+    # b, which t3 groups by, and t3 itself are drawn filled
+    ink = INK[theme]["cell"]
+    return re.sub(r'(<g><title>(?:b|t3)</title>\s*<(?:circle|polygon)[^>]*?)fill="[^"]*"', rf'\1fill="{ink}"', svg)
 
 
 def plan_and_grid(theme):
