@@ -31,7 +31,7 @@ from metasmith.models.dag_renderer import SYNTHETIC, DagMode, DagRenderer, NodeK
 
 # One shade per group; the gaps between bands, the key and the step names tell a group's subgroups apart
 ASM, BIN, VIR, GEM = "#1F77B4", "#00CC96", "#EF553B", "#AB63FA"
-METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 3: each module's band fades into it across E5
+METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 3: each module's band fades into it across E5's graph, done before its labels
 MODULES = [  # (key, label, light, dark) in E5's row order
     ("short", "Short", ASM, ASM),
     ("hybrid", "Hybrid", ASM, ASM),
@@ -409,7 +409,7 @@ def compose(theme, titles):
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * SCALE:.0f}" height="{H * SCALE:.0f}" '
            f'viewBox="0 0 {W:.0f} {H:.0f}"><rect width="100%" height="100%" fill="{surface}"/>'
            + "<defs>" + "".join(f'<linearGradient id="fade-{m}" gradientUnits="userSpaceOnUse" x1="{D["col"][0]:.1f}" y1="0" '
-                                f'x2="{D["col"][1]:.1f}" y2="0"><stop offset="0" stop-color="{colour[m]}"/>'
+                                f'x2="{D["x"] + D["lx"]:.1f}" y2="0"><stop offset="0" stop-color="{colour[m]}"/>'
                                 f'<stop offset="1" stop-color="{METASMITH}"/></linearGradient>' for m in colour) + "</defs>"
            + "".join(back) + "".join(front) + "</svg>")
     return svg, {k: d["steps"] for k, d in drawn.items()}
