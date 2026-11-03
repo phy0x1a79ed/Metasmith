@@ -31,7 +31,7 @@ from metasmith.models.dag_renderer import SYNTHETIC, DagMode, DagRenderer, NodeK
 
 # One shade per group; the gaps between bands, the key and the step names tell a group's subgroups apart
 ASM, BIN, VIR, GEM = "#1F77B4", "#00CC96", "#EF553B", "#AB63FA"
-METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 2: each module's band fades into it across E5
+METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 3: each module's band fades into it across E5
 MODULES = [  # (key, label, light, dark) in E5's row order
     ("short", "Short", ASM, ASM),
     ("hybrid", "Hybrid", ASM, ASM),
