@@ -1,0 +1,13 @@
+lane	test	weight	median_B	median_U	mean_B	mean_U	paired_mean_change	paired_median_change	share_of_consistency_change_pts	pass_rate_B	pass_rate_U	bins_improved	bins_worse	bins
+as_built	test_stoichiometric_consistency	3	0.0	1.0	0.0433	0.7621	0.7188	1.0	0.308	0.0433	0.7621	0.7259	0.0071	1408
+as_built	test_reaction_mass_balance	1	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	1408
+as_built	test_reaction_charge_balance	1	1.0	1.0	1.0	1.0	0.0	0.0	0.0	1.0	1.0	0.0	0.0	1408
+as_built	test_find_disconnected	1	1.0	1.0	1.0	1.0	0.0	0.0	0.0	1.0	1.0	0.0	0.0	1408
+as_built	test_find_reactions_unbounded_flux_default_condition	1	0.735	0.6648	0.7333	0.6616	-0.0717	-0.0725	-0.0102	0.0	0.0	0.1733	0.7692	1408
+as_built	consistency	7	0.3909	0.8034	0.409	0.7068	0.2978	0.4117	0.2978	0.0	0.0	0.7422	0.1371	1408
+rewritten	test_stoichiometric_consistency	3	0.0	1.0	0.0433	0.7621	0.7188	1.0	0.308	0.0433	0.7621	0.7259	0.0071	1408
+rewritten	test_reaction_mass_balance	1	0.5618	0.9991	0.5626	0.999	0.4364	0.4373	0.0623	0.0	0.5689	1.0	0.0	1408
+rewritten	test_reaction_charge_balance	1	0.9973	0.9977	0.9946	0.9954	0.0008	0.0	0.0001	0.2415	0.2479	0.0348	0.0057	1408
+rewritten	test_find_disconnected	1	1.0	1.0	1.0	1.0	0.0	0.0	0.0	1.0	1.0	0.0	0.0	1408
+rewritten	test_find_reactions_unbounded_flux_default_condition	1	0.7341	0.6628	0.7326	0.6611	-0.0715	-0.073	-0.0102	0.0	0.0	0.1754	0.7656	1408
+rewritten	consistency	7	0.4706	0.9453	0.4885	0.8488	0.3603	0.4742	0.3603	0.0	0.0	0.9915	0.0071	1408
