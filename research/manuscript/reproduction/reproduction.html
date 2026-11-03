@@ -128,10 +128,23 @@ code { font-family: var(--mono); font-size: 0.88em; }
   const B_TICKS = GROUPS.map(([g]) => (bPos(g, 0) + bPos(g, B_BARS[g].length)) / 2);
   const CPU_RANGE = [0, 700];
   const STUDIES = [["sunagawa2015", "Sunagawa 2015"], ["karlsson2013", "Karlsson 2013"], ["bissett_base", "Bissett 2016"], ["li2019", "Li 2019"], ["korem2015", "Korem 2015"]];
-  const E4L = [["repro", "Reproduction · CarveMe 1.2.2"], ["modern", "Modern · CarveMe 1.6.6"],
+  const E4_ALL = [["repro", "Reproduction · CarveMe 1.2.2"], ["modern", "Modern · CarveMe 1.6.6"],
     ["kofam", "KOfam · CarveMe 1.6.6 · 10% subset"], ["both", "KOfam + DIAMOND · CarveMe 1.6.6 · 10% subset"]];
-  // three columns, one per workflow; bars on top share each column's x axis with the violins below
-  const COLS = { A: [0, 0.29], B: [0.37, 0.585], C: [0.665, 1] };
+  // the KOfam lanes are drawn only when the text reports them; d1 and d2 do not
+  const KOFAM = false;
+  const E4L = E4_ALL.filter(([lane]) => KOFAM || !lane.startsWith("kofam") && lane !== "both");
+  // C's grouped bars: metaGEM's then one per lane, in a slot of 1 - BARGAP; each violin sits under its bar
+  const BARGAP = 0.22, BARGROUPGAP = 0.04, C_N = 1 + E4L.length;
+  const cSlot = (1 - BARGAP) / C_N, cBar = cSlot * (1 - BARGROUPGAP);
+  const cX = (i, k) => i + (k - (C_N - 1) / 2) * cSlot;
+  // three columns, one per workflow; bars on top share each column's x axis with the violins below.
+  // Each column is as wide as its x range in bar widths, so a bar is the same width in all three.
+  const COL_GAP = 0.08;
+  const COLS = (() => {
+    const span = { A: 4 / 0.39, B: (B_RANGE[1] - B_RANGE[0]) / B_W, C: (STUDIES.length + 0.1) / cBar }, total = span.A + span.B + span.C, room = 1 - 2 * COL_GAP;
+    const a = room * span.A / total, b = room * span.B / total;
+    return { A: [0, a], B: [a + COL_GAP, a + COL_GAP + b], C: [a + b + 2 * COL_GAP, 1] };
+  })();
   const TOP = [0.429, 0.828], BOT = [0, 0.399];
   // C splits its top cell: reactions above, MEMOTE below
   const C_RXN = [0.65, 0.815], C_MEMOTE = [0.429, 0.607];
@@ -182,7 +195,7 @@ code { font-family: var(--mono); font-size: 0.88em; }
       });
     };
     k.strip = () => k.traces.forEach((t) => { delete t.legend; delete t.legendgroup; t.showlegend = false; });
-    k.base = { barmode: "group", bargap: 0.22, bargroupgap: 0.04, violinmode: "overlay", boxmode: "overlay",
+    k.base = { barmode: "group", bargap: BARGAP, bargroupgap: BARGROUPGAP, violinmode: "overlay", boxmode: "overlay",
       paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", font: { family: SANS, size: 12, color: k.ink }, hoverlabel: { font: { family: SANS } } };
     return k;
   }
@@ -287,7 +300,7 @@ code { font-family: var(--mono); font-size: 0.88em; }
         hovertemplate: `${name}<br>%{customdata[0]}: MEMOTE %{y:.3f}<br>IQR %{customdata[1]:.3f}–%{customdata[2]:.3f}<br>%{customdata[3]:,} models<extra></extra>` });
     });
     STUDIES.forEach(([st], i) => E4L.forEach(([lane, name], j) => {
-      const y = E4[lane][st].map((r) => 100 * r), x = i + (j - 1.5) * 0.23, col = e4Col[lane];
+      const y = E4[lane][st].map((r) => 100 * r), x = cX(i, j + 1), col = e4Col[lane];
       k.traces.push({ type: "violin", x: y.map(() => x), y, xaxis: "x6", yaxis: "y6", side: "negative", width: 0.2, spanmode: "hard", points: false,
         line: { color: col, width: 1 }, fillcolor: col, opacity: 0.55, name, showlegend: false, hoverinfo: "skip" });
       const b = summary(y);
@@ -315,14 +328,17 @@ code { font-family: var(--mono); font-size: 0.88em; }
     k.text(brx, brow(2), "swapped assembler"); k.span(br, brow(2), brow(2));
     // C: who built the model on the left, CarveMe version on the right, each bar spanning the rows its label covers
     const lx = COLS.C[0], sx = lx + k.px(76), lb = sx - k.px(6), rb = sx + k.px(BOX + 6), rx = rb + k.px(6), row = (r) => 22 + r * PITCH;
-    k.box(sx, row(0), ref); k.box(sx, row(1), e4Col.repro); k.box(sx, row(2), e4Col.modern); k.box(sx, row(3), e4Col.kofam); k.box(sx, row(4), e4Col.both);
+    const last = E4L.length;
+    k.box(sx, row(0), ref); E4L.forEach(([lane], j) => k.box(sx, row(j + 1), e4Col[lane]));
     k.text(lx, row(0), "metaGEM"); k.span(lb, row(0), row(0));
-    k.text(lx, (row(1) + row(4)) / 2, "Metasmith"); k.span(lb, row(1), row(4));
+    k.text(lx, (row(1) + row(last)) / 2, "Metasmith"); k.span(lb, row(1), row(last));
     k.text(rx, 6, "CarveMe", "left", v("--ink"));
     k.text(rx, (row(0) + row(1)) / 2, "v1.2.2"); k.span(rb, row(0), row(1));
     k.text(rx, row(2), "v1.6.6"); k.span(rb, row(2), row(2));
-    k.text(rx, row(3), "v1.6.6 · KOfam"); k.span(rb, row(3), row(3));
-    k.text(rx, row(4), "v1.6.6 · KOfam + DIAMOND"); k.span(rb, row(4), row(4));
+    if (KOFAM) {
+      k.text(rx, row(3), "v1.6.6 · KOfam"); k.span(rb, row(3), row(3));
+      k.text(rx, row(4), "v1.6.6 · KOfam + DIAMOND"); k.span(rb, row(4), row(4));
+    }
     const ident = { range: [0, 101], dtick: 20, ticksuffix: "%" };
 
     Plotly.react("fig", k.traces, Object.assign({}, k.base, {
