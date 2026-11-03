@@ -1,0 +1,63 @@
+kind	name	processes	lines	short_tasks	long_tasks
+module	modules/local/bin_summary/main.nf	BIN_SUMMARY	34	1	1
+module	modules/local/bowtie2_assembly_align/main.nf	BOWTIE2_ASSEMBLY_ALIGN	36	208	0
+module	modules/local/bowtie2_assembly_build/main.nf	BOWTIE2_ASSEMBLY_BUILD	21	298	0
+module	modules/local/dastool_rename_post/main.nf	RENAME_POSTDASTOOL	26	208	41
+module	modules/local/dastool_rename_pre/main.nf	RENAME_PREDASTOOL	37	623	82
+module	modules/local/mag_depths/main.nf	MAG_DEPTHS	25	831	123
+module	modules/local/mag_depths_summary/main.nf	MAG_DEPTHS_SUMMARY	21	1	1
+module	modules/local/quast_bins/main.nf	QUAST_BINS	32	0	164
+module	modules/local/quast_run/main.nf	QUAST	23	0	41
+module	modules/local/split_fasta/main.nf	SPLIT_FASTA	27	209	41
+module	modules/nf-core/checkm2/predict/main.nf	CHECKM2_PREDICT	29	1039	164
+module	modules/nf-core/chopper/main.nf	CHOPPER	37	0	41
+module	modules/nf-core/comebin/runcomebin/main.nf	COMEBIN_RUNCOMEBIN	44	208	41
+module	modules/nf-core/dastool/dastool/main.nf	DASTOOL_DASTOOL	52	208	41
+module	modules/nf-core/dastool/fastatocontig2bin/main.nf	DASTOOL_FASTATOCONTIG2BIN	33	623	82
+module	modules/nf-core/fastp/main.nf	FASTP	91	208	0
+module	modules/nf-core/fastqc/main.nf	FASTQC_RAW|FASTQC_TRIMMED	36	416	0
+module	modules/nf-core/flye/main.nf	FLYE	44	0	41
+module	modules/nf-core/gunzip/main.nf	GUNZIP_LONGREAD_ASSEMBLIES|GUNZIP_SHORTREAD_ASSEMBLIES	34	208	41
+module	modules/nf-core/megahit/main.nf	MEGAHIT	42	208	0
+module	modules/nf-core/metabat2/jgisummarizebamcontigdepths/main.nf	METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS_LONGREAD|METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS_SHORTREAD	29	208	41
+module	modules/nf-core/metabat2/metabat2/main.nf	METABAT2_METABAT2	36	211	41
+module	modules/nf-core/minimap2/align/main.nf	MINIMAP2_ASSEMBLY_ALIGN	46	0	41
+module	modules/nf-core/minimap2/index/main.nf	MINIMAP2_ASSEMBLY_INDEX	22	0	41
+module	modules/nf-core/multiqc/main.nf	MULTIQC	34	1	1
+module	modules/nf-core/nanoplot/main.nf	NANOPLOT_FILTERED|NANOPLOT_RAW	30	0	82
+module	modules/nf-core/porechop/abi/main.nf	PORECHOP_ABI	36	0	41
+module	modules/nf-core/prodigal/main.nf	PRODIGAL	39	208	41
+module	modules/nf-core/qsv/cat/main.nf	CONCAT_CHECKM2_TSV|CONCAT_QUAST_SUMMARY	30	1	2
+module	modules/nf-core/semibin/singleeasybin/main.nf	SEMIBIN_SINGLEEASYBIN	41	215	41
+module	modules/nf-core/seqkit/stats/main.nf	SEQKIT_STATS	28	623	82
+modules.config	withName: FASTQC_RAW (conf/modules.config:23-28)	FASTQC_RAW	6	208	0
+modules.config	withName: FASTP (conf/modules.config:30-54)	FASTP	25	208	0
+modules.config	withName: FASTQC_TRIMMED (conf/modules.config:153-162)	FASTQC_TRIMMED	10	208	0
+modules.config	withName: PORECHOP_ABI (conf/modules.config:196-204)	PORECHOP_ABI	9	0	41
+modules.config	withName: CHOPPER (conf/modules.config:264-283)	CHOPPER	20	0	41
+modules.config	withName: NANOPLOT_RAW (conf/modules.config:285-300)	NANOPLOT_RAW	16	0	41
+modules.config	withName: NANOPLOT_FILTERED (conf/modules.config:302-316)	NANOPLOT_FILTERED	15	0	41
+modules.config	withName: MINIMAP2_ASSEMBLY_INDEX (conf/modules.config:345-347)	MINIMAP2_ASSEMBLY_INDEX	3	0	41
+modules.config	withName: GUNZIP_SHORTREAD_ASSEMBLIES|GUNZIP_LONGREAD_ASSEMBLIES|GUNZIP_ASSEMBLYINPUT (conf/modules.config:349-351)	GUNZIP_SHORTREAD_ASSEMBLIES|GUNZIP_LONGREAD_ASSEMBLIES	3	208	41
+modules.config	withName: MINIMAP2_ASSEMBLY_ALIGN (conf/modules.config:353-371)	MINIMAP2_ASSEMBLY_ALIGN	19	0	41
+modules.config	withName: MEGAHIT (conf/modules.config:393-401)	MEGAHIT	9	208	0
+modules.config	withName: FLYE (conf/modules.config:423-431)	FLYE	9	0	41
+modules.config	withName: QUAST (conf/modules.config:442-448)	QUAST	7	0	41
+modules.config	withName: QUAST_BINS|CONCAT_QUAST_SUMMARY (conf/modules.config:474-480)	QUAST_BINS|CONCAT_QUAST_SUMMARY	7	0	165
+modules.config	withName: BOWTIE2_ASSEMBLY_ALIGN (conf/modules.config:496-512)	BOWTIE2_ASSEMBLY_ALIGN	17	208	0
+modules.config	withName: MAG_DEPTHS_SUMMARY (conf/modules.config:514-520)	MAG_DEPTHS_SUMMARY	7	1	1
+modules.config	withName: BIN_SUMMARY (conf/modules.config:522-528)	BIN_SUMMARY	7	1	1
+modules.config	withName: CONCAT_BUSCO_TSV|CONCAT_CHECKM_TSV|CONCAT_CHECKM2_TSV|CONCAT_GUNC_TSV|CONCAT_GUNC_CHECKM_TSV (conf/modules.config:584-591)	CONCAT_CHECKM2_TSV	8	1	1
+modules.config	withName: CHECKM2_PREDICT (conf/modules.config:603-611)	CHECKM2_PREDICT	9	1039	164
+modules.config	withName: PRODIGAL (conf/modules.config:756-765)	PRODIGAL	10	208	41
+modules.config	withName: METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS_SHORTREAD (conf/modules.config:858-867)	METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS_SHORTREAD	10	208	0
+modules.config	withName: METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS_LONGREAD (conf/modules.config:869-878)	METABAT2_JGISUMMARIZEBAMCONTIGDEPTHS_LONGREAD	10	0	41
+modules.config	withName: METABAT2_METABAT2 (conf/modules.config:884-909)	METABAT2_METABAT2	26	211	41
+modules.config	withName: COMEBIN_RUNCOMEBIN (conf/modules.config:959-974)	COMEBIN_RUNCOMEBIN	16	208	41
+modules.config	withName: SEMIBIN_SINGLEEASYBIN (conf/modules.config:1015-1040)	SEMIBIN_SINGLEEASYBIN	26	215	41
+modules.config	withName: SEQKIT_STATS (conf/modules.config:1042-1048)	SEQKIT_STATS	7	623	82
+modules.config	withName: SPLIT_FASTA (conf/modules.config:1050-1068)	SPLIT_FASTA	19	209	41
+modules.config	withName: DASTOOL_FASTATOCONTIG2BIN (conf/modules.config:1075-1084)	DASTOOL_FASTATOCONTIG2BIN	10	623	82
+modules.config	withName: DASTOOL_DASTOOL (conf/modules.config:1086-1095)	DASTOOL_DASTOOL	10	208	41
+modules.config	withName: RENAME_POSTDASTOOL (conf/modules.config:1097-1110)	RENAME_POSTDASTOOL	14	208	41
+modules.config	withName: MULTIQC (conf/modules.config:1159-1166)	MULTIQC	8	1	1

@@ -1,0 +1,84 @@
+section	metric	value	note
+source	nf-core/mag commit	56abab5b023ce953c9c43fe21090d156ad0e18af	tag 5.5.0
+union	workflow lines: routing	427	
+union	workflow lines: config	121	
+union	workflow lines: invocation	450	
+union	workflow lines: versions	93	
+union	workflow lines: other	382	
+union	workflow lines: PRUNED (exercised)	1473	headline denominator, workflow+subworkflow only
+union	process module lines (modules/**/main.nf, no stub)	1095	
+union	conf/modules.config entry lines	372	
+union	routing % of workflow lines	29.0	
+union	routing % of workflow lines without `other`	39.1	drops non-channel Groovy: validation, banners, citations, email
+union	routing % of workflow + modules + modules.config	14.5	denominator 2940
+short	workflow lines: routing	345	
+short	workflow lines: config	97	
+short	workflow lines: invocation	397	
+short	workflow lines: versions	79	
+short	workflow lines: other	379	
+short	workflow lines: PRUNED (exercised)	1297	headline denominator, workflow+subworkflow only
+short	process module lines (modules/**/main.nf, no stub)	825	
+short	conf/modules.config entry lines	257	
+short	routing % of workflow lines	26.6	
+short	routing % of workflow lines without `other`	37.6	drops non-channel Groovy: validation, banners, citations, email
+short	routing % of workflow + modules + modules.config	14.5	denominator 2379
+long	workflow lines: routing	378	
+long	workflow lines: config	99	
+long	workflow lines: invocation	404	
+long	workflow lines: versions	82	
+long	workflow lines: other	382	
+long	workflow lines: PRUNED (exercised)	1345	headline denominator, workflow+subworkflow only
+long	process module lines (modules/**/main.nf, no stub)	869	
+long	conf/modules.config entry lines	295	
+long	routing % of workflow lines	28.1	
+long	routing % of workflow lines without `other`	39.3	drops non-channel Groovy: validation, banners, citations, email
+long	routing % of workflow + modules + modules.config	15.1	denominator 2509
+union	FILES TOUCHED: files	19	
+union	FILES TOUCHED: lines (upper bound)	2640	every non-blank non-comment line of each file
+union subtypes	config/param-if	120	
+union subtypes	config/param-ternary	1	
+union subtypes	invocation/alias	24	
+union subtypes	invocation/call	160	
+union subtypes	invocation/emit	32	
+union subtypes	invocation/include	65	
+union subtypes	invocation/label	57	
+union subtypes	invocation/take	72	
+union subtypes	invocation/workflow header	40	
+union subtypes	other/function	340	
+union subtypes	other/handler	6	
+union subtypes	other/statement	36	
+union subtypes	routing/factory	29	
+union subtypes	routing/join-key function	8	
+union subtypes	routing/multiqc	30	
+union subtypes	routing/operator	337	
+union subtypes	routing/operator in call	23	
+union subtypes	versions/-	93	
+union	of which nf-core template/utility files	553	main.nf, subworkflows/nf-core/utils_*, utils_nfcore_mag_pipeline
+short	processes ran (tasks > 0)	24	B19 hand reruns excluded
+long	processes ran (tasks > 0)	28	B19 hand reruns excluded
+union	processes ran (tasks > 0)	36	
+nf-core counterpart	process input declarations	56	
+nf-core counterpart	distinct input tuple signatures	11	val names kept, path globs dropped
+nf-core counterpart	process output declarations (excl. versions)	87	
+nf-core counterpart	distinct output tuple signatures	5	
+nf-core counterpart	distinct input+output signatures	13	
+nf-core counterpart	versions output declarations	31	
+nf-core counterpart	meta keys read/set in exercised workflow code	12	assembler bin_id binner domain group id lr_platform refinement run sample_count single_end sr_platform
+nf-core counterpart	meta keys read in their modules.config entries	8	assembler binner domain id lr_platform refinement run sample_count
+metasmith	transforms	14	union of both arms, amber and gold_standard excluded
+metasmith	requires (data) declarations	38	
+metasmith	requires (env) declarations	15	
+metasmith	produces declarations	21	
+metasmith	parents= lineage edges	23	
+metasmith	group_by declarations	14	
+metasmith	distinct data types (referenced + ancestors)	27	adapter_trimmed_long_reads assembly bin binning_bam checkm2_database checkm2_quality comebin_bin comebin_contig_to_bin das_tool_bin das_tool_contig_to_bin das_tool_summary fastp_html fastp_json fastqc_raw_reports fastqc_trimmed_reports filtered_long_reads flye_assembly long_reads megahit_assembly metabat2_bin metabat2_contig_to_bin read_metadata semibin2_bin semibin2_contig_to_bin short_reads_1 short_reads_2 trimmed_short_reads
+metasmith	of which ancestors only	0	
+metasmith	extends edges on those types	6	
+metasmith	properties declared on those data types	60	48 without the `_` description
+metasmith	env types	14	bowtie2.env checkm2.env chopper.env comebin.env das_tool.env fastp.env fastqc.env flye.env jgi_depth.env megahit.env metabat2.env minimap2.env porechop_abi.env semibin2.env
+metasmith	properties declared on env types	28	
+metasmith	hand-written routing lines	0	Nextflow DSL tokens in E2 transforms and e2_cami.py: none
+metasmith	read_metadata keys read inside transform protocols	2	platform sample
+metasmith	transform Python lines (non-blank, non-comment)	504	whole files: declarations + protocol + helpers
+check	DAG agreement	short: 35 processes invoked by the pruned code = the 35 in E1's DAG	
+check	DAG agreement	long: 38 processes invoked by the pruned code = the 38 in E1's DAG	

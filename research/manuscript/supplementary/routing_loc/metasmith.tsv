@@ -1,0 +1,15 @@
+transform	requires_data	requires_env	produces	parents_edges	group_by	python_lines
+bowtie2_binning_bam	3	1	1	2	e2::megahit_assembly	27
+checkm2	2	1	1	0	e2::bin	41
+chopper	2	1	1	1	e2::adapter_trimmed_long_reads	22
+comebin	3	1	2	2	e2::assembly	39
+das_tool	5	1	3	4	e2::assembly	50
+fastp	3	1	3	2	e2::read_metadata	39
+fastqc_raw	3	1	1	2	e2::read_metadata	32
+fastqc_trimmed	2	1	1	1	e2::trimmed_short_reads	32
+flye	2	1	1	1	e2::read_metadata	32
+megahit	2	1	1	1	e2::read_metadata	27
+metabat2	3	2	2	2	e2::assembly	54
+minimap2_binning_bam	3	1	1	2	e2::flye_assembly	35
+porechop_abi	2	1	1	1	e2::long_reads	27
+semibin2	3	1	2	2	e2::assembly	47

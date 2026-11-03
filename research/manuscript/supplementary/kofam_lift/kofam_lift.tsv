@@ -1,0 +1,7 @@
+study	mags	orfs	annotated_diamond	annotated_with_kofam	reaction_diamond	reaction_with_kofam	kofam_only_reaction_orfs	reactions_diamond	reactions_with_kofam
+Bissett 2016	27	2538.0	41.3	54.3	40.8	42.0	30.0	1744.0	2121.0
+Karlsson 2013	413	2115.0	41.6	60.7	41.3	42.1	19.0	1557.0	1887.0
+Korem 2015	15	2412.0	42.1	58.5	41.6	42.3	25.0	1838.0	2191.0
+Li 2019	17	2502.0	42.8	61.7	41.2	42.7	40.0	2185.0	2701.0
+Sunagawa 2015	936	1697.5	43.7	60.7	42.2	43.3	20.0	1791.0	2130.5
+All	1408	1879.5	42.8	60.5	41.6	42.7	20.0	1666.0	1995.0
