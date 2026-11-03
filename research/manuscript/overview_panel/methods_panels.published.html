@@ -819,7 +819,7 @@
       const key = tf && nodes.find((n) => n.tri && Math.abs(n.cy - (tf.y + tf.height / 2)) < 25 && n.x > tf.x);
       if (key) { key.after = tf; key.isKey = true; }
       if (types) {
-        types.text = "Types:";
+        types.text = opts.typesLabel || "Types:";
         const sz = key ? key.tw * 0.8 : 28;
         if (key) { key.tw = sz; key.th = sz * 0.86; }
         const circ = { id: "key-type", type: "ellipse", x: 0, y: 0, width: sz, height: sz, strokeColor: "#1e1e1e",
@@ -1161,7 +1161,7 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types, SCENE_OPTS.types, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type:" }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, each row named on the left.
