@@ -10,8 +10,8 @@ sys.path.insert(0, str(HERE.parent / "routing_panels"))
 
 from build import draw  # noqa: E402
 
-INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5"},
-       "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31"}}
+INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5", "job": "#E3E6EC"},
+       "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31", "job": "#343944"}}
 
 # The plan's shape: t1 makes several b from one a; t2 runs once per b (group by b), takes a as well, and makes several c.
 PLAN = [("t1", None, "t1", ["a"], ["b"]),
@@ -70,7 +70,15 @@ def plan_and_grid(theme):
     ys, ink = data_rows(svg), INK[theme]
     p, dy = bare(svg)
     cw, ch, gap = 30.0, 16.0, 4.0
+    span_x = lambda cols: (cols[0] * (cw + gap), len(cols) * cw + (len(cols) - 1) * gap)  # noqa: E731
+    top, bot = min(ys.values()) + dy - ch / 2, max(ys.values()) + dy + ch / 2
+    # Each job (one run of t2, one per b) is a grey ribbon down its columns, named below the plan's last triangle.
+    last = max(float(y) for pts in re.findall(r'<polygon points="([^"]+)"', svg) for y in re.findall(r",([\d.]+)", pts)) + dy
+    job_y = last + 16
     out = []
+    for cols in CELLS["c"]:
+        x, w = span_x(cols)
+        out.append(f'<rect x="{x:.1f}" y="{top - 4:.1f}" width="{w:.1f}" height="{job_y + 5 - (top - 4):.1f}" rx="4" fill="{ink["job"]}"/>')
     for name, spans in CELLS.items():
         y = ys[name] + dy - ch / 2
         for cols in spans:
@@ -82,16 +90,15 @@ def plan_and_grid(theme):
                 out.append(f'<line x1="{x + w / 2:.1f}" y1="{y:.1f}" x2="{x + w / 2:.1f}" y2="{y + ch:.1f}" '
                            f'stroke="{ink["cell"]}" stroke-width="2.4"/>')
     gw = COLUMNS * cw + (COLUMNS - 1) * gap
-    top, bot = min(ys.values()) + dy - ch / 2, max(ys.values()) + dy + ch / 2
     label = lambda x, y, t, extra="": (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Arial" font-size="13" fill="{ink["text"]}" '
                                        f'text-anchor="middle"{extra}>{t}</text>')
-    out.append(label(gw / 2, top - 7, "instances"))
+    out.append(label(gw / 2, top - 10, "instances"))
     out.append(f'<line x1="{gw + 8:.1f}" y1="{top:.1f}" x2="{gw + 8:.1f}" y2="{bot:.1f}" stroke="{ink["text"]}" stroke-width="1.1"/>')
     out.append(label(gw + 20, (top + bot) / 2, "types", f' transform="rotate(90 {gw + 20:.1f} {(top + bot) / 2:.1f})" dominant-baseline="central"'))
     for i, cols in enumerate(CELLS["c"]):
-        x = cols[0] * (cw + gap) + (len(cols) * cw + (len(cols) - 1) * gap) / 2
-        out.append(label(x, ys["c"] + dy + ch / 2 + 15, f"job {i + 1}"))
-    return p, {"w": gw + 30, "h": p["h"], "body": "".join(out)}
+        x, w = span_x(cols)
+        out.append(label(x + w / 2, job_y, f"job {i + 1}"))
+    return p, {"w": gw + 30, "h": max(p["h"], job_y + 8), "body": "".join(out)}
 
 
 def spec_piece(svg, row=None):
