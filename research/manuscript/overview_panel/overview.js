@@ -1,8 +1,8 @@
   // ov:js:start — the overview: a band of two reciprocal triangles over Contract / Specification / Plan / Execution columns
   const OV = JSON.parse(document.getElementById("ov-data").textContent);
   const OVPAL = {
-    light: { you: "#E3E6EC", youText: "#1B1E24", ms: "#636EFA", msText: "#FFFFFF", bar: "#EEF0F3", barText: "#1B1E24" },
-    dark:  { you: "#343944", youText: "#DFE3EA", ms: "#636EFA", msText: "#FFFFFF", bar: "#262A31", barText: "#DFE3EA" },
+    light: { you: "#E3E6EC", youText: "#1B1E24", ms: "#636EFA", msText: "#FFFFFF", },
+    dark:  { you: "#343944", youText: "#DFE3EA", ms: "#636EFA", msText: "#FFFFFF", },
   };
   const DS = 22 / 13;   // composite px per DAG-renderer px: its 13px labels land at the figure's 22px
   function excal(elements, opts, s) {   // s: composite px per scene unit, fixed so steps match across pieces
@@ -33,14 +33,14 @@
   }
   function overview(pal) {
     const t = theme(), op = OVPAL[t], d = OV[t];
-    const FS = 22, PAD = 28, G = 56, BAR = 34, LAB_GAP = 22, BAND = 60, ICON = BAND, FADE = ICON + 70;
+    const FS = 22, PAD = 28, G = 56, BAND = 60, ICON = BAND, FADE = ICON + 70;
     const text = (x, y, s, anchor = "start", fill = pal.text, weight = "normal") =>
       `<text x="${f(x)}" y="${f(y + FS * 0.35)}" font-family="${FONT}" font-size="${FS}" font-weight="${weight}" fill="${fill}" text-anchor="${anchor}">${esc(s)}</text>`;
     // A: the types canvas at the figure's one label size; it is drawn large enough that its circle labels fit at that size.
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type:" }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type:", flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, each row named on the left. A row's pieces sit level on their anchors
@@ -68,13 +68,9 @@
         return out;
       } };
     const C = piece(d.plan), D = piece(d.grid);
-    // A column is at least wide enough for its header: the letter at the left, the name centred clear of it.
-    const fit = (letter, name, it) => {
-      const w = Math.max(it.w, textWidth(name, FS) + 2 * (12 + textWidth(letter, FS) + 14)), dx = (w - it.w) / 2;
-      return [letter, name, { w, h: it.h, inner: (x, y) => it.inner(x + dx, y) }];
-    };
-    const COLS = [["A", "Contract", A], ["B", "Specification", B], ["C", "Plan", C], ["D", "Execution", D]].map((c) => fit(...c));
-    const W = PAD * 2 + COLS.reduce((s, c) => s + c[2].w, 0) + G * (COLS.length - 1);
+    const COLS = [["A", "Contract", A], ["B", "Specification", B], ["C", "Plan", C], ["D", "Execution", D]]
+      .map(([letter, name, it]) => { const title = `${letter}. ${name}`; return [title, { ...it, w: Math.max(it.w, textWidth(title, FS) * 1.06) }]; });
+    const W = PAD * 2 + COLS.reduce((s, c) => s + c[1].w, 0) + G * (COLS.length - 1);
     // The band spans the full width; each triangle's thick end is the icons' height (2 for their strokes) and fades out under its icon.
     const y0 = PAD, bh = BAND + 2, x0 = PAD, x1 = W - PAD, bw = x1 - x0, cy = y0 + bh / 2, gx = 3.5 * bw / bh;
     const fade = (id, color, from, to) => `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${f(from)}" y1="0" x2="${f(to)}" y2="0">`
@@ -88,12 +84,9 @@
       + text(x0 + FADE, y0 + bh * 0.3, "Expressiveness", "start", op.youText)
       + text(x1 - FADE, y0 + bh * 0.72, "Automation", "end", op.msText);
     let cx = PAD, H = 0;
-    const yBar = y0 + bh + 18, yBody = yBar + BAR + LAB_GAP;
-    for (const [letter, name, it] of COLS) {
-      svg += `<rect x="${f(cx)}" y="${f(yBar)}" width="${f(it.w)}" height="${BAR}" rx="5" fill="${op.bar}"/>`
-        + text(cx + 12, yBar + BAR / 2, letter, "start", op.barText, "bold")
-        + text(cx + it.w / 2, yBar + BAR / 2, name, "middle", op.barText, "bold")
-        + it.inner(cx, yBody);
+    const yTitle = y0 + bh + 30, yBody = yTitle + FS;
+    for (const [title, it] of COLS) {
+      svg += text(cx, yTitle, title, "start", pal.text, "bold") + it.inner(cx, yBody);
       H = Math.max(H, yBody + it.h);
       cx += it.w + G;
     }

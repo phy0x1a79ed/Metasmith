@@ -60,6 +60,23 @@ def plan(theme):
     return hollow(draw(PLAN, theme, given=["reads"], target=["BAM"]))
 
 
+def ink_origin(svg):
+    """The top-left of the drawn shapes, ignoring labels: where a left-aligned title should meet the drawing."""
+    xs, ys = [], []
+    for cx, cy, r in re.findall(r'<circle cx="([\d.]+)" cy="([\d.]+)" r="([\d.]+)"', svg):
+        xs.append(float(cx) - float(r)); ys.append(float(cy) - float(r))
+    for pts in re.findall(r'<polygon points="([^"]+)"', svg):
+        for x, y in (p.split(",") for p in pts.split()):
+            xs.append(float(x)); ys.append(float(y))
+    for x, y in re.findall(r"[ML] ([\d.]+),([\d.]+)", svg):
+        xs.append(float(x)); ys.append(float(y))
+    return min(xs) - 1, min(ys) - 1
+
+
+def shifted(p, dx, dy):
+    return {"w": p["w"] - dx, "h": p["h"] - dy, "body": f'<g transform="translate({-dx:.1f} {-dy:.1f})">{p["body"]}</g>'}
+
+
 def grid(theme):
     """The sample table for execution, its rows level with the plan's data rows."""
     svg = plan(theme)
@@ -97,7 +114,15 @@ def specification(theme):
 
 
 def data():
-    return {t: {"plan": piece(plan(t)), "grid": grid(t), "spec": specification(t)} for t in ("light", "dark")}
+    out = {}
+    for t in ("light", "dark"):
+        svg = plan(t)
+        dx, dy = ink_origin(svg)
+        g = grid(t)
+        top = min(dy, min(float(y) for y in re.findall(r'<text[^>]* y="([\d.]+)"', g["body"])) - 16)
+        # The grid keeps the plan's rows: both lose the same top margin.
+        out[t] = {"plan": shifted(piece(svg), dx, top), "grid": shifted(g, 0, top), "spec": specification(t)}
+    return out
 
 
 def splice(page: Path, section: Path, script: Path):
