@@ -43,26 +43,29 @@
     try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
-    // B: the specification in pieces, each row named on the left. A row's pieces sit level on their anchors
-    // (the data node for Given and Targets, the transform for the library), and the row's name sits on that level too.
-    const S = d.spec, dots = 34, LG = 28;
+    // B: the specification in pieces, one section per row. A vertical line spans each section, its name centred beside it;
+    // a row's pieces sit level on their anchors (the data node for Given and Targets, the transform for the library).
+    const S = d.spec, dots = 34, LG = 28, INSET = 6 * DS, RULE = 16;
     const anchored = (p) => ({ ...piece(p), a: p.anchor * DS });
     const lib = S.library.map(anchored);
-    const libW = lib.reduce((s, p) => s + p.w, 0) + LG * lib.length + dots;
-    const rowsB = [["Given", [anchored(S.given)]], ["Transform library", lib], ["Targets", [anchored(S.targets)]]].map(([name, ps]) => {
+    const libW = lib.reduce((s, p) => s + p.w, 0) + LG * (lib.length - 1) + 14 + dots;
+    const rowsB = [[["Given"], [anchored(S.given)]], [["Transform", "library"], lib], [["Targets"], [anchored(S.targets)]]].map(([lines, ps]) => {
       const a = Math.max(...ps.map((p) => p.a));
-      return { name, ps, a, h: Math.max(...ps.map((p) => a - p.a + p.h)) };
+      return { lines, ps, a, h: Math.max(...ps.map((p) => a - p.a + p.h)) };
     });
-    const labW = Math.max(...rowsB.map((r) => textWidth(r.name, FS))) + 18, RG = 10;
-    const B = { w: labW + Math.max(libW, ...rowsB.map((r) => r.ps[0].w)),
+    const labW = Math.max(...rowsB.flatMap((r) => r.lines.map((l) => textWidth(l, FS)))), RG = 14;
+    const xRule = labW + RULE, xBody = xRule + RULE - INSET;
+    const B = { w: xBody + Math.max(libW, ...rowsB.map((r) => r.ps[0].w)),
       h: rowsB.reduce((s, r) => s + r.h, 0) + RG * (rowsB.length - 1),
       inner: (x, y) => {
         let out = "", cy = y;
         for (const r of rowsB) {
-          out += text(x + labW - 18, cy + r.a, r.name, "end");
-          let cx = x + labW;
+          const mid = cy + r.h / 2, lh = FS * 1.2;
+          r.lines.forEach((l, i) => { out += text(x, mid + (i - (r.lines.length - 1) / 2) * lh, l); });
+          out += `<line x1="${f(x + xRule)}" y1="${f(cy + INSET)}" x2="${f(x + xRule)}" y2="${f(cy + r.h - INSET)}" stroke="${pal.text}" stroke-width="1.5"/>`;
+          let cx = x + xBody;
           for (const p of r.ps) { out += p.inner(cx, cy + r.a - p.a); cx += p.w + LG; }
-          if (r.ps === lib) for (let i = 0; i < 3; i++) out += `<circle cx="${f(cx + 4 + i * 12)}" cy="${f(cy + r.a)}" r="3.2" fill="${pal.text}"/>`;
+          if (r.ps === lib) for (let i = 0; i < 3; i++) out += `<circle cx="${f(cx - LG + 14 + 4 + i * 12)}" cy="${f(cy + r.a)}" r="3.2" fill="${pal.text}"/>`;
           cy += r.h + RG;
         }
         return out;
