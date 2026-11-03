@@ -1155,6 +1155,26 @@
     return { w: p.w * k, h: p.h * k,
       inner: (x, y) => `<svg x="${f(x)}" y="${f(y)}" width="${f(p.w * k)}" height="${f(p.h * k)}" viewBox="0 0 ${f(p.w)} ${f(p.h)}" overflow="visible">${p.body}</svg>` };
   }
+  // A's three cases, left to right: the ring each case's contract takes is drawn bold (the inner of the first
+  // nested pair, the outer of the second, the right of the overlapping pair); arrows out of the rings are plain.
+  function emphasise(svg) {
+    const rings = [...svg.matchAll(/<ellipse cx="([-\d.]+)" cy="([-\d.]+)" rx="([\d.]+)"[^>]*\/>/g)]
+      .map((m) => ({ s: m[0], cx: +m[1], cy: +m[2], r: +m[3] })).filter((e) => e.r < 30);
+    const count = {};
+    for (const e of rings) count[e.cy] = (count[e.cy] || 0) + 1;
+    const rowY = +Object.keys(count).sort((a, b) => count[b] - count[a])[0];
+    const row = rings.filter((e) => e.cy === rowY);
+    const byX = {};
+    for (const e of row) (byX[e.cx] ??= []).push(e);
+    const nested = Object.values(byX).filter((g) => g.length > 1).sort((a, b) => a[0].cx - b[0].cx);
+    const lone = row.filter((e) => byX[e.cx].length === 1).sort((a, b) => a.cx - b.cx);
+    const bold = [nested[0] && nested[0].reduce((a, b) => (a.r < b.r ? a : b)),
+                  nested[1] && nested[1].reduce((a, b) => (a.r > b.r ? a : b)), lone[lone.length - 1]].filter(Boolean);
+    const arrowW = +(svg.match(/<g><path d="M [-\d.]+ [-\d.]+ L [^"]*" fill="none" stroke="[^"]*" stroke-width="([\d.]+)"/) || [0, 2])[1];
+    for (const e of bold) svg = svg.replace(e.s, e.s.replace(/stroke-width="[\d.]+"/, `stroke-width="${arrowW}"`));
+    return svg.replace(/<g><path d="M [-\d.]+ ([-\d.]+) L .*?<\/g>/g, (g, y0) =>
+      +y0 > rowY ? g.replace(/stroke-width="([\d.]+)"/g, (_, w) => `stroke-width="${f(w / 2)}"`) : g);
+  }
   function userIcon(cx, cy, s, ink) {   // the person from the old figure 1A, with its upright head, scaled to height s
     const k = s / 74, X = (x) => f(cx + (x - 24.5) * k), Y = (y) => f(cy + (y - 37) * k);
     return `<g fill="none" stroke="${ink}" stroke-width="2" stroke-linejoin="round">`
@@ -1181,7 +1201,7 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Contract", keyStack: true, boldArrows: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Contract", keyStack: true, boldArrows: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: emphasise(contract.inner(0, 0)) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, one section per row, its name right-aligned and centred beside it;
