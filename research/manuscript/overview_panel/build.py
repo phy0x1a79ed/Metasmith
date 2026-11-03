@@ -1,4 +1,4 @@
-"""Draw the overview figure's DAG-renderer pieces (lineage pair, rows) and splice the figure into the methods-panels page."""
+"""Draw the overview figure's DAG-renderer piece (rows) and splice the figure into the methods-panels page."""
 import argparse
 import json
 import re
@@ -8,17 +8,11 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "routing_panels"))
 
-from build import HUE, draw  # noqa: E402
+from build import draw  # noqa: E402
 
-HUE.update({"bin": "#00CC96", "genes": "#FFA15A"})
 INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill": "#F1F2F5"},
        "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31"}}
 
-PLAIN = [("asm", "assemble", "assemble", ["reads"], ["assembly"]),
-         ("orf", "genes", "call genes", ["assembly"], ["ORFs"])]
-VIA_MAG = [("asm", "assemble", "assemble", ["reads"], ["assembly"]),
-           ("bin", "bin", "bin", ["assembly"], ["MAG"]),
-           ("orf", "genes", "call genes", ["MAG"], ["ORFs"])]
 ROWS = [("asm", "assemble", "assemble", ["reads"], ["assembly"]),
         ("map", "map", "map", ["reads", "assembly"], ["BAM"])]
 SAMPLES = ["S1", "S2", "S3"]
@@ -33,11 +27,6 @@ def piece(svg):
 
 def data_rows(svg):
     return {t: float(cy) for t, cy in re.findall(r'<g><title>([^<]+)</title>\s*<circle cx="[\d.]+" cy="([\d.]+)"', svg)}
-
-
-def lineage(theme):
-    return {"plain": piece(draw(PLAIN, theme, given=["reads"], target=["ORFs"])),
-            "mag": piece(draw(VIA_MAG, theme, given=["reads"], target=["ORFs"]))}
 
 
 def rows(theme):
@@ -60,7 +49,7 @@ def rows(theme):
 
 
 def data():
-    return {t: {"lineage": lineage(t), "rows": rows(t)} for t in ("light", "dark")}
+    return {t: {"rows": rows(t)} for t in ("light", "dark")}
 
 
 def splice(page: Path, section: Path, script: Path):
