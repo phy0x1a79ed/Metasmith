@@ -4,8 +4,6 @@
     light: { you: "#E3E6EC", youText: "#1B1E24", ms: "#636EFA", msText: "#FFFFFF", },
     dark:  { you: "#343944", youText: "#DFE3EA", ms: "#636EFA", msText: "#FFFFFF", },
   };
-  // A's types in warm hues, leaving blue to Metasmith's plan and execution.
-  const WARM = { "#ef553b": "#EF553B", "#636efa": "#FFA15A", "#ab63fa": "#D4A00B" };
   const DS = 22 / 13;   // composite px per DAG-renderer px: its 13px labels land at the figure's 22px
   function excal(elements, opts, s) {   // s: composite px per scene unit, fixed so steps match across pieces
     const r = renderScene(elements, PAL[theme()], opts);
@@ -42,7 +40,7 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: WARM[String(e.strokeColor).toLowerCase()] ?? e.strokeColor })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, one section per row, its name right-aligned and centred beside it;

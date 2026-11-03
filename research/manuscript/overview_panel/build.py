@@ -76,11 +76,11 @@ def plan_and_grid(theme):
         for cols in spans:
             x = cols[0] * (cw + gap)
             w = len(cols) * cw + (len(cols) - 1) * gap
-            out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="{METASMITH}" '
-                       f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
+            out.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{ch:.1f}" rx="3" fill="none" '
+                       f'stroke="{METASMITH}" stroke-width="2.4"/>')
             if name in DIVIDED:
                 out.append(f'<line x1="{x + w / 2:.1f}" y1="{y:.1f}" x2="{x + w / 2:.1f}" y2="{y + ch:.1f}" '
-                           f'stroke="{ink["cell"]}" stroke-width="1.1"/>')
+                           f'stroke="{METASMITH}" stroke-width="2.4"/>')
     gw = COLUMNS * cw + (COLUMNS - 1) * gap
     top, bot = min(ys.values()) + dy - ch / 2, max(ys.values()) + dy + ch / 2
     label = lambda x, y, t, extra="": (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Arial" font-size="13" fill="{ink["text"]}" '
