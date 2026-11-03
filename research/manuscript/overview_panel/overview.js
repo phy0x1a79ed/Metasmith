@@ -1,4 +1,4 @@
-  // ov:js:start — the overview: a band of two reciprocal triangles over Intent / Plan / Execution columns
+  // ov:js:start — the overview: a band of two reciprocal triangles over Specification / Plan / Execution columns
   const OV = JSON.parse(document.getElementById("ov-data").textContent);
   const OVPAL = {
     light: { you: "#E3E6EC", youText: "#1B1E24", ms: "#5F6878", msText: "#FFFFFF", bar: "#EEF0F3", barText: "#1B1E24" },
@@ -29,6 +29,24 @@
     return { w: Math.max(item.w, textWidth(text, fs)), h: h + item.h,
       inner: (x, y) => `<text x="${f(x)}" y="${f(y + fs)}" font-family="${FONT}" font-size="${fs}" fill="${pal.text}">${esc(text)}</text>` + item.inner(x, y + h) };
   }
+  function userIcon(cx, cy, s, ink) {   // the person from the old figure 1A, scaled to height s
+    const k = s / 70, X = (x) => f(cx + (x - 24) * k), Y = (y) => f(cy + (y - 35) * k);
+    return `<g fill="none" stroke="${ink}" stroke-width="2" stroke-linejoin="round">`
+      + `<ellipse cx="${X(24)}" cy="${Y(13.5)}" rx="${f(15 * k)}" ry="${f(13.5 * k)}"/>`
+      + `<polygon points="${X(12)},${Y(34)} ${X(37)},${Y(34)} ${X(49)},${Y(68)} ${X(0)},${Y(68)}"/></g>`;
+  }
+  function serverIcon(cx, cy, s, ink) {   // three stacked units, each with two lights and two vents
+    const w = s * 0.95, gap = s * 0.07, h = (s - 2 * gap) / 3, x = cx - w / 2;
+    let out = `<g fill="none" stroke="${ink}" stroke-width="2" stroke-linecap="round">`;
+    for (let i = 0; i < 3; i++) {
+      const y = cy - s / 2 + i * (h + gap), my = y + h / 2;
+      out += `<rect x="${f(x)}" y="${f(y)}" width="${f(w)}" height="${f(h)}" rx="${f(h * 0.3)}"/>`
+        + `<circle cx="${f(x + w * 0.18)}" cy="${f(my)}" r="${f(h * 0.2)}"/><circle cx="${f(x + w * 0.33)}" cy="${f(my)}" r="${f(h * 0.2)}"/>`
+        + `<line x1="${f(x + w * 0.46)}" y1="${f(y + h * 0.36)}" x2="${f(x + w * 0.86)}" y2="${f(y + h * 0.36)}"/>`
+        + `<line x1="${f(x + w * 0.46)}" y1="${f(y + h * 0.64)}" x2="${f(x + w * 0.86)}" y2="${f(y + h * 0.64)}"/>`;
+    }
+    return out + "</g>";
+  }
   function lineagePair(L, pal) {
     return row([caption("Target: ORFs", piece(L.plain), pal), caption("Target: ORFs from a MAG", piece(L.mag), pal)], 44);
   }
@@ -38,7 +56,7 @@
     const intentScene = solver.filter((e) => centreX(e) < 429);
     const planScene = solver.filter((e) => centreX(e) > 950);
     const COLS = [
-      ["Intent", [["A", excal(intentScene, SCENE_OPTS.solver, 0.62)], ["B", excal(DATA.scenes.types, SCENE_OPTS.types, 0.95)]]],
+      ["Specification", [["A", excal(intentScene, SCENE_OPTS.solver, 0.62)], ["B", excal(DATA.scenes.types, SCENE_OPTS.types, 0.95)]]],
       ["Plan", [["C", excal(planScene, SCENE_OPTS.solver, 0.62)], ["D", lineagePair(d.lineage, pal)]]],
       ["Execution", [["E", piece(d.rows)]]],
     ];
@@ -50,15 +68,18 @@
       return { name, body: ovSplit === "side" ? row(parts, IG) : col(parts, IG) };
     });
     const W = PAD * 2 + cols.reduce((s, c) => s + c.body.w, 0) + G * (cols.length - 1);
-    const x0 = PAD, x1 = W - PAD, y0 = PAD, bh = BAND, e = 3.5 / bh;
+    const ICON = 64, IGAP = 16, y0 = PAD + 6, bh = BAND, e = 3.5 / bh;
+    const x0 = PAD + ICON + IGAP, x1 = W - PAD - ICON - IGAP;
     const tri = (pts, fill) => `<polygon points="${pts.map(([x, y]) => `${f(x)},${f(y)}`).join(" ")}" fill="${fill}"/>`;
     const bw = x1 - x0;
-    let svg = tri([[x0, y0], [x0 + bw * (1 - e), y0], [x0, y0 + bh * (1 - e)]], op.you)
+    let svg = userIcon(PAD + ICON / 2, y0 + bh / 2, ICON, pal.text)
+      + serverIcon(W - PAD - ICON / 2, y0 + bh / 2, ICON, pal.text)
+      + tri([[x0, y0], [x0 + bw * (1 - e), y0], [x0, y0 + bh * (1 - e)]], op.you)
       + tri([[x1, y0 + bh * e], [x1, y0 + bh], [x0 + bw * e, y0 + bh]], op.ms)
-      + `<text x="${f(x0 + 14)}" y="${f(y0 + bh * 0.42)}" font-family="${FONT}" font-size="${FS}" fill="${op.youText}">What you specify</text>`
-      + `<text x="${f(x1 - 14)}" y="${f(y0 + bh * 0.86)}" font-family="${FONT}" font-size="${FS}" fill="${op.msText}" text-anchor="end">What Metasmith decides</text>`;
+      + `<text x="${f(x0 + 14)}" y="${f(y0 + bh * 0.42)}" font-family="${FONT}" font-size="${FS}" fill="${op.youText}">Expressiveness</text>`
+      + `<text x="${f(x1 - 14)}" y="${f(y0 + bh * 0.86)}" font-family="${FONT}" font-size="${FS}" fill="${op.msText}" text-anchor="end">Automation</text>`;
     let cx = PAD, H = 0;
-    const yBar = y0 + bh + 18, yBody = yBar + BAR + 22;
+    const yBar = y0 + bh + 18 + 6, yBody = yBar + BAR + 22;
     for (const c of cols) {
       svg += `<rect x="${f(cx)}" y="${f(yBar)}" width="${f(c.body.w)}" height="${BAR}" rx="5" fill="${op.bar}"/>`
         + `<text x="${f(cx + c.body.w / 2)}" y="${f(yBar + BAR / 2 + FS * 0.35)}" font-family="${FONT}" font-size="${FS}" font-weight="bold" fill="${op.barText}" text-anchor="middle">${c.name}</text>`
