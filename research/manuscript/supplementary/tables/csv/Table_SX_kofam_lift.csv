@@ -1,0 +1,7 @@
+Study,MAGs,ORFs per MAG,"ORFs annotated, DIAMOND (%)","ORFs annotated, DIAMOND + KofamScan (%)","ORFs with a reaction, DIAMOND (%)","ORFs with a reaction, DIAMOND + KofamScan (%)",ORFs with a reaction from KofamScan only,"Reactions, DIAMOND","Reactions, DIAMOND + KofamScan"
+Bissett 2016,27,2538,41.3,54.3,40.8,42.0,30,1744,2121
+Karlsson 2013,413,2115,41.6,60.7,41.3,42.1,19,1557,1887
+Korem 2015,15,2412,42.1,58.5,41.6,42.3,25,1838,2191
+Li 2019,17,2502,42.8,61.7,41.2,42.7,40,2185,2701
+Sunagawa 2015,936,1697.5,43.7,60.7,42.2,43.3,20,1791,2130.5
+All,1408,1879.5,42.8,60.5,41.6,42.7,20,1666,1995
