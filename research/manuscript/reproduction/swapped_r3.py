@@ -1,4 +1,4 @@
-# Figure 2B's vOTU counts, identity violins and CPU bars with the E3 ablation's rung R3 (run osU8IP4o) as the swapped
+# Figure 3B's vOTU counts, identity violins and CPU bars with the E3 ablation's rung R3 (run osU8IP4o) as the swapped
 # assemblers: its MEGAHIT lane for the de Bruijn group, its MEGAHIT -> OPERA-MS lane for the hybrid group.
 # Rewrites the E3K and E3C constants of reproduction.html in place. Inputs are the scored catalogues in
 # ~/scratch/e3_fig and the E3 helpers on feat/engine/bench-E3; run with the msm env.

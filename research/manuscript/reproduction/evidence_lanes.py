@@ -1,4 +1,4 @@
-# Figure 2C's KOfam and KOfam + DIAMOND lanes. Adds them to the E4R, E4M and E4 constants of reproduction.html in place:
+# Figure 3C's KOfam and KOfam + DIAMOND lanes. Adds them to the E4R, E4M and E4 constants of reproduction.html in place:
 # bars from evidence_fig2c.tsv, violins from the per-bin reaction Jaccard against metaGEM in evidence_parity.tsv. Both
 # lanes exist only on the E4 ablation's 1,408-bin subset. Inputs are on feat/engine/bench-E5; run with the msm env.
 import json
