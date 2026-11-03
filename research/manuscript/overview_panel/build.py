@@ -85,11 +85,12 @@ def plan_and_grid(theme):
     label = lambda x, y, t, extra="": (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Arial" font-size="13" fill="{ink["text"]}" '
                                        f'text-anchor="middle"{extra}>{t}</text>')
     out.append(label(gw / 2, top - 7, "instances"))
-    out.append(label(gw + 16, (top + bot) / 2, "types", f' transform="rotate(90 {gw + 16:.1f} {(top + bot) / 2:.1f})" dominant-baseline="central"'))
+    out.append(f'<line x1="{gw + 8:.1f}" y1="{top:.1f}" x2="{gw + 8:.1f}" y2="{bot:.1f}" stroke="{ink["text"]}" stroke-width="1.1"/>')
+    out.append(label(gw + 20, (top + bot) / 2, "types", f' transform="rotate(90 {gw + 20:.1f} {(top + bot) / 2:.1f})" dominant-baseline="central"'))
     for i, cols in enumerate(CELLS["c"]):
         x = cols[0] * (cw + gap) + (len(cols) * cw + (len(cols) - 1) * gap) / 2
         out.append(label(x, ys["c"] + dy + ch / 2 + 15, f"job {i + 1}"))
-    return p, {"w": gw + 26, "h": p["h"], "body": "".join(out)}
+    return p, {"w": gw + 30, "h": p["h"], "body": "".join(out)}
 
 
 def spec_piece(svg, row=None):
