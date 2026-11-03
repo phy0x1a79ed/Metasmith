@@ -62,8 +62,7 @@ def data_rows(svg):
 
 
 def plan(theme):
-    svg = hollow(draw(PLAN, theme, given=["a"], target=["d"]))
-    return re.sub(r'(<circle[^>]*?)stroke-width="[^"]*"', r'\1stroke-width="2.6"', svg)
+    return hollow(draw(PLAN, theme, given=["a"], target=["d"]))
 
 
 def plan_and_grid(theme):
