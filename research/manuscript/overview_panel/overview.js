@@ -1,4 +1,4 @@
-  // ov:js:start — the overview: a band of two reciprocal triangles over Contract / Specification / Plan / Execution columns
+  // ov:js:start — the overview: a band of two reciprocal triangles over Type system / Specification / Plan / Execution columns
   const OV = JSON.parse(document.getElementById("ov-data").textContent);
   const OVPAL = {
     light: { you: "#E3E6EC", youText: "#1B1E24", ms: "#636EFA", msText: "#FFFFFF", },
@@ -40,16 +40,16 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, boldArrows: true, arrowColor: "#EF553B", flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types.map((e) => ({ ...e, strokeColor: "#1e1e1e" })), { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Contract", keyStack: true, boldArrows: true, arrowColor: "#EF553B", flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, one section per row, its name right-aligned and centred beside it;
-    // a row's pieces sit level on their anchors (the data node for Given and Targets, the transform for the library).
+    // a row's pieces sit level on their anchors (the data node for Given and Targets, the contract for the library).
     const S = d.spec, dots = 34, LG = 28, INSET = 6 * DS, RULE = 16;
     const anchored = (p) => ({ ...piece(p), a: p.anchor * DS });
     const lib = S.library.map(anchored);
     const libW = lib.reduce((s, p) => s + p.w, 0) + LG * (lib.length - 1) + 14 + dots;
-    const rowsB = [[["Given"], [anchored(S.given)]], [["Transforms"], lib], [["Targets"], [anchored(S.targets)]]].map(([lines, ps]) => {
+    const rowsB = [[["Given"], [anchored(S.given)]], [["Contracts"], lib], [["Targets"], [anchored(S.targets)]]].map(([lines, ps]) => {
       const a = Math.max(...ps.map((p) => p.a));
       return { lines, ps, a, h: Math.max(...ps.map((p) => a - p.a + p.h)) };
     });
@@ -70,7 +70,7 @@
         return out;
       } };
     const C = piece(d.plan), D = piece(d.grid);
-    const COLS = [["A", "Contract", A], ["B", "Specification", B], ["C", "Plan", C], ["D", "Execution", D]]
+    const COLS = [["A", "Type system", A], ["B", "Specification", B], ["C", "Plan", C], ["D", "Execution", D]]
       .map(([letter, name, it]) => {
         const title = `${letter}. ${name}`, w = Math.max(it.w, textWidth(title, FS) * 1.06);
         // C's plan sits at its column's right edge, against D, whose rows continue its data nodes.
