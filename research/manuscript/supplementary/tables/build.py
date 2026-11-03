@@ -100,9 +100,9 @@ def table_s3():
 
 
 TABLES = [
-    ("Table_SX_viromics_reads.csv", table_s1),
-    ("Table_SX_gem_ablation.csv", table_s2),
-    ("Table_SX_kofam_lift.csv", table_s3),
+    ("Table_S1_viromics_reads.csv", table_s1),
+    ("Table_S2_gem_ablation.csv", table_s2),
+    ("Table_S3_kofam_lift.csv", table_s3),
 ]
 
 
