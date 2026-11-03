@@ -40,7 +40,7 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type:", flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, each row named on the left. A row's pieces sit level on their anchors

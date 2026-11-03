@@ -818,6 +818,7 @@
       const tf = els.find((e) => e.type === "text" && /^Transform:?$/.test(e.text));
       const key = tf && nodes.find((n) => n.tri && Math.abs(n.cy - (tf.y + tf.height / 2)) < 25 && n.x > tf.x);
       if (key) { key.after = tf; key.isKey = true; }
+      if (tf && opts.transformLabel) tf.text = opts.transformLabel;
       if (types) {
         types.text = opts.typesLabel || "Types:";
         const sz = key ? key.tw * 0.8 : 28;
@@ -844,8 +845,19 @@
       const out = [], sw = ST.sw * k, len = ST.head * k, gap = ST.gap * k, fs = ST.fs * k;
       let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
       const grow = (x, y) => { minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x); maxY = Math.max(maxY, y); };
+      if (opts.keyStack) {   // one key per row, stacked upward from the first label's row, flush with the drawing's left edge: icon, then its label
+        const keys = els.filter((e) => e.after).sort((a, b) => (a.tri ? 1 : 0) - (b.tri ? 1 : 0));
+        const home = keys[0].after._home ??= { x: Math.min(...nodes.filter((n) => !n.isKey).map((n) => (n.tri ? n.cx - n.tw / 2 : n.x))), cy: keys[0].after.y + keys[0].after.height / 2 };
+        const size = Math.max(...keys.map((e) => (e.tri ? e.tw : e.width))), step = Math.max(size, fs) + 12 * k;
+        keys.forEach((e, i) => {
+          const cy = home.cy - (keys.length - 1 - i) * step, cx = home.x + size / 2, t = e.after;
+          if (e.tri) { e.cx = cx; e.top = cy - e.th / 2; e.bot = e.top + e.th; }
+          else { e.x = cx - e.width / 2; e.y = cy - e.width / 2; e.cx = cx; e.cy = cy; }
+          t.textAlign = "left"; t.x = home.x + size + 10 * k; t.y = cy - t.height / 2;
+        });
+      }
       // Key icons sit just after their label.
-      for (const e of els) if (e.after) {
+      else for (const e of els) if (e.after) {
         const t = e.after, tw = textWidth(t.text, fs);
         const left = t.textAlign === "center" ? t.x + t.width / 2 - tw / 2 : t.textAlign === "right" ? t.x + t.width - tw : t.x;
         const size = e.tri ? e.tw : e.width, cx = left + tw + 8 * k + size / 2, cy = t.y + t.height / 2;
@@ -1168,7 +1180,7 @@
     const saved = { fs: ST.fs, small: ST.small };
     ST.fs = FS; ST.small = FS;
     let contract;
-    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type:", flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
+    try { contract = excal(DATA.scenes.types, { ...SCENE_OPTS.types, typesLabel: "Type", transformLabel: "Transform", keyStack: true, flatCaptions: true, captionText: (t) => t.toLowerCase(), pad: 1 }, 1.22); contract = { ...contract, svg: contract.inner(0, 0) }; }
     finally { Object.assign(ST, saved); }
     const A = { w: contract.w, h: contract.h, inner: (x, y) => `<g transform="translate(${f(x)} ${f(y)})">${contract.svg}</g>` };
     // B: the specification in pieces, each row named on the left. A row's pieces sit level on their anchors
