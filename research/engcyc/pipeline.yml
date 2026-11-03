@@ -36,6 +36,14 @@ groups:
         sl_metag: "= ?"
         sl_virome: Trimmomatic 0.39
         cyanoverse: QC-filtered reads (tool not recorded)
+      - stage: Host read removal
+        diff: true
+        open: U15
+        engcyc: "Hostile against T2T-CHM13 plus HLA, before read QC, on human-associated datasets only (proposed, U15)"
+        e5: "-"
+        sl_metag: "-"
+        sl_virome: "-"
+        cyanoverse: "-"
       - stage: Long-read filter
         engcyc: Filtlong 0.3.1 (ONT, CLR)
         e5: "="
@@ -403,6 +411,7 @@ open:
   U12: "Reuse rule (Tony: reuse where methods match, regenerate where they differ). Where a source never recorded its tool version (the = ? cells, mostly Spanish Lakes annotation), reuse it or regenerate it?"
   U13: "CarveMe from the 4-lane calls (Tony: test it, report like E4 Fig 1). Two shapes. (a) Score CarveMe's own BiGG universe from the 4-lane calls: translate each ORF's MNXR or EC call to BiGG reactions and pass it as CarveMe's eggNOG-style input, so carving and gap fill stay stock. Needs an MNXR-to-BiGG crosswalk, and BiGG and MetaNetX 4.5 disagree on 1,231 of 2,751 reactions. (b) The library's existing GPR lane: a draft in MetaNetX ids (gem_from_gpr), then CarveMe's biomass, transport and gap fill. On its one test (e_coli_core) both gap fillers came back infeasible. Recommended: (a), tested on the six E. coli strains from mm_compare and a batch of E5 MAGs, scored as reaction Jaccard against the DIAMOND lane and against iML1515, plus MEMOTE by section."
   U14: "TreeSAPP, deferred (Tony 2026-10-22: maybe add later). TreeSAPP is a targeted tool, not a general annotator: it places only the genes of the families it has a reference package for (an HMM, a tree and a placement model each), so it answers questions about chosen marker genes and says nothing about the rest. Nothing in the library runs it. To add it later: pick the gene families the Engcyc questions need, take the curated packages for them (John already builds packages, e.g. the PR_22 rhodopsin package), write one transform for treesapp assign on the pipeline's ORFs, and time one sample on fir."
+  U15: "Host read removal. The pipeline has no host-removal step, and no source ran one. Two real datasets in the manifest are human-associated: karlsson2013 (stool) and gmcf3495_lung (lung, whole-genome amplified). korem2015 is an in-vitro mixed culture (MIX7), so it needs none, and the CAMI human sets are simulated. Recommended: Hostile (Constantinides 2023) against T2T-CHM13 plus HLA, as one new transform before BBDuk, run only on the datasets the manifest marks human-associated. Stage their reads as ENA serves them."
 
 # One entry per read shape the driver solves. `datasets` names the manifest rows that take the shape.
 shapes:
