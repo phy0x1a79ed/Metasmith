@@ -14,10 +14,10 @@ INK = {"light": {"cell": "#2B2B2B", "text": "#111111", "muted": "#7A7A7A", "fill
        "dark": {"cell": "#DFE3EA", "text": "#DFE3EA", "muted": "#8D97A8", "fill": "#262A31", "job": "#343944"}}
 
 # The plan's shape: t1 makes several b from one a; t2 takes a as well and makes several c from each b; t3 runs once
-# per b (group by b) over that b's c, and each of its runs is a job.
+# per b (group by b), taking that b, its c and the one a, and each of its runs is a job.
 PLAN = [("t1", None, "t1", ["a"], ["b"]),
         ("t2", None, "t2", ["a", "b"], ["c"]),
-        ("t3", None, "t3", ["c"], ["d"])]
+        ("t3", None, "t3", ["a", "b", "c"], ["d"])]
 # The specification's library holds more than the plan uses: bin is offered and left out.
 LIBRARY = [[("asm", None, "assemble", ["reads"], ["assembly"])],
            [("map", None, "map", ["reads", "assembly"], ["BAM"])],
