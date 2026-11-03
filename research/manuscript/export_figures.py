@@ -5,20 +5,16 @@ import html
 import re
 import shutil
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE / "methods_panels"))
-import build as methods_build  # noqa: E402
-
 LIGHT = '<script>document.documentElement.dataset.theme = "light";</script>'
 
 # Each hook leaves `name=<base64 svg>` lines in #export once the page has drawn.
 METHODS_HOOK = """<pre id="export"></pre><script>
 setTimeout(() => {
-  const svg = document.querySelector("#p2-fig svg");
+  const svg = document.querySelector("#ov-fig svg");
   const s = new XMLSerializer().serializeToString(svg);
   document.getElementById("export").textContent = "model=" + btoa(unescape(encodeURIComponent(s)));
 }, 3000);
@@ -62,7 +58,8 @@ def main() -> None:
     args.out.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as t:
         tmp = Path(t)
-        svgs = dump(with_hook(methods_build.build(), METHODS_HOOK), tmp)
+        # Figure 1 is the overview at the top of the methods-panels page.
+        svgs = dump(with_hook((HERE / "overview_panel" / "methods_panels.published.html").read_text(), METHODS_HOOK), tmp)
         svgs |= dump(with_hook((HERE / "reproduction" / "reproduction.html").read_text(), REPRO_HOOK), tmp)
     for name, svg in svgs.items():
         path = args.out / f"{name}.svg"

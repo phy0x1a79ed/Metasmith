@@ -30,7 +30,8 @@ from metasmith.models.dag_draw import Label  # noqa: E402
 from metasmith.models.dag_renderer import SYNTHETIC, DagMode, DagRenderer, NodeKind  # noqa: E402
 
 # One shade per group; the gaps between bands, the key and the step names tell a group's subgroups apart
-ASM, BIN, VIR, GEM = "#636EFA", "#00CC96", "#EF553B", "#AB63FA"
+ASM, BIN, VIR, GEM = "#FFA15A", "#00CC96", "#EF553B", "#AB63FA"
+METASMITH = "#636EFA"  # plotly's first colour, Metasmith's in figure 2: every module's background fades into it
 MODULES = [  # (key, label, light, dark) in E5's row order
     ("short", "Short", ASM, ASM),
     ("hybrid", "Hybrid", ASM, ASM),
@@ -266,7 +267,7 @@ def rows(svg):
 
 
 ARIAL = ImageFont.truetype("LiberationSans-Regular.ttf", 13)  # Arial's metrics
-TITLE = ImageFont.truetype("LiberationSans-Bold.ttf", 26)
+TITLE = ImageFont.truetype("LiberationSans-Bold.ttf", 13)
 
 
 def text_left(svg):
@@ -303,7 +304,7 @@ TITLES = {"tools": ("nf-core/MAG", "Viromics", "metaGEM"), "domains": ("Metageno
 
 def compose(theme, titles):
     """A over B over C on the left, packed tight; D on the right, its module key beside it. Each panel is
-    named on a bar outside it, the left panels on their left, D outermost on the right."""
+    named on a thin bar outside it, the left panels on their left, D outermost on the right."""
     dark = theme == "dark"
     ink, muted, surface = ("#DFE3EA", "#97A0B0", "#1B1E24") if dark else ("#1B1E24", "#5F6878", "#FFFFFF")
     colour = {m[0]: m[3 if dark else 2] for m in MODULES}
@@ -323,7 +324,7 @@ def compose(theme, titles):
     slack = lambda d: max(0, TITLE.getlength(d["title"]) + 16 - (d["bottom"] - d["top"]))  # noqa: E731
     span = lambda d: d["bottom"] - d["top"] + CAP + slack(d)  # noqa: E731
 
-    CAP, PAD, VGAP, FLOW_W, TOP, KEY_W, LEFT = 0, 10, 14, 150, 4, 96, 44
+    CAP, PAD, VGAP, FLOW_W, TOP, KEY_W, LEFT = 0, 10, 14, 150, 4, 84, 32
     # the left panels' step names share one column, so each drawing shifts right by its label offset
     lx = max(d["lx"] for d in (A, B, C))
     l_w = LEFT + max(lx - d["lx"] + d["w"] for d in (A, B, C)) + 2 * PAD
@@ -344,9 +345,10 @@ def compose(theme, titles):
         d["bands"] = {m: [(d["y"] + y0, d["y"] + y1) for y0, y1 in runs] for m, runs in bands(d["rows"]).items()}
         x0, x1 = d["col"]
         for m, runs in d["bands"].items():
+            fill = METASMITH if d is D else colour[m]
             for y0, y1 in runs:
                 back.append(f'<rect x="{x0:.1f}" y="{y0 + INSET:.1f}" width="{x1 - x0:.1f}" height="{y1 - y0 - 2 * INSET:.1f}" '
-                            f'rx="4" fill="{colour[m]}" fill-opacity="{tint}"/>')
+                            f'rx="4" fill="{fill}" fill-opacity="{tint}"/>')
 
     hull = lambda runs: (runs[0][0] + INSET, runs[-1][1] - INSET)  # noqa: E731
 
@@ -354,7 +356,7 @@ def compose(theme, titles):
         cx = (xa + xb) / 2
         back.append(f'<path d="M {xa:.1f},{s0:.1f} C {cx:.1f},{s0:.1f} {cx:.1f},{u0:.1f} {xb:.1f},{u0:.1f} '
                     f'L {xb:.1f},{u1:.1f} C {cx:.1f},{u1:.1f} {cx:.1f},{s1:.1f} {xa:.1f},{s1:.1f} Z" '
-                    f'fill="{colour[m]}" fill-opacity="{flow}"/>')
+                    f'fill="url(#fade-{m})" fill-opacity="{flow}"/>')
 
     # each side splits an E5 module's rows among its own sources, in stacking order, as a sankey's do
     for sources, xa, xb in (([A, B, C], l_w, D["col"][0]),):
@@ -373,26 +375,26 @@ def compose(theme, titles):
                 ribbon(m, xa, s0, s1, xb, u0, u1)
 
     font = 'font-family="Arial"'
-    SIZE = 13  # the step names' size; a panel's name is twice it
+    SIZE = 13  # every label's size, the step names' and the panels' names alike
     edge = "#8D97A8" if dark else "#666666"  # the DAGs' edge colour
 
-    def bar(x, y0, y1, fill, text, fg, gap, size=SIZE, weight="normal"):
-        """A 4-wide bar over [y0, y1] with its label read downward, `gap` from the bar's left edge."""
-        front.append(f'<rect x="{x:.1f}" y="{y0 + 1:.1f}" width="4" height="{y1 - y0 - 2:.1f}" rx="2" fill="{fill}"/>')
+    def bar(x, y0, y1, fill, text, fg, gap, size=SIZE, weight="normal", width=4):
+        """A bar over [y0, y1] with its label read downward, `gap` from the bar's left edge."""
+        front.append(f'<rect x="{x:.1f}" y="{y0 + 1:.1f}" width="{width}" height="{y1 - y0 - 2:.1f}" rx="{width / 2}" fill="{fill}"/>')
         front.append(f'<text transform="translate({x + gap:.1f} {(y0 + y1) / 2:.1f}) rotate(90)" {font} '
                      f'font-size="{size}" font-weight="{weight}" fill="{fg}" text-anchor="middle">{text}</text>')
 
     def title(x, d, gap):
         y0, y1 = d["y"] + d["top"] + INSET, d["y"] + d["bottom"] - INSET
         over = max(0, (TITLE.getlength(d["title"]) + 12 - (y1 - y0)) / 2)
-        bar(x, y0 - over, y1 + over, edge, d["title"], ink, gap, 2 * SIZE, "bold")
+        bar(x, y0 - over, y1 + over, edge, d["title"], ink, gap, SIZE, "bold", width=2)
 
     for d in drawn.values():
         front.append(f'<g transform="translate({d["x"]:.1f} {d["y"]:.1f})">{inner(d["svg"])}</g>')
     # rotated text's glyphs lie on the +x side of its baseline, so a label left of its bar sits a glyph
     # height further from it than one on the right
     for d in (A, B, C):
-        title(LEFT - 10, d, -25)
+        title(LEFT - 10, d, -13)
 
     # the key: each module named beside its rows in E5, reading downward
     for m, runs in D["bands"].items():
@@ -402,10 +404,13 @@ def compose(theme, titles):
     # the three read lanes bracketed together as assembly, outside their own key entries
     y0, y1 = hull(D["bands"]["short"])[0], hull(D["bands"]["long"])[1]
     bar(key_x + 30, y0, y1, edge, "Assembly", muted, 12)
-    title(key_x + 60, D, 13)
+    title(key_x + 60, D, 12)
 
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W * SCALE:.0f}" height="{H * SCALE:.0f}" '
            f'viewBox="0 0 {W:.0f} {H:.0f}"><rect width="100%" height="100%" fill="{surface}"/>'
+           + "<defs>" + "".join(f'<linearGradient id="fade-{m}" gradientUnits="userSpaceOnUse" x1="{l_w:.1f}" y1="0" '
+                                f'x2="{D["col"][0]:.1f}" y2="0"><stop offset="0" stop-color="{colour[m]}"/>'
+                                f'<stop offset="1" stop-color="{METASMITH}"/></linearGradient>' for m in colour) + "</defs>"
            + "".join(back) + "".join(front) + "</svg>")
     return svg, {k: d["steps"] for k, d in drawn.items()}
 
