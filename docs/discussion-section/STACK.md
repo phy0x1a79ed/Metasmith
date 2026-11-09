@@ -28,6 +28,9 @@ Procedure, from dfs-interview § Work the stack:
 ## Stack
 
 - **limitations** (2026-11-09): Limitations
+  - [ ] Which candidate limitations make the cut?
+  - [ ] Does each limitation pair with its mitigation or hand off to Future directions?
+  - [ ] Where does the d2 'AI agents / value is the specification' paragraph go?
 - **future-directions** (2026-11-09): Future directions
 - **comparison** (2026-11-09): Thoughtful comparison with what is already out there
 - **results-in-literature** (2026-11-09): Where the results fit and compare in literature
