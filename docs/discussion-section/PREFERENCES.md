@@ -6,3 +6,4 @@ This file holds the preferences the user set for this discussion, each with its 
 
 ## Preferences
 
+- (2026-11-09) Mandate: "place results in context with literature". Decide the topics first, then how to order and connect them.

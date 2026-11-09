@@ -23,10 +23,15 @@ Procedure, from dfs-interview § Work the stack:
 
 ## Current topic
 
-**limitations**. Its result: `limitations/README.md`.
+**topic-selection**. Its result: `topic-selection/README.md`.
 
 ## Stack
 
+- **topic-selection** (2026-11-09): we need to first decide on topics ... the main thing I can think of is a qualitative table comparing metasmtith against existing workflow managers, including nextflow. then I think a lot of the current points would fit inot this structure
+  - [ ] Is the comparison table the spine, with one Discussion paragraph per table dimension?
+  - [ ] Which systems are the table's rows?
+  - [ ] Do the four outline topics survive as sections, or fold into the table's dimensions?
+- **ordering** (2026-11-09): then how to order and connect them
 - **limitations** (2026-11-09): Limitations
   - [ ] Which candidate limitations make the cut?
   - [ ] Does each limitation pair with its mitigation or hand off to Future directions?
