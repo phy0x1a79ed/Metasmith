@@ -28,9 +28,10 @@ Procedure, from dfs-interview § Work the stack:
 ## Stack
 
 - **topic-selection** (2026-11-09): we need to first decide on topics ... the main thing I can think of is a qualitative table comparing metasmtith against existing workflow managers, including nextflow. then I think a lot of the current points would fit inot this structure
-  - [ ] Is the comparison table the spine, with one Discussion paragraph per table dimension?
+  - [x] Is the comparison table the spine, with one Discussion paragraph per table dimension? (answered 2026-11-09)
   - [ ] Which systems are the table's rows?
   - [ ] Do the four outline topics survive as sections, or fold into the table's dimensions?
+  - [ ] What topics outside the table should the Discussion cover?
 - **ordering** (2026-11-09): then how to order and connect them
 - **limitations** (2026-11-09): Limitations
   - [ ] Which candidate limitations make the cut?
