@@ -32,6 +32,7 @@ Procedure, from dfs-interview § Work the stack:
   - [ ] Which systems are the table's rows?
   - [ ] Do the four outline topics survive as sections, or fold into the table's dimensions?
   - [ ] What topics outside the table should the Discussion cover?
+  - [ ] Which metrics (columns) compare the systems?
 - **ordering** (2026-11-09): then how to order and connect them
 - **limitations** (2026-11-09): Limitations
   - [ ] Which candidate limitations make the cut?
