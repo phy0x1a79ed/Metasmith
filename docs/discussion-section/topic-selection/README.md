@@ -27,4 +27,4 @@ Where the earlier candidate limitations land: 1 (two partitionings) → column 3
 
 ## Decisions
 
-(none yet)
+- **The table is central, but the prose is not one paragraph per column.** The user: "1 paragraph per row is too narrow. I think we will chunk and find other groupings. we may want to also talk about other things." The table's dimensions are raw material; the ordering topic groups them into larger chunks, and the Discussion may also cover topics outside the table.
