@@ -35,6 +35,8 @@ Procedure, from dfs-interview § Work the stack:
   - [x] Which metrics (columns) compare the systems? (answered 2026-11-10)
   - [x] Which Loach themes become table columns, and where does 'how the structure is produced' go? (answered 2026-11-11)
   - [ ] Does the table add a 13th column for how the workflow is built, or does that live in prose?
+  - [ ] How does the 'strictly additive' framing handle themes where the contract layer restricts Nextflow?
+  - [ ] With Nextflow as the baseline, do other systems stay as table rows or move to prose?
 - **ordering** (2026-11-09): then how to order and connect them
 - **limitations** (2026-11-09): Limitations
   - [ ] Which candidate limitations make the cut?
