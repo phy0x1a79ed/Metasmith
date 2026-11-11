@@ -29,14 +29,14 @@ Procedure, from dfs-interview § Work the stack:
 
 - **topic-selection** (2026-11-09): we need to first decide on topics ... the main thing I can think of is a qualitative table comparing metasmtith against existing workflow managers, including nextflow. then I think a lot of the current points would fit inot this structure
   - [x] Is the comparison table the spine, with one Discussion paragraph per table dimension? (answered 2026-11-09)
-  - [ ] Which systems are the table's rows?
+  - [x] Which systems are the table's rows? (answered 2026-11-11)
   - [ ] Do the four outline topics survive as sections, or fold into the table's dimensions?
   - [ ] What topics outside the table should the Discussion cover?
   - [x] Which metrics (columns) compare the systems? (answered 2026-11-10)
   - [x] Which Loach themes become table columns, and where does 'how the structure is produced' go? (answered 2026-11-11)
   - [ ] Does the table add a 13th column for how the workflow is built, or does that live in prose?
   - [x] How does the 'strictly additive' framing handle themes where the contract layer restricts Nextflow? (answered 2026-11-11)
-  - [ ] With Nextflow as the baseline, do other systems stay as table rows or move to prose?
+  - [x] With Nextflow as the baseline, do other systems stay as table rows or move to prose? (answered 2026-11-11)
 - **ordering** (2026-11-09): then how to order and connect them
 - **limitations** (2026-11-09): Limitations
   - [ ] Which candidate limitations make the cut?
