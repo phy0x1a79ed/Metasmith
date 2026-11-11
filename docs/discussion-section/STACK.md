@@ -48,6 +48,6 @@ Procedure, from dfs-interview § Work the stack:
 
 ## Parked
 
-- **d2-fragments** (2026-11-02, Metasmith_d2.docx Discussion): four draft paragraphs already in d2 — (a) the 1:1 mapping of transforms to execution steps conflates conceptual and logistical partitioning; (b) a heading "Conditionals and looping"; (c) no domain knowledge: no system picks between redundant tools, the user "needs to know what they are doing"; (d) AI agents could implement from scratch, so Metasmith's value is the specification. Each fragment enters the topic it serves.
+- **d2-fragments** (2026-11-02, Metasmith_d2.docx Discussion): four draft paragraphs already in d2 — (a) the 1:1 mapping of transforms to execution steps conflates conceptual and logistical partitioning; (b) a heading "Conditionals and looping"; (c) no domain knowledge: no system picks between redundant tools, the user "needs to know what they are doing"; (d) AI agents could implement from scratch, so Metasmith's value is the specification. Each fragment enters the topic it serves. The Nov 5 save (capella B:\OneDrive - UBC\Hallam Lab - Metasmith\d2, SHA-256 31755B9A…) replaces heading (b) with Tony's paragraph: "Metamsith solver doesn't handle conditionals and looping. Conditionals could be don't through a contract that pass through a channel based on a condition channel. Looping requires a fundamentally new component and how the solver works, and for conditionals to be in the type system for loops to exit."
 
 ## Closed
