@@ -11,7 +11,7 @@ class Phase {
 
     static Map<String,Object> of(Object wire) {
         if( wire instanceof CharSequence )
-            return [name: wire.toString()] as Map<String,Object>
+            return [phase: wire.toString()] as Map<String,Object>
         final Map m = (Map) wire
         final key = m.keySet().first() as String
         final result = new LinkedHashMap<String,Object>((Map) m.get(key))
