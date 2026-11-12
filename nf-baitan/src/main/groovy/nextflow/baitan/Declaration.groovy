@@ -11,6 +11,11 @@ class Declaration {
 
     final Map<String,String> props
     final Map<String,Map<String,String>> givens
+    /** Metric axes of the contract: name, column, higher_better, weight. */
+    List<Map> axes = []
+    /** The checker's own declared set, with the `script`, `report` and `input` it runs by. */
+    Declaration checker
+    String script, report, input
 
     private Declaration(Map<String,String> props, Map<String,Map<String,String>> givens) {
         this.props = props
@@ -28,7 +33,13 @@ class Declaration {
         ((m.params ?: [:]) as Map).each { k, v -> props.put("param.${k}".toString(), v.toString()) }
         final givens = new LinkedHashMap<String,Map<String,String>>()
         ((m.givens ?: [:]) as Map).each { k, v -> givens.put(k.toString(), new TreeMap<String,String>((Map<String,String>) v)) }
-        return new Declaration(props, givens)
+        final d = new Declaration(props, givens)
+        d.axes = (m.axes ?: []) as List<Map>
+        d.checker = of(m.checker)
+        d.script = m.script as String
+        d.report = m.report as String
+        d.input = m.input as String
+        return d
     }
 
     /** The instance id of a given file, when its property set is declared. */

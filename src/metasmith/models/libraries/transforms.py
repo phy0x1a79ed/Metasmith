@@ -41,6 +41,31 @@ def _collect_dep_names(module, model: Transform) -> tuple[dict[str, Dependency],
 
 
 @dataclass
+class MetricAxis:
+    """A quality axis of a contract's result, read from `column` of the checker's report.
+
+    Weight 0 scores the axis in the review without letting it pick a provider.
+    """
+    name: str
+    column: str = ""
+    higher_better: bool = False
+    weight: float = 0.0
+
+
+@dataclass
+class CheckerSpec:
+    """The transform that scores a result: `contract` names it, so its declared set is its plan step's.
+
+    `script` is the shell body baitan runs; it reads the checked output as `./<input>` and writes `report`,
+    a TSV with a header row and one column per axis.
+    """
+    contract: str
+    script: str
+    report: str = "scores.tsv"
+    input: str = "input"
+
+
+@dataclass
 class TransformInstance:
     protocol: Callable[[ExecutionContext], ExecutionResult|list[ExecutionResult]]
     model: Transform
@@ -53,6 +78,8 @@ class TransformInstance:
     output_signature: dict = field(default_factory=dict)
     version: str = ""
     params: dict[str, str] = field(default_factory=dict)
+    axes: list[MetricAxis] = field(default_factory=list)
+    checker: CheckerSpec|None = None
     _path: Path = field(default_factory=Path)
     _key: str = ""
     _hash: int = -1

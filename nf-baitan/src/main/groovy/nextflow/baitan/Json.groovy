@@ -30,6 +30,11 @@ class Json {
             sb.append(v.toString())
         else if( v instanceof Integer || v instanceof Long )
             sb.append(v.toString())
+        else if( v instanceof Double || v instanceof BigDecimal ) {
+            if( v instanceof Double && !Double.isFinite(((Double) v).doubleValue()) )
+                throw new IllegalArgumentException("Cannot encode ${v}")
+            sb.append(v.toString())
+        }
         else if( v instanceof Map ) {
             sb.append('{')
             boolean first = true

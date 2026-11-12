@@ -11,6 +11,7 @@ WINDOW = 1.5  # seconds a promise stays open, so concurrent offers are visible i
 lock = threading.Lock()
 STATE = os.path.join(ROOT, "state.json")
 store = {}       # instance id -> directory holding it
+inflight = []    # offered task steps, in arrival order: {"pairs", "event"}
 done = []        # settled task steps: {"pairs", "slots", "listing", "sizes"}
 promises = {}    # promise id -> {"phase": ..., "proc": Popen|None, "cancelled": bool}
 
@@ -78,7 +79,16 @@ def fail(caller, promise, name, message):
 
 
 def run_set(caller, promise, offer_set):
+    try:
+        run_steps(caller, promise, offer_set)
+    finally:
+        for e in promises[promise]["entries"]:
+            e["event"].set()
+
+
+def run_steps(caller, promise, offer_set):
     p = promises[promise]
+    entries = iter(p["entries"])
     time.sleep(WINDOW)
     if p["cancelled"]:
         return
@@ -92,7 +102,15 @@ def run_set(caller, promise, offer_set):
         if step["op"] == "task":
             spec = step["spec"]
             out = slot_id(offer_key(step), "out")
+            mine = next(entries)
             hit = find_hit(step)
+            if not hit:
+                want = pairs(step)
+                earlier = inflight[:inflight.index(mine)]
+                prior = next((e for e in earlier if want <= e["pairs"] and not e["event"].is_set()), None)
+                if prior:
+                    prior["event"].wait()
+                    hit = find_hit(step)
             if hit:
                 stored = hit["slots"]["out"]
                 alias[out] = stored
@@ -126,6 +144,7 @@ def run_set(caller, promise, offer_set):
             with lock:
                 done.append({"pairs": sorted(pairs(step)), "slots": {"out": out}, "listing": {out: files}, "sizes": {out: sizes[out]}})
                 save_state()
+            mine["event"].set()
         elif step["op"] == "place":
             for sid in (alias.get(i, i) for i in step["inputs"]):
                 if sid not in slots:
@@ -142,10 +161,13 @@ def handle(env):
     reply = lambda s, a: emit(envelope(caller, s, a, env["id"]))
     if sel == "offer":
         promise = str(uuid.uuid4())
-        promises[promise] = {"phase": "open", "proc": None, "cancelled": False}
+        entries = [{"pairs": pairs(s), "event": threading.Event()} for s in args["set"]["steps"] if s["op"] == "task"]
+        with lock:
+            inflight.extend(entries)
+        promises[promise] = {"phase": "open", "proc": None, "cancelled": False, "entries": entries}
         reply("return", {"promise": promise})
         threading.Thread(target=run_set, args=(caller, promise, args["set"]), daemon=True).start()
-    elif sel == "watch":
+    elif sel in ("watch", "review"):
         reply("return", None)
     elif sel == "status":
         reply("return", {"promise": args["promise"], "phase": promises[args["promise"]]["phase"]})

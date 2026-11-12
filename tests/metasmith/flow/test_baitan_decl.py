@@ -13,6 +13,12 @@ from metasmith.testing.pool_fixtures import pool_backed
 from .conftest import _build_samples_lib, _build_transform_lib, _build_type_lib
 from .test_setup_subplan import ANNOTATE, FETCH
 
+CHECKED_ANNOTATE = ANNOTATE.replace(
+    "TransformInstance(protocol=protocol, model=model, group_by=asm)",
+    "from metasmith.models.libraries.transforms import CheckerSpec, MetricAxis\n"
+    "TransformInstance(protocol=protocol, model=model, group_by=asm, axes=[MetricAxis('score', 'Score', True)],"
+    " checker=CheckerSpec(contract='fetch', script='check input', report='r.tsv', input='bins'))",
+)
 DB = {"kind": "refdb", "name": "toy", "version": "1"}
 VERSIONED_FETCH = FETCH.replace(
     "TransformInstance(protocol=protocol, model=model, group_by=src)",
@@ -29,7 +35,7 @@ def _generate(tmp_path: Path, monkeypatch, declare: bool = True) -> str:
     refs.AddItem(Path("image.txt"), "mock::container", props=DB if declare else None)
     pool_backed(refs)
     refs.Save()
-    tr_lib = _build_transform_lib(tmp_path / "tr", types_path, {"fetch": VERSIONED_FETCH, "annotate": ANNOTATE})
+    tr_lib = _build_transform_lib(tmp_path / "tr", types_path, {"fetch": VERSIONED_FETCH, "annotate": CHECKED_ANNOTATE})
     task = Spec.SolveViews(
         samples=list(samples.AsSamples("mock::assembly")), resources=[refs],
         transforms=[tr_lib], targets=["mock::annotated"],
@@ -62,7 +68,7 @@ def test_each_process_carries_its_declared_set(tmp_path, monkeypatch):
     assert "'contract': 'fetch'" in fetch and "'version': '3'" in fetch and "'params': ['k': 'v']" in fetch
     assert "/image.txt': ['kind': 'refdb', 'name': 'toy', 'version': '1']" in fetch
     annotate = _ext(wf, "p02__annotate")
-    assert "'contract': 'annotate'" in annotate and "'msm':" in annotate and "image.txt" not in annotate
+    assert "'contract': 'annotate'" in annotate and "'msm':" in annotate and "image.txt" not in annotate.split("'axes'")[0]
 
 
 def test_an_undeclared_reference_falls_back_to_the_metasmith_id(tmp_path, monkeypatch):
@@ -74,3 +80,14 @@ def test_declared_props_survive_the_index_yaml(tmp_path, monkeypatch):
     _generate(tmp_path, monkeypatch)
     loaded = DataInstanceLibrary.Load(tmp_path / "refs.xgdb")
     assert loaded.instance_meta[Path("image.txt")]["props"] == DB
+
+
+def test_a_checker_is_declared_as_its_plan_step_is(tmp_path, monkeypatch):
+    wf = _generate(tmp_path, monkeypatch)
+    fetch, annotate = _ext(wf, "p01__fetch"), _ext(wf, "p02__annotate")
+    assert "'axes': [['name': 'score', 'column': 'Score', 'higher_better': true, 'weight': 0.0]]" in annotate
+    checker = annotate.split("'checker': ", 1)[1]
+    declared = fetch.split("ext baitan: ", 1)[1].split(", 'givens'")[0]
+    assert checker.startswith(declared) and "/image.txt': ['kind': 'refdb'" in checker
+    assert "'script': 'check input', 'report': 'r.tsv', 'input': 'bins'" in checker
+    assert "'checker'" not in fetch
