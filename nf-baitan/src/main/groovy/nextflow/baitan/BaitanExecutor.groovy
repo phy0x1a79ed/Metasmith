@@ -17,7 +17,7 @@ import org.pf4j.ExtensionPoint
 
 /**
  * Routes each Nextflow task through baitan as one offer set. Config scope `baitan`:
- * `connect` (command bridging to the market, default `baitan connect`) and `place`
+ * `connect` (command bridging to the market, default `baitan connect`), `place`
  * (the provider id of the machine that runs Nextflow).
  */
 @Slf4j
@@ -27,6 +27,11 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
 
     BaitanClient client
     String place
+    /** Where a published output lands at `place`, when the requester's work dir does not exist there. */
+    String placeRoot
+    /** Provider props that narrow who bids. */
+    Map<String,String> runAt
+    boolean dispose = true
 
     /** Listeners by promise id, to route events. */
     final ConcurrentHashMap<String,Listener> handlers = new ConcurrentHashMap<>()
@@ -41,6 +46,9 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
         super.register()
         final cfg = (session.config.baitan ?: [:]) as Map
         place = cfg.place as String
+        placeRoot = cfg.placeRoot as String
+        runAt = cfg.runAt as Map<String,String>
+        dispose = cfg.dispose != false
         client = new BaitanClient((cfg.connect ?: 'baitan connect') as String)
         client.onEvent = { Map status -> onEvent(status) }
         client.onConnected = { onConnected() }
@@ -83,7 +91,7 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
             log.warn "[baitan] a checker did not finish: ${e.message}"
         }
         try {
-            if( session.isSuccess() && intermediates ) {
+            if( dispose && session.isSuccess() && intermediates ) {
                 final ids = new ArrayList<String>(intermediates).sort()
                 client.ask('dispose', [ids: ids]).get(30, TimeUnit.SECONDS)
                 log.debug "[baitan] disposed ${ids.size()} intermediates"

@@ -60,6 +60,10 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
         }
     }
 
+    private String placedPath() {
+        return executor.placeRoot ? "${executor.placeRoot}/${workDir.parent.fileName}/${workDir.fileName}".toString() : workDir.toString()
+    }
+
     private Declaration declaration() {
         final ext = task.config.get('ext')
         return Declaration.of(ext instanceof Map ? ((Map) ext).get('baitan') : null)
@@ -97,13 +101,14 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
         publishes = !task.config.getPublishDir().isEmpty()
         if( publishes ) {
             if( !place ) throw new IllegalStateException("A process publishes but 'baitan.place' is not set")
-            steps.add([op: 'place', props: [:], inputs: [slotOut], slots: [], spec: [path: workDir.toString()], to: place] as Map<String,Object>)
+            steps.add([op: 'place', props: [:], inputs: [slotOut], slots: [], spec: [path: placedPath()], to: place] as Map<String,Object>)
         }
 
         final memMb = task.config.getMemory()?.toMega() ?: 2048L
         final set = new LinkedHashMap<String,Object>()
         set.steps = steps
         set.start = new ArrayList(start.values())
+        if( executor.runAt ) set.place = executor.runAt
         set.resources = [cpus: task.config.getCpus(), mem_mb: memMb] as Map<String,Object>
         if( decl?.axes ) {
             final axes = new ArrayList<Map<String,Object>>()
