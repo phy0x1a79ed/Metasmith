@@ -19,6 +19,7 @@ from ..libraries import DataInstance, GPU_LABEL, ResolveEnvImage
 from ..lineage import LinPayload
 from ..paths import PathMap
 from ..solver import Endpoint
+from .baitan_decl import ext_line, step_declaration
 from .grouping import expected_per_key
 from .steps import WorkflowStep
 
@@ -221,6 +222,8 @@ def _dep_type_name(step, dep) -> str:
 
 def prepare_nextflow(task, context: NextflowGenContext):
     TAB = "\t"
+    the_plan = task.plan
+    _given = set(the_plan.given)
     downloads = DownloadSteps(task.plan)
     if downloads:
         Log.Info(
@@ -312,6 +315,8 @@ def prepare_nextflow(task, context: NextflowGenContext):
         ] + [
             TAB+f"label 'x{x}x'"
             for x in step.transform.labels
+        ] + [
+            TAB+ext_line(step_declaration(step, _given)),
         ]
         def _make_bind_var(i: int, is_assignment=False):
             s = "\\$" if not is_assignment else ""
@@ -554,8 +559,6 @@ def prepare_nextflow(task, context: NextflowGenContext):
         d.mkdir(exist_ok=True)
         return d
     
-    the_plan = task.plan
-    _given = set(the_plan.given)
     used_given = {x for s in the_plan.steps for x in s.uses if x in _given}
     given_endpoints = {x.dtype for x in used_given}
 

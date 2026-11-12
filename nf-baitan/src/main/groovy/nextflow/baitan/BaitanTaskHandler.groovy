@@ -57,12 +57,18 @@ class BaitanTaskHandler extends TaskHandler {
         }
     }
 
+    private Declaration declaration() {
+        final ext = task.config.get('ext')
+        return Declaration.of(ext instanceof Map ? ((Map) ext).get('baitan') : null)
+    }
+
     private Map<String,Object> buildSet() {
         final place = executor.place
+        final decl = declaration()
         final stage = new TreeMap<String,Object>()
         final start = new LinkedHashMap<String,Map>()
         for( Map.Entry<String,Path> e : task.getInputFilesMap().entrySet() ) {
-            final ref = inputRef(e.value, place)
+            final ref = inputRef(e.value, place, decl)
             final id = ref.stage.get('id') as String
             stage.put(e.key, ref.stage)
             start.put(id, Fact.at(id, ref.provider))
@@ -75,7 +81,7 @@ class BaitanTaskHandler extends TaskHandler {
         spec.script = script
         spec.stage = stage
         spec.outputs = outputs
-        final props = [contract: 'nextflow-task', hash: task.hash.toString()] as Map<String,String>
+        final Map<String,String> props = decl != null ? decl.props : [contract: 'nextflow-task', hash: task.hash.toString()] as Map<String,String>
         final step = new LinkedHashMap<String,Object>()
         step.op = 'task'
         step.props = new TreeMap<String,String>(props)
@@ -117,9 +123,10 @@ class BaitanTaskHandler extends TaskHandler {
 
     /**
      * Where an input comes from: a stub under an upstream manifest, or a leaf file held by the
-     * requester's place. Returns the stage entry and the provider that holds the instance.
+     * requester's place, named by its declared property set when the process declares one.
+     * Returns the stage entry and the provider that holds the instance.
      */
-    private InputRef inputRef(Path file, String place) {
+    private InputRef inputRef(Path file, String place, Declaration decl) {
         for( Path dir = file.parent; dir != null && file.fileSystem == java.nio.file.FileSystems.getDefault(); dir = dir.parent ) {
             final manifest = dir.resolve(MANIFEST)
             if( !Files.exists(manifest) ) continue
@@ -130,7 +137,7 @@ class BaitanTaskHandler extends TaskHandler {
         }
         if( !place ) throw new IllegalStateException("A process reads a file but 'baitan.place' is not set")
         final path = file.fileSystem == java.nio.file.FileSystems.getDefault() ? file.toAbsolutePath().toString() : file.toUriString()
-        final id = Ids.instanceId([path: path, origin: place] as Map<String,String>)
+        final id = decl?.givenId(path) ?: Ids.instanceId([path: path, origin: place] as Map<String,String>)
         return new InputRef([id: id, src: path] as Map<String,Object>, place)
     }
 
