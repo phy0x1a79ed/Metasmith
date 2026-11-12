@@ -1,5 +1,6 @@
 package nextflow.baitan
 
+import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -70,22 +71,20 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
     }
 
     private Map<String,Object> buildSet() {
-        final place = executor.place
         decl = declaration()
         final stage = new TreeMap<String,Object>()
         final start = new LinkedHashMap<String,Map>()
         for( Map.Entry<String,Path> e : task.getInputFilesMap().entrySet() ) {
-            final ref = inputRef(e.value, place, decl)
+            final ref = inputRef(e.value)
             final id = ref.stage.get('id') as String
             stage.put(e.key, ref.stage)
             start.put(id, Fact.at(id, ref.provider))
         }
         final inputs = new ArrayList<String>(start.keySet()).sort()
         final outputs = new ArrayList<String>(task.getOutputFilesNames() as Collection<String>).unique().sort()
-        final script = launchScript()
 
         final spec = new LinkedHashMap<String,Object>()
-        spec.script = script
+        spec.script = launchScript()
         spec.stage = stage
         spec.outputs = outputs
         final Map<String,String> props = decl != null ? decl.props : [contract: 'nextflow-task', hash: task.hash.toString()] as Map<String,String>
@@ -100,6 +99,7 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
         slotOut = Ids.slotId(Ids.offerKey('task', props, inputs, spec, null), 'out')
         publishes = !task.config.getPublishDir().isEmpty()
         if( publishes ) {
+            final place = executor.place
             if( !place ) throw new IllegalStateException("A process publishes but 'baitan.place' is not set")
             steps.add([op: 'place', props: [:], inputs: [slotOut], slots: [], spec: [path: placedPath()], to: place] as Map<String,Object>)
         }
@@ -141,8 +141,9 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
      * requester's place, named by its declared property set when the process declares one.
      * Returns the stage entry and the provider that holds the instance.
      */
-    private InputRef inputRef(Path file, String place, Declaration decl) {
-        for( Path dir = file.parent; dir != null && file.fileSystem == java.nio.file.FileSystems.getDefault(); dir = dir.parent ) {
+    private InputRef inputRef(Path file) {
+        final local = file.fileSystem == FileSystems.getDefault()
+        for( Path dir = file.parent; local && dir != null; dir = dir.parent ) {
             final manifest = dir.resolve(MANIFEST)
             if( !Files.exists(manifest) ) continue
             final m = (Map) Json.parse(Files.readString(manifest))
@@ -150,8 +151,9 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
             final stage = [id: id, path: dir.relativize(file).toString()] as Map<String,Object>
             return new InputRef(stage, (m.providers as Map)[id] as String)
         }
+        final place = executor.place
         if( !place ) throw new IllegalStateException("A process reads a file but 'baitan.place' is not set")
-        final path = file.fileSystem == java.nio.file.FileSystems.getDefault() ? file.toAbsolutePath().toString() : file.toUriString()
+        final path = local ? file.toAbsolutePath().toString() : file.toUriString()
         final id = decl?.givenId(path) ?: Ids.instanceId([path: path, origin: place] as Map<String,String>)
         return new InputRef([id: id, src: path] as Map<String,Object>, place)
     }
@@ -215,7 +217,7 @@ class BaitanTaskHandler extends TaskHandler implements Listener {
         }
         final manifest = [promise: promise, ids: [out: outId], providers: [(outId): provider]]
         Files.writeString(workDir.resolve(MANIFEST), Json.encode(manifest))
-        (publishes ? executor.finals : executor.intermediates).add(outId)
+        if( !publishes ) executor.intermediates.add(outId)
         if( decl?.checker != null ) {
             try {
                 new CheckRun(executor, promise, decl, outId, provider, workDir).start()

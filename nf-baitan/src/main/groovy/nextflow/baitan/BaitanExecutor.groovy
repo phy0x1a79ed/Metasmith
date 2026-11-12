@@ -37,9 +37,8 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
     final ConcurrentHashMap<String,Listener> handlers = new ConcurrentHashMap<>()
     /** Checker runs that may still owe a review. */
     final Set<CompletableFuture<Void>> checks = ConcurrentHashMap.newKeySet()
-    /** Settled instance ids to dispose at the end, and the ones that stay. */
+    /** Settled instance ids of unpublished outputs, to dispose at the end. */
     final Set<String> intermediates = ConcurrentHashMap.newKeySet()
-    final Set<String> finals = ConcurrentHashMap.newKeySet()
 
     @Override
     protected void register() {

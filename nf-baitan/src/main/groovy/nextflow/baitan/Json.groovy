@@ -26,9 +26,7 @@ class Json {
             sb.append('null')
         else if( v instanceof CharSequence )
             string(sb, v.toString())
-        else if( v instanceof Boolean )
-            sb.append(v.toString())
-        else if( v instanceof Integer || v instanceof Long )
+        else if( v instanceof Boolean || v instanceof Integer || v instanceof Long )
             sb.append(v.toString())
         else if( v instanceof Double || v instanceof BigDecimal ) {
             if( v instanceof Double && !Double.isFinite(((Double) v).doubleValue()) )
