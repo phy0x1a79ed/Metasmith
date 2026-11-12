@@ -2,6 +2,7 @@ package nextflow.baitan
 
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.TimeUnit
 import java.util.function.Consumer
 
 import groovy.transform.CompileStatic
@@ -129,7 +130,7 @@ class BaitanClient {
         closed = true
         try { out?.close() } catch( IOException e ) { }
         final p = proc
-        if( p != null && !p.waitFor(5, java.util.concurrent.TimeUnit.SECONDS) )
+        if( p != null && !p.waitFor(5, TimeUnit.SECONDS) )
             p.destroy()
     }
 }
