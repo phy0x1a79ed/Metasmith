@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Builds and installs the plugin, then runs the toy pipelines against the stub market:
-# layer 1 (a normal run and a killed one) and layer 2 (two generated workflows sharing a step).
+# layer 1 (a normal run and a killed one), layer 2 (two generated workflows sharing a step)
+# and layer 3 (a checker that the plan's own step then reuses).
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
 export JAVA_HOME=${JAVA_HOME:-$(echo ~/.local/jdk/jdk-21*)}
@@ -35,3 +36,8 @@ for w in a b; do
     nf_run "$run/$w" "$run/wf_$w.nf" "$run/market.jsonl" "$run/market-root" || { cat "$run/$w/nf.out"; exit 1; }
 done
 $MM python "$here/check_l2.py" "$run/market.jsonl" "$run"
+
+run=$(mktemp -d); mkdir "$run/market-root" "$run/c"
+PYTHONPATH=$here/../../src ${MSM_PY:-$HOME/lib/miniforge3/envs/msm/bin/python} "$here/gen_l3.py" "$run"
+nf_run "$run/c" "$run/wf_c.nf" "$run/market.jsonl" "$run/market-root" || { cat "$run/c/nf.out"; exit 1; }
+$MM python "$here/check_l3.py" "$run/market.jsonl" "$run/c"

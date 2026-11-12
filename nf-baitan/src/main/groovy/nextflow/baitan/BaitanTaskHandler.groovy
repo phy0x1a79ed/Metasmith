@@ -15,13 +15,14 @@ import nextflow.processor.TaskStatus
  */
 @Slf4j
 @CompileStatic
-class BaitanTaskHandler extends TaskHandler {
+class BaitanTaskHandler extends TaskHandler implements Listener {
 
     static final String MANIFEST = '.baitan-manifest.json'
 
     private final BaitanExecutor executor
     private final Path workDir
     private String slotOut
+    private Declaration decl
     private boolean publishes
     private volatile String promise
     private volatile boolean killRequested
@@ -33,6 +34,8 @@ class BaitanTaskHandler extends TaskHandler {
         this.executor = executor
         this.workDir = task.workDir
     }
+
+    void onPhase(Map<String,Object> p) { phase = p }
 
     boolean isFinished() {
         final p = phase?.phase
@@ -64,7 +67,7 @@ class BaitanTaskHandler extends TaskHandler {
 
     private Map<String,Object> buildSet() {
         final place = executor.place
-        final decl = declaration()
+        decl = declaration()
         final stage = new TreeMap<String,Object>()
         final start = new LinkedHashMap<String,Map>()
         for( Map.Entry<String,Path> e : task.getInputFilesMap().entrySet() ) {
@@ -102,6 +105,13 @@ class BaitanTaskHandler extends TaskHandler {
         set.steps = steps
         set.start = new ArrayList(start.values())
         set.resources = [cpus: task.config.getCpus(), mem_mb: memMb] as Map<String,Object>
+        if( decl?.axes ) {
+            final axes = new ArrayList<Map<String,Object>>()
+            axes.add([name: 'time', weight: 1.0d, higher_better: false] as Map<String,Object>)
+            for( Map a : decl.axes )
+                axes.add([name: a.name, weight: a.weight ?: 0.0d, higher_better: a.higher_better ?: false] as Map<String,Object>)
+            set.axes = axes
+        }
         return set
     }
 
@@ -201,6 +211,14 @@ class BaitanTaskHandler extends TaskHandler {
         final manifest = [promise: promise, ids: [out: outId], providers: [(outId): provider]]
         Files.writeString(workDir.resolve(MANIFEST), Json.encode(manifest))
         (publishes ? executor.finals : executor.intermediates).add(outId)
+        if( decl?.checker != null ) {
+            try {
+                new CheckRun(executor, promise, decl, outId, provider, workDir).start()
+            }
+            catch( Exception e ) {
+                log.warn "[baitan] checker for ${promise} not started: ${e.message}"
+            }
+        }
     }
 
     @Override

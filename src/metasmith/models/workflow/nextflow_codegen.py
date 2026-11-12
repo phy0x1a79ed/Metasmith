@@ -316,7 +316,7 @@ def prepare_nextflow(task, context: NextflowGenContext):
             TAB+f"label 'x{x}x'"
             for x in step.transform.labels
         ] + [
-            TAB+ext_line(step_declaration(step, _given)),
+            TAB+ext_line(step_declaration(step, _given, the_plan.steps)),
         ]
         def _make_bind_var(i: int, is_assignment=False):
             s = "\\$" if not is_assignment else ""

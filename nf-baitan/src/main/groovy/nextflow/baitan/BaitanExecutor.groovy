@@ -1,5 +1,6 @@
 package nextflow.baitan
 
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
@@ -27,8 +28,10 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
     BaitanClient client
     String place
 
-    /** Handlers by promise id, to route events. */
-    final ConcurrentHashMap<String,BaitanTaskHandler> handlers = new ConcurrentHashMap<>()
+    /** Listeners by promise id, to route events. */
+    final ConcurrentHashMap<String,Listener> handlers = new ConcurrentHashMap<>()
+    /** Checker runs that may still owe a review. */
+    final Set<CompletableFuture<Void>> checks = ConcurrentHashMap.newKeySet()
     /** Settled instance ids to dispose at the end, and the ones that stay. */
     final Set<String> intermediates = ConcurrentHashMap.newKeySet()
     final Set<String> finals = ConcurrentHashMap.newKeySet()
@@ -47,7 +50,7 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
     /** Watch every promise, and learn what happened to the open ones while the link was down. */
     private void onConnected() {
         client.ask('watch', [promises: []])
-        for( Map.Entry<String,BaitanTaskHandler> e : handlers.entrySet() ) {
+        for( Map.Entry<String,Listener> e : handlers.entrySet() ) {
             if( !e.value.isFinished() )
                 client.ask('status', [promise: e.key]).thenAccept { Object r -> onEvent((Map) r) }
         }
@@ -56,7 +59,7 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
     private void onEvent(Map status) {
         final handler = handlers.get(status.promise as String)
         if( handler == null ) return
-        handler.phase = Phase.of(status.phase)
+        handler.onPhase(Phase.of(status.phase))
         signal()
     }
 
@@ -70,9 +73,15 @@ class BaitanExecutor extends Executor implements ExtensionPoint {
         new BaitanTaskHandler(task, this)
     }
 
-    /** Dispose the intermediates of a successful run, then close the link. */
+    /** Wait for the owed reviews, dispose the intermediates of a successful run, then close the link. */
     @Override
     void shutdown() {
+        try {
+            CompletableFuture.allOf(checks as CompletableFuture[]).get(60, TimeUnit.SECONDS)
+        }
+        catch( Exception e ) {
+            log.warn "[baitan] a checker did not finish: ${e.message}"
+        }
         try {
             if( session.isSuccess() && intermediates ) {
                 final ids = new ArrayList<String>(intermediates).sort()
