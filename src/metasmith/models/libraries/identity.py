@@ -40,11 +40,13 @@ class _LeafIdentity:
         if key is None:
             raw = uuid.uuid4().bytes + time.time_ns().to_bytes(16, "big", signed=False)
             key = multihash_key(raw).hex()
+        props = self.instance_meta.get(path, {}).get("props")
         self.instance_meta[path] = {
             "instance_id": key,
             "origin": "leaf",
             "lineage_payload": None,
             "fork_id": self.fork_id,
+            **({"props": props} if props else {}),
             # This process invented the number. `Pack` does not carry the flag,
             # so a library that is saved and loaded again is a record rather
             # than a mint -- which is the whole difference the given path cares
@@ -68,6 +70,7 @@ class _LeafIdentity:
                 "origin": "leaf",
                 "lineage_payload": None,
                 "fork_id": self.fork_id,
+                **({"props": entry["props"]} if entry.get("props") else {}),
             }
         return self.instance_meta[path]
 

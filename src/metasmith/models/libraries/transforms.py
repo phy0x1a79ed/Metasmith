@@ -51,6 +51,8 @@ class TransformInstance:
     labels: list[str] = field(default_factory=list)
     cacheable: bool = True
     output_signature: dict = field(default_factory=dict)
+    version: str = ""
+    params: dict[str, str] = field(default_factory=dict)
     _path: Path = field(default_factory=Path)
     _key: str = ""
     _hash: int = -1

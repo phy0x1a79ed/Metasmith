@@ -36,6 +36,8 @@ class _StoreTransfer:
                 payload = meta.get("lineage_payload")
                 if payload is not None:
                     d["lineage_payload"] = payload.hex()
+                if meta.get("props"):
+                    d["props"] = dict(sorted(meta["props"].items()))
             return d
         if not self.is_pinned:
             for _path, _dtype in self.manifest.items():
@@ -77,6 +79,7 @@ class _StoreTransfer:
                     "instance_id": v["instance_id"],
                     "origin": v.get("origin", "leaf"),
                     "lineage_payload": payload,
+                    **({"props": {str(a): str(b) for a, b in v["props"].items()}} if v.get("props") else {}),
                     # The library's fork was never round-tripped onto its
                     # entries, so every leaf of a forked library came back
                     # looking stale and was re-minted on the first Get() after

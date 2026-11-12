@@ -116,10 +116,12 @@ class DataInstance:
             instance_id=raw.get("instance_id"),
         )
         if raw.get("instance_id"):
+            props = lib.instance_meta.get(inst.path, {}).get("props")
             lib.instance_meta[inst.path] = {
                 "instance_id": inst.instance_id,
                 "origin": inst.origin,
                 "lineage_payload": inst.lineage_payload,
+                **({"props": props} if props else {}),
             }
         return inst
 
@@ -380,9 +382,12 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
         self._invalidate_endpoint_cache()
         return path
 
-    def AddItem(self, path: Path|str|_DeferredPath, dtype: str, parents: Iterable[Path]|None=None):
+    def AddItem(self, path: Path|str|_DeferredPath, dtype: str, parents: Iterable[Path]|None=None, props: dict[str, str]|None=None):
         self._refuse_if_pinned("AddItem")
-        return self._register(path, dtype, parents, self._mint_leaf_id)
+        item = self._register(path, dtype, parents, self._mint_leaf_id)
+        if props:
+            self.instance_meta[Path(path)]["props"] = {str(k): str(v) for k, v in props.items()}
+        return item
 
     # The caller supplies the identity, so nothing here invents one and the
     # given path does not refuse what this produces. That is the route a pool
@@ -396,6 +401,7 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
         origin: str = "leaf",
         lineage_payload: bytes|None = None,
         parents: Iterable[Path]|None = None,
+        props: dict[str, str]|None = None,
     ):
         def _set(p: Path):
             self.instance_meta[p] = {
@@ -403,6 +409,7 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
                 "origin": origin,
                 "lineage_payload": lineage_payload,
                 "fork_id": self.fork_id,
+                **({"props": {str(k): str(v) for k, v in props.items()}} if props else {}),
             }
         self._refuse_if_pinned("RegisterItem")
         assert origin in {"leaf", "lineage", "imported"}, f"bad origin {origin!r}"
@@ -420,10 +427,12 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
         assert origin in {"lineage", "imported"}, (
             f"origin must be lineage or imported, got {origin!r}"
         )
+        props = self.instance_meta.get(path, {}).get("props")
         self.instance_meta[path] = {
             "instance_id": instance_id,
             "origin": origin,
             "lineage_payload": lineage_payload,
+            **({"props": props} if props else {}),
         }
 
     def AddValue(self, name: str, value: str|dict, dtype: str, parents: Iterable[Path]|None=None):
