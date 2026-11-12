@@ -1,0 +1,15 @@
+plugins {
+    id 'io.nextflow.nextflow-plugin' version '1.0.0-beta.15'
+}
+
+version = '0.1.0'
+
+nextflowPlugin {
+    nextflowVersion = '26.04.1'
+
+    provider = 'metasmith'
+    className = 'nextflow.baitan.BaitanPlugin'
+    extensionPoints = [
+        'nextflow.baitan.BaitanExecutor'
+    ]
+}
