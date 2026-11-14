@@ -31,3 +31,15 @@ The result of the alignment topic: how the project builds its own ion tables fro
 - Reads Bruker `.d` directly. 48 s wall, 2.3 GB peak RSS. Import is 36 s of that.
 - 1620 ions. 1034 carry MS2. Charge 1: 1202, charge 2: 6, unassigned: 412. CCS on 1133.
 - RT 0.64–6.06 min. m/z 168–1762. Median height about 25k.
+
+## QC check and full per-injection run (2026-11-14)
+
+> run the 8 QC, then move on to all, can you use sockeye?
+> confirm the objective is to match up ions across all samples right
+
+- Objective confirmed: one common table, ions matched across all 136 injections. Per-injection detection is step one; drift correction, matching and gap-fill follow.
+- Ran locally, not on sockeye: the 98 GB upload outweighs a 26 min local run, and sockeye `/scratch` is 97% full.
+- Fixes: `/tmp` is a 16 GB tmpfs and parallel `-memory none` runs filled it (SIGBUS on import), so each run now gets its own on-disk temp dir. The chromatogram builder's polarity filter was `+`; set to `Any` so one batch serves both modes.
+- QC (8 per polarity): CUDA found in every QC, RT 0.802–0.814 min, mobility stable. Pairwise ion match within a fraction (10 ppm, 0.1 min, 3% mobility): POS P 84%, POS SN 83%, NEG P 81%, NEG SN 72%. NEG SN is the weak spot: many ions, few MS2.
+- Full run: 136/136 tables, 6 parallel, 26 min. POS median 1465 ions (1097–1984), NEG median 698 (248–1447). Blanks lowest. CUDA in all 136.
+- Output: `data/fabfos/runs/scadc_mzmine_per_injection_v0/` (DVC), one CSV and log per injection, with the batch copied alongside.
