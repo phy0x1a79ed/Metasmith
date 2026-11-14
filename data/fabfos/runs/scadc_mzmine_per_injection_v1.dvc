@@ -1,0 +1,6 @@
+outs:
+- md5: 78b41e95f156a86ee05f7a3e0a86c6b7.dir
+  size: 614062811
+  nfiles: 682
+  hash: md5
+  path: scadc_mzmine_per_injection_v1
