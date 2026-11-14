@@ -1,0 +1,432 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<batch mzmine_version="4.8.8">
+    <batchstep method="io.github.mzmine.modules.io.import_rawdata_all.AllSpectralDataImportModule" module_name="Import MS data" parameter_version="1">
+        <parameter name="File names">
+            </parameter>
+        <parameter name="Try vendor centroiding">true</parameter>
+        <parameter name="Advanced import" selected="false">
+            <parameter name="Scan filters" selected="false">
+                <parameter name="Scan number" />
+                <parameter name="Base Filtering Integer" />
+                <parameter name="Retention time" />
+                <parameter name="Mobility" />
+                <parameter name="MS level filter" selected="All MS levels">1</parameter>
+                <parameter name="Scan definition" />
+                <parameter name="Polarity">Any</parameter>
+                <parameter name="Spectrum type">ANY</parameter>
+            </parameter>
+            <parameter name="Crop MS1 m/z" selected="false" />
+            <parameter name="MS1 detector (Advanced)" selected="true" selected_item="Auto">
+                <module name="Factor of lowest signal">
+                    <parameter name="Noise factor">2.5</parameter>
+                </module>
+                <module name="Auto">
+                    <parameter name="Noise level">500.0</parameter>
+                </module>
+                <module name="Centroid">
+                    <parameter name="Noise level" />
+                </module>
+                <module name="Exact mass">
+                    <parameter name="Noise level" />
+                </module>
+                <module name="Local maxima">
+                    <parameter name="Noise level" />
+                </module>
+                <module name="Recursive threshold">
+                    <parameter name="Noise level" />
+                    <parameter name="Min m/z peak width" />
+                    <parameter name="Max m/z peak width" />
+                </module>
+                <module name="Wavelet transform">
+                    <parameter name="Noise level" />
+                    <parameter name="Scale level" />
+                    <parameter name="Wavelet window size (%)" />
+                </module>
+            </parameter>
+            <parameter name="MS2 detector (Advanced)" selected="true" selected_item="Auto">
+                <module name="Factor of lowest signal">
+                    <parameter name="Noise factor">2.5</parameter>
+                </module>
+                <module name="Auto">
+                    <parameter name="Noise level">300.0</parameter>
+                </module>
+                <module name="Centroid">
+                    <parameter name="Noise level" />
+                </module>
+                <module name="Exact mass">
+                    <parameter name="Noise level" />
+                </module>
+                <module name="Local maxima">
+                    <parameter name="Noise level" />
+                </module>
+                <module name="Recursive threshold">
+                    <parameter name="Noise level" />
+                    <parameter name="Min m/z peak width" />
+                    <parameter name="Max m/z peak width" />
+                </module>
+                <module name="Wavelet transform">
+                    <parameter name="Noise level" />
+                    <parameter name="Scale level" />
+                    <parameter name="Wavelet window size (%)" />
+                </module>
+            </parameter>
+            <parameter name="Denormalize fragment scans (traps)">false</parameter>
+        </parameter>
+        <parameter name="Metadata file" selected="false">
+            <current_file>E:\OneDrive - mzio GmbH\mzio - shared\Example data\Bruker\timsTOF\20241126 - WWTP Spiked\pos\metadata.csv</current_file>
+        </parameter>
+        <parameter name="Sort and color">true</parameter>
+        <parameter name="Spectral library files">
+            </parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_massdetection.MassDetectionModule" module_name="Mass detection" parameter_version="1">
+        <parameter name="Raw data files" type="BATCH_LAST_FILES" />
+        <parameter name="Scan filters" selected="true">
+            <parameter name="Scan number" />
+            <parameter name="Base Filtering Integer" />
+            <parameter name="Retention time" />
+            <parameter name="Mobility" />
+            <parameter name="MS level filter" selected="MS1, level = 1">1</parameter>
+            <parameter name="Scan definition" />
+            <parameter name="Polarity">Any</parameter>
+            <parameter name="Spectrum type">ANY</parameter>
+        </parameter>
+        <parameter name="Scan types (IMS)">Frames only</parameter>
+        <parameter name="Denormalize fragment scans (traps)">false</parameter>
+        <parameter name="Mass detector" selected_item="Auto">
+            <module name="Factor of lowest signal">
+                <parameter name="Noise factor">2.5</parameter>
+            </module>
+            <module name="Auto">
+                <parameter name="Noise level">500.0</parameter>
+            </module>
+            <module name="Centroid">
+                <parameter name="Noise level">10.0</parameter>
+            </module>
+            <module name="Exact mass">
+                <parameter name="Noise level">100.0</parameter>
+            </module>
+            <module name="Local maxima">
+                <parameter name="Noise level" />
+            </module>
+            <module name="Recursive threshold">
+                <parameter name="Noise level">10.0</parameter>
+                <parameter name="Min m/z peak width">5.0E-4</parameter>
+                <parameter name="Max m/z peak width">0.01</parameter>
+            </module>
+            <module name="Wavelet transform">
+                <parameter name="Noise level">50.0</parameter>
+                <parameter name="Scale level">3</parameter>
+                <parameter name="Wavelet window size (%)">1.0</parameter>
+            </module>
+        </parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_massdetection.MassDetectionModule" module_name="Mass detection" parameter_version="1">
+        <parameter name="Raw data files" type="BATCH_LAST_FILES" />
+        <parameter name="Scan filters" selected="true">
+            <parameter name="Scan number" />
+            <parameter name="Base Filtering Integer" />
+            <parameter name="Retention time" />
+            <parameter name="Mobility" />
+            <parameter name="MS level filter" selected="MSn, level ≥ 2">3</parameter>
+            <parameter name="Scan definition" />
+            <parameter name="Polarity">Any</parameter>
+            <parameter name="Spectrum type">ANY</parameter>
+        </parameter>
+        <parameter name="Scan types (IMS)">Frames only</parameter>
+        <parameter name="Denormalize fragment scans (traps)">false</parameter>
+        <parameter name="Mass detector" selected_item="Auto">
+            <module name="Factor of lowest signal">
+                <parameter name="Noise factor">2.5</parameter>
+            </module>
+            <module name="Auto">
+                <parameter name="Noise level">300.0</parameter>
+            </module>
+            <module name="Centroid">
+                <parameter name="Noise level">10.0</parameter>
+            </module>
+            <module name="Exact mass">
+                <parameter name="Noise level">100.0</parameter>
+            </module>
+            <module name="Local maxima">
+                <parameter name="Noise level" />
+            </module>
+            <module name="Recursive threshold">
+                <parameter name="Noise level">10.0</parameter>
+                <parameter name="Min m/z peak width">5.0E-4</parameter>
+                <parameter name="Max m/z peak width">0.01</parameter>
+            </module>
+            <module name="Wavelet transform">
+                <parameter name="Noise level">50.0</parameter>
+                <parameter name="Scale level">3</parameter>
+                <parameter name="Wavelet window size (%)">1.0</parameter>
+            </module>
+        </parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_massdetection.MassDetectionModule" module_name="Mass detection" parameter_version="1">
+        <parameter name="Raw data files" type="BATCH_LAST_FILES" />
+        <parameter name="Scan filters" selected="true">
+            <parameter name="Scan number" />
+            <parameter name="Base Filtering Integer" />
+            <parameter name="Retention time" />
+            <parameter name="Mobility" />
+            <parameter name="MS level filter" selected="MS1, level = 1">1</parameter>
+            <parameter name="Scan definition" />
+            <parameter name="Polarity">Any</parameter>
+            <parameter name="Spectrum type">ANY</parameter>
+        </parameter>
+        <parameter name="Scan types (IMS)">Mobility scans only</parameter>
+        <parameter name="Denormalize fragment scans (traps)">false</parameter>
+        <parameter name="Mass detector" selected_item="Auto">
+            <module name="Factor of lowest signal">
+                <parameter name="Noise factor">2.5</parameter>
+            </module>
+            <module name="Auto">
+                <parameter name="Noise level">100.0</parameter>
+            </module>
+            <module name="Centroid">
+                <parameter name="Noise level">10.0</parameter>
+            </module>
+            <module name="Exact mass">
+                <parameter name="Noise level">100.0</parameter>
+            </module>
+            <module name="Local maxima">
+                <parameter name="Noise level" />
+            </module>
+            <module name="Recursive threshold">
+                <parameter name="Noise level">10.0</parameter>
+                <parameter name="Min m/z peak width">5.0E-4</parameter>
+                <parameter name="Max m/z peak width">0.01</parameter>
+            </module>
+            <module name="Wavelet transform">
+                <parameter name="Noise level">50.0</parameter>
+                <parameter name="Scale level">3</parameter>
+                <parameter name="Wavelet window size (%)">1.0</parameter>
+            </module>
+        </parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_massdetection.MassDetectionModule" module_name="Mass detection" parameter_version="1">
+        <parameter name="Raw data files" type="BATCH_LAST_FILES" />
+        <parameter name="Scan filters" selected="true">
+            <parameter name="Scan number" />
+            <parameter name="Base Filtering Integer" />
+            <parameter name="Retention time" />
+            <parameter name="Mobility" />
+            <parameter name="MS level filter" selected="MSn, level ≥ 2">3</parameter>
+            <parameter name="Scan definition" />
+            <parameter name="Polarity">Any</parameter>
+            <parameter name="Spectrum type">ANY</parameter>
+        </parameter>
+        <parameter name="Scan types (IMS)">Mobility scans only</parameter>
+        <parameter name="Denormalize fragment scans (traps)">false</parameter>
+        <parameter name="Mass detector" selected_item="Auto">
+            <module name="Factor of lowest signal">
+                <parameter name="Noise factor">2.5</parameter>
+            </module>
+            <module name="Auto">
+                <parameter name="Noise level">60.0</parameter>
+            </module>
+            <module name="Centroid">
+                <parameter name="Noise level">10.0</parameter>
+            </module>
+            <module name="Exact mass">
+                <parameter name="Noise level">100.0</parameter>
+            </module>
+            <module name="Local maxima">
+                <parameter name="Noise level" />
+            </module>
+            <module name="Recursive threshold">
+                <parameter name="Noise level">10.0</parameter>
+                <parameter name="Min m/z peak width">5.0E-4</parameter>
+                <parameter name="Max m/z peak width">0.01</parameter>
+            </module>
+            <module name="Wavelet transform">
+                <parameter name="Noise level">50.0</parameter>
+                <parameter name="Scale level">3</parameter>
+                <parameter name="Wavelet window size (%)">1.0</parameter>
+            </module>
+        </parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_adapchromatogrambuilder.ModularADAPChromatogramBuilderModule" module_name="Chromatogram builder" parameter_version="1">
+        <parameter name="Raw data files" type="BATCH_LAST_FILES" />
+        <parameter name="Scan filters" selected="true">
+            <parameter name="Scan number" />
+            <parameter name="Base Filtering Integer" />
+            <parameter name="Retention time">
+                <min>0.5</min>
+                <max>8.0</max>
+            </parameter>
+            <parameter name="Mobility" />
+            <parameter name="MS level filter" selected="MS1, level = 1">1</parameter>
+            <parameter name="Scan definition" />
+            <parameter name="Polarity">+</parameter>
+            <parameter name="Spectrum type">ANY</parameter>
+        </parameter>
+        <parameter name="Minimum consecutive scans">6</parameter>
+        <parameter name="Minimum intensity for consecutive scans">1000.0</parameter>
+        <parameter name="Minimum absolute height">8000.0</parameter>
+        <parameter name="m/z tolerance (scan-to-scan)">
+            <absolutetolerance>0.005</absolutetolerance>
+            <ppmtolerance>20.0</ppmtolerance>
+        </parameter>
+        <parameter name="Suffix">eics</parameter>
+        <parameter name="Allow single scan chromatograms" />
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_smoothing.SmoothingModule" module_name="Smoothing" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Smoothing algorithm" selected_item="Savitzky Golay">
+            <module name="Loess smoothing">
+                <parameter name="Retention time width (scans)" selected="false">5</parameter>
+                <parameter name="Mobility width (scans)" selected="false">5</parameter>
+            </module>
+            <module name="Savitzky Golay">
+                <parameter name="Retention time width (scans)" selected="true">7</parameter>
+                <parameter name="Mobility width (scans)" selected="false">5</parameter>
+            </module>
+        </parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+        <parameter name="Suffix">sm</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_chromatogramdeconvolution.minimumsearch.MinimumSearchFeatureResolverModule" module_name="Local minimum feature resolver" parameter_version="2">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Suffix">r</parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+        <parameter name="MS/MS scan pairing" selected="true">
+            <parameter name="MS1 to MS2 precursor tolerance (m/z)">
+                <absolutetolerance>0.01</absolutetolerance>
+                <ppmtolerance>20.0</ppmtolerance>
+            </parameter>
+            <parameter name="Retention time filter" selected="Use feature edges" unit="MINUTES">0.04</parameter>
+            <parameter name="Minimum relative feature height" selected="true">0.25</parameter>
+            <parameter name="Minimum required signals" selected="true">1</parameter>
+            <parameter name="Limit by ion mobility edges">true</parameter>
+            <parameter name="Merge MS/MS spectra (TIMS)">false</parameter>
+            <parameter name="Minimum detections in IMS dimension">2</parameter>
+            <parameter name="Advanced" selected="false">
+                <parameter name="Minimum signal intensity (absolute, TIMS)" selected="true">600.0</parameter>
+                <parameter name="Minimum signal intensity (relative, TIMS)" selected="true">0.01</parameter>
+                <parameter name="Group iterative MS2s" selected="false">mainQuantFile</parameter>
+            </parameter>
+        </parameter>
+        <parameter name="Dimension">Retention time</parameter>
+        <parameter name="Chromatographic threshold">0.84</parameter>
+        <parameter name="Minimum search range RT/Mobility (absolute)">0.03999999910593033</parameter>
+        <parameter name="Minimum relative height">0.0</parameter>
+        <parameter name="Minimum absolute height">8000.0</parameter>
+        <parameter name="Min ratio of peak top/edge">2.0</parameter>
+        <parameter name="Peak duration range (min/mobility)">
+            <min>0.0</min>
+            <max>1.1999999731779099</max>
+        </parameter>
+        <parameter name="Minimum scans (data points)">6</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_imsexpander.ImsExpanderModule" module_name="Ims expander" parameter_version="2">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="m/z tolerance">
+            <absolutetolerance>0.005</absolutetolerance>
+            <ppmtolerance>20.0</ppmtolerance>
+        </parameter>
+        <parameter name="Raw data instead of thresholded" selected="true">10.0</parameter>
+        <parameter name="Override default mobility bin width (scans)" selected="false">1</parameter>
+        <parameter name="Maximum features per thread" selected="false">2000</parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_smoothing.SmoothingModule" module_name="Smoothing" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Smoothing algorithm" selected_item="Savitzky Golay">
+            <module name="Loess smoothing">
+                <parameter name="Retention time width (scans)" selected="false">5</parameter>
+                <parameter name="Mobility width (scans)" selected="false">5</parameter>
+            </module>
+            <module name="Savitzky Golay">
+                <parameter name="Retention time width (scans)" selected="false">5</parameter>
+                <parameter name="Mobility width (scans)" selected="true">5</parameter>
+            </module>
+        </parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+        <parameter name="Suffix">sm</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_chromatogramdeconvolution.minimumsearch.MinimumSearchFeatureResolverModule" module_name="Local minimum feature resolver" parameter_version="2">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Suffix">r</parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+        <parameter name="MS/MS scan pairing" selected="true">
+            <parameter name="MS1 to MS2 precursor tolerance (m/z)">
+                <absolutetolerance>0.01</absolutetolerance>
+                <ppmtolerance>20.0</ppmtolerance>
+            </parameter>
+            <parameter name="Retention time filter" selected="Use feature edges" unit="MINUTES">0.04</parameter>
+            <parameter name="Minimum relative feature height" selected="true">0.25</parameter>
+            <parameter name="Minimum required signals" selected="true">1</parameter>
+            <parameter name="Limit by ion mobility edges">true</parameter>
+            <parameter name="Merge MS/MS spectra (TIMS)">false</parameter>
+            <parameter name="Minimum detections in IMS dimension">2</parameter>
+            <parameter name="Advanced" selected="false">
+                <parameter name="Minimum signal intensity (absolute, TIMS)" selected="true">600.0</parameter>
+                <parameter name="Minimum signal intensity (relative, TIMS)" selected="true">0.01</parameter>
+                <parameter name="Group iterative MS2s" selected="false">mainQuantFile</parameter>
+            </parameter>
+        </parameter>
+        <parameter name="Dimension">Mobility</parameter>
+        <parameter name="Chromatographic threshold">0.8</parameter>
+        <parameter name="Minimum search range RT/Mobility (absolute)">0.01</parameter>
+        <parameter name="Minimum relative height">0.0</parameter>
+        <parameter name="Minimum absolute height">8000.0</parameter>
+        <parameter name="Min ratio of peak top/edge">1.8</parameter>
+        <parameter name="Peak duration range (min/mobility)">
+            <min>0.0</min>
+            <max>20.0</max>
+        </parameter>
+        <parameter name="Minimum scans (data points)">5</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.featdet_smoothing.SmoothingModule" module_name="Smoothing" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Smoothing algorithm" selected_item="Savitzky Golay">
+            <module name="Loess smoothing">
+                <parameter name="Retention time width (scans)" selected="false">5</parameter>
+                <parameter name="Mobility width (scans)" selected="false">5</parameter>
+            </module>
+            <module name="Savitzky Golay">
+                <parameter name="Retention time width (scans)" selected="true">5</parameter>
+                <parameter name="Mobility width (scans)" selected="true">5</parameter>
+            </module>
+        </parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+        <parameter name="Suffix">sm</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.filter_isotopegrouper.IsotopeGrouperModule" module_name="13C isotope filter (formerly: isotope grouper)" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Name suffix">deiso</parameter>
+        <parameter name="m/z tolerance (intra-sample)">
+            <absolutetolerance>0.0015</absolutetolerance>
+            <ppmtolerance>3.0</ppmtolerance>
+        </parameter>
+        <parameter name="Retention time tolerance" unit="MINUTES">0.04</parameter>
+        <parameter name="Mobility tolerance" selected="true">0.008</parameter>
+        <parameter name="Monotonic shape">true</parameter>
+        <parameter name="Maximum charge">2</parameter>
+        <parameter name="Representative isotope">Most intense</parameter>
+        <parameter name="Never remove feature with MS2">true</parameter>
+        <parameter name="Original feature list">REMOVE</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.dataprocessing.filter_isotopefinder.IsotopeFinderModule" module_name="Isotopic peaks finder" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Chemical elements">H,C,N,O,S</parameter>
+        <parameter name="m/z tolerance (feature-to-scan)">
+            <absolutetolerance>0.0015</absolutetolerance>
+            <ppmtolerance>3.0</ppmtolerance>
+        </parameter>
+        <parameter name="Maximum charge of isotope m/z">1</parameter>
+        <parameter name="Search in scans">SINGLE MOST INTENSE</parameter>
+    </batchstep>
+    <batchstep method="io.github.mzmine.modules.io.export_features_csv.CSVExportModularModule" module_name="Export to CSV file (modular)" parameter_version="1">
+        <parameter name="Feature lists" type="BATCH_LAST_FEATURELISTS" />
+        <parameter name="Filename">
+            <current_file>C:\Users\Steffen\git\mzmine3\mzmine-community\src\test\resources\rawdatafiles\integration_tests\lc_tims\expected_results.csv</current_file>
+        </parameter>
+        <parameter name="Field separator">,</parameter>
+        <parameter name="Identification separator">;</parameter>
+        <parameter name="Remove empty columns">true</parameter>
+        <parameter name="Filter rows">ALL</parameter>
+    </batchstep>
+</batch>
