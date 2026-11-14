@@ -1,0 +1,6 @@
+outs:
+- md5: 40a2dcefff55bb74bbba33feea50d400.dir
+  size: 26264821
+  nfiles: 273
+  hash: md5
+  path: scadc_mzmine_parquet_v1
