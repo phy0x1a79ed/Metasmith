@@ -1,0 +1,6 @@
+name: mzmine
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - mzmine=4.7.29  # the package ships the 4.7.30 jar
