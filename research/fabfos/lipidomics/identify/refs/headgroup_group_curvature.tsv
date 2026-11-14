@@ -1,0 +1,23 @@
+# Curvature at HEADGROUP-GROUP resolution.
+#
+# A different claim from lipid_class_reference.tsv, not a coarser copy of it.
+# That table answers "what shape is this subclass"; this one answers "given ONLY
+# the four-way group that MS/MS mass balance can resolve, what may be said".
+# Mass balance cannot separate PE from PC (0.00 mDa on the acyl lattice) nor PA
+# from PI or a neutral glycerolipid (5.87 mDa), so those groups carry the
+# ambiguity forward rather than picking a side.
+#
+# Two readings are emitted, and both travel to the statistics:
+#   strict  assumes nothing.
+#   prior   reads PE/PC as PE, which rests on E. coli having no
+#           phosphatidylcholine synthase, so PC is not a native product here.
+#
+# Chain count is applied ON TOP of this by headgroup.curvature(): any single-chain
+# species is an inverted cone whatever its headgroup, because the label is about
+# head area against tail volume.
+#
+headgroup_group	curvature_strict	curvature_prior	citation_key	note
+PG	bilayer-forming	bilayer-forming	CULLIS1979	PG is lamellar. The group also admits BMP/HBMP and cardiolipin, which is why the strict reading is a statement about the group's diacyl representative, not about every member.
+PS	bilayer-forming	bilayer-forming	CULLIS1979
+PE/PC	indeterminate	curvature-forcing	CULLIS1979;MOREIN1996	PE is a cone and PC a cylinder, and mass balance cannot tell them apart. The prior reading resolves it from the organism, not the spectrum.
+PA/PI/neutral	indeterminate	indeterminate	KOOIJMAN2005;CULLIS1979	PA is strongly curvature-forcing (-46 A) and PI is lamellar; the group merges them with neutral glycerolipids, so it stays indeterminate under BOTH readings. Splitting it needs a method that names the subclass.

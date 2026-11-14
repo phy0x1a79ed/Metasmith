@@ -1,0 +1,41 @@
+# MetaboScape / RefMet class names against the reference table's class names
+# (which follow MS-DIAL shorthand, the vocabulary MS2Lipid emits).
+#
+# O- is the ether variant, -P the plasmalogen, L- the lyso form, and the facility
+# writes TAG/DAG/MAG where MS-DIAL writes TG/DG/MG.
+#
+# A facility class with NO row here does not get a call. That is deliberate: the
+# ones left out (EPC, PE-NMe, SPB, HOME, Vitamin E, Vitamin K, Porphyrins,
+# N-acyl amines) are either outside the reference vocabulary entirely or are not
+# lipids, and inventing a mapping for them would put a guess where an abstain
+# belongs.
+#
+facility_class	class	note
+PE	PE
+PC	PC
+PG	PG
+PS	PS
+PA	PA
+PI	PI
+LPE	LPE
+LPC	LPC
+LPG	LPG
+LPS	LPS
+LPA	LPA
+HBMP	HBMP
+BMP	BMP
+O-PE	EtherPE
+O-PC	EtherPC
+O-PG	EtherPG
+O-PS	EtherPS
+O-PA	PA	No ether-PA row in the reference vocabulary; the headgroup is what both the gate and the group turn on.
+PE-P	EtherPE	Plasmalogen; the reference table does not separate plasmenyl from plasmanyl.
+PC-P	EtherPC	As PE-P.
+TAG	TG
+DAG	DG
+MAG	MG
+TG	TG
+DG	DG
+MG	MG
+O-DG	EtherDG
+Ubiquinones	CoQ

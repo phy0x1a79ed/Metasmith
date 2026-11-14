@@ -1,0 +1,35 @@
+# OD600 at harvest (6-day M9-glucose cultures, 0.1% v/v toluene), transcribed verbatim
+# from SCADC_method_Omics.docx (Resmi Capron, fwd 2026-07-08; measured 6 d post-challenge).
+# Source of the biomass normalization requested by Andras Szeitz (email 2026-07-08):
+#   "divide all the peak area counts ... with the OD values of the individual samples".
+# One OD per *culture*; each culture yields BOTH a pellet (P) and supernatant (S) lipidomics
+# fraction, so both fractions of a given (culture,treatment,rep) share this OD.
+# culture -> lipidomics strain by fraction:
+#   EPI300 -> Epi300 (P) & ESi300 (S);  EpCC1 -> EpCC1 (P) & ESCC1 (S);
+#   Clone1 -> Clone1 (P & S);           Clone2 -> Clone2 (P & S).
+# treatment: minus->ctrl, plus->tol.  CAVEAT: OD rep index assumed to match lipidomics rep index.
+culture,treatment,rep,od600
+EPI300,ctrl,1,0.700
+EPI300,ctrl,2,0.723
+EPI300,ctrl,3,0.797
+EPI300,tol,1,0.242
+EPI300,tol,2,0.287
+EPI300,tol,3,0.112
+EpCC1,ctrl,1,0.398
+EpCC1,ctrl,2,0.555
+EpCC1,ctrl,3,0.557
+EpCC1,tol,1,0.099
+EpCC1,tol,2,0.103
+EpCC1,tol,3,0.111
+Clone1,ctrl,1,0.425
+Clone1,ctrl,2,0.459
+Clone1,ctrl,3,0.467
+Clone1,tol,1,0.371
+Clone1,tol,2,0.369
+Clone1,tol,3,0.267
+Clone2,ctrl,1,0.439
+Clone2,ctrl,2,0.318
+Clone2,ctrl,3,0.262
+Clone2,tol,1,0.439
+Clone2,tol,2,0.431
+Clone2,tol,3,0.354

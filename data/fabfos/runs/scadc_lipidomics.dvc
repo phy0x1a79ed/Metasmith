@@ -1,0 +1,6 @@
+outs:
+- md5: 6366a1d7e50918afd2703c8d2556b7f1.dir
+  size: 105323895245
+  nfiles: 6661
+  hash: md5
+  path: scadc_lipidomics

@@ -1,0 +1,32 @@
+name: imaging
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.12
+  - readlif
+  - scikit-image
+  - scipy
+  - trackpy
+  - photutils
+  - sep
+  - numpy
+  - pandas
+  - plotly
+  - pillow
+  - python-kaleido=0.2
+# trackpy, photutils and sep are the three interchangeable segmentation backends
+# in main/vesicle_panels/segmenters.py; bakeoff.py scores them against each
+# other. All three replaced a hand-rolled absolute threshold, which sized spots
+# by an iso-intensity contour and so returned a larger radius for a brighter spot
+# of the same size. photutils and sep are astronomical source-extraction
+# libraries — detecting faint near-point sources against a variable background,
+# deblending the ones that overlap, and measuring their size is the problem they
+# were built for. photutils pulls in astropy; trackpy pulls in matplotlib; sep is
+# the Source Extractor C core and needs a native-byte-order contiguous array.
+# None of them needs a GPU.
+# readlif reads the Leica .lif originals directly — pure Python, no Java/bioformats
+# dependency. It lives on conda-forge, not bioconda, as do aicsimageio and
+# bioio-lif. plotly/pillow/kaleido match what main/vesicle_panels/ already uses.
+# The conda package for the plotly static-image exporter is `python-kaleido`;
+# plain `kaleido` is the PyPI name and does not resolve here.

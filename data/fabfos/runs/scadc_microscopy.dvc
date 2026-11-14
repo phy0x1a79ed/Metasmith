@@ -1,0 +1,6 @@
+outs:
+- md5: 0f031d033be3d333f0177ded1b603d6c.dir
+  size: 252211662
+  nfiles: 651
+  hash: md5
+  path: scadc_microscopy
