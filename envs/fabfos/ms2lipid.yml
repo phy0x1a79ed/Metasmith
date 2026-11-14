@@ -1,0 +1,21 @@
+name: ms2lipid
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pandas
+  - numpy
+  - scipy
+  - pyarrow
+  - pip
+  - pip:
+      - ms2lipid
+# MS2Lipid (Sakamoto et al., Metabolites 2024, 14(11):602, doi 10.3390/metabo14110602;
+# MIT) predicts lipid subclass from an MS/MS spectrum + precursor m/z in EITHER
+# ionization mode. It is the whole producer tier of the membrane/curvature lane —
+# see main/lipids/identify/ms2lipid_lane.py.
+#
+# Kept out of `lipidomics` and out of `p312` because the pip resolution pulls
+# tensorflow/keras/xgboost and `zenodo-get`; the latter fetches model weights from
+# Zenodo on first run, so the first invocation needs network. Weights land in the
+# installed package directory and are cached from then on.

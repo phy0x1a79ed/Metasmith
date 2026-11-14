@@ -1,0 +1,136 @@
+# Lipid subclass -> membrane / curvature reference table.
+#
+# One row per subclass in MS2Lipid's vocabulary (63 positive-mode + 69 negative-mode
+# classes, 97 distinct). This table is literature, not inference: every non-abstaining
+# row names the citation that licenses it, and `citations.tsv` resolves the key.
+# It replaces the three hard-coded dictionaries that used to live in membrane.py.
+#
+# membrane      yes | no | abstain
+#               The LIPID MAPS category decides it (LIPIDMAPS2009): glycerophospholipid
+#               is a membrane lipid, glycerolipid / sterol / fatty acyl / prenol is not.
+#               Sphingolipids ABSTAIN rather than being assigned -- sphingomyelin is a
+#               phospholipid and ceramide is not, so the category does not settle it.
+#               E. coli makes neither, so this costs nothing here and stops the mapping
+#               being wrong if it is ever reused on a eukaryotic dataset.
+#
+# curvature     curvature-forcing | bilayer-forming | positive-curvature | indeterminate
+#                                                                       | not-applicable
+#               A property of the lipid, stated independently of `membrane`, so a
+#               consumer can gate on membrane without this column having quietly
+#               pre-gated itself. `not-applicable` means the species does not sit in a
+#               bilayer at all (neutral core lipids, sterol esters, free fatty acyls).
+#               `indeterminate` means the class is real but its shape is not settled --
+#               oxidised chains and transphosphatidylation artifacts.
+#
+# headgroup_group  PE/PC | PG | PS | PA/PI/neutral | NA
+#               The four-way bucket the in-house mass-balance lane emits
+#               (headgroup.py RESIDUE_GROUP). Present ONLY so MS2Lipid can be scored
+#               against that lane at the resolution the lane can actually resolve.
+#               It is a crosswalk for validation, not a call to make: MS2Lipid names
+#               PE and PC separately and collapsing them throws that away.
+#
+# native_ecoli  yes | trace | no
+#               Whether E. coli makes this class. Not used to gate any call -- it is the
+#               instrument for measuring MS2Lipid's closed-world failure mode, which is
+#               that handed a non-lipid (or a lipid outside its 97 classes) it still
+#               returns one of the 97. A `no` call is not necessarily wrong, but a
+#               *population* of `no` calls is a coverage claim that has to be discounted.
+#
+class	lipid_maps_category	membrane	headgroup_group	curvature	n_chains	native_ecoli	citation_key	note
+PE	Glycerophospholipids	yes	PE/PC	curvature-forcing	2	yes	CULLIS1979;MOREIN1996	The dominant E. coli lipid and its non-bilayer component.
+PC	Glycerophospholipids	yes	PE/PC	bilayer-forming	2	no	CULLIS1979	E. coli has no phosphatidylcholine synthase. A PC call here is either a real contaminant or a misprediction.
+PG	Glycerophospholipids	yes	PG	bilayer-forming	2	yes	CULLIS1979
+PS	Glycerophospholipids	yes	PS	bilayer-forming	2	trace	CULLIS1979	Transient intermediate of PE synthesis; decarboxylated fast, so present but not accumulated.
+PA	Glycerophospholipids	yes	PA/PI/neutral	curvature-forcing	2	trace	KOOIJMAN2005	Measured spontaneous radius of curvature -46 A. Separable from PI only once a method names the subclass.
+PI	Glycerophospholipids	yes	PA/PI/neutral	bilayer-forming	2	no	CULLIS1979	Not made by E. coli.
+CL	Glycerophospholipids	yes	PG	curvature-forcing	4	yes	RENNER2011;MOREIN1996	Cardiolipin. Measured-absent in this dataset (cl_bound.py), so a crop of CL calls is a red flag, not a discovery.
+DLCL	Glycerophospholipids	yes	PG	indeterminate	2	trace	RENNER2011	Dilyso-cardiolipin. Two chains on a cardiolipin head; geometry not measured.
+BMP	Glycerophospholipids	yes	PG	bilayer-forming	2	no	CULLIS1979	Bis(monoacylglycero)phosphate. Grouped with PG by head chemistry, consistent with the prior lane.
+HBMP	Glycerophospholipids	yes	PG	indeterminate	3	no	CULLIS1979	Hemi-BMP, three chains on a glycerophosphoglycerol head. Two of the three blind controls are HBMP.
+PEtOH	Glycerophospholipids	yes	NA	indeterminate	2	no	LIPIDMAPS2009	Phosphatidylethanol -- a transphosphatidylation artifact, not a biosynthetic product.
+PMeOH	Glycerophospholipids	yes	NA	indeterminate	2	no	LIPIDMAPS2009	Phosphatidylmethanol -- as PEtOH.
+EtherPE	Glycerophospholipids	yes	PE/PC	curvature-forcing	2	no	CULLIS1979	Ether/plasmalogen PE. E. coli makes no ether lipids.
+EtherPC	Glycerophospholipids	yes	PE/PC	bilayer-forming	2	no	CULLIS1979
+EtherPG	Glycerophospholipids	yes	PG	bilayer-forming	2	no	CULLIS1979
+EtherPI	Glycerophospholipids	yes	PA/PI/neutral	bilayer-forming	2	no	CULLIS1979
+EtherPS	Glycerophospholipids	yes	PS	bilayer-forming	2	no	CULLIS1979
+OxPE	Glycerophospholipids	yes	PE/PC	indeterminate	2	no	LIPIDMAPS2009	An oxidised chain is polar and turns back toward the interface; the headgroup no longer sets the shape.
+OxPC	Glycerophospholipids	yes	PE/PC	indeterminate	2	no	LIPIDMAPS2009	As OxPE.
+OxPI	Glycerophospholipids	yes	PA/PI/neutral	indeterminate	2	no	LIPIDMAPS2009	As OxPE.
+OxPS	Glycerophospholipids	yes	PS	indeterminate	2	no	LIPIDMAPS2009	As OxPE.
+LPE	Glycerophospholipids	yes	PE/PC	positive-curvature	1	yes	CULLIS1979
+LPC	Glycerophospholipids	yes	PE/PC	positive-curvature	1	no	CULLIS1979
+LPG	Glycerophospholipids	yes	PG	positive-curvature	1	yes	CULLIS1979
+LPS	Glycerophospholipids	yes	PS	positive-curvature	1	trace	CULLIS1979
+LPI	Glycerophospholipids	yes	PA/PI/neutral	positive-curvature	1	no	CULLIS1979
+LPA	Glycerophospholipids	yes	PA/PI/neutral	positive-curvature	1	trace	KOOIJMAN2005	Measured +20 A -- the most positive spontaneous curvature of any membrane lipid reported.
+EtherLPE	Glycerophospholipids	yes	PE/PC	positive-curvature	1	no	CULLIS1979
+EtherLPC	Glycerophospholipids	yes	PE/PC	positive-curvature	1	no	CULLIS1979
+EtherLPG	Glycerophospholipids	yes	PG	positive-curvature	1	no	CULLIS1979
+LNAPE	Glycerophospholipids	yes	PE/PC	indeterminate	2	no	LIPIDMAPS2009	N-acyl-lyso-PE. One O-acyl chain plus an N-acyl on the head; neither cone nor cylinder.
+GPNAE	Glycerophospholipids	yes	NA	indeterminate	1	no	LIPIDMAPS2009	Glycerophospho-N-acyl-ethanolamine.
+MG	Glycerolipids	no	PA/PI/neutral	positive-curvature	1	trace	CULLIS1979
+DG	Glycerolipids	no	PA/PI/neutral	curvature-forcing	2	trace	CULLIS1979	Diacylglycerol is a classic inverted-hexagonal-phase former. Not a membrane lipid by category, but it does force curvature where it partitions in.
+TG	Glycerolipids	no	PA/PI/neutral	not-applicable	3	no	LIPIDMAPS2009	Neutral core lipid; E. coli makes essentially none. A large TG/DG population in this dataset is a misprediction signature.
+EtherDG	Glycerolipids	no	PA/PI/neutral	not-applicable	2	no	LIPIDMAPS2009
+EtherTG	Glycerolipids	no	PA/PI/neutral	not-applicable	3	no	LIPIDMAPS2009
+OxTG	Glycerolipids	no	PA/PI/neutral	not-applicable	3	no	LIPIDMAPS2009
+MGDG	Glycerolipids	no	NA	curvature-forcing	2	no	CULLIS1979	Monogalactosyldiacylglycerol -- the non-bilayer lipid of plants and cyanobacteria, absent from E. coli.
+DGDG	Glycerolipids	no	NA	bilayer-forming	2	no	CULLIS1979
+EtherMGDG	Glycerolipids	no	NA	indeterminate	2	no	LIPIDMAPS2009
+SM	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009	Sphingomyelin IS a phospholipid, but its category also holds ceramides, which are not. Abstain rather than assign.
+ASM	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_NS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_NDS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_NP	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_AS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_ADS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_AP	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_BS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_HS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_HDS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Cer_EOS	Sphingolipids	abstain	NA	indeterminate	3	no	LIPIDMAPS2009
+Cer_EBDS	Sphingolipids	abstain	NA	indeterminate	3	no	LIPIDMAPS2009
+HexCer_NS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+HexCer_NDS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+HexCer_AP	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+HexCer_HS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+HexCer_HDS	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Hex2Cer	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Hex3Cer	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+AHexCer	Sphingolipids	abstain	NA	indeterminate	3	no	LIPIDMAPS2009
+SHexCer	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+PI_Cer	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+PE_Cer	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+SL	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+Sph	Sphingolipids	abstain	NA	positive-curvature	1	no	CULLIS1979	Free sphingoid base -- single chain.
+DHSph	Sphingolipids	abstain	NA	positive-curvature	1	no	CULLIS1979
+PhytoSph	Sphingolipids	abstain	NA	positive-curvature	1	no	CULLIS1979
+GM1	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+GM3	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+GD1a	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+GD1b	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+GD3	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+GT1b	Sphingolipids	abstain	NA	indeterminate	2	no	LIPIDMAPS2009
+CE	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+ST	Sterol Lipids	no	NA	not-applicable	0	no	LIPIDMAPS2009
+BRSE	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+CASE	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+SISE	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+DSMSE	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+DCAE	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+AHexCAS	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+AHexSIS	Sterol Lipids	no	NA	not-applicable	1	no	LIPIDMAPS2009
+BileAcid	Sterol Lipids	no	NA	not-applicable	0	no	LIPIDMAPS2009	E. coli synthesises no bile acids. A bile-acid population in an E. coli extract is a misprediction signature.
+BASulfate	Sterol Lipids	no	NA	not-applicable	0	no	LIPIDMAPS2009
+SSulfate	Sterol Lipids	no	NA	not-applicable	0	no	LIPIDMAPS2009
+FAHFA	Fatty Acyls	no	NA	not-applicable	2	no	LIPIDMAPS2009
+OxFA	Fatty Acyls	no	NA	not-applicable	1	trace	LIPIDMAPS2009
+NAE	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009
+NAGly	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009
+NAGlySer	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009
+NATau	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009
+NAOrn	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009
+CAR	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009	Acylcarnitine -- E. coli has no carnitine acyltransferase pathway.
+VAE	Fatty Acyls	no	NA	not-applicable	1	no	LIPIDMAPS2009
+CoQ	Prenol Lipids	no	NA	not-applicable	0	yes	LIPIDMAPS2009	Ubiquinone. Genuinely present and abundant here -- the quinone signal is a documented part of this dataset.

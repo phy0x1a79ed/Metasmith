@@ -1,0 +1,6 @@
+outs:
+- md5: 0d17897f0459d3e028b6dfa2e084507f.dir
+  size: 9850951
+  nfiles: 14
+  hash: md5
+  path: scadc_vesicle_results

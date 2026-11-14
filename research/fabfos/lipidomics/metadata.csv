@@ -1,0 +1,137 @@
+filename,polarity,sample_type,strain,treatment,fraction,replicate,plate_pos,run_id
+Blank 1 P_P1-F-8_1_15817.d,pos,blank,,ctrl,P,1,P1-F-8,15817
+Blank 1 Tol_P1-C-9_1_15782.d,pos,blank,,tol,S,1,P1-C-9,15782
+Blank 1_P1-C-8_1_15781.d,pos,blank,,ctrl,S,1,P1-C-8,15781
+Blank 2 P_P1-F-8_1_15827.d,pos,blank,,ctrl,P,2,P1-F-8,15827
+Blank 2 Tol_P1-C-9_1_15793.d,pos,blank,,tol,S,2,P1-C-9,15793
+Blank 2_P1-C-8_1_15792.d,pos,blank,,ctrl,S,2,P1-C-8,15792
+Blank 3 P_P1-F-8_1_15837.d,pos,blank,,ctrl,P,3,P1-F-8,15837
+Blank 3 Tol_P1-C-9_1_15804.d,pos,blank,,tol,S,3,P1-C-9,15804
+Blank 3_P1-C-8_1_15803.d,pos,blank,,ctrl,S,3,P1-C-8,15803
+Blank 4 P_P1-F-8_1_15847.d,pos,blank,,ctrl,P,4,P1-F-8,15847
+Blank 4 Tol_P1-C-9_1_15815.d,pos,blank,,tol,S,4,P1-C-9,15815
+Blank 4_P1-C-8_1_15814.d,pos,blank,,ctrl,S,4,P1-C-8,15814
+Clone1_P_1_P1-E-4_1_15835.d,pos,sample,Clone1,ctrl,P,1,P1-E-4,15835
+Clone1_P_2_P1-E-5_1_15833.d,pos,sample,Clone1,ctrl,P,2,P1-E-5,15833
+Clone1_P_3_P1-E-6_1_15822.d,pos,sample,Clone1,ctrl,P,3,P1-E-6,15822
+Clone1_S_1_P1-B-4_1_15808.d,pos,sample,Clone1,ctrl,S,1,P1-B-4,15808
+Clone1_S_2_P1-B-5_1_15810.d,pos,sample,Clone1,ctrl,S,2,P1-B-5,15810
+Clone1_S_3_P1-B-6_1_15797.d,pos,sample,Clone1,ctrl,S,3,P1-B-6,15797
+Clone1_Tol_P_1_P1-E-7_1_15840.d,pos,sample,Clone1,tol,P,1,P1-E-7,15840
+Clone1_Tol_P_2_P1-E-8_1_15839.d,pos,sample,Clone1,tol,P,2,P1-E-8,15839
+Clone1_Tol_P_3_P1-E-9_1_15845.d,pos,sample,Clone1,tol,P,3,P1-E-9,15845
+Clone1_Tol_S_1_P1-B-7_1_15789.d,pos,sample,Clone1,tol,S,1,P1-B-7,15789
+Clone1_Tol_S_2_P1-B-8_1_15800.d,pos,sample,Clone1,tol,S,2,P1-B-8,15800
+Clone1_Tol_S_3_P1-B-9_1_15786.d,pos,sample,Clone1,tol,S,3,P1-B-9,15786
+Clone2_P_1_P1-F-1_1_15823.d,pos,sample,Clone2,ctrl,P,1,P1-F-1,15823
+Clone2_P_2_P1-F-2_1_15819.d,pos,sample,Clone2,ctrl,P,2,P1-F-2,15819
+Clone2_P_3_P1-F-3_1_15843.d,pos,sample,Clone2,ctrl,P,3,P1-F-3,15843
+Clone2_S_1_P1-C-1_1_15785.d,pos,sample,Clone2,ctrl,S,1,P1-C-1,15785
+Clone2_S_2_P1-C-2_1_15799.d,pos,sample,Clone2,ctrl,S,2,P1-C-2,15799
+Clone2_S_3_P1-C-3_1_15795.d,pos,sample,Clone2,ctrl,S,3,P1-C-3,15795
+Clone2_Tol_P_1_P1-F-4_1_15825.d,pos,sample,Clone2,tol,P,1,P1-F-4,15825
+Clone2_Tol_P_2_P1-F-5_1_15832.d,pos,sample,Clone2,tol,P,2,P1-F-5,15832
+Clone2_Tol_P_3_P1-F-6_1_15824.d,pos,sample,Clone2,tol,P,3,P1-F-6,15824
+Clone2_Tol_S_1_P1-C-4_1_15812.d,pos,sample,Clone2,tol,S,1,P1-C-4,15812
+Clone2_Tol_S_2_P1-C-5_1_15809.d,pos,sample,Clone2,tol,S,2,P1-C-5,15809
+Clone2_Tol_S_3_P1-C-6_1_15784.d,pos,sample,Clone2,tol,S,3,P1-C-6,15784
+ESCC1_S_1_P1-A-7_1_15796.d,pos,sample,ESCC1,ctrl,S,1,P1-A-7,15796
+ESCC1_S_2_P1-A-8_1_15798.d,pos,sample,ESCC1,ctrl,S,2,P1-A-8,15798
+ESCC1_S_3_P1-A-9_1_15790.d,pos,sample,ESCC1,ctrl,S,3,P1-A-9,15790
+ESCC1_Tol_S_1_P1-B-1_1_15805.d,pos,sample,ESCC1,tol,S,1,P1-B-1,15805
+ESCC1_Tol_S_2_P1-B-2_1_15807.d,pos,sample,ESCC1,tol,S,2,P1-B-2,15807
+ESCC1_Tol_S_3_P1-B-3_1_15801.d,pos,sample,ESCC1,tol,S,3,P1-B-3,15801
+ESi300_S_1_P1-A-1_1_15783.d,pos,sample,ESi300,ctrl,S,1,P1-A-1,15783
+ESi300_S_2_P1-A-2_1_15794.d,pos,sample,ESi300,ctrl,S,2,P1-A-2,15794
+ESi300_S_3_P1-A-3_1_15806.d,pos,sample,ESi300,ctrl,S,3,P1-A-3,15806
+ESi300_Tol_S_1_P1-A-4_1_15811.d,pos,sample,ESi300,tol,S,1,P1-A-4,15811
+ESi300_Tol_S_2_P1-A-5_1_15787.d,pos,sample,ESi300,tol,S,2,P1-A-5,15787
+ESi300_Tol_S_3_P1-A-6_1_15788.d,pos,sample,ESi300,tol,S,3,P1-A-6,15788
+EpCC1_P_1_P1-D-7_1_15838.d,pos,sample,EpCC1,ctrl,P,1,P1-D-7,15838
+EpCC1_P_2_P1-D-8_1_15821.d,pos,sample,EpCC1,ctrl,P,2,P1-D-8,15821
+EpCC1_P_3_P1-D-9_1_15820.d,pos,sample,EpCC1,ctrl,P,3,P1-D-9,15820
+EpCC1_Tol_P_1_P1-E-1_1_15830.d,pos,sample,EpCC1,tol,P,1,P1-E-1,15830
+EpCC1_Tol_P_2_P1-E-2_1_15834.d,pos,sample,EpCC1,tol,P,2,P1-E-2,15834
+EpCC1_Tol_P_3_P1-E-3_1_15844.d,pos,sample,EpCC1,tol,P,3,P1-E-3,15844
+Epi300_P_1_P1-D-1_1_15818.d,pos,sample,Epi300,ctrl,P,1,P1-D-1,15818
+Epi300_P_2_P1-D-2_1_15828.d,pos,sample,Epi300,ctrl,P,2,P1-D-2,15828
+Epi300_P_3_P1-D-3_1_15842.d,pos,sample,Epi300,ctrl,P,3,P1-D-3,15842
+Epi300_Tol_P_1_P1-D-4_1_15829.d,pos,sample,Epi300,tol,P,1,P1-D-4,15829
+Epi300_Tol_P_2_P1-D-5_1_15831.d,pos,sample,Epi300,tol,P,2,P1-D-5,15831
+Epi300_Tol_P_3_P1-D-6_1_15841.d,pos,sample,Epi300,tol,P,3,P1-D-6,15841
+QC 1 SN_P1-C-7_1_15780.d,pos,qc,,,S,1,P1-C-7,15780
+QC 2 P_P1-F-7_1_15826.d,pos,qc,,,P,2,P1-F-7,15826
+QC 2 SN_P1-C-7_1_15791.d,pos,qc,,,S,2,P1-C-7,15791
+QC 3 P_P1-F-7_1_15836.d,pos,qc,,,P,3,P1-F-7,15836
+QC 3 SN_P1-C-7_1_15802.d,pos,qc,,,S,3,P1-C-7,15802
+QC 4 P_P1-F-7_1_15846.d,pos,qc,,,P,4,P1-F-7,15846
+QC 4 SN_P1-C-7_1_15813.d,pos,qc,,,S,4,P1-C-7,15813
+QC1 P_P1-F-7_1_15816.d,pos,qc,,,P,1,P1-F-7,15816
+Blank 1 P_P1-F-8_1_15891.d,neg,blank,,ctrl,P,1,P1-F-8,15891
+Blank 1 Tol_P1-C-9_1_15856.d,neg,blank,,tol,S,1,P1-C-9,15856
+Blank 1_P1-C-8_1_15855.d,neg,blank,,ctrl,S,1,P1-C-8,15855
+Blank 2 P_P1-F-8_1_15901.d,neg,blank,,ctrl,P,2,P1-F-8,15901
+Blank 2 Tol_P1-C-9_1_15867.d,neg,blank,,tol,S,2,P1-C-9,15867
+Blank 2_P1-C-8_1_15866.d,neg,blank,,ctrl,S,2,P1-C-8,15866
+Blank 3 P_P1-F-8_1_15911.d,neg,blank,,ctrl,P,3,P1-F-8,15911
+Blank 3 Tol_P1-C-9_1_15878.d,neg,blank,,tol,S,3,P1-C-9,15878
+Blank 3_P1-C-8_1_15877.d,neg,blank,,ctrl,S,3,P1-C-8,15877
+Blank 4 P_P1-F-8_1_15921.d,neg,blank,,ctrl,P,4,P1-F-8,15921
+Blank 4 Tol_P1-C-9_1_15889.d,neg,blank,,tol,S,4,P1-C-9,15889
+Blank 4_P1-C-8_1_15888.d,neg,blank,,ctrl,S,4,P1-C-8,15888
+Clone1_P_1_P1-E-4_1_15909.d,neg,sample,Clone1,ctrl,P,1,P1-E-4,15909
+Clone1_P_2_P1-E-5_1_15907.d,neg,sample,Clone1,ctrl,P,2,P1-E-5,15907
+Clone1_P_3_P1-E-6_1_15896.d,neg,sample,Clone1,ctrl,P,3,P1-E-6,15896
+Clone1_S_1_P1-B-4_1_15882.d,neg,sample,Clone1,ctrl,S,1,P1-B-4,15882
+Clone1_S_2_P1-B-5_1_15884.d,neg,sample,Clone1,ctrl,S,2,P1-B-5,15884
+Clone1_S_3_P1-B-6_1_15871.d,neg,sample,Clone1,ctrl,S,3,P1-B-6,15871
+Clone1_Tol_P_1_P1-E-7_1_15914.d,neg,sample,Clone1,tol,P,1,P1-E-7,15914
+Clone1_Tol_P_2_P1-E-8_1_15913.d,neg,sample,Clone1,tol,P,2,P1-E-8,15913
+Clone1_Tol_P_3_P1-E-9_1_15919.d,neg,sample,Clone1,tol,P,3,P1-E-9,15919
+Clone1_Tol_S_1_P1-B-7_1_15863.d,neg,sample,Clone1,tol,S,1,P1-B-7,15863
+Clone1_Tol_S_2_P1-B-8_1_15874.d,neg,sample,Clone1,tol,S,2,P1-B-8,15874
+Clone1_Tol_S_3_P1-B-9_1_15860.d,neg,sample,Clone1,tol,S,3,P1-B-9,15860
+Clone2_P_1_P1-F-1_1_15897.d,neg,sample,Clone2,ctrl,P,1,P1-F-1,15897
+Clone2_P_2_P1-F-2_1_15893.d,neg,sample,Clone2,ctrl,P,2,P1-F-2,15893
+Clone2_P_3_P1-F-3_1_15917.d,neg,sample,Clone2,ctrl,P,3,P1-F-3,15917
+Clone2_S_1_P1-C-1_1_15859.d,neg,sample,Clone2,ctrl,S,1,P1-C-1,15859
+Clone2_S_2_P1-C-2_1_15873.d,neg,sample,Clone2,ctrl,S,2,P1-C-2,15873
+Clone2_S_3_P1-C-3_1_15869.d,neg,sample,Clone2,ctrl,S,3,P1-C-3,15869
+Clone2_Tol_P_1_P1-F-4_1_15899.d,neg,sample,Clone2,tol,P,1,P1-F-4,15899
+Clone2_Tol_P_2_P1-F-5_1_15906.d,neg,sample,Clone2,tol,P,2,P1-F-5,15906
+Clone2_Tol_P_3_P1-F-6_1_15898.d,neg,sample,Clone2,tol,P,3,P1-F-6,15898
+Clone2_Tol_S_1_P1-C-4_1_15886.d,neg,sample,Clone2,tol,S,1,P1-C-4,15886
+Clone2_Tol_S_2_P1-C-5_1_15883.d,neg,sample,Clone2,tol,S,2,P1-C-5,15883
+Clone2_Tol_S_3_P1-C-6_1_15858.d,neg,sample,Clone2,tol,S,3,P1-C-6,15858
+ESCC1_S_1_P1-A-7_1_15870.d,neg,sample,ESCC1,ctrl,S,1,P1-A-7,15870
+ESCC1_S_2_P1-A-8_1_15872.d,neg,sample,ESCC1,ctrl,S,2,P1-A-8,15872
+ESCC1_S_3_P1-A-9_1_15864.d,neg,sample,ESCC1,ctrl,S,3,P1-A-9,15864
+ESCC1_Tol_S_1_P1-B-1_1_15879.d,neg,sample,ESCC1,tol,S,1,P1-B-1,15879
+ESCC1_Tol_S_2_P1-B-2_1_15881.d,neg,sample,ESCC1,tol,S,2,P1-B-2,15881
+ESCC1_Tol_S_3_P1-B-3_1_15875.d,neg,sample,ESCC1,tol,S,3,P1-B-3,15875
+ESi300_S_1_P1-A-1_1_15857.d,neg,sample,ESi300,ctrl,S,1,P1-A-1,15857
+ESi300_S_2_P1-A-2_1_15868.d,neg,sample,ESi300,ctrl,S,2,P1-A-2,15868
+ESi300_S_3_P1-A-3_1_15880.d,neg,sample,ESi300,ctrl,S,3,P1-A-3,15880
+ESi300_Tol_S_1_P1-A-4_1_15885.d,neg,sample,ESi300,tol,S,1,P1-A-4,15885
+ESi300_Tol_S_2_P1-A-5_1_15861.d,neg,sample,ESi300,tol,S,2,P1-A-5,15861
+ESi300_Tol_S_3_P1-A-6_1_15862.d,neg,sample,ESi300,tol,S,3,P1-A-6,15862
+EpCC1_P_1_P1-D-7_1_15912.d,neg,sample,EpCC1,ctrl,P,1,P1-D-7,15912
+EpCC1_P_2_P1-D-8_1_15895.d,neg,sample,EpCC1,ctrl,P,2,P1-D-8,15895
+EpCC1_P_3_P1-D-9_1_15894.d,neg,sample,EpCC1,ctrl,P,3,P1-D-9,15894
+EpCC1_Tol_P_1_P1-E-1_1_15904.d,neg,sample,EpCC1,tol,P,1,P1-E-1,15904
+EpCC1_Tol_P_2_P1-E-2_1_15908.d,neg,sample,EpCC1,tol,P,2,P1-E-2,15908
+EpCC1_Tol_P_3_P1-E-3_1_15918.d,neg,sample,EpCC1,tol,P,3,P1-E-3,15918
+Epi300_P_1_P1-D-1_1_15892.d,neg,sample,Epi300,ctrl,P,1,P1-D-1,15892
+Epi300_P_2_P1-D-2_1_15902.d,neg,sample,Epi300,ctrl,P,2,P1-D-2,15902
+Epi300_P_3_P1-D-3_1_15916.d,neg,sample,Epi300,ctrl,P,3,P1-D-3,15916
+Epi300_Tol_P_1_P1-D-4_1_15903.d,neg,sample,Epi300,tol,P,1,P1-D-4,15903
+Epi300_Tol_P_2_P1-D-5_1_15905.d,neg,sample,Epi300,tol,P,2,P1-D-5,15905
+Epi300_Tol_P_3_P1-D-6_1_15915.d,neg,sample,Epi300,tol,P,3,P1-D-6,15915
+QC 1 SN_P1-C-7_1_15854.d,neg,qc,,,S,1,P1-C-7,15854
+QC 2 P_P1-F-7_1_15900.d,neg,qc,,,P,2,P1-F-7,15900
+QC 2 SN_P1-C-7_1_15865.d,neg,qc,,,S,2,P1-C-7,15865
+QC 3 P_P1-F-7_1_15910.d,neg,qc,,,P,3,P1-F-7,15910
+QC 3 SN_P1-C-7_1_15876.d,neg,qc,,,S,3,P1-C-7,15876
+QC 4 P_P1-F-7_1_15920.d,neg,qc,,,P,4,P1-F-7,15920
+QC 4 SN_P1-C-7_1_15887.d,neg,qc,,,S,4,P1-C-7,15887
+QC1 P_P1-F-7_1_15890.d,neg,qc,,,P,1,P1-F-7,15890
