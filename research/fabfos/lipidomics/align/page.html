@@ -125,6 +125,8 @@ function figure(el) {
     COLS.forEach(([key, what, swap], col) => {
       const f = DATA.figures[key], mi = key === "MI_MDS", ct = what === "cell type";
       const strain = s => (swap && SWAP[s]) || s;
+      const name = i => swap && SWAP[f.strain[i]]
+        ? `${f.sample_id[i].replace(f.strain[i], SWAP[f.strain[i]])} (recorded ${f.strain[i]})` : f.sample_id[i];
       const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
       const n = row * COLS.length + col + 1, ax = n > 1 ? n : "";
       const axis = (dom, anchor) => ({ domain: dom, anchor, showgrid: false, zeroline: false, showticklabels: false,
@@ -149,13 +151,13 @@ function figure(el) {
           traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, x: ex, y: ey,
             line: { color: col, width: ct ? 1.2 : 0.9 }, fill: "toself", hoveron: "fills",
             fillcolor: !ct && f.treatment[i] === "tol" ? fg + "55" : "rgba(0,0,0,0)",
-            text: f.sample_id[i], hoverinfo: "text" });
+            text: name(i), hoverinfo: "text" });
         });
         return;
       }
       traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
-        x: idx.map(i => f.x[i]), y: idx.map(i => f.y[i]), text: idx.map(i => f.sample_id[i]),
+        x: idx.map(i => f.x[i]), y: idx.map(i => f.y[i]), text: idx.map(name),
         hovertemplate: "%{text}<extra></extra>",
         marker: ct
           ? { size: 7, color: idx.map(i => c[strain(f.strain[i])]), line: { color: surface, width: 1 } }
