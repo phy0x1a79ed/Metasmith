@@ -70,19 +70,20 @@ def run(tables: dict) -> dict:
         ck = {"core": n_core, "core_flag": n_core < MIN_CORE, "variants": {}}
         pcs = {}
         for v, x in xs.items():
-            pca = PCA(n_components=2, svd_solver="full").fit(x)
+            pca = PCA(n_components=3, svd_solver="full").fit(x)
             pcs[v] = pca.transform(x)
             ums = [embed(x, sd) for sd in SEEDS]
             for method, xy in (("PCA", pcs[v]), ("UMAP", ums[0])):
                 coords.append(smp[["sample_id", "strain", "strain_recorded", "treatment", "replicate"]]
-                              .assign(observation=obs, variant=v, method=method, x=xy[:, 0], y=xy[:, 1]))
+                              .assign(observation=obs, variant=v, method=method, x=xy[:, 0], y=xy[:, 1],
+                                      z=xy[:, 2] if xy.shape[1] > 2 else np.nan))
             ck["variants"][v] = {
                 "n_features": x.shape[1],
                 "pca_var": [round(float(e), 4) for e in pca.explained_variance_ratio_],
                 "focus": focus_report(x, ids),
                 "umap_seed_disparity": [round(float(procrustes(ums[0], u)[2]), 3) for u in ums[1:]],
             }
-        ck["procrustes_pca"] = {f"{a}-{b}": round(float(procrustes(pcs[a], pcs[b])[2]), 3)
+        ck["procrustes_pca"] = {f"{a}-{b}": round(float(procrustes(pcs[a][:, :2], pcs[b][:, :2])[2]), 3)
                                 for a, b in (("A", "B"), ("A", "C"), ("B", "C"))}
         checks[obs] = ck
     load.save(pd.concat(coords), load.OUT / "ordination.parquet")

@@ -18,9 +18,9 @@ DISPARITY_MAX = 0.3
 def figures():
     o = pd.read_parquet(load.OUT / "ordination.parquet")
     o["obs"] = o.observation.map(load.LABEL)
-    o["x"], o["y"] = o.x.round(4), o.y.round(4)
+    o = o[(o.variant == "B") & (o.method == "PCA")].round({"x": 4, "y": 4, "z": 4})
     cols = ["obs", "sample_id", "strain", "treatment", "x", "y"]
-    figs = {"B_PCA": o[(o.variant == "B") & (o.method == "PCA")][cols].to_dict("list")}
+    figs = {"B_PCA": o[cols + ["z"]].to_dict("list")}
     mi = pd.read_parquet(load.OUT / "mi.parquet")
     mi["obs"] = mi.observation.map(load.LABEL)
     figs["MI_MDS"] = mi[cols + ["cxx", "cxy", "cyy"]].round(5).to_dict("list")
