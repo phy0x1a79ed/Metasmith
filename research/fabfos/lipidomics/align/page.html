@@ -90,6 +90,47 @@ const COLS = [["B_PCA", "cell type", false, "PCA · B"], ["MI_MDS", "cell type",
 const W = 0.145, XDOM = COLS.map((_, i) => { const x = i * (W + 0.02) + (i >= 4 ? 0.03 : 0); return [x, x + W]; });
 const GROUPS = [["cell type", 0, 3], ["treatment", 4, 5]];
 const CHI2_95 = 5.991;
+const ISO = { yaw: Math.PI / 4, pitch: Math.atan(1 / Math.SQRT2) };  // looking straight at a cube corner
+const VIEW = { ...ISO };
+const QUARTERS = [0.25, 0.5, 0.75, 1];
+
+function project([x, y, z]) {  // orthographic; third value is depth, positive toward the viewer
+  const cy = Math.cos(VIEW.yaw), sy = Math.sin(VIEW.yaw), cp = Math.cos(VIEW.pitch), sp = Math.sin(VIEW.pitch);
+  const x1 = x * cy + z * sy, z1 = -x * sy + z * cy;
+  return [x1, y * cp - z1 * sp, y * sp + z1 * cp];
+}
+
+function hull(pts) {
+  const p = [...pts].sort((a, b) => a[0] - b[0] || a[1] - b[1]), cross = (o, a, b) =>
+    (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+  const half = q => q.reduce((h, v) => {
+    while (h.length > 1 && cross(h[h.length - 2], h[h.length - 1], v) <= 0) h.pop();
+    return [...h, v];
+  }, []);
+  const lo = half(p), up = half(p.reverse());
+  return [...lo.slice(0, -1), ...up.slice(0, -1)];
+}
+
+// The cube's silhouette, plus the three edges meeting at its farthest corner as axes, each carrying its
+// component's share of variance as a bar from that corner (full edge = 100%) with ticks at quarters.
+function cube(s, pv, ref, rule, muted) {
+  const signs = [...Array(8)].map((_, n) => [n & 1 ? 1 : -1, n & 2 ? 1 : -1, n & 4 ? 1 : -1]);
+  const corner = sg => project(sg.map(v => v * s));
+  const back = signs.reduce((a, b) => corner(b)[2] < corner(a)[2] ? b : a), b0 = corner(back);
+  const seg = (a, b, color, width) => ({ type: "line", layer: "below", ...ref,
+    x0: a[0], y0: a[1], x1: b[0], y1: b[1], line: { color, width } });
+  const shapes = [{ type: "path", layer: "below", ...ref, line: { color: rule, width: 0.8 },
+    path: "M" + hull(signs.map(corner)).map(q => `${q[0]},${q[1]}`).join("L") + "Z" }];
+  [0, 1, 2].forEach(k => {
+    const along = t => { const v = back.map(x => x * s); v[k] = back[k] * s * (1 - 2 * t); return project(v); };
+    const end = along(1), dx = end[0] - b0[0], dy = end[1] - b0[1], len = Math.hypot(dx, dy);
+    shapes.push(seg(b0, end, rule, 1), seg(b0, along(pv[k]), muted, 3));
+    if (len < s * 0.2) return;
+    const nx = -dy / len * s * 0.06, ny = dx / len * s * 0.06;
+    QUARTERS.forEach(q => { const m = along(q); shapes.push(seg([m[0] - nx, m[1] - ny], [m[0] + nx, m[1] + ny], rule, 1)); });
+  });
+  return shapes;
+}
 
 function ellipse(cx, cy, a, b, d) {
   const t = (a + d) / 2, r = Math.sqrt(((a - d) / 2) ** 2 + b * b), l1 = t + r, l2 = Math.max(t - r, 0);
@@ -109,7 +150,7 @@ function figure(el) {
     xanchor: "center", yanchor: "bottom", showarrow: false, font: { size, color } });
   const traces = [], layout = {
     paper_bgcolor: surface, plot_bgcolor: surface, font: { family: css("--sans"), color: fg, size: 11 },
-    margin: { l: 58, r: 6, t: 46, b: 8 }, showlegend: false, hovermode: "closest", shapes: [],
+    margin: { l: 58, r: 6, t: 46, b: 8 }, showlegend: false, hovermode: "closest", dragmode: false, shapes: [],
     hoverlabel: { bgcolor: surface, bordercolor: css("--rule"), font: { color: fg, family: css("--mono") } },
     annotations: [
       ...COLS.map(([, , , head], i) => label(head, (XDOM[i][0] + XDOM[i][1]) / 2, 10, muted, 4)),
@@ -130,19 +171,9 @@ function figure(el) {
       const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
       const n = row * COLS.length + col + 1, ax = n > 1 ? n : "";
       const axis = (dom, anchor) => ({ domain: dom, anchor, showgrid: false, zeroline: false, showticklabels: false,
-        ticks: "", linecolor: css("--rule") });
+        ticks: "", linecolor: css("--rule"), fixedrange: true });
       layout[`xaxis${ax}`] = axis(XDOM[col], `y${ax}`);
       layout[`yaxis${ax}`] = axis(ydom, `x${ax}`);
-      if (!mi) layout.shapes.push(  // explained variance as a bar along each axis: full axis length = 100%
-        { type: "line", xref: `x${ax} domain`, yref: `y${ax} domain`, x0: 0, x1: pv[0], y0: -0.035, y1: -0.035,
-          line: { color: muted, width: 3 } },
-        { type: "line", xref: `x${ax} domain`, yref: `y${ax} domain`, x0: -0.035, x1: -0.035, y0: 0, y1: pv[1],
-          line: { color: muted, width: 3 } },
-        ...[0.25, 0.5, 0.75, 1].flatMap(q => [
-          { type: "line", xref: `x${ax} domain`, yref: `y${ax} domain`, x0: q, x1: q, y0: -0.055, y1: -0.015,
-            line: { color: rule, width: 1 } },
-          { type: "line", xref: `x${ax} domain`, yref: `y${ax} domain`, x0: -0.055, x1: -0.015, y0: q, y1: q,
-            line: { color: rule, width: 1 } }]));
       if (mi) {
         Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "range" });
         layout[`xaxis${ax}`].constrain = "range";
@@ -155,13 +186,23 @@ function figure(el) {
         });
         return;
       }
+      const pts = idx.map(i => [f.x[i], f.y[i], f.z[i]]);
+      const s = Math.max(...pts.flat().map(Math.abs)) * 1.05, r = s * Math.sqrt(3) * 1.05;
+      Object.assign(layout[`xaxis${ax}`], { range: [-r, r], showline: false });
+      Object.assign(layout[`yaxis${ax}`], { range: [-r, r], showline: false, scaleanchor: `x${ax}`, constrain: "range" });
+      layout[`xaxis${ax}`].constrain = "range";
+      layout.shapes.push(...cube(s, pv, { xref: `x${ax}`, yref: `y${ax}` }, rule, muted));
+      const pr = pts.map(project), order = pts.map((_, k) => k).sort((a, b) => pr[a][2] - pr[b][2]);
+      const at = order.map(k => idx[k]);
       traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
-        x: idx.map(i => f.x[i]), y: idx.map(i => f.y[i]), text: idx.map(name),
+        x: order.map(k => pr[k][0]), y: order.map(k => pr[k][1]), text: at.map(name),
         hovertemplate: "%{text}<extra></extra>",
-        marker: ct
-          ? { size: 7, color: idx.map(i => c[strain(f.strain[i])]), line: { color: surface, width: 1 } }
-          : { size: 7, color: idx.map(i => f.treatment[i] === "tol" ? fg : surface), line: { color: fg, width: 1.3 } },
+        marker: {
+          size: order.map(k => 7 * (1 + 0.3 * pr[k][2] / (s * Math.sqrt(3)))),
+          color: at.map(i => ct ? c[strain(f.strain[i])] : f.treatment[i] === "tol" ? fg : surface),
+          line: ct ? { color: surface, width: 1 } : { color: fg, width: 1.3 },
+        },
       });
     });
   });
@@ -177,7 +218,9 @@ function build() {
       floor, distance is one minus the permutation-corrected normalised MI, pairs are weighted by bootstrap precision,
       and each ellipse is the 95% region of that sample over ${DATA.n_boot} species bootstraps (wide = little shared
       information). Swap columns exchange the Clone1 and PCC1 colours in every sample; positions are unchanged.
-      Bars along the PCA axes show each component's share of variance (full axis = 100%, ticks at quarters). Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
+      PCA panels show PC1–PC3 as a cube seen from a corner; drag any of them to rotate all together, double-click to
+      reset. Nearer samples are drawn larger. The bar on each back edge is that component's share of variance (full
+      edge = 100%, ticks at quarters). Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
       <div class="fig"><div class="plot"></div></div></section>`;
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
@@ -185,6 +228,15 @@ function build() {
       const cls = ["pass", "flag", "fail"].includes(c.mark) ? c.mark : "info";
       return `<td class="v">${c.value}<br><span class="mark ${cls}">${c.mark}</span></td>`;
     }).join("")}</tr>`).join("");
+}
+
+let drag = null, pending = false;
+function rotate(e) {
+  if (!drag) return;
+  VIEW.yaw += (e.clientX - drag[0]) * 0.01;
+  VIEW.pitch = Math.max(-1.5, Math.min(1.5, VIEW.pitch + (e.clientY - drag[1]) * 0.01));
+  drag = [e.clientX, e.clientY];
+  if (!pending) { pending = true; requestAnimationFrame(() => { pending = false; draw(); }); }
 }
 
 function draw() {
@@ -200,4 +252,9 @@ document.getElementById("theme").addEventListener("click", () => {
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
 build();
 draw();
+const plotEl = document.querySelector(".plot");
+plotEl.addEventListener("pointerdown", e => { drag = [e.clientX, e.clientY]; }, true);
+plotEl.addEventListener("dblclick", () => { Object.assign(VIEW, ISO); draw(); }, true);
+addEventListener("pointermove", rotate);
+addEventListener("pointerup", () => { drag = null; });
 </script>
