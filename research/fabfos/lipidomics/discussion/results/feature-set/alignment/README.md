@@ -19,11 +19,6 @@ The result of the alignment topic: how the project builds its own ion tables fro
 
 > then we would coupled files that let's us actually work with the data... 1 or a series of paraquets?
 
-## Proposed working layout (awaiting confirmation)
-
-- Partitioned Parquet datasets keyed by polarity and injection: `ions/` (scalars, one row per ion) and `traces/` (long format: `ion_id, kind, x, y`), plus one `injections.parquet` of sample metadata.
-- MS2 spectra also exported as MGF.
-
 ## First MZmine trial (2026-11-13)
 
 The v0 batch (detection only, since folded into `per_injection_v1.mzbatch`) on `QC 2 P` (POS), template settings untuned:
@@ -54,16 +49,13 @@ The v0 batch (detection only, since folded into `per_injection_v1.mzbatch`) on `
 - **CAUTION:** the `.mzmine` projects reference the raw `.d` paths in this worktree. They break if the raw chunk moves.
 - Gap: EIC and mobilogram traces are not exported. Extract from `.d` per species window later if componentization needs shapes.
 
-## Matching design (open)
+## Matching design
 
 > this bit needs a bit of thinking, since depending on the precision, we need to balence something like optimal transport with a union that actually gets new species when detected. aggregating the feature set may also let us transpose the M2 features. Essentially we should get multiple reads of ions and covariance for identification. For teh actual signal, we should just get a single abundance number (relative?) per sample, just like transcriptomics or ASV tables
 
 - Terms: a **read** is one row of a per-injection ion table (one detected peak). A **species** is a cross-injection cluster of reads, at most one read per injection; it becomes one row of the common table. Its **centroid** is the consensus m/z, RT and mobility.
-- Proposed: learn the error model (Δppm, ΔRT, Δmobility) from QC replicates against a random-pair background. Assign each injection's reads to centroids one-to-one with a "new species" cost (unbalanced assignment). Refit centroids, iterate.
-- Abundance: raw area per species per injection, gap-filled from raw where undetected, with a flag. Normalization is a later choice.
-- Per species: pool MS2 reads into a consensus spectrum. Componentization by covariance, co-elution and mobility comes after the table.
-- Align POS and NEG separately; P and S jointly within a polarity.
-- Error model: QC replicates (4 per fraction per polarity, bracketing every 8 samples) give the true-match spread; random pairs give the background; their likelihood ratio sets the match vs new-species cost. CUDA gives drift for every injection. Check matrix widening on sample reads after a first pass.
+- Built as `align/` (see the lipidomics README for the command). The error model comes from QC replicate pairs against a background of the same pairs shifted 1 min in RT. The match cutoff sits where the two densities cross, capped at d² = 144 (12σ). Beyond that, the QC excess is mobility conformers, not measurement error. Each injection's reads go to centroids by one-to-one assignment, with opening a new species costing the cutoff. Centroids refit until under 0.5% of reads move. Centroid pairs inside the cutoff that never share an injection merge, because MZmine splits some peaks.
+- POS and NEG align separately. P and S also align separately, as the 4 observations below.
 
 ## Decisions (2026-11-16)
 
@@ -74,4 +66,27 @@ The v0 batch (detection only, since folded into `per_injection_v1.mzbatch`) on `
 - One feature table per observation (pel+, pel-, sup+, sup-). Relative abundance is normalized within an observation only.
 - Rename once at import: `ESi300` → EPI300 and `ESCC1` → EpCC1 (the supernatant file labels). Verify against the labels, then document it only in the raw-data notes.
 - Compute: nibi, not fir (offline) and not the local box. nibi scratch is wiped at the end of each batch of work.
-- The concrete task (8 conditions, 4 feature tables, PCA + UMAP artifact) moved to a plan. This topic resumes after it.
+- No gap-fill and no imputation. A zero means not detected. The ordination handles zeros three ways (below) instead of filling them.
+- No normalization by OD or by CUDA. OD values are tied to the sample labels, so they would carry the suspected swap into the evidence for it. CUDA corrects extraction, not cell load.
+
+## Outcome (2026-11-16)
+
+- Error model per observation: σ 1.4–2.2 ppm, 0.008–0.011 min RT, 0.20–0.36% mobility. The cutoff is d² 105–116 in POS and capped at 144 in NEG.
+- Matcher checks: no species holds two reads from one injection. CUDA lands in one species per observation, found in every injection. Sample reads scatter at most 1.12× the QC scatter, so the samples show no matrix widening. Reversing the injection order gives ARI 0.984–0.996.
+- QC pairs share 0.79–0.81 of their species, except sup− at 0.68. sup− stays the weak observation.
+- Blank filter: keep a species when its sample mean is at least 3× its blank mean. CUDA fails this filter by design, because it is spiked into the blanks too. Kept: pel+ 3100, pel− 1642, sup+ 2262, sup− 2799.
+- Size factors (median of ratios to the QC median) span 0.78–1.44 across samples. OD spans 0.1–0.8. Comparing them waits for the biology stage.
+- Zero handling, all drawn: A floors every value at the most dilute sample's detection floor and takes CLR against the core. B takes CLR on the core alone, the species found in all 24 samples. C replaces zeros multiplicatively, then takes CLR. The supernatant cores are small (sup+ 44, sup− 36).
+- The variants disagree in geometry (PCA Procrustes disparity 0.16–0.81). Variant A's UMAP is unstable in sup− across seeds.
+
+Where EpCC1 ctrl r2 falls, as the group whose replicates sit closer on average:
+
+| observation | A | B | C |
+|---|---|---|---|
+| pel+ | EpCC1 ctrl | EpCC1 ctrl | EpCC1 ctrl |
+| pel− | EPI300 ctrl | EPI300 ctrl | EPI300 ctrl |
+| sup+ | EPI300 ctrl | EPI300 ctrl | EPI300 ctrl |
+| sup− | EpCC1 ctrl | EPI300 ctrl | EPI300 ctrl |
+
+- Verdict: mixed. The supernatant and pel− lean towards a swap with EPI300 ctrl, and pel+ fits the recorded label. The pel− margins are small.
+- Deferred to the biology stage: marker-ion load estimates, the OD-to-replicate mapping, the size-factor-against-OD check, and a per-cell table.
