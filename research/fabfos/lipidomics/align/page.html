@@ -5,17 +5,17 @@
 /* layout: one grid, rows = observations, columns = B PCA and MI MDS by colouring, legend pinned under the header, checks table last */
 :root {
   --bg: #f6f7f8; --surface: #ffffff; --fg: #1d2126; --muted: #5d6670; --rule: #dde1e6;
-  --s1: #2a78d6; --s2: #1baf7a; --s3: #eb8a1a; --s4: #d1332a;
+  --s1: #2a78d6; --s2: #1597a6; --s3: #e8681f; --s4: #d1332a;
   --pass: #1f7a3a; --flag: #a86200; --fail: #b3261e; --neutral: #4b5563;
   --sans: "IBM Plex Sans", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #121417; --surface: #1a1d21; --fg: #e8eaed; --muted: #9aa3ad; --rule: #2c3138;
-  --s1: #3987e5; --s2: #199e70; --s3: #e08a22; --s4: #e04a3c;
+  --s1: #3987e5; --s2: #1ea3b3; --s3: #ec7330; --s4: #e04a3c;
   --pass: #5cc27a; --flag: #e0a040; --fail: #f07068; --neutral: #a0a8b2; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #121417; --surface: #1a1d21; --fg: #e8eaed; --muted: #9aa3ad; --rule: #2c3138;
-  --s1: #3987e5; --s2: #199e70; --s3: #e08a22; --s4: #e04a3c;
+  --s1: #3987e5; --s2: #1ea3b3; --s3: #ec7330; --s4: #e04a3c;
   --pass: #5cc27a; --flag: #e0a040; --fail: #f07068; --neutral: #a0a8b2; color-scheme: dark }
 body { background: var(--bg); color: var(--fg); font-family: var(--sans); }
 main { max-width: 1180px; margin: 0 auto; padding-block: 16px 48px;
