@@ -91,8 +91,10 @@ const CGAP = 0.006, GROUP_GAP = 0.02, W = (1 - 5 * CGAP - GROUP_GAP) / 6;
 const XDOM = COLS.map((_, i) => { const x = i * (W + CGAP) + (i >= 4 ? GROUP_GAP : 0); return [x, x + W]; });
 const GROUPS = [["cell type", 0, 3], ["treatment", 4, 5]];
 const CHI2_95 = 5.991;
-// The 4 views down at a top cube corner (from below would only mirror them); dragging adds a shared offset.
-const CORNERS = [1, 3, 5, 7].map(q => ({ yaw: q * Math.PI / 4, pitch: Math.atan(1 / Math.SQRT2) }));
+// One fixed view down at a cube corner for every row; dragging adds a shared offset, double-click removes it.
+const HOME = { yaw: Math.PI / 4, pitch: Math.atan(1 / Math.SQRT2) };
+const PERMS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
+const SIGNS = [...Array(8)].map((_, n) => [n & 1 ? -1 : 1, n & 2 ? -1 : 1, n & 4 ? -1 : 1]);
 const DRAG = { yaw: 0, pitch: 0 };
 const QUARTERS = [0.25, 0.5, 0.75, 1];
 
@@ -124,31 +126,31 @@ function ellipse(cx, cy, a, b, d) {
   return [xs, ys];
 }
 
-// Per observation: centre the cube on the data's mid-range and pick the corner whose view overlaps the samples
-// least (soft count of projected pairs closer than about one dot width, ~0.1 s at the drawn scale).
+// Per observation: centre on the data's mid-range, then place PC1-PC3 on the cube's axes (any order, either sign;
+// signs are arbitrary in PCA) so the fixed view crowds the samples least: a soft count of projected pairs within
+// about a third of the cube's half-width.
 const FRAMES = {};
 function frameOf(p) {
   if (FRAMES[p]) return FRAMES[p];
   const f = DATA.figures.B_PCA, raw = f.obs.flatMap((o, i) => o === p ? [[f.x[i], f.y[i], f.z[i]]] : []);
   const lo = [0, 1, 2].map(k => Math.min(...raw.map(q => q[k]))), hi = [0, 1, 2].map(k => Math.max(...raw.map(q => q[k])));
   const mid = lo.map((v, k) => (v + hi[k]) / 2), s = Math.max(...hi.map((v, k) => (v - lo[k]) / 2)) * 1.04;
-  const pts = raw.map(q => q.map((v, k) => v - mid[k]));
-  const overlap = view => {
-    const pr = pts.map(q => project(q, view));
+  const place = (q, perm, sign) => perm.map((pc, j) => sign[j] * (q[pc] - mid[pc]));
+  const crowding = (perm, sign) => {
+    const pr = raw.map(q => project(place(q, perm, sign), HOME));
     return pr.reduce((t, a, i) => t + pr.slice(i + 1).reduce((u, b) =>
-      u + Math.exp(-((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) / (0.1 * s) ** 2), 0), 0);
+      u + Math.exp(-((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) / (0.3 * s) ** 2), 0), 0);
   };
-  return FRAMES[p] = { mid, s, corner: CORNERS.reduce((a, v) => overlap(v) < overlap(a) ? v : a) };
+  let best = { c: Infinity };
+  PERMS.forEach(perm => SIGNS.forEach(sign => { const c = crowding(perm, sign); if (c < best.c) best = { c, perm, sign }; }));
+  return FRAMES[p] = { s, perm: best.perm, place: q => place(q, best.perm, best.sign) };
 }
 
-const viewOf = p => {
-  const { corner } = frameOf(p);
-  return { yaw: corner.yaw + DRAG.yaw, pitch: Math.max(-1.5, Math.min(1.5, corner.pitch + DRAG.pitch)) };
-};
+const viewOf = () => ({ yaw: HOME.yaw + DRAG.yaw, pitch: Math.max(-1.5, Math.min(1.5, HOME.pitch + DRAG.pitch)) });
 
 // The cube's silhouette and its three back edges (axis lines, behind the dots). Along the leftmost silhouette edge
-// parallel to each axis, just outside the outline: that component's share of variance as a bar from the axis' low
-// end (full edge = 100%) with ticks at quarters.
+// parallel to each cube axis, just outside the outline, starting from that edge's left (or lower) end: the share of
+// variance of the component placed on that axis (full edge = 100%), with ticks at quarters.
 function cube(s, pv, ref, rule, muted, view) {
   const P = [...Array(8)].map((_, n) => project([n & 1 ? s : -s, n & 2 ? s : -s, n & 4 ? s : -s], view));
   const back = P.reduce((a, q, n) => q[2] < P[a][2] ? n : a, 0);
@@ -165,7 +167,7 @@ function cube(s, pv, ref, rule, muted, view) {
     const along = edges.filter(([a, b]) => (a[2] ^ b[2]) === 1 << k);
     if (!along.length) return;
     const [a, b] = along.reduce((m, e) => e[0][0] + e[1][0] < m[0][0] + m[1][0] ? e : m);
-    const [lo, hi] = (a[2] >> k) & 1 ? [b, a] : [a, b];
+    const [lo, hi] = Math.abs(a[0] - b[0]) > 1e-9 * s ? (a[0] < b[0] ? [a, b] : [b, a]) : (a[1] < b[1] ? [a, b] : [b, a]);
     const dx = hi[0] - lo[0], dy = hi[1] - lo[1], len = Math.hypot(dx, dy);
     let nx = -dy / len, ny = dx / len;
     if (((lo[0] + hi[0]) / 2 - cx) * nx + ((lo[1] + hi[1]) / 2 - cy) * ny < 0) { nx = -nx; ny = -ny; }
@@ -241,13 +243,13 @@ function figure(el) {
         });
         return;
       }
-      const { mid, s } = frameOf(p), view = viewOf(p);
-      const pts = idx.map(i => [f.x[i], f.y[i], f.z[i]].map((v, k) => v - mid[k]));
-      const box = cube(s, pv, { xref: `x${ax}`, yref: `y${ax}` }, rule, muted, view);
+      const { s, perm, place } = frameOf(p), view = viewOf();
+      const pts = idx.map(i => place([f.x[i], f.y[i], f.z[i]]));
+      const box = cube(s, perm.map(pc => pv[pc]), { xref: `x${ax}`, yref: `y${ax}` }, rule, muted, view);
       Object.assign(layout[`xaxis${ax}`], { range: box.x, showline: false, constrain: "range" });
       Object.assign(layout[`yaxis${ax}`], { range: box.y, showline: false, scaleanchor: `x${ax}`, constrain: "range" });
       layout.shapes.push(...box.shapes);
-      const hov = box.bars.flatMap(b => b.pts.map(q => [...q, `PC${b.k + 1} · ${(pv[b.k] * 100).toFixed(1)}%`]));
+      const hov = box.bars.flatMap(b => b.pts.map(q => [...q, `PC${perm[b.k] + 1} · ${(pv[perm[b.k]] * 100).toFixed(1)}%`]));
       traces.push({ type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`, marker: { size: 8, opacity: 0 },
         x: hov.map(q => q[0]), y: hov.map(q => q[1]), text: hov.map(q => q[2]), hovertemplate: "%{text}<extra></extra>" });
       const pr = pts.map(q => project(q, view)), order = pts.map((_, k) => k).sort((a, b) => pr[a][2] - pr[b][2]);
@@ -289,9 +291,9 @@ function build() {
       and each ellipse is the 95% region of that sample over ${DATA.n_boot} species bootstraps (wide = little shared
       information). Swap columns exchange the Clone1 and PCC1 colours in every sample; positions are unchanged.
       PCA panels show PC1–PC3 as a cube seen from a corner; drag any of them to rotate all together, double-click to
-      reset. The three back edges are the axes; the bars outside the left edges give each
-      component's share of variance (full edge = 100%, ticks at quarters). Each row's corner is chosen to overlap the
-      samples least. Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
+      reset. The three back edges are the axes. In each row PC1–PC3 are placed on the
+      cube's axes (any order and sign) to crowd the samples least; the bars outside the left edges give the share of
+      variance of the component on that axis (full edge = 100%, ticks at quarters; hover for which PC). Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
       <div class="fig"><div class="plot"></div></div></section>`;
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
@@ -303,6 +305,7 @@ function build() {
 
 let drag = null, pending = false;
 function rotate(e) {
+  if (drag && !e.buttons) drag = null;
   if (!drag) return;
   DRAG.yaw += (e.clientX - drag[0]) * 0.01;
   DRAG.pitch += (e.clientY - drag[1]) * 0.01;
