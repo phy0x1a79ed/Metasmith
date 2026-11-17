@@ -246,8 +246,9 @@ function figure(el) {
       const { s, perm, place } = frameOf(p), view = viewOf();
       const pts = idx.map(i => place([f.x[i], f.y[i], f.z[i]]));
       const box = cube(s, perm.map(pc => pv[pc]), { xref: `x${ax}`, yref: `y${ax}` }, rule, muted, view);
-      Object.assign(layout[`xaxis${ax}`], { range: box.x, showline: false, constrain: "range" });
-      Object.assign(layout[`yaxis${ax}`], { range: box.y, showline: false, scaleanchor: `x${ax}`, constrain: "range" });
+      const frame = cube(s, [0, 0, 0], {}, rule, muted, HOME);  // rotation keeps the starting view's framing
+      Object.assign(layout[`xaxis${ax}`], { range: frame.x, showline: false, constrain: "range" });
+      Object.assign(layout[`yaxis${ax}`], { range: frame.y, showline: false, scaleanchor: `x${ax}`, constrain: "range" });
       layout.shapes.push(...box.shapes);
       const hov = box.bars.flatMap(b => b.pts.map(q => [...q, `PC${perm[b.k] + 1} · ${(pv[perm[b.k]] * 100).toFixed(1)}%`]));
       traces.push({ type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`, marker: { size: 8, opacity: 0 },
@@ -327,8 +328,16 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", draw);
 build();
 draw();
 const plotEl = document.querySelector(".plot");
-plotEl.addEventListener("pointerdown", e => { drag = [e.clientX, e.clientY]; }, true);
-plotEl.addEventListener("dblclick", () => { Object.assign(DRAG, { yaw: 0, pitch: 0 }); draw(); }, true);
+// Plotly's layers can swallow dblclick, so a double press is detected from the pointer events themselves.
+let lastDown = { t: -1e9, x: 0, y: 0 };
+plotEl.addEventListener("pointerdown", e => {
+  if (e.timeStamp - lastDown.t < 400 && Math.hypot(e.clientX - lastDown.x, e.clientY - lastDown.y) < 6) {
+    Object.assign(DRAG, { yaw: 0, pitch: 0 });
+    draw();
+  }
+  lastDown = { t: e.timeStamp, x: e.clientX, y: e.clientY };
+  drag = [e.clientX, e.clientY];
+}, true);
 addEventListener("pointermove", rotate);
 addEventListener("pointerup", () => { drag = null; });
 addEventListener("resize", draw);
