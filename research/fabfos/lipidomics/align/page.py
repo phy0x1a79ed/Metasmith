@@ -91,6 +91,8 @@ def main(out: Path):
         "variants": VARIANTS,
         "pca_var": {f"{v}_{load.LABEL[o]}": checks[o]["ordination"]["variants"][v]["pca_var"]
                     for o in load.OBSERVATIONS for v in VARIANTS},
+        "n_features": {f"{v}_{load.LABEL[o]}": checks[o]["ordination"]["variants"][v]["n_features"]
+                       for o in load.OBSERVATIONS for v in VARIANTS},
         "figures": figures(),
         "checks": [{"check": row[0][0], "about": row[0][1],
                     "cells": [{"value": value, "mark": mark} for *_, value, mark in row]} for row in zip(*cols)],

@@ -1,4 +1,7 @@
-"""PCA and UMAP of each observation's 24 samples under three CLR zero-handling variants, plus the check report."""
+"""PCA and UMAP of each observation's 24 samples under three CLR zero-handling variants, plus the check report.
+
+Run alone to re-ordinate from the saved feature tables without re-matching."""
+import json
 import warnings
 
 import numpy as np
@@ -11,7 +14,9 @@ from . import load
 
 VARIANTS = {"A": "floor-CLR", "B": "core-only CLR", "C": "multiplicative-replacement CLR"}
 SEEDS = (0, 1, 2)
-N_NEIGHBORS = 5
+# 24 points in groups of 3: a small neighbourhood fragments into replicate triplets (swept 5-23, min_dist 0.1-0.9)
+N_NEIGHBORS = 12
+MIN_DIST = 0.9
 FOCUS = "PCC1_ctrl_r2"
 MIN_CORE = 50
 
@@ -43,7 +48,7 @@ def variants(scaled: pd.DataFrame, s: pd.Series) -> tuple[dict, int]:
 def embed(x: np.ndarray, seed: int) -> np.ndarray:
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        return umap.UMAP(n_neighbors=N_NEIGHBORS, random_state=seed).fit_transform(x)
+        return umap.UMAP(n_neighbors=N_NEIGHBORS, min_dist=MIN_DIST, init="pca", random_state=seed).fit_transform(x)
 
 
 def focus_report(x: np.ndarray, ids: list) -> dict:
@@ -82,3 +87,19 @@ def run(tables: dict) -> dict:
         checks[obs] = ck
     load.save(pd.concat(coords), load.OUT / "ordination.parquet")
     return checks
+
+
+def from_disk() -> dict:
+    frames = {}
+    for obs in load.OBSERVATIONS:
+        d = load.OUT / obs
+        scaled = pd.read_parquet(d / "abundance_scaled.parquet")
+        frames[obs] = (pd.read_parquet(d / "injections.parquet"), scaled.set_index("species_id"))
+    return frames
+
+
+if __name__ == "__main__":
+    checks = json.loads((load.OUT / "checks.json").read_text())
+    for obs, oc in run(from_disk()).items():
+        checks[obs]["ordination"] = oc
+    load.save(checks, load.OUT / "checks.json")
