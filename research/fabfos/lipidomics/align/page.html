@@ -87,7 +87,8 @@ const SWAP = { Clone1: "PCC1", PCC1: "Clone1" };
 const COLS = [["B_PCA", "cell type", false, "PCA · B"], ["MI_MDS", "cell type", false, "MDS · MI"],
               ["B_PCA", "cell type", true, "PCA · swap"], ["MI_MDS", "cell type", true, "MDS · swap"],
               ["B_PCA", "treatment", false, "PCA · B"], ["MI_MDS", "treatment", false, "MDS · MI"]];
-const W = 0.145, XDOM = COLS.map((_, i) => { const x = i * (W + 0.02) + (i >= 4 ? 0.03 : 0); return [x, x + W]; });
+const CGAP = 0.006, GROUP_GAP = 0.02, W = (1 - 5 * CGAP - GROUP_GAP) / 6;
+const XDOM = COLS.map((_, i) => { const x = i * (W + CGAP) + (i >= 4 ? GROUP_GAP : 0); return [x, x + W]; });
 const GROUPS = [["cell type", 0, 3], ["treatment", 4, 5]];
 const CHI2_95 = 5.991;
 const ISO = { yaw: Math.PI / 4, pitch: Math.atan(1 / Math.SQRT2) };  // looking straight at a cube corner
@@ -168,7 +169,7 @@ function cube(s, pv, ref, rule, muted) {
     shapes.push(seg(at(0, 0.1), at(pv[k], 0.1), muted, 3));
     QUARTERS.forEach(q => shapes.push(seg(at(q, 0.05), at(q, 0.15), rule, 1)));
   });
-  const pad = 0.2 * s, xs = h.map(v => v[0]), ys = h.map(v => v[1]);
+  const pad = 0.17 * s, xs = h.map(v => v[0]), ys = h.map(v => v[1]);
   const backSigns = [0, 1, 2].map(k => (back >> k) & 1 ? 1 : -1);
   return { shapes, back: backSigns, x: [Math.min(...xs) - pad, Math.max(...xs) + pad], y: [Math.min(...ys) - pad, Math.max(...ys) + pad] };
 }
@@ -191,7 +192,7 @@ function mdsBox(p) {
 
 function figure(el) {
   const c = colour(), fg = css("--fg"), muted = css("--muted"), surface = css("--surface"), rule = css("--muted") + "99";
-  const rows = DATA.panels.length, cell = W * (el.clientWidth - 64), gapPx = 28;  // square cells
+  const rows = DATA.panels.length, cell = W * (el.clientWidth - 64), gapPx = 8;  // square cells
   const areaH = rows * cell + (rows - 1) * gapPx, h = cell / areaH, gap = gapPx / areaH;
   const label = (text, x, size, color, yshift) => ({ text, xref: "paper", yref: "paper", x, y: 1, yshift,
     xanchor: "center", yanchor: "bottom", showarrow: false, font: { size, color } });
