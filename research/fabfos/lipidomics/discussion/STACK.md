@@ -25,6 +25,10 @@ Procedure, from dfs-interview § Work the stack:
 
 **alignment**, under **feature-set**. Its result: `results/feature-set/alignment/README.md`.
 
+## Pending
+
+- **A1** (2026-11-16): Build the 4 observation feature tables and the PCA/UMAP artifact (planned task, out of the interview)
+
 ## Stack
 
 - **results** (2026-11-09): I need to prepare context presentation for scadc lipidomics results

@@ -63,4 +63,15 @@ The v0 batch (detection only, since folded into `per_injection_v1.mzbatch`) on `
 - Abundance: raw area per species per injection, gap-filled from raw where undetected, with a flag. Normalization is a later choice.
 - Per species: pool MS2 reads into a consensus spectrum. Componentization by covariance, co-elution and mobility comes after the table.
 - Align POS and NEG separately; P and S jointly within a polarity.
-- Open: error model first, or MZmine join aligner as a baseline first.
+- Error model: QC replicates (4 per fraction per polarity, bracketing every 8 samples) give the true-match spread; random pairs give the background; their likelihood ratio sets the match vs new-species cost. CUDA gives drift for every injection. Check matrix widening on sample reads after a first pass.
+
+## Decisions (2026-11-16)
+
+> ok, it looks like + and - need to be kept separate since they dont behave like 1 set (cant rel abundance norm across the aggregate). that's fine, so for each biological condition, we also have sup+, sup-, pel+, pel- observations (henceforth called the "4 obsevations").
+
+> when we import and create our working table, we should do 1 rename and confirm it is correct as per the labels, then we can forget about it and only document it as part of the raw data.
+
+- One feature table per observation (pel+, pel-, sup+, sup-). Relative abundance is normalized within an observation only.
+- Rename once at import: `ESi300` → EPI300 and `ESCC1` → EpCC1 (the supernatant file labels). Verify against the labels, then document it only in the raw-data notes.
+- Compute: nibi, not fir (offline) and not the local box. nibi scratch is wiped at the end of each batch of work.
+- The concrete task (8 conditions, 4 feature tables, PCA + UMAP artifact) moved to a plan. This topic resumes after it.
