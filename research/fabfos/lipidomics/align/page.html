@@ -109,7 +109,7 @@ function figure(el) {
     xanchor: "center", yanchor: "bottom", showarrow: false, font: { size, color } });
   const traces = [], layout = {
     paper_bgcolor: surface, plot_bgcolor: surface, font: { family: css("--sans"), color: fg, size: 11 },
-    margin: { l: 58, r: 6, t: 46, b: 8 }, showlegend: false, hovermode: "closest",
+    margin: { l: 58, r: 6, t: 46, b: 8 }, showlegend: false, hovermode: "closest", shapes: [],
     hoverlabel: { bgcolor: surface, bordercolor: css("--rule"), font: { color: fg, family: css("--mono") } },
     annotations: [
       ...COLS.map(([, , , head], i) => label(head, (XDOM[i][0] + XDOM[i][1]) / 2, 10, muted, 4)),
@@ -127,10 +127,15 @@ function figure(el) {
       const strain = s => (swap && SWAP[s]) || s;
       const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
       const n = row * COLS.length + col + 1, ax = n > 1 ? n : "";
-      const axis = (dom, t, anchor) => ({ domain: dom, anchor, title: { text: t, font: { size: 9, color: muted }, standoff: 2 },
-        showgrid: false, zeroline: false, showticklabels: false, ticks: "", linecolor: css("--rule") });
-      layout[`xaxis${ax}`] = axis(XDOM[col], mi ? "" : `PC1 ${(pv[0] * 100).toFixed(0)}%`, `y${ax}`);
-      layout[`yaxis${ax}`] = axis(ydom, mi ? "" : `PC2 ${(pv[1] * 100).toFixed(0)}%`, `x${ax}`);
+      const axis = (dom, anchor) => ({ domain: dom, anchor, showgrid: false, zeroline: false, showticklabels: false,
+        ticks: "", linecolor: css("--rule") });
+      layout[`xaxis${ax}`] = axis(XDOM[col], `y${ax}`);
+      layout[`yaxis${ax}`] = axis(ydom, `x${ax}`);
+      if (!mi) layout.shapes.push(  // explained variance as a bar along each axis: full axis length = 100%
+        { type: "line", xref: `x${ax} domain`, yref: `y${ax} domain`, x0: 0, x1: pv[0], y0: -0.035, y1: -0.035,
+          line: { color: muted, width: 3 } },
+        { type: "line", xref: `x${ax} domain`, yref: `y${ax} domain`, x0: -0.035, x1: -0.035, y0: 0, y1: pv[1],
+          line: { color: muted, width: 3 } });
       if (mi) {
         Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "range" });
         layout[`xaxis${ax}`].constrain = "range";
@@ -165,7 +170,7 @@ function build() {
       floor, distance is one minus the permutation-corrected normalised MI, pairs are weighted by bootstrap precision,
       and each ellipse is the 95% region of that sample over ${DATA.n_boot} species bootstraps (wide = little shared
       information). Swap columns exchange the Clone1 and PCC1 colours in every sample; positions are unchanged.
-      Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
+      Bars along the PCA axes show each component's share of variance (full axis = 100%). Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
       <div class="fig"><div class="plot"></div></div></section>`;
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
