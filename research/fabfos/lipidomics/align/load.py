@@ -9,7 +9,7 @@ import pyarrow.dataset as ds
 ROOT = Path(__file__).resolve().parents[4]
 PARQUET = ROOT / "data/fabfos/runs/scadc_mzmine_parquet_v1"
 OUT = ROOT / "data/fabfos/runs/scadc_feature_tables_v1"
-STRAIN = {"Epi300": "EPI300", "ESi300": "EPI300", "EpCC1": "EpCC1", "ESCC1": "EpCC1",
+STRAIN = {"Epi300": "EPI300", "ESi300": "EPI300", "EpCC1": "PCC1", "ESCC1": "PCC1",
           "Clone1": "Clone1", "Clone2": "Clone2"}
 OBSERVATIONS = {"pel_pos": ("P", "POS"), "pel_neg": ("P", "NEG"),
                 "sup_pos": ("S", "POS"), "sup_neg": ("S", "NEG")}

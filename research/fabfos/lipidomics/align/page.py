@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 from . import load
-from .ordinate import FOCUS, MIN_CORE, VARIANTS
+from .ordinate import MIN_CORE, VARIANTS
 
 TEMPLATE = Path(__file__).with_name("page.html")
 QC_SHARED_MIN = 0.72
@@ -37,7 +37,7 @@ def column(c: dict) -> list[tuple[str, str, str, str]]:
     groups = {f["closer_to"] for f in fv.values()}
     return [
         ("Design",
-         "Sample labels after the one spelling fix (Epi300, ESi300 → EPI300; ESCC1 → EpCC1). "
+         "Sample labels after the spelling fix (Epi300, ESi300 → EPI300; EpCC1, ESCC1 → PCC1). "
          "Normal: 24 samples (8 conditions × 3 replicates), 4 QCs, 4 blanks (pellet) or 8 (supernatant).",
          f"{n['sample']} samples · {n['qc']} QC · {n['blank']} blanks", "pass"),
         ("Measurement error",
@@ -75,9 +75,9 @@ def column(c: dict) -> list[tuple[str, str, str, str]]:
          "How far variant A's UMAP moves when re-run with two other random seeds (Procrustes disparity). "
          f"Normal: below {DISPARITY_MAX}.",
          " · ".join(f"{u:.2f}" for u in us), "pass" if max(us) < DISPARITY_MAX else "flag"),
-        ("EpCC1 ctrl r2 placement",
-         "Per variant: which group's other replicates sit closer on average to EpCC1 ctrl r2, then its 3 "
-         "nearest samples. EpCC1 ctrl fits the label as recorded; EPI300 ctrl supports a swap. Not pass/fail.",
+        ("PCC1 ctrl r2 placement",
+         "Per variant: which group's other replicates sit closer on average to PCC1 ctrl r2, then its 3 "
+         "nearest samples. PCC1 ctrl fits the label as recorded; EPI300 ctrl supports a swap. Not pass/fail.",
          "\n".join(f"{v}: {f['closer_to'].replace('_', ' ')} · {', '.join(f['nearest'])}" for v, f in fv.items()),
          groups.pop().split("_")[0] if len(groups) == 1 else "mixed"),
     ]
@@ -92,7 +92,6 @@ def main(out: Path):
         "pca_var": {f"{v}_{load.LABEL[o]}": checks[o]["ordination"]["variants"][v]["pca_var"]
                     for o in load.OBSERVATIONS for v in VARIANTS},
         "figures": figures(),
-        "focus": FOCUS,
         "checks": [{"check": row[0][0], "about": row[0][1],
                     "cells": [{"value": value, "mark": mark} for *_, value, mark in row]} for row in zip(*cols)],
     }

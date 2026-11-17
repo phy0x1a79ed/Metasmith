@@ -12,7 +12,7 @@ from . import load
 VARIANTS = {"A": "floor-CLR", "B": "core-only CLR", "C": "multiplicative-replacement CLR"}
 SEEDS = (0, 1, 2)
 N_NEIGHBORS = 5
-FOCUS = "EpCC1_ctrl_r2"
+FOCUS = "PCC1_ctrl_r2"
 MIN_CORE = 50
 
 
@@ -51,7 +51,7 @@ def focus_report(x: np.ndarray, ids: list) -> dict:
     i = ids.index(FOCUS)
     order = [ids[j] for j in np.argsort(d[i]) if j != i]
     mean_to = {g: float(np.mean([d[i, ids.index(f"{g}_r{r}")] for r in (1, 2, 3) if f"{g}_r{r}" != FOCUS]))
-               for g in ("EpCC1_ctrl", "EPI300_ctrl")}
+               for g in ("PCC1_ctrl", "EPI300_ctrl")}
     return {"nearest": order[:3], "mean_dist": {k: round(v, 2) for k, v in mean_to.items()},
             "closer_to": min(mean_to, key=mean_to.get)}
 
