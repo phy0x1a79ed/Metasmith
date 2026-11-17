@@ -250,21 +250,24 @@ function figure(el) {
         x: hov.map(q => q[0]), y: hov.map(q => q[1]), text: hov.map(q => q[2]), hovertemplate: "%{text}<extra></extra>" });
       const pr = pts.map(q => project(q)), order = pts.map((_, k) => k).sort((a, b) => pr[a][2] - pr[b][2]);
       const at = order.map(k => idx[k]);
-      const drop = pts.flatMap(q => {  // each sample to the nearest back wall
-        const k = [0, 1, 2].reduce((a, j) => Math.abs(q[j] - box.back[j] * s) < Math.abs(q[a] - box.back[a] * s) ? j : a, 0);
+      const dotColour = i => ct ? c[strain(f.strain[i])] : fg;
+      const drops = {};  // each sample to the nearest back wall, one trace per dot colour
+      pts.forEach((q, j) => {
+        const k = [0, 1, 2].reduce((a, m) => Math.abs(q[m] - box.back[m] * s) < Math.abs(q[a] - box.back[a] * s) ? m : a, 0);
         const w = [...q]; w[k] = box.back[k] * s;
         const [a, b] = [project(q), project(w)];
-        return [[a[0], a[1]], [b[0], b[1]], [null, null]];
+        (drops[dotColour(idx[j])] ??= []).push([a[0], a[1]], [b[0], b[1]], [null, null]);
       });
-      traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, hoverinfo: "skip",
-        x: drop.map(d => d[0]), y: drop.map(d => d[1]), line: { color: rule, width: 0.6 } });
+      Object.entries(drops).forEach(([colr, d]) => traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`,
+        yaxis: `y${ax}`, hoverinfo: "skip", opacity: 0.45, x: d.map(v => v[0]), y: d.map(v => v[1]),
+        line: { color: colr, width: 0.8 } }));
       traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
         x: order.map(k => pr[k][0]), y: order.map(k => pr[k][1]), text: at.map(name),
         hovertemplate: "%{text}<extra></extra>",
         marker: {
-          size: 5,
-          color: at.map(i => ct ? c[strain(f.strain[i])] : fg),
+          size: 5, opacity: 0.75,
+          color: at.map(dotColour),
           symbol: at.map(i => ct || f.treatment[i] === "tol" ? "circle" : "circle-open"),
           line: { width: at.map(i => ct || f.treatment[i] === "tol" ? 0 : 1.2), color: fg },
         },
