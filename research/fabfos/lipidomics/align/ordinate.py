@@ -15,8 +15,8 @@ from . import load
 VARIANTS = {"A": "floor-CLR", "B": "core-only CLR", "C": "multiplicative-replacement CLR"}
 SEEDS = (0, 1, 2)
 # 24 points in groups of 3: a small neighbourhood fragments into replicate triplets (swept 5-23, min_dist 0.1-0.9)
-N_NEIGHBORS = 12
-MIN_DIST = 0.9
+N_NEIGHBORS = 10
+MIN_DIST = 0.5
 FOCUS = "PCC1_ctrl_r2"
 MIN_CORE = 50
 

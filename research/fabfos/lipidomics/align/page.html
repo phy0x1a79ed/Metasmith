@@ -26,7 +26,6 @@ header { display: flex; align-items: center; justify-content: space-between; gap
 h1 { font-size: 1.15rem; font-weight: 600; margin: 0; letter-spacing: .01em; }
 h2 { font-size: 1rem; font-weight: 600; margin: 0; }
 h2 span { color: var(--muted); font-weight: 400; margin-left: 8px; }
-h3 { font-size: .78rem; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0; }
 button#theme { background: var(--surface); color: var(--fg); border: 1px solid var(--rule); border-radius: 6px;
   width: 36px; height: 36px; display: grid; place-items: center; cursor: pointer; }
 button#theme:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; }
@@ -34,10 +33,8 @@ button#theme:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; 
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend svg { flex: none; }
 section.variant { display: grid; gap: 14px; }
-.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
-.fig { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px; display: grid; gap: 4px; min-width: 0; }
-.plot { width: 100%; height: 900px; }
-@media (max-width: 900px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+.fig { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px; min-width: 0; overflow-x: auto; }
+.plot { width: 100%; min-width: 720px; height: 860px; }
 .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
 table { border-collapse: collapse; width: 100%; font-size: .8rem; min-width: 1180px; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
@@ -84,38 +81,43 @@ function legend() {
     `<span>${dot(css("--fg"))}tol</span><span>${dot(css("--fg"), true)}ctrl</span>`;
 }
 
-function figure(el, key, method, variant) {
-  const f = DATA.figures[key], c = colour();
-  const fg = css("--fg"), muted = css("--muted"), surface = css("--surface");
+const COLS = [["PCA", "cell type"], ["PCA", "treatment"], ["UMAP", "cell type"], ["UMAP", "treatment"]];
+const XDOM = [[0, 0.225], [0.245, 0.47], [0.53, 0.755], [0.775, 1]];
+
+function figure(el, variant) {
+  const c = colour(), fg = css("--fg"), muted = css("--muted"), surface = css("--surface");
+  const rows = DATA.panels.length, gap = 0.035, h = (1 - gap * (rows - 1)) / rows;
   const traces = [], layout = {
     paper_bgcolor: surface, plot_bgcolor: surface, font: { family: css("--sans"), color: fg, size: 11 },
-    margin: { l: 24, r: 8, t: 34, b: 24 }, showlegend: false, hovermode: "closest",
+    margin: { l: 58, r: 6, t: 28, b: 8 }, showlegend: false, hovermode: "closest",
     hoverlabel: { bgcolor: surface, bordercolor: css("--rule"), font: { color: fg, family: css("--mono") } },
-    grid: { rows: DATA.panels.length, columns: 2, pattern: "independent", xgap: 0.1, ygap: 0.16 },
-    annotations: ["cell type", "treatment"].map((text, col) => ({ text, xref: "paper", yref: "paper",
-      x: col ? 0.775 : 0.225, y: 1, yshift: 30, xanchor: "center", yanchor: "top", showarrow: false,
-      font: { size: 10, color: muted } })),
+    annotations: COLS.map(([m, what], col) => ({ text: `${m} · ${what}`, xref: "paper", yref: "paper",
+      x: (XDOM[col][0] + XDOM[col][1]) / 2, y: 1, yshift: 4, xanchor: "center", yanchor: "bottom",
+      showarrow: false, font: { size: 10, color: muted } })),
   };
   DATA.panels.forEach((p, row) => {
-    const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
+    const ydom = [1 - (row + 1) * h - row * gap, 1 - row * h - row * gap];
     const pv = DATA.pca_var[`${variant}_${p}`];
-    const xt = method === "PCA" ? `PC1 (${(pv[0] * 100).toFixed(1)}%)` : "UMAP1";
-    const yt = method === "PCA" ? `PC2 (${(pv[1] * 100).toFixed(1)}%)` : "UMAP2";
-    const axis = t => ({ title: { text: t, font: { size: 10, color: muted } }, showgrid: false, zeroline: false,
-      showticklabels: false, ticks: "", linecolor: css("--rule") });
-    const tol = idx.map(i => f.treatment[i] === "tol");
-    [idx.map(i => c[f.strain[i]]), null].forEach((colours, col) => {
-      const n = 2 * row + col + 1, ax = n > 1 ? n : "";
-      layout[`xaxis${ax}`] = axis(xt); layout[`yaxis${ax}`] = axis(yt);
-      if (!col) layout.annotations.push({ text: `<b>${p}</b>`, xref: `x${ax} domain`, yref: `y${ax} domain`,
-        x: 0, y: 1.02, xanchor: "left", yanchor: "bottom", showarrow: false, font: { size: 12, color: fg } });
+    layout.annotations.push({ text: `<b>${p}</b>  N=${DATA.n_features[`${variant}_${p}`]}`, textangle: -90,
+      xref: "paper", yref: "paper", x: 0, xshift: -44, y: (ydom[0] + ydom[1]) / 2, xanchor: "center",
+      yanchor: "middle", showarrow: false, font: { size: 11, color: fg } });
+    COLS.forEach(([method, what], col) => {
+      const f = DATA.figures[`${variant}_${method}`];
+      const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
+      const n = row * COLS.length + col + 1, ax = n > 1 ? n : "";
+      const pca = method === "PCA";
+      const axis = (dom, t, anchor) => ({ domain: dom, anchor, title: { text: t, font: { size: 9, color: muted }, standoff: 2 },
+        showgrid: false, zeroline: false, showticklabels: false, ticks: "", linecolor: css("--rule") });
+      layout[`xaxis${ax}`] = axis(XDOM[col], pca ? `PC1 ${(pv[0] * 100).toFixed(0)}%` : "", `y${ax}`);
+      layout[`yaxis${ax}`] = axis(ydom, pca ? `PC2 ${(pv[1] * 100).toFixed(0)}%` : "", `x${ax}`);
+      const tol = idx.map(i => f.treatment[i] === "tol");
       traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
         x: idx.map(i => f.x[i]), y: idx.map(i => f.y[i]), text: idx.map(i => f.sample_id[i]),
         hovertemplate: "%{text}<extra></extra>",
-        marker: colours
-          ? { size: 9, color: colours, line: { color: surface, width: 1 } }
-          : { size: 9, color: tol.map(t => t ? fg : surface), line: { color: fg, width: 1.5 } },
+        marker: what === "cell type"
+          ? { size: 8, color: idx.map(i => c[f.strain[i]]), line: { color: surface, width: 1 } }
+          : { size: 8, color: tol.map(t => t ? fg : surface), line: { color: fg, width: 1.4 } },
       });
     });
   });
@@ -125,9 +127,8 @@ function figure(el, key, method, variant) {
 function build() {
   const host = document.getElementById("variants");
   host.innerHTML = Object.entries(DATA.variants).map(([v, name]) => `
-    <section class="variant"><h2>${v}<span>${name}</span><span>${DATA.panels.map(p => `${p} N=${DATA.n_features[`${v}_${p}`]}`).join(" · ")}</span></h2><div class="pair">
-      ${["PCA", "UMAP"].map(m => `<div class="fig"><h3>${m}</h3><div class="plot" data-key="${v}_${m}" data-method="${m}" data-variant="${v}"></div></div>`).join("")}
-    </div></section>`).join("");
+    <section class="variant"><h2>${v}<span>${name}</span></h2>
+      <div class="fig"><div class="plot" data-variant="${v}"></div></div></section>`).join("");
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
     DATA.checks.map(r => `<tr><td class="name">${r.check}</td><td class="about">${r.about}</td>${r.cells.map(c => {
@@ -139,7 +140,7 @@ function build() {
 function draw() {
   document.getElementById("theme").innerHTML = isDark() ? SUN : MOON;
   legend();
-  document.querySelectorAll(".plot").forEach(el => figure(el, el.dataset.key, el.dataset.method, el.dataset.variant));
+  document.querySelectorAll(".plot").forEach(el => figure(el, el.dataset.variant));
 }
 
 document.getElementById("theme").addEventListener("click", () => {
