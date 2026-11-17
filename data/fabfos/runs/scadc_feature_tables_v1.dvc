@@ -1,6 +1,6 @@
 outs:
-- md5: 9ac024b8fc74948b01c13b175a667336.dir
-  size: 6871812
-  nfiles: 24
+- md5: 7f3fbea0b49440953bcf703ada8f26b0.dir
+  size: 11861080
+  nfiles: 40
   hash: md5
   path: scadc_feature_tables_v1
