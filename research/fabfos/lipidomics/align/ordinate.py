@@ -1,5 +1,4 @@
 """PCA and UMAP of each observation's 24 samples under three CLR zero-handling variants, plus the check report."""
-import json
 import warnings
 
 import numpy as np
@@ -9,7 +8,6 @@ from scipy.spatial import procrustes
 from sklearn.decomposition import PCA
 
 from . import load
-from .errors import OUT
 
 VARIANTS = {"A": "floor-CLR", "B": "core-only CLR", "C": "multiplicative-replacement CLR"}
 SEEDS = (0, 1, 2)
@@ -58,19 +56,16 @@ def focus_report(x: np.ndarray, ids: list) -> dict:
             "closer_to": min(mean_to, key=mean_to.get)}
 
 
-def run():
+def run(tables: dict) -> dict:
     coords, checks = [], {}
-    for obs in load.OBSERVATIONS:
-        d = OUT / obs
-        inj = pd.read_parquet(d / "injections.parquet")
+    for obs, (inj, scaled) in tables.items():
         smp = inj[inj.sample_type == "sample"].sort_values(["strain", "treatment", "replicate"])
         ids = smp.sample_id.tolist()
-        scaled = pd.read_parquet(d / "abundance_scaled.parquet").set_index("species_id")[ids]
-        xs, n_core = variants(scaled, smp.set_index("sample_id").size_factor[ids])
+        xs, n_core = variants(scaled[ids], smp.set_index("sample_id").size_factor[ids])
         ck = {"core": n_core, "core_flag": n_core < MIN_CORE, "variants": {}}
         pcs = {}
         for v, x in xs.items():
-            pca = PCA(n_components=2).fit(x)
+            pca = PCA(n_components=2, svd_solver="full").fit(x)
             pcs[v] = pca.transform(x)
             ums = [embed(x, sd) for sd in SEEDS]
             for method, xy in (("PCA", pcs[v]), ("UMAP", ums[0])):
@@ -85,10 +80,5 @@ def run():
         ck["procrustes_pca"] = {f"{a}-{b}": round(float(procrustes(pcs[a], pcs[b])[2]), 3)
                                 for a, b in (("A", "B"), ("A", "C"), ("B", "C"))}
         checks[obs] = ck
-        print(obs, json.dumps(ck))
-    pd.concat(coords).to_parquet(OUT / "ordination.parquet", index=False)
-    (OUT / "ordination_checks.json").write_text(json.dumps(checks, indent=1))
-
-
-if __name__ == "__main__":
-    run()
+    load.save(pd.concat(coords), load.OUT / "ordination.parquet")
+    return checks

@@ -1,22 +1,11 @@
 """Blank-filter each observation's species, write relative and size-factor-scaled tables, and the per-species feature file with pooled MS2."""
-import json
-import os
-import sys
-
 import numpy as np
 import pandas as pd
 
 from . import load
-from .errors import OUT
 
 BLANK_RATIO = 3.0
 MS2_PPM = 10.0
-
-
-def replace(df: pd.DataFrame, path):
-    tmp = path.with_suffix(".tmp")
-    df.to_parquet(tmp, index=False)
-    os.replace(tmp, path)
 
 
 def size_factors(kept: pd.DataFrame, qc_cols) -> pd.Series:
@@ -46,8 +35,8 @@ def pool_ms2(spectra: pd.DataFrame) -> dict:
             "ms2_n_reads": agg.n.astype(int).tolist()}
 
 
-def features(obs, inj, sp, reads, raw, groups):
-    ions = load.ions(inj, obs)[["injection", "ion_id", "ccs", "charge", "isotopes"]]
+def features(obs, all_inj, ions, sp, reads, raw, groups):
+    ions = ions[["injection", "ion_id", "ccs", "charge", "isotopes"]]
     r = reads.merge(ions, on=["injection", "ion_id"], how="left").merge(sp[["species_id", "mz", "rt", "mobility"]],
                                                                      on="species_id", suffixes=("", "_c"))
     r["d_ppm"] = np.log(r.mz / r.mz_c) * 1e6
@@ -68,7 +57,7 @@ def features(obs, inj, sp, reads, raw, groups):
     f["blank_ratio"] = f.mean_sample / f.mean_blank.replace(0, np.nan)
     f["kept"] = f.blank_ratio.isna() & (f.mean_sample > 0) | (f.blank_ratio >= BLANK_RATIO)
 
-    ms2 = load.ms2(inj, obs).merge(reads[["injection", "ion_id", "species_id"]], on=["injection", "ion_id"])
+    ms2 = load.reads("ms2", all_inj, obs).merge(reads[["injection", "ion_id", "species_id"]], on=["injection", "ion_id"])
     pooled = {}
     for sid, s in ms2.groupby("species_id"):
         pooled[sid] = {**pool_ms2(s), "ms2_reads": (s.injection + ":" + s.ion_id.astype(str)).tolist(),
@@ -77,27 +66,22 @@ def features(obs, inj, sp, reads, raw, groups):
     return f.join(pooled).reset_index()
 
 
-def write(obs: str):
-    d = OUT / obs
-    inj = pd.read_parquet(d / "injections.parquet")
-    raw = pd.read_parquet(d / "abundance_raw.parquet").set_index("species_id")
-    sp = pd.read_parquet(d / "species.parquet")
-    reads = pd.read_parquet(d / "read_map.parquet")
+def write(obs: str, all_inj, ions, inj, sp, reads, raw):
     by = inj.groupby("sample_type").sample_id.apply(list)
     groups = {t: by[t] for t in ("sample", "qc", "blank")}
-    f = features(obs, load.injections(), sp, reads, raw, groups)
+    f = features(obs, all_inj, ions, sp, reads, raw, groups)
 
-    kept_ids = f.species_id[f.kept]
-    kept = raw.loc[kept_ids, groups["sample"] + groups["qc"]]
+    kept = raw.loc[f.species_id[f.kept], groups["sample"] + groups["qc"]]
     rel = kept / kept.sum()
     s = size_factors(kept, groups["qc"])
     scaled = kept / s
+    inj = inj.assign(size_factor=inj.sample_id.map(s))
 
-    f.to_parquet(d / "features.parquet", index=False)
-    rel.reset_index().to_parquet(d / "abundance_rel.parquet", index=False)
-    scaled.reset_index().to_parquet(d / "abundance_scaled.parquet", index=False)
-    inj["size_factor"] = inj.sample_id.map(s)
-    replace(inj, d / "injections.parquet")
+    d = load.OUT / obs
+    load.save(f, d / "features.parquet")
+    load.save(rel.reset_index(), d / "abundance_rel.parquet")
+    load.save(scaled.reset_index(), d / "abundance_scaled.parquet")
+    load.save(inj, d / "injections.parquet")
 
     smp = s[groups["sample"]]
     chk = {"species_raw": len(f), "species_kept": int(f.kept.sum()),
@@ -106,10 +90,4 @@ def write(obs: str):
            "size_factor_range_samples": [round(float(smp.min()), 3), round(float(smp.max()), 3)],
            "size_factor_range_qc": [round(float(s[groups["qc"]].min()), 3), round(float(s[groups["qc"]].max()), 3)],
            "rel_column_sums_ok": bool(np.allclose(rel.sum(), 1))}
-    (d / "tables_checks.json").write_text(json.dumps(chk, indent=1))
-    print(obs, chk)
-
-
-if __name__ == "__main__":
-    for obs in sys.argv[1:] or load.OBSERVATIONS:
-        write(obs)
+    return inj, scaled, chk

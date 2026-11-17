@@ -20,7 +20,8 @@
 body { background: var(--bg); color: var(--fg); font-family: var(--sans); }
 main { max-width: 1180px; margin: 0 auto; padding-block: 16px 48px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  display: grid; gap: 28px; }
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+main > *, #variants > *, section.variant > * { min-width: 0; }
 header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 h1 { font-size: 1.15rem; font-weight: 600; margin: 0; letter-spacing: .01em; }
 h2 { font-size: 1rem; font-weight: 600; margin: 0; }
@@ -33,15 +34,17 @@ button#theme:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; 
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend svg { flex: none; }
 section.variant { display: grid; gap: 14px; }
-.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
 .fig { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px; display: grid; gap: 4px; min-width: 0; }
 .plot { width: 100%; height: 520px; }
-@media (max-width: 900px) { .pair { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .pair { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 560px) { .plot { height: 980px; } }
 .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
-table { border-collapse: collapse; width: 100%; font-size: .8rem; min-width: 760px; }
+table { border-collapse: collapse; width: 100%; font-size: .8rem; min-width: 1180px; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font-weight: 500; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
+td.about { color: var(--muted); min-width: 300px; max-width: 380px; line-height: 1.45; }
+td.name { font-weight: 500; white-space: nowrap; }
 td.v { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: pre-line; }
 tr:last-child td { border-bottom: 0; }
 .mark { display: inline-block; margin-top: 4px; font-family: var(--sans); font-size: .7rem; font-weight: 600;
@@ -56,14 +59,14 @@ tr:last-child td { border-bottom: 0; }
     <button id="theme" type="button" aria-label="Toggle light or dark theme"></button>
   </header>
   <div class="legend" id="legend"></div>
-  <div id="variants" style="display:grid;gap:28px"></div>
+  <div id="variants" style="display:grid;grid-template-columns:minmax(0,1fr);gap:28px"></div>
   <section style="display:grid;gap:10px">
     <h2>Checks</h2>
     <div class="tablewrap"><table id="checks"></table></div>
   </section>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.2/plotly.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
 <script>
 const DATA = __DATA__;
 const STRAINS = ["EPI300", "EpCC1", "Clone1", "Clone2"];
@@ -92,7 +95,7 @@ function figure(el, key, method, variant) {
     paper_bgcolor: surface, plot_bgcolor: surface, font: { family: css("--sans"), color: fg, size: 11 },
     margin: { l: 44, r: 8, t: 26, b: 40 }, showlegend: false, hovermode: "closest",
     hoverlabel: { bgcolor: surface, bordercolor: css("--rule"), font: { color: fg, family: css("--mono") } },
-    grid: { rows: narrow ? 4 : 2, columns: narrow ? 1 : 2, pattern: "independent", xgap: 0.14, ygap: narrow ? 0.12 : 0.2 },
+    grid: { rows: narrow ? 4 : 2, columns: narrow ? 1 : 2, pattern: "independent", xgap: 0.14, ygap: 0.2 },
     annotations: [],
   };
   DATA.panels.forEach((p, k) => {
@@ -126,8 +129,8 @@ function build() {
       ${["PCA", "UMAP"].map(m => `<div class="fig"><h3>${m}</h3><div class="plot" data-key="${v}_${m}" data-method="${m}" data-variant="${v}"></div></div>`).join("")}
     </div></section>`).join("");
   const t = document.getElementById("checks");
-  t.innerHTML = `<tr><th>Check</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
-    DATA.checks.map(r => `<tr><td>${r.check}</td>${r.cells.map(c => {
+  t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
+    DATA.checks.map(r => `<tr><td class="name">${r.check}</td><td class="about">${r.about}</td>${r.cells.map(c => {
       const cls = ["pass", "flag", "fail"].includes(c.mark) ? c.mark : "info";
       return `<td class="v">${c.value}<br><span class="mark ${cls}">${c.mark}</span></td>`;
     }).join("")}</tr>`).join("");
