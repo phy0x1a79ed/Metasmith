@@ -4,11 +4,11 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Current
 
-**intro-composition**: the Intro's flow and main points around the new automated-composition paragraph. Agreed so far (2026-11-16): swap the user-gap paragraph and the composition paragraph; P3 refocuses on why today's systems cannot adapt; P4 = what was tried and what went wrong, ending on LLM agents ("act as both solver and interface") as the transition to P5; P5 = user gap with Galaxy added; P6 = Metasmith, with tree search framed as "success in similar problems" (AlphaZero, Segler 2018), not direct inspiration. Taverna stays light in the Intro; its main value is Discussion ¶4 (compute-market).
+**discussion-p1..p4**: go over each Discussion section for what to say and in what order.
 
 ## Waiting on the user
 
-- intro-composition: does Loach's 12-theme framework enter at the end of Intro P2 (after FAIR, setting up Table 1), or only in the Discussion?
+- intro-composition: review the Intro edits in d2 (blue = added, red strikethrough = deleted); insert the new citations (Afgan 2018, Silver 2016/2018, Segler 2018, Loach 2026, LLM agents [ref], and the composition paragraph's author-year refs) in EndNote.
 
 ## Preferences
 
@@ -18,7 +18,6 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Stack
 
-- **intro-composition** (2026-11-16): "the current intro paragraph has a few ideas, but doesnt read with a common thread or agenda that builds on the introduction". Then rewrite P3–P6 as prose in d2.
 - **main-points** (2026-11-15): "we can point out a few main points and show the table of features". Proposal in `draft/README.md` (907c853b), not yet reviewed.
   - **opening-vs-conclusion**: d2 has its own Conclusion; does the "what Metasmith shows" recap stay in the Discussion?
   - **limitations**: which limitations make the cut. Candidates in `draft/long.md` § Limitations; d2 fragments (one step per contract; no conditionals or loops, Tony's Nov 5 paragraph; no tool ranking; the AI-agents paragraph) enter here.
@@ -34,4 +33,5 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Closed
 
+- **intro-composition** (2026-11-17). Intro P2–P6 restructured in d2.
 - **topic-selection** (2026-11-15). Short Discussion: a few main points plus the comparison table.
