@@ -22,3 +22,20 @@ One section per closed topic, in the order the topics closed.
 - Arguments to carry: EDAM grounds the types but "is often insufficient" (`ontology: EDAM 1.25, strict: false`, src/metasmith/models/libraries/types.py:52); judging which tool is "better" needs domain expertise, so compare metrics, not tools.
 
 **Where it landed.** `draft/long.md` (field-setting draft, cut at d1150271; uploaded into live d2 on 2026-11-15, Nov 5 original kept as `Metasmith_d2_backup_2026-11-05.docx`). `draft/README.md` at 907c853b is an unreviewed proposal for the short form.
+
+## intro-composition (2026-11-17)
+
+**Question.** How does the Intro build from the field to Metasmith, around the new automated-composition paragraph?
+
+**Tony's words.** "P5 and existing 4 should switch places. then we can shape our P5 as what was tried and what went wrong? existing p3 should then focus more on the why"; "we say that the idea has had sucess in similar problems rather than say we have direct inspiration"; "LLM agents i think go at the end for P4 since they act as both solver and interface"; "make all necessary changes and mark additions in blue, deletions in red".
+
+**Design.**
+- P2 ends on Loach et al. 2026's twelve themes, setting up Table 1.
+- P3 (Nextflow, Snakemake) ends on the shared cause: the knowledge of which tools fit together lives with the author, not the system.
+- P4 is the composition paragraph, moved above the user gap: semantic web services, BioMoby/SADI, Pegasus/Wings, PROPHETS/APE, the Lamprecht 2021 barriers, then LLM agents as solver and interface with no guarantees. The tree-search sentences are struck from it.
+- P5 is the user gap, with Galaxy added.
+- P6 opens with Metasmith, then typed contracts, the backward solver, and tree search's success on similar problems (Silver 2016/2018, Segler 2018).
+- Taverna stays light in the Intro; its value is Discussion ¶4 (compute-market).
+- EndNote fields kept in place; new citations are plain author-year text for Tony to insert.
+
+**Landed.** d2 via Word COM over the Windows tether, 2026-11-17.
