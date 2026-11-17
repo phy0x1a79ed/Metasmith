@@ -15,3 +15,6 @@ How this lane runs MZmine 4 to build per-injection ion tables from the raw timsT
 - Call the binary by path, not through `mamba run`. Start-up is about 5 s. One batch call processes every input, so start-up is paid once per batch.
 - **CAUTION:** `--login` falls back to a console password prompt on a headless node. Never route that prompt through an agent session.
 - Keep the `.mzmine` project as the full record of a run. Derive analysis files from its exports.
+- Run reruns on nibi. Fir is offline, and the local box is not for compute. Use a container on the cluster, never an installed env.
+- The run needs the mzio user file from `~/.mzmine/users/` on the node. Copy the file. Never type the password into an agent session.
+- **WARNING:** nibi scratch is shared scratch. Delete this lane's files there when the batch of work ends.

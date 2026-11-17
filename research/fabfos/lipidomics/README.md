@@ -14,8 +14,11 @@ This lane moved from the archived `scadc/lipidomics` scope, branch `feat/lipidom
 - Imaging data: `data/fabfos/runs/scadc_microscopy/` (DVC).
 - Vesicle measurement tables: `data/fabfos/runs/scadc_vesicle_results/` (DVC). `vesicle_common.RESULTS` names it.
 - Rendered lipidomics figures: `data/fabfos/runs/scadc_lipidomics_figures/` (DVC).
+- Per-injection MZmine ion reads: `data/fabfos/runs/scadc_mzmine_parquet_v1/` (DVC). `mzmine/README.md` covers how they are made.
+- Feature tables, one per observation (pel+, pel−, sup+, sup−): `data/fabfos/runs/scadc_feature_tables_v1/` (DVC). Rebuild them and the ordination page with `mamba run -n python_for_data_science python -m align <page.html>` from this directory. `checks.json` there holds every check the page shows.
+- **CAUTION:** the raw files spell two strains differently. `Epi300` and `ESi300` are EPI300. `ESCC1` is EpCC1. `align/load.py` applies this rename once at import and refuses an unmapped label. Every table under `scadc_feature_tables_v1/` uses the corrected names. `strain_recorded` keeps the spelling from the file.
 - `metadata.csv` and `od_values.csv` stay in git. They are hand-curated inputs, not outputs.
-- **CAUTION:** a DVC-pinned file is a read-only hardlink. Unlink it before a generator rewrites it. Then run `dvc add` on the chunk and commit the pin.
+- **CAUTION:** a DVC-pinned file is a read-only hardlink. Write a new file and rename it over the old one, as `align/load.save` does. Never write into the pinned file. Then run `dvc add` on the chunk and commit the pin.
 - Envs: `envs/fabfos/lipidomics.yml`, `imaging.yml`, `ms2lipid.yml`.
 - `discussion/` is the dfs-interview folder for the Armando presentation. Run its `stack.py` against that path.
 - `lipidio.py` owns the data paths. Take paths from its constants.
@@ -23,5 +26,5 @@ This lane moved from the archived `scadc/lipidomics` scope, branch `feat/lipidom
 ## Known gaps
 
 - **CAUTION:** scripts that publish figures still write to `.awm/data/figures/publish/`, a path that does not exist in this repo. Pick a publish root before rerunning them.
-- The MS-DIAL and MZmine pipelines here (`run_msdial.sh`, `_mzmine_legacy/`) are retired. The facility MetaboScape table is the working dataset until our own MZmine 4 ion tables land.
+- The MS-DIAL and MZmine pipelines here (`run_msdial.sh`, `_mzmine_legacy/`) are retired. The `align/` feature tables replace the facility MetaboScape table. The older `diff_*`, `composition*` and `od_*` scripts still read MetaboScape.
 - The vesicle renders were gitignored in the old scope and were not carried over. Rerun the generators in `vesicle_panels/`.
