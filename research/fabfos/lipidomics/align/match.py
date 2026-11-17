@@ -1,6 +1,5 @@
 """Match ion reads across one observation's injections into species and write the raw abundance table."""
-import argparse
-import json
+import itertools
 
 import numpy as np
 import pandas as pd
@@ -109,15 +108,9 @@ class Matcher:
         return n
 
 
-def build(observation: str, inj: pd.DataFrame, reverse: bool = False):
-    model = json.loads((errors.OUT / observation / "error_model.json").read_text())
-    polarity = load.OBSERVATIONS[observation][1]
-    reads = errors.align_rt(load.ions(inj, observation), polarity)
-    m = Matcher(reads, np.array(list(model["sigma"].values())), model["d2_cutoff"])
-    if reverse:
-        m.injections = m.injections[::-1]
-    log = m.run()
-    return m, log
+def build(reads: pd.DataFrame, model: dict) -> tuple[Matcher, dict]:
+    m = Matcher(reads, np.array([model["sigma"][k] for k in errors.DIMS]), model["d2_cutoff"])
+    return m, m.run()
 
 
 def species_table(m: Matcher, observation: str):
@@ -135,20 +128,20 @@ def species_table(m: Matcher, observation: str):
     return sp.sort_values("species_id").reset_index(drop=True), reads, resid
 
 
-def checks(m, observation, inj, sp, reads, resid, log, polarity):
-    o = inj[inj.observation == observation]
+def checks(m, observation, o, sp, reads, resid, log):
     kind = reads.injection.map(o.set_index("injection").sample_type)
-    spread = {k: dict(zip(errors.DIMS, errors.robust_sigma(resid[(kind == k).values & (reads.species_id.map(sp.set_index("species_id").n_reads) >= 3).values]).round(5).tolist()))
+    multi = (reads.species_id.map(sp.set_index("species_id").n_reads) >= 3).values
+    spread = {k: dict(zip(errors.DIMS, errors.robust_sigma(resid[(kind == k).values & multi]).round(5).tolist()))
               for k in ("qc", "sample")}
-    t = errors.CUDA_MZ[polarity]
-    near = sp[(abs(sp.mz - t) / t * 1e6 < 10) & sp.rt.between(0.6, 1.0)].species_id
+    near = sp[load.cuda_mask(sp, load.OBSERVATIONS[observation][1])].species_id
     cuda = reads[reads.species_id.isin(near)].groupby("species_id").injection.nunique()
     qc_ids = o[o.sample_type == "qc"].injection.tolist()
     qsets = {i: set(reads.species_id[reads.injection == i]) for i in qc_ids}
     pair = [len(qsets[a] & qsets[b]) / np.mean([len(qsets[a]), len(qsets[b])])
-            for k, a in enumerate(qc_ids) for b in qc_ids[k + 1:]]
+            for a, b in itertools.combinations(qc_ids, 2)]
     return {
-        "observation": observation, **log,
+        **log,
+        "injections": o.sample_type.value_counts().to_dict(),
         "n_species": len(sp),
         "duplicate_read_per_injection": int(reads.duplicated(["injection", "species_id"]).sum()),
         "cuda_species_detected_in": cuda.to_dict(),
@@ -159,35 +152,16 @@ def checks(m, observation, inj, sp, reads, resid, log, polarity):
     }
 
 
-def write(observation: str, inj: pd.DataFrame, stability: bool):
-    polarity = load.OBSERVATIONS[observation][1]
-    m, log = build(observation, inj)
-    sp, reads, resid = species_table(m, observation)
-    o = inj[inj.observation == observation].set_index("injection")
-    raw = reads.pivot_table(index="species_id", columns="injection", values="area", aggfunc="sum", fill_value=0)
-    raw = raw.reindex(index=sp.species_id, columns=o.index, fill_value=0).rename(columns=o.sample_id)
-    out = errors.OUT / observation
-    raw.reset_index().to_parquet(out / "abundance_raw.parquet", index=False)
-    reads.to_parquet(out / "read_map.parquet", index=False)
-    sp.to_parquet(out / "species.parquet", index=False)
-    o.reset_index()[["injection", "sample_id", "sample_type", "strain", "strain_recorded", "treatment", "replicate",
-                     "run_id", "filename"]].merge(m.offsets.rename_axis("injection").reset_index(), on="injection") \
-        .to_parquet(out / "injections.parquet", index=False)
-    c = checks(m, observation, inj, sp, reads, resid, log, polarity)
-    if stability:
-        m2, _ = build(observation, inj, reverse=True)
-        key = m.reads.injection + ":" + m.reads.ion_id.astype(str)
-        b = pd.Series(m2.species, index=m2.reads.injection + ":" + m2.reads.ion_id.astype(str)).loc[key]
-        c["reverse_order_ari"] = round(float(adjusted_rand_score(m.species, b.values)), 5)
-    (out / "match_checks.json").write_text(json.dumps(c, indent=1))
-    print(json.dumps(c))
-
-
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("observations", nargs="*", default=list(load.OBSERVATIONS))
-    ap.add_argument("--stability", action="store_true", help="also rerun with reversed injection order")
-    a = ap.parse_args()
-    inj = load.injections()
-    for obs in a.observations:
-        write(obs, inj, a.stability)
+def write(observation: str, o: pd.DataFrame, reads: pd.DataFrame, model: dict):
+    m, log = build(reads, model)
+    sp, read_map, resid = species_table(m, observation)
+    oi = o.set_index("injection")
+    raw = read_map.pivot_table(index="species_id", columns="injection", values="area", aggfunc="sum", fill_value=0)
+    raw = raw.reindex(index=sp.species_id, columns=oi.index, fill_value=0).rename(columns=oi.sample_id)
+    inj = o[["injection", "sample_id", "sample_type", "strain", "strain_recorded", "treatment", "replicate",
+             "run_id", "filename"]].merge(m.offsets.rename_axis("injection").reset_index(), on="injection")
+    out = load.OUT / observation
+    load.save(raw.reset_index(), out / "abundance_raw.parquet")
+    load.save(read_map, out / "read_map.parquet")
+    load.save(sp, out / "species.parquet")
+    return inj, sp, read_map, raw, checks(m, observation, o, sp, read_map, resid, log)

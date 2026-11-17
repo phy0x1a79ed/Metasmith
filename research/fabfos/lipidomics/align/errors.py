@@ -1,6 +1,5 @@
 """Fit the read-to-read error model per observation from QC replicate pairs."""
 import itertools
-import json
 
 import numpy as np
 import pandas as pd
@@ -8,8 +7,6 @@ from scipy.spatial import cKDTree
 
 from . import load
 
-OUT = load.ROOT / "data/fabfos/runs/scadc_feature_tables_v1"
-CUDA_MZ = {"POS": 341.2799, "NEG": 339.2653}
 WINDOW = np.array([50.0, 0.3, 10.0])  # ppm, min, mobility %
 DIMS = ["ppm", "rt", "mob_pct"]
 BG_SHIFT = 1.0
@@ -26,8 +23,7 @@ def coords(reads: pd.DataFrame, offsets: pd.DataFrame | None = None) -> np.ndarr
 
 
 def cuda_rt(reads: pd.DataFrame, polarity: str) -> pd.Series:
-    t = CUDA_MZ[polarity]
-    c = reads[(abs(reads.mz - t) / t * 1e6 < 10) & reads.rt.between(0.6, 1.0)]
+    c = reads[load.cuda_mask(reads, polarity)]
     return c.sort_values("height").groupby("injection").rt.last()
 
 
@@ -85,10 +81,9 @@ def equal_density_cutoff(real: np.ndarray, bg: np.ndarray) -> float:
     return float(edges[peak + cross[0]]) ** 2 if len(cross) else RADIUS ** 2
 
 
-def fit(observation: str, inj: pd.DataFrame) -> dict:
+def fit(observation: str, reads: pd.DataFrame, inj: pd.DataFrame) -> dict:
     polarity = load.OBSERVATIONS[observation][1]
-    reads = align_rt(load.ions(inj, observation), polarity)
-    qc_ids = sorted(inj[(inj.observation == observation) & (inj.sample_type == "qc")].injection)
+    qc_ids = sorted(inj[inj.sample_type == "qc"].injection)
     qc = reads[reads.injection.isin(qc_ids)]
 
     offsets = pd.DataFrame(0.0, index=qc_ids, columns=DIMS)
@@ -99,16 +94,16 @@ def fit(observation: str, inj: pd.DataFrame) -> dict:
         sigma = robust_sigma(np.vstack(list(pair_deltas(qc, offsets, scale, radius).values())))
         scale = np.minimum(scale, 6 * sigma)
 
-    real = np.vstack(list(pair_deltas(qc, offsets, sigma, RADIUS).values()))
-    bg = np.vstack(list(pair_deltas(qc, offsets, sigma, RADIUS, BG_SHIFT).values()))
-    d_real = np.sqrt(((real / sigma) ** 2).sum(1))
-    d_bg = np.sqrt(((bg / sigma) ** 2).sum(1))
+    def dist(shift=0.0):
+        d = np.vstack(list(pair_deltas(qc, offsets, sigma, RADIUS, shift).values()))
+        return np.sqrt(((d / sigma) ** 2).sum(1))
+
+    d_real, d_bg = dist(), dist(BG_SHIFT)
     crossing = equal_density_cutoff(d_real, d_bg)
     cutoff = min(crossing, MAX_D ** 2)
     n_under = (d_real ** 2 <= cutoff).sum()
 
     return {
-        "observation": observation,
         "sigma": dict(zip(DIMS, sigma.round(5).tolist())),
         "d2_cutoff": round(cutoff, 2),
         "d2_equal_density": round(crossing, 2),
@@ -118,11 +113,3 @@ def fit(observation: str, inj: pd.DataFrame) -> dict:
         "cuda_rt_range": round(float(np.ptp(cuda_rt(reads, polarity))), 4),
     }
 
-
-if __name__ == "__main__":
-    inj = load.injections()
-    for obs in load.OBSERVATIONS:
-        m = fit(obs, inj)
-        (OUT / obs).mkdir(parents=True, exist_ok=True)
-        (OUT / obs / "error_model.json").write_text(json.dumps(m, indent=1))
-        print(json.dumps(m))
