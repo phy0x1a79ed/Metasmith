@@ -132,7 +132,8 @@ function figure(el) {
       layout[`xaxis${ax}`] = axis(XDOM[col], mi ? "" : `PC1 ${(pv[0] * 100).toFixed(0)}%`, `y${ax}`);
       layout[`yaxis${ax}`] = axis(ydom, mi ? "" : `PC2 ${(pv[1] * 100).toFixed(0)}%`, `x${ax}`);
       if (mi) {
-        Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "domain" });
+        Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "range" });
+        layout[`xaxis${ax}`].constrain = "range";
         idx.forEach(i => {
           const [ex, ey] = ellipse(f.x[i], f.y[i], f.cxx[i], f.cxy[i], f.cyy[i]), col = ct ? c[strain(f.strain[i])] : fg;
           traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, x: ex, y: ey,
