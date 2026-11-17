@@ -2,7 +2,7 @@
 import argparse
 from pathlib import Path
 
-from . import errors, load, match, ordinate, page, tables
+from . import errors, load, match, mi, ordinate, page, tables
 
 ap = argparse.ArgumentParser(prog="python -m align", description=__doc__)
 ap.add_argument("page", type=Path, help="HTML file to write the ordination page to")
@@ -21,5 +21,7 @@ for obs, (_, polarity) in load.OBSERVATIONS.items():
     print(obs, tc)
 for obs, oc in ordinate.run(frames).items():
     checks[obs]["ordination"] = oc
+for obs, c in mi.run(frames).items():
+    checks[obs]["mi"] = c
 load.save(checks, load.OUT / "checks.json")
 page.main(out)
