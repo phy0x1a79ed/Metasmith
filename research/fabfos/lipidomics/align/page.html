@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* layout: one figure grid per CLR variant plus MI, legend pinned under the header, checks table last */
+/* layout: B and MI grids, then both with Clone1/PCC1 exchanged, legend pinned under the header, checks table last */
 :root {
   --bg: #f6f7f8; --surface: #ffffff; --fg: #1d2126; --muted: #5d6670; --rule: #dde1e6;
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eb8a1a; --s4: #d1332a;
@@ -83,10 +83,19 @@ function legend() {
 }
 
 const GRIDS = {
-  clr: { cols: [["PCA", "cell type"], ["PCA", "treatment"], ["UMAP", "cell type"], ["UMAP", "treatment"]],
-         xdom: [[0, 0.225], [0.245, 0.47], [0.53, 0.755], [0.775, 1]] },
+  B: { cols: [["PCA", "cell type"], ["PCA", "treatment"], ["UMAP", "cell type"], ["UMAP", "treatment"]],
+       xdom: [[0, 0.225], [0.245, 0.47], [0.53, 0.755], [0.775, 1]] },
   MI: { cols: [["MDS", "cell type"], ["MDS", "treatment"]], xdom: [[0, 0.48], [0.52, 1]] },
+  B_swap: { cols: [["PCA", "cell type"], ["UMAP", "cell type"]], xdom: [[0, 0.48], [0.52, 1]] },
+  MI_swap: { cols: [["MDS", "cell type"]], xdom: [[0.25, 0.75]] },
 };
+const SWAP = { Clone1: "PCC1", PCC1: "Clone1" };
+const SECTIONS = [
+  { variant: "B", swap: false, title: "B", sub: "core-only CLR" },
+  { variant: "MI", swap: false, title: "MI", sub: "pairwise mutual information, weighted MDS" },
+  { variant: "B", swap: true, title: "B, Clone1 ↔ PCC1", sub: "core-only CLR with the two labels exchanged" },
+  { variant: "MI", swap: true, title: "MI, Clone1 ↔ PCC1", sub: "the same MI layout with the two labels exchanged" },
+];
 const CHI2_95 = 5.991;
 
 function ellipse(cx, cy, a, b, d) {
@@ -100,8 +109,9 @@ function ellipse(cx, cy, a, b, d) {
   return [xs, ys];
 }
 
-function figure(el, variant) {
-  const mi = variant === "MI", { cols: COLS, xdom: XDOM } = GRIDS[mi ? "MI" : "clr"];
+function figure(el, variant, swap) {
+  const mi = variant === "MI", { cols: COLS, xdom: XDOM } = GRIDS[swap ? `${variant}_swap` : variant];
+  const strain = s => (swap && SWAP[s]) || s;
   const c = colour(), fg = css("--fg"), muted = css("--muted"), surface = css("--surface");
   const rows = DATA.panels.length, gap = 0.035, h = (1 - gap * (rows - 1)) / rows;
   const traces = [], layout = {
@@ -126,9 +136,11 @@ function figure(el, variant) {
       const pca = method === "PCA";
       if (mi) idx.forEach(i => {
         const [ex, ey] = ellipse(f.x[i], f.y[i], f.cxx[i], f.cxy[i], f.cyy[i]);
-        const col = what === "cell type" ? c[f.strain[i]] : fg;
+        const ct = what === "cell type", col = ct ? c[strain(f.strain[i])] : fg;
         traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, x: ex, y: ey,
-          line: { color: col, width: 0.8 }, fill: "toself", fillcolor: col + "14", opacity: 0.8, hoverinfo: "skip" });
+          line: { color: col, width: ct ? 1.3 : 1 }, fill: "toself", hoveron: "fills",
+          fillcolor: !ct && f.treatment[i] === "tol" ? fg + "55" : "rgba(0,0,0,0)",
+          text: f.sample_id[i], hoverinfo: "text" });
       });
       const axis = (dom, t, anchor) => ({ domain: dom, anchor, title: { text: t, font: { size: 9, color: muted }, standoff: 2 },
         showgrid: false, zeroline: false, showticklabels: false, ticks: "", linecolor: css("--rule") });
@@ -136,12 +148,12 @@ function figure(el, variant) {
       layout[`yaxis${ax}`] = axis(ydom, pca ? `PC2 ${(pv[1] * 100).toFixed(0)}%` : "", `x${ax}`);
       if (mi) Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "domain" });
       const tol = idx.map(i => f.treatment[i] === "tol");
-      traces.push({
+      if (!mi) traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
         x: idx.map(i => f.x[i]), y: idx.map(i => f.y[i]), text: idx.map(i => f.sample_id[i]),
         hovertemplate: "%{text}<extra></extra>",
         marker: what === "cell type"
-          ? { size: 8, color: idx.map(i => c[f.strain[i]]), line: { color: surface, width: 1 } }
+          ? { size: 8, color: idx.map(i => c[strain(f.strain[i])]), line: { color: surface, width: 1 } }
           : { size: 8, color: tol.map(t => t ? fg : surface), line: { color: fg, width: 1.4 } },
       });
     });
@@ -151,16 +163,17 @@ function figure(el, variant) {
 
 function build() {
   const host = document.getElementById("variants");
-  host.innerHTML = Object.entries(DATA.variants).map(([v, name]) => `
-    <section class="variant"><h2>${v}<span>${name}</span></h2>
-      <div class="fig"><div class="plot" data-variant="${v}"></div></div></section>`).join("") + `
-    <section class="variant"><h2>MI<span>pairwise mutual information, weighted MDS</span></h2>
+  host.innerHTML = SECTIONS.map(({ variant, swap, title, sub }) => `
+    <section class="variant"><h2>${title}<span>${sub}</span></h2>${variant === "MI" && !swap ? `
       <p class="note">Each pair of samples is compared only on the species either of them detects above the pair's
       floor; species neither detects carry no information instead of a shared zero. Distance is one minus the
       permutation-corrected, normalised MI. The embedding weights each pair by its bootstrap precision, and each
       ellipse is the 95% region of that sample's position over ${DATA.n_boot} species bootstraps: a wide ellipse means
-      little shared information, not a different lipidome. N is the range of species per pair.</p>
-      <div class="fig"><div class="plot" data-variant="MI"></div></div></section>`;
+      little shared information, not a different lipidome. Filled ellipses are tol, outlines ctrl. N is the range
+      of species per pair.</p>` : ""}${swap ? `
+      <p class="note">Positions are unchanged; only the Clone1 and PCC1 colours are exchanged, in every sample of
+      both treatments. Treatment copies are omitted because they do not change.</p>` : ""}
+      <div class="fig"><div class="plot" data-variant="${variant}" data-swap="${swap}"></div></div></section>`).join("");
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
     DATA.checks.map(r => `<tr><td class="name">${r.check}</td><td class="about">${r.about}</td>${r.cells.map(c => {
@@ -172,7 +185,7 @@ function build() {
 function draw() {
   document.getElementById("theme").innerHTML = isDark() ? SUN : MOON;
   legend();
-  document.querySelectorAll(".plot").forEach(el => figure(el, el.dataset.variant));
+  document.querySelectorAll(".plot").forEach(el => figure(el, el.dataset.variant, el.dataset.swap === "true"));
 }
 
 document.getElementById("theme").addEventListener("click", () => {
