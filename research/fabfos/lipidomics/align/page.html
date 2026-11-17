@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* layout: B and MI grids, then both with Clone1/PCC1 exchanged, legend pinned under the header, checks table last */
+/* layout: one grid, rows = observations, columns = B PCA and MI MDS by colouring, legend pinned under the header, checks table last */
 :root {
   --bg: #f6f7f8; --surface: #ffffff; --fg: #1d2126; --muted: #5d6670; --rule: #dde1e6;
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eb8a1a; --s4: #d1332a;
@@ -35,7 +35,7 @@ button#theme:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; 
 section.variant { display: grid; gap: 14px; }
 .note { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.5; max-width: 820px; }
 .fig { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px; min-width: 0; overflow-x: auto; }
-.plot { width: 100%; min-width: 720px; height: 860px; }
+.plot { width: 100%; min-width: 960px; height: 900px; }
 .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
 table { border-collapse: collapse; width: 100%; font-size: .8rem; min-width: 1180px; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
@@ -82,20 +82,13 @@ function legend() {
     `<span>${dot(css("--fg"))}tol</span><span>${dot(css("--fg"), true)}ctrl</span>`;
 }
 
-const GRIDS = {
-  B: { cols: [["PCA", "cell type"], ["PCA", "treatment"], ["UMAP", "cell type"], ["UMAP", "treatment"]],
-       xdom: [[0, 0.225], [0.245, 0.47], [0.53, 0.755], [0.775, 1]] },
-  MI: { cols: [["MDS", "cell type"], ["MDS", "treatment"]], xdom: [[0, 0.48], [0.52, 1]] },
-  B_swap: { cols: [["PCA", "cell type"], ["UMAP", "cell type"]], xdom: [[0, 0.48], [0.52, 1]] },
-  MI_swap: { cols: [["MDS", "cell type"]], xdom: [[0.25, 0.75]] },
-};
 const SWAP = { Clone1: "PCC1", PCC1: "Clone1" };
-const SECTIONS = [
-  { variant: "B", swap: false, title: "B", sub: "core-only CLR" },
-  { variant: "MI", swap: false, title: "MI", sub: "pairwise mutual information, weighted MDS" },
-  { variant: "B", swap: true, title: "B, Clone1 ↔ PCC1", sub: "core-only CLR with the two labels exchanged" },
-  { variant: "MI", swap: true, title: "MI, Clone1 ↔ PCC1", sub: "the same MI layout with the two labels exchanged" },
-];
+// [figure, colouring, labels exchanged, header]
+const COLS = [["B_PCA", "cell type", false, "PCA · B"], ["MI_MDS", "cell type", false, "MDS · MI"],
+              ["B_PCA", "cell type", true, "PCA · swap"], ["MI_MDS", "cell type", true, "MDS · swap"],
+              ["B_PCA", "treatment", false, "PCA · B"], ["MI_MDS", "treatment", false, "MDS · MI"]];
+const W = 0.145, XDOM = COLS.map((_, i) => { const x = i * (W + 0.02) + (i >= 4 ? 0.03 : 0); return [x, x + W]; });
+const GROUPS = [["cell type", 0, 3], ["treatment", 4, 5]];
 const CHI2_95 = 5.991;
 
 function ellipse(cx, cy, a, b, d) {
@@ -109,52 +102,53 @@ function ellipse(cx, cy, a, b, d) {
   return [xs, ys];
 }
 
-function figure(el, variant, swap) {
-  const mi = variant === "MI", { cols: COLS, xdom: XDOM } = GRIDS[swap ? `${variant}_swap` : variant];
-  const strain = s => (swap && SWAP[s]) || s;
+function figure(el) {
   const c = colour(), fg = css("--fg"), muted = css("--muted"), surface = css("--surface");
   const rows = DATA.panels.length, gap = 0.035, h = (1 - gap * (rows - 1)) / rows;
+  const label = (text, x, size, color, yshift) => ({ text, xref: "paper", yref: "paper", x, y: 1, yshift,
+    xanchor: "center", yanchor: "bottom", showarrow: false, font: { size, color } });
   const traces = [], layout = {
     paper_bgcolor: surface, plot_bgcolor: surface, font: { family: css("--sans"), color: fg, size: 11 },
-    margin: { l: 58, r: 6, t: 28, b: 8 }, showlegend: false, hovermode: "closest",
+    margin: { l: 58, r: 6, t: 46, b: 8 }, showlegend: false, hovermode: "closest",
     hoverlabel: { bgcolor: surface, bordercolor: css("--rule"), font: { color: fg, family: css("--mono") } },
-    annotations: COLS.map(([m, what], col) => ({ text: `${m} · ${what}`, xref: "paper", yref: "paper",
-      x: (XDOM[col][0] + XDOM[col][1]) / 2, y: 1, yshift: 4, xanchor: "center", yanchor: "bottom",
-      showarrow: false, font: { size: 10, color: muted } })),
+    annotations: [
+      ...COLS.map(([, , , head], i) => label(head, (XDOM[i][0] + XDOM[i][1]) / 2, 10, muted, 4)),
+      ...GROUPS.map(([g, i, j]) => label(`<b>${g}</b>`, (XDOM[i][0] + XDOM[j][1]) / 2, 11, fg, 22)),
+    ],
   };
   DATA.panels.forEach((p, row) => {
     const ydom = [1 - (row + 1) * h - row * gap, 1 - row * h - row * gap];
-    const pv = DATA.pca_var[`${variant}_${p}`] || [0, 0];
-    const nlab = mi ? DATA.mi_support[p].join("–") : DATA.n_features[`${variant}_${p}`];
-    layout.annotations.push({ text: `<b>${p}</b>  N=${nlab}`, textangle: -90,
-      xref: "paper", yref: "paper", x: 0, xshift: -44, y: (ydom[0] + ydom[1]) / 2, xanchor: "center",
-      yanchor: "middle", showarrow: false, font: { size: 11, color: fg } });
-    COLS.forEach(([method, what], col) => {
-      const f = DATA.figures[`${variant}_${method}`];
+    const pv = DATA.pca_var[p];
+    layout.annotations.push({ text: `<b>${p}</b>  core ${DATA.n_features[p]} · pairs ${DATA.mi_support[p].join("–")}`,
+      textangle: -90, xref: "paper", yref: "paper", x: 0, xshift: -44, y: (ydom[0] + ydom[1]) / 2,
+      xanchor: "center", yanchor: "middle", showarrow: false, font: { size: 10, color: fg } });
+    COLS.forEach(([key, what, swap], col) => {
+      const f = DATA.figures[key], mi = key === "MI_MDS", ct = what === "cell type";
+      const strain = s => (swap && SWAP[s]) || s;
       const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
       const n = row * COLS.length + col + 1, ax = n > 1 ? n : "";
-      const pca = method === "PCA";
-      if (mi) idx.forEach(i => {
-        const [ex, ey] = ellipse(f.x[i], f.y[i], f.cxx[i], f.cxy[i], f.cyy[i]);
-        const ct = what === "cell type", col = ct ? c[strain(f.strain[i])] : fg;
-        traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, x: ex, y: ey,
-          line: { color: col, width: ct ? 1.3 : 1 }, fill: "toself", hoveron: "fills",
-          fillcolor: !ct && f.treatment[i] === "tol" ? fg + "55" : "rgba(0,0,0,0)",
-          text: f.sample_id[i], hoverinfo: "text" });
-      });
       const axis = (dom, t, anchor) => ({ domain: dom, anchor, title: { text: t, font: { size: 9, color: muted }, standoff: 2 },
         showgrid: false, zeroline: false, showticklabels: false, ticks: "", linecolor: css("--rule") });
-      layout[`xaxis${ax}`] = axis(XDOM[col], pca ? `PC1 ${(pv[0] * 100).toFixed(0)}%` : "", `y${ax}`);
-      layout[`yaxis${ax}`] = axis(ydom, pca ? `PC2 ${(pv[1] * 100).toFixed(0)}%` : "", `x${ax}`);
-      if (mi) Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "domain" });
-      const tol = idx.map(i => f.treatment[i] === "tol");
-      if (!mi) traces.push({
+      layout[`xaxis${ax}`] = axis(XDOM[col], mi ? "" : `PC1 ${(pv[0] * 100).toFixed(0)}%`, `y${ax}`);
+      layout[`yaxis${ax}`] = axis(ydom, mi ? "" : `PC2 ${(pv[1] * 100).toFixed(0)}%`, `x${ax}`);
+      if (mi) {
+        Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "domain" });
+        idx.forEach(i => {
+          const [ex, ey] = ellipse(f.x[i], f.y[i], f.cxx[i], f.cxy[i], f.cyy[i]), col = ct ? c[strain(f.strain[i])] : fg;
+          traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, x: ex, y: ey,
+            line: { color: col, width: ct ? 1.2 : 0.9 }, fill: "toself", hoveron: "fills",
+            fillcolor: !ct && f.treatment[i] === "tol" ? fg + "55" : "rgba(0,0,0,0)",
+            text: f.sample_id[i], hoverinfo: "text" });
+        });
+        return;
+      }
+      traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
         x: idx.map(i => f.x[i]), y: idx.map(i => f.y[i]), text: idx.map(i => f.sample_id[i]),
         hovertemplate: "%{text}<extra></extra>",
-        marker: what === "cell type"
-          ? { size: 8, color: idx.map(i => c[strain(f.strain[i])]), line: { color: surface, width: 1 } }
-          : { size: 8, color: tol.map(t => t ? fg : surface), line: { color: fg, width: 1.4 } },
+        marker: ct
+          ? { size: 7, color: idx.map(i => c[strain(f.strain[i])]), line: { color: surface, width: 1 } }
+          : { size: 7, color: idx.map(i => f.treatment[i] === "tol" ? fg : surface), line: { color: fg, width: 1.3 } },
       });
     });
   });
@@ -163,17 +157,15 @@ function figure(el, variant, swap) {
 
 function build() {
   const host = document.getElementById("variants");
-  host.innerHTML = SECTIONS.map(({ variant, swap, title, sub }) => `
-    <section class="variant"><h2>${title}<span>${sub}</span></h2>${variant === "MI" && !swap ? `
-      <p class="note">Each pair of samples is compared only on the species either of them detects above the pair's
-      floor; species neither detects carry no information instead of a shared zero. Distance is one minus the
-      permutation-corrected, normalised MI. The embedding weights each pair by its bootstrap precision, and each
-      ellipse is the 95% region of that sample's position over ${DATA.n_boot} species bootstraps: a wide ellipse means
-      little shared information, not a different lipidome. Filled ellipses are tol, outlines ctrl. N is the range
-      of species per pair.</p>` : ""}${swap ? `
-      <p class="note">Positions are unchanged; only the Clone1 and PCC1 colours are exchanged, in every sample of
-      both treatments. Treatment copies are omitted because they do not change.</p>` : ""}
-      <div class="fig"><div class="plot" data-variant="${variant}" data-swap="${swap}"></div></div></section>`).join("");
+  host.innerHTML = `
+    <section class="variant">
+      <p class="note">PCA is core-only CLR (B): species detected in all 24 samples, no zeros imputed. MDS is the
+      pairwise mutual-information layout: each pair is compared on the species either sample detects above the pair's
+      floor, distance is one minus the permutation-corrected normalised MI, pairs are weighted by bootstrap precision,
+      and each ellipse is the 95% region of that sample over ${DATA.n_boot} species bootstraps (wide = little shared
+      information). Swap columns exchange the Clone1 and PCC1 colours in every sample; positions are unchanged.
+      Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
+      <div class="fig"><div class="plot"></div></div></section>`;
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
     DATA.checks.map(r => `<tr><td class="name">${r.check}</td><td class="about">${r.about}</td>${r.cells.map(c => {
@@ -185,7 +177,7 @@ function build() {
 function draw() {
   document.getElementById("theme").innerHTML = isDark() ? SUN : MOON;
   legend();
-  document.querySelectorAll(".plot").forEach(el => figure(el, el.dataset.variant, el.dataset.swap === "true"));
+  document.querySelectorAll(".plot").forEach(figure);
 }
 
 document.getElementById("theme").addEventListener("click", () => {

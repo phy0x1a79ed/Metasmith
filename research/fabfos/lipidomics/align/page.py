@@ -1,4 +1,4 @@
-"""Build the ordination page (PCA and UMAP per CLR variant, the MI ordination, the checks table) as one HTML file."""
+"""Build the ordination page (core-only CLR PCA beside the MI ordination, then the checks table) as one HTML file."""
 import json
 import sys
 from pathlib import Path
@@ -20,7 +20,7 @@ def figures():
     o["obs"] = o.observation.map(load.LABEL)
     o["x"], o["y"] = o.x.round(4), o.y.round(4)
     cols = ["obs", "sample_id", "strain", "treatment", "x", "y"]
-    figs = {f"{v}_{m}": g[cols].to_dict("list") for (v, m), g in o.groupby(["variant", "method"])}
+    figs = {"B_PCA": o[(o.variant == "B") & (o.method == "PCA")][cols].to_dict("list")}
     mi = pd.read_parquet(load.OUT / "mi.parquet")
     mi["obs"] = mi.observation.map(load.LABEL)
     figs["MI_MDS"] = mi[cols + ["cxx", "cxy", "cyy"]].round(5).to_dict("list")
@@ -104,11 +104,8 @@ def main(out: Path):
     cols = [column(checks[o]) for o in load.OBSERVATIONS]
     data = {
         "panels": [load.LABEL[o] for o in load.OBSERVATIONS],
-        "variants": VARIANTS,
-        "pca_var": {f"{v}_{load.LABEL[o]}": checks[o]["ordination"]["variants"][v]["pca_var"]
-                    for o in load.OBSERVATIONS for v in VARIANTS},
-        "n_features": {f"{v}_{load.LABEL[o]}": checks[o]["ordination"]["variants"][v]["n_features"]
-                       for o in load.OBSERVATIONS for v in VARIANTS},
+        "pca_var": {load.LABEL[o]: checks[o]["ordination"]["variants"]["B"]["pca_var"] for o in load.OBSERVATIONS},
+        "n_features": {load.LABEL[o]: checks[o]["ordination"]["variants"]["B"]["n_features"] for o in load.OBSERVATIONS},
         "n_boot": N_BOOT,
         "mi_support": {load.LABEL[o]: checks[o]["mi"]["support"] for o in load.OBSERVATIONS},
         "figures": figures(),
