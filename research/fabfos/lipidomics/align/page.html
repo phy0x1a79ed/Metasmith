@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* layout: one column of figure pairs per CLR variant, legend pinned under the header, checks table last */
+/* layout: one figure grid per CLR variant plus MI, legend pinned under the header, checks table last */
 :root {
   --bg: #f6f7f8; --surface: #ffffff; --fg: #1d2126; --muted: #5d6670; --rule: #dde1e6;
   --s1: #2a78d6; --s2: #1baf7a; --s3: #eb8a1a; --s4: #d1332a;
@@ -33,6 +33,7 @@ button#theme:focus-visible { outline: 2px solid var(--s1); outline-offset: 2px; 
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend svg { flex: none; }
 section.variant { display: grid; gap: 14px; }
+.note { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.5; max-width: 820px; }
 .fig { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px; min-width: 0; overflow-x: auto; }
 .plot { width: 100%; min-width: 720px; height: 860px; }
 .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
@@ -81,10 +82,26 @@ function legend() {
     `<span>${dot(css("--fg"))}tol</span><span>${dot(css("--fg"), true)}ctrl</span>`;
 }
 
-const COLS = [["PCA", "cell type"], ["PCA", "treatment"], ["UMAP", "cell type"], ["UMAP", "treatment"]];
-const XDOM = [[0, 0.225], [0.245, 0.47], [0.53, 0.755], [0.775, 1]];
+const GRIDS = {
+  clr: { cols: [["PCA", "cell type"], ["PCA", "treatment"], ["UMAP", "cell type"], ["UMAP", "treatment"]],
+         xdom: [[0, 0.225], [0.245, 0.47], [0.53, 0.755], [0.775, 1]] },
+  MI: { cols: [["MDS", "cell type"], ["MDS", "treatment"]], xdom: [[0, 0.48], [0.52, 1]] },
+};
+const CHI2_95 = 5.991;
+
+function ellipse(cx, cy, a, b, d) {
+  const t = (a + d) / 2, r = Math.sqrt(((a - d) / 2) ** 2 + b * b), l1 = t + r, l2 = Math.max(t - r, 0);
+  const th = Math.atan2(l1 - a, b || 1e-12), k = Math.sqrt(CHI2_95);
+  const xs = [], ys = [];
+  for (let i = 0; i <= 48; i++) {
+    const u = 2 * Math.PI * i / 48, p = k * Math.sqrt(l1) * Math.cos(u), q = k * Math.sqrt(l2) * Math.sin(u);
+    xs.push(cx + p * Math.cos(th) - q * Math.sin(th)); ys.push(cy + p * Math.sin(th) + q * Math.cos(th));
+  }
+  return [xs, ys];
+}
 
 function figure(el, variant) {
+  const mi = variant === "MI", { cols: COLS, xdom: XDOM } = GRIDS[mi ? "MI" : "clr"];
   const c = colour(), fg = css("--fg"), muted = css("--muted"), surface = css("--surface");
   const rows = DATA.panels.length, gap = 0.035, h = (1 - gap * (rows - 1)) / rows;
   const traces = [], layout = {
@@ -97,8 +114,9 @@ function figure(el, variant) {
   };
   DATA.panels.forEach((p, row) => {
     const ydom = [1 - (row + 1) * h - row * gap, 1 - row * h - row * gap];
-    const pv = DATA.pca_var[`${variant}_${p}`];
-    layout.annotations.push({ text: `<b>${p}</b>  N=${DATA.n_features[`${variant}_${p}`]}`, textangle: -90,
+    const pv = DATA.pca_var[`${variant}_${p}`] || [0, 0];
+    const nlab = mi ? DATA.mi_support[p].join("–") : DATA.n_features[`${variant}_${p}`];
+    layout.annotations.push({ text: `<b>${p}</b>  N=${nlab}`, textangle: -90,
       xref: "paper", yref: "paper", x: 0, xshift: -44, y: (ydom[0] + ydom[1]) / 2, xanchor: "center",
       yanchor: "middle", showarrow: false, font: { size: 11, color: fg } });
     COLS.forEach(([method, what], col) => {
@@ -106,10 +124,17 @@ function figure(el, variant) {
       const idx = f.obs.map((o, i) => o === p ? i : -1).filter(i => i >= 0);
       const n = row * COLS.length + col + 1, ax = n > 1 ? n : "";
       const pca = method === "PCA";
+      if (mi) idx.forEach(i => {
+        const [ex, ey] = ellipse(f.x[i], f.y[i], f.cxx[i], f.cxy[i], f.cyy[i]);
+        const col = what === "cell type" ? c[f.strain[i]] : fg;
+        traces.push({ type: "scatter", mode: "lines", xaxis: `x${ax}`, yaxis: `y${ax}`, x: ex, y: ey,
+          line: { color: col, width: 0.8 }, fill: "toself", fillcolor: col + "14", opacity: 0.8, hoverinfo: "skip" });
+      });
       const axis = (dom, t, anchor) => ({ domain: dom, anchor, title: { text: t, font: { size: 9, color: muted }, standoff: 2 },
         showgrid: false, zeroline: false, showticklabels: false, ticks: "", linecolor: css("--rule") });
       layout[`xaxis${ax}`] = axis(XDOM[col], pca ? `PC1 ${(pv[0] * 100).toFixed(0)}%` : "", `y${ax}`);
       layout[`yaxis${ax}`] = axis(ydom, pca ? `PC2 ${(pv[1] * 100).toFixed(0)}%` : "", `x${ax}`);
+      if (mi) Object.assign(layout[`yaxis${ax}`], { scaleanchor: `x${ax}`, scaleratio: 1, constrain: "domain" });
       const tol = idx.map(i => f.treatment[i] === "tol");
       traces.push({
         type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`,
@@ -128,7 +153,14 @@ function build() {
   const host = document.getElementById("variants");
   host.innerHTML = Object.entries(DATA.variants).map(([v, name]) => `
     <section class="variant"><h2>${v}<span>${name}</span></h2>
-      <div class="fig"><div class="plot" data-variant="${v}"></div></div></section>`).join("");
+      <div class="fig"><div class="plot" data-variant="${v}"></div></div></section>`).join("") + `
+    <section class="variant"><h2>MI<span>pairwise mutual information, weighted MDS</span></h2>
+      <p class="note">Each pair of samples is compared only on the species either of them detects above the pair's
+      floor; species neither detects carry no information instead of a shared zero. Distance is one minus the
+      permutation-corrected, normalised MI. The embedding weights each pair by its bootstrap precision, and each
+      ellipse is the 95% region of that sample's position over ${DATA.n_boot} species bootstraps: a wide ellipse means
+      little shared information, not a different lipidome. N is the range of species per pair.</p>
+      <div class="fig"><div class="plot" data-variant="MI"></div></div></section>`;
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
     DATA.checks.map(r => `<tr><td class="name">${r.check}</td><td class="about">${r.about}</td>${r.cells.map(c => {

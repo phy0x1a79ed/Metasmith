@@ -1,4 +1,4 @@
-"""Build the ordination page (PCA and UMAP per CLR variant, plus the checks table) as one HTML file."""
+"""Build the ordination page (PCA and UMAP per CLR variant, the MI ordination, the checks table) as one HTML file."""
 import json
 import sys
 from pathlib import Path
@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 from . import load
+from .mi import N_BOOT
 from .ordinate import MIN_CORE, VARIANTS
 
 TEMPLATE = Path(__file__).with_name("page.html")
@@ -19,11 +20,15 @@ def figures():
     o["obs"] = o.observation.map(load.LABEL)
     o["x"], o["y"] = o.x.round(4), o.y.round(4)
     cols = ["obs", "sample_id", "strain", "treatment", "x", "y"]
-    return {f"{v}_{m}": g[cols].to_dict("list") for (v, m), g in o.groupby(["variant", "method"])}
+    figs = {f"{v}_{m}": g[cols].to_dict("list") for (v, m), g in o.groupby(["variant", "method"])}
+    mi = pd.read_parquet(load.OUT / "mi.parquet")
+    mi["obs"] = mi.observation.map(load.LABEL)
+    figs["MI_MDS"] = mi[cols + ["cxx", "cxy", "cyy"]].round(5).to_dict("list")
+    return figs
 
 
 def column(c: dict) -> list[tuple[str, str, str, str]]:
-    em, mc, tc, oc = c["error_model"], c["match"], c["tables"], c["ordination"]
+    em, mc, tc, oc, mi = c["error_model"], c["match"], c["tables"], c["ordination"], c["mi"]
     n, s = mc["injections"], em["sigma"]
     capped = " (capped)" if em["d2_equal_density"] > em["d2_cutoff"] else ""
     rs = mc["resid_sigma"]
@@ -80,6 +85,17 @@ def column(c: dict) -> list[tuple[str, str, str, str]]:
          "nearest samples. PCC1 ctrl fits the label as recorded; EPI300 ctrl supports a swap. Not pass/fail.",
          "\n".join(f"{v}: {f['closer_to'].replace('_', ' ')} · {', '.join(f['nearest'])}" for v, f in fv.items()),
          groups.pop().split("_")[0] if len(groups) == 1 else "mixed"),
+        ("MI replicate signal",
+         "Species each sample pair shares above its pair floor (min–max), then the mean MI distance between "
+         "replicates and between samples of different conditions. Normal: replicates closer.",
+         f"{mi['support'][0]}–{mi['support'][1]} species\nreplicates {mi['d_replicates']:.3f} · "
+         f"others {mi['d_between']:.3f}", "pass" if mi["d_replicates"] < mi["d_between"] else "flag"),
+        ("MI cross-checks",
+         "Rank correlation of the MI distances with Kendall-τ distances on the same species; of each sample's "
+         "cloud size with its size factor (negative: low-loading samples get wider clouds); MDS stress. "
+         "Not pass/fail.",
+         f"τ {mi['rho_mi_kendall']:.2f} · loading {mi['rho_cloud_size_factor']:.2f}\nstress {mi['stress']:.3f}",
+         "info"),
     ]
 
 
@@ -93,6 +109,8 @@ def main(out: Path):
                     for o in load.OBSERVATIONS for v in VARIANTS},
         "n_features": {f"{v}_{load.LABEL[o]}": checks[o]["ordination"]["variants"][v]["n_features"]
                        for o in load.OBSERVATIONS for v in VARIANTS},
+        "n_boot": N_BOOT,
+        "mi_support": {load.LABEL[o]: checks[o]["mi"]["support"] for o in load.OBSERVATIONS},
         "figures": figures(),
         "checks": [{"check": row[0][0], "about": row[0][1],
                     "cells": [{"value": value, "mark": mark} for *_, value, mark in row]} for row in zip(*cols)],
