@@ -131,14 +131,15 @@ function frameOf(p) {
   const f = DATA.figures.B_PCA, pts = f.obs.flatMap((o, i) => o === p ? [[f.x[i], f.y[i], f.z[i]]] : []);
   const lo = [0, 1, 2].map(k => Math.min(...pts.map(q => q[k]))), hi = [0, 1, 2].map(k => Math.max(...pts.map(q => q[k])));
   const mid = lo.map((v, k) => (v + hi[k]) / 2), s = Math.max(...hi.map((v, k) => (v - lo[k]) / 2)) * 1.04;
-  let best = { area: -1 };
+  // overlap: soft count of projected pairs closer than about one dot width (~0.1 s at the drawn scale)
+  let best = { overlap: Infinity };
   for (let n = 0; n < 8; n++) {
     const flip = [n & 1 ? -1 : 1, n & 2 ? -1 : 1, n & 4 ? -1 : 1];
     const pr = pts.map(q => project(q.map((v, k) => (v - mid[k]) * flip[k]), ISO));
-    const m = [0, 1].map(k => pr.reduce((t, q) => t + q[k], 0) / pr.length);
-    const cov = (a, b) => pr.reduce((t, q) => t + (q[a] - m[a]) * (q[b] - m[b]), 0);
-    const area = cov(0, 0) * cov(1, 1) - cov(0, 1) ** 2;
-    if (area > best.area) best = { area, flip };
+    let overlap = 0;
+    pr.forEach((a, i) => pr.slice(i + 1).forEach(b =>
+      { overlap += Math.exp(-((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) / (0.1 * s) ** 2); }));
+    if (overlap < best.overlap) best = { overlap, flip };
   }
   return FRAMES[p] = { mid, s, flip: best.flip };
 }
@@ -156,6 +157,7 @@ function cube(s, pv, ref, rule, muted) {
   const shapes = [{ type: "path", layer: "below", ...ref, line: { color: rule, width: 0.8 },
     path: "M" + h.map(v => `${v[0]},${v[1]}`).join("L") + "Z" }];
   [0, 1, 2].forEach(k => shapes.push(seg(P[back], P[back ^ (1 << k)], rule, 1)));
+  const bars = [];
   const edges = h.map((v, i) => [v, h[(i + 1) % h.length]]);
   [0, 1, 2].forEach(k => {
     const along = edges.filter(([a, b]) => (a[2] ^ b[2]) === 1 << k);
@@ -167,11 +169,12 @@ function cube(s, pv, ref, rule, muted) {
     if (((lo[0] + hi[0]) / 2 - cx) * nx + ((lo[1] + hi[1]) / 2 - cy) * ny < 0) { nx = -nx; ny = -ny; }
     const at = (t, o) => [lo[0] + dx * t + nx * o * s, lo[1] + dy * t + ny * o * s];
     shapes.push(seg(at(0, 0.1), at(pv[k], 0.1), muted, 3));
+    bars.push({ k, pts: [...Array(9)].map((_, j) => at(pv[k] * j / 8, 0.1)) });
     QUARTERS.forEach(q => shapes.push(seg(at(q, 0.05), at(q, 0.15), rule, 1)));
   });
   const pad = 0.17 * s, xs = h.map(v => v[0]), ys = h.map(v => v[1]);
   const backSigns = [0, 1, 2].map(k => (back >> k) & 1 ? 1 : -1);
-  return { shapes, back: backSigns, x: [Math.min(...xs) - pad, Math.max(...xs) + pad], y: [Math.min(...ys) - pad, Math.max(...ys) + pad] };
+  return { shapes, bars, back: backSigns, x: [Math.min(...xs) - pad, Math.max(...xs) + pad], y: [Math.min(...ys) - pad, Math.max(...ys) + pad] };
 }
 
 // MI distances share units across observations, so every MDS panel gets the same half-width (the largest
@@ -242,6 +245,9 @@ function figure(el) {
       Object.assign(layout[`xaxis${ax}`], { range: box.x, showline: false, constrain: "range" });
       Object.assign(layout[`yaxis${ax}`], { range: box.y, showline: false, scaleanchor: `x${ax}`, constrain: "range" });
       layout.shapes.push(...box.shapes);
+      const hov = box.bars.flatMap(b => b.pts.map(q => [...q, `PC${b.k + 1} · ${(pv[b.k] * 100).toFixed(1)}%`]));
+      traces.push({ type: "scatter", mode: "markers", xaxis: `x${ax}`, yaxis: `y${ax}`, marker: { size: 8, opacity: 0 },
+        x: hov.map(q => q[0]), y: hov.map(q => q[1]), text: hov.map(q => q[2]), hovertemplate: "%{text}<extra></extra>" });
       const pr = pts.map(q => project(q)), order = pts.map((_, k) => k).sort((a, b) => pr[a][2] - pr[b][2]);
       const at = order.map(k => idx[k]);
       const drop = pts.flatMap(q => {  // each sample to the nearest back wall
@@ -257,9 +263,10 @@ function figure(el) {
         x: order.map(k => pr[k][0]), y: order.map(k => pr[k][1]), text: at.map(name),
         hovertemplate: "%{text}<extra></extra>",
         marker: {
-          size: order.map(k => 7 * (1 + 0.3 * pr[k][2] / (s * Math.sqrt(3)))),
-          color: at.map(i => ct ? c[strain(f.strain[i])] : f.treatment[i] === "tol" ? fg : surface),
-          line: ct ? { color: surface, width: 1 } : { color: fg, width: 1.3 },
+          size: 5,
+          color: at.map(i => ct ? c[strain(f.strain[i])] : fg),
+          symbol: at.map(i => ct || f.treatment[i] === "tol" ? "circle" : "circle-open"),
+          line: { width: at.map(i => ct || f.treatment[i] === "tol" ? 0 : 1.2), color: fg },
         },
       });
     });
@@ -277,9 +284,9 @@ function build() {
       and each ellipse is the 95% region of that sample over ${DATA.n_boot} species bootstraps (wide = little shared
       information). Swap columns exchange the Clone1 and PCC1 colours in every sample; positions are unchanged.
       PCA panels show PC1–PC3 as a cube seen from a corner; drag any of them to rotate all together, double-click to
-      reset. Nearer samples are drawn larger. The three back edges are the axes; the bars outside the left edges give each
-      component's share of variance (full edge = 100%, ticks at quarters). Each row's corner is chosen to spread the
-      samples most. Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
+      reset. The three back edges are the axes; the bars outside the left edges give each
+      component's share of variance (full edge = 100%, ticks at quarters). Each row's corner is chosen to overlap the
+      samples least. Treatment: filled tol, open ctrl. Row labels give B's core species and the range of species per MI pair.</p>
       <div class="fig"><div class="plot"></div></div></section>`;
   const t = document.getElementById("checks");
   t.innerHTML = `<tr><th>Check</th><th>What it tests · normal result</th>${DATA.panels.map(p => `<th>${p}</th>`).join("")}</tr>` +
