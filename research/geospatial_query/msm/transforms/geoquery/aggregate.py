@@ -16,8 +16,8 @@ PRODUCTS = {long_: "observations_long.parquet", wide: "features_wide.parquet",
 
 def protocol(context: ExecutionContext):
     ins = " ".join(str(t.container) for t in context.InputGroup(tables))
-    context.ExecWithContainer(
-        image=image,
+    context.ExecWithEnv(
+        env=image,
         cmd=f"python -m geoquery.aggregate --tables {ins} --out-dir integrated",
     )
     outs = {p: context.Output(p) for p in PRODUCTS}

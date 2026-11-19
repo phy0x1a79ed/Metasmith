@@ -10,8 +10,8 @@ aois  = model.AddProduct(lib.GetType("geoquery::aois"))
 
 def protocol(context: ExecutionContext):
     i, o = context.Input(table), context.Output(aois)
-    context.ExecWithContainer(
-        image=image,
+    context.ExecWithEnv(
+        env=image,
         cmd=f"python -m geoquery.normalise --in {i.container} --out {o.container}",
     )
     return ExecutionResult(manifest=[{aois: o.local}], success=o.local.exists())
