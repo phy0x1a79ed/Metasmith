@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="212" height="382" viewBox="0 0 212 382">
+<rect width="212" height="382" fill="#FFFFFF"/>
+<g fill="none" stroke="#666666" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="butt">
+<path d="M 41.7,40.4 L 41.7,42.2 L 41.7,92.9" stroke="#636EFA"/>
+<path d="M 41.7,102.1 L 41.7,124.0" stroke="#636EFA"/>
+<path d="M 41.7,133.4 L 41.7,135.8 L 41.7,198.2 A 8.5,8.5 0 0 1 33.3,206.7 A 8.5,8.5 0 0 0 24.8,215.2" stroke="#636EFA"/>
+<path d="M 41.7,248.2 L 41.7,246.3 A 8.5,8.5 0 0 0 33.3,237.9 A 8.5,8.5 0 0 1 24.8,229.4" stroke="#EF553B"/>
+<path d="M 41.7,279.4 L 41.7,277.6 A 8.5,8.5 0 0 0 33.3,269.1 A 8.5,8.5 0 0 1 24.8,260.6" stroke="#EF553B"/>
+<path d="M 41.7,310.6 L 41.7,308.8 A 8.5,8.5 0 0 0 33.3,300.3 A 8.5,8.5 0 0 1 24.8,291.9" stroke="#EF553B"/>
+<path d="M 24.8,61.0 L 24.8,59.1 A 8.5,8.5 0 0 1 33.3,50.7 A 8.5,8.5 0 0 0 41.7,42.2" stroke="#636EFA"/>
+<path d="M 24.8,71.6 L 24.8,152.8 L 24.8,155.3" stroke="#636EFA"/>
+<path d="M 24.8,164.5 L 24.8,186.4" stroke="#636EFA"/>
+<path d="M 24.8,195.8 L 24.8,215.2 L 24.8,217.7" stroke="#636EFA"/>
+<path d="M 24.8,226.9 L 24.8,229.4 L 24.8,260.6 L 24.8,291.9 L 24.8,341.8" stroke="#EF553B"/>
+<path d="M 41.7,135.8 A 8.5,8.5 0 0 1 33.3,144.3 A 8.5,8.5 0 0 0 24.8,152.8" stroke="#636EFA"/>
+</g>
+<g><title>geoquery::aoi_table</title>
+<circle cx="41.7" cy="35.1" r="5.3" fill="#636EFA" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="29.6" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="39.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">aoi_table</text></g>
+<g><title>geoquery::source</title>
+<circle cx="24.8" cy="66.3" r="5.3" fill="#636EFA" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="60.8" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="71.0" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">source</text></g>
+<g><title>normalise_aois</title>
+<polygon points="36.4,92.9 47.1,92.9 41.7,102.1" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
+<line x1="54.2" y1="88.9" x2="192.8" y2="88.9" stroke="#111111" stroke-width="1"/>
+<text x="54.2" y="102.2" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">normalise_aois</text></g>
+<g><title>geoquery::aois</title>
+<circle cx="41.7" cy="128.7" r="4.7" fill="#FFFFFF" stroke="#636EFA" stroke-width="1.3"/>
+<text x="64.6" y="123.2" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="133.4" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">aois</text></g>
+<g><title>fetch_source</title>
+<polygon points="19.5,155.3 30.2,155.3 24.8,164.5" fill="#FFFFFF" stroke="#636EFA" stroke-width="2.0" stroke-linejoin="round"/>
+<line x1="54.2" y1="151.3" x2="192.8" y2="151.3" stroke="#111111" stroke-width="1"/>
+<text x="54.2" y="164.6" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">fetch_source</text></g>
+<g><title>geoquery::source_table</title>
+<circle cx="24.8" cy="191.1" r="4.7" fill="#FFFFFF" stroke="#636EFA" stroke-width="1.3"/>
+<text x="64.6" y="185.6" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="195.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">source_table</text></g>
+<g><title>aggregate</title>
+<polygon points="19.5,217.7 30.2,217.7 24.8,226.9" fill="#FFFFFF" stroke="#EF553B" stroke-width="2.0" stroke-linejoin="round"/>
+<line x1="54.2" y1="213.7" x2="192.8" y2="213.7" stroke="#111111" stroke-width="1"/>
+<text x="54.2" y="227.0" font-family="Arial" font-size="13" fill="#111111" font-weight="600" text-anchor="start">aggregate</text></g>
+<g><title>geoquery::gaps</title>
+<circle cx="41.7" cy="253.5" r="5.3" fill="#EF553B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="248.0" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="258.2" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">gaps</text></g>
+<g><title>geoquery::observations_long</title>
+<circle cx="41.7" cy="284.7" r="5.3" fill="#EF553B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="279.2" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="289.4" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">observations_long</text></g>
+<g><title>geoquery::features_wide</title>
+<circle cx="41.7" cy="315.9" r="5.3" fill="#EF553B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="310.4" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="320.6" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">features_wide</text></g>
+<g><title>geoquery::coverage</title>
+<circle cx="24.8" cy="347.1" r="5.3" fill="#EF553B" stroke="#2B2B2B" stroke-width="1.3"/>
+<text x="64.6" y="341.6" font-family="Arial" font-size="6.5" fill="#7A7A7A" text-anchor="start">geoquery</text>
+<text x="64.6" y="351.8" font-family="Arial" font-size="13" fill="#7A7A7A" font-weight="normal" text-anchor="start">coverage</text></g>
+</svg>

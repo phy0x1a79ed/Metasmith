@@ -9,14 +9,7 @@ Design follows the sister-session decisions:
 import os, time, json, math, warnings
 import numpy as np, requests
 
-import pyproj
-_PROJ = os.path.abspath("./projdata")
-os.environ.setdefault("PROJ_DATA", _PROJ); os.environ.setdefault("PROJ_LIB", _PROJ)
-import rasterio, rasterio._env
-try:
-    rasterio._env.set_proj_data_search_path(_PROJ)
-except Exception:
-    pass
+import rasterio
 from rasterio.windows import from_bounds, Window, WindowError
 from rasterio.warp import transform_bounds
 from rasterio.features import geometry_mask
@@ -32,7 +25,7 @@ NRCAN = "https://datacube.services.geo.ca/stac/api"
 MAXPIX = 320          # decimated-read cap per side; keeps stress AOIs cheap
 GDAL_ENV = dict(GDAL_DISABLE_READDIR_ON_OPEN="EMPTY_DIR", GDAL_HTTP_MULTIPLEX="YES",
                 VSI_CACHE="TRUE", GDAL_HTTP_MAX_RETRY="2", GDAL_HTTP_RETRY_DELAY="1",
-                CPL_VSIL_CURL_NON_CACHED="", PROJ_DATA=_PROJ)
+                CPL_VSIL_CURL_NON_CACHED="")
 
 S = requests.Session()
 S.headers.update({"Accept": "*/*"})
@@ -492,14 +485,11 @@ def run_one(aoi, spec, timeout_s=120):
     rec["wall_s"] = round(time.time() - t0, 2)
     return rec
 
-def load_aois(path, tiers=("test", "stress")):
-    gj = json.load(open(path))
+def load_aois(path):
+    """Normalised AOI GeoJSON (see normalise.py) -> the aoi dicts every adapter takes."""
     out = []
-    for f in gj["features"]:
-        p = f["properties"]
-        if p.get("tier") not in tiers: continue
-        g = shape(f["geometry"])
-        out.append({"aoi_id": p["aoi_id"], "aoi_class": p["aoi_class"], "country": p["country"],
-                    "area_km2": p["area_km2"], "tier": p["tier"], "geom": f["geometry"],
-                    "bbox": list(g.bounds), "centroid": [g.centroid.x, g.centroid.y]})
+    for f in json.load(open(path))["features"]:
+        p, g = f["properties"], shape(f["geometry"])
+        out.append({**p, "geom": f["geometry"], "bbox": list(g.bounds),
+                    "centroid": [g.centroid.x, g.centroid.y]})
     return out

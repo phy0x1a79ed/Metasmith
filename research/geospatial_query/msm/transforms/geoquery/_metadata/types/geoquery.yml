@@ -1,0 +1,54 @@
+ontology:
+  doi: https://doi.org/10.1093/bioinformatics/btt113
+  name: EDAM
+  strict: false
+  version: '1.25'
+schema: v1
+types:
+  aoi_table:
+    properties:
+      Format: KML or GeoJSON
+      _:
+      - areas of interest as given, one feature per AOI
+  aois:
+    properties:
+      Format: GeoJSON
+      _:
+      - normalised AOIs with aoi_id, aoi_name, aoi_class, country, area_km2
+      ext: geojson
+  coverage:
+    properties:
+      Format: TSV
+      _:
+      - AOI by source matrix of found, unavailable and not-attempted
+      ext: tsv
+  features_wide:
+    properties:
+      Format: parquet
+      _:
+      - AOI by feature matrix of found values
+      ext: parquet
+  gaps:
+    properties:
+      Format: TSV
+      _:
+      - every AOI x source pair that found nothing, with its gap reason
+      ext: tsv
+  observations_long:
+    properties:
+      Format: parquet
+      _:
+      - every found value, one row per AOI x source x feature
+      ext: parquet
+  source:
+    properties:
+      Format: JSON
+      _:
+      - 'one data source to query, as {"adapter": name}'
+  source_table:
+    properties:
+      Format: TSV
+      _:
+      - one source over every AOI, a row per AOI x feature found and a status row
+        per AOI without
+      ext: tsv

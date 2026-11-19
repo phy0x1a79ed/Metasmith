@@ -1,0 +1,9 @@
+types:
+  container:
+    properties:
+      Format: OCI
+  geoquery.oci:
+    extends: container
+    properties:
+      provides:
+      - python

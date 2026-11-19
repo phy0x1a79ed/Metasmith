@@ -39,8 +39,7 @@ import pyarrow.parquet as pq
 import pyarrow.compute as pc
 from shapely.geometry import shape
 
-sys.path.append(os.getcwd())
-import pipeline as P                      # contract + shared session (PROJ fixup inside)
+from . import pipeline as P
 
 S = P.S                                   # reuse pipeline's requests.Session
 # Sent per-request rather than mutated onto the shared session, so other lanes'

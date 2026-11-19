@@ -35,8 +35,8 @@ import os, io, sys, time, json, math, zipfile, threading, warnings
 import numpy as np
 import requests
 
-import pipeline as P                      # PROJ fixup happens on import
-from pipeline import S, stats, MAXPIX     # reused helpers
+from . import pipeline as P
+from .pipeline import S, stats, MAXPIX     # reused helpers
 
 import rasterio
 from rasterio.windows import from_bounds

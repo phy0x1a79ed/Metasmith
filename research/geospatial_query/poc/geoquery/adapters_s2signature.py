@@ -16,8 +16,7 @@ Fill type stays `observed`: every component is a statistic of measured reflectan
 import os, sys, math, threading, concurrent.futures as cf
 import numpy as np
 
-sys.path.append(os.getcwd())
-from pipeline import pc_item, read_window, _dt   # noqa: E402
+from .pipeline import pc_item, read_window, _dt   # noqa: E402
 
 BANDS = ["B02", "B03", "B04", "B08", "B11", "B12"]
 YEAR = "2024"

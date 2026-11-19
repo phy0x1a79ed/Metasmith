@@ -6,7 +6,7 @@ Decisions: docs/geospatial_query/DECISIONS.md
 Email content stays out of this repo, journals and commits. Koonkie's AOI KML is data under no NDA and is DVC-tracked (aoi-handling). Source: the KML Koonkie sent on 2026-11-12.
 
 ## Current
-mvp-build: PLAN.md approved 2026-11-19, executing T1
+mvp-build: T1–T4 committed (image geoquery:local, package poc/geoquery, library msm/, DAG msm/dag.svg); next T6 run. KML pull waits on productivity request qoD5POsTVoXCf
 
 ## Waiting on the user
 none
