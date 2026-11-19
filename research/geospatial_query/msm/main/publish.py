@@ -1,5 +1,5 @@
 """Copy one geoquery run's results into the engcyc dataset layout, with ledger, gaps and README."""
-import csv, hashlib, shutil, subprocess, tarfile
+import csv, hashlib, re, shutil, subprocess, tarfile
 from datetime import date
 from pathlib import Path
 
@@ -24,7 +24,9 @@ def _sha256(p: Path) -> str:
 
 def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: str, image: str):
     with open(sources_tsv) as fh:
-        family = {r["source"]: r["family"].replace(" ", "_") for r in csv.DictReader(fh, delimiter="\t")}
+        # a path segment holds only letters, digits and _ (engcyc LAYOUT.md)
+        family = {r["source"]: re.sub(r"[^a-z0-9]+", "_", r["family"].lower()).strip("_")
+                  for r in csv.DictReader(fh, delimiter="\t")}
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)

@@ -128,7 +128,9 @@ def _dt(i):
             or i.properties.get("end_datetime") or "")
 
 def pc_item(coll, bbox, dt=None, query=None, sortby=None, limit=10, retries=3):
-    kw = dict(collections=[coll], bbox=bbox, limit=limit)
+    # max_items caps the search; `limit` alone is only the page size, and .items() would
+    # walk every page of a long archive (MODIS 13Q1 since 2000) until the API times out
+    kw = dict(collections=[coll], bbox=bbox, limit=limit, max_items=limit)
     if dt: kw["datetime"] = dt
     if query: kw["query"] = query
     if sortby: kw["sortby"] = sortby
