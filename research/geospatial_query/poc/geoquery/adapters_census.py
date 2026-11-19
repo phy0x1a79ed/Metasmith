@@ -39,8 +39,8 @@ import pandas as pd
 import geopandas as gpd
 from shapely.geometry import shape
 
-import pipeline as P                      # PROJ fixup + helpers already applied
-from pipeline import S, read_window, class_fractions, pc_item, _dt
+from . import pipeline as P
+from .pipeline import S, read_window, class_fractions, pc_item, _dt
 
 import rasterio
 from rasterio.windows import from_bounds as win_from_bounds

@@ -86,8 +86,8 @@ dataset is produced by Google and Google DeepMind."
 import os, math, time, threading, warnings
 import numpy as np
 
-import pipeline as P                      # PROJ fixup happens on import
-from pipeline import S                    # reused proxy-aware session
+from . import pipeline as P
+from .pipeline import S                    # reused proxy-aware session
 
 import rasterio
 from rasterio.transform import Affine

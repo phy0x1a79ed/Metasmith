@@ -20,8 +20,8 @@ import numpy as np
 import pandas as pd
 import requests
 
-import pipeline
-from pipeline import S                      # shared requests.Session
+from . import pipeline
+from .pipeline import S                      # shared requests.Session
 
 CACHE = os.path.abspath("./cache")
 os.makedirs(CACHE, exist_ok=True)
