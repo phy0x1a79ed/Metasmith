@@ -6,13 +6,14 @@ Decisions: docs/geospatial_query/DECISIONS.md
 Email content stays out of this repo, journals and commits. Koonkie's AOI KML is data under no NDA and is DVC-tracked (aoi-handling). Source: the KML Koonkie sent on 2026-11-12.
 
 ## Current
-mvp-build: plan at docs/geospatial_query/PLAN.md, awaiting approval
+mvp-build: PLAN.md approved 2026-11-19, executing T1
 
 ## Waiting on the user
-- mvp-build: approve PLAN.md, dataset id, per-AOI files vs pooled only
+none
 
 ## Preferences
 - 2026-11-17: discuss before building; drafts go to the user before anything is sent
+- 2026-11-19: pipeline ingests one AOI table and writes one table per source; metasmith scatter-gather DAG; dataset id mmap_canada_mining
 
 ## Stack
 - mvp-build: plan covers mvp-scope, aoi-size, query-time, output-shape and env
