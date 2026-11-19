@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plan the geoquery DAG for one AOI table: normalise, fetch every source, aggregate."""
+"""Plan, and with --run execute, the geoquery DAG for one AOI table: normalise, fetch every source, aggregate."""
 import argparse, csv
 from pathlib import Path
 from metasmith.python_api import (Agent, Source, Runtime, DataInstanceLibrary,
@@ -7,7 +7,7 @@ from metasmith.python_api import (Agent, Source, Runtime, DataInstanceLibrary,
 
 MSM = Path(__file__).resolve().parent.parent
 SOURCES = MSM.parent / "poc" / "geoquery" / "sources.tsv"
-TARGETS = ["observations_long", "features_wide", "coverage", "gaps"]
+TARGETS = ["source_table", "observations_long", "features_wide", "coverage", "gaps"]
 
 
 def plan(aoi_table: Path, dataset: str, work: Path, sources: list[str]):
@@ -36,6 +36,8 @@ def main():
     ap.add_argument("--dataset", required=True, help="dataset id, e.g. mmap_canada_mining")
     ap.add_argument("--work", type=Path, required=True)
     ap.add_argument("--sources", help="comma-separated subset; default every source")
+    ap.add_argument("--run", action="store_true", help="stage, run and wait for the workflow")
+    ap.add_argument("--timeout", type=float, default=3600, help="seconds to wait for the run")
     a = ap.parse_args()
     with open(SOURCES) as fh:
         sources = [r["source"] for r in csv.DictReader(fh, delimiter="\t")]
@@ -43,13 +45,23 @@ def main():
         sources = [s for s in sources if s in a.sources.split(",")]
     work = a.work.resolve()
     work.mkdir(parents=True, exist_ok=True)
-    _, task = plan(a.aois, a.dataset, work, sources)
+    agent, task = plan(a.aois, a.dataset, work, sources)
     if not task.ok:
         raise SystemExit(f"plan failed, dropped targets: {sorted(task.plan.dropped_targets)}")
     for s in task.plan.steps:
         print(f"{Path(s.transform._path).stem:16s} x{len(s.group_by_instances)}")
     task.plan.RenderDAG(str(work / "dag"), format="svg")
     print(f"plan {task.GetKey()} -> {work}/dag.svg")
+    if not a.run:
+        return
+    agent.Deploy()
+    agent.StageWorkflow(task, on_exist="update")
+    agent.RunWorkflow(task)
+    result = agent.WaitForWorkflow(task, timeout_s=a.timeout, poll_s=10.0)
+    print(f"run {result['status']} after {result['elapsed_s']:.0f}s")
+    if result["status"] != "completed":
+        raise SystemExit("\n".join(result["tail"]))
+    print(f"results {agent.GetResultSource(task).GetPath()}")
 
 
 if __name__ == "__main__":

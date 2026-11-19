@@ -11,8 +11,8 @@ table  = model.AddProduct(lib.GetType("geoquery::source_table"))
 
 def protocol(context: ExecutionContext):
     a, s, o = context.Input(aois), context.Input(source), context.Output(table)
-    context.ExecWithContainer(
-        image=image,
+    context.ExecWithEnv(
+        env=image,
         cmd=f"python -m geoquery.fetch --aois {a.container} --source {s.container} --out {o.container}",
     )
     return ExecutionResult(manifest=[{table: o.local}], success=o.local.exists())
