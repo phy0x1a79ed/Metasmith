@@ -1,6 +1,7 @@
 """One AOI table (KML or GeoJSON) in, normalised AOI GeoJSON out."""
 import argparse, json, re, unicodedata
 import geopandas as gpd
+import pandas as pd
 
 NE_COUNTRIES = "https://naciscdn.org/naturalearth/50m/cultural/ne_50m_admin_0_countries.zip"
 
@@ -11,8 +12,12 @@ def slug(s):
 
 
 def normalise(path):
-    g = gpd.read_file(path).to_crs(4326)
+    # a KML folder is a layer and the default one can be empty, so read every layer
+    layers = [gpd.read_file(path, layer=n).to_crs(4326) for n in gpd.list_layers(path).name]
+    g = pd.concat(layers, ignore_index=True)
     g = g[g.geometry.notna() & ~g.geometry.is_empty].reset_index(drop=True)
+    if g.empty:
+        raise SystemExit(f"no AOI geometries in {path}")
     g["geometry"] = g.geometry.make_valid()
     name = next((c for c in ("aoi_id", "Name", "name") if c in g), None)
     g["aoi_name"] = g[name].astype(str) if name else [f"aoi_{i + 1}" for i in range(len(g))]
