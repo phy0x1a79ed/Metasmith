@@ -1,11 +1,16 @@
 """One source over every AOI, one table out: a row per AOI x feature found, a status row per AOI without."""
-import argparse, json, os, concurrent.futures as cf
+import argparse, json, os, re, time, concurrent.futures as cf
 import pandas as pd
 from . import pipeline as P
 from .registry import SOURCES, UNITS, specs
 
 COLUMNS = ["aoi", "source", "observation_type", "time", "feature", "family", "value",
            "value_num", "SI_unit", "licence", "native_res_m", "status", "reason"]
+
+
+# Shared public APIs throttle and stall when every source runs at once; these failures are retried.
+TRANSIENT = re.compile(r"429|Too Many Requests|[Tt]imeout|timed out|HTTP 5\d\d|50[234]")
+BACKOFF_S = (15, 60, 180)
 
 
 def rows(rec, src):
@@ -23,10 +28,17 @@ def fetch(aois, source, nwork):
     todo = [(a, s) for s in specs() if s[1] == source for a in aois]
     if not todo:
         raise SystemExit(f"unknown source: {source}")
-    out = []
     with cf.ThreadPoolExecutor(nwork) as ex:
-        for rec in ex.map(lambda t: P.run_one(*t), todo):
-            out += rows(rec, SOURCES[source])
+        recs = list(ex.map(lambda t: P.run_one(*t), todo))
+    for wait in BACKOFF_S:
+        retry = [i for i, r in enumerate(recs)
+                 if r["status"] == "unavailable" and TRANSIENT.search(r["reason"] or "")]
+        if not retry:
+            break
+        time.sleep(wait)
+        for i in retry:  # serially, so a throttled API sees one request at a time
+            recs[i] = P.run_one(*todo[i])
+    out = [row for r in recs for row in rows(r, SOURCES[source])]
     t = pd.DataFrame(out).reindex(columns=COLUMNS)
     t["value_num"] = pd.to_numeric(t["value"], errors="coerce")
     return t

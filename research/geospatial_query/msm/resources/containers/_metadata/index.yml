@@ -1,6 +1,6 @@
 manifest:
   geoquery.oci:
-    instance_id: 1e2056b849bbf34c0db5dfed9f7953a716a6dd7bfbf6bc9949dd7b47fdbf25404a82
+    instance_id: 1e20f7685ad7c3a0da558761501f08b75ec20acd8b8610c3b287ccf5d63c303f0264
     origin: leaf
     type: containers::geoquery.oci
 schema: v1

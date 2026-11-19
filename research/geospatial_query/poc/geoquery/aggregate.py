@@ -11,8 +11,9 @@ def gap_reason(status, reason):
 
 
 def aggregate(tables):
-    t = pd.concat([pd.read_csv(p, sep="\t", dtype={"value": str, "SI_unit": str, "time": str}) for p in tables],
-                  ignore_index=True)
+    # every column as text: sources disagree on type (native_res_m is metres or "vector")
+    t = pd.concat([pd.read_csv(p, sep="\t", dtype=str) for p in tables], ignore_index=True)
+    t["value_num"] = pd.to_numeric(t.value_num, errors="coerce")
     found = t[t.status == "found"]
     long_ = found.drop(columns=["status", "reason"]).reset_index(drop=True)
     wide = found.pivot_table(index="aoi", columns="feature", values="value", aggfunc="first")
