@@ -39,3 +39,19 @@ One section per closed topic, in the order the topics closed.
 - EndNote fields kept in place; new citations are plain author-year text for Tony to insert.
 
 **Landed.** d2 via Word COM over the Windows tether, 2026-11-17.
+
+## idea-partition (2026-11-19)
+
+**Question.** How do the Intro and Discussion share their themes without repeating each other?
+
+**Tony's words.** "I think the 4 parts work well for the intro, and we need to somehow map that to our groups for discussion"; "in the discussion, we can refer to the intro and say that loach further splits this?"
+
+**Design.**
+- Shared spine of four layers: ecosystem, execution, planning, intent. The four paradigms (service, dataflow, build, declarative) supply each layer's lineage; Metasmith sits in the declarative class.
+- Each idea is placed in a grid: layer × (what exists, why it falls short, what Metasmith does, what is open). Cross-cutting threads: types, the accessibility–expressiveness trade-off, the paradigms, Loach, the precedents (tree search, query planning).
+- The Intro walks up the stack: P2 ecosystem history, then execution, planning, intent (the open user gap), then Metasmith.
+- The Discussion walks the same layers with verdicts, in bookend order: D2a concerns and Loach, then execution, planning, intent, ecosystem last, leading to D3 limitations and D4 future (compute market).
+- Loach's 12 themes are mapped by us onto the layers (not "Loach splits"): execution = Basic computing, Scalability, Security, Cost/Efficiency, Reproducibility; planning = Functions, Flexibility; intent = Usability, Learnability, Support; ecosystem = FAIRness, Sustainability. Loach omits automated composition, which spans planning and intent.
+- Table 1 columns grouped under the four layers.
+
+**Landed.** `draft/outline.md` (cbe26eaa) as the working outline; the row-by-row re-split into Intro and Discussion comes later.
