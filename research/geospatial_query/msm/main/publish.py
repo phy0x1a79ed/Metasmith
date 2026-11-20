@@ -8,6 +8,11 @@ import pandas as pd
 INTEGRATED = {"observations_long": "observations_long.parquet",
               "features_wide": "features_wide.parquet",
               "coverage": "coverage.tsv"}
+# Caveats a reader of one source's table needs and the data cannot show.
+NOTES = {"phac_wastewater": (
+    "`phac_wastewater` loads are SARS-CoV-2 N2 gene copies/mL, the unit PHAC's own dashboard puts on "
+    "this series (\"Viral load (copies/mL)\"). PHAC applies the same label to solid-fraction samples, "
+    "which are often measured per gram. PHAC's open CSV ends 2024-06-28.")}
 
 
 def _files(results: Path, type_name: str) -> list[Path]:
@@ -51,13 +56,14 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     pd.DataFrame([f["properties"] for f in norm]).to_csv(tsv, sep="\t", index=False)
     record("aois.tsv", out.name, "aois", aois.name)
 
-    found = {}
+    found, tables = {}, []
     for t in _files(results, "source_table"):
         d = pd.read_csv(t, sep="\t", dtype=str)
         src = d.source.iloc[0]
         found[src] = int((d.status == "found").sum())
         if found[src]:
-            put(t, f"{family[src]}/{src}.tsv", src, src)
+            tables.append(f"{family[src]}/{src}.tsv")
+            put(t, tables[-1], src, src)
     for name, fname in INTEGRATED.items():
         (f,) = _files(results, name)
         put(f, f"integrated/{fname}", out.name, name)
@@ -74,8 +80,6 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
         tar.add(results / "_metadata" / "index.yml", arcname=f"{run}/index.yml")
     record(f"_logs/runs/{run}.tar.gz", run, "run_logs", "logs.latest")
 
-    tables = sorted(r["path"] for r in ledger if r["path"].endswith(".tsv") and "/" in r["path"]
-                    and not r["path"].startswith(("integrated", "aois", "_logs")))
     empty = sorted(s for s, n in found.items() if n == 0)
     readme = [
         f"# {out.name}",
@@ -104,9 +108,10 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
         "Each source is asked for its default moment, usually its latest data or a climatology. Raster reads "
         "cap at 320 px a side, so large AOIs read coarser than the source's native resolution.",
         "",
+        *[f"{NOTES[s]}\n" for s in sorted(NOTES) if found.get(s)],
         "## Tables",
         "",
-        *[f"- `{p}`" for p in tables],
+        *[f"- `{p}`" for p in sorted(tables)],
         "",
         f"Sources with no data for any AOI ({len(empty)}): {', '.join(empty) or 'none'}.",
         "",
