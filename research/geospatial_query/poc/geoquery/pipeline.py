@@ -438,6 +438,7 @@ def _a_overpass(aoi):
     raise ConnectionError(f"overpass server busy/blocked after retries ({last})")
 
 def _a_wqp(aoi):
+    if aoi["country"] != "US": raise PermissionError("out of coverage (US-only: NWIS/STORET)")
     x0, y0, x1, y1 = aoi["bbox"]
     r = S.get("https://www.waterqualitydata.us/data/Station/search",
               params={"bBox": f"{x0-0.2},{y0-0.2},{x1+0.2},{y1+0.2}", "mimeType": "csv",

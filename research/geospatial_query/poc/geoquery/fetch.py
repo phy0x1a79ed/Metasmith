@@ -41,6 +41,8 @@ def fetch(aois, source, nwork):
     out = [row for r in recs for row in rows(r, SOURCES[source])]
     t = pd.DataFrame(out).reindex(columns=COLUMNS)
     t["value_num"] = pd.to_numeric(t["value"], errors="coerce")
+    # identifiers are text: parsing 090805 as 90805 would corrupt the join key
+    t.loc[t.feature.astype(str).str.contains(r"(?:_id|uid|_code)$"), "value_num"] = float("nan")
     return t
 
 
