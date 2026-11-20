@@ -19,7 +19,8 @@ def aggregate(tables):
     wide = found.pivot_table(index="aoi", columns="feature", values="value", aggfunc="first")
     wide = wide.reindex(sorted(wide.columns), axis=1).reset_index()
     coverage = t.groupby(["aoi", "source"]).status.first().unstack().reset_index()
-    gaps = t[t.status != "found"][["aoi", "source", "family", "status", "reason"]].copy()
+    # a source registered by two adapter lanes (epa_echo) writes one status row per lane
+    gaps = t[t.status != "found"].drop_duplicates(["aoi", "source"])[["aoi", "source", "family", "status", "reason"]].copy()
     gaps.insert(4, "gap", [gap_reason(s, r) for s, r in zip(gaps.status, gaps.reason.fillna(""))])
     return long_, wide, coverage, gaps.sort_values(["source", "aoi"])
 

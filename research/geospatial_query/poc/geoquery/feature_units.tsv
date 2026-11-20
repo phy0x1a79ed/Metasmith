@@ -297,6 +297,7 @@ ghssmod_dominant_label
 ghssmod_frac_dense_town	1
 ghssmod_frac_low_rural	1
 ghssmod_frac_rural_cluster	1
+ghssmod_frac_semi_dense_town	1
 ghssmod_frac_suburban	1
 ghssmod_frac_urban_centre	1
 ghssmod_frac_very_low_rural	1
@@ -340,6 +341,7 @@ iolulc_built_frac	1
 iolulc_dominant	
 iolulc_frac_bare	1
 iolulc_frac_built	1
+iolulc_frac_clouds	1
 iolulc_frac_crops	1
 iolulc_frac_flooded_veg	1
 iolulc_frac_rangeland	1
@@ -465,7 +467,10 @@ nrcanlc_frac_cropland	1
 nrcanlc_frac_grassland	1
 nrcanlc_frac_mixed_forest	1
 nrcanlc_frac_shrubland	1
+nrcanlc_frac_subpolar_barren	1
+nrcanlc_frac_subpolar_grass	1
 nrcanlc_frac_subpolar_needleleaf	1
+nrcanlc_frac_subpolar_shrub	1
 nrcanlc_frac_temperate_broadleaf	1
 nrcanlc_frac_temperate_needleleaf	1
 nrcanlc_frac_urban	1
@@ -510,6 +515,9 @@ odhf_nearest_facility_name
 odhf_nearest_facility_type	
 odhf_nearest_hospital_km	km
 odhf_nearest_nursing_km	km
+osm_building_per_km2	1/km2
+osm_building_ways	count
+osm_highway_ways	count
 ovt_address_dominant_postcode	
 ovt_address_n	count
 ovt_address_n_bbox	count
@@ -644,6 +652,7 @@ places_no_dental_visit_pct	%
 places_routine_checkup_pct	%
 places_tract_population	count
 places_uninsured_pct	%
+qc_assessment_catalogue_hits	count
 relief_m	m
 rvdss_detections_latest_week	count
 rvdss_influenza_pct_positive	%

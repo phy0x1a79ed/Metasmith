@@ -1044,13 +1044,11 @@ def _a_qc_assessment(aoi):
         raise PermissionError("out of coverage (Quebec-only)")
     prov = ""
     try:
-        g = ca_csd()
-        inter, _ = _overlap(aoi, g)
-        if len(inter):
-            prov = str(inter.iloc[0]["prov"])
+        inter, _ = _overlap(aoi, ca_csd())
+        prov = ", ".join(sorted(set(inter["prov"].astype(str))))
     except Exception:
         pass
-    if "Quebec" not in prov and "Qu" not in prov:
+    if "Qu" not in prov:                       # any overlapping CSD in Quebec
         raise PermissionError(f"out of coverage (Quebec-only; AOI province '{prov}')")
     last = None
     for host, path in (("www.donneesquebec.ca", "/recherche/api/3/action/package_search"),
@@ -1169,20 +1167,22 @@ def _a_alta_indigenous(aoi):
     """
     if aoi["country"] != "CA":
         raise PermissionError("out of coverage (Canada-only)")
-    prov = None
-    g = ca_csd()
-    inter, _ = _overlap(aoi, g)
-    if len(inter):
-        prov = PRUID2PROV.get(str(inter.iloc[0]["csduid"])[:2])
-    if prov is None:
+    # every province the AOI touches: an AOI on a border (Labrador / Quebec) has its
+    # nearest parcels in the neighbouring province's extract
+    inter, _ = _overlap(aoi, ca_csd())
+    provs = sorted({PRUID2PROV[u[:2]] for u in inter["csduid"].astype(str) if u[:2] in PRUID2PROV})
+    if not provs:
         raise LookupError("could not resolve AOI province for the ALTA extract")
-    al = ca_alta(prov)
+    al = pd.concat([ca_alta(p) for p in provs], ignore_index=True)
+    prov = ",".join(provs)
     clip, aoi_km2 = _overlap(aoi, al)
     ov_km2 = float(clip.geometry.area.sum()) / 1e6 if len(clip) else 0.0
     cx, cy = aoi["centroid"]
-    pt = gpd.GeoSeries([shape({"type": "Point", "coordinates": [cx, cy]})],
-                       crs=4326).to_crs(EQA).iloc[0]
-    dists = al.to_crs(EQA).distance(pt)
+    # distances in an equidistant projection centred on the AOI; the equal-area EQA
+    # stretches north-south distance at these latitudes
+    aeqd = f"+proj=aeqd +lat_0={cy} +lon_0={cx} +datum=WGS84"
+    pt = gpd.GeoSeries([shape({"type": "Point", "coordinates": [cx, cy]})], crs=4326).to_crs(aeqd).iloc[0]
+    dists = al.to_crs(aeqd).distance(pt)
     f = {"alta_overlap_frac": round(min(ov_km2 / aoi_km2, 1.0) if aoi_km2 > 0 else 0.0, 5),
          "alta_overlap_km2": round(ov_km2, 5),
          "alta_n_parcels_intersecting": int(len(clip)),

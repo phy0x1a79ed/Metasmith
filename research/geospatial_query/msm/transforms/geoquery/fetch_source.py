@@ -20,5 +20,6 @@ def protocol(context: ExecutionContext):
 
 TransformInstance(
     protocol=protocol, model=model, group_by=source,
-    resources=Resources(cpus=2, memory=Size.GB(4), duration=Duration(minutes=30)),
+    # network-bound: a fetch uses ~20% of a core, so one core each lets twice as many run
+    resources=Resources(cpus=1, memory=Size.GB(2), duration=Duration(minutes=30)),
 )

@@ -32,13 +32,16 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     out.mkdir(parents=True)
     ledger = []
 
-    def put(src: Path, rel: str, stem: str, product: str):
+    def record(rel: str, stem: str, product: str, source: str):
         dst = out / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(src, dst)
         assert dst.stat().st_size > 0, f"zero-byte output {rel}"
-        ledger.append(dict(path=rel, stem=stem, product=product, run=run, source=src.name,
+        ledger.append(dict(path=rel, stem=stem, product=product, run=run, source=source,
                            bytes=dst.stat().st_size, sha256=_sha256(dst)))
+
+    def put(src: Path, rel: str, stem: str, product: str):
+        (out / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(src, out / rel)
+        record(rel, stem, product, src.name)
 
     put(aoi_table, f"aois/{aoi_table.name}", out.name, "aoi_table")
     (aois,) = _files(results, "aois")
@@ -46,8 +49,7 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     norm = pd.read_json(aois).get("features")
     tsv = out / "aois.tsv"
     pd.DataFrame([f["properties"] for f in norm]).to_csv(tsv, sep="\t", index=False)
-    ledger.append(dict(path="aois.tsv", stem=out.name, product="aois", run=run, source=aois.name,
-                       bytes=tsv.stat().st_size, sha256=_sha256(tsv)))
+    record("aois.tsv", out.name, "aois", aois.name)
 
     found = {}
     for t in _files(results, "source_table"):
@@ -65,14 +67,15 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     gaps = gaps.rename(columns={"source": "product", "aoi": "stem", "reason": "detail", "gap": "reason"})
     (out / "_logs" / "runs").mkdir(parents=True)
     gaps[["product", "stem", "reason", "detail"]].to_csv(out / "_logs" / "gaps.tsv", sep="\t", index=False)
+    record("_logs/gaps.tsv", out.name, "gaps", g.name)
     logs = (results / "_metadata" / "logs.latest").resolve()
     with tarfile.open(out / "_logs" / "runs" / f"{run}.tar.gz", "w:gz") as tar:
         tar.add(logs, arcname=run)
         tar.add(results / "_metadata" / "index.yml", arcname=f"{run}/index.yml")
-    pd.DataFrame(ledger).to_csv(out / "_logs" / "ledger.tsv", sep="\t", index=False)
+    record(f"_logs/runs/{run}.tar.gz", run, "run_logs", "logs.latest")
 
     tables = sorted(r["path"] for r in ledger if r["path"].endswith(".tsv") and "/" in r["path"]
-                    and not r["path"].startswith(("integrated", "aois")))
+                    and not r["path"].startswith(("integrated", "aois", "_logs")))
     empty = sorted(s for s, n in found.items() if n == 0)
     readme = [
         f"# {out.name}",
@@ -109,6 +112,8 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
         "",
     ]
     (out / "README.md").write_text("\n".join(readme))
+    record("README.md", out.name, "readme", "publish.py")
+    pd.DataFrame(ledger).to_csv(out / "_logs" / "ledger.tsv", sep="\t", index=False)
     return dict(tables=len(tables), empty=len(empty), gaps=len(gaps))
 
 

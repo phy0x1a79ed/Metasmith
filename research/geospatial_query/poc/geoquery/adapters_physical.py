@@ -480,6 +480,10 @@ def _a_permafrost(aoi):
     if sub is None or sub.empty:
         raise LookupError("permafrost atlas returned no polygon near AOI")
     aoi_g = gpd.GeoSeries([shape(aoi["geom"])], crs="EPSG:4326").to_crs(crs).iloc[0]
+    # the atlas maps "No permafrost (0%)" as a zone too; only the other zones are permafrost
+    sub = sub[~sub["PMF_E"].astype(str).str.startswith("No permafrost")]
+    if sub.empty:
+        raise LookupError("no permafrost zone near AOI")
     d_m = sub.distance(aoi_g)
     hit = sub[d_m <= 0]
     f = {"nrcanpf_nearest_km": round(float(d_m.min()) / 1000.0, 2),
@@ -494,7 +498,7 @@ def _a_permafrost(aoi):
         f["nrcanpf_zone_code"] = str(dom.get("PMF_CLASS") or "")[:8]
     else:
         f["nrcanpf_frac_in_aoi"] = 0.0
-        f["nrcanpf_zone_class"] = "none (outside mapped permafrost)"
+        f["nrcanpf_zone_class"] = "no permafrost"
     return f, {"obs_date": "2019 (Atlas of Canada, permafrost)", "res_m": "vector",
                "item": "permafrost_pg"}
 
