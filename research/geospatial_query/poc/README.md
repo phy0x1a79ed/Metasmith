@@ -87,7 +87,7 @@ derivative without checking.
   shapefile substitute is used), and NSIDC cryosphere products (Earthdata Login; NOAA-hosted
   equivalents are used).
 - **Partial-coverage sources report honestly**: `field_boundaries` is US-only (NASS Crop Sequence
-  Boundaries), `embeddings` covers 5 of the 15 test AOIs (`examples/test_aois.geojson`) (Clay v0 MGRS tiles), `gamma_radiometrics` covers 3
+  Boundaries), `embeddings` covers 5 of the 15 test AOIs (`../examples/test_aois.geojson`) (Clay v0 MGRS tiles), `gamma_radiometrics` covers 3
   of 15 (genuine survey gaps in the North American grid), `glaciers` is Natural Earth 1:10M and is
   provisional below ~10 km.
 - **Raster features are decimated samples**, capped at 320 px per side (`pipeline.MAXPIX`), not every
