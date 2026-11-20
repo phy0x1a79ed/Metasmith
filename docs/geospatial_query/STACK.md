@@ -6,7 +6,7 @@ Decisions: docs/geospatial_query/DECISIONS.md
 Email content stays out of this repo, journals and commits. Koonkie's AOI KML is data under no NDA and is DVC-tracked (aoi-handling). Source: the KML Koonkie sent on 2026-11-12.
 
 ## Current
-mvp-build: T1–T4 committed (image geoquery:local, package poc/geoquery, library msm/, DAG msm/dag.svg); next T6 run. KML pull waits on productivity request qoD5POsTVoXCf
+deliverable: mmap_canada_mining is published and pushed; nothing has gone to Tomer yet
 
 ## Waiting on the user
 none
@@ -16,12 +16,11 @@ none
 - 2026-11-19: pipeline ingests one AOI table and writes one table per source; metasmith scatter-gather DAG; dataset id mmap_canada_mining
 
 ## Stack
-- mvp-build: plan covers mvp-scope, aoi-size, query-time, output-shape and env
+- deliverable: what goes back to Tomer after the run
 - probed-features: adapters for the 152 probed features
 - query-time: build Query.time after the MVP
 - postgis-loader: whether the tool ships a PostGIS loader
 - packaging: standalone open-source CLI vs metasmith workflow
-- deliverable: what goes back to Tomer after the run
 - osm: get OpenStreetMap working (Tomer asked)
 - country-coverage: parked unless Tomer raises it again
 - claude-plan: follow up with Hallam (not build work)
@@ -32,3 +31,4 @@ none
 ## Closed
 - reply-tomer (2026-11-17)
 - aoi-handling (2026-11-19)
+- mvp-build (2026-11-19)
