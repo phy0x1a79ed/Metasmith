@@ -40,7 +40,7 @@ import geopandas as gpd
 from shapely.geometry import shape
 
 from . import pipeline as P
-from .pipeline import S, read_window, class_fractions, pc_item, _dt
+from .pipeline import S, read_window, read_best, class_fractions, pc_item, _dt
 
 import rasterio
 from rasterio.windows import from_bounds as win_from_bounds
@@ -893,8 +893,7 @@ def _a_iolulc_built(aoi):
     it = pc_item("io-lulc-annual-v02", aoi["bbox"], limit=20)
     if not it:
         raise LookupError("no io-lulc-annual-v02 item for this AOI")
-    i = sorted(it, key=_dt)[-1]
-    a = read_window(i.assets["data"].href, aoi["bbox"], aoi["geom"])
+    i, a = read_best(it, "data", aoi)
     v = a.compressed()
     v = v[v != 0]
     if v.size == 0:
