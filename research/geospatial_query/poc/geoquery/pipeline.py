@@ -99,6 +99,27 @@ def read_window(href, bbox, geom=None, maxpix=MAXPIX, band=1, sign=True):
             arr = np.ma.masked_array(arr, mask=arr.mask | ~m)
     return arr
 
+def read_best(items, asset, aoi, **kw):
+    """Read one asset from the newest date's tiles; keep the tile with the most AOI pixels.
+
+    A tiled collection holds several tiles per date. STAC footprints are loose (some wrap the
+    antimeridian and claim every longitude), so a footprint can touch the AOI while the
+    raster holds no pixels there. Reading every same-date tile is the only reliable pick.
+    Pixels equal to 0 do not count, since several sources leave their 0 nodata undeclared.
+    """
+    newest, best = _dt(items[0]), None
+    for i in (x for x in items if _dt(x) == newest):
+        try:
+            arr = read_window(i.assets[asset].href, aoi["bbox"], aoi["geom"], **kw)
+        except LookupError:
+            continue
+        n = int((arr.filled(0) != 0).sum())
+        if best is None or n > best[2]:
+            best = (i, arr, n)
+    if best is None:
+        raise LookupError("AOI does not intersect raster footprint")
+    return best[0], best[1]
+
 def stats(arr, pref, scale=1.0, offset=0.0, nd=3):
     v = arr.compressed().astype("float64")
     if v.size == 0:
@@ -137,7 +158,10 @@ def pc_item(coll, bbox, dt=None, query=None, sortby=None, limit=10, retries=3):
     last = None
     for k in range(retries):
         try:
-            return list(catalog(PC).search(**kw).items())
+            items = list(catalog(PC).search(**kw).items())
+            if not sortby:
+                items.sort(key=_dt, reverse=True)
+            return items
         except Exception as e:                      # 429 / 5xx from the STAC API
             last = e
             if "429" not in str(e) and "50" not in str(e)[:40]:
@@ -193,7 +217,7 @@ def _a_landsat_st(aoi):
 def _a_dem(aoi):
     it = pc_item("cop-dem-glo-30", aoi["bbox"], limit=4)
     if not it: raise LookupError("no item")
-    arr = read_window(it[0].assets["data"].href, aoi["bbox"], aoi["geom"])
+    i, arr = read_best(it, "data", aoi)
     f = stats(arr, "elev_m", nd=1)
     v = arr.astype("f8").filled(np.nan)
     if v.shape[0] > 2 and v.shape[1] > 2:
@@ -203,21 +227,20 @@ def _a_dem(aoi):
         f["slope_deg_mean"] = round(float(np.nanmean(slope)), 2)
         f["slope_deg_p90"] = round(float(np.nanpercentile(slope, 90)), 2)
         f["relief_m"] = round(float(np.nanmax(v) - np.nanmin(v)), 1)
-    return f, {"obs_date": "2021", "res_m": 30, "item": it[0].id}
+    return f, {"obs_date": "2021", "res_m": 30, "item": i.id}
 
 def _a_worldcover(aoi):
     it = pc_item("esa-worldcover", aoi["bbox"], limit=4)
     if not it: raise LookupError("no item")
-    arr = read_window(it[0].assets["map"].href, aoi["bbox"], aoi["geom"])
-    return class_fractions(arr, WC, "wc"), {"obs_date": "2021", "res_m": 10, "item": it[0].id}
+    i, arr = read_best(it, "map", aoi)
+    return class_fractions(arr, WC, "wc"), {"obs_date": "2021", "res_m": 10, "item": i.id}
 
 def _a_nrcan_lc(aoi):
     if aoi["country"] != "CA": raise PermissionError("out of coverage (Canada-only)")
     it = pc_item("nrcan-landcover", aoi["bbox"], limit=4)
     if not it: raise LookupError("no item")
-    i = sorted(it, key=_dt)[-1]
-    k = "landcover" if "landcover" in i.assets else list(i.assets)[0]
-    arr = read_window(i.assets[k].href, aoi["bbox"], aoi["geom"])
+    k = "landcover" if "landcover" in it[0].assets else list(it[0].assets)[0]
+    i, arr = read_best(it, k, aoi)
     return class_fractions(arr, NRC, "nrcanlc"), {"obs_date": (_dt(i) or "unknown")[:10],
                                                   "res_m": 30, "item": i.id}
 
@@ -226,7 +249,7 @@ def _a_cdl(aoi):
     it = pc_item("usda-cdl", aoi["bbox"], limit=12)
     it = [x for x in it if x.id.startswith("cropland")]
     if not it: raise LookupError("no item")
-    i = sorted(it, key=_dt)[-1]
+    i = it[0]
     arr = read_window(i.assets["cropland"].href, aoi["bbox"], aoi["geom"])
     return class_fractions(arr, CDL, "cdl"), {"obs_date": (_dt(i) or "unknown")[:10],
                                               "res_m": 30, "item": i.id}
@@ -256,25 +279,25 @@ def _a_aafc(aoi):
 def _a_biomass(aoi):
     it = pc_item("hgb", aoi["bbox"], limit=4)
     if not it: raise LookupError("no item")
-    arr = read_window(it[0].assets["aboveground"].href, aoi["bbox"], aoi["geom"])
-    return stats(arr, "agb_mgha", nd=1), {"obs_date": "2010", "res_m": 300, "item": it[0].id}
+    i, arr = read_best(it, "aboveground", aoi)
+    return stats(arr, "agb_mgha", nd=1), {"obs_date": "2010", "res_m": 300, "item": i.id}
 
 def _a_gsw(aoi):
     it = pc_item("jrc-gsw", aoi["bbox"], limit=4)
     if not it: raise LookupError("no item")
-    arr = read_window(it[0].assets["occurrence"].href, aoi["bbox"], aoi["geom"])
+    i, arr = read_best(it, "occurrence", aoi)
     f = stats(arr, "water_occurrence_pct", nd=2)
     if f: f["water_frac_ge50pct"] = round(float((arr.compressed() >= 50).mean()), 4)
-    return f, {"obs_date": "1984-2021", "res_m": 30, "item": it[0].id}
+    return f, {"obs_date": "1984-2021", "res_m": 30, "item": i.id}
 
 def _a_palsar(aoi):
     it = pc_item("alos-palsar-mosaic", aoi["bbox"], "2020-01-01/2025-12-31", limit=6)
     if not it: raise LookupError("no item")
-    i = sorted(it, key=_dt)[-1]
+    i, hh = read_best(it, "HH", aoi)
     out = {}
     for pol in ("HH", "HV"):
         if pol in i.assets:
-            a = read_window(i.assets[pol].href, aoi["bbox"], aoi["geom"]).astype("f8")
+            a = (hh if pol == "HH" else read_window(i.assets[pol].href, aoi["bbox"], aoi["geom"])).astype("f8")
             v = a.compressed()
             v = v[v > 0]
             if v.size:
