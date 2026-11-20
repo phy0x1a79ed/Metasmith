@@ -4,7 +4,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Current
 
-**discussion-p1..p4**: go over each Discussion section for what to say and in what order.
+**discussion-d2-d4**: tune D2–D4 on the four-layer spine (idea-partition). The sister session's notes on D2 are in `STACK-discussion.md` on feat/engine/manuscript-b.
 
 ## Waiting on the user
 
@@ -33,5 +33,6 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Closed
 
+- **idea-partition** (2026-11-19). Four-layer spine shared by Intro and Discussion; Loach mapped onto it.
 - **intro-composition** (2026-11-17). Intro P2–P6 restructured in d2.
 - **topic-selection** (2026-11-15). Short Discussion: a few main points plus the comparison table.
