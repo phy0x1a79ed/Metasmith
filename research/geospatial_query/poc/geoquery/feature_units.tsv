@@ -633,8 +633,8 @@ palsar_hh_db_mean	dB
 palsar_hh_db_std	dB
 palsar_hv_db_mean	dB
 palsar_hv_db_std	dB
-phacww_7day_avg_latest	
-phacww_7day_avg_p90_1yr	
+phacww_7day_avg_latest	copies/mL
+phacww_7day_avg_p90_1yr	copies/mL
 phacww_latest_date	date
 phacww_latest_vs_1yr_p90	1
 phacww_province	
@@ -642,7 +642,7 @@ phacww_pruid
 phacww_records_province	count
 phacww_sites_latest_date	count
 phacww_sites_province	count
-phacww_viral_load_latest	
+phacww_viral_load_latest	copies/mL
 places_disability_pct	%
 places_fair_poor_health_pct	%
 places_food_insecurity_pct	%

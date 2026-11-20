@@ -1,0 +1,6 @@
+outs:
+- md5: 0d89e302f7b12e8080668cdaf8857e8a.dir
+  size: 2253954
+  nfiles: 66
+  hash: md5
+  path: mmap_canada_mining
