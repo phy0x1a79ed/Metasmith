@@ -490,7 +490,7 @@ ADAPTERS = [
  ("geolocated_sequence_insdc","ena_geo",      "microbiology",   "INSDC open",             "none", _a_ena),
 ]
 
-def run_one(aoi, spec, timeout_s=120):
+def run_one(aoi, spec):
     slot, src, fam, lic, auth, fn = spec
     rec = {"aoi_id": aoi["aoi_id"], "slot": slot, "source": src, "family": fam,
            "licence": lic, "auth": auth, "fill_type": "observed"}

@@ -11,6 +11,8 @@ COLUMNS = ["aoi", "source", "observation_type", "time", "feature", "family", "va
 # Shared public APIs throttle and stall when every source runs at once; these failures are retried.
 TRANSIENT = re.compile(r"429|Too Many Requests|[Tt]imeout|timed out|HTTP 5\d\d|50[234]")
 BACKOFF_S = (15, 60, 180)
+# inside fetch_source's 30-minute limit: a stalled API (Overpass) must cost its AOIs, not the run
+DEADLINE_S = 20 * 60
 
 
 def rows(rec, src):
@@ -24,20 +26,33 @@ def rows(rec, src):
             for k, v in rec["features"].items()]
 
 
+def _run(todo, nwork, end):
+    """run_one over todo until `end`; an AOI still running then is recorded, not awaited."""
+    ex = cf.ThreadPoolExecutor(nwork)
+    futs = [ex.submit(P.run_one, *t) for t in todo]
+    cf.wait(futs, timeout=max(0.0, end - time.time()))
+    ex.shutdown(wait=False, cancel_futures=True)
+    return [f.result() if f.done() and not f.cancelled() else
+            {"aoi_id": a["aoi_id"], "source": s[1], "licence": s[3], "status": "unavailable",
+             "reason": f"DeadlineExceeded: no answer within {DEADLINE_S} s", "features": {}}
+            for f, (a, s) in zip(futs, todo)]
+
+
 def fetch(aois, source, nwork):
     todo = [(a, s) for s in specs() if s[1] == source for a in aois]
     if not todo:
         raise SystemExit(f"unknown source: {source}")
-    with cf.ThreadPoolExecutor(nwork) as ex:
-        recs = list(ex.map(lambda t: P.run_one(*t), todo))
+    end = time.time() + DEADLINE_S
+    recs = _run(todo, nwork, end)
     for wait in BACKOFF_S:
         retry = [i for i, r in enumerate(recs)
                  if r["status"] == "unavailable" and TRANSIENT.search(r["reason"] or "")]
-        if not retry:
+        if not retry or time.time() + wait >= end:
             break
         time.sleep(wait)
-        for i in retry:  # serially, so a throttled API sees one request at a time
-            recs[i] = P.run_one(*todo[i])
+        # one at a time, so a throttled API sees one request at a time
+        for i, r in zip(retry, _run([todo[i] for i in retry], 1, end)):
+            recs[i] = r
     out = [row for r in recs for row in rows(r, SOURCES[source])]
     t = pd.DataFrame(out).reindex(columns=COLUMNS)
     t["value_num"] = pd.to_numeric(t["value"], errors="coerce")
@@ -55,7 +70,8 @@ def main():
     spec = json.load(open(a.source)) if os.path.exists(a.source) else json.loads(a.source)
     t = fetch(P.load_aois(a.aois), spec["adapter"], int(os.environ.get("NWORK", 4)))
     t.to_csv(a.out, sep="\t", index=False)
-    print(f"{spec['adapter']}: {t.status.value_counts().to_dict()} -> {a.out}")
+    print(f"{spec['adapter']}: {t.status.value_counts().to_dict()} -> {a.out}", flush=True)
+    os._exit(0)  # do not wait on threads still stuck in a stalled request
 
 
 if __name__ == "__main__":
