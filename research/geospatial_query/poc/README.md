@@ -1,36 +1,27 @@
-# AOI → feature set: pilot pipeline
+# geoquery: AOI table in, one table per source out
 
-Takes a list of areas of interest (polygons) and returns one provenance-tagged feature set per AOI,
-drawn from 74 public open-data sources. No credentials, no API keys, no vendor SDKs — every adapter
-is plain HTTPS against a public endpoint.
+## Purpose & Contents
 
-```
-AOI polygons (GeoJSON)  →  74 adapters in parallel  →  feature matrix + coverage matrix + run log
-```
+This file explains how to run geoquery and how its adapters behave. It holds the run command, the image, the design rules that every adapter honours, the steps to add an adapter, and the known limits of the data. The output tree follows the engcyc dataset grammar in `research/engcyc/LAYOUT.md` (branch `feat/engcyc/data`), and each published dataset's own `README.md` describes its columns.
 
-**Current scale:** 15 AOIs × 74 adapters = 1 110 fetches in 191 s wall (8 threads), returning
-**662 distinct features**, 392–447 per AOI.
+geoquery takes one table of areas of interest (KML or GeoJSON polygons) and queries 75 public open-data sources for each AOI. Every adapter is plain HTTPS against a public endpoint, with no credentials, API keys or vendor SDKs.
 
-## Install and run
+## Run
 
-```bash
-pip install -r requirements.txt
-python run_all.py            # AOI_PATH=my_aois.geojson to use your own
-python build_outputs.py      # writes the four CSV deliverables
-```
+The pipeline is a metasmith scatter-gather. `normalise_aois` runs once, `fetch_source` runs once per source, and `aggregate` gathers every source table. The library sits in `../msm/`: types in `data_types/`, transforms in `transforms/geoquery/`, the rendered plan in `dag.svg`.
 
-`AOI_PATH` must point at a GeoJSON FeatureCollection whose features carry the properties
-`aoi_id`, `aoi_class`, `country` (`CA`/`US`), `area_km2` and `tier`. `test_aois.geojson` has 15
-examples (farmland, mine and city AOIs in Canada and the US, 0.5–630 km²).
+1. Build the image with `docker/geoquery/dev.sh`. It builds the tag that `msm/resources/containers/geoquery.oci` names.
+2. Run the driver from the worktree root:
+   `PYTHONPATH=src python research/geospatial_query/msm/main/geoquery.py --aois <table.kml> --dataset <id> --work <dir> --run --publish data/geospatial_query/<id>`
+3. Track the published folder with `dvc add` and push it with the `dvc` tool.
 
-Outputs:
+Leave out `--run` to plan only and render `<work>/dag.svg`. Use `--sources a,b` to run a subset. The driver runs every step in local Docker. Eleven AOIs across all 75 sources take about 55 minutes.
 
-| File | Contents |
-|---|---|
-| `feature_matrix.csv` | AOI × feature, the modelling-ready table |
-| `feature_values_long.csv` | one row per value with source, licence, observation date, native resolution, fill type |
-| `coverage_matrix.csv` | AOI × slot, each cell `found` / `unavailable` / `not-attempted` |
-| `run_log.csv` | every fetch with status, failure reason and wall time |
+**CAUTION** Bump the tag in `geoquery.oci` for every image change. Metasmith keys the container input on its path and modification time, so `dev.sh` invalidates that key after each build. Without it, every step reuses the old image's cached result.
+
+**WARNING** `--publish` deletes the dataset folder before it writes the new one.
+
+`fetch_source` gives each source 20 minutes. AOIs still waiting at the deadline get a `DeadlineExceeded` gap row, so one stalled API cannot stop the run.
 
 ## Design
 
@@ -71,7 +62,7 @@ ADAPTERS = [("slot_name", "source_id", "family", "CC-BY-4.0", "none", _a_mysourc
 
 Rules: return flat scalars only, globally unique feature names prefixed by source, raise
 `PermissionError` for out-of-coverage and any other exception for failure, never return an empty
-dict. Drop the module in as `adapters_<name>.py` and add it to `LANES` in `run_all.py`.
+dict. Drop the module in as `adapters_<name>.py` and add it to `LANES` in `registry.py`. Add the source's family and observation type to `sources.tsv` and each feature's unit to `feature_units.tsv`. Rebuild the image.
 
 Helpers in `pipeline.py`: `read_window` (decimated AOI-clipped read, masks only *declared* nodata),
 `stats`, `class_fractions`, `pc_item` (Planetary Computer STAC search with backoff), `pc_sign`.
@@ -96,10 +87,8 @@ derivative without checking.
   shapefile substitute is used), and NSIDC cryosphere products (Earthdata Login; NOAA-hosted
   equivalents are used).
 - **Partial-coverage sources report honestly**: `field_boundaries` is US-only (NASS Crop Sequence
-  Boundaries), `embeddings` covers 5 of 15 AOIs (Clay v0 MGRS tiles), `gamma_radiometrics` covers 3
+  Boundaries), `embeddings` covers 5 of the 15 test AOIs (`examples/test_aois.geojson`) (Clay v0 MGRS tiles), `gamma_radiometrics` covers 3
   of 15 (genuine survey gaps in the North American grid), `glaciers` is Natural Earth 1:10M and is
   provisional below ~10 km.
 - **Raster features are decimated samples**, capped at 320 px per side (`pipeline.MAXPIX`), not every
   native pixel.
-- `projdata/` holds a copy of the PROJ database; it exists only to work around a read-only conda
-  share directory and is unnecessary on a normal install.
