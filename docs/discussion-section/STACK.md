@@ -5,10 +5,14 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 ## Current
 
 **discussion-d2-d4**: tune D2–D4 on the four-layer spine (idea-partition). The sister session's notes on D2 are in `STACK-discussion.md` on feat/engine/manuscript-b.
+- State (2026-11-22): prose for D1, D2a–e and D3 (planning, types, evidence) is in live d2, laid out like the Intro, drafts in blue, all red removed. Outline artifact: https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d
+- Now iterating D1 with Tony. He rewrote D1 himself; next step is to read his new D1 live over the Windows tether (Cosmos), itemize it, and check it against the plan (problem as the intent→execution gap; derive vs write; n vs n² adapters; three pipelines joined; bridge). Thesis choice open: interoperability (his seed, recommended) or derivation. Make one doc update when agreed, not many.
+- Rules: keep Tony's seed text verbatim; drafts in blue only, no red.
+- Open: keep the two grammar fixes in his ¶2 seed?; delete the ¶ scaffold headings?; ¶4 future directions still bullets.
 
 ## Waiting on the user
 
-- intro-composition: review the Intro edits in d2 (blue = added, red strikethrough = deleted); insert the new citations (Afgan 2018, Silver 2016/2018, Segler 2018, Loach 2026, LLM agents [ref], and the composition paragraph's author-year refs) in EndNote.
+- intro-composition: review the Intro edits in d2. All 22 missing refs are now in EndNote (ids 84–105; Loach 93, AutoBA 103, Biomni 104, BixBench 105). Confirm Kiran 2023 (100), Wu 2024 (101), Hsieh 2024 (102). Then convert author-year text to EndNote fields via temporary citations {Author, Year #id} + Update Citations.
 
 ## Preferences
 
