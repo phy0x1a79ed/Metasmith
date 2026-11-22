@@ -11,7 +11,7 @@ CONTAINERS=$HERE/../../research/geospatial_query/msm/resources/containers
 IMAGE=$(sed 's|^docker://||' "$CONTAINERS/geoquery.oci")
 rm -rf "$HERE/geoquery" && cp -r "$SRC" "$HERE/geoquery"
 trap 'rm -rf "$HERE/geoquery"' EXIT
-DOCKER_BUILDKIT=1 docker build -t "$IMAGE" -f "$HERE/dockerfile" "$HERE"
+DOCKER_BUILDKIT=1 docker build "$@" -t "$IMAGE" -f "$HERE/dockerfile" "$HERE"
 PYTHONPATH=$HERE/../../src "${MSM_PYTHON:-$HOME/lib/miniforge3/envs/msm/bin/python}" -c \
     "import sys; from metasmith.python_api import DataInstanceLibrary as L; print(L.Load(sys.argv[1]).Invalidate(['geoquery.oci'])['moved'])" \
     "$CONTAINERS"
