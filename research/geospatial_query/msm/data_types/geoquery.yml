@@ -15,8 +15,8 @@ types:
   source_table:
     properties:
       _: one source over every AOI, a row per AOI x feature found and a status row per AOI without
-      Format: TSV
-      ext: tsv
+      Format: CSV
+      ext: csv
   observations_long:
     properties:
       _: every found value, one row per AOI x source x feature
@@ -30,10 +30,10 @@ types:
   coverage:
     properties:
       _: AOI by source matrix of found, unavailable and not-attempted
-      Format: TSV
-      ext: tsv
+      Format: CSV
+      ext: csv
   gaps:
     properties:
       _: every AOI x source pair that found nothing, with its gap reason
-      Format: TSV
-      ext: tsv
+      Format: CSV
+      ext: csv

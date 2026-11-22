@@ -11,7 +11,7 @@ wide     = model.AddProduct(lib.GetType("geoquery::features_wide"))
 coverage = model.AddProduct(lib.GetType("geoquery::coverage"))
 gaps     = model.AddProduct(lib.GetType("geoquery::gaps"))
 PRODUCTS = {long_: "observations_long.parquet", wide: "features_wide.parquet",
-            coverage: "coverage.tsv", gaps: "gaps.tsv"}
+            coverage: "coverage.csv", gaps: "gaps.csv"}
 
 
 def protocol(context: ExecutionContext):

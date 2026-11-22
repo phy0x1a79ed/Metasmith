@@ -336,8 +336,8 @@ def _a_clay_embeddings(aoi):
     tid = _mgrs_tile(*aoi["centroid"])
     keys = idx.get(tid)
     if not keys:
-        raise LookupError(f"no Clay embedding tile for MGRS {tid} "
-                          f"({len(idx)} of ~57k land tiles published)")
+        raise LookupError(f"Clay published no embedding for this area (Sentinel-2 tile {tid}; "
+                          f"{len(idx)} of ~57k land tiles exist)")
     key = sorted(keys)[-1]
     fs = _csb_fs()
     with fs.open(CLAY + os.path.basename(key), "rb") as fh:

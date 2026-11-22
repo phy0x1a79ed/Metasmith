@@ -12,7 +12,7 @@ def gap_reason(status, reason):
 
 def aggregate(tables):
     # every column as text: sources disagree on type (native_res_m is metres or "vector")
-    t = pd.concat([pd.read_csv(p, sep="\t", dtype=str) for p in tables], ignore_index=True)
+    t = pd.concat([pd.read_csv(p, dtype=str) for p in tables], ignore_index=True)
     t["value_num"] = pd.to_numeric(t.value_num, errors="coerce")
     found = t[t.status == "found"]
     long_ = found.drop(columns=["status", "reason"]).reset_index(drop=True)
@@ -22,6 +22,7 @@ def aggregate(tables):
     # a source registered by two adapter lanes (epa_echo) writes one status row per lane
     gaps = t[t.status != "found"].drop_duplicates(["aoi", "source"])[["aoi", "source", "family", "status", "reason"]].copy()
     gaps.insert(4, "gap", [gap_reason(s, r) for s, r in zip(gaps.status, gaps.reason.fillna(""))])
+    gaps["reason"] = gaps.reason.str.replace(r"^[A-Z]\w*: ", "", regex=True)
     return long_, wide, coverage, gaps.sort_values(["source", "aoi"])
 
 
@@ -35,8 +36,8 @@ def main():
     long_, wide, coverage, gaps = aggregate(a.tables)
     long_.to_parquet(out / "observations_long.parquet", index=False)
     wide.to_parquet(out / "features_wide.parquet", index=False)
-    coverage.to_csv(out / "coverage.tsv", sep="\t", index=False)
-    gaps.to_csv(out / "gaps.tsv", sep="\t", index=False)
+    coverage.to_csv(out / "coverage.csv", index=False)
+    gaps.to_csv(out / "gaps.csv", index=False)
     print(f"{len(long_)} values, {wide.shape[0]} AOIs x {wide.shape[1] - 1} features, {len(gaps)} gaps")
 
 

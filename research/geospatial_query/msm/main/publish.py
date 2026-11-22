@@ -7,7 +7,15 @@ import pandas as pd
 
 INTEGRATED = {"observations_long": "observations_long.parquet",
               "features_wide": "features_wide.parquet",
-              "coverage": "coverage.tsv"}
+              "coverage": "coverage.csv"}
+GAP_REASONS = {
+    "not_applicable": "The source does not cover this AOI, for example a US-only source and a Canadian AOI. "
+                      "geoquery did not query it.",
+    "no_hits": "The source answered but holds no data for this AOI, for example no station or no image "
+               "tile nearby.",
+    "failed": "The source did not answer: it needs a login, its address is gone, or it timed out. "
+              "A later run can succeed.",
+}
 # Caveats a reader of one source's table needs and the data cannot show.
 NOTES = {"phac_wastewater": (
     "`phac_wastewater` loads are SARS-CoV-2 N2 gene copies/mL, the unit PHAC's own dashboard puts on "
@@ -52,28 +60,29 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     (aois,) = _files(results, "aois")
     put(aois, "aois/aois.geojson", out.name, "aois")
     norm = pd.read_json(aois).get("features")
-    tsv = out / "aois.tsv"
-    pd.DataFrame([f["properties"] for f in norm]).to_csv(tsv, sep="\t", index=False)
-    record("aois.tsv", out.name, "aois", aois.name)
+    pd.DataFrame([f["properties"] for f in norm]).to_csv(out / "aois.csv", index=False)
+    record("aois.csv", out.name, "aois", aois.name)
 
     found, tables = {}, []
     for t in _files(results, "source_table"):
-        d = pd.read_csv(t, sep="\t", dtype=str)
+        d = pd.read_csv(t, dtype=str)
         src = d.source.iloc[0]
         found[src] = int((d.status == "found").sum())
         if found[src]:
-            tables.append(f"{family[src]}/{src}.tsv")
+            tables.append(f"{family[src]}/{src}.csv")
             put(t, tables[-1], src, src)
     for name, fname in INTEGRATED.items():
         (f,) = _files(results, name)
         put(f, f"integrated/{fname}", out.name, name)
 
     (g,) = _files(results, "gaps")
-    gaps = pd.read_csv(g, sep="\t", dtype=str)
-    gaps = gaps.rename(columns={"source": "product", "aoi": "stem", "reason": "detail", "gap": "reason"})
+    gaps = pd.read_csv(g, dtype=str).rename(columns={"reason": "detail", "gap": "reason"})
     (out / "_logs" / "runs").mkdir(parents=True)
-    gaps[["product", "stem", "reason", "detail"]].to_csv(out / "_logs" / "gaps.tsv", sep="\t", index=False)
-    record("_logs/gaps.tsv", out.name, "gaps", g.name)
+    gaps[["aoi", "source", "reason", "detail"]].to_csv(out / "_logs" / "gaps.csv", index=False)
+    record("_logs/gaps.csv", out.name, "gaps", g.name)
+    pd.DataFrame(GAP_REASONS.items(), columns=["reason", "description"]).to_csv(
+        out / "_logs" / "gaps_descriptions.csv", index=False)
+    record("_logs/gaps_descriptions.csv", out.name, "gaps", "publish.py")
     logs = (results / "_metadata" / "logs.latest").resolve()
     with tarfile.open(out / "_logs" / "runs" / f"{run}.tar.gz", "w:gz") as tar:
         tar.add(logs, arcname=run)
@@ -81,32 +90,45 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     record(f"_logs/runs/{run}.tar.gz", run, "run_logs", "logs.latest")
 
     empty = sorted(s for s, n in found.items() if n == 0)
+    counts = gaps.reason.value_counts()
     readme = [
         f"# {out.name}",
         "",
-        f"Geospatial features for {len(norm)} areas of interest, pulled from {len(found)} public sources "
-        f"by the geoquery metasmith DAG (run `{run}`, {date.today()}, image `{image}`).",
+        f"Geospatial features for {len(norm)} areas of interest (AOIs) from {len(found)} public data sources. "
+        f"geoquery produced it on {date.today()} (run `{run}`, image `{image}`).",
         "",
-        "## Layout",
+        "Start with `integrated/features_wide.parquet` for one row per AOI, or open a source's CSV below.",
         "",
-        "- `aois.tsv`, `aois/`: the AOI table as delivered and as normalised (EPSG:4326, slugged `aoi_id`).",
-        "- `<family>/<source>.tsv`: one table per source that found data. Rows are AOI × feature, plus one "
-        "status row per AOI the source did not cover.",
-        "- `integrated/observations_long.parquet`: every found value, one row each.",
-        "- `integrated/features_wide.parquet`: AOI × feature, values as text.",
-        "- `integrated/coverage.tsv`: AOI × source status (`found`, `unavailable`, `not-attempted`).",
-        "- `_logs/gaps.tsv`: every AOI × source pair that is not `found`. `reason` is `no_hits`, `failed` or "
-        "`not_applicable`; `detail` is the adapter's message.",
-        "- `_logs/ledger.tsv`: bytes and sha256 of every published file. `_logs/runs/`: the metasmith run logs.",
+        "## Files",
         "",
-        "## Columns",
+        "- `aois.csv`: the AOIs, one row each. `aois/` holds the AOI file as delivered and as normalised "
+        "(GeoJSON, EPSG:4326).",
+        "- `<family>/<source>.csv`: one table per source that found data, grouped by feature family.",
+        "- `integrated/observations_long.parquet`: every value, one row each.",
+        "- `integrated/features_wide.parquet`: one row per AOI, one column per feature. Values are text.",
+        "- `integrated/coverage.csv`: one row per AOI, one column per source: `found`, `unavailable` or "
+        "`not-attempted`.",
+        "- `_logs/gaps.csv`: every AOI and source with no data, and why. `_logs/gaps_descriptions.csv` explains "
+        "each reason.",
+        "- `_logs/ledger.csv`: size and sha256 of every file. `_logs/runs/`: the pipeline's run logs.",
         "",
-        "`aoi`, `source`, `observation_type`, `time`, `feature`, `family`, `value` (text), `value_num` "
-        "(numeric when parseable), `SI_unit` (blank for categorical or text features), `licence`, "
-        "`native_res_m`, `status`, `reason`.",
+        "## Columns in the source tables",
         "",
-        "Each source is asked for its default moment, usually its latest data or a climatology. Raster reads "
-        "cap at 320 px a side, so large AOIs read coarser than the source's native resolution.",
+        "- `aoi`, `source`, `feature`: what was measured, where, and by which source.",
+        "- `value`: the value as text. `value_num`: the same value as a number, blank when it is not one.",
+        "- `SI_unit`: blank for categories, names and flags.",
+        "- `family`, `observation_type`: the feature family and how the source observes (satellite, survey, "
+        "station and so on).",
+        "- `time`: the date of the data. `licence`: the source's licence. `native_res_m`: the source's "
+        "resolution in metres, or `vector`.",
+        "- `status`, `reason`: `found`, or why the source has no data for that AOI.",
+        "",
+        "Each source returns its default moment, usually its latest data or a long-term average. Raster reads "
+        "cap at 320 pixels a side, so a large AOI reads coarser than the source's native resolution.",
+        "",
+        "## Gaps",
+        "",
+        *[f"- `{k}` ({counts.get(k, 0)}): {v}" for k, v in GAP_REASONS.items()],
         "",
         *[f"{NOTES[s]}\n" for s in sorted(NOTES) if found.get(s)],
         "## Tables",
@@ -118,7 +140,7 @@ def publish(results: Path, aoi_table: Path, out: Path, sources_tsv: Path, run: s
     ]
     (out / "README.md").write_text("\n".join(readme))
     record("README.md", out.name, "readme", "publish.py")
-    pd.DataFrame(ledger).to_csv(out / "_logs" / "ledger.tsv", sep="\t", index=False)
+    pd.DataFrame(ledger).to_csv(out / "_logs" / "ledger.csv", index=False)
     return dict(tables=len(tables), empty=len(empty), gaps=len(gaps))
 
 

@@ -811,7 +811,7 @@ def _a_ground_imagery(aoi):
         msgs.append(f"kartaview apiCode={st.get('apiCode')} {str(st.get('apiMessage'))[:30]}")
     except Exception as e:
         msgs.append(f"kartaview {type(e).__name__}: {str(e)[:50]}")
-    raise ConnectionError("auth-blocked: no keyless street-level imagery route; " + "; ".join(msgs))
+    raise ConnectionError("street-level imagery needs an account token and none is configured; " + "; ".join(msgs))
 
 
 _WD_TOTAL = """SELECT (COUNT(DISTINCT ?i) AS ?n) (COUNT(DISTINCT ?t) AS ?nt) WHERE {
@@ -884,7 +884,7 @@ def _a_divisions(aoi):
             break
     ctl = _ctrl_fp("divisions", "division")
     if tb.num_rows == 0:
-        raise LookupError(f"no Overture divisions within {rad:.0f} km (control={ctl})")
+        raise LookupError(f"no Overture named place within {rad:.0f} km of the AOI")
     _guard(tb, ctl, "division")
     g = _aoi_geom(aoi)
     x, y = _xy(tb)

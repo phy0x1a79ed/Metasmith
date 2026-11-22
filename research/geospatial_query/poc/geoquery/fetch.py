@@ -34,7 +34,7 @@ def _run(todo, nwork, end):
     ex.shutdown(wait=False, cancel_futures=True)
     return [f.result() if f.done() and not f.cancelled() else
             {"aoi_id": a["aoi_id"], "source": s[1], "licence": s[3], "status": "unavailable",
-             "reason": f"DeadlineExceeded: no answer within {DEADLINE_S} s", "features": {}}
+             "reason": f"DeadlineExceeded: the source did not answer within {DEADLINE_S // 60} minutes", "features": {}}
             for f, (a, s) in zip(futs, todo)]
 
 
@@ -69,7 +69,7 @@ def main():
     a = ap.parse_args()
     spec = json.load(open(a.source)) if os.path.exists(a.source) else json.loads(a.source)
     t = fetch(P.load_aois(a.aois), spec["adapter"], int(os.environ.get("NWORK", 4)))
-    t.to_csv(a.out, sep="\t", index=False)
+    t.to_csv(a.out, index=False)
     print(f"{spec['adapter']}: {t.status.value_counts().to_dict()} -> {a.out}", flush=True)
     os._exit(0)  # do not wait on threads still stuck in a stalled request
 

@@ -185,7 +185,7 @@ def _a_s2(aoi):
     it = pc_item("sentinel-2-l2a", aoi["bbox"], "2024-05-01/2024-09-30",
                  {"eo:cloud_cover": {"lt": 20}},
                  [{"field": "properties.eo:cloud_cover", "direction": "asc"}], 10)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i = it[0]
     red = read_window(i.assets["B04"].href, aoi["bbox"], aoi["geom"])
     nir = read_window(i.assets["B08"].href, aoi["bbox"], aoi["geom"])
@@ -204,7 +204,7 @@ def _a_landsat_st(aoi):
     it = pc_item("landsat-c2-l2", aoi["bbox"], "2024-05-01/2024-09-30",
                  {"eo:cloud_cover": {"lt": 25}, "platform": {"in": ["landsat-8", "landsat-9"]}},
                  [{"field": "properties.eo:cloud_cover", "direction": "asc"}], 10)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i = it[0]
     a = i.assets["lwir11"]
     rb = (a.extra_fields.get("raster:bands") or [{}])[0]
@@ -216,7 +216,7 @@ def _a_landsat_st(aoi):
 
 def _a_dem(aoi):
     it = pc_item("cop-dem-glo-30", aoi["bbox"], limit=4)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i, arr = read_best(it, "data", aoi)
     f = stats(arr, "elev_m", nd=1)
     v = arr.astype("f8").filled(np.nan)
@@ -231,14 +231,14 @@ def _a_dem(aoi):
 
 def _a_worldcover(aoi):
     it = pc_item("esa-worldcover", aoi["bbox"], limit=4)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i, arr = read_best(it, "map", aoi)
     return class_fractions(arr, WC, "wc"), {"obs_date": "2021", "res_m": 10, "item": i.id}
 
 def _a_nrcan_lc(aoi):
     if aoi["country"] != "CA": raise PermissionError("out of coverage (Canada-only)")
     it = pc_item("nrcan-landcover", aoi["bbox"], limit=4)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     k = "landcover" if "landcover" in it[0].assets else list(it[0].assets)[0]
     i, arr = read_best(it, k, aoi)
     return class_fractions(arr, NRC, "nrcanlc"), {"obs_date": (_dt(i) or "unknown")[:10],
@@ -248,7 +248,7 @@ def _a_cdl(aoi):
     if aoi["country"] != "US": raise PermissionError("out of coverage (US-only)")
     it = pc_item("usda-cdl", aoi["bbox"], limit=12)
     it = [x for x in it if x.id.startswith("cropland")]
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i = it[0]
     arr = read_window(i.assets["cropland"].href, aoi["bbox"], aoi["geom"])
     return class_fractions(arr, CDL, "cdl"), {"obs_date": (_dt(i) or "unknown")[:10],
@@ -273,18 +273,18 @@ def _a_aafc(aoi):
         v = q.json().get("value")
         if v in (None, "NoData"): raise LookupError("identify returned NoData")
         return ({"aafc_crop_class_code": v}, {"obs_date": "2023", "res_m": 30})
-    raise ConnectionError("endpoint not discoverable: /atlas/rest ImageServer 404 on both AAFC "
-                          f"hosts ({'; '.join(tried)}); triage marked reachable but persisted no URL")
+    raise ConnectionError("AAFC no longer serves the crop inventory at a public address "
+                          f"(HTTP 404 on {'; '.join(tried)})")
 
 def _a_biomass(aoi):
     it = pc_item("hgb", aoi["bbox"], limit=4)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i, arr = read_best(it, "aboveground", aoi)
     return stats(arr, "agb_mgha", nd=1), {"obs_date": "2010", "res_m": 300, "item": i.id}
 
 def _a_gsw(aoi):
     it = pc_item("jrc-gsw", aoi["bbox"], limit=4)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i, arr = read_best(it, "occurrence", aoi)
     f = stats(arr, "water_occurrence_pct", nd=2)
     if f: f["water_frac_ge50pct"] = round(float((arr.compressed() >= 50).mean()), 4)
@@ -292,7 +292,7 @@ def _a_gsw(aoi):
 
 def _a_palsar(aoi):
     it = pc_item("alos-palsar-mosaic", aoi["bbox"], "2020-01-01/2025-12-31", limit=6)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i, hh = read_best(it, "HH", aoi)
     out = {}
     for pol in ("HH", "HV"):
@@ -309,7 +309,7 @@ def _a_palsar(aoi):
 
 def _a_s1rtc(aoi):
     it = pc_item("sentinel-1-rtc", aoi["bbox"], "2024-06-01/2024-09-30", limit=4)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     i = it[0]
     a = read_window(i.assets["vv"].href, aoi["bbox"], aoi["geom"]).astype("f8")
     v = a.compressed(); v = v[v > 0]
@@ -319,7 +319,7 @@ def _a_s1rtc(aoi):
 
 def _a_modis_ndvi(aoi):
     it = pc_item("modis-13Q1-061", aoi["bbox"], limit=40)
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     vals = []
     for i in sorted(it, key=_dt)[::6][:4]:
         k = [a for a in i.assets if "NDVI" in a]
@@ -337,7 +337,7 @@ def _a_nrcan_dem(aoi):
     if aoi["country"] != "CA": raise PermissionError("out of coverage (Canada-only)")
     cat = catalog(NRCAN)
     it = list(cat.search(collections=["mrdem-30"], bbox=aoi["bbox"], limit=4).items())
-    if not it: raise LookupError("no item")
+    if not it: raise LookupError("no scene in the catalogue covers this AOI in the search window")
     a = it[0].assets.get("dtm") or it[0].assets.get("dsm") or list(it[0].assets.values())[0]
     arr = read_window(a.href, aoi["bbox"], aoi["geom"], sign=False)
     return stats(arr, "mrdem_elev_m", nd=1), {"obs_date": "2024", "res_m": 30, "item": it[0].id}
