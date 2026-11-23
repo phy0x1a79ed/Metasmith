@@ -21,7 +21,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Stack
 
-- **table-criteria** (2026-11-22): "first establish what goes in the table: what are we comparing against … and what is the metrics". Table 1 is now `d2/tables/Table_1_wms_themes.csv` (removed from the doc, caption kept). Score cells by levels and criteria from the reviews Loach covers (Wratten 2021 and Kiran 2023 define levels); a subagent is fetching their full texts into `data/loach-reviews/`.
+- **table-criteria** (2026-11-22): "first establish what goes in the table: what are we comparing against … and what is the metrics". Table 1 is now `d2/tables/Table_1_wms_themes.csv` (removed from the doc, caption kept). Score cells by levels and criteria from the reviews Loach covers (Wratten 2021 and Kiran 2023 define levels); 17 of 22 full texts are in `data/loach-reviews/` (index.tsv; Kiran 2023 has the level definitions). Untracked: mizar has no dvc CLI, so they are not yet pinned. Wratten 2021, Larsonneur, Marinova and Welivita are paywalled; Tony to drop PDFs in `d2/_fetch`.
   - **systems-list**: which systems are columns. Current: Metasmith, Nextflow/nf-core, Snakemake, CWL, Galaxy, Pegasus, APE/Workflomics, LLM agents.
   - **levels**: one criterion and level definition per theme, drawn from the reviews.
   - **twelve-coverage**: ¶2 promises all twelve themes; Security and Scalability are not yet discussed (proposed: one sentence in ¶3).
