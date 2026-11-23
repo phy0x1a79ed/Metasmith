@@ -4,11 +4,9 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Current
 
-**discussion-d2-d4**: tune D2–D4 on the four-layer spine (idea-partition). The sister session's notes on D2 are in `STACK-discussion.md` on feat/engine/manuscript-b.
-- State (2026-11-22): prose for D1, D2a–e and D3 (planning, types, evidence) is in live d2, laid out like the Intro, drafts in blue, all red removed. Outline artifact: https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d
-- Now iterating D1 with Tony. He rewrote D1 himself; next step is to read his new D1 live over the Windows tether (Cosmos), itemize it, and check it against the plan (problem as the intent→execution gap; derive vs write; n vs n² adapters; three pipelines joined; bridge). Thesis choice open: interoperability (his seed, recommended) or derivation. Make one doc update when agreed, not many.
-- Rules: keep Tony's seed text verbatim; drafts in blue only, no red.
-- Open: keep the two grammar fixes in his ¶2 seed?; delete the ¶ scaffold headings?; ¶4 future directions still bullets.
+**discussion-d2-d4**: tune D2–D4 on the four-layer spine (idea-partition), one paragraph at a time, starting with ¶2's opening (D2a).
+- Prose for D2a–e and D3 is in live d2, drafts in blue. Outline artifact: https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d
+- Open: ¶2 promises an assessment against all twelve themes, so check each theme is covered; delete the ¶ scaffold headings?; ¶4 future directions still bullets.
 
 ## Waiting on the user
 
@@ -19,6 +17,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 - (2026-11-09) Mandate: "place results in context with literature".
 - (2026-11-09) Point form and concise while drafting; fill the field, then cut.
 - (2026-11-15) Talk before acting: discuss a change before making it.
+- (2026-11-22) Agree changes as itemized points in chat, then edit the doc directly. Keep Tony's sentences; add in blue only; no red. Don't echo doc text back in chat.
 
 ## Stack
 
@@ -37,6 +36,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Closed
 
+- **d1-recap** (2026-11-22). D1 thesis is radical interoperability; one-contract-per-tool point added.
 - **idea-partition** (2026-11-19). Four-layer spine shared by Intro and Discussion; Loach mapped onto it.
 - **intro-composition** (2026-11-17). Intro P2–P6 restructured in d2.
 - **topic-selection** (2026-11-15). Short Discussion: a few main points plus the comparison table.

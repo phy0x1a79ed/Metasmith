@@ -55,3 +55,16 @@ One section per closed topic, in the order the topics closed.
 - Table 1 columns grouped under the four layers.
 
 **Landed.** `draft/outline.md` (cbe26eaa) as the working outline; the row-by-row re-split into Intro and Discussion comes later.
+
+## d1-recap (2026-11-22)
+
+**Question.** What does D1, the Discussion's opening paragraph, claim and cover?
+
+**Tony's words.** He rewrote D1 himself around his seed; "lets try dropping P 3".
+
+**Design.**
+- Thesis: radical interoperability between bioinformatics tools, shown with Metasmith.
+- Order: problem (hand-written topology, needs fluency in both tools and workflow system), claim (topology can be derived), mechanism (one typed contract per tool, symbolic solver, compiles to Nextflow), why it is radical (one contract per tool rather than routing to every tool), evidence (pipelines from well-developed to bespoke), composition (pipelines stitched together in response to user intent).
+- The three named cases stay in the Results, not D1. The bridge to the literature is ¶2's opening.
+
+**Landed.** Live d2 via Word COM over the Windows tether, 2026-11-22. Additions in blue.
