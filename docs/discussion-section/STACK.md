@@ -25,6 +25,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
   - **systems-list**: which systems are columns. Current: Metasmith, Nextflow/nf-core, Snakemake, CWL, Galaxy, Pegasus, APE/Workflomics, LLM agents.
   - **levels**: one criterion and level definition per theme, drawn from the reviews.
   - **twelve-coverage**: ¶2 promises all twelve themes; Security and Scalability are not yet discussed (proposed: one sentence in ¶3).
+- **flowcraft** (2026-11-23): "we must mention them in discussion. shelf for later". FlowCraft (https://github.com/assemblerflow/flowcraft; no paper found, last commit May 2020): ordered component strings with fork syntax, one free-form input/output type string per component checked between neighbours, compiles to Nextflow with per-component containers. Closest prior work on execution; the user still writes the topology. Proposed: one sentence in the planning paragraph (¶4) next to Snakemake and Pegasus; also a sustainability example. No Table 1 column.
 - **main-points** (2026-11-15): "we can point out a few main points and show the table of features". Proposal in `draft/README.md` (907c853b), not yet reviewed.
   - **opening-vs-conclusion**: d2 has its own Conclusion; does the "what Metasmith shows" recap stay in the Discussion?
   - **limitations**: which limitations make the cut. Candidates in `draft/long.md` § Limitations; d2 fragments (one step per contract; no conditionals or loops, Tony's Nov 5 paragraph; no tool ranking; the AI-agents paragraph) enter here.
