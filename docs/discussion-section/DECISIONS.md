@@ -68,3 +68,17 @@ One section per closed topic, in the order the topics closed.
 - The three named cases stay in the Results, not D1. The bridge to the literature is ¶2's opening.
 
 **Landed.** Live d2 via Word COM over the Windows tether, 2026-11-22. Additions in blue.
+
+## three-claims (2026-11-24)
+
+**Question:** what organises the Discussion, now that a scorecard across Loach's 12 themes reads as hollow and unfocused?
+
+**User's words:** "we just aren't staying true to them and just kind of pulling in an arbitrary 12 themed metric." "Let's do claim 2, then 1, then 3." Claim 1: "routing is a chore." Claim 3: "we attempt to be accessible full stack."
+
+**Design:** after the D1 opening, three claims, each split into paragraphs with one core message apiece. Limitations and future directions sit inside the claim they qualify (Loach P4), and there is no standalone limitations paragraph.
+- Claim 2, *Format isn't meaning*: 2a prior vocabularies; 2b why they didn't stick; 2c Metasmith's types; 2d limits.
+- Claim 1, *Routing is a chore*: 1a manual; 1b earlier automation (FlowCraft, APE, Pegasus clause); 1c backward planning; 1d agents as planner clients; 1e smarter routing (conditionals, loops, ranking, domain knowledge: limits and future).
+- Claim 3, *Accessible across the full stack*: 3a one-end-only systems; 3b one user owns the stack (scale is one clause, inherited from Nextflow); 3c limits; 3d compute market.
+- Loach's 12 themes stay as background only. Table 1 is deferred; it supersedes table-criteria/levels and twelve-coverage.
+
+**Landed:** outline artifact v7, https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d

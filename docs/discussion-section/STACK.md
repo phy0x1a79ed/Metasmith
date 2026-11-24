@@ -4,7 +4,9 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 ## Current
 
-**discussion-d2-d4**: tune D2–D4 on the four-layer spine (idea-partition), one paragraph at a time, starting with ¶2's opening (D2a).
+**table-criteria** (deferred by Tony, "will come back to that one"): Table 1 under the three-claim structure (three-claims, DECISIONS.md).
+
+Previous current, superseded by three-claims: **discussion-d2-d4**: tune D2–D4 on the four-layer spine (idea-partition), one paragraph at a time, starting with ¶2's opening (D2a).
 - Prose for D2a–e and D3 is in live d2, drafts in blue. Outline artifact: https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d
 - Open: ¶2 promises an assessment against all twelve themes, so check each theme is covered; delete the ¶ scaffold headings?; ¶4 future directions still bullets.
 
@@ -40,6 +42,8 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 (none)
 
 ## Closed
+
+- **three-claims** (2026-11-24). Discussion = D1 opening + claim 2 (format isn't meaning), claim 1 (routing is a chore), claim 3 (accessible across the full stack); 14 paragraphs, one core message each; limits and future inside each claim. Supersedes twelve-coverage and the D2–D4 layer spine.
 
 - **d1-recap** (2026-11-22). D1 thesis is radical interoperability; one-contract-per-tool point added.
 - **idea-partition** (2026-11-19). Four-layer spine shared by Intro and Discussion; Loach mapped onto it.
