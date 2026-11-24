@@ -1,0 +1,6 @@
+outs:
+- md5: 53b90bb0c4dd5f61590486ab8ed5964f.dir
+  size: 94938147
+  nfiles: 345
+  hash: md5
+  path: clean_cpu_bench
