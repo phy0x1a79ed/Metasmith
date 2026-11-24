@@ -73,6 +73,10 @@ types:
     properties:
       src: clean_wrapper
       usage: command line
+  clean_cpu_wrapper.py:
+    properties:
+      src: clean_cpu_wrapper
+      usage: command line
   ezpred_wrapper.py:
     properties:
       src: ezpred_wrapper

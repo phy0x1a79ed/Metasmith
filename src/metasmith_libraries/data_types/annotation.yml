@@ -183,6 +183,16 @@ types:
       _: CLEAN contrastive EC predictions (Query ID, Predicted EC number, clean_score)
       Format: TSV
       ext: tsv
+  clean_cpu_predictions:
+    extends:
+    - clean_predictions
+    properties:
+      device: cpu
+  # clean.py and clean_cpu.py both answer clean_predictions, and the planner picks between two
+  # producers arbitrarily. Only a run that holds this marker can plan clean_cpu.py.
+  clean_on_cpu:
+    properties:
+      _: Marker that opts a run into CLEAN on CPU (clean_cpu.py)
 
   # EZpred (ESM-C 600M DL-only EC head)
   ezpred_predictions:
