@@ -69,8 +69,8 @@ def main() -> int:
         return 0
     if run.exists():
         shutil.rmtree(run)
-    work, cwd = run / "work", run / "cwd"
-    cwd.mkdir(parents=True)
+    work = run / "work"
+    run.mkdir(parents=True)
     unpack_capsule(a.data / q["data_folder"], work)
 
     system = SYSTEM_PROMPT.format(max_steps=a.max_steps)
@@ -79,6 +79,10 @@ def main() -> int:
     (run / "system_prompt.txt").write_text(system)
 
     container = f"bxl-{uuid.uuid4().hex[:12]}"
+    # Claude Code loads AGENTS.md and project memory from its working directory's
+    # parents, so the agent process starts in a neutral directory outside any repo.
+    cwd = Path("/var/tmp") / container
+    cwd.mkdir()
     subprocess.run(
         ["docker", "run", "-d", "--rm", "--name", container, "--network", "none",
          "--cpus", "4", "--memory", "16g", "--user", f"{os.getuid()}:{os.getgid()}",
@@ -107,6 +111,7 @@ def main() -> int:
                 exit_code = 124
     finally:
         subprocess.run(["docker", "kill", container], capture_output=True)
+        shutil.rmtree(cwd, ignore_errors=True)
     seconds = time.time() - start
 
     final, init = {}, {}
