@@ -61,6 +61,9 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
 - (2026-11-09) Point form and concise while drafting; fill the field, then cut.
 - (2026-11-15) Talk before acting: discuss a change before making it.
 - (2026-11-22) Agree changes as itemized points in chat, then edit the doc directly. Keep Tony's sentences; add in blue only; no red. Don't echo doc text back in chat.
+- (2026-11-24) Seed sentences need not be verbatim: "I would appreciate if you kept the original thought, but some of my prose is very informal. If you could fix, please."
+- (2026-11-25) Record every decided structure and point-form draft in § Structure as it is decided, at three levels (claim, paragraph key message, sentence points), with references assigned to one paragraph where possible, so the main points can be read back top-down. Never leave a decided structure only in the chat.
+- (2026-11-25) Check each claim reads coherently once its prose is done.
 - (2026-11-25) Per paragraph: tight itemized points (key message + 4-5 items), then prose in chat, then write into d2 as soon as accepted: plain paragraphs, no claim headings, D1 formatting (Normal, Arial 12), blue.
 
 ## Stack
