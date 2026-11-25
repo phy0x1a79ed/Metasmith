@@ -1,0 +1,53 @@
+name: deseq2_fit_wald
+tool: DESeq2 1.42.0 (R)
+summary: Fit the DESeq2 negative binomial model (size factors, dispersions, GLM) for a design formula, with Wald tests on each coefficient.
+usage: |
+  Use for differential expression from raw integer counts. The sample sheet row names must match the count matrix column names; the model is fitted on those samples in the count matrix order.
+  Choices that change the numbers: the design formula (put the factor of interest last), the reference level of each factor (the first alphabetical level unless set), the dispersion fit type, the optional beta prior, and a minimum row-sum pre-filter.
+  Character columns of the sample sheet become factors. A numeric-looking column such as batch 1/2 is read as a continuous covariate. The fitted object feeds results extraction, shrinkage and size-factor steps.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  fit: deseq2_wald_fit
+params:
+  design:
+    default: "~ condition"
+    help: Design formula over sample sheet columns, for example "~ batch + condition".
+  reference:
+    default: ""
+    help: Reference levels as comma separated factor=level pairs, for example "condition=control". Empty keeps the alphabetical first level.
+  fit_type:
+    default: "parametric"
+    help: Dispersion trend, one of parametric, local, mean or glmGamPoi.
+  size_factor_type:
+    default: "ratio"
+    help: Size factor estimator passed to estimateSizeFactors, ratio, poscounts or iterate.
+  beta_prior:
+    default: "FALSE"
+    help: TRUE or FALSE, use a zero-centred normal prior on the coefficients (the legacy DESeq2 behaviour).
+  min_replicates_for_replace:
+    default: "7"
+    help: Minimum number of replicates in a group before outliers are replaced and refit. 0 disables replacement.
+  min_row_sum:
+    default: "0"
+    help: Drop genes whose total count over all samples is below this value before fitting. 0 keeps every gene.
+interpreter: Rscript
+script: |
+  suppressMessages(library(DESeq2))
+  cnt <- read.csv(Sys.getenv("IN_counts"), row.names = 1, check.names = FALSE)
+  cd <- read.csv(Sys.getenv("IN_samples"), row.names = 1, check.names = FALSE)
+  cd <- cd[colnames(cnt), , drop = FALSE]
+  cd[] <- lapply(cd, function(x) if (is.character(x)) factor(x) else x)
+  for (pair in strsplit(Sys.getenv("PARAM_reference"), ",")[[1]]) {
+    kv <- trimws(strsplit(pair, "=")[[1]])
+    cd[[kv[1]]] <- relevel(factor(cd[[kv[1]]]), ref = kv[2])
+  }
+  dds <- DESeqDataSetFromMatrix(as.matrix(cnt), cd, design = as.formula(Sys.getenv("PARAM_design")))
+  dds <- dds[rowSums(counts(dds)) >= as.numeric(Sys.getenv("PARAM_min_row_sum")), ]
+  dds <- estimateSizeFactors(dds, type = Sys.getenv("PARAM_size_factor_type"))
+  dds <- DESeq(dds, test = "Wald", fitType = Sys.getenv("PARAM_fit_type"),
+               betaPrior = as.logical(Sys.getenv("PARAM_beta_prior")),
+               minReplicatesForReplace = as.numeric(Sys.getenv("PARAM_min_replicates_for_replace")))
+  print(resultsNames(dds))
+  saveRDS(dds, Sys.getenv("OUT_fit"))

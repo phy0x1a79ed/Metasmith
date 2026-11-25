@@ -1,0 +1,45 @@
+name: bootstrap_confidence_interval
+tool: scipy.stats 1.14.1 bootstrap
+summary: Bootstrap confidence interval for a statistic of one numeric column.
+usage: |
+  Use for a resampling confidence interval of the mean, median or standard deviation without distributional assumptions. method BCa is the scipy default.
+inputs:
+  data: table
+outputs:
+  result: bootstrap_ci_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  statistic:
+    default: mean
+    help: mean, median or std.
+  confidence_level:
+    default: '0.95'
+    help: Confidence level.
+  n_resamples:
+    default: '9999'
+    help: Number of bootstrap resamples.
+  method:
+    default: BCa
+    help: percentile, basic or BCa.
+  random_state:
+    default: None
+    help: Integer seed or None.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  x = data[e["PARAM_value_col"]].dropna().values
+  f = {"mean": np.mean, "median": np.median, "std": np.std}[e["PARAM_statistic"]]
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  res = stats.bootstrap((x,), f, confidence_level=float(e["PARAM_confidence_level"]), n_resamples=int(e["PARAM_n_resamples"]),
+                        method=e["PARAM_method"], random_state=rs)
+  row = dict(statistic_name=e["PARAM_statistic"], estimate=f(x), ci_low=res.confidence_interval.low, ci_high=res.confidence_interval.high,
+             standard_error=res.standard_error, n=len(x))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

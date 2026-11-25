@@ -1,0 +1,2 @@
+#labels	g0	g1	g2	outgroup
+test1	tax1;tax2	tax3;tax4	tax5;tax6	tax8

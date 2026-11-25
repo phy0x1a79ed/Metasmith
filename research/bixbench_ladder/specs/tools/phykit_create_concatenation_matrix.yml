@@ -1,0 +1,18 @@
+name: phykit_create_concatenation_matrix
+tool: PhyKIT 2.0.1 create_concatenation_matrix
+summary: Concatenate gene alignments into one supermatrix with a partition file and an occupancy report.
+usage: |
+  Use for a species-tree analysis from many genes: every file of the directory is one gene alignment in FASTA; taxa missing from a gene are filled with ? characters. Gene files are concatenated in alphabetical order. The partition file gives each gene's column range and the occupancy table lists how many taxa each gene has.
+inputs:
+  alns: alignment_set
+outputs:
+  matrix: concatenated_alignment
+  partitions: concat_partition_file
+  occupancy: concat_occupancy_table
+interpreter: bash
+script: |
+  ls "$IN_alns"/* > list.txt
+  phykit create_concatenation_matrix -a list.txt -p cc > /dev/null
+  cp cc.fa "$OUT_matrix"
+  cp cc.partition "$OUT_partitions"
+  { echo "alignment,taxa_present,taxa_missing,fraction_occupancy,missing_taxa"; tr '\t' ',' < cc.occupancy; } > "$OUT_occupancy"

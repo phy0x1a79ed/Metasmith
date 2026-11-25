@@ -1,0 +1,13 @@
+name: phykit_internode_labeler
+tool: PhyKIT 2.0.1 internode_labeler
+summary: Label every internal node of a tree with a unique integer.
+usage: |
+  Use to refer to internal branches by id in later analyses. Existing support values are replaced.
+inputs:
+  tree: source_tree
+outputs:
+  out: internode_labeled_tree
+interpreter: bash
+script: |
+  phykit internode_labeler "$IN_tree" -o labeled > /dev/null
+  cp labeled "$OUT_out"

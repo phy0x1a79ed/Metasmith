@@ -1,0 +1,39 @@
+name: pydeseq2_normalized_counts
+tool: pydeseq2 0.4.12 (Python)
+summary: Estimate pydeseq2 size factors and write counts divided by them.
+usage: |
+  Use to get library-size normalised counts (not log transformed) in Python. The design factors only build the object and do not change size factors.
+  Choices that change the numbers: the size factor estimator (ratio median-of-ratios, poscounts for data with many zeros, iterative) and a minimum row-sum pre-filter on genes.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  normalized: pydeseq2_normalized_counts_table
+  size_factors: pydeseq2_size_factors_table
+params:
+  design_factors:
+    default: "condition"
+    help: Comma separated sample sheet columns used as design; they do not change size factors.
+  size_factor_type:
+    default: "ratio"
+    help: Size factor estimator, ratio, poscounts or iterative.
+  min_row_sum:
+    default: "0"
+    help: Drop genes with a total count below this before estimating size factors.
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from pydeseq2.dds import DeseqDataSet
+
+  counts = pd.read_csv(os.environ["IN_counts"], index_col=0).T
+  counts = counts.loc[:, counts.sum(axis=0) >= float(os.environ["PARAM_min_row_sum"])]
+  meta = pd.read_csv(os.environ["IN_samples"], index_col=0).loc[counts.index].astype(str)
+  dds = DeseqDataSet(counts=counts, metadata=meta, design_factors=[c.strip() for c in os.environ["PARAM_design_factors"].split(",")],
+                     n_cpus=1, quiet=True)
+  dds.fit_size_factors(fit_type=os.environ["PARAM_size_factor_type"])
+  norm = pd.DataFrame(dds.layers["normed_counts"], index=counts.index, columns=counts.columns).T
+  norm.index.name = "gene"
+  norm.reset_index().to_csv(os.environ["OUT_normalized"], index=False, float_format="%.17g")
+  sf = pd.DataFrame({"sample": counts.index, "sizeFactor": dds.obsm["size_factors"]})
+  sf.to_csv(os.environ["OUT_size_factors"], index=False, float_format="%.17g")

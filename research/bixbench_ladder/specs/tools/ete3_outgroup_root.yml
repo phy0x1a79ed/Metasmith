@@ -1,0 +1,18 @@
+name: ete3_outgroup_root
+tool: ete3 3.1.3 Tree
+summary: Root a tree on a chosen outgroup.
+usage: |
+  The outgroup list has one tip name per line. A single taxon roots the tree on its branch; several taxa must form a clade (monophyletic) and the root is placed on the branch leading to that clade.
+inputs:
+  tree: source_tree
+  outgroup: taxon_list
+outputs:
+  out: ete3_outgroup_rooted_tree
+interpreter: python
+script: |
+  import os
+  from ete3 import Tree
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  names = [l.strip() for l in open(os.environ["IN_outgroup"]) if l.strip()]
+  t.set_outgroup(names[0] if len(names) == 1 else t.get_common_ancestor(names))
+  open(os.environ["OUT_out"], "w").write(t.write(format=0) + "\n")

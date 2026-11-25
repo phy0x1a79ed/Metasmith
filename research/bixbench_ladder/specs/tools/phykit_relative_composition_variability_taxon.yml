@@ -1,0 +1,12 @@
+name: phykit_relative_composition_variability_taxon
+tool: PhyKIT 2.0.1 relative_composition_variability_taxon
+summary: Compute relative composition variability for each taxon of an alignment.
+usage: |
+  Use to find taxa whose composition deviates from the others; high values flag taxa likely to cause compositional artifacts.
+inputs:
+  aln: alignment
+outputs:
+  out: relative_composition_variability_taxon_table
+interpreter: bash
+script: |
+  { echo "taxon,rcvt"; phykit relative_composition_variability_taxon "$IN_aln" | tr '\t' ','; } > "$OUT_out"

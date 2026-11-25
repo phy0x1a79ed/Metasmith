@@ -1,0 +1,13 @@
+name: phykit_treeness_over_rcv
+tool: PhyKIT 2.0.1 treeness_over_rcv
+summary: Compute treeness divided by relative composition variability for an alignment and its tree.
+usage: |
+  A measure of phylogenetic usefulness of a gene: high treeness and low compositional variability give a high ratio. The tree must have branch lengths inferred from the same alignment. Reports the ratio, treeness and RCV.
+inputs:
+  aln: alignment
+  tree: tree
+outputs:
+  out: treeness_over_rcv_table
+interpreter: bash
+script: |
+  { echo "treeness_over_rcv,treeness,rcv"; phykit treeness_over_rcv -a "$IN_aln" -t "$IN_tree" | tr '\t' ','; } > "$OUT_out"

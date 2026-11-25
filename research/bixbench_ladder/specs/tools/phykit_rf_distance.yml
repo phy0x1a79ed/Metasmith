@@ -1,0 +1,13 @@
+name: phykit_rf_distance
+tool: PhyKIT 2.0.1 robinson_foulds_distance
+summary: Compute the Robinson-Foulds distance between two trees.
+usage: |
+  The number of bipartitions found in one tree but not the other, and that number divided by the maximum possible (normalised, 0 to 1). Trees are compared on their shared taxa and treated as unrooted.
+inputs:
+  tree: tree
+  tree_b: second_tree
+outputs:
+  out: phykit_rf_distance_table
+interpreter: bash
+script: |
+  { echo "robinson_foulds_distance,normalized_robinson_foulds_distance"; phykit robinson_foulds_distance "$IN_tree" "$IN_tree_b" | tr '\t' ','; } > "$OUT_out"

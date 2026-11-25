@@ -1,0 +1,12 @@
+name: phykit_long_branch_score_per_taxon
+tool: PhyKIT 2.0.1 long_branch_score
+summary: Report the long-branch (LB) score of every taxon of a tree.
+usage: |
+  One row per tip. The LB score is the percentage by which a taxon's mean patristic distance to all others exceeds the all-taxa average.
+inputs:
+  tree: tree
+outputs:
+  out: long_branch_score_per_taxon_table
+interpreter: bash
+script: |
+  { echo "taxon,lb_score"; phykit long_branch_score "$IN_tree" -v | tr '\t' ','; } > "$OUT_out"

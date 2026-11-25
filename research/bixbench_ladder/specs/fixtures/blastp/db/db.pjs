@@ -1,0 +1,24 @@
+{
+  "version": "1.2",
+  "dbname": "db",
+  "dbtype": "Protein",
+  "db-version": 5,
+  "description": "prot_unaligned.fasta",
+  "number-of-letters": 800,
+  "number-of-sequences": 8,
+  "last-updated": "2026-11-25T13:13:00",
+  "number-of-volumes": 1,
+  "bytes-total": 50781,
+  "bytes-to-cache": 969,
+  "files": [
+    "db.pdb",
+    "db.phr",
+    "db.pin",
+    "db.pog",
+    "db.pos",
+    "db.pot",
+    "db.psq",
+    "db.ptf",
+    "db.pto"
+  ]
+}

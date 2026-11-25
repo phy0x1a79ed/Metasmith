@@ -1,0 +1,4 @@
+{
+ "pvalue_col": "pvalue",
+ "method": "fdr_bh"
+}

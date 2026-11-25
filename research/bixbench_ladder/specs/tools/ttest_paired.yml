@@ -1,0 +1,35 @@
+name: ttest_paired
+tool: scipy.stats 1.14.1 ttest_rel
+summary: Paired t-test between two numeric columns measured on the same rows.
+usage: |
+  Use when each row holds a before and an after measurement on the same unit. Rows with a missing value in either column are dropped.
+inputs:
+  data: table
+outputs:
+  result: paired_ttest_result
+params:
+  col_1:
+    default: ''
+    help: Name of the first measurement column.
+  col_2:
+    default: ''
+    help: Name of the second measurement column.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  d = data[[e["PARAM_col_1"], e["PARAM_col_2"]]].dropna()
+  x, y = d.iloc[:, 0], d.iloc[:, 1]
+  res = stats.ttest_rel(x, y, alternative=e["PARAM_alternative"])
+  ci = res.confidence_interval()
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, df=res.df, mean_1=x.mean(), mean_2=y.mean(),
+             mean_difference=(x - y).mean(), ci_low=ci.low, ci_high=ci.high, n_pairs=len(d))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

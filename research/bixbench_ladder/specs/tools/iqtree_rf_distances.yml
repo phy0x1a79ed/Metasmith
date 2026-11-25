@@ -1,0 +1,20 @@
+name: iqtree_rf_distances
+tool: IQ-TREE 2.3.6 -rf_all
+summary: Compute the Robinson-Foulds distance between every pair of trees in a set.
+usage: |
+  Use to quantify topological disagreement between trees on the same taxa. The distance counts bipartitions found in one tree but not the other. All trees must have the same taxa. It is not normalised: the maximum is 2(n-3) for n taxa.
+inputs:
+  trees: tree_set
+outputs:
+  matrix: rf_distance_matrix
+interpreter: bash
+script: |
+  iqtree2 -t "$IN_trees" -rf_all --prefix run -quiet > /dev/null
+  python - run.rfdist "$OUT_matrix" <<'PY'
+  import sys
+  lines = open(sys.argv[1]).read().split("\n")
+  n = int(lines[0].split()[0])
+  rows = [l.split() for l in lines[1:n + 1]]
+  head = "tree," + ",".join(r[0] for r in rows)
+  open(sys.argv[2], "w").write("\n".join([head] + [",".join(r) for r in rows]) + "\n")
+  PY

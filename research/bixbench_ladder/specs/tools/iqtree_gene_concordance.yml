@@ -1,0 +1,27 @@
+name: iqtree_gene_concordance
+tool: IQ-TREE 2.3.6 --gcf
+summary: Compute gene concordance factors (gCF) for every branch of a reference tree from a set of gene trees.
+usage: |
+  Use to measure what percentage of gene trees contain each branch of the reference (species) tree. gDF1 and gDF2 are the two alternative resolutions around the branch, gDFP counts gene trees that are discordant because of polyphyly. Gene trees may lack some taxa.
+inputs:
+  tree: source_tree
+  genes: tree_set
+outputs:
+  table: gene_concordance_table
+  labelled: gene_concordance_tree
+params:
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  iqtree2 -t "$IN_tree" --gcf "$IN_genes" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  python - run.cf.stat "$OUT_table" <<'PY'
+  import sys
+  rows = [l.rstrip("\n").split("\t") for l in open(sys.argv[1]) if not l.startswith("#") and l.strip()]
+  open(sys.argv[2], "w").write("\n".join(",".join(r) for r in rows) + "\n")
+  PY
+  cp run.cf.tree "$OUT_labelled"

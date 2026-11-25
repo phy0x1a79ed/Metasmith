@@ -1,0 +1,5 @@
+{
+ "formula": "outcome ~ x1 + x3",
+ "family": "binomial",
+ "exponentiate": "TRUE"
+}

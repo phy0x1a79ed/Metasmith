@@ -1,0 +1,42 @@
+name: glm_regression
+tool: statsmodels 0.14.4 glm
+summary: Generalised linear model (Gaussian, binomial, Poisson, Gamma ...) from a formula.
+usage: |
+  Use for counts (Poisson), proportions or positive skewed responses. family picks the distribution and uses its canonical link unless link is given. Gaussian is the statsmodels default.
+inputs:
+  data: table
+outputs:
+  result: glm_coefficients
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+  family:
+    default: Gaussian
+    help: Gaussian, Binomial, Poisson, Gamma, InverseGaussian or NegativeBinomial.
+  link:
+    default: ''
+    help: Optional link class name such as log, logit, identity; empty uses the family default.
+  alpha:
+    default: '0.05'
+    help: Significance level; confidence intervals are 1 - alpha.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  fam = getattr(sm.families, e["PARAM_family"])
+  if e["PARAM_link"]:
+      fam = fam(link=getattr(sm.families.links, e["PARAM_link"])())
+  else:
+      fam = fam()
+  res = smf.glm(e["PARAM_formula"], data, family=fam).fit()
+  ci = res.conf_int(alpha=float(e["PARAM_alpha"]))
+  out = pd.DataFrame({"term": res.params.index, "estimate": res.params.values, "std_err": res.bse.values,
+      "statistic": res.tvalues.values, "pvalue": res.pvalues.values, "ci_low": ci[0].values, "ci_high": ci[1].values})
+  out.to_csv(e["OUT_result"], index=False)

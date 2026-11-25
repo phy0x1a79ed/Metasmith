@@ -1,0 +1,5 @@
+{
+ "time_col": "time",
+ "status_col": "event",
+ "group_col": "group"
+}

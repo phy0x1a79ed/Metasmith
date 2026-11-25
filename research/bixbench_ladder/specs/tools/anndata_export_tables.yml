@@ -1,0 +1,32 @@
+name: anndata_export_tables
+tool: anndata 0.11.1 (Python)
+summary: Write the obs table and the expression matrix X of an AnnData h5ad file as CSV tables.
+usage: |
+  Use to read results of an AnnData analysis (cluster labels, QC metrics, PCA or UMAP coordinates added to obs by the caller, normalised values) into other tools. X is written densely with genes in rows and cells in columns, in whatever state X currently holds (counts, normalised, log or scaled). The obs table carries every obs column.
+  Choices that change the values: which layer is exported.
+inputs:
+  adata: anndata_h5ad
+outputs:
+  obs: anndata_obs_table
+  matrix: anndata_matrix_table
+params:
+  layer:
+    default: ""
+    help: Name of a layer to write instead of X. Empty writes X.
+interpreter: python
+script: |
+  import os
+  import anndata as ad
+  import pandas as pd
+  import scipy.sparse as sp
+
+  adata = ad.read_h5ad(os.environ["IN_adata"])
+  obs = adata.obs.copy()
+  obs.index.name = "obs_name"
+  obs.to_csv(os.environ["OUT_obs"], float_format="%.17g")
+  layer = os.environ["PARAM_layer"].strip()
+  X = adata.layers[layer] if layer else adata.X
+  X = X.toarray() if sp.issparse(X) else X
+  m = pd.DataFrame(X, index=adata.obs_names, columns=adata.var_names).T
+  m.index.name = "gene"
+  m.to_csv(os.environ["OUT_matrix"], float_format="%.17g")

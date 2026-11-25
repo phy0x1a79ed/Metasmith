@@ -1,0 +1,19 @@
+name: phykit_saturation
+tool: PhyKIT 2.0.1 saturation
+summary: Measure substitution saturation of an alignment against its tree.
+usage: |
+  Regresses uncorrected pairwise sequence distances on patristic tree distances with the intercept fixed at zero; a slope near 1 means no saturation and a lower slope means multiple substitutions are being hidden. Reports the slope and the saturation (1 minus slope). The tree must have branch lengths from the same alignment. exclude_gaps ignores columns with gaps.
+inputs:
+  aln: alignment
+  tree: tree
+outputs:
+  out: saturation_table
+params:
+  exclude_gaps:
+    default: 'no'
+    help: yes ignores every column that has a gap
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_exclude_gaps" = yes ]; then flag+=(-e); fi
+  { echo "slope,saturation"; phykit saturation -a "$IN_aln" -t "$IN_tree" "${flag[@]}" | tr '\t' ','; } > "$OUT_out"

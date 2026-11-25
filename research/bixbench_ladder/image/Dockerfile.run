@@ -7,3 +7,10 @@ COPY --from=msm /opt/conda/envs/metasmith_env /opt/conda/envs/metasmith_env
 COPY workflow.py /opt/conda/envs/metasmith_env/lib/python3.12/site-packages/metasmith/coms/cli/workflow.py
 COPY metasmith /usr/local/bin/metasmith
 ENV NXF_OFFLINE=true
+
+COPY bx /usr/local/bin/bx
+COPY generate.py /opt/bx-src/generate.py
+COPY specs /opt/bx-src/specs
+RUN python /opt/bx-src/generate.py --out /opt/bx \
+    && metasmith build -t /opt/bx/data_types -r /opt/bx/transforms/bx \
+    && chmod -R a+rX /opt/bx

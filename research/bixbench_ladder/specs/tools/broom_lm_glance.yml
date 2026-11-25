@@ -1,0 +1,19 @@
+name: broom_lm_glance
+tool: broom 1.0.7 glance (stats::lm)
+summary: 'Model-level fit statistics of a linear model: R-squared, F, AIC, BIC.'
+usage: |
+  Use to report the overall fit of an lm fitted from an R formula.
+inputs:
+  data: table
+outputs:
+  result: broom_lm_fit_statistics
+params:
+  formula:
+    default: ''
+    help: R model formula.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(broom))
+  data <- read.csv(Sys.getenv("IN_data"), stringsAsFactors = TRUE)
+  res <- glance(lm(as.formula(Sys.getenv("PARAM_formula")), data = data))
+  write.csv(as.data.frame(res), Sys.getenv("OUT_result"), row.names = FALSE)

@@ -1,0 +1,19 @@
+name: phykit_tip_to_tip_node_distance
+tool: PhyKIT 2.0.1 tip_to_tip_node_distance
+summary: Report the number of nodes between two named tips of a tree.
+usage: |
+  The topological distance: how many nodes lie on the path, ignoring branch lengths.
+inputs:
+  tree: tree
+outputs:
+  out: tip_to_tip_node_distance_table
+params:
+  tip_1:
+    default: ''
+    help: name of the first tip (required)
+  tip_2:
+    default: ''
+    help: name of the second tip (required)
+interpreter: bash
+script: |
+  { echo "tip_1,tip_2,node_distance"; phykit tip_to_tip_node_distance "$IN_tree" "$PARAM_tip_1" "$PARAM_tip_2" | paste -d, <(echo "$PARAM_tip_1,$PARAM_tip_2") -; } > "$OUT_out"

@@ -1,0 +1,42 @@
+name: classification_metrics
+tool: scikit-learn 1.6.0 metrics
+summary: Accuracy, precision, recall, F1, MCC and the confusion matrix counts of predicted against true labels.
+usage: |
+  Use when a table holds true and predicted labels. For a binary problem pos_label names the positive class; average controls multiclass averaging (binary by default).
+inputs:
+  data: table
+outputs:
+  result: classification_metrics_result
+params:
+  true_col:
+    default: ''
+    help: Column of true labels.
+  pred_col:
+    default: ''
+    help: Column of predicted labels.
+  pos_label:
+    default: '1'
+    help: Positive class.
+  average:
+    default: binary
+    help: binary, micro, macro or weighted.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn import metrics as m
+  t = data[e["PARAM_true_col"]].astype(str)
+  p = data[e["PARAM_pred_col"]].astype(str)
+  kw = dict(average=e["PARAM_average"], pos_label=e["PARAM_pos_label"], zero_division=0)
+  row = dict(accuracy=m.accuracy_score(t, p), balanced_accuracy=m.balanced_accuracy_score(t, p), precision=m.precision_score(t, p, **kw),
+             recall=m.recall_score(t, p, **kw), f1=m.f1_score(t, p, **kw), mcc=m.matthews_corrcoef(t, p))
+  if t.nunique() == 2 and set(p) <= set(t):
+      labels = sorted(set(t))
+      tn, fp, fn, tp = m.confusion_matrix(t, p, labels=labels).ravel()
+      row.update(tn=tn, fp=fp, fn=fn, tp=tp)
+  out = pd.DataFrame([row])
+  out.to_csv(e["OUT_result"], index=False)

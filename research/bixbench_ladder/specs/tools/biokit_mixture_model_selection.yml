@@ -1,0 +1,40 @@
+name: biokit_mixture_model_selection
+tool: biokit 0.5.0 biokit.stats.mixture.AdaptativeMixtureFitting
+summary: Choose the number of Gaussian components of a mixture by fitting k from kmin to kmax and minimising an information criterion.
+usage: |
+  Use when the number of sub-populations is unknown. Each k is fitted by likelihood minimisation; the criterion (AIC, AICc or biokit's BIC, which it computes on its own scale) decides which k is selected. Fits that fail to converge are left out of the table.
+inputs:
+  data: table
+outputs:
+  table: biokit_mixture_selection_table
+params:
+  column:
+    default: value
+    help: name of the numeric column to model
+  kmin:
+    default: '1'
+    help: smallest number of components
+  kmax:
+    default: '6'
+    help: largest number of components
+  criteria:
+    default: AICc
+    help: 'criterion to minimise: AIC, AICc or BIC'
+interpreter: python
+script: |
+  import os
+  import matplotlib
+  matplotlib.use('Agg')
+  import numpy as np
+  import pandas as pd
+
+  df = pd.read_csv(os.environ["IN_data"])
+  x = df[os.environ["PARAM_column"]].dropna().to_numpy(dtype=float)
+
+  from biokit.stats import mixture
+  a = mixture.AdaptativeMixtureFitting(x)
+  a.verbose = False
+  a.run(kmin=int(os.environ["PARAM_kmin"]), kmax=int(os.environ["PARAM_kmax"]), criteria=os.environ["PARAM_criteria"])
+  rows = [dict(k=k, neg_log_likelihood=a.all_results[k]["log_likelihood"], aic=a.all_results[k]["AIC"], aicc=a.all_results[k]["AICc"],
+               bic=a.all_results[k]["BIC"], selected=k == a.best_k) for k in a.x]
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

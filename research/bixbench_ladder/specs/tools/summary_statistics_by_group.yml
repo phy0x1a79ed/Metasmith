@@ -1,0 +1,33 @@
+name: summary_statistics_by_group
+tool: pandas 2.2.3 groupby describe
+summary: Descriptive statistics of a numeric column, overall or per group.
+usage: |
+  Use to get n, mean, standard deviation, quartiles, min and max of a column. ddof 1 gives the sample standard deviation (pandas default).
+inputs:
+  data: table
+outputs:
+  result: group_summary_table
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Grouping column; empty for a single overall row.
+  ddof:
+    default: '1'
+    help: Delta degrees of freedom for std and sem.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  v, g, dd = e["PARAM_value_col"], e["PARAM_group_col"], int(e["PARAM_ddof"])
+  d = data.assign(_g=data[g].astype(str) if g else "all")[[v, "_g"]].dropna()
+  out = d.groupby("_g")[v].agg(n="count", mean="mean", std=lambda s: s.std(ddof=dd), sem=lambda s: s.sem(ddof=dd), min="min",
+      q25=lambda s: s.quantile(.25), median="median", q75=lambda s: s.quantile(.75), max="max", skewness="skew").reset_index().rename(columns={"_g": "group"})
+  out.to_csv(e["OUT_result"], index=False)

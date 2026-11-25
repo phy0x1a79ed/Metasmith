@@ -1,0 +1,34 @@
+name: factominer_pca
+tool: FactoMineR 2.11 PCA
+summary: Principal component analysis of numeric columns with eigenvalues, individual coordinates and variable coordinates.
+usage: |
+  Use for PCA with FactoMineR. scale_unit TRUE standardises variables (correlation PCA, default). ncp is the number of dimensions kept (default 5). Variable coordinates are correlations with the components for scaled data.
+inputs:
+  data: table
+outputs:
+  ind: factominer_pca_individuals
+  eig: factominer_pca_eigenvalues
+  var: factominer_pca_variables
+params:
+  columns:
+    default: ''
+    help: Comma-separated numeric columns.
+  scale_unit:
+    default: 'TRUE'
+    help: TRUE to scale variables to unit variance.
+  ncp:
+    default: '5'
+    help: Number of dimensions kept.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(FactoMineR))
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE)
+  cols <- trimws(strsplit(Sys.getenv("PARAM_columns"), ",")[[1]])
+  fit <- PCA(data[, cols], scale.unit = Sys.getenv("PARAM_scale_unit") == "TRUE", ncp = as.integer(Sys.getenv("PARAM_ncp")), graph = FALSE)
+  write.csv(as.data.frame(fit$ind$coord), Sys.getenv("OUT_ind"), row.names = FALSE)
+  eig <- as.data.frame(fit$eig)
+  colnames(eig) <- c("eigenvalue", "percentage_of_variance", "cumulative_percentage")
+  write.csv(cbind(dimension = rownames(eig), eig), Sys.getenv("OUT_eig"), row.names = FALSE)
+  cos2 <- as.data.frame(fit$var$cos2)
+  colnames(cos2) <- paste0(colnames(cos2), "_cos2")
+  write.csv(cbind(variable = rownames(fit$var$coord), as.data.frame(fit$var$coord), cos2), Sys.getenv("OUT_var"), row.names = FALSE)

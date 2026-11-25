@@ -1,0 +1,17 @@
+name: phykit_collapse_branches
+tool: PhyKIT 2.0.1 collapse_branches
+summary: Collapse internal branches whose support is below a threshold into polytomies.
+usage: |
+  Use to remove poorly supported groupings before species-tree or concordance analyses. Support is read from the internal node labels, in the same scale as the threshold (for example 0-100 for bootstrap).
+inputs:
+  tree: source_tree
+outputs:
+  out: collapsed_tree
+params:
+  support:
+    default: '0'
+    help: branches with support below this value are collapsed
+interpreter: bash
+script: |
+  phykit collapse_branches "$IN_tree" -s "$PARAM_support" -o collapsed > /dev/null
+  cp collapsed "$OUT_out"

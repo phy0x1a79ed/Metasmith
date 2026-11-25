@@ -1,0 +1,34 @@
+name: rstatix_pairwise_t_test
+tool: rstatix 0.7.2 pairwise_t_test
+summary: All-pairs t-tests with a pooled standard deviation and adjusted p-values.
+usage: |
+  Use for post-hoc comparisons after ANOVA assuming equal variances. pool_sd TRUE uses the pooled sd of all groups (rstatix default for unpaired data).
+inputs:
+  data: table
+outputs:
+  result: rstatix_pairwise_t_test_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  pool_sd:
+    default: 'TRUE'
+    help: TRUE pooled sd across groups, FALSE separate tests.
+  paired:
+    default: 'FALSE'
+    help: TRUE for paired tests.
+  p_adjust_method:
+    default: holm
+    help: 'p.adjust method: holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.'
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- pairwise_t_test(data, as.formula(Sys.getenv("PARAM_formula")), pool.sd = Sys.getenv("PARAM_pool_sd") == "TRUE",
+                         paired = Sys.getenv("PARAM_paired") == "TRUE", p.adjust.method = Sys.getenv("PARAM_p_adjust_method"))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

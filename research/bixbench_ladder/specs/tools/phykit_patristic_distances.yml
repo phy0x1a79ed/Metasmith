@@ -1,0 +1,12 @@
+name: phykit_patristic_distances
+tool: PhyKIT 2.0.1 patristic_distances
+summary: Summarise all pairwise patristic (path-length) distances between the tips of a tree.
+usage: |
+  Summary statistics are mean, median, 25th and 75th percentile, minimum, maximum, standard deviation and variance. Values are rounded by PhyKIT to four decimals.
+inputs:
+  tree: tree
+outputs:
+  out: patristic_distance_summary_table
+interpreter: bash
+script: |
+  { echo "statistic,value"; phykit patristic_distances "$IN_tree" | sed 's/: /,/'; } > "$OUT_out"

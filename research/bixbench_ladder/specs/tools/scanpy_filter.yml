@@ -1,0 +1,49 @@
+name: scanpy_filter
+tool: scanpy 1.10.4 (Python)
+summary: Filter cells and genes by detection and count thresholds, and optionally by mitochondrial fraction.
+usage: |
+  Use after QC metrics. Thresholds are applied as scanpy filter_cells (minimum and maximum genes, minimum and maximum counts) and filter_genes (minimum cells), in that order, plus an optional cut on pct_counts_mt. A threshold of 0 or an empty value turns that filter off. Everything that is not removed keeps its raw counts.
+  Choices that change the cells and genes kept: each threshold below. The filtering of genes is done after the cell filter, so it counts only the cells that remain.
+inputs:
+  qc: anndata_qc
+outputs:
+  filtered: anndata_filtered
+params:
+  min_genes:
+    default: "0"
+    help: Keep cells with at least this many genes detected.
+  max_genes:
+    default: ""
+    help: Keep cells with at most this many genes detected. Empty for no limit.
+  min_counts:
+    default: "0"
+    help: Keep cells with at least this total count.
+  max_counts:
+    default: ""
+    help: Keep cells with at most this total count. Empty for no limit.
+  max_pct_mt:
+    default: ""
+    help: Keep cells with pct_counts_mt below this. Empty for no filter; needs the mitochondrial metrics.
+  min_cells:
+    default: "0"
+    help: Keep genes detected in at least this many cells.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_qc"])
+  num = lambda v: float(v) if v.strip() else None
+  for key, arg in (("PARAM_min_genes", "min_genes"), ("PARAM_max_genes", "max_genes"),
+                   ("PARAM_min_counts", "min_counts"), ("PARAM_max_counts", "max_counts")):
+      v = num(os.environ[key])
+      if v:
+          sc.pp.filter_cells(adata, **{arg: v})
+  mt = num(os.environ["PARAM_max_pct_mt"])
+  if mt is not None:
+      adata = adata[adata.obs["pct_counts_mt"] < mt].copy()
+  v = num(os.environ["PARAM_min_cells"])
+  if v:
+      sc.pp.filter_genes(adata, min_cells=v)
+  print(adata.shape)
+  adata.write_h5ad(os.environ["OUT_filtered"])

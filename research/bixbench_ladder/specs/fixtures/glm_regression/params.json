@@ -1,0 +1,4 @@
+{
+ "formula": "count ~ x1",
+ "family": "Poisson"
+}

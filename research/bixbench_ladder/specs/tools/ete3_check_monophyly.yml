@@ -1,0 +1,24 @@
+name: ete3_check_monophyly
+tool: ete3 3.1.3 Tree.check_monophyly
+summary: Test whether a set of taxa is monophyletic, paraphyletic or polyphyletic in a tree.
+usage: |
+  The taxa list has one tip name per line. monophyletic means the taxa are exactly the leaves of one clade; paraphyletic means one clade contains them plus other taxa that are not in a subclade of their own; polyphyletic means neither. With unrooted yes the test ignores the current root, so a group that is monophyletic on one side of any branch counts. offending_taxa are the other leaves inside the smallest clade holding the taxa.
+inputs:
+  tree: tree
+  taxa: taxon_list
+outputs:
+  table: ete3_monophyly_table
+params:
+  unrooted:
+    default: 'no'
+    help: yes tests monophyly irrespective of the root position
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from ete3 import Tree
+
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  taxa = [l.strip() for l in open(os.environ["IN_taxa"]) if l.strip()]
+  ok, kind, extra = t.check_monophyly(values=taxa, target_attr="name", unrooted=os.environ["PARAM_unrooted"] == "yes")
+  pd.DataFrame([dict(is_monophyletic=ok, clade_type=kind, offending_taxa=";".join(sorted(n.name for n in extra)))]).to_csv(os.environ["OUT_table"], index=False)

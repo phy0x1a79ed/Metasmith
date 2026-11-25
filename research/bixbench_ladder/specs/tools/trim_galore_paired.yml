@@ -1,0 +1,48 @@
+name: trim_galore_paired
+tool: Trim Galore 0.6.10 (Cutadapt) --paired
+summary: Trim adapters and low-quality bases from paired-end reads, keeping mates in sync.
+usage: |
+  Use on raw paired-end FASTQ. Both mates are trimmed with the same quality and adapter settings; a pair is dropped when either mate becomes shorter than length, so the two outputs always hold the same read names in the same order. Leave adapter empty to auto-detect.
+inputs:
+  r1: source_reads_r1_fastq
+  r2: source_reads_r2_fastq
+outputs:
+  trimmed_r1: trimmed_reads_r1_fastq
+  trimmed_r2: trimmed_reads_r2_fastq
+  report_r1: trim_galore_paired_report_r1
+  report_r2: trim_galore_paired_report_r2
+params:
+  quality:
+    default: '20'
+    help: Phred score below which 3' bases are trimmed from reads
+  length:
+    default: '20'
+    help: reads shorter than this after trimming are discarded
+  stringency:
+    default: '1'
+    help: minimum adapter overlap in bp required to trim
+  error_rate:
+    default: '0.1'
+    help: maximum allowed error rate of the adapter match
+  adapter:
+    default: ''
+    help: adapter sequence to trim; empty auto-detects among Illumina, Nextera and small RNA adapters
+  clip_5prime:
+    default: '0'
+    help: bp removed from the 5' end of read 1 before adapter trimming; 0 does nothing
+  clip_3prime:
+    default: '0'
+    help: bp removed from the 3' end of read 1 after adapter trimming; 0 does nothing
+interpreter: bash
+script: |
+  mkdir -p tg_out
+  args=()
+  if [ -n "$PARAM_adapter" ]; then args+=(-a "$PARAM_adapter"); fi
+  if [ "$PARAM_clip_5prime" -gt 0 ]; then args+=(--clip_R1 "$PARAM_clip_5prime"); fi
+  if [ "$PARAM_clip_3prime" -gt 0 ]; then args+=(--three_prime_clip_R1 "$PARAM_clip_3prime"); fi
+  trim_galore --paired -q "$PARAM_quality" --length "$PARAM_length" --stringency "$PARAM_stringency" -e "$PARAM_error_rate" \
+    --dont_gzip --cores 1 -o tg_out "${args[@]}" "$IN_r1" "$IN_r2" > /dev/null 2>&1
+  cp tg_out/*_val_1.fq "$OUT_trimmed_r1"
+  cp tg_out/*_val_2.fq "$OUT_trimmed_r2"
+  cp tg_out/r1*_trimming_report.txt "$OUT_report_r1"
+  cp tg_out/r2*_trimming_report.txt "$OUT_report_r2"

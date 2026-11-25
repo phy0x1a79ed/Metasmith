@@ -7,10 +7,6 @@ sequences_fasta:
 alignment:
   description: multiple sequence alignment, aligned FASTA, every record the same length
   ext: fasta
-mafft_alignment:
-  description: multiple sequence alignment written by MAFFT, aligned FASTA
-  ext: fasta
-  extends: alignment
 tree:
   description: phylogenetic tree in Newick format
   ext: nwk
@@ -26,3 +22,12 @@ gene_list:
 gene_sets:
   description: gene sets in GMT format, one set per line, name then description then member genes, tab separated
   ext: gmt
+background_gene_list:
+  description: the background (universe) gene identifiers an enrichment test draws from, one per line, no header
+  ext: txt
+second_gene_list:
+  description: a second set of identifiers to compare with a gene_list, one per line, no header
+  ext: txt
+subject_regions_bed:
+  description: the genomic intervals that query intervals are compared against, BED format, tab separated, no header, columns chrom, start (0-based), end, name, score, strand
+  ext: bed

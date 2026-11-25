@@ -1,0 +1,35 @@
+name: roc_curve_points
+tool: scikit-learn 1.6.0 roc_curve
+summary: False and true positive rates at each score threshold.
+usage: |
+  Use to tabulate the ROC curve of a score against binary labels. drop_intermediate True (default) omits suboptimal thresholds.
+inputs:
+  data: table
+outputs:
+  result: roc_curve_table
+params:
+  label_col:
+    default: ''
+    help: Binary label column.
+  score_col:
+    default: ''
+    help: Numeric score column.
+  positive_label:
+    default: '1'
+    help: Positive class label.
+  drop_intermediate:
+    default: 'True'
+    help: Drop suboptimal thresholds.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.metrics import roc_curve
+  y = data[e["PARAM_label_col"]].astype(str) == e["PARAM_positive_label"]
+  fpr, tpr, thr = roc_curve(y, data[e["PARAM_score_col"]], drop_intermediate=e["PARAM_drop_intermediate"] == "True")
+  out = pd.DataFrame(dict(threshold=thr, fpr=fpr, tpr=tpr))
+  out.to_csv(e["OUT_result"], index=False)

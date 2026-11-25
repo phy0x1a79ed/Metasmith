@@ -1,0 +1,30 @@
+name: kruskal_wallis
+tool: scipy.stats 1.14.1 kruskal
+summary: Kruskal-Wallis H test across the groups of a column.
+usage: |
+  Use as the non-parametric alternative to one-way ANOVA for two or more independent groups.
+inputs:
+  data: table
+outputs:
+  result: kruskal_wallis_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Name of the column holding the group labels.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  d = data[[e["PARAM_value_col"], e["PARAM_group_col"]]].dropna()
+  groups = [g[e["PARAM_value_col"]].values for _, g in d.groupby(e["PARAM_group_col"])]
+  res = stats.kruskal(*groups)
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, df=len(groups) - 1, n_groups=len(groups), n=len(d))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

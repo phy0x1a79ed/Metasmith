@@ -1,0 +1,39 @@
+name: kmeans_clustering
+tool: scikit-learn 1.6.0 KMeans
+summary: K-means clustering of rows on numeric features.
+usage: |
+  Use to partition samples into k groups. Features are used as given (scale first if units differ). Results depend on the seed and n_init (scikit-learn default: 'auto', k-means++ initialisation).
+inputs:
+  data: table
+outputs:
+  result: kmeans_assignments
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  n_clusters:
+    default: '8'
+    help: Number of clusters k.
+  n_init:
+    default: auto
+    help: Number of initialisations, or auto.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.cluster import KMeans
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  ni = e["PARAM_n_init"] if e["PARAM_n_init"] == "auto" else int(e["PARAM_n_init"])
+  km = KMeans(n_clusters=int(e["PARAM_n_clusters"]), n_init=ni, random_state=rs).fit(X)
+  d = km.transform(X)
+  out = pd.DataFrame({"row": range(len(X)), "cluster": km.labels_, "distance_to_center": d[np.arange(len(X)), km.labels_]})
+  out.to_csv(e["OUT_result"], index=False)

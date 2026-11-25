@@ -1,0 +1,17 @@
+name: phykit_branch_length_multiplier
+tool: PhyKIT 2.0.1 branch_length_multiplier
+summary: Multiply every branch length of a tree by a factor.
+usage: |
+  Use to rescale a tree, for example from substitutions to a different unit. Topology and support values are unchanged.
+inputs:
+  tree: source_tree
+outputs:
+  out: scaled_tree
+params:
+  factor:
+    default: '1'
+    help: number every branch length is multiplied by
+interpreter: bash
+script: |
+  phykit branch_length_multiplier "$IN_tree" -f "$PARAM_factor" -o scaled > /dev/null
+  cp scaled "$OUT_out"

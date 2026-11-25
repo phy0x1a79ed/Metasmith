@@ -1,0 +1,17 @@
+name: iqtree_consensus_tree
+tool: IQ-TREE 2.3.6 -con
+summary: Build a majority-rule consensus tree from a set of trees.
+usage: |
+  Use to summarise bootstrap trees or gene trees. Nodes carry the percentage of trees that contain them. The minimum support sets which clades are kept: 0.5 gives the majority-rule tree, 1.0 the strict consensus.
+inputs:
+  trees: tree_set
+outputs:
+  tree: iqtree_consensus_tree
+params:
+  minsup:
+    default: '0.5'
+    help: minimum fraction of trees a clade must appear in to be kept (-minsup); 1.0 is the strict consensus
+interpreter: bash
+script: |
+  iqtree2 -t "$IN_trees" -con -minsup "$PARAM_minsup" --prefix run -quiet > /dev/null
+  cp run.contree "$OUT_tree"

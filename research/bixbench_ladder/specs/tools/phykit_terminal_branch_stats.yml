@@ -1,0 +1,12 @@
+name: phykit_terminal_branch_stats
+tool: PhyKIT 2.0.1 terminal_branch_stats
+summary: Summarise the lengths of the terminal branches of a tree.
+usage: |
+  Long terminal branches mark fast-evolving or divergent taxa. Summary statistics are mean, median, 25th and 75th percentile, minimum, maximum, standard deviation and variance. Values are rounded by PhyKIT to four decimals.
+inputs:
+  tree: tree
+outputs:
+  out: terminal_branch_summary_table
+interpreter: bash
+script: |
+  { echo "statistic,value"; phykit terminal_branch_stats "$IN_tree" | sed 's/: /,/'; } > "$OUT_out"

@@ -1,0 +1,43 @@
+name: iqtree_topology_tests
+tool: IQ-TREE 2.3.6 -z -zb -au
+summary: Compare candidate tree topologies on one alignment with RELL bootstrap, KH, SH, expected-likelihood weights and the AU test.
+usage: |
+  Use to decide whether alternative topologies are significantly worse than the best one. Branch lengths and model parameters are re-optimised for each tree. A trailing + on a test means the tree is not rejected at 5 percent; - means rejected. At least 10000 replicates are advised for a reliable AU test.
+inputs:
+  aln: alignment
+  trees: tree_set
+outputs:
+  table: iqtree_topology_test_table
+params:
+  model:
+    default: MFP
+    help: substitution model, for example MFP (ModelFinder then tree search), GTR+G, HKY+F+I, LG+G4, JC; MFP picks the best by BIC
+  replicates:
+    default: '1000'
+    help: number of RELL bootstrap replicates (-zb)
+  au:
+    default: 'yes'
+    help: yes also runs the approximately unbiased test
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  if [ "$PARAM_au" = yes ]; then args+=(-au); fi
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" -z "$IN_trees" -zb "$PARAM_replicates" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  python - run.iqtree "$OUT_table" <<'PY'
+  import sys
+  lines = open(sys.argv[1]).read().splitlines()
+  i = next(k for k, l in enumerate(lines) if l.startswith("Tree") and "logL" in l)
+  tests = lines[i].split()[3:]
+  out = ["tree,logL,deltaL," + ",".join(f"{t},{t}_pass" for t in tests)]
+  for l in lines[i + 2:]:
+      t = l.split()
+      if not t:
+          break
+      out.append(",".join(t))
+  open(sys.argv[2], "w").write("\n".join(out) + "\n")
+  PY

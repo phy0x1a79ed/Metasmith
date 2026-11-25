@@ -1,0 +1,18 @@
+name: phykit_print_tree
+tool: PhyKIT 2.0.1 print_tree
+summary: Draw a tree as ASCII text.
+usage: |
+  Use to look at a tree's shape. remove_branch_lengths gives a cladogram-style drawing.
+inputs:
+  tree: tree
+outputs:
+  out: ascii_tree
+params:
+  remove_branch_lengths:
+    default: 'no'
+    help: yes draws the tree without branch lengths
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_remove_branch_lengths" = yes ]; then flag+=(-r); fi
+  phykit print_tree "$IN_tree" "${flag[@]}" > "$OUT_out"

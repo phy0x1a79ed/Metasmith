@@ -1,0 +1,12 @@
+name: phykit_parsimony_informative_sites
+tool: PhyKIT 2.0.1 parsimony_informative_sites
+summary: Count the parsimony-informative sites of an alignment.
+usage: |
+  A site is parsimony informative when at least two different characters each occur in at least two sequences. Gap and ambiguous characters are not counted as states. Reports the count, the alignment length and the percentage.
+inputs:
+  aln: alignment
+outputs:
+  out: parsimony_informative_sites_table
+interpreter: bash
+script: |
+  { echo "parsimony_informative_sites,alignment_length,percent_parsimony_informative"; phykit parsimony_informative_sites "$IN_aln" | tr '\t' ','; } > "$OUT_out"

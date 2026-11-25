@@ -1,0 +1,33 @@
+name: ttest_one_sample
+tool: scipy.stats 1.14.1 ttest_1samp
+summary: One-sample t-test of a numeric column against a hypothesised mean.
+usage: |
+  Use to test whether the mean of a column differs from a fixed value popmean.
+inputs:
+  data: table
+outputs:
+  result: one_sample_ttest_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  popmean:
+    default: '0'
+    help: Hypothesised population mean under the null.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  x = data[e["PARAM_value_col"]].dropna()
+  res = stats.ttest_1samp(x, float(e["PARAM_popmean"]), alternative=e["PARAM_alternative"])
+  ci = res.confidence_interval()
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, df=res.df, mean=x.mean(), ci_low=ci.low, ci_high=ci.high, n=len(x))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

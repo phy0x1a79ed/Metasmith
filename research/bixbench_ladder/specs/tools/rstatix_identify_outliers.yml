@@ -1,0 +1,28 @@
+name: rstatix_identify_outliers
+tool: rstatix 0.7.2 identify_outliers
+summary: Flag outliers of a numeric column by the 1.5 x IQR rule, optionally per group.
+usage: |
+  Use to list rows beyond 1.5 IQR (outlier) or 3 IQR (extreme) from the quartiles. Returns only the flagged rows, empty header-only if none.
+inputs:
+  data: table
+outputs:
+  result: rstatix_outliers_table
+params:
+  variable:
+    default: ''
+    help: Numeric column.
+  group_col:
+    default: ''
+    help: Optional grouping column.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  if (nzchar(Sys.getenv("PARAM_group_col"))) data <- group_by(data, .data[[Sys.getenv("PARAM_group_col")]])
+  res <- identify_outliers(data, variable = Sys.getenv("PARAM_variable"))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

@@ -1,0 +1,38 @@
+name: cox_proportional_hazards
+tool: statsmodels 0.14.4 PHReg
+summary: Cox proportional hazards regression of survival time on covariates.
+usage: |
+  Use for time-to-event data. formula is 'time_col ~ covariates' (no intercept is added). status_col is 1 for an event and 0 for censored. ties breslow is the statsmodels default.
+inputs:
+  data: table
+outputs:
+  result: cox_coefficients
+params:
+  formula:
+    default: ''
+    help: Formula such as 'time ~ x1 + C(group)'.
+  status_col:
+    default: ''
+    help: Column with 1 for event, 0 for censored.
+  ties:
+    default: breslow
+    help: breslow or efron.
+  alpha:
+    default: '0.05'
+    help: Significance level; confidence intervals are 1 - alpha.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  res = smf.phreg(e["PARAM_formula"], data, status=data[e["PARAM_status_col"]], ties=e["PARAM_ties"]).fit()
+  ci = res.conf_int(alpha=float(e["PARAM_alpha"]))
+  names = res.model.exog_names
+  out = pd.DataFrame({"term": names, "coef": res.params, "hazard_ratio": np.exp(res.params), "std_err": res.bse, "statistic": res.tvalues,
+      "pvalue": res.pvalues, "hr_ci_low": np.exp(ci[:, 0]), "hr_ci_high": np.exp(ci[:, 1])})
+  out.to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,14 @@
+name: phykit_covarying_rates_branches
+tool: PhyKIT 2.0.1 covarying_evolutionary_rates
+summary: List the reference-corrected branch lengths of two gene trees for every shared branch.
+usage: |
+  One row per shared branch after outlier removal: corrected length in tree 0, corrected length in tree 1 and the taxa below the branch (joined by semicolons).
+inputs:
+  tree0: tree
+  tree1: second_tree
+  reference: reference_tree
+outputs:
+  out: covarying_rates_branches_table
+interpreter: bash
+script: |
+  { echo "corrected_length_tree0,corrected_length_tree1,clade_taxa"; phykit covarying_evolutionary_rates "$IN_tree0" "$IN_tree1" -r "$IN_reference" -v | tr '\t' ','; } > "$OUT_out"

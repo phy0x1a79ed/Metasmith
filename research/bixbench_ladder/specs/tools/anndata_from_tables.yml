@@ -1,0 +1,28 @@
+name: anndata_from_tables
+tool: anndata 0.11.1 (Python)
+summary: Build an AnnData h5ad object from a count table and a metadata table.
+usage: |
+  Use to start a scanpy analysis from a genes-by-cells (or genes-by-samples) count matrix and its per-cell metadata. The count matrix is transposed so observations (columns of the table) become obs and genes become var. The metadata row names must match the count matrix column names; metadata columns become obs columns (text columns become categoricals). X holds the counts unchanged.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  adata: anndata_raw
+params:
+  sparse:
+    default: "True"
+    help: True or False, store X as a sparse CSR matrix. Does not change values.
+interpreter: python
+script: |
+  import os
+  import anndata as ad
+  import pandas as pd
+  import scipy.sparse as sp
+
+  counts = pd.read_csv(os.environ["IN_counts"], index_col=0)
+  meta = pd.read_csv(os.environ["IN_samples"], index_col=0).loc[counts.columns]
+  X = counts.T.values.astype("float32")
+  adata = ad.AnnData(X=sp.csr_matrix(X) if os.environ["PARAM_sparse"] == "True" else X, obs=meta, var=pd.DataFrame(index=counts.index))
+  adata.obs_names = adata.obs_names.astype(str)
+  adata.strings_to_categoricals()
+  adata.write_h5ad(os.environ["OUT_adata"])

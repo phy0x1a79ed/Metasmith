@@ -1,0 +1,31 @@
+name: rstatix_tukey_hsd
+tool: rstatix 0.7.2 tukey_hsd
+summary: Tukey honest significant differences between all group pairs.
+usage: |
+  Use after one-way (or factorial) ANOVA. The formula is passed to aov, so it can have several factors.
+inputs:
+  data: table
+outputs:
+  result: rstatix_tukey_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  conf_level:
+    default: '0.95'
+    help: Confidence level.
+  ordered:
+    default: 'FALSE'
+    help: TRUE orders levels by increasing mean so differences are positive.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- tukey_hsd(data, as.formula(Sys.getenv("PARAM_formula")), conf.level = as.numeric(Sys.getenv("PARAM_conf_level")),
+                   ordered = Sys.getenv("PARAM_ordered") == "TRUE")
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

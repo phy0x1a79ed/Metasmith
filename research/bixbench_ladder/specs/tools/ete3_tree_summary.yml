@@ -1,0 +1,21 @@
+name: ete3_tree_summary
+tool: ete3 3.1.3 Tree
+summary: 'Summarise a tree: leaf and node counts, total length, height, polytomies and mean support.'
+usage: |
+  Use for a quick description of a tree. height is the longest root-to-leaf distance; n_polytomies counts nodes with more than two children (a trifurcating root of an unrooted tree counts once); mean_support averages the support of internal non-root nodes; is_binary is true when no node has more than two children.
+inputs:
+  tree: tree
+outputs:
+  table: ete3_tree_summary_table
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from ete3 import Tree
+
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  inner = [n for n in t.traverse() if not n.is_leaf()]
+  sup = [n.support for n in inner if not n.is_root()]
+  poly = sum(1 for n in inner if len(n.children) > 2)
+  pd.DataFrame([dict(n_leaves=len(t), n_internal_nodes=len(inner), total_branch_length=sum(n.dist for n in t.traverse()),
+                     height=t.get_farthest_leaf()[1], n_polytomies=poly, mean_support=sum(sup) / len(sup) if sup else None, is_binary=poly == 0)]).to_csv(os.environ["OUT_table"], index=False)

@@ -1,0 +1,56 @@
+name: blastn
+tool: BLAST+ 2.16.0 blastn
+summary: Search nucleotide queries against a nucleotide BLAST database and report local alignments.
+usage: |
+  Use for nucleotide-to-nucleotide similarity. The task chooses the algorithm: megablast (the default) for highly similar sequences, blastn for more divergent ones, dc-megablast for cross-species, blastn-short for queries under 50 nt. Empty optional parameters leave the program default in force; reward, penalty, gapopen and gapextend defaults depend on the task. Output is one row per high-scoring pair with a header.
+inputs:
+  query: sequences_fasta
+  db: blast_database
+outputs:
+  hits: blastn_hits_table
+params:
+  task:
+    default: megablast
+    help: 'blastn algorithm: megablast, dc-megablast, blastn or blastn-short'
+  evalue:
+    default: '10'
+    help: 'expect-value threshold: hits with a larger e-value are dropped'
+  max_target_seqs:
+    default: '500'
+    help: maximum number of aligned database sequences kept per query
+  word_size:
+    default: ''
+    help: initial exact-match word length; empty uses the task default (28 for megablast, 11 for blastn)
+  perc_identity:
+    default: '0'
+    help: minimum percent identity of reported alignments
+  strand:
+    default: both
+    help: 'query strand to search: both, plus or minus'
+  dust:
+    default: 'yes'
+    help: yes masks low-complexity query regions with DUST, no keeps them
+  reward:
+    default: ''
+    help: match reward; empty uses the task default
+  penalty:
+    default: ''
+    help: mismatch penalty (negative); empty uses the task default
+  gapopen:
+    default: ''
+    help: gap opening cost; empty uses the task default
+  gapextend:
+    default: ''
+    help: gap extension cost; empty uses the task default
+  columns:
+    default: qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore
+    help: space-separated BLAST tabular output fields (the tool's default twelve); other fields such as qlen slen qcovs staxids stitle can be added
+interpreter: bash
+script: |
+  args=()
+  add() { if [ -n "$2" ]; then args+=("$1" "$2"); fi; }
+
+  add -task "$PARAM_task"; add -word_size "$PARAM_word_size"; add -perc_identity "$PARAM_perc_identity"; add -strand "$PARAM_strand"
+  add -dust "$PARAM_dust"; add -reward "$PARAM_reward"; add -penalty "$PARAM_penalty"; add -gapopen "$PARAM_gapopen"; add -gapextend "$PARAM_gapextend"
+  cols="$PARAM_columns"
+  { echo "$cols" | tr ' ' ','; blastn -query "$IN_query" -db "$IN_db/db" -evalue "$PARAM_evalue" -max_target_seqs "$PARAM_max_target_seqs" "${args[@]}" -outfmt "10 $cols"; } > "$OUT_hits"

@@ -1,0 +1,43 @@
+name: gseapy_prerank
+tool: gseapy 1.1.4 (Python)
+summary: Pre-ranked gene set enrichment analysis (GSEA) of a ranked gene table against a local GMT file with gseapy prerank.
+usage: |
+  Use for a gene table ranked by a statistic (see the ranking step) and gene sets whose member ids match the ranked gene ids. A positive normalised enrichment score (NES) means the set is enriched among the top-ranked genes. Runs offline with the local GMT. The ranking is sorted in descending order unless ascending is True.
+  Choices that change the numbers: the ranking, the gene sets, size limits (sets are sized on the overlap with the ranked genes), the number of permutations, the weight exponent and the seed (p-values come from gene permutation).
+inputs:
+  ranked: ranked_gene_table
+  sets: gene_sets
+outputs:
+  result: gseapy_prerank_table
+params:
+  min_size:
+    default: "15"
+    help: Smallest overlap of a gene set with the ranked genes that is tested.
+  max_size:
+    default: "500"
+    help: Largest overlap that is tested.
+  permutation_num:
+    default: "1000"
+    help: Number of permutations for the null distribution.
+  weight:
+    default: "1.0"
+    help: Exponent of the gene score in the running sum; 0 is the unweighted statistic.
+  ascending:
+    default: "False"
+    help: True or False, sort the ranking from smallest to largest score.
+  seed:
+    default: "123"
+    help: Random seed for the permutations.
+interpreter: python
+script: |
+  import os
+  import gseapy as gp
+  import pandas as pd
+
+  rk = pd.read_csv(os.environ["IN_ranked"]).iloc[:, :2].dropna()
+  rk = rk.drop_duplicates(subset=rk.columns[0])
+  res = gp.prerank(rnk=rk, gene_sets=os.environ["IN_sets"], min_size=int(os.environ["PARAM_min_size"]),
+                   max_size=int(os.environ["PARAM_max_size"]), permutation_num=int(os.environ["PARAM_permutation_num"]),
+                   weight=float(os.environ["PARAM_weight"]), ascending=os.environ["PARAM_ascending"] == "True",
+                   threads=1, no_plot=True, seed=int(os.environ["PARAM_seed"]), verbose=False)
+  res.res2d.to_csv(os.environ["OUT_result"], index=False, float_format="%.17g")

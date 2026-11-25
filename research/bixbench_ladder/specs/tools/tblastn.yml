@@ -1,0 +1,43 @@
+name: tblastn
+tool: BLAST+ 2.16.0 tblastn
+summary: Search protein queries against a nucleotide BLAST database translated in all six frames.
+usage: |
+  Use to find where a protein is encoded in unannotated nucleotide sequence such as a genome or transcriptome. The database genetic code, matrix and gap costs change the scores.
+inputs:
+  query: sequences_fasta
+  db: blast_database
+outputs:
+  hits: tblastn_hits_table
+params:
+  evalue:
+    default: '10'
+    help: 'expect-value threshold: hits with a larger e-value are dropped'
+  max_target_seqs:
+    default: '500'
+    help: maximum number of aligned database sequences kept per query
+  matrix:
+    default: BLOSUM62
+    help: amino-acid scoring matrix, for example BLOSUM62, BLOSUM45, BLOSUM80, PAM30, PAM70
+  db_gencode:
+    default: '1'
+    help: NCBI genetic code table used to translate the database
+  gapopen:
+    default: '11'
+    help: gap opening cost
+  gapextend:
+    default: '1'
+    help: gap extension cost
+  seg:
+    default: 'no'
+    help: yes filters low-complexity query regions with SEG
+  columns:
+    default: qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore
+    help: space-separated BLAST tabular output fields (the tool's default twelve); other fields such as qlen slen qcovs staxids stitle can be added
+interpreter: bash
+script: |
+  args=()
+  add() { if [ -n "$2" ]; then args+=("$1" "$2"); fi; }
+
+  add -db_gencode "$PARAM_db_gencode"; add -matrix "$PARAM_matrix"; add -gapopen "$PARAM_gapopen"; add -gapextend "$PARAM_gapextend"; add -seg "$PARAM_seg"
+  cols="$PARAM_columns"
+  { echo "$cols" | tr ' ' ','; tblastn -query "$IN_query" -db "$IN_db/db" -evalue "$PARAM_evalue" -max_target_seqs "$PARAM_max_target_seqs" "${args[@]}" -outfmt "10 $cols"; } > "$OUT_hits"

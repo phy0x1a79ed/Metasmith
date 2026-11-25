@@ -1,0 +1,16 @@
+name: phykit_spurious_sequence
+tool: PhyKIT 2.0.1 spurious_sequence
+summary: Flag taxa with unusually long terminal branches as putatively spurious sequences.
+usage: |
+  A taxon is flagged when its terminal branch is at least factor times the median branch length. Prints nothing but the header when no taxon passes. Note PhyKIT computes the median over terminal branches plus one repeated terminal length per internal node.
+inputs:
+  tree: tree
+outputs:
+  out: spurious_sequence_table
+params:
+  factor:
+    default: '20'
+    help: multiple of the median branch length above which a terminal branch is flagged
+interpreter: bash
+script: |
+  { echo "taxon,branch_length,threshold,median_branch_length"; phykit spurious_sequence "$IN_tree" -f "$PARAM_factor" | { grep -v '^None$' || true; } | tr '\t' ','; } > "$OUT_out"

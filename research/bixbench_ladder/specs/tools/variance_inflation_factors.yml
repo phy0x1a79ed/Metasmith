@@ -1,0 +1,28 @@
+name: variance_inflation_factors
+tool: statsmodels 0.14.4 variance_inflation_factor
+summary: Variance inflation factor of each predictor column, a collinearity check.
+usage: |
+  Use before regression to find collinear numeric predictors. An intercept column is added to the design, as statsmodels expects.
+inputs:
+  data: table
+outputs:
+  result: vif_table
+params:
+  columns:
+    default: ''
+    help: Comma-separated numeric predictor columns.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.outliers_influence import variance_inflation_factor as vif
+  cols = [c.strip() for c in e["PARAM_columns"].split(",")]
+  X = sm.add_constant(data[cols].dropna())
+  out = pd.DataFrame({"variable": cols, "vif": [vif(X.values, i + 1) for i in range(len(cols))]})
+  out.to_csv(e["OUT_result"], index=False)

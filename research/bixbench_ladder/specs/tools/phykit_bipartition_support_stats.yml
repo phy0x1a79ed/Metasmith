@@ -1,0 +1,12 @@
+name: phykit_bipartition_support_stats
+tool: PhyKIT 2.0.1 bipartition_support_stats
+summary: Summarise the support values of a tree's internal branches.
+usage: |
+  Use for the average support (bootstrap, UFBoot or SH-aLRT) of a gene tree. Summary statistics are mean, median, 25th and 75th percentile, minimum, maximum, standard deviation and variance. Values are rounded by PhyKIT to four decimals.
+inputs:
+  tree: tree
+outputs:
+  out: bipartition_support_summary_table
+interpreter: bash
+script: |
+  { echo "statistic,value"; phykit bipartition_support_stats "$IN_tree" | sed 's/: /,/'; } > "$OUT_out"

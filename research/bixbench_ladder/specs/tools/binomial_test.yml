@@ -1,0 +1,37 @@
+name: binomial_test
+tool: scipy.stats 1.14.1 binomtest
+summary: Exact binomial test of a success proportion against a hypothesised probability.
+usage: |
+  Use on a binary column (or counts) to test whether the success rate differs from p. Success is the value given by success_value.
+inputs:
+  data: table
+outputs:
+  result: binomial_test_result
+params:
+  value_col:
+    default: ''
+    help: Column of outcomes.
+  success_value:
+    default: '1'
+    help: Value counted as a success.
+  p:
+    default: '0.5'
+    help: Hypothesised success probability.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  x = data[e["PARAM_value_col"]].dropna().astype(str)
+  k = int((x == e["PARAM_success_value"]).sum())
+  res = stats.binomtest(k, len(x), float(e["PARAM_p"]), alternative=e["PARAM_alternative"])
+  ci = res.proportion_ci()
+  row = dict(successes=k, n=len(x), proportion=res.proportion_estimate, pvalue=res.pvalue, ci_low=ci.low, ci_high=ci.high)
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

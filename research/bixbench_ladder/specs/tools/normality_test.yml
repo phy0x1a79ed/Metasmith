@@ -1,0 +1,33 @@
+name: normality_test
+tool: scipy.stats 1.14.1 shapiro / normaltest / jarque_bera / kstest
+summary: Test whether a numeric column is normally distributed.
+usage: |
+  Use before a parametric test. shapiro is Shapiro-Wilk; normaltest is D'Agostino-Pearson; jarque_bera uses skew and kurtosis; kstest compares to a normal with the sample mean and sd (not corrected for estimated parameters). A small p-value rejects normality.
+inputs:
+  data: table
+outputs:
+  result: normality_test_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  test:
+    default: shapiro
+    help: shapiro, normaltest, jarque_bera or kstest.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  x = data[e["PARAM_value_col"]].dropna()
+  t = e["PARAM_test"]
+  if t == "kstest":
+      res = stats.kstest(x, "norm", args=(x.mean(), x.std(ddof=1)))
+  else:
+      res = {"shapiro": stats.shapiro, "normaltest": stats.normaltest, "jarque_bera": stats.jarque_bera}[t](x)
+  row = dict(test=t, statistic=res[0], pvalue=res[1], n=len(x))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

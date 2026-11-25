@@ -1,0 +1,37 @@
+name: psiblast
+tool: BLAST+ 2.16.0 psiblast
+summary: 'Iterated protein search: build a position-specific score matrix from hits and search again.'
+usage: |
+  Use to find remote homologs that a single blastp misses. The number of iterations and the inclusion threshold decide which hits join the profile. With one iteration it equals blastp.
+inputs:
+  query: sequences_fasta
+  db: blast_database
+outputs:
+  hits: psiblast_hits_table
+params:
+  evalue:
+    default: '10'
+    help: 'expect-value threshold: hits with a larger e-value are dropped'
+  max_target_seqs:
+    default: '500'
+    help: maximum number of aligned database sequences kept per query
+  num_iterations:
+    default: '1'
+    help: number of search iterations
+  inclusion_ethresh:
+    default: '0.002'
+    help: e-value a hit needs to enter the profile for the next iteration
+  matrix:
+    default: BLOSUM62
+    help: amino-acid scoring matrix used in the first iteration
+  columns:
+    default: qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore
+    help: space-separated BLAST tabular output fields (the tool's default twelve); other fields such as qlen slen qcovs staxids stitle can be added
+interpreter: bash
+script: |
+  args=()
+  add() { if [ -n "$2" ]; then args+=("$1" "$2"); fi; }
+
+  add -num_iterations "$PARAM_num_iterations"; add -inclusion_ethresh "$PARAM_inclusion_ethresh"; add -matrix "$PARAM_matrix"
+  cols="$PARAM_columns"
+  { echo "$cols" | tr ' ' ','; psiblast -query "$IN_query" -db "$IN_db/db" -evalue "$PARAM_evalue" -max_target_seqs "$PARAM_max_target_seqs" "${args[@]}" -outfmt "10 $cols"; } > "$OUT_hits"

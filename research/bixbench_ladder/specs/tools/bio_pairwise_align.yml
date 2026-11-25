@@ -1,0 +1,51 @@
+name: bio_pairwise_align
+tool: Biopython 1.84 Bio.Align.PairwiseAligner
+summary: Align every pair of sequences in a FASTA file with Needleman-Wunsch or Smith-Waterman and report the best score and identity.
+usage: |
+  Use for exact optimal pairwise alignment of nucleotide or protein sequences. mode global aligns end to end; local finds the best matching segment. Scores are the aligner's own: with the defaults match 1, mismatch 0 and no gap penalty. Set a substitution matrix (for example BLOSUM62 for proteins) together with gap scores for biological scoring; when a matrix is set, match and mismatch scores are ignored. identity_fraction is identities over aligned_length. All pairs i<j are reported.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  table: pairwise_alignment_scores_table
+params:
+  mode:
+    default: global
+    help: global or local
+  match_score:
+    default: '1'
+    help: score of an identical pair (ignored with a substitution matrix)
+  mismatch_score:
+    default: '0'
+    help: score of a mismatching pair (ignored with a substitution matrix)
+  open_gap_score:
+    default: '0'
+    help: score for opening a gap (use a negative number)
+  extend_gap_score:
+    default: '0'
+    help: score for extending a gap (use a negative number)
+  substitution_matrix:
+    default: ''
+    help: name of a Biopython substitution matrix such as BLOSUM62, PAM250 or NUC.4.4; empty uses match and mismatch scores
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  import itertools
+  from Bio import Align, SeqIO
+  from Bio.Align import substitution_matrices
+  al = Align.PairwiseAligner()
+  al.mode = os.environ["PARAM_mode"]
+  if os.environ["PARAM_substitution_matrix"]:
+      al.substitution_matrix = substitution_matrices.load(os.environ["PARAM_substitution_matrix"])
+  else:
+      al.match_score = float(os.environ["PARAM_match_score"]); al.mismatch_score = float(os.environ["PARAM_mismatch_score"])
+  al.open_gap_score = float(os.environ["PARAM_open_gap_score"]); al.extend_gap_score = float(os.environ["PARAM_extend_gap_score"])
+  recs = [(r.id, str(r.seq).replace("-", "").upper()) for r in SeqIO.parse(os.environ["IN_seqs"], "fasta")]
+  rows = []
+  for (qa, a), (qb, b) in itertools.combinations(recs, 2):
+      aln = al.align(a, b)[0]
+      c = aln.counts()
+      rows.append(dict(query=qa, target=qb, score=aln.score, aligned_length=aln.length, identities=c.identities, mismatches=c.mismatches, gaps=c.gaps,
+                       identity_fraction=c.identities / aln.length))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

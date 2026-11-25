@@ -1,0 +1,48 @@
+name: enhancedvolcano_plot
+tool: EnhancedVolcano 1.20.0 (R)
+summary: Draw a volcano plot of fold change against significance for a differential expression table, and classify each gene.
+usage: |
+  Use to display differential expression results. The plot and the class table use the same two cutoffs: a gene is "P & Log2FC" when its p-value is below the p cutoff and its absolute fold change is above the fold change cutoff.
+  Choices that change the classification: the x and y columns (default pvalue on y), the p cutoff and the column it is applied to (use padj to cut on adjusted p-values), and the fold change cutoff. The first table column is the gene id used for labels. Rows with NA p-values are dropped.
+inputs:
+  results: de_results_table
+outputs:
+  plot: volcano_plot_png
+  classes: volcano_classification_table
+params:
+  x:
+    default: "log2FoldChange"
+    help: Column for the x axis.
+  y:
+    default: "pvalue"
+    help: Column for the y axis (plotted as minus log10).
+  p_cutoff:
+    default: "1e-05"
+    help: p-value cutoff.
+  pvalue_column:
+    default: ""
+    help: Column the p cutoff is applied to. Empty uses y.
+  fc_cutoff:
+    default: "1"
+    help: Absolute log2 fold change cutoff.
+  title:
+    default: "Volcano plot"
+    help: Plot title.
+interpreter: Rscript
+script: |
+  suppressMessages(library(EnhancedVolcano))
+  df <- read.csv(Sys.getenv("IN_results"), check.names = FALSE)
+  x <- Sys.getenv("PARAM_x"); y <- Sys.getenv("PARAM_y")
+  pcol <- if (nzchar(Sys.getenv("PARAM_pvalue_column"))) Sys.getenv("PARAM_pvalue_column") else y
+  df <- df[!is.na(df[[x]]) & !is.na(df[[y]]) & !is.na(df[[pcol]]), ]
+  rownames(df) <- make.unique(as.character(df[[1]]))
+  pc <- as.numeric(Sys.getenv("PARAM_p_cutoff")); fc <- as.numeric(Sys.getenv("PARAM_fc_cutoff"))
+  p <- EnhancedVolcano(df, lab = rownames(df), x = x, y = y, pCutoff = pc, pCutoffCol = pcol,
+                       FCcutoff = fc, title = Sys.getenv("PARAM_title"))
+  png(Sys.getenv("OUT_plot"), width = 900, height = 800, res = 100)
+  print(p)
+  invisible(dev.off())
+  sig_p <- df[[pcol]] < pc; sig_fc <- abs(df[[x]]) > fc
+  cls <- ifelse(sig_p & sig_fc, "P & Log2FC", ifelse(sig_p, "P", ifelse(sig_fc, "Log2FC", "NS")))
+  write.csv(data.frame(gene = rownames(df), x = df[[x]], y = df[[y]], class = cls),
+            Sys.getenv("OUT_classes"), row.names = FALSE)

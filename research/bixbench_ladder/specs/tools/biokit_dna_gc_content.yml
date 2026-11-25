@@ -1,0 +1,28 @@
+name: biokit_dna_gc_content
+tool: biokit 0.5.0 biokit.sequence.dna.DNA.gc_content
+summary: Compute the GC percentage of every DNA sequence with biokit.
+usage: |
+  Use for nucleotide records. gc_percent is the percentage of positions whose letter is in the chosen letter set, by default C, G and S (IUPAC strong); the denominator is the full sequence length, ambiguous letters included.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  table: biokit_gc_content_table
+params:
+  letters:
+    default: CGS
+    help: letters counted as GC, for example CGS or CG
+interpreter: python
+script: |
+  import os
+  import matplotlib
+  matplotlib.use('Agg')
+  import numpy as np
+  import pandas as pd
+
+  from Bio import SeqIO
+  from biokit.sequence.dna import DNA
+  rows = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      s = str(r.seq).upper().replace("-", "")
+      rows.append(dict(id=r.id, length=len(s), gc_percent=DNA(s).gc_content(os.environ["PARAM_letters"])))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

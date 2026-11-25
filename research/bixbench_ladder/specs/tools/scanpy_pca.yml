@@ -1,0 +1,39 @@
+name: scanpy_pca
+tool: scanpy 1.10.4 (Python)
+summary: Principal component analysis of a log-normalised or scaled AnnData object with scanpy pca.
+usage: |
+  Use on highly variable genes: when the object carries a highly_variable flag and use_highly_variable is True, only flagged genes enter the PCA. Writes obsm X_pca, varm PCs and uns pca with variance and variance_ratio.
+  Choices that change the components: number of components, the SVD solver, zero_center, whether to restrict to highly variable genes, and the random state for randomised solvers.
+inputs:
+  prepared: anndata_prepared
+outputs:
+  pca: anndata_pca
+params:
+  n_comps:
+    default: "50"
+    help: Number of components to compute (limited by the number of cells and genes).
+  svd_solver:
+    default: "arpack"
+    help: arpack, randomized, auto, lobpcg or tsqr.
+  zero_center:
+    default: "True"
+    help: True or False, centre the data (False runs TruncatedSVD).
+  use_highly_variable:
+    default: "True"
+    help: True or False, restrict to var highly_variable genes when that column exists.
+  random_state:
+    default: "0"
+    help: Seed for randomised solvers.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_prepared"])
+  mask = "highly_variable" if os.environ["PARAM_use_highly_variable"] == "True" and "highly_variable" in adata.var else None
+  n = min(int(os.environ["PARAM_n_comps"]), min(adata.shape) - 1)
+  sc.pp.pca(adata, n_comps=n, svd_solver=os.environ["PARAM_svd_solver"],
+            zero_center=os.environ["PARAM_zero_center"] == "True", mask_var=mask,
+            random_state=int(os.environ["PARAM_random_state"]))
+  print(adata.uns["pca"]["variance_ratio"][:10])
+  adata.write_h5ad(os.environ["OUT_pca"])

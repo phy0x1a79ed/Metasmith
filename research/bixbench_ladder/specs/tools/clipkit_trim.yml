@@ -1,0 +1,30 @@
+name: clipkit_trim
+tool: ClipKIT 2.3.0
+summary: Trim alignment columns with a ClipKIT mode, keeping the phylogenetically informative sites.
+usage: |
+  Use before phylogenetic inference to remove columns that are mostly gaps or uninformative. The mode is the decision: smart-gap (default) chooses a gap threshold from the data; gappy removes columns whose gap fraction is above the threshold; kpic keeps parsimony-informative and constant sites; kpi keeps only parsimony-informative sites; kpic-smart-gap, kpic-gappy, kpi-smart-gap and kpi-gappy combine them; c3 removes every third codon position. The gaps threshold applies to gappy modes only. Also writes the per-site keep/trim log, which phykit thread_dna can use.
+inputs:
+  aln: source_alignment
+outputs:
+  trimmed: clipkit_alignment
+  log: clipkit_log
+params:
+  mode:
+    default: smart-gap
+    help: 'trimming mode: smart-gap, gappy, kpic, kpic-smart-gap, kpic-gappy, kpi, kpi-smart-gap, kpi-gappy or c3'
+  gaps:
+    default: '0.9'
+    help: gap-fraction threshold between 0 and 1; columns above it are trimmed in the gappy modes
+  codon:
+    default: 'no'
+    help: yes trims in whole codons, applying the decision to all three positions together
+  sequence_type:
+    default: ''
+    help: nt or aa; empty auto-detects
+interpreter: bash
+script: |
+  args=()
+  if [ "$PARAM_codon" = yes ]; then args+=(--codon); fi
+  if [ -n "$PARAM_sequence_type" ]; then args+=(-s "$PARAM_sequence_type"); fi
+  clipkit "$IN_aln" -o "$OUT_trimmed" -m "$PARAM_mode" -g "$PARAM_gaps" -l -q "${args[@]}"
+  mv "$OUT_trimmed.log" "$OUT_log"

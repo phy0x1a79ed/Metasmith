@@ -1,0 +1,19 @@
+name: phykit_saturation_distances
+tool: PhyKIT 2.0.1 saturation
+summary: List the uncorrected and patristic distance of every pair of tips used for the saturation regression.
+usage: |
+  One row per pair of tips. Plot uncorrected against patristic distance to inspect saturation; points that flatten at large patristic distance indicate saturation.
+inputs:
+  aln: alignment
+  tree: tree
+outputs:
+  out: saturation_pairs_table
+params:
+  exclude_gaps:
+    default: 'no'
+    help: yes ignores every column that has a gap
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_exclude_gaps" = yes ]; then flag+=(-e); fi
+  { echo "taxon_1,taxon_2,uncorrected_distance,patristic_distance"; phykit saturation -a "$IN_aln" -t "$IN_tree" -v "${flag[@]}" | tr '\t' ','; } > "$OUT_out"

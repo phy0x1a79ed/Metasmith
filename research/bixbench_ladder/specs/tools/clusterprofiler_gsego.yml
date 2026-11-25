@@ -1,0 +1,63 @@
+name: clusterprofiler_gsego
+tool: clusterProfiler 4.10.0 (R) with org.Hs.eg.db 3.18.0
+summary: Gene set enrichment analysis (GSEA) of a ranked human gene list against Gene Ontology terms with gseGO.
+usage: |
+  Use for a gene table ranked by a statistic (see the ranking step), for example the Wald statistic. The direction of the ranking matters: a positive normalised enrichment score means the set is enriched among the top-ranked genes. Offline with the installed GO.db and org.Hs.eg.db. Genes with a duplicated id keep the first row; the list is sorted in decreasing order of score.
+  Choices that change the numbers: the ranking itself, identifier type, ontology (tool default BP), exponent, size limits, the algorithm and, because p-values come from permutation, the seed.
+inputs:
+  ranked: ranked_gene_table
+outputs:
+  table: gsego_table
+  object: gsego_object
+params:
+  key_type:
+    default: "ENTREZID"
+    help: Identifier type of the gene column in org.Hs.eg.db, for example ENTREZID, SYMBOL or ENSEMBL.
+  ontology:
+    default: "BP"
+    help: GO ontology, BP, MF, CC or ALL.
+  n_perm_simple:
+    default: "1000"
+    help: Number of permutations used by fgsea for the simple p-value estimate.
+  exponent:
+    default: "1"
+    help: Weight of the gene score in the running sum; 0 gives the unweighted Kolmogorov-Smirnov statistic.
+  eps:
+    default: "1e-10"
+    help: Lower boundary for the p-values estimated by fgsea; use 0 for exact small p-values.
+  p_adjust_method:
+    default: "BH"
+    help: Multiple testing method, one of holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.
+  pvalue_cutoff:
+    default: "0.05"
+    help: Sets with an adjusted p-value above this are dropped from the output; use 1 to keep every tested set.
+  min_gs_size:
+    default: "10"
+    help: Smallest gene set size tested.
+  max_gs_size:
+    default: "500"
+    help: Largest gene set size tested.
+  by:
+    default: "fgsea"
+    help: Algorithm, fgsea or DOSE.
+  seed:
+    default: "FALSE"
+    help: TRUE or FALSE, fix the random seed for permutation p-values (FALSE is the tool default and gives run-to-run variation).
+interpreter: Rscript
+script: |
+  suppressMessages({library(clusterProfiler); library(org.Hs.eg.db)})
+  invisible(runif(1))
+  rk <- read.csv(Sys.getenv("IN_ranked"), check.names = FALSE)
+  rk <- rk[!is.na(rk[[2]]) & !duplicated(rk[[1]]), ]
+  gl <- setNames(rk[[2]], as.character(rk[[1]]))
+  gl <- sort(gl, decreasing = TRUE)
+  res <- gseGO(geneList = gl, ont = Sys.getenv("PARAM_ontology"), OrgDb = org.Hs.eg.db,
+               keyType = Sys.getenv("PARAM_key_type"), exponent = as.numeric(Sys.getenv("PARAM_exponent")),
+               minGSSize = as.integer(Sys.getenv("PARAM_min_gs_size")), maxGSSize = as.integer(Sys.getenv("PARAM_max_gs_size")),
+               eps = as.numeric(Sys.getenv("PARAM_eps")), pvalueCutoff = as.numeric(Sys.getenv("PARAM_pvalue_cutoff")),
+               pAdjustMethod = Sys.getenv("PARAM_p_adjust_method"), verbose = FALSE,
+               seed = as.logical(Sys.getenv("PARAM_seed")), by = Sys.getenv("PARAM_by"),
+               nPermSimple = as.integer(Sys.getenv("PARAM_n_perm_simple")))
+  df <- if (is.null(res)) data.frame() else as.data.frame(res)
+  write.csv(df, Sys.getenv("OUT_table"), row.names = FALSE)
+  saveRDS(res, Sys.getenv("OUT_object"))

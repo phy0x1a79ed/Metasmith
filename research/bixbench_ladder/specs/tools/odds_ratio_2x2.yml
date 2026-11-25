@@ -1,0 +1,36 @@
+name: odds_ratio_2x2
+tool: statsmodels 0.14.4 Table2x2
+summary: Odds ratio and risk ratio with confidence intervals for two binary columns.
+usage: |
+  Use for exposure versus outcome tables. Rows are the levels of exposure_col and columns the levels of outcome_col, both in sorted order, so the odds ratio compares the second row to the first with the second column as the event.
+inputs:
+  data: table
+outputs:
+  result: odds_ratio_result
+params:
+  exposure_col:
+    default: ''
+    help: Binary exposure column.
+  outcome_col:
+    default: ''
+    help: Binary outcome column.
+  alpha:
+    default: '0.05'
+    help: Interval is 1 - alpha.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  ct = pd.crosstab(data[e["PARAM_exposure_col"]], data[e["PARAM_outcome_col"]])
+  t = sm.stats.Table2x2(ct.values)
+  a = float(e["PARAM_alpha"])
+  olo, ohi = t.oddsratio_confint(alpha=a)
+  rlo, rhi = t.riskratio_confint(alpha=a)
+  pd.DataFrame([dict(odds_ratio=t.oddsratio, or_ci_low=olo, or_ci_high=ohi, or_pvalue=t.oddsratio_pvalue(), risk_ratio=t.riskratio,
+                     rr_ci_low=rlo, rr_ci_high=rhi)]).to_csv(e["OUT_result"], index=False)

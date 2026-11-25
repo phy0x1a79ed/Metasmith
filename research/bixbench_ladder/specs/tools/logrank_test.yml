@@ -1,0 +1,38 @@
+name: logrank_test
+tool: statsmodels 0.14.4 survdiff
+summary: Log-rank test comparing survival curves across groups.
+usage: |
+  Use for time-to-event data with a group column; weight_type None is the plain log-rank test, other options (fh, gb, tw, or an exponent) weight early or late events.
+inputs:
+  data: table
+outputs:
+  result: logrank_result
+params:
+  time_col:
+    default: ''
+    help: Follow-up time column.
+  status_col:
+    default: ''
+    help: 1 for event, 0 for censored.
+  group_col:
+    default: ''
+    help: Group label column.
+  weight_type:
+    default: None
+    help: None, fh, gb or tw.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.duration.survfunc import survdiff
+  wt = None if e["PARAM_weight_type"] == "None" else e["PARAM_weight_type"]
+  g = data[e["PARAM_group_col"]].astype(str)
+  chi, p = survdiff(data[e["PARAM_time_col"]], data[e["PARAM_status_col"]], g, weight_type=wt)
+  n = g.nunique()
+  pd.DataFrame([dict(statistic=chi, pvalue=p, df=n - 1, n_groups=n)]).to_csv(e["OUT_result"], index=False)

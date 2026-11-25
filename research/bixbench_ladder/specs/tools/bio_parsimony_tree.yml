@@ -1,0 +1,27 @@
+name: bio_parsimony_tree
+tool: Biopython 1.84 ParsimonyTreeConstructor
+summary: Search for a maximum-parsimony tree from an alignment by nearest-neighbour-interchange.
+usage: |
+  Use for a quick parsimony tree of few sequences. The search starts from a neighbour-joining (or UPGMA) tree and keeps interchanges that lower the Fitch parsimony score; it can stop in a local optimum. Branch lengths are not meaningful.
+inputs:
+  aln: alignment
+outputs:
+  tree: bio_parsimony_tree
+params:
+  start:
+    default: nj
+    help: 'starting tree method: nj or upgma'
+  model:
+    default: identity
+    help: distance model for the starting tree
+interpreter: python
+script: |
+  import os
+  from Bio import AlignIO, Phylo
+  from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor, NNITreeSearcher, ParsimonyScorer, ParsimonyTreeConstructor
+  aln = AlignIO.read(os.environ["IN_aln"], "fasta")
+  dm = DistanceCalculator(os.environ["PARAM_model"]).get_distance(aln)
+  dtc = DistanceTreeConstructor()
+  start = dtc.nj(dm) if os.environ["PARAM_start"] == "nj" else dtc.upgma(dm)
+  tree = ParsimonyTreeConstructor(NNITreeSearcher(ParsimonyScorer()), start).build_tree(aln)
+  Phylo.write(tree, os.environ["OUT_tree"], "newick")

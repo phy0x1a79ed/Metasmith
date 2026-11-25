@@ -1,0 +1,79 @@
+name: pydeseq2_wald_test
+tool: pydeseq2 0.4.12 (Python)
+summary: Differential expression with pydeseq2 (DeseqDataSet.deseq2 then DeseqStats Wald test) for one contrast.
+usage: |
+  Use for DESeq2-style differential expression in Python from raw integer counts. The count matrix has genes in rows; it is transposed internally to the samples-by-genes layout pydeseq2 needs. The sample sheet row names must match the count matrix columns.
+  Design is a list of factor columns (no interaction terms). The contrast is factor, tested level, reference level; empty tests the last design factor against its reference.
+  Choices that change the numbers: design factors and which are continuous, reference level, dispersion fit type, outlier refit, alpha, the Cooks filter, independent filtering, lfc_null and alt_hypothesis.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  results: pydeseq2_results_table
+params:
+  design_factors:
+    default: "condition"
+    help: Comma separated sample sheet columns used as design, for example "batch,condition". The contrast factor goes last.
+  continuous_factors:
+    default: ""
+    help: Comma separated subset of design_factors treated as continuous covariates.
+  ref_level:
+    default: ""
+    help: Reference level as "factor,level", for example "condition,control". Empty uses the alphabetical first level.
+  contrast:
+    default: ""
+    help: Comma separated factor,tested_level,reference_level. Empty tests the last design factor.
+  fit_type:
+    default: "parametric"
+    help: Dispersion trend, parametric or mean.
+  refit_cooks:
+    default: "True"
+    help: True or False, refit genes flagged as Cooks outliers after replacing outlier counts.
+  min_replicates:
+    default: "7"
+    help: Minimum replicates in a group for outlier replacement.
+  alpha:
+    default: "0.05"
+    help: Significance level for independent filtering and adjusted p-values.
+  cooks_filter:
+    default: "True"
+    help: True or False, set p-values of Cooks outliers to NA.
+  independent_filter:
+    default: "True"
+    help: True or False, apply independent filtering on the mean of normalised counts.
+  lfc_null:
+    default: "0"
+    help: Log2 fold change under the null hypothesis.
+  alt_hypothesis:
+    default: ""
+    help: Alternative hypothesis, one of greaterAbs, lessAbs, greater, less. Empty is the two-sided test against lfc_null.
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from pydeseq2.dds import DeseqDataSet
+  from pydeseq2.ds import DeseqStats
+
+  split = lambda s: [x.strip() for x in s.split(",") if x.strip()]
+  counts = pd.read_csv(os.environ["IN_counts"], index_col=0).T
+  meta = pd.read_csv(os.environ["IN_samples"], index_col=0).loc[counts.index]
+  design = split(os.environ["PARAM_design_factors"])
+  continuous = split(os.environ["PARAM_continuous_factors"])
+  for col in design:
+      if col not in continuous:
+          meta[col] = meta[col].astype(str)
+  dds = DeseqDataSet(
+      counts=counts, metadata=meta, design_factors=design,
+      continuous_factors=continuous or None,
+      ref_level=split(os.environ["PARAM_ref_level"]) or None,
+      fit_type=os.environ["PARAM_fit_type"], refit_cooks=os.environ["PARAM_refit_cooks"] == "True",
+      min_replicates=int(os.environ["PARAM_min_replicates"]), n_cpus=1, quiet=True)
+  dds.deseq2()
+  stat = DeseqStats(
+      dds, contrast=split(os.environ["PARAM_contrast"]) or None, alpha=float(os.environ["PARAM_alpha"]),
+      cooks_filter=os.environ["PARAM_cooks_filter"] == "True", independent_filter=os.environ["PARAM_independent_filter"] == "True",
+      lfc_null=float(os.environ["PARAM_lfc_null"]), alt_hypothesis=os.environ["PARAM_alt_hypothesis"] or None, quiet=True)
+  stat.summary()
+  out = stat.results_df
+  out.index.name = "gene"
+  out.reset_index().to_csv(os.environ["OUT_results"], index=False, float_format="%.17g")

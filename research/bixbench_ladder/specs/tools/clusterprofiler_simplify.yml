@@ -1,0 +1,30 @@
+name: clusterprofiler_simplify
+tool: clusterProfiler 4.10.0 (R) with GO.db
+summary: Remove redundant GO terms from an enrichGO or gseGO result by semantic similarity with simplify().
+usage: |
+  Use after a GO enrichment when many related terms (parents and children of one process) crowd the table. Terms with similarity above the cutoff are collapsed to the representative with the best value of the chosen column. Works offline with GO.db. Input is the saved result object, not the table.
+  Choices that change the table: the similarity cutoff, the column used to pick the representative and whether the minimum or maximum is best, and the semantic similarity measure (Wang, Resnik, Rel, Jiang or Lin; the information-content measures need a semantic data object and are slower).
+inputs:
+  result: go_enrichment_object
+outputs:
+  table: simplified_go_table
+params:
+  cutoff:
+    default: "0.7"
+    help: Similarity above which two terms count as redundant.
+  by:
+    default: "p.adjust"
+    help: Column used to choose the representative term among redundant ones, for example p.adjust or Count.
+  select_fun:
+    default: "min"
+    help: min or max, which value of the by column wins.
+  measure:
+    default: "Wang"
+    help: Semantic similarity measure, Wang, Resnik, Rel, Jiang or Lin.
+interpreter: Rscript
+script: |
+  suppressMessages(library(clusterProfiler))
+  res <- readRDS(Sys.getenv("IN_result"))
+  simp <- simplify(res, cutoff = as.numeric(Sys.getenv("PARAM_cutoff")), by = Sys.getenv("PARAM_by"),
+                   select_fun = match.fun(Sys.getenv("PARAM_select_fun")), measure = Sys.getenv("PARAM_measure"))
+  write.csv(as.data.frame(simp), Sys.getenv("OUT_table"), row.names = FALSE)

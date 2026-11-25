@@ -1,0 +1,56 @@
+name: pheatmap_cluster
+tool: pheatmap 1.0.12 (R)
+summary: Cluster the rows and columns of an expression matrix with hierarchical clustering and draw a heat map.
+usage: |
+  Use to visualise sample and gene structure. Pass transformed (vst, rlog, log) values rather than raw counts. The order table records the clustering so the picture can be read as numbers. Rows can be restricted to the most variable genes first.
+  Choices that change the clustering: scaling of rows or columns, the distance measure and linkage for each axis, and the number of top-variance genes kept. With cutree_rows above zero the order table also carries the cluster membership.
+inputs:
+  matrix: expression_matrix_table
+outputs:
+  plot: heatmap_plot_png
+  order: heatmap_order_table
+params:
+  scale:
+    default: "none"
+    help: Standardise "row", "column" or "none" before colouring (clustering uses the unscaled values).
+  clustering_distance_rows:
+    default: "euclidean"
+    help: Row distance, euclidean, correlation, maximum, manhattan, canberra, binary or minkowski.
+  clustering_distance_cols:
+    default: "euclidean"
+    help: Column distance, same choices as the row distance.
+  clustering_method:
+    default: "complete"
+    help: Linkage, ward.D, ward.D2, single, complete, average, mcquitty, median or centroid.
+  cluster_rows:
+    default: "TRUE"
+    help: TRUE or FALSE.
+  cluster_cols:
+    default: "TRUE"
+    help: TRUE or FALSE.
+  top_variable:
+    default: "0"
+    help: Keep the n most variable rows by variance. 0 keeps all rows.
+  cutree_rows:
+    default: "0"
+    help: Cut the row tree into this many clusters and record the membership. 0 for none.
+interpreter: Rscript
+script: |
+  suppressMessages(library(pheatmap))
+  df <- read.csv(Sys.getenv("IN_matrix"), check.names = FALSE)
+  m <- as.matrix(df[, -1]); rownames(m) <- make.unique(as.character(df[[1]]))
+  top <- as.integer(Sys.getenv("PARAM_top_variable"))
+  if (top > 0 && top < nrow(m)) m <- m[order(apply(m, 1, var), decreasing = TRUE)[seq_len(top)], , drop = FALSE]
+  k <- as.integer(Sys.getenv("PARAM_cutree_rows"))
+  cr <- as.logical(Sys.getenv("PARAM_cluster_rows")); cc <- as.logical(Sys.getenv("PARAM_cluster_cols"))
+  ph <- pheatmap(m, scale = Sys.getenv("PARAM_scale"), cluster_rows = cr, cluster_cols = cc,
+                 clustering_distance_rows = Sys.getenv("PARAM_clustering_distance_rows"),
+                 clustering_distance_cols = Sys.getenv("PARAM_clustering_distance_cols"),
+                 clustering_method = Sys.getenv("PARAM_clustering_method"),
+                 cutree_rows = if (k > 0) k else NA, filename = Sys.getenv("OUT_plot"), width = 7, height = 7)
+  rows <- if (cr) ph$tree_row$labels[ph$tree_row$order] else rownames(m)
+  cols <- if (cc) ph$tree_col$labels[ph$tree_col$order] else colnames(m)
+  member <- if (cr && k > 0) cutree(ph$tree_row, k)[rows] else rep(NA, length(rows))
+  write.csv(rbind(data.frame(axis = "row", position = seq_along(rows), label = rows, cluster = member),
+                  data.frame(axis = "column", position = seq_along(cols), label = cols, cluster = NA)),
+            Sys.getenv("OUT_order"), row.names = FALSE)

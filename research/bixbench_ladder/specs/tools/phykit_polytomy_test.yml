@@ -1,0 +1,18 @@
+name: phykit_polytomy_test
+tool: PhyKIT 2.0.1 polytomy_test
+summary: Test a polytomy among three groups of taxa by gene-tree support frequencies.
+usage: |
+  Use to ask whether a three-way relationship among groups is an unresolved polytomy: gene trees (one per line in the tree set) are scanned for which two of three groups are sisters, and a chi-square test asks whether the three pairings are equally frequent. The groups file is tab separated: test name, group 0, group 1, group 2, outgroup, each a list of tip names joined by semicolons.
+inputs:
+  trees: tree_set
+  groups: polytomy_groups
+outputs:
+  out: polytomy_test_table
+interpreter: bash
+script: |
+  i=0
+  : > trees.txt
+  while IFS= read -r line; do
+    i=$((i+1)); printf '%s\n' "$line" > "gene_$i.nwk"; echo "gene_$i.nwk" >> trees.txt
+  done < <(grep -v '^$' "$IN_trees")
+  { echo "statistic,value"; phykit polytomy_test -t trees.txt -g "$IN_groups" | grep ':' | grep -v '^Gene Support' | sed 's/: /,/'; } > "$OUT_out"

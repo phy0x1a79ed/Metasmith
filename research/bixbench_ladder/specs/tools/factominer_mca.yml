@@ -1,0 +1,28 @@
+name: factominer_mca
+tool: FactoMineR 2.11 MCA
+summary: Multiple correspondence analysis of categorical columns.
+usage: |
+  Use for categorical data. Columns are read as factors; every column must be categorical. ncp default 5. Returns eigenvalues and category coordinates.
+inputs:
+  data: table
+outputs:
+  eig: factominer_mca_eigenvalues
+  var: factominer_mca_categories
+params:
+  columns:
+    default: ''
+    help: Comma-separated categorical columns.
+  ncp:
+    default: '5'
+    help: Number of dimensions kept.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(FactoMineR))
+  data <- read.csv(Sys.getenv("IN_data"), stringsAsFactors = TRUE)
+  cols <- trimws(strsplit(Sys.getenv("PARAM_columns"), ",")[[1]])
+  d <- as.data.frame(lapply(data[, cols], as.factor))
+  fit <- MCA(d, ncp = as.integer(Sys.getenv("PARAM_ncp")), graph = FALSE)
+  eig <- as.data.frame(fit$eig)
+  colnames(eig) <- c("eigenvalue", "percentage_of_variance", "cumulative_percentage")
+  write.csv(cbind(dimension = rownames(eig), eig), Sys.getenv("OUT_eig"), row.names = FALSE)
+  write.csv(cbind(category = rownames(fit$var$coord), as.data.frame(fit$var$coord)), Sys.getenv("OUT_var"), row.names = FALSE)

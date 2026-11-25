@@ -1,0 +1,37 @@
+name: scanpy_neighbors
+tool: scanpy 1.10.4 (Python)
+summary: Build the k-nearest-neighbour graph of cells in PCA space with scanpy neighbors.
+usage: |
+  Use after PCA. Writes obsp distances and connectivities and uns neighbors. The graph is the input to UMAP. Graph construction on small data is exact; on large data it uses approximate search.
+  Choices that change the graph: the number of neighbours, the number of principal components used, the metric, and the connectivity method (umap or gauss).
+inputs:
+  pca: anndata_pca
+outputs:
+  graph: anndata_neighbors
+params:
+  n_neighbors:
+    default: "15"
+    help: Size of the local neighbourhood.
+  n_pcs:
+    default: ""
+    help: Number of principal components used. Empty uses all computed components.
+  metric:
+    default: "euclidean"
+    help: Distance metric, for example euclidean, cosine, manhattan or correlation.
+  method:
+    default: "umap"
+    help: Connectivity weighting, umap or gauss.
+  random_state:
+    default: "0"
+    help: Seed for the approximate neighbour search.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_pca"])
+  n_pcs = os.environ["PARAM_n_pcs"].strip()
+  sc.pp.neighbors(adata, n_neighbors=int(os.environ["PARAM_n_neighbors"]), n_pcs=int(n_pcs) if n_pcs else None,
+                  metric=os.environ["PARAM_metric"], method=os.environ["PARAM_method"],
+                  random_state=int(os.environ["PARAM_random_state"]))
+  adata.write_h5ad(os.environ["OUT_graph"])

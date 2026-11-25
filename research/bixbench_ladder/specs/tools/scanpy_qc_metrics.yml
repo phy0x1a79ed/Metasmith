@@ -1,0 +1,35 @@
+name: scanpy_qc_metrics
+tool: scanpy 1.10.4 (Python)
+summary: Compute per-cell and per-gene quality control metrics with scanpy calculate_qc_metrics, including the mitochondrial fraction.
+usage: |
+  Use on raw counts before filtering. Adds to obs: n_genes_by_counts, total_counts, pct_counts_in_top_N_genes, and for the mitochondrial flag pct_counts_mt; adds to var: n_cells_by_counts, mean_counts, pct_dropout_by_counts, total_counts. The mitochondrial genes are those whose name starts with the prefix (case-sensitive; MT- for human, mt- for mouse).
+  Choices that change the numbers: the mitochondrial prefix, percent_top (every value must be at most the number of genes) and whether the log1p versions are added. Cells and genes are not removed.
+inputs:
+  adata: anndata_raw
+outputs:
+  qc: anndata_qc
+params:
+  mito_prefix:
+    default: "MT-"
+    help: Gene name prefix that marks mitochondrial genes. Empty skips the mitochondrial fraction.
+  percent_top:
+    default: "50,100,200,500"
+    help: Comma separated gene ranks for pct_counts_in_top_N_genes_by_counts.
+  log1p:
+    default: "True"
+    help: True or False, also add log1p versions of the metrics.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_adata"])
+  prefix = os.environ["PARAM_mito_prefix"]
+  qc_vars = []
+  if prefix:
+      adata.var["mt"] = adata.var_names.str.startswith(prefix)
+      qc_vars = ["mt"]
+  top = [int(x) for x in os.environ["PARAM_percent_top"].split(",") if x.strip()]
+  sc.pp.calculate_qc_metrics(adata, qc_vars=qc_vars, percent_top=top or None,
+                             log1p=os.environ["PARAM_log1p"] == "True", inplace=True)
+  adata.write_h5ad(os.environ["OUT_qc"])

@@ -1,0 +1,33 @@
+name: chi_square_goodness_of_fit
+tool: scipy.stats 1.14.1 chisquare
+summary: Chi-square goodness-of-fit test of a categorical column against expected proportions.
+usage: |
+  Use to compare observed category counts to expected ones. With expected empty, categories are equally likely; otherwise give proportions in sorted-level order, comma separated.
+inputs:
+  data: table
+outputs:
+  result: chi_square_gof_result
+params:
+  category_col:
+    default: ''
+    help: Categorical column to count.
+  expected:
+    default: ''
+    help: Comma-separated expected proportions in sorted level order; empty for uniform.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  obs = data[e["PARAM_category_col"]].value_counts().sort_index()
+  exp = None
+  if e["PARAM_expected"]:
+      p = np.array([float(v) for v in e["PARAM_expected"].split(",")])
+      exp = p / p.sum() * obs.sum()
+  res = stats.chisquare(obs.values, f_exp=exp)
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, dof=len(obs) - 1, n=int(obs.sum()))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

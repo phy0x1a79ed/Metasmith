@@ -1,0 +1,45 @@
+name: knn_classifier_cv
+tool: scikit-learn 1.6.0 KNeighborsClassifier
+summary: Cross-validated score of a k-nearest-neighbours classifier.
+usage: |
+  Use as a distance-based classifier; scale features first. Default k is 5.
+inputs:
+  data: table
+outputs:
+  result: knn_classifier_cv_scores
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Name of the class label column.
+  cv:
+    default: '5'
+    help: Number of cross-validation folds (stratified for classifiers, unshuffled).
+  scoring:
+    default: ''
+    help: scikit-learn scoring name, for example accuracy, roc_auc, f1, balanced_accuracy; empty uses the estimator's default (accuracy).
+  n_neighbors:
+    default: '5'
+    help: Number of neighbours.
+  weights:
+    default: uniform
+    help: uniform or distance.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.model_selection import cross_val_score
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  y = data[e["PARAM_target_col"]]
+  from sklearn.neighbors import KNeighborsClassifier
+  model = KNeighborsClassifier(n_neighbors=int(e["PARAM_n_neighbors"]), weights=e["PARAM_weights"])
+  scores = cross_val_score(model, X, y, cv=int(e["PARAM_cv"]), scoring=e["PARAM_scoring"] or None)
+  out = pd.DataFrame({"fold": range(1, len(scores) + 1), "score": scores})
+  out.to_csv(e["OUT_result"], index=False)

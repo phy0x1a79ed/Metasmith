@@ -1,0 +1,39 @@
+name: clusterprofiler_enricher_universe
+tool: clusterProfiler 4.10.0 (R)
+summary: Over-representation analysis of a gene list against custom gene sets from a GMT file with enricher (hypergeometric test), against an explicit background universe.
+usage: |
+  Use for any gene identifiers that match the GMT members, including the MSigDB-style collections the caller supplies. The background is the explicit universe list; sets are restricted to its genes.
+  Choices that change the numbers: the gene set file, the multiple testing method, size limits for the tested sets, and the p and q cutoffs, which only filter the output.
+inputs:
+  genes: gene_list
+  sets: gene_sets
+  universe: background_gene_list
+outputs:
+  table: enricher_universe_table
+params:
+  p_adjust_method:
+    default: "BH"
+    help: Multiple testing method, one of holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.
+  pvalue_cutoff:
+    default: "0.05"
+    help: Sets with an adjusted p-value above this are dropped from the output; use 1 to keep every tested set.
+  qvalue_cutoff:
+    default: "0.2"
+    help: Sets with a q-value above this are dropped; use 1 to keep every tested set.
+  min_gs_size:
+    default: "10"
+    help: Smallest gene set size tested, counted among the background genes.
+  max_gs_size:
+    default: "500"
+    help: Largest gene set size tested.
+interpreter: Rscript
+script: |
+  suppressMessages(library(clusterProfiler))
+  genes <- unique(trimws(readLines(Sys.getenv("IN_genes")))); genes <- genes[nzchar(genes)]
+  universe <- unique(trimws(readLines(Sys.getenv("IN_universe")))); universe <- universe[nzchar(universe)]
+  t2g <- read.gmt(Sys.getenv("IN_sets"))
+  res <- enricher(gene = genes, TERM2GENE = t2g, pvalueCutoff = as.numeric(Sys.getenv("PARAM_pvalue_cutoff")),
+                  pAdjustMethod = Sys.getenv("PARAM_p_adjust_method"), qvalueCutoff = as.numeric(Sys.getenv("PARAM_qvalue_cutoff")),
+                  minGSSize = as.integer(Sys.getenv("PARAM_min_gs_size")), maxGSSize = as.integer(Sys.getenv("PARAM_max_gs_size")), universe = universe)
+  df <- if (is.null(res)) data.frame() else as.data.frame(res)
+  write.csv(df, Sys.getenv("OUT_table"), row.names = FALSE)

@@ -1,0 +1,14 @@
+name: phykit_lca_subtree
+tool: PhyKIT 2.0.1 last_common_ancestor_subtree
+summary: Extract the subtree below the last common ancestor of chosen taxa.
+usage: |
+  Use to cut out a clade. The subtree contains every descendant of the most recent common ancestor of the listed tips, including tips not in the list that fall inside it.
+inputs:
+  tree: source_tree
+  taxa: taxon_list
+outputs:
+  out: lca_subtree
+interpreter: bash
+script: |
+  phykit last_common_ancestor_subtree "$IN_tree" "$IN_taxa" -o lca > /dev/null
+  cp lca "$OUT_out"

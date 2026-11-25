@@ -1,0 +1,4 @@
+{
+ "formula": "value ~ C(group)",
+ "groups_col": "subject"
+}

@@ -1,0 +1,54 @@
+name: scanpy_highly_variable_genes
+tool: scanpy 1.10.4 (Python)
+summary: Flag highly variable genes with scanpy highly_variable_genes (seurat or cell_ranger flavor).
+usage: |
+  Use on log-normalised data. Adds var columns highly_variable, means, dispersions and dispersions_norm. Genes are selected either by thresholds on mean and normalised dispersion, or by taking a fixed number of top genes (n_top_genes, which overrides the thresholds). Optionally selects within each batch and keeps the genes variable in most batches. The seurat_v3 flavor is not available in the image (it needs scikit-misc).
+  Choices that change the selection: flavor, n_top_genes or the mean and dispersion thresholds, the batch column, and whether the object is subset to the selected genes (otherwise only the flag is written).
+inputs:
+  logged: anndata_log1p
+outputs:
+  hvg: anndata_hvg
+params:
+  flavor:
+    default: "seurat"
+    help: seurat or cell_ranger.
+  n_top_genes:
+    default: ""
+    help: Number of genes to select. Empty uses the mean and dispersion thresholds.
+  min_mean:
+    default: "0.0125"
+    help: Minimum mean expression, used when n_top_genes is empty.
+  max_mean:
+    default: "3"
+    help: Maximum mean expression, used when n_top_genes is empty.
+  min_disp:
+    default: "0.5"
+    help: Minimum normalised dispersion, used when n_top_genes is empty.
+  max_disp:
+    default: "inf"
+    help: Maximum normalised dispersion, used when n_top_genes is empty.
+  n_bins:
+    default: "20"
+    help: Number of mean-expression bins used to normalise the dispersion.
+  batch_key:
+    default: ""
+    help: obs column; genes are ranked within each batch and combined. Empty for no batch correction.
+  subset:
+    default: "False"
+    help: True or False, drop the genes that are not highly variable.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_logged"])
+  n_top = os.environ["PARAM_n_top_genes"].strip()
+  batch = os.environ["PARAM_batch_key"].strip()
+  sc.pp.highly_variable_genes(
+      adata, flavor=os.environ["PARAM_flavor"], n_top_genes=int(n_top) if n_top else None,
+      min_mean=float(os.environ["PARAM_min_mean"]), max_mean=float(os.environ["PARAM_max_mean"]),
+      min_disp=float(os.environ["PARAM_min_disp"]), max_disp=float(os.environ["PARAM_max_disp"]),
+      n_bins=int(os.environ["PARAM_n_bins"]), batch_key=batch or None,
+      subset=os.environ["PARAM_subset"] == "True")
+  print(int(adata.var["highly_variable"].sum()), "highly variable genes")
+  adata.write_h5ad(os.environ["OUT_hvg"])

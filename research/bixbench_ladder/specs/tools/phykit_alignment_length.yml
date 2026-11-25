@@ -1,0 +1,12 @@
+name: phykit_alignment_length
+tool: PhyKIT 2.0.1 alignment_length
+summary: Report the number of columns in an alignment.
+usage: |
+  Use for the length of a multiple sequence alignment in columns, gaps included.
+inputs:
+  aln: alignment
+outputs:
+  out: alignment_length_table
+interpreter: bash
+script: |
+  { echo "alignment_length"; phykit alignment_length "$IN_aln" | tr '\t' ','; } > "$OUT_out"

@@ -1,0 +1,36 @@
+name: bio_codon_usage
+tool: Biopython 1.84 Seq.translate (codon counting)
+summary: Count codon usage in coding sequences and compute relative synonymous codon usage (RSCU).
+usage: |
+  Use on in-frame coding sequences (length a multiple of three; a trailing partial codon is ignored). Counts are pooled over all records. per_thousand is the codon's share per 1000 codons; RSCU is the count divided by the mean count of its synonymous codons (1 means no bias, above 1 preferred).
+inputs:
+  seqs: sequences_fasta
+outputs:
+  table: codon_usage_table
+params:
+  table:
+    default: '1'
+    help: NCBI genetic code table number
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from collections import Counter
+  from Bio import SeqIO
+  from Bio.Data import CodonTable
+  from Bio.Seq import Seq
+  tab = CodonTable.unambiguous_dna_by_id[int(os.environ["PARAM_table"])]
+  cnt = Counter()
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      s = str(r.seq).upper().replace("-", "")
+      for i in range(0, len(s) - 2, 3):
+          cnt[s[i:i + 3]] += 1
+  aa = {c: tab.forward_table.get(c, "*") for c in [a + b + d for a in "TCAG" for b in "TCAG" for d in "TCAG"]}
+  total = sum(cnt[c] for c in aa)
+  rows = []
+  for c, a in aa.items():
+      syn = [x for x, y in aa.items() if y == a]
+      mean = sum(cnt[x] for x in syn) / len(syn)
+      rows.append(dict(codon=c, amino_acid=a, count=cnt[c], per_thousand=1000 * cnt[c] / total, rscu=cnt[c] / mean if mean else None))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

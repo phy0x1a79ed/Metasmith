@@ -1,0 +1,52 @@
+name: deseq2_fit_lrt
+tool: DESeq2 1.42.0 (R)
+summary: Fit the DESeq2 model with the likelihood ratio test, comparing a full design against a reduced design.
+usage: |
+  Use to test whether a factor (or set of terms) as a whole explains expression, for example any difference across several time points or across a multi-level factor. The test drops the terms present in the full design and absent from the reduced design.
+  Choices that change the numbers: full and reduced formulas, reference levels, dispersion fit type, size factor estimator and the minimum row-sum pre-filter. The results step reports the LRT statistic and p-value; its log2 fold change is that of the last coefficient or the requested contrast.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  fit: deseq2_lrt_fit
+params:
+  design:
+    default: "~ batch + condition"
+    help: Full design formula over sample sheet columns.
+  reduced:
+    default: "~ batch"
+    help: Reduced formula to test against, nested in the full design.
+  reference:
+    default: ""
+    help: Reference levels as comma separated factor=level pairs, for example "condition=control". Empty keeps the alphabetical first level.
+  fit_type:
+    default: "parametric"
+    help: Dispersion trend, one of parametric, local, mean or glmGamPoi.
+  size_factor_type:
+    default: "ratio"
+    help: Size factor estimator passed to estimateSizeFactors, ratio, poscounts or iterate.
+  min_replicates_for_replace:
+    default: "7"
+    help: Minimum number of replicates in a group before outliers are replaced and refit. 0 disables replacement.
+  min_row_sum:
+    default: "0"
+    help: Drop genes whose total count over all samples is below this value before fitting. 0 keeps every gene.
+interpreter: Rscript
+script: |
+  suppressMessages(library(DESeq2))
+  cnt <- read.csv(Sys.getenv("IN_counts"), row.names = 1, check.names = FALSE)
+  cd <- read.csv(Sys.getenv("IN_samples"), row.names = 1, check.names = FALSE)
+  cd <- cd[colnames(cnt), , drop = FALSE]
+  cd[] <- lapply(cd, function(x) if (is.character(x)) factor(x) else x)
+  for (pair in strsplit(Sys.getenv("PARAM_reference"), ",")[[1]]) {
+    kv <- trimws(strsplit(pair, "=")[[1]])
+    cd[[kv[1]]] <- relevel(factor(cd[[kv[1]]]), ref = kv[2])
+  }
+  dds <- DESeqDataSetFromMatrix(as.matrix(cnt), cd, design = as.formula(Sys.getenv("PARAM_design")))
+  dds <- dds[rowSums(counts(dds)) >= as.numeric(Sys.getenv("PARAM_min_row_sum")), ]
+  dds <- estimateSizeFactors(dds, type = Sys.getenv("PARAM_size_factor_type"))
+  dds <- DESeq(dds, test = "LRT", reduced = as.formula(Sys.getenv("PARAM_reduced")),
+               fitType = Sys.getenv("PARAM_fit_type"),
+               minReplicatesForReplace = as.numeric(Sys.getenv("PARAM_min_replicates_for_replace")))
+  print(resultsNames(dds))
+  saveRDS(dds, Sys.getenv("OUT_fit"))

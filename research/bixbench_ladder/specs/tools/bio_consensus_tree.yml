@@ -1,0 +1,30 @@
+name: bio_consensus_tree
+tool: Biopython 1.84 Bio.Phylo.Consensus
+summary: Build a strict, majority-rule or Adam consensus tree from a set of trees.
+usage: |
+  Use to summarise bootstrap replicates or gene trees on the same taxa. strict keeps only clades in every tree; majority keeps clades above the cutoff (cutoff 0 keeps the most frequent compatible clades, 0.5 is the classic majority rule); adam is the Adam consensus and needs no cutoff. All trees must have the same taxa.
+inputs:
+  trees: tree_set
+outputs:
+  tree: bio_consensus_tree
+params:
+  method:
+    default: majority
+    help: strict, majority or adam
+  cutoff:
+    default: '0'
+    help: 'majority only: minimum fraction of trees (0 to 1) a clade must occur in to be kept'
+interpreter: python
+script: |
+  import os
+  from Bio import Phylo
+  from Bio.Phylo import Consensus
+  trees = list(Phylo.parse(os.environ["IN_trees"], "newick"))
+  m = os.environ["PARAM_method"]
+  if m == "strict":
+      t = Consensus.strict_consensus(trees)
+  elif m == "adam":
+      t = Consensus.adam_consensus(trees)
+  else:
+      t = Consensus.majority_consensus(trees, float(os.environ["PARAM_cutoff"]))
+  Phylo.write(t, os.environ["OUT_tree"], "newick")

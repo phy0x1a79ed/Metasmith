@@ -1,0 +1,24 @@
+name: fcs_to_table
+tool: fcsparser 0.2.8 parse
+summary: Read a flow cytometry FCS file into a table of events by channels.
+usage: |
+  Use to convert an FCS 2.0/3.0/3.1 file into CSV, one row per event and one column per channel. channel_naming picks channel names from $PnN (short name) or $PnS (marker stain).
+inputs:
+  fcs: fcs_file
+outputs:
+  result: fcs_events_table
+params:
+  channel_naming:
+    default: $PnS
+    help: 'Which keyword names the channels: $PnS or $PnN.'
+  reformat_meta:
+    default: 'True'
+    help: Ignored for the table; kept as fcsparser's own default.
+interpreter: python
+script: |
+  import os
+  import fcsparser
+
+  e = os.environ
+  meta, df = fcsparser.parse(e["IN_fcs"], channel_naming=e["PARAM_channel_naming"], reformat_meta=e["PARAM_reformat_meta"] == "True")
+  df.to_csv(e["OUT_result"], index=False)

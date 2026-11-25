@@ -1,0 +1,12 @@
+name: phykit_variable_sites
+tool: PhyKIT 2.0.1 variable_sites
+summary: Count the variable sites of an alignment.
+usage: |
+  A site is variable when it contains more than one character state. Reports the count, the alignment length and the percentage of variable sites.
+inputs:
+  aln: alignment
+outputs:
+  out: variable_sites_table
+interpreter: bash
+script: |
+  { echo "variable_sites,alignment_length,percent_variable"; phykit variable_sites "$IN_aln" | tr '\t' ','; } > "$OUT_out"

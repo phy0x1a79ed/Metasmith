@@ -1,0 +1,37 @@
+name: tsne_embedding
+tool: scikit-learn 1.6.0 TSNE
+summary: t-SNE low-dimensional embedding of rows on numeric features.
+usage: |
+  Use for visualisation only; distances between clusters are not meaningful. perplexity must be smaller than the number of rows (default 30).
+inputs:
+  data: table
+outputs:
+  result: tsne_embedding_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  n_components:
+    default: '2'
+    help: Embedding dimension.
+  perplexity:
+    default: '30.0'
+    help: Perplexity.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.manifold import TSNE
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  emb = TSNE(n_components=int(e["PARAM_n_components"]), perplexity=float(e["PARAM_perplexity"]), random_state=rs).fit_transform(X)
+  out = pd.DataFrame(emb, columns=[f"TSNE{i + 1}" for i in range(emb.shape[1])])
+  out.to_csv(e["OUT_result"], index=False)

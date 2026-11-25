@@ -1,0 +1,16 @@
+name: ete3_unroot
+tool: ete3 3.1.3 Tree
+summary: Remove the root of a tree.
+usage: |
+  Use before methods that need an unrooted tree. A bifurcating root is collapsed into a trifurcation; the two root branches are merged by adding their lengths.
+inputs:
+  tree: source_tree
+outputs:
+  out: ete3_unrooted_tree
+interpreter: python
+script: |
+  import os
+  from ete3 import Tree
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  t.unroot()
+  open(os.environ["OUT_out"], "w").write(t.write(format=0) + "\n")

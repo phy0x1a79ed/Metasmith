@@ -1,0 +1,29 @@
+name: broom_glm_tidy
+tool: broom 1.0.7 tidy (stats::glm)
+summary: Generalised linear model coefficients as a tidy table, optionally exponentiated.
+usage: |
+  Use for logistic (binomial), Poisson and other glm fits from an R formula. family is the stats family name; gaussian is the glm default. exponentiate TRUE reports odds or rate ratios. Confidence intervals are profile-likelihood.
+inputs:
+  data: table
+outputs:
+  result: broom_glm_coefficients
+params:
+  formula:
+    default: ''
+    help: R model formula.
+  family:
+    default: gaussian
+    help: gaussian, binomial, poisson, Gamma, quasibinomial, quasipoisson ...
+  exponentiate:
+    default: 'FALSE'
+    help: TRUE to exponentiate estimates and intervals.
+  conf_level:
+    default: '0.95'
+    help: Confidence level.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(broom))
+  data <- read.csv(Sys.getenv("IN_data"), stringsAsFactors = TRUE)
+  fit <- glm(as.formula(Sys.getenv("PARAM_formula")), family = get(Sys.getenv("PARAM_family")), data = data)
+  res <- tidy(fit, conf.int = TRUE, conf.level = as.numeric(Sys.getenv("PARAM_conf_level")), exponentiate = Sys.getenv("PARAM_exponentiate") == "TRUE")
+  write.csv(as.data.frame(res), Sys.getenv("OUT_result"), row.names = FALSE)

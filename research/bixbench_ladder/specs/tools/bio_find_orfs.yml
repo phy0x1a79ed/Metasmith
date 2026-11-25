@@ -1,0 +1,47 @@
+name: bio_find_orfs
+tool: Biopython 1.84 Seq.translate (six-frame ORF scan)
+summary: Find open reading frames in all six frames of each nucleotide sequence.
+usage: |
+  Use to locate candidate protein-coding regions in unannotated DNA. An ORF is a stretch between stop codons in one frame; with require_start yes it begins at the first methionine codon after the previous stop. min_aa_length drops short ORFs. The stop codon, when present, is included in the coordinates but not in the protein. The genetic code table matters for non-standard codes.
+inputs:
+  seqs: nucleotide_fasta
+outputs:
+  table: orf_table
+params:
+  table:
+    default: '1'
+    help: NCBI genetic code table number
+  min_aa_length:
+    default: '30'
+    help: minimum ORF length in amino acids
+  require_start:
+    default: 'yes'
+    help: yes begins each ORF at its first Met codon; no reports whole stop-to-stop stretches
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import SeqIO
+  from Bio.Seq import Seq
+  tbl = int(os.environ["PARAM_table"]); minaa = int(os.environ["PARAM_min_aa_length"]); need = os.environ["PARAM_require_start"] == "yes"
+  rows = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      fwd = Seq(str(r.seq).replace("-", "").upper())
+      L = len(fwd)
+      for strand, seq in (("+", fwd), ("-", fwd.reverse_complement())):
+          for frame in range(3):
+              n = (L - frame) // 3 * 3
+              prot = str(seq[frame:frame + n].translate(table=tbl))
+              pos = 0
+              for chunk in prot.split("*"):
+                  has_stop = pos + len(chunk) < len(prot)
+                  start_aa = chunk.find("M") if need else 0
+                  if start_aa >= 0 and len(chunk) - start_aa >= minaa:
+                      s0 = frame + 3 * (pos + start_aa)
+                      e0 = frame + 3 * (pos + len(chunk) + (1 if has_stop else 0))
+                      a, b = (s0 + 1, e0) if strand == "+" else (L - e0 + 1, L - s0)
+                      rows.append(dict(record=r.id, strand=strand, frame=frame + 1, start=a, end=b, length_nt=e0 - s0,
+                                       length_aa=len(chunk) - start_aa, protein=chunk[start_aa:]))
+                  pos += len(chunk) + 1
+  pd.DataFrame(rows, columns=["record", "strand", "frame", "start", "end", "length_nt", "length_aa", "protein"]).to_csv(os.environ["OUT_table"], index=False)

@@ -1,0 +1,38 @@
+name: scanpy_tsne
+tool: scanpy 1.10.4 (Python) with scikit-learn 1.6.0
+summary: Embed cells in two dimensions with t-SNE from the principal components (scanpy tsne).
+usage: |
+  Use after PCA. Writes obsm X_tsne. t-SNE is for visualisation only; the layout depends on the perplexity and the seed.
+  Choices that change the layout: number of principal components, perplexity, early exaggeration, learning rate and the random state.
+inputs:
+  pca: anndata_pca
+outputs:
+  tsne: anndata_tsne
+params:
+  n_pcs:
+    default: ""
+    help: Number of principal components used. Empty uses all computed components.
+  perplexity:
+    default: "30"
+    help: Perplexity, roughly the number of effective neighbours.
+  early_exaggeration:
+    default: "12"
+    help: Factor by which clusters are spread apart in the early optimisation.
+  learning_rate:
+    default: "1000"
+    help: Learning rate, usually between 100 and 1000.
+  random_state:
+    default: "0"
+    help: Seed.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_pca"])
+  n_pcs = os.environ["PARAM_n_pcs"].strip()
+  sc.tl.tsne(adata, n_pcs=int(n_pcs) if n_pcs else None, perplexity=float(os.environ["PARAM_perplexity"]),
+             early_exaggeration=float(os.environ["PARAM_early_exaggeration"]),
+             learning_rate=float(os.environ["PARAM_learning_rate"]), random_state=int(os.environ["PARAM_random_state"]),
+             n_jobs=1)
+  adata.write_h5ad(os.environ["OUT_tsne"])

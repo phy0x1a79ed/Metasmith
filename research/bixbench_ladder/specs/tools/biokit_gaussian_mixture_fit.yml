@@ -1,0 +1,38 @@
+name: biokit_gaussian_mixture_fit
+tool: biokit 0.5.0 biokit.stats.mixture.GaussianMixtureFitting
+summary: Fit a mixture of k Gaussians to one numeric column by minimising the negative log-likelihood.
+usage: |
+  Use to find sub-populations in a one-dimensional sample (for example a bimodal score or length distribution). k is fixed in advance; use biokit_mixture_model_selection to choose k. The fit is by a numeric optimiser (default Nelder-Mead), so very different starting guesses can reach local optima. Reported neg_log_likelihood (biokit stores the negative log-likelihood), AIC, AICc and BIC are biokit's own values; its BIC is not on the same scale as AIC, so compare criteria only between fits from biokit.
+inputs:
+  data: table
+outputs:
+  table: biokit_gaussian_mixture_components_table
+params:
+  column:
+    default: value
+    help: name of the numeric column to model
+  k:
+    default: '2'
+    help: number of Gaussian components
+  method:
+    default: Nelder-Mead
+    help: 'scipy optimiser: Nelder-Mead, Powell, BFGS, ...'
+interpreter: python
+script: |
+  import os
+  import matplotlib
+  matplotlib.use('Agg')
+  import numpy as np
+  import pandas as pd
+
+  df = pd.read_csv(os.environ["IN_data"])
+  x = df[os.environ["PARAM_column"]].dropna().to_numpy(dtype=float)
+
+  from biokit.stats import mixture
+  m = mixture.GaussianMixtureFitting(x, k=int(os.environ["PARAM_k"]), method=os.environ["PARAM_method"])
+  m.estimate()
+
+  r = m.results
+  rows = [dict(component=i + 1, mean=m, sigma=s, weight=w, neg_log_likelihood=r["log_likelihood"], aic=r["AIC"], aicc=r["AICc"], bic=r["BIC"])
+          for i, (m, s, w) in enumerate(zip(r["mus"], r["sigmas"], r["pis"]))]
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

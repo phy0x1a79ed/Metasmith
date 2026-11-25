@@ -1,0 +1,34 @@
+name: rstatix_fisher_test
+tool: rstatix 0.7.2 fisher_test
+summary: Fisher's exact test on the contingency table of two categorical columns.
+usage: |
+  Use for small counts; works for r x c tables (conditional odds ratio and CI only for 2x2).
+inputs:
+  data: table
+outputs:
+  result: rstatix_fisher_table
+params:
+  row_col:
+    default: ''
+    help: Categorical column for rows.
+  col_col:
+    default: ''
+    help: Categorical column for columns.
+  alternative:
+    default: two.sided
+    help: 'Alternative: two.sided, less or greater.'
+  conf_level:
+    default: '0.95'
+    help: Confidence level.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  xtab <- table(data[[Sys.getenv("PARAM_row_col")]], data[[Sys.getenv("PARAM_col_col")]])
+  res <- fisher_test(xtab, alternative = Sys.getenv("PARAM_alternative"), conf.level = as.numeric(Sys.getenv("PARAM_conf_level")), detailed = TRUE)
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

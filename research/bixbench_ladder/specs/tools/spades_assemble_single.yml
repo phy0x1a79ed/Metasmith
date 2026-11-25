@@ -1,0 +1,38 @@
+name: spades_assemble_single
+tool: SPAdes 4.0.0
+summary: Assemble single-end reads into contigs and scaffolds with SPAdes.
+usage: |
+  Use for a genome or isolate sequenced with single-end reads. mode selects the assembler: --isolate for high-coverage isolates, --careful to reduce mismatches, --meta for metagenomes (paired-end only), --sc for single cells, --rna for transcriptomes. Without mode, SPAdes runs read error correction first. A k-mer list changes contiguity. Returns contigs and scaffolds; headers give length and k-mer coverage.
+inputs:
+  reads: seq_reads_fastq
+outputs:
+  contigs: spades_se_contigs
+  scaffolds: spades_se_scaffolds
+params:
+  mode:
+    default: ''
+    help: 'assembly mode flag: empty for standard, or one of --isolate, --careful, --meta, --sc, --plasmid, --rna, --bio'
+  kmers:
+    default: auto
+    help: comma-separated odd k-mer sizes, for example 21,33,55, or auto to let SPAdes choose
+  only_assembler:
+    default: 'no'
+    help: yes skips read error correction (--only-assembler)
+  cov_cutoff:
+    default: 'off'
+    help: 'coverage cutoff: off, auto or a number; contigs below it are dropped'
+  threads:
+    default: '16'
+    help: number of threads
+  memory_gb:
+    default: '250'
+    help: memory limit in GB (-m)
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_mode" ]; then args+=($PARAM_mode); fi
+  if [ "$PARAM_kmers" != auto ]; then args+=(-k "$PARAM_kmers"); fi
+  if [ "$PARAM_only_assembler" = yes ]; then args+=(--only-assembler); fi
+  spades.py -s "$IN_reads" -o asm_out -t "$PARAM_threads" -m "$PARAM_memory_gb" --cov-cutoff "$PARAM_cov_cutoff" "${args[@]}" > spades.log 2>&1 || { tail -20 spades.log >&2; exit 1; }
+  cp asm_out/contigs.fasta "$OUT_contigs"
+  cp asm_out/scaffolds.fasta "$OUT_scaffolds"

@@ -1,0 +1,37 @@
+name: tukey_hsd_pairwise
+tool: statsmodels 0.14.4 pairwise_tukeyhsd
+summary: Tukey HSD all-pairs comparison of group means.
+usage: |
+  Use after a significant one-way ANOVA to compare every pair of groups with family-wise error control. Assumes equal variances.
+inputs:
+  data: table
+outputs:
+  result: tukey_hsd_table
+params:
+  value_col:
+    default: ''
+    help: Numeric column.
+  group_col:
+    default: ''
+    help: Group label column.
+  alpha:
+    default: '0.05'
+    help: Family-wise error rate.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.multicomp import pairwise_tukeyhsd
+  d = data[[e["PARAM_value_col"], e["PARAM_group_col"]]].dropna()
+  res = pairwise_tukeyhsd(d[e["PARAM_value_col"]], d[e["PARAM_group_col"]].astype(str), alpha=float(e["PARAM_alpha"]))
+  i, j = res._multicomp.pairindices
+  names = res.groupsunique
+  out = pd.DataFrame({"group1": names[i], "group2": names[j], "meandiff": res.meandiffs, "p-adj": res.pvalues,
+                      "lower": res.confint[:, 0], "upper": res.confint[:, 1], "reject": res.reject})
+  out.to_csv(e["OUT_result"], index=False)

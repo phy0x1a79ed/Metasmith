@@ -1,0 +1,297 @@
+ttest_result:
+  description: 'one-row table of a t-test: statistic, pvalue, df, mean_1, mean_2, mean_difference, ci_low, ci_high, n_1, n_2'
+  ext: csv
+paired_ttest_result:
+  description: 'one-row table of a paired t-test: statistic, pvalue, df, mean_1, mean_2, mean_difference, ci_low, ci_high, n_pairs'
+  ext: csv
+one_sample_ttest_result:
+  description: 'one-row table of a one-sample t-test: statistic, pvalue, df, mean, ci_low, ci_high, n'
+  ext: csv
+mann_whitney_result:
+  description: 'one-row table of a Mann-Whitney test: statistic (U of group 1), pvalue, n_1, n_2, median_1, median_2'
+  ext: csv
+wilcoxon_result:
+  description: 'one-row table of a Wilcoxon signed-rank test: statistic, pvalue, n'
+  ext: csv
+oneway_anova_result:
+  description: 'one-row table of a one-way ANOVA: statistic (F), pvalue, n_groups, n'
+  ext: csv
+kruskal_wallis_result:
+  description: 'one-row table of a Kruskal-Wallis test: statistic (H), pvalue, df, n_groups, n'
+  ext: csv
+friedman_result:
+  description: 'one-row table of a Friedman test: statistic, pvalue, n_conditions, n_subjects'
+  ext: csv
+chi_square_independence_result:
+  description: 'one-row table of a chi-square test: statistic, pvalue, dof, n, min_expected_count'
+  ext: csv
+fisher_exact_result:
+  description: 'one-row table of Fisher''s exact test: odds_ratio, pvalue, a, b, c, d (the 2x2 cell counts, row-major)'
+  ext: csv
+correlation_test_result:
+  description: 'one-row table: method, coefficient, pvalue, n'
+  ext: csv
+normality_test_result:
+  description: 'one-row table: test, statistic, pvalue, n'
+  ext: csv
+variance_test_result:
+  description: 'one-row table: test, statistic, pvalue, n_groups'
+  ext: csv
+ks_two_sample_result:
+  description: 'one-row table: statistic, pvalue, n_1, n_2'
+  ext: csv
+linregress_result:
+  description: 'one-row table: slope, intercept, rvalue, rsquared, pvalue, stderr, intercept_stderr, n'
+  ext: csv
+binomial_test_result:
+  description: 'one-row table: successes, n, proportion, pvalue, ci_low, ci_high'
+  ext: csv
+bootstrap_ci_result:
+  description: 'one-row table: statistic_name, estimate, ci_low, ci_high, standard_error, n'
+  ext: csv
+permutation_test_result:
+  description: 'one-row table: statistic, pvalue, n_1, n_2'
+  ext: csv
+chi_square_gof_result:
+  description: 'one-row table: statistic, pvalue, dof, n'
+  ext: csv
+group_summary_table:
+  description: 'table with one row per group (or one row ''all''): group, n, mean, std, sem, min, q25, median, q75, max, skewness'
+  ext: csv
+ols_coefficients:
+  description: 'table, one row per model term: term, estimate, std_err, statistic (t), pvalue, ci_low, ci_high'
+  ext: csv
+ols_fit_statistics:
+  description: 'one-row table: nobs, df_model, df_resid, rsquared, rsquared_adj, fvalue, f_pvalue, aic, bic, llf, mse_resid'
+  ext: csv
+anova_lm_table:
+  description: 'table, one row per term plus Residual: term, sum_sq, df, F, PR(>F)'
+  ext: csv
+logit_coefficients:
+  description: 'table, one row per term: term, estimate (log odds), std_err, statistic (z), pvalue, ci_low, ci_high, odds_ratio, or_ci_low, or_ci_high'
+  ext: csv
+glm_coefficients:
+  description: 'table, one row per term: term, estimate, std_err, statistic (z), pvalue, ci_low, ci_high'
+  ext: csv
+negbin_coefficients:
+  description: 'table, one row per term plus alpha: term, estimate, std_err, statistic (z), pvalue, ci_low, ci_high'
+  ext: csv
+mixedlm_estimates:
+  description: 'table, one row per fixed effect and variance parameter: term, estimate, std_err, statistic (z), pvalue, ci_low, ci_high'
+  ext: csv
+tukey_hsd_table:
+  description: 'table, one row per group pair: group1, group2, meandiff, p-adj, lower, upper, reject'
+  ext: csv
+adjusted_pvalues_table:
+  description: the input table plus columns pvalue_adjusted and reject
+  ext: csv
+proportions_ztest_result:
+  description: 'one-row table: statistic (z), pvalue'
+  ext: csv
+proportion_ci_table:
+  description: 'table, one row per input row: count, nobs, proportion, ci_low, ci_high'
+  ext: csv
+mcnemar_result:
+  description: 'one-row table: statistic, pvalue, n_01, n_10 (discordant counts)'
+  ext: csv
+odds_ratio_result:
+  description: 'one-row table: odds_ratio, or_ci_low, or_ci_high, or_pvalue, risk_ratio, rr_ci_low, rr_ci_high'
+  ext: csv
+cox_coefficients:
+  description: 'table, one row per covariate: term, coef (log hazard ratio), hazard_ratio, std_err, statistic (z), pvalue, hr_ci_low, hr_ci_high'
+  ext: csv
+logrank_result:
+  description: 'one-row table: statistic (chi-square), pvalue, df, n_groups'
+  ext: csv
+kaplan_meier_table:
+  description: 'table: group, time, n_risk, n_events, surv_prob, surv_prob_se, one row per distinct event time per group'
+  ext: csv
+vif_table:
+  description: 'table, one row per predictor: variable, vif'
+  ext: csv
+breusch_pagan_result:
+  description: 'one-row table: lm_statistic, lm_pvalue, f_statistic, f_pvalue'
+  ext: csv
+random_forest_classifier_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+feature_importance_table:
+  description: 'table, one row per feature: feature, importance'
+  ext: csv
+logistic_regression_classifier_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+svm_classifier_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+gradient_boosting_classifier_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+knn_classifier_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+random_forest_regressor_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+ridge_regression_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+lasso_regression_cv_scores:
+  description: 'table with one row per cross-validation fold: fold, score'
+  ext: csv
+pca_scores_table:
+  description: 'table, one row per input row: PC1..PCk component scores, in input row order'
+  ext: csv
+pca_variance_table:
+  description: 'table, one row per component: component, explained_variance, explained_variance_ratio, cumulative_ratio, singular_value'
+  ext: csv
+pca_loadings_table:
+  description: 'table, one row per input feature: feature, PC1..PCk loadings (component vectors)'
+  ext: csv
+kmeans_assignments:
+  description: 'table, one row per input row: row, cluster (0-based label), distance_to_center'
+  ext: csv
+agglomerative_assignments:
+  description: 'table, one row per input row: row, cluster (0-based label)'
+  ext: csv
+dbscan_assignments:
+  description: 'table, one row per input row: row, cluster (-1 for noise)'
+  ext: csv
+silhouette_table:
+  description: 'table, one row per k: k, silhouette_score, inertia'
+  ext: csv
+scaled_table:
+  description: the input table with the selected columns rescaled and all others unchanged
+  ext: csv
+imputed_table:
+  description: the input table with missing values filled in the selected columns
+  ext: csv
+umap_embedding_table:
+  description: 'table, one row per input row: UMAP1..UMAPk coordinates'
+  ext: csv
+tsne_embedding_table:
+  description: 'table, one row per input row: TSNE1..TSNEk coordinates'
+  ext: csv
+roc_auc_result:
+  description: 'one-row table: auc, n_positive, n_negative'
+  ext: csv
+roc_curve_table:
+  description: 'table, one row per threshold: threshold, fpr, tpr'
+  ext: csv
+classification_metrics_result:
+  description: 'one-row table: accuracy, balanced_accuracy, precision, recall, f1, mcc, tn, fp, fn, tp (counts only for binary labels)'
+  ext: csv
+smote_resampled_table:
+  description: table with the selected feature columns plus the target column, original rows first followed by synthetic minority rows
+  ext: csv
+undersampled_table:
+  description: table with the selected feature columns plus the target column after random undersampling
+  ext: csv
+fcs_file:
+  description: flow cytometry standard file with event-by-channel data
+  ext: fcs
+fcs_events_table:
+  description: table, one row per cytometer event, one column per channel with the raw measured values
+  ext: csv
+excel_workbook:
+  description: Excel workbook with one or more worksheets
+  ext: xlsx
+excel_sheet_table:
+  description: one worksheet as a CSV table with a header row
+  ext: csv
+set_overlap_membership:
+  description: 'table, one row per distinct identifier: element, in_a, in_b, region (a_only, b_only or both)'
+  ext: csv
+rstatix_t_test_table:
+  description: 'table, one row per comparison: .y., group1, group2, n1, n2, estimate, estimate1, estimate2, statistic, p, df, conf.low, conf.high, method, alternative, p.adj'
+  ext: csv
+rstatix_pairwise_t_test_table:
+  description: 'table, one row per pair: .y., group1, group2, n1, n2, p, p.signif, p.adj, p.adj.signif'
+  ext: csv
+rstatix_wilcox_test_table:
+  description: 'table, one row per comparison: .y., group1, group2, n1, n2, estimate, statistic, p, conf.low, conf.high, method, alternative, p.adj'
+  ext: csv
+rstatix_anova_table:
+  description: 'table, one row per effect: Effect, DFn, DFd, F, p, p<.05, and the effect size column ges or pes'
+  ext: csv
+rstatix_welch_anova_table:
+  description: 'one-row table: .y., n, statistic, DFn, DFd, p, method'
+  ext: csv
+rstatix_kruskal_table:
+  description: 'one-row table: .y., n, statistic, df, p, method'
+  ext: csv
+rstatix_friedman_table:
+  description: 'one-row table: .y., n, statistic, df, p, method'
+  ext: csv
+rstatix_tukey_table:
+  description: 'table, one row per comparison: term, group1, group2, null.value, estimate, conf.low, conf.high, p.adj'
+  ext: csv
+rstatix_games_howell_table:
+  description: 'table, one row per pair: .y., group1, group2, estimate, conf.low, conf.high, p.adj'
+  ext: csv
+rstatix_dunn_table:
+  description: 'table, one row per pair: .y., group1, group2, n1, n2, statistic, p, p.adj'
+  ext: csv
+rstatix_cohens_d_table:
+  description: 'table, one row per comparison: .y., group1, group2, effsize, n1, n2, magnitude'
+  ext: csv
+rstatix_shapiro_table:
+  description: 'table, one row per variable (and group): [group], variable, statistic, p'
+  ext: csv
+rstatix_levene_table:
+  description: 'one-row table: df1, df2, statistic, p'
+  ext: csv
+rstatix_cor_test_table:
+  description: 'one-row table: var1, var2, cor, statistic, p, conf.low, conf.high, method'
+  ext: csv
+rstatix_chisq_table:
+  description: 'one-row table: n, statistic, p, df, method, p.signif'
+  ext: csv
+rstatix_fisher_table:
+  description: 'table: n, p, p.signif (and estimate, conf.low, conf.high for 2x2 via detailed output)'
+  ext: csv
+rstatix_summary_table:
+  description: 'table, one row per variable (and group): [group], variable, n, min, max, median, q1, q3, iqr, mad, mean, sd, se, ci'
+  ext: csv
+rstatix_outliers_table:
+  description: the flagged input rows plus is.outlier and is.extreme columns
+  ext: csv
+multcomp_glht_table:
+  description: 'table, one row per contrast: contrast, estimate, std_error, statistic, pvalue, ci_low, ci_high'
+  ext: csv
+factominer_pca_individuals:
+  description: 'table, one row per input row: Dim.1..Dim.k individual coordinates'
+  ext: csv
+factominer_pca_eigenvalues:
+  description: 'table, one row per dimension: dimension, eigenvalue, percentage_of_variance, cumulative_percentage'
+  ext: csv
+factominer_pca_variables:
+  description: 'table, one row per variable: variable, Dim.1..Dim.k coordinates, and Dim.1..Dim.k cos2 columns suffixed _cos2'
+  ext: csv
+factominer_mca_eigenvalues:
+  description: 'table, one row per dimension: dimension, eigenvalue, percentage_of_variance, cumulative_percentage'
+  ext: csv
+factominer_mca_categories:
+  description: 'table, one row per category: category, Dim.1..Dim.k coordinates'
+  ext: csv
+factominer_hcpc_clusters:
+  description: 'table, one row per input row: row, cluster'
+  ext: csv
+cluster_number_table:
+  description: 'table, one row per k: clusters, y (the chosen diagnostic; for gap_stat the gap and its SE)'
+  ext: csv
+hcut_clusters:
+  description: 'table, one row per input row: row, cluster'
+  ext: csv
+broom_lm_coefficients:
+  description: 'table, one row per coefficient: term, estimate, std.error, statistic, p.value, conf.low, conf.high'
+  ext: csv
+broom_lm_fit_statistics:
+  description: 'one-row table: r.squared, adj.r.squared, sigma, statistic, p.value, df, logLik, AIC, BIC, deviance, df.residual, nobs'
+  ext: csv
+broom_glm_coefficients:
+  description: 'table, one row per coefficient: term, estimate, std.error, statistic, p.value, conf.low, conf.high'
+  ext: csv
+ggpubr_compare_means_table:
+  description: 'table, one row per comparison: .y., group1, group2, p, p.adj, p.format, p.signif, method'
+  ext: csv

@@ -1,0 +1,50 @@
+name: pydeseq2_lfc_shrink
+tool: pydeseq2 0.4.12 (Python)
+summary: Fit pydeseq2, run the Wald test and shrink the log2 fold changes of one coefficient with the apeglm-style prior.
+usage: |
+  Use when fold changes of low-count genes are noisy and a ranking or plot needs shrunken values. The step refits the model and runs the Wald test for the contrast first, then calls lfc_shrink on the chosen coefficient; the p-values are those of the unshrunk Wald test, only log2FoldChange and lfcSE are replaced.
+  Choices that change the numbers: design factors, reference level, dispersion fit type, the coefficient shrunk (coefficients are named factor_level_vs_reference), and adapt, which lets the prior scale adapt to the data.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  results: pydeseq2_shrunk_results_table
+params:
+  design_factors:
+    default: "condition"
+    help: Comma separated sample sheet columns used as design. The factor of interest goes last.
+  ref_level:
+    default: ""
+    help: Reference level as "factor,level", for example "condition,control". Empty uses the alphabetical first level.
+  fit_type:
+    default: "parametric"
+    help: Dispersion trend, parametric or mean.
+  contrast:
+    default: ""
+    help: Comma separated factor,tested_level,reference_level for the Wald test. Empty tests the last design factor.
+  coeff:
+    default: ""
+    help: Coefficient to shrink, for example "condition_treated_vs_control". Empty shrinks the coefficient of the last design factor.
+  adapt:
+    default: "True"
+    help: True or False, adapt the prior scale to the data.
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from pydeseq2.dds import DeseqDataSet
+  from pydeseq2.ds import DeseqStats
+
+  split = lambda s: [x.strip() for x in s.split(",") if x.strip()]
+  counts = pd.read_csv(os.environ["IN_counts"], index_col=0).T
+  meta = pd.read_csv(os.environ["IN_samples"], index_col=0).loc[counts.index].astype(str)
+  dds = DeseqDataSet(counts=counts, metadata=meta, design_factors=split(os.environ["PARAM_design_factors"]),
+                     ref_level=split(os.environ["PARAM_ref_level"]) or None, fit_type=os.environ["PARAM_fit_type"], n_cpus=1, quiet=True)
+  dds.deseq2()
+  stat = DeseqStats(dds, contrast=split(os.environ["PARAM_contrast"]) or None, quiet=True)
+  stat.summary()
+  coeff = os.environ["PARAM_coeff"] or [c for c in dds.obsm["design_matrix"].columns if c != "intercept"][-1]
+  stat.lfc_shrink(coeff=coeff, adapt=os.environ["PARAM_adapt"] == "True")
+  out = stat.results_df
+  out.index.name = "gene"
+  out.reset_index().to_csv(os.environ["OUT_results"], index=False, float_format="%.17g")

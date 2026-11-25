@@ -1,0 +1,20 @@
+name: phykit_thread_dna_clipkit
+tool: PhyKIT 2.0.1 thread_dna with ClipKIT log
+summary: Thread nucleotide coding sequences over a ClipKIT-trimmed protein alignment, applying the same trimming to the codons.
+usage: |
+  Use after trimming a protein alignment with clipkit_trim: the ClipKIT log tells which protein columns were removed, so the matching codons are removed too. The nucleotide sequences must be the untrimmed coding sequences with the same record names.
+inputs:
+  protein_aln: clipkit_alignment
+  cds: sequences_fasta
+  log: clipkit_log
+outputs:
+  out: trimmed_codon_alignment
+params:
+  remove_stop_codons:
+    default: 'no'
+    help: yes removes stop codons from the threaded sequences (-s)
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_remove_stop_codons" = yes ]; then flag+=(-s); fi
+  phykit thread_dna -p "$IN_protein_aln" -n "$IN_cds" -c "$IN_log" "${flag[@]}" > "$OUT_out"

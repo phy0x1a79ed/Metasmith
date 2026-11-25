@@ -1,0 +1,22 @@
+name: bio_tree_stats
+tool: Biopython 1.84 Bio.Phylo
+summary: 'Summarise a tree: tip and node counts, total branch length, depth and support.'
+usage: |
+  Use for a quick description of a tree. max_root_to_tip is the longest root-to-tip distance with the tree as rooted in the file; is_bifurcating is true when every internal node has two children (an unrooted tree with a trifurcating root reports false). Support is read from internal node labels.
+inputs:
+  tree: tree
+outputs:
+  table: bio_tree_stats_table
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import Phylo
+  t = Phylo.read(os.environ["IN_tree"], "newick")
+  inner = t.get_nonterminals()
+  sup = [c.confidence for c in inner if c.confidence is not None and c is not t.root]
+  depths = t.depths()
+  pd.DataFrame([dict(n_terminals=t.count_terminals(), n_internal_nodes=len(inner), total_branch_length=t.total_branch_length(),
+                     max_root_to_tip=max(depths[x] for x in t.get_terminals()), is_bifurcating=t.is_bifurcating(),
+                     mean_support=sum(sup) / len(sup) if sup else None, min_support=min(sup) if sup else None)]).to_csv(os.environ["OUT_table"], index=False)

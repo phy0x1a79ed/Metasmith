@@ -1,0 +1,24 @@
+name: iqtree_constrained_tree
+tool: IQ-TREE 2.3.6 -g
+summary: Infer a maximum-likelihood tree under a topological constraint.
+usage: |
+  Use to test a hypothesis by forcing groups of taxa to be monophyletic. The constraint tree may be multifurcating: only the clades it defines are enforced. Compare its log-likelihood with the unconstrained tree to test the constraint.
+inputs:
+  aln: alignment
+  constraint: constraint_tree
+outputs:
+  tree: iqtree_constrained_tree
+params:
+  model:
+    default: MFP
+    help: substitution model, for example MFP (ModelFinder then tree search), GTR+G, HKY+F+I, LG+G4, JC; MFP picks the best by BIC
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" -g "$IN_constraint" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  cp run.treefile "$OUT_tree"

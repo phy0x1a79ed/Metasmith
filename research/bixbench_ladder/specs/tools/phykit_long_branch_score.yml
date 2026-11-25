@@ -1,0 +1,12 @@
+name: phykit_long_branch_score
+tool: PhyKIT 2.0.1 long_branch_score
+summary: Summarise the long-branch (LB) scores of the taxa of a tree.
+usage: |
+  The LB score of a taxon is the percentage by which its average patristic distance to all other taxa exceeds the average over all taxa; high values flag long-branch candidates. Summary statistics are mean, median, 25th and 75th percentile, minimum, maximum, standard deviation and variance. Values are rounded by PhyKIT to four decimals.
+inputs:
+  tree: tree
+outputs:
+  out: long_branch_score_summary_table
+interpreter: bash
+script: |
+  { echo "statistic,value"; phykit long_branch_score "$IN_tree" | sed 's/: /,/'; } > "$OUT_out"

@@ -1,0 +1,12 @@
+name: phykit_relative_composition_variability
+tool: PhyKIT 2.0.1 relative_composition_variability
+summary: Compute the relative composition variability (RCV) of an alignment.
+usage: |
+  RCV measures how much the character composition varies among the sequences of an alignment; low values mean homogeneous composition. It is a proxy for compositional bias that violates the model assumption of stationarity.
+inputs:
+  aln: alignment
+outputs:
+  out: relative_composition_variability_table
+interpreter: bash
+script: |
+  { echo "rcv"; phykit relative_composition_variability "$IN_aln" | tr '\t' ','; } > "$OUT_out"

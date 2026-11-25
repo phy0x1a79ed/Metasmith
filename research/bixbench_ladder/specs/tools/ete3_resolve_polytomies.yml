@@ -1,0 +1,20 @@
+name: ete3_resolve_polytomies
+tool: ete3 3.1.3 Tree
+summary: Resolve polytomies into bifurcating nodes.
+usage: |
+  Use before software that needs a fully bifurcating tree. New internal branches get length zero and carry no support; the order of resolution is arbitrary. recursive yes resolves every polytomy in the tree; no only the root.
+inputs:
+  tree: source_tree
+outputs:
+  out: ete3_resolved_tree
+params:
+  recursive:
+    default: 'yes'
+    help: yes resolves all polytomies; no only the root
+interpreter: python
+script: |
+  import os
+  from ete3 import Tree
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  t.resolve_polytomy(recursive=os.environ["PARAM_recursive"] == "yes")
+  open(os.environ["OUT_out"], "w").write(t.write(format=0) + "\n")

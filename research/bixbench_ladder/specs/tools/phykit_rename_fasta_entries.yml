@@ -1,0 +1,14 @@
+name: phykit_rename_fasta_entries
+tool: PhyKIT 2.0.1 rename_fasta_entries
+summary: Rename FASTA records using a two-column identifier map.
+usage: |
+  Use to replace sequence identifiers, for example to map accession codes to species names. Records absent from the map keep their names. The map has the current name in column 1 and the new name in column 2, tab separated.
+inputs:
+  seqs: sequences_fasta
+  idmap: id_map
+outputs:
+  out: renamed_fasta
+interpreter: bash
+script: |
+  phykit rename_fasta_entries "$IN_seqs" -i "$IN_idmap" -o renamed > /dev/null
+  cp renamed.renamed.fa "$OUT_out"

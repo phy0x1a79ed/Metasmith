@@ -1,0 +1,23 @@
+name: broom_lm_tidy
+tool: broom 1.0.7 tidy (stats::lm)
+summary: Linear model coefficients as a tidy table with confidence intervals.
+usage: |
+  Use for an lm fit written as an R formula, e.g. 'value ~ x1 + group'. Character columns become treatment-coded factors with the alphabetically first level as reference.
+inputs:
+  data: table
+outputs:
+  result: broom_lm_coefficients
+params:
+  formula:
+    default: ''
+    help: R model formula.
+  conf_level:
+    default: '0.95'
+    help: Confidence level.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(broom))
+  data <- read.csv(Sys.getenv("IN_data"), stringsAsFactors = TRUE)
+  fit <- lm(as.formula(Sys.getenv("PARAM_formula")), data = data)
+  res <- tidy(fit, conf.int = TRUE, conf.level = as.numeric(Sys.getenv("PARAM_conf_level")))
+  write.csv(as.data.frame(res), Sys.getenv("OUT_result"), row.names = FALSE)

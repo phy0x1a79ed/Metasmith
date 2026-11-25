@@ -1,0 +1,49 @@
+name: mann_whitney_u
+tool: scipy.stats 1.14.1 mannwhitneyu
+summary: Mann-Whitney U rank-sum test comparing two independent groups.
+usage: |
+  Use for a non-parametric comparison of a numeric column between two groups. The reported statistic is U for the first group. method auto picks exact for small samples without ties, else asymptotic.
+inputs:
+  data: table
+outputs:
+  result: mann_whitney_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Name of the column holding the group labels.
+  group1:
+    default: ''
+    help: Label of the first group; empty takes the alphabetically first level.
+  group2:
+    default: ''
+    help: Label of the second group; empty takes the alphabetically second level.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+  use_continuity:
+    default: 'True'
+    help: Apply continuity correction (asymptotic method only).
+  method:
+    default: auto
+    help: 'p-value method: auto, exact or asymptotic.'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  levels = sorted(data[e["PARAM_group_col"]].dropna().astype(str).unique())
+  g1 = e["PARAM_group1"] or levels[0]
+  g2 = e["PARAM_group2"] or levels[1]
+  col = data[e["PARAM_group_col"]].astype(str)
+  a = data.loc[col == g1, e["PARAM_value_col"]].dropna()
+  b = data.loc[col == g2, e["PARAM_value_col"]].dropna()
+  res = stats.mannwhitneyu(a, b, use_continuity=e["PARAM_use_continuity"] == "True", alternative=e["PARAM_alternative"], method=e["PARAM_method"])
+  row = dict(group_1=g1, group_2=g2, statistic=res.statistic, pvalue=res.pvalue, n_1=len(a), n_2=len(b), median_1=a.median(), median_2=b.median())
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

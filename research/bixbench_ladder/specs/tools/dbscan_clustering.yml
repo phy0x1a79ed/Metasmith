@@ -1,0 +1,33 @@
+name: dbscan_clustering
+tool: scikit-learn 1.6.0 DBSCAN
+summary: Density-based clustering (DBSCAN) of rows on numeric features.
+usage: |
+  Use when the number of clusters is unknown. Label -1 marks noise points. eps and min_samples default to scikit-learn's 0.5 and 5, which only suit scaled data.
+inputs:
+  data: table
+outputs:
+  result: dbscan_assignments
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  eps:
+    default: '0.5'
+    help: Neighbourhood radius.
+  min_samples:
+    default: '5'
+    help: Points needed to form a core point.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.cluster import DBSCAN
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  m = DBSCAN(eps=float(e["PARAM_eps"]), min_samples=int(e["PARAM_min_samples"])).fit(X)
+  out = pd.DataFrame({"row": range(len(X)), "cluster": m.labels_})
+  out.to_csv(e["OUT_result"], index=False)

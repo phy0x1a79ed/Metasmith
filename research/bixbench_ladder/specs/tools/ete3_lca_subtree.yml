@@ -1,0 +1,19 @@
+name: ete3_lca_subtree
+tool: ete3 3.1.3 Tree
+summary: Extract the subtree below the last common ancestor of chosen taxa.
+usage: |
+  The list has one tip name per line. The subtree holds every leaf below the most recent common ancestor of the listed taxa, including taxa not in the list.
+inputs:
+  tree: source_tree
+  taxa: taxon_list
+outputs:
+  out: ete3_lca_subtree_tree
+interpreter: python
+script: |
+  import os
+  from ete3 import Tree
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  names = [l.strip() for l in open(os.environ["IN_taxa"]) if l.strip()]
+  t = t.get_common_ancestor(names).copy()
+  t.dist = 0
+  open(os.environ["OUT_out"], "w").write(t.write(format=0) + "\n")

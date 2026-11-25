@@ -1,0 +1,12 @@
+name: phykit_evolutionary_rate
+tool: PhyKIT 2.0.1 evolutionary_rate
+summary: Estimate a gene's evolutionary rate as total tree length divided by the number of tips.
+usage: |
+  A tree-based rate proxy for one gene; compare genes by their value. Branch lengths are required.
+inputs:
+  tree: tree
+outputs:
+  out: evolutionary_rate_table
+interpreter: bash
+script: |
+  { echo "evolutionary_rate"; phykit evolutionary_rate "$IN_tree" | tr '\t' ','; } > "$OUT_out"

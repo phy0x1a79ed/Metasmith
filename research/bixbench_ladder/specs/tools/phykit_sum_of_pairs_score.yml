@@ -1,0 +1,13 @@
+name: phykit_sum_of_pairs_score
+tool: PhyKIT 2.0.1 sum_of_pairs_score
+summary: Score a query alignment against a reference alignment with the sum-of-pairs score.
+usage: |
+  Use to benchmark an aligner: the fraction of aligned residue pairs in the reference that are aligned in the query. Both alignments must hold the same sequences.
+inputs:
+  aln: alignment
+  reference: reference_alignment
+outputs:
+  out: sum_of_pairs_table
+interpreter: bash
+script: |
+  { echo "sum_of_pairs_score"; phykit sum_of_pairs_score "$IN_aln" -r "$IN_reference" | tr '\t' ','; } > "$OUT_out"

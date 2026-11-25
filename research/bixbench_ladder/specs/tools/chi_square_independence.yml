@@ -1,0 +1,36 @@
+name: chi_square_independence
+tool: scipy.stats 1.14.1 chi2_contingency
+summary: Chi-square test of independence between two categorical columns.
+usage: |
+  Use on two categorical columns; the contingency table is cross-tabulated first. Yates continuity correction applies only to 2x2 tables.
+inputs:
+  data: table
+outputs:
+  result: chi_square_independence_result
+params:
+  row_col:
+    default: ''
+    help: Categorical column forming the table rows.
+  col_col:
+    default: ''
+    help: Categorical column forming the table columns.
+  correction:
+    default: 'True'
+    help: Apply Yates continuity correction for 2x2 tables.
+  lambda_:
+    default: None
+    help: Cressie-Read power divergence parameter; None gives Pearson's chi-square.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  ct = pd.crosstab(data[e["PARAM_row_col"]], data[e["PARAM_col_col"]])
+  lam = None if e["PARAM_lambda_"] == "None" else float(e["PARAM_lambda_"])
+  res = stats.chi2_contingency(ct, correction=e["PARAM_correction"] == "True", lambda_=lam)
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, dof=res.dof, n=int(ct.values.sum()), min_expected_count=res.expected_freq.min())
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

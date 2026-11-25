@@ -1,0 +1,20 @@
+name: phykit_prune_tree
+tool: PhyKIT 2.0.1 prune_tree
+summary: Remove chosen taxa from a tree, or keep only chosen taxa.
+usage: |
+  Use to restrict a tree to a taxon subset. The list file has one tip name per line. With keep set to yes the listed taxa are kept and every other taxon is removed; otherwise the listed taxa are removed.
+inputs:
+  tree: source_tree
+  taxa: taxon_list
+outputs:
+  out: pruned_tree
+params:
+  keep:
+    default: 'no'
+    help: yes keeps the listed taxa and removes all others; no removes the listed taxa
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_keep" = yes ]; then flag+=(-k); fi
+  phykit prune_tree "$IN_tree" "$IN_taxa" -o pruned "${flag[@]}" > /dev/null
+  cp pruned "$OUT_out"

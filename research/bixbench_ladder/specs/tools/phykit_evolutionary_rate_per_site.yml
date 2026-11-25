@@ -1,0 +1,12 @@
+name: phykit_evolutionary_rate_per_site
+tool: PhyKIT 2.0.1 evolutionary_rate_per_site
+summary: Estimate a relative evolutionary rate for every alignment column.
+usage: |
+  Rate is derived from the column's character diversity (a parsimony-informativeness / pairwise-difference measure); higher means faster-evolving. One row per column.
+inputs:
+  aln: alignment
+outputs:
+  out: evolutionary_rate_per_site_table
+interpreter: bash
+script: |
+  { echo "site,evolutionary_rate"; phykit evolutionary_rate_per_site "$IN_aln" | tr '\t' ','; } > "$OUT_out"

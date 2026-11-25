@@ -1,0 +1,34 @@
+name: bio_restriction_sites
+tool: Biopython 1.84 Bio.Restriction
+summary: Find where restriction enzymes cut each DNA sequence.
+usage: |
+  Use to predict digest sites. Enzymes are named as in REBASE (EcoRI, BamHI, HindIII, ...), comma separated. linear yes treats each record as a linear fragment; no treats it as a circular molecule such as a plasmid. One row per cut.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  table: restriction_sites_table
+params:
+  enzymes:
+    default: EcoRI,BamHI,HindIII
+    help: comma-separated enzyme names
+  linear:
+    default: 'yes'
+    help: yes for linear DNA, no for circular DNA
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import SeqIO
+  from Bio.Restriction import RestrictionBatch
+  batch = RestrictionBatch(first=[], suppliers=[])
+  import Bio.Restriction as R
+  for name in os.environ["PARAM_enzymes"].split(","):
+      batch.add(getattr(R, name.strip()))
+  rows = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      res = batch.search(r.seq.replace("-", ""), linear=os.environ["PARAM_linear"] == "yes")
+      for enz, pos in res.items():
+          for p in pos:
+              rows.append(dict(record=r.id, enzyme=str(enz), cut_position=p))
+  pd.DataFrame(rows, columns=["record", "enzyme", "cut_position"]).to_csv(os.environ["OUT_table"], index=False)

@@ -1,0 +1,24 @@
+name: rstatix_welch_anova_test
+tool: rstatix 0.7.2 welch_anova_test
+summary: Welch one-way ANOVA, not assuming equal variances.
+usage: |
+  Use for a one-way comparison of group means when variances differ.
+inputs:
+  data: table
+outputs:
+  result: rstatix_welch_anova_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- welch_anova_test(data, as.formula(Sys.getenv("PARAM_formula")))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

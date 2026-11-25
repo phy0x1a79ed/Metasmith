@@ -1,0 +1,24 @@
+name: rstatix_kruskal_test
+tool: rstatix 0.7.2 kruskal_test
+summary: Kruskal-Wallis rank test from a formula.
+usage: |
+  Use as the non-parametric one-way test across two or more groups.
+inputs:
+  data: table
+outputs:
+  result: rstatix_kruskal_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- kruskal_test(data, as.formula(Sys.getenv("PARAM_formula")))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

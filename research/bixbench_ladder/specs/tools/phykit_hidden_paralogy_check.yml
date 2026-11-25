@@ -1,0 +1,13 @@
+name: phykit_hidden_paralogy_check
+tool: PhyKIT 2.0.1 hidden_paralogy_check
+summary: Check whether expected clades are monophyletic in a gene tree, to detect hidden paralogy.
+usage: |
+  Each line of the clade file lists the tip names of one clade expected to be monophyletic (whitespace separated). For each clade the tree is rooted on all other taxa and the clade is tested; a clade with fewer than two tips in the tree reports insufficient_taxon_representation.
+inputs:
+  tree: tree
+  clades: clade_list
+outputs:
+  out: hidden_paralogy_table
+interpreter: bash
+script: |
+  { echo "clade_line,result"; phykit hidden_paralogy_check "$IN_tree" -c "$IN_clades" | awk '{print NR "," $0}'; } > "$OUT_out"

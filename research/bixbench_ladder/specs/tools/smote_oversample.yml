@@ -1,0 +1,42 @@
+name: smote_oversample
+tool: imbalanced-learn 0.13.0 SMOTE
+summary: Balance classes by synthetic minority oversampling (SMOTE).
+usage: |
+  Use before fitting a classifier on imbalanced classes. Synthetic points interpolate between a minority sample and its k nearest minority neighbours, so only numeric features are allowed. sampling_strategy auto equalises to the majority class.
+inputs:
+  data: table
+outputs:
+  result: smote_resampled_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Class label column.
+  k_neighbors:
+    default: '5'
+    help: Neighbours used to synthesise.
+  sampling_strategy:
+    default: auto
+    help: auto, minority, or a float ratio for binary problems.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from imblearn.over_sampling import SMOTE
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  ss = e["PARAM_sampling_strategy"]
+  ss = float(ss) if ss.replace(".", "", 1).isdigit() else ss
+  Xr, yr = SMOTE(k_neighbors=int(e["PARAM_k_neighbors"]), sampling_strategy=ss, random_state=rs).fit_resample(X, data[e["PARAM_target_col"]])
+  out = Xr.assign(**{e["PARAM_target_col"]: yr})
+  out.to_csv(e["OUT_result"], index=False)

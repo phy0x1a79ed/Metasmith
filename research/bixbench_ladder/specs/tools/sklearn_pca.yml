@@ -1,0 +1,45 @@
+name: sklearn_pca
+tool: scikit-learn 1.6.0 PCA
+summary: 'Principal component analysis: sample scores, explained variance and loadings.'
+usage: |
+  Use to reduce numeric columns to components. scale True standardises each column to unit variance first (correlation PCA); scikit-learn PCA itself only centres. n_components empty keeps all.
+inputs:
+  data: table
+outputs:
+  scores: pca_scores_table
+  variance: pca_variance_table
+  loadings: pca_loadings_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  n_components:
+    default: ''
+    help: Number of components; empty keeps min(n_samples, n_features).
+  scale:
+    default: 'False'
+    help: True to standardise columns before PCA.
+  svd_solver:
+    default: auto
+    help: auto, full, arpack or randomized.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.decomposition import PCA
+  from sklearn.preprocessing import StandardScaler
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  X = X.dropna()
+  Z = StandardScaler().fit_transform(X) if e["PARAM_scale"] == "True" else X.values
+  k = int(e["PARAM_n_components"]) if e["PARAM_n_components"] else None
+  p = PCA(n_components=k, svd_solver=e["PARAM_svd_solver"]).fit(Z)
+  pcs = [f"PC{i + 1}" for i in range(p.n_components_)]
+  pd.DataFrame(p.transform(Z), columns=pcs).to_csv(e["OUT_scores"], index=False)
+  pd.DataFrame({"component": pcs, "explained_variance": p.explained_variance_, "explained_variance_ratio": p.explained_variance_ratio_,
+                "cumulative_ratio": np.cumsum(p.explained_variance_ratio_), "singular_value": p.singular_values_}).to_csv(e["OUT_variance"], index=False)
+  pd.DataFrame(p.components_.T, columns=pcs).assign(feature=cols)[["feature"] + pcs].to_csv(e["OUT_loadings"], index=False)

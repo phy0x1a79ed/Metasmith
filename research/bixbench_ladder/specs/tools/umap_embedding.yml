@@ -1,0 +1,44 @@
+name: umap_embedding
+tool: umap-learn 0.5.7 UMAP
+summary: UMAP low-dimensional embedding of rows on numeric features.
+usage: |
+  Use for a non-linear 2D or 3D embedding. Results depend on n_neighbors and min_dist and, unless a seed is set, vary between runs. A seed also forces single-threaded execution.
+inputs:
+  data: table
+outputs:
+  result: umap_embedding_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  n_neighbors:
+    default: '15'
+    help: Local neighbourhood size.
+  min_dist:
+    default: '0.1'
+    help: Minimum distance between embedded points.
+  n_components:
+    default: '2'
+    help: Embedding dimension.
+  metric:
+    default: euclidean
+    help: Distance metric.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  import umap
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  emb = umap.UMAP(n_neighbors=int(e["PARAM_n_neighbors"]), min_dist=float(e["PARAM_min_dist"]), n_components=int(e["PARAM_n_components"]),
+                  metric=e["PARAM_metric"], random_state=rs).fit_transform(X)
+  out = pd.DataFrame(emb, columns=[f"UMAP{i + 1}" for i in range(emb.shape[1])])
+  out.to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,41 @@
+name: clusterprofiler_comparecluster_gmt
+tool: clusterProfiler 4.10.0 (R)
+summary: Run over-representation analysis against a GMT gene set file separately for each cluster of genes with compareCluster.
+usage: |
+  Use for genes grouped into clusters when the enrichment of each group in custom gene sets is compared. Each cluster is tested against the union of all genes in the GMT file as background.
+  Choices that change the numbers: the gene set file, multiple testing method, size limits and the p and q cutoffs, which only filter the output.
+inputs:
+  clusters: gene_cluster_table
+  sets: gene_sets
+outputs:
+  table: comparecluster_gmt_table
+params:
+  p_adjust_method:
+    default: "BH"
+    help: Multiple testing method, one of holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.
+  pvalue_cutoff:
+    default: "0.05"
+    help: Sets with an adjusted p-value above this are dropped; use 1 to keep every tested set.
+  qvalue_cutoff:
+    default: "0.2"
+    help: Sets with a q-value above this are dropped; use 1 to keep every tested set.
+  min_gs_size:
+    default: "10"
+    help: Smallest gene set size tested.
+  max_gs_size:
+    default: "500"
+    help: Largest gene set size tested.
+interpreter: Rscript
+script: |
+  suppressMessages(library(clusterProfiler))
+  d <- read.csv(Sys.getenv("IN_clusters"), colClasses = "character")
+  lst <- lapply(split(d[[1]], d[[2]]), unique)
+  t2g <- read.gmt(Sys.getenv("IN_sets"))
+  res <- compareCluster(geneClusters = lst, fun = "enricher", TERM2GENE = t2g,
+                        pvalueCutoff = as.numeric(Sys.getenv("PARAM_pvalue_cutoff")),
+                        pAdjustMethod = Sys.getenv("PARAM_p_adjust_method"),
+                        qvalueCutoff = as.numeric(Sys.getenv("PARAM_qvalue_cutoff")),
+                        minGSSize = as.integer(Sys.getenv("PARAM_min_gs_size")),
+                        maxGSSize = as.integer(Sys.getenv("PARAM_max_gs_size")))
+  df <- if (is.null(res)) data.frame() else as.data.frame(res)
+  write.csv(df, Sys.getenv("OUT_table"), row.names = FALSE)

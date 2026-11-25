@@ -1,0 +1,27 @@
+name: rstatix_dunn_test
+tool: rstatix 0.7.2 dunn_test
+summary: Dunn's post-hoc test after Kruskal-Wallis.
+usage: |
+  Use for all-pairs rank comparisons following a significant Kruskal-Wallis test. Adjustment is Holm by default.
+inputs:
+  data: table
+outputs:
+  result: rstatix_dunn_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  p_adjust_method:
+    default: holm
+    help: 'p.adjust method: holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.'
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- dunn_test(data, as.formula(Sys.getenv("PARAM_formula")), p.adjust.method = Sys.getenv("PARAM_p_adjust_method"))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

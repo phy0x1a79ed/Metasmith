@@ -1,0 +1,12 @@
+name: phykit_total_tree_length
+tool: PhyKIT 2.0.1 total_tree_length
+summary: Sum all branch lengths of a tree.
+usage: |
+  Use for tree length in substitutions per site (or time units). Branch lengths are required.
+inputs:
+  tree: tree
+outputs:
+  out: total_tree_length_table
+interpreter: bash
+script: |
+  { echo "total_tree_length"; phykit total_tree_length "$IN_tree" | tr '\t' ','; } > "$OUT_out"

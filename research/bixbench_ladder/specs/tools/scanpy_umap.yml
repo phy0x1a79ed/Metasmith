@@ -1,0 +1,51 @@
+name: scanpy_umap
+tool: scanpy 1.10.4 (Python) with umap-learn 0.5.7
+summary: Embed cells in two dimensions with UMAP from the neighbour graph (scanpy umap).
+usage: |
+  Use after the neighbour graph. Writes obsm X_umap. A UMAP embedding is a visualisation: distances between clusters are not quantitative, and the layout depends on the seed.
+  Choices that change the layout: min_dist, spread, the number of dimensions, initialisation, the number of epochs, and the random state.
+inputs:
+  graph: anndata_neighbors
+outputs:
+  umap: anndata_umap
+params:
+  min_dist:
+    default: "0.5"
+    help: Effective minimum distance between embedded points.
+  spread:
+    default: "1.0"
+    help: Scale of the embedded points; with min_dist sets how tightly points cluster.
+  n_components:
+    default: "2"
+    help: Number of embedding dimensions.
+  maxiter:
+    default: ""
+    help: Number of optimisation epochs. Empty uses 200 for large and 500 for small datasets.
+  alpha:
+    default: "1.0"
+    help: Initial learning rate.
+  gamma:
+    default: "1.0"
+    help: Weight of repulsive against attractive forces.
+  negative_sample_rate:
+    default: "5"
+    help: Negative samples per positive sample during optimisation.
+  init_pos:
+    default: "spectral"
+    help: Initialisation, spectral, random or paga.
+  random_state:
+    default: "0"
+    help: Seed.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_graph"])
+  maxiter = os.environ["PARAM_maxiter"].strip()
+  sc.tl.umap(adata, min_dist=float(os.environ["PARAM_min_dist"]), spread=float(os.environ["PARAM_spread"]),
+             n_components=int(os.environ["PARAM_n_components"]), maxiter=int(maxiter) if maxiter else None,
+             alpha=float(os.environ["PARAM_alpha"]), gamma=float(os.environ["PARAM_gamma"]),
+             negative_sample_rate=int(os.environ["PARAM_negative_sample_rate"]),
+             init_pos=os.environ["PARAM_init_pos"], random_state=int(os.environ["PARAM_random_state"]))
+  adata.write_h5ad(os.environ["OUT_umap"])

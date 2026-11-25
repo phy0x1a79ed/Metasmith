@@ -1,0 +1,27 @@
+name: breusch_pagan_test
+tool: statsmodels 0.14.4 het_breuschpagan
+summary: Breusch-Pagan test for heteroskedasticity of OLS residuals.
+usage: |
+  Use after fitting an OLS formula to test whether residual variance depends on the predictors.
+inputs:
+  data: table
+outputs:
+  result: breusch_pagan_result
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.diagnostic import het_breuschpagan
+  res = smf.ols(e["PARAM_formula"], data).fit()
+  lm, lmp, f, fp = het_breuschpagan(res.resid, res.model.exog)
+  pd.DataFrame([dict(lm_statistic=lm, lm_pvalue=lmp, f_statistic=f, f_pvalue=fp)]).to_csv(e["OUT_result"], index=False)

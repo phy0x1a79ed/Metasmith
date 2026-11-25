@@ -1,0 +1,55 @@
+name: permutation_test_two_groups
+tool: scipy.stats 1.14.1 permutation_test
+summary: Permutation test of the difference in means or medians between two groups.
+usage: |
+  Use for a distribution-free two-sample test. The statistic is the first group minus the second. permutation_type independent shuffles labels across groups.
+inputs:
+  data: table
+outputs:
+  result: permutation_test_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Name of the column holding the group labels.
+  group1:
+    default: ''
+    help: Label of the first group; empty takes the alphabetically first level.
+  group2:
+    default: ''
+    help: Label of the second group; empty takes the alphabetically second level.
+  statistic:
+    default: mean
+    help: mean or median difference.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+  n_resamples:
+    default: '9999'
+    help: Number of random permutations.
+  random_state:
+    default: None
+    help: Integer seed or None.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  levels = sorted(data[e["PARAM_group_col"]].dropna().astype(str).unique())
+  g1 = e["PARAM_group1"] or levels[0]
+  g2 = e["PARAM_group2"] or levels[1]
+  col = data[e["PARAM_group_col"]].astype(str)
+  a = data.loc[col == g1, e["PARAM_value_col"]].dropna()
+  b = data.loc[col == g2, e["PARAM_value_col"]].dropna()
+  f = np.mean if e["PARAM_statistic"] == "mean" else np.median
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  res = stats.permutation_test((a.values, b.values), lambda x, y, axis: f(x, axis=axis) - f(y, axis=axis), permutation_type="independent",
+                               alternative=e["PARAM_alternative"], n_resamples=int(e["PARAM_n_resamples"]), random_state=rs)
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, n_1=len(a), n_2=len(b))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

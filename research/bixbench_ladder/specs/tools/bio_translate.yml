@@ -1,0 +1,29 @@
+name: bio_translate
+tool: Biopython 1.84 Seq.translate
+summary: Translate nucleotide sequences into protein with a chosen genetic code.
+usage: |
+  Use for coding sequences. The reading frame starts at the first base; a trailing partial codon is dropped. The genetic code table (NCBI number) matters for mitochondrial and other non-standard codes. to_stop cuts each protein at its first stop codon; without it stops show as *. Gap characters are removed first.
+inputs:
+  seqs: nucleotide_fasta
+outputs:
+  prot: protein_fasta
+params:
+  table:
+    default: '1'
+    help: NCBI genetic code table number, for example 1 standard, 2 vertebrate mitochondrial, 11 bacterial
+  to_stop:
+    default: 'no'
+    help: yes truncates each protein at the first stop codon
+interpreter: python
+script: |
+  import os
+  from Bio import SeqIO
+  from Bio.Seq import Seq
+  out = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      s = str(r.seq).replace("-", "")
+      s = s[: len(s) // 3 * 3]
+      r.seq = Seq(s).translate(table=int(os.environ["PARAM_table"]), to_stop=os.environ["PARAM_to_stop"] == "yes")
+      r.description = ""
+      out.append(r)
+  SeqIO.write(out, os.environ["OUT_prot"], "fasta")

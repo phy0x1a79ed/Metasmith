@@ -1,0 +1,31 @@
+name: rstatix_chisq_test
+tool: rstatix 0.7.2 chisq_test
+summary: Chi-square test on the contingency table of two categorical columns.
+usage: |
+  Use for independence of two categorical columns. correct TRUE applies Yates correction to 2x2 tables (rstatix default).
+inputs:
+  data: table
+outputs:
+  result: rstatix_chisq_table
+params:
+  row_col:
+    default: ''
+    help: Categorical column for rows.
+  col_col:
+    default: ''
+    help: Categorical column for columns.
+  correct:
+    default: 'TRUE'
+    help: Yates continuity correction.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  xtab <- table(data[[Sys.getenv("PARAM_row_col")]], data[[Sys.getenv("PARAM_col_col")]])
+  res <- chisq_test(xtab, correct = Sys.getenv("PARAM_correct") == "TRUE")
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

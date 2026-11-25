@@ -1,0 +1,34 @@
+name: factoextra_cluster_number
+tool: factoextra 1.0.7 fviz_nbclust
+summary: 'Diagnostic curve for the number of clusters: silhouette, within-sum-of-squares or gap statistic.'
+usage: |
+  Use to choose k for k-means (or hierarchical) clustering. method silhouette is the average silhouette width, wss the total within-cluster sum of squares, gap_stat the gap statistic. Data are used as given: scale beforehand if needed.
+inputs:
+  data: table
+outputs:
+  result: cluster_number_table
+params:
+  columns:
+    default: ''
+    help: Comma-separated numeric columns.
+  method:
+    default: silhouette
+    help: silhouette, wss or gap_stat.
+  k_max:
+    default: '10'
+    help: Largest k.
+  cluster_function:
+    default: kmeans
+    help: kmeans, hcut, pam or clara.
+  nboot:
+    default: '100'
+    help: Bootstrap samples for gap_stat.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(factoextra))
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE)
+  cols <- trimws(strsplit(Sys.getenv("PARAM_columns"), ",")[[1]])
+  set.seed(1)
+  fn <- get(Sys.getenv("PARAM_cluster_function"))
+  p <- fviz_nbclust(data[, cols], fn, method = Sys.getenv("PARAM_method"), k.max = as.integer(Sys.getenv("PARAM_k_max")), nboot = as.integer(Sys.getenv("PARAM_nboot")))
+  write.csv(as.data.frame(p$data), Sys.getenv("OUT_result"), row.names = FALSE)

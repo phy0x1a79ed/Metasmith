@@ -1,0 +1,17 @@
+name: ete3_root_to_tip
+tool: ete3 3.1.3 Tree.get_distance
+summary: Report the distance from the root to every leaf, in branch length and in number of edges.
+usage: |
+  Use to look for clock-like behaviour (equal root-to-tip distances) or outlier tips. The values depend on where the tree is rooted.
+inputs:
+  tree: tree
+outputs:
+  table: ete3_root_to_tip_table
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from ete3 import Tree
+
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  pd.DataFrame([dict(leaf=l.name, distance_from_root=l.get_distance(t), topological_depth=l.get_distance(t, topology_only=True)) for l in t]).to_csv(os.environ["OUT_table"], index=False)

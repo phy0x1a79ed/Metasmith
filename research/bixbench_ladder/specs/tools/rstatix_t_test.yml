@@ -1,0 +1,50 @@
+name: rstatix_t_test
+tool: rstatix 0.7.2 t_test
+summary: Pairwise or one-sample t-tests from a formula with multiple-comparison adjustment.
+usage: |
+  Use to compare a numeric column between the levels of a grouping column (all pairs, or against ref_group). Welch's test is the rstatix default (var_equal FALSE). With more than two groups the p-values are adjusted by p_adjust_method. paired TRUE needs equal group sizes in matching order. A formula 'value ~ 1' gives a one-sample test against mu.
+inputs:
+  data: table
+outputs:
+  result: rstatix_t_test_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  paired:
+    default: 'FALSE'
+    help: TRUE for a paired test.
+  var_equal:
+    default: 'FALSE'
+    help: TRUE for pooled-variance Student test.
+  alternative:
+    default: two.sided
+    help: 'Alternative: two.sided, less or greater.'
+  mu:
+    default: '0'
+    help: Null mean (one-sample) or difference.
+  p_adjust_method:
+    default: holm
+    help: 'p.adjust method: holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.'
+  conf_level:
+    default: '0.95'
+    help: Confidence level.
+  ref_group:
+    default: ''
+    help: Compare every other group to this one; empty for all pairs.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  args <- list(data, as.formula(Sys.getenv("PARAM_formula")), paired = Sys.getenv("PARAM_paired") == "TRUE",
+               var.equal = Sys.getenv("PARAM_var_equal") == "TRUE", alternative = Sys.getenv("PARAM_alternative"),
+               mu = as.numeric(Sys.getenv("PARAM_mu")), p.adjust.method = Sys.getenv("PARAM_p_adjust_method"),
+               conf.level = as.numeric(Sys.getenv("PARAM_conf_level")), detailed = TRUE)
+  if (nzchar(Sys.getenv("PARAM_ref_group"))) args$ref.group <- Sys.getenv("PARAM_ref_group")
+  res <- do.call(t_test, args)
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

@@ -1,0 +1,50 @@
+name: blastp
+tool: BLAST+ 2.16.0 blastp
+summary: Search protein queries against a protein BLAST database and report local alignments.
+usage: |
+  Use for protein-to-protein similarity. The scoring matrix, gap costs, composition-based statistics and low-complexity masking change scores and e-values. Empty optional parameters leave the program default in force.
+inputs:
+  query: sequences_fasta
+  db: blast_database
+outputs:
+  hits: blastp_hits_table
+params:
+  task:
+    default: blastp
+    help: blastp, blastp-short or blastp-fast
+  evalue:
+    default: '10'
+    help: 'expect-value threshold: hits with a larger e-value are dropped'
+  max_target_seqs:
+    default: '500'
+    help: maximum number of aligned database sequences kept per query
+  matrix:
+    default: BLOSUM62
+    help: amino-acid scoring matrix, for example BLOSUM62, BLOSUM45, BLOSUM80, PAM30, PAM70
+  word_size:
+    default: ''
+    help: initial word length; empty uses the task default (3)
+  gapopen:
+    default: '11'
+    help: gap opening cost
+  gapextend:
+    default: '1'
+    help: gap extension cost
+  comp_based_stats:
+    default: '2'
+    help: 'composition-based statistics: 0 none, 1 Composition-based, 2 conditional score adjustment, 3 unconditional'
+  seg:
+    default: 'no'
+    help: yes filters low-complexity query regions with SEG, no keeps them
+  columns:
+    default: qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore
+    help: space-separated BLAST tabular output fields (the tool's default twelve); other fields such as qlen slen qcovs staxids stitle can be added
+interpreter: bash
+script: |
+  args=()
+  add() { if [ -n "$2" ]; then args+=("$1" "$2"); fi; }
+
+  add -task "$PARAM_task"; add -word_size "$PARAM_word_size"; add -matrix "$PARAM_matrix"; add -gapopen "$PARAM_gapopen"; add -gapextend "$PARAM_gapextend"
+  add -comp_based_stats "$PARAM_comp_based_stats"; add -seg "$PARAM_seg"
+  cols="$PARAM_columns"
+  { echo "$cols" | tr ' ' ','; blastp -query "$IN_query" -db "$IN_db/db" -evalue "$PARAM_evalue" -max_target_seqs "$PARAM_max_target_seqs" "${args[@]}" -outfmt "10 $cols"; } > "$OUT_hits"

@@ -1,0 +1,46 @@
+name: clusterprofiler_comparecluster_go
+tool: clusterProfiler 4.10.0 (R) with org.Hs.eg.db 3.18.0
+summary: Run GO over-representation analysis (enrichGO) separately for each cluster of genes with compareCluster.
+usage: |
+  Use for genes grouped into clusters or contrasts (for example up and down regulated genes) when the enrichment of each group is compared. Each cluster is tested against the same default background, the annotated genes of the ontology. Offline with org.Hs.eg.db.
+  Choices that change the numbers: identifier type, ontology (tool default MF), multiple testing method, size limits and the p and q cutoffs, which only filter the output.
+inputs:
+  clusters: gene_cluster_table
+outputs:
+  table: comparecluster_go_table
+params:
+  key_type:
+    default: "ENTREZID"
+    help: Identifier type of the gene column in org.Hs.eg.db, for example ENTREZID, SYMBOL or ENSEMBL.
+  ontology:
+    default: "MF"
+    help: GO ontology, BP, MF, CC or ALL.
+  p_adjust_method:
+    default: "BH"
+    help: Multiple testing method, one of holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.
+  pvalue_cutoff:
+    default: "0.05"
+    help: Terms with an adjusted p-value above this are dropped; use 1 to keep every tested term.
+  qvalue_cutoff:
+    default: "0.2"
+    help: Terms with a q-value above this are dropped; use 1 to keep every tested term.
+  min_gs_size:
+    default: "10"
+    help: Smallest gene set size tested.
+  max_gs_size:
+    default: "500"
+    help: Largest gene set size tested.
+interpreter: Rscript
+script: |
+  suppressMessages({library(clusterProfiler); library(org.Hs.eg.db)})
+  d <- read.csv(Sys.getenv("IN_clusters"), colClasses = "character")
+  lst <- lapply(split(d[[1]], d[[2]]), unique)
+  res <- compareCluster(geneClusters = lst, fun = "enrichGO", OrgDb = org.Hs.eg.db,
+                        keyType = Sys.getenv("PARAM_key_type"), ont = Sys.getenv("PARAM_ontology"),
+                        pvalueCutoff = as.numeric(Sys.getenv("PARAM_pvalue_cutoff")),
+                        pAdjustMethod = Sys.getenv("PARAM_p_adjust_method"),
+                        qvalueCutoff = as.numeric(Sys.getenv("PARAM_qvalue_cutoff")),
+                        minGSSize = as.integer(Sys.getenv("PARAM_min_gs_size")),
+                        maxGSSize = as.integer(Sys.getenv("PARAM_max_gs_size")))
+  df <- if (is.null(res)) data.frame() else as.data.frame(res)
+  write.csv(df, Sys.getenv("OUT_table"), row.names = FALSE)

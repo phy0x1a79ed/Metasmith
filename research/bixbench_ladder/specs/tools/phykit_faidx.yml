@@ -1,0 +1,16 @@
+name: phykit_faidx
+tool: PhyKIT 2.0.1 faidx
+summary: Extract one named record from a FASTA file.
+usage: |
+  Use to pull a single sequence by its identifier. The name must match the record id (the text after > up to the first space).
+inputs:
+  seqs: sequences_fasta
+outputs:
+  out: fasta_entry
+params:
+  entry:
+    default: ''
+    help: record identifier to extract (required)
+interpreter: bash
+script: |
+  phykit faidx "$IN_seqs" -e "$PARAM_entry" > "$OUT_out"

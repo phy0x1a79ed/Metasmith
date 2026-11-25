@@ -1,0 +1,38 @@
+name: biokit_em_mixture_fit
+tool: biokit 0.5.0 biokit.stats.mixture.EM
+summary: Fit a mixture of k Gaussians to one numeric column by expectation-maximisation.
+usage: |
+  Use to find sub-populations in a one-dimensional sample. EM alternates assigning points to components and re-estimating each component's mean, sigma and weight, for at most max_iter iterations. k is fixed in advance. Reported neg_log_likelihood (the negative log-likelihood), AIC, AICc and BIC are biokit's own values; its BIC is not on the same scale as AIC.
+inputs:
+  data: table
+outputs:
+  table: biokit_em_mixture_components_table
+params:
+  column:
+    default: value
+    help: name of the numeric column to model
+  k:
+    default: '2'
+    help: number of Gaussian components
+  max_iter:
+    default: '100'
+    help: maximum number of EM iterations
+interpreter: python
+script: |
+  import os
+  import matplotlib
+  matplotlib.use('Agg')
+  import numpy as np
+  import pandas as pd
+
+  df = pd.read_csv(os.environ["IN_data"])
+  x = df[os.environ["PARAM_column"]].dropna().to_numpy(dtype=float)
+
+  from biokit.stats import mixture
+  e = mixture.EM(x, max_iter=int(os.environ["PARAM_max_iter"]))
+  e.estimate(k=int(os.environ["PARAM_k"]))
+
+  r = e.results
+  rows = [dict(component=i + 1, mean=m, sigma=s, weight=w, neg_log_likelihood=r["log_likelihood"], aic=r["AIC"], aicc=r["AICc"], bic=r["BIC"])
+          for i, (m, s, w) in enumerate(zip(r["mus"], r["sigmas"], r["pis"]))]
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

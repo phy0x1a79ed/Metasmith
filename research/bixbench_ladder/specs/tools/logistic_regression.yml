@@ -1,0 +1,37 @@
+name: logistic_regression
+tool: statsmodels 0.14.4 logit
+summary: Logistic regression of a binary response with coefficients and odds ratios.
+usage: |
+  Use for a 0/1 outcome. The formula's left side is the binary column. Fails under perfect separation. method newton is the statsmodels default.
+inputs:
+  data: table
+outputs:
+  result: logit_coefficients
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+  alpha:
+    default: '0.05'
+    help: Significance level; confidence intervals are 1 - alpha.
+  method:
+    default: newton
+    help: 'Optimiser: newton, bfgs, lbfgs, nm ...'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  res = smf.logit(e["PARAM_formula"], data).fit(method=e["PARAM_method"], disp=0)
+  ci = res.conf_int(alpha=float(e["PARAM_alpha"]))
+  out = pd.DataFrame({"term": res.params.index, "estimate": res.params.values, "std_err": res.bse.values,
+      "statistic": res.tvalues.values, "pvalue": res.pvalues.values, "ci_low": ci[0].values, "ci_high": ci[1].values})
+  out["odds_ratio"] = np.exp(out.estimate)
+  out["or_ci_low"] = np.exp(out.ci_low)
+  out["or_ci_high"] = np.exp(out.ci_high)
+  out.to_csv(e["OUT_result"], index=False)

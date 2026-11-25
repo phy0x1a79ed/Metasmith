@@ -1,0 +1,25 @@
+name: ete3_collapse_low_support
+tool: ete3 3.1.3 Tree
+summary: Collapse internal branches with support below a threshold.
+usage: |
+  Use to turn weakly supported groupings into polytomies. Support is read from internal node labels on the same scale as the threshold. With preserve_branch_length yes the lengths of the removed branches are added to the children so tip-to-tip distances are unchanged.
+inputs:
+  tree: source_tree
+outputs:
+  out: ete3_collapsed_tree
+params:
+  threshold:
+    default: '0'
+    help: internal branches with support below this value are removed
+  preserve_branch_length:
+    default: 'no'
+    help: yes keeps path lengths by adding removed branch lengths to the children
+interpreter: python
+script: |
+  import os
+  from ete3 import Tree
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  thr = float(os.environ["PARAM_threshold"])
+  for n in [n for n in t.traverse() if not n.is_leaf() and not n.is_root() and n.support < thr]:
+      n.delete(preserve_branch_length=os.environ["PARAM_preserve_branch_length"] == "yes")
+  open(os.environ["OUT_out"], "w").write(t.write(format=0) + "\n")

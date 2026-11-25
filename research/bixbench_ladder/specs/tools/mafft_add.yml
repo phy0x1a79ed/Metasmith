@@ -1,0 +1,20 @@
+name: mafft_add
+tool: MAFFT 7.526 --add
+summary: Add new sequences to an existing multiple sequence alignment without changing the existing alignment.
+usage: |
+  Use when an alignment is already fixed and more sequences arrive. mode add aligns full-length new sequences into the alignment; addfragments is for short fragments or reads; addlong is for sequences much longer than the alignment. The existing columns are kept.
+inputs:
+  aln: source_alignment
+  newseqs: sequences_fasta
+outputs:
+  out: mafft_extended_alignment
+params:
+  mode:
+    default: add
+    help: add, addfragments or addlong
+  strategy:
+    default: --auto
+    help: MAFFT strategy flags, for example "--auto" or "--localpair".
+interpreter: bash
+script: |
+  mafft --quiet $PARAM_strategy --$PARAM_mode "$IN_newseqs" "$IN_aln" > "$OUT_out"

@@ -1,0 +1,61 @@
+name: gseapy_gsea
+tool: gseapy 1.1.4 (Python)
+summary: Gene set enrichment analysis with phenotype permutation on an expression matrix and two sample classes (gseapy gsea).
+usage: |
+  Use for normalised expression (log scale, genes in rows) with at least a few samples per class and gene sets from a GMT file. Genes are ranked by a per-gene statistic computed between the two classes, then the enrichment of each set is tested by permuting sample labels, which needs enough samples (at least 7 per class is recommended). The first class (in sorted order, or the one named in class_order) is the positive one.
+  Choices that change the numbers: the sample column and class order, the ranking metric (signal_to_noise, t_test, ratio_of_classes, diff_of_classes, log2_ratio_of_classes), the permutation type, size limits, the weight and the seed.
+inputs:
+  matrix: expression_matrix_table
+  samples: sample_sheet
+  sets: gene_sets
+outputs:
+  result: gseapy_gsea_table
+params:
+  group_column:
+    default: "condition"
+    help: Sample sheet column holding the two classes.
+  class_order:
+    default: ""
+    help: Two class labels, comma separated, positive class first. Empty uses the labels in sorted order.
+  method:
+    default: "signal_to_noise"
+    help: Ranking metric, signal_to_noise, t_test, ratio_of_classes, diff_of_classes or log2_ratio_of_classes.
+  permutation_type:
+    default: "phenotype"
+    help: phenotype (shuffle sample labels) or gene_set.
+  permutation_num:
+    default: "1000"
+    help: Number of permutations.
+  min_size:
+    default: "15"
+    help: Smallest overlap of a gene set with the matrix genes that is tested.
+  max_size:
+    default: "500"
+    help: Largest overlap that is tested.
+  weight:
+    default: "1.0"
+    help: Exponent of the gene score in the running sum.
+  seed:
+    default: "123"
+    help: Random seed.
+interpreter: python
+script: |
+  import os
+  import gseapy as gp
+  import pandas as pd
+
+  mat = pd.read_csv(os.environ["IN_matrix"], index_col=0)
+  meta = pd.read_csv(os.environ["IN_samples"], index_col=0).loc[mat.columns]
+  labels = meta[os.environ["PARAM_group_column"]].astype(str)
+  order = [x.strip() for x in os.environ["PARAM_class_order"].split(",") if x.strip()] or sorted(labels.unique())
+  keep = labels.isin(order)
+  mat = mat.loc[:, keep.values]
+  labels = labels[keep.values]
+  mat = mat.groupby(level=0).mean()
+  cols = [c for o in order for c in labels.index[labels == o]]
+  res = gp.gsea(data=mat[cols], gene_sets=os.environ["IN_sets"], cls=[labels[c] for c in cols],
+                permutation_type=os.environ["PARAM_permutation_type"], method=os.environ["PARAM_method"],
+                permutation_num=int(os.environ["PARAM_permutation_num"]), min_size=int(os.environ["PARAM_min_size"]),
+                max_size=int(os.environ["PARAM_max_size"]), weight=float(os.environ["PARAM_weight"]),
+                threads=1, no_plot=True, seed=int(os.environ["PARAM_seed"]), verbose=False)
+  res.res2d.to_csv(os.environ["OUT_result"], index=False, float_format="%.17g")

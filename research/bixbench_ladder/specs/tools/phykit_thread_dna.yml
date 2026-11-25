@@ -1,0 +1,19 @@
+name: phykit_thread_dna
+tool: PhyKIT 2.0.1 thread_dna (pal2nal)
+summary: Thread nucleotide coding sequences over a protein alignment to make a codon alignment.
+usage: |
+  Use to build a codon-aware nucleotide alignment from a protein alignment and the matching coding sequences (same record names). Gaps in the protein alignment become three-gap codons. keep_stop_codons decides what happens to stop codons.
+inputs:
+  protein_aln: source_alignment
+  cds: sequences_fasta
+outputs:
+  out: codon_alignment
+params:
+  remove_stop_codons:
+    default: 'no'
+    help: yes removes stop codons from the threaded sequences (-s)
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_remove_stop_codons" = yes ]; then flag+=(-s); fi
+  phykit thread_dna -p "$IN_protein_aln" -n "$IN_cds" "${flag[@]}" > "$OUT_out"

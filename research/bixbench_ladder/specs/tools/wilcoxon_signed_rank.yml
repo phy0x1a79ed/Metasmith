@@ -1,0 +1,43 @@
+name: wilcoxon_signed_rank
+tool: scipy.stats 1.14.1 wilcoxon
+summary: Wilcoxon signed-rank test on paired columns or on differences from zero.
+usage: |
+  Use as the non-parametric paired test. With col_2 empty the first column is tested as differences about zero. zero_method controls how zero differences are handled; correction applies a continuity correction to the normal approximation.
+inputs:
+  data: table
+outputs:
+  result: wilcoxon_result
+params:
+  col_1:
+    default: ''
+    help: First measurement column, or the column of differences.
+  col_2:
+    default: ''
+    help: Second measurement column; empty for a one-sample test.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+  zero_method:
+    default: wilcox
+    help: wilcox, pratt or zsplit.
+  correction:
+    default: 'False'
+    help: True applies continuity correction.
+  method:
+    default: auto
+    help: 'p-value method: auto, exact or approx.'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  c2 = e["PARAM_col_2"]
+  d = data[[e["PARAM_col_1"]] + ([c2] if c2 else [])].dropna()
+  x = d.iloc[:, 0] - d.iloc[:, 1] if c2 else d.iloc[:, 0]
+  res = stats.wilcoxon(x, zero_method=e["PARAM_zero_method"], correction=e["PARAM_correction"] == "True", alternative=e["PARAM_alternative"], method=e["PARAM_method"])
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, n=len(x))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

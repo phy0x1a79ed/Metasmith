@@ -1,0 +1,12 @@
+name: phykit_patristic_distance_pairs
+tool: PhyKIT 2.0.1 patristic_distances
+summary: List the patristic (path-length) distance of every pair of tips of a tree.
+usage: |
+  One row per pair of tips; the distance is the sum of branch lengths on the path between them.
+inputs:
+  tree: tree
+outputs:
+  out: patristic_distance_pairs_table
+interpreter: bash
+script: |
+  { echo "taxon_1,taxon_2,patristic_distance"; phykit patristic_distances "$IN_tree" -v | tr '\t' ','; } > "$OUT_out"

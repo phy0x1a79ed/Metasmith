@@ -1,0 +1,34 @@
+name: phykit_alignment_recoding
+tool: PhyKIT 2.0.1 alignment_recoding
+summary: Recode an alignment into a reduced alphabet to lessen compositional and saturation bias.
+usage: |
+  Use before phylogenetic inference on distant sequences: RY-nucleotide collapses purines (R) and pyrimidines (Y); the amino-acid schemes group residues of similar chemistry into 6 to 18 classes (SandR-6, KGB-6, Dayhoff-6, -9, -12, -15, -18). The output holds class symbols, not residues, so it must be analysed with a model for that alphabet (for example MULTI data in IQ-TREE).
+inputs:
+  aln: source_alignment
+outputs:
+  out: recoded_alignment
+params:
+  code:
+    default: RY-nucleotide
+    help: 'recoding scheme: RY-nucleotide, SandR-6, KGB-6, Dayhoff-6, Dayhoff-9, Dayhoff-12, Dayhoff-15 or Dayhoff-18'
+interpreter: bash
+script: |
+  python - table.txt <<'PY'
+  import sys, os
+  schemes = {
+   "RY-nucleotide": {"R": "AG", "Y": "TC"},
+   "SandR-6": {"0": "APST", "1": "DENG", "2": "QKR", "3": "MIVL", "4": "WC", "5": "FYH"},
+   "KGB-6": {"0": "AGPS", "1": "DENQHKRT", "2": "MIL", "3": "W", "4": "FY", "5": "CV"},
+   "Dayhoff-6": {"0": "AGPST", "1": "DENQ", "2": "HKR", "3": "ILMV", "4": "FWY", "5": "C"},
+   "Dayhoff-9": {"0": "DEHNQ", "1": "ILMV", "2": "FY", "3": "AST", "4": "KR", "5": "G", "6": "P", "7": "C", "8": "W"},
+   "Dayhoff-12": {"0": "DEQ", "1": "MLIV", "2": "FY", "3": "KHR", "4": "G", "5": "A", "6": "P", "7": "S", "8": "T", "9": "N", "A": "W", "B": "C"},
+   "Dayhoff-15": {"0": "DEQ", "1": "ML", "2": "IV", "3": "FY", "4": "G", "5": "A", "6": "P", "7": "S", "8": "T", "9": "N", "A": "K", "B": "H", "C": "R", "D": "W", "E": "C"},
+   "Dayhoff-18": {"0": "FY", "1": "ML", "2": "I", "3": "V", "4": "G", "5": "A", "6": "P", "7": "S", "8": "T", "9": "D", "A": "E", "B": "Q", "C": "N", "D": "K", "E": "H", "F": "R", "G": "W", "H": "C"},
+  }
+  scheme = schemes[os.environ["PARAM_code"]]
+  with open(sys.argv[1], "w") as f:
+      for sym, residues in scheme.items():
+          for r in residues:
+              f.write(f"{sym} {r}\n")
+  PY
+  phykit alignment_recoding "$IN_aln" -c "$PWD/table.txt" > "$OUT_out"

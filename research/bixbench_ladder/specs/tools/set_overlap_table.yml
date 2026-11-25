@@ -1,0 +1,27 @@
+name: set_overlap_table
+tool: Python set operations (matplotlib-venn 1.1.1 style Venn counts)
+summary: Intersection and exclusive members of two identifier lists, as a membership table.
+usage: |
+  Use to compare two lists of identifiers (the data behind a two-set Venn diagram). Identifiers are compared as exact strings after stripping whitespace; duplicates collapse.
+inputs:
+  set_a: gene_list
+  set_b: second_gene_list
+outputs:
+  result: set_overlap_membership
+params:
+  case_sensitive:
+    default: 'True'
+    help: False compares identifiers case-insensitively (reported in upper case).
+interpreter: python
+script: |
+  import os
+
+  e = os.environ
+  def load(p):
+      ids = [l.strip() for l in open(p) if l.strip()]
+      return {i if e["PARAM_case_sensitive"] == "True" else i.upper() for i in ids}
+  a, b = load(e["IN_set_a"]), load(e["IN_set_b"])
+  rows = ["element,in_a,in_b,region"]
+  for x in sorted(a | b):
+      rows.append(f"{x},{x in a},{x in b},{'both' if x in a and x in b else 'a_only' if x in a else 'b_only'}")
+  open(e["OUT_result"], "w").write("\n".join(rows) + "\n")

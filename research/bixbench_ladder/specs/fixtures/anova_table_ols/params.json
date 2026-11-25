@@ -1,0 +1,4 @@
+{
+ "formula": "value ~ C(group) + C(arm)",
+ "typ": "2"
+}

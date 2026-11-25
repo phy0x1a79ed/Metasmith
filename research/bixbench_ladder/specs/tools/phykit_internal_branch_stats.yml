@@ -1,0 +1,12 @@
+name: phykit_internal_branch_stats
+tool: PhyKIT 2.0.1 internal_branch_stats
+summary: Summarise the lengths of the internal branches of a tree.
+usage: |
+  Short internal branches suggest rapid radiations or poor resolution. Summary statistics are mean, median, 25th and 75th percentile, minimum, maximum, standard deviation and variance. Values are rounded by PhyKIT to four decimals.
+inputs:
+  tree: tree
+outputs:
+  out: internal_branch_summary_table
+interpreter: bash
+script: |
+  { echo "statistic,value"; phykit internal_branch_stats "$IN_tree" | sed 's/: /,/'; } > "$OUT_out"

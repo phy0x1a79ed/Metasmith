@@ -1,0 +1,45 @@
+name: fastqc
+tool: FastQC 0.12.1
+summary: Run quality-control checks on sequencing reads and report per-module verdicts and statistics.
+usage: |
+  Use on raw or trimmed reads to check per-base quality, adapter content, GC content, duplication, overrepresented sequences and length distribution. Reports an HTML report with a data file, a PASS/WARN/FAIL table per module and the basic statistics. kmer_size sets the k of the k-mer content module; nogroup keeps every base position in the per-base plots instead of grouping bases beyond 50.
+inputs:
+  reads: seq_reads_fastq
+outputs:
+  reports: fastqc_reports
+  summary: fastqc_summary_table
+  stats: fastqc_basic_statistics_table
+params:
+  kmer_size:
+    default: '7'
+    help: k-mer length for the k-mer content module, 2 to 10
+  nogroup:
+    default: 'no'
+    help: yes disables grouping of bases for reads longer than 50 bp
+  min_length:
+    default: '0'
+    help: artificial lower length limit on sequences considered; 0 means none
+interpreter: bash
+script: |
+  mkdir -p "$OUT_reports"
+  flag=()
+  if [ "$PARAM_nogroup" = yes ]; then flag+=(--nogroup); fi
+  fastqc -o "$OUT_reports" --extract -k "$PARAM_kmer_size" --min_length "$PARAM_min_length" --threads 1 "${flag[@]}" "$IN_reads" > /dev/null 2>&1
+  d=$(ls -d "$OUT_reports"/*_fastqc)
+  { echo "status,module,file"; tr '\t' ',' < "$d/summary.txt"; } > "$OUT_summary"
+  python - "$d/fastqc_data.txt" "$OUT_stats" <<'PY'
+  import sys
+  out = ["measure,value"]
+  on = False
+  for l in open(sys.argv[1]):
+      if l.startswith(">>Basic Statistics"):
+          on = True; continue
+      if on:
+          if l.startswith(">>END_MODULE"):
+              break
+          if l.startswith("#"):
+              continue
+          k, v = l.rstrip("\n").split("\t")[:2]
+          out.append(f'{k},{v}')
+  open(sys.argv[2], "w").write("\n".join(out) + "\n")
+  PY

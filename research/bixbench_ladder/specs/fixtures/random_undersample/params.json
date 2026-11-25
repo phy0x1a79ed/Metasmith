@@ -1,0 +1,5 @@
+{
+ "features": "x1,x2",
+ "target_col": "label",
+ "random_state": "0"
+}

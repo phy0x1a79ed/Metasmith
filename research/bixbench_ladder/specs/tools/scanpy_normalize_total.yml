@@ -1,0 +1,31 @@
+name: scanpy_normalize_total
+tool: scanpy 1.10.4 (Python)
+summary: Scale each cell to the same total count with scanpy normalize_total.
+usage: |
+  Use on raw counts after filtering. Each cell is divided by its total and multiplied by target_sum, so cells become comparable in depth. The raw counts are overwritten in X (the original object is not kept). Follow with log1p.
+  Choices that change the numbers: target_sum (empty uses the median total count before normalisation) and whether highly expressed genes are excluded from the size computation.
+inputs:
+  filtered: anndata_filtered
+outputs:
+  normalized: anndata_normalized
+params:
+  target_sum:
+    default: ""
+    help: Total count each cell is scaled to, for example 10000. Empty uses the median of the cell totals.
+  exclude_highly_expressed:
+    default: "False"
+    help: True or False, leave genes that take more than max_fraction of a cell's counts out of the size factor.
+  max_fraction:
+    default: "0.05"
+    help: Fraction of a cell's total above which a gene counts as highly expressed.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_filtered"])
+  target = os.environ["PARAM_target_sum"].strip()
+  sc.pp.normalize_total(adata, target_sum=float(target) if target else None,
+                        exclude_highly_expressed=os.environ["PARAM_exclude_highly_expressed"] == "True",
+                        max_fraction=float(os.environ["PARAM_max_fraction"]))
+  adata.write_h5ad(os.environ["OUT_normalized"])

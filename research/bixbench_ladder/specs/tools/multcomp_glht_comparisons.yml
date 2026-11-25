@@ -1,0 +1,35 @@
+name: multcomp_glht_comparisons
+tool: multcomp 1.4-26 glht
+summary: General linear hypothesis multiple comparisons of group means (Tukey, Dunnett ...).
+usage: |
+  Use after an ANOVA to test contrasts between levels of one factor with simultaneous inference. The model is aov(formula); factor names the term to compare and type the contrast family (Tukey all-pairs; Dunnett against the first level; Sequen; Williams...). adjustment is the multcomp default single-step.
+inputs:
+  data: table
+outputs:
+  result: multcomp_glht_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  factor:
+    default: ''
+    help: Name of the factor column to compare.
+  type:
+    default: Tukey
+    help: 'Contrast family: Tukey, Dunnett, Sequen, Williams, Changepoint, AVE, Marcus, McDermott or .'
+  adjustment:
+    default: single-step
+    help: single-step, Shaffer, Westfall, free, holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(multcomp))
+  data <- read.csv(Sys.getenv("IN_data"), stringsAsFactors = TRUE)
+  fit <- aov(as.formula(Sys.getenv("PARAM_formula")), data = data)
+  spec <- list(Sys.getenv("PARAM_type"))
+  names(spec) <- Sys.getenv("PARAM_factor")
+  g <- glht(fit, linfct = do.call(mcp, spec))
+  s <- summary(g, test = adjusted(Sys.getenv("PARAM_adjustment")))
+  ci <- confint(g)$confint
+  res <- data.frame(contrast = rownames(ci), estimate = s$test$coefficients, std_error = s$test$sigma, statistic = s$test$tstat,
+                    pvalue = s$test$pvalues, ci_low = ci[, "lwr"], ci_high = ci[, "upr"])
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

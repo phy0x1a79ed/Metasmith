@@ -1,0 +1,12 @@
+name: phykit_bipartition_support
+tool: PhyKIT 2.0.1 bipartition_support_stats
+summary: List the support value of every internal branch of a tree with the taxa on that branch.
+usage: |
+  One row per internal branch; the clade is given as its tip names joined by semicolons.
+inputs:
+  tree: tree
+outputs:
+  out: bipartition_support_table
+interpreter: bash
+script: |
+  { echo "support,clade_taxa"; phykit bipartition_support_stats "$IN_tree" -v | tr ' ' ','; } > "$OUT_out"

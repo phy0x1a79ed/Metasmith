@@ -1,0 +1,12 @@
+name: phykit_internal_branch_lengths
+tool: PhyKIT 2.0.1 internal_branch_stats
+summary: List the length of every internal branch of a tree with the taxa on that branch.
+usage: |
+  One row per internal branch; the clade is given as its tip names joined by semicolons.
+inputs:
+  tree: tree
+outputs:
+  out: internal_branch_lengths_table
+interpreter: bash
+script: |
+  { echo "branch_length,clade_taxa"; phykit internal_branch_stats "$IN_tree" -v | tr ' ' ','; } > "$OUT_out"

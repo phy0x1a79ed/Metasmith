@@ -1,0 +1,19 @@
+name: bio_reverse_complement
+tool: Biopython 1.84 Seq.reverse_complement
+summary: Reverse-complement every nucleotide sequence.
+usage: |
+  Use to bring sequences to the opposite strand, for example before searching or aligning reads that came off the minus strand. Record names are kept.
+inputs:
+  seqs: nucleotide_fasta
+outputs:
+  out: reverse_complement_fasta
+interpreter: python
+script: |
+  import os
+  from Bio import SeqIO
+  out = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      r.seq = r.seq.reverse_complement()
+      r.description = ""
+      out.append(r)
+  SeqIO.write(out, os.environ["OUT_out"], "fasta")

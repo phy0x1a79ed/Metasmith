@@ -1,0 +1,27 @@
+name: friedman_test
+tool: scipy.stats 1.14.1 friedmanchisquare
+summary: Friedman test for repeated measures across three or more columns.
+usage: |
+  Use when each row is one subject measured under several conditions held in separate columns; non-parametric repeated-measures ANOVA.
+inputs:
+  data: table
+outputs:
+  result: friedman_result
+params:
+  columns:
+    default: ''
+    help: Comma-separated names of three or more condition columns.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  cols = [c.strip() for c in e["PARAM_columns"].split(",")]
+  d = data[cols].dropna()
+  res = stats.friedmanchisquare(*[d[c] for c in cols])
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, n_conditions=len(cols), n_subjects=len(d))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

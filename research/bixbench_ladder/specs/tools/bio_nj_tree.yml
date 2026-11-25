@@ -1,0 +1,22 @@
+name: bio_nj_tree
+tool: Biopython 1.84 DistanceTreeConstructor.nj
+summary: Build a neighbour-joining tree from the pairwise distances of an alignment.
+usage: |
+  A fast distance method for a first tree of many sequences. The distance model sets the distances. The result is unrooted (trifurcating root) and may have tiny negative branch lengths, as is usual for neighbour joining.
+inputs:
+  aln: alignment
+outputs:
+  tree: bio_nj_tree
+params:
+  model:
+    default: identity
+    help: 'distance model: identity (p-distance), or a DNA matrix such as blastn or trans, or a protein matrix such as blosum62'
+interpreter: python
+script: |
+  import os
+  from Bio import AlignIO, Phylo
+  from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
+  aln = AlignIO.read(os.environ["IN_aln"], "fasta")
+  dm = DistanceCalculator(os.environ["PARAM_model"]).get_distance(aln)
+  tree = DistanceTreeConstructor().nj(dm)
+  Phylo.write(tree, os.environ["OUT_tree"], "newick")

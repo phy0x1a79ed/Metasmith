@@ -1,0 +1,19 @@
+name: blastdbcmd_entries
+tool: BLAST+ 2.16.0 blastdbcmd
+summary: Retrieve named sequences from a BLAST database as FASTA.
+usage: |
+  Use to pull the full sequence of database hits by identifier. The database must have been built with parse_seqids. Optionally retrieve only a sub-range of each sequence.
+inputs:
+  ids: sequence_id_list
+  db: blast_database
+outputs:
+  seqs: blastdb_sequences_fasta
+params:
+  range:
+    default: ''
+    help: sub-range to extract from every entry as start-stop, 1-based inclusive; empty returns whole sequences
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_range" ]; then args+=(-range "$PARAM_range"); fi
+  blastdbcmd -db "$IN_db/db" -entry_batch "$IN_ids" "${args[@]}" > "$OUT_seqs"

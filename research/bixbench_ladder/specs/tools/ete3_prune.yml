@@ -1,0 +1,22 @@
+name: ete3_prune
+tool: ete3 3.1.3 Tree
+summary: Restrict a tree to a chosen set of taxa.
+usage: |
+  The list file has one tip name per line; those taxa are kept and every other taxon is removed. With preserve_branch_length yes the branch lengths of removed nodes are added to the remaining branches, so path lengths between kept taxa are unchanged.
+inputs:
+  tree: source_tree
+  taxa: taxon_list
+outputs:
+  out: ete3_pruned_tree
+params:
+  preserve_branch_length:
+    default: 'no'
+    help: yes keeps path lengths between the kept taxa by merging branches
+interpreter: python
+script: |
+  import os
+  from ete3 import Tree
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  keep = [l.strip() for l in open(os.environ["IN_taxa"]) if l.strip()]
+  t.prune(keep, preserve_branch_length=os.environ["PARAM_preserve_branch_length"] == "yes")
+  open(os.environ["OUT_out"], "w").write(t.write(format=0) + "\n")

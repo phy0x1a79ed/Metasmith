@@ -1,0 +1,32 @@
+name: roc_auc_score
+tool: scikit-learn 1.6.0 roc_auc_score
+summary: Area under the ROC curve of a score column against binary labels.
+usage: |
+  Use to measure how well a continuous score separates two classes. positive_label names the class counted as positive.
+inputs:
+  data: table
+outputs:
+  result: roc_auc_result
+params:
+  label_col:
+    default: ''
+    help: Binary label column.
+  score_col:
+    default: ''
+    help: Numeric score column; higher means more positive.
+  positive_label:
+    default: '1'
+    help: Label value treated as positive.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.metrics import roc_auc_score
+  y = data[e["PARAM_label_col"]].astype(str) == e["PARAM_positive_label"]
+  auc = roc_auc_score(y, data[e["PARAM_score_col"]])
+  out = pd.DataFrame([dict(auc=auc, n_positive=int(y.sum()), n_negative=int((~y).sum()))])
+  out.to_csv(e["OUT_result"], index=False)

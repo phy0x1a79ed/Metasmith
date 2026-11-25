@@ -1,0 +1,26 @@
+name: bio_alignment_consensus
+tool: Biopython 1.84 AlignInfo.SummaryInfo.dumb_consensus
+summary: Make a consensus sequence from an alignment.
+usage: |
+  A column gets its most frequent residue when that residue's share of the sequences reaches the threshold, otherwise the ambiguous symbol. A gap in the winning position gives a gap. Use for a quick representative sequence of a family.
+inputs:
+  aln: alignment
+outputs:
+  cons: consensus_sequence_fasta
+params:
+  threshold:
+    default: '0.7'
+    help: fraction of sequences that must share the most common residue for it to be called
+  ambiguous:
+    default: X
+    help: symbol written where no residue reaches the threshold
+interpreter: python
+script: |
+  import os
+  from Bio import AlignIO, SeqIO
+  from Bio.Align import AlignInfo
+  from Bio.Seq import Seq
+  from Bio.SeqRecord import SeqRecord
+  aln = AlignIO.read(os.environ["IN_aln"], "fasta")
+  c = AlignInfo.SummaryInfo(aln).dumb_consensus(threshold=float(os.environ["PARAM_threshold"]), ambiguous=os.environ["PARAM_ambiguous"])
+  SeqIO.write([SeqRecord(Seq(str(c)), id="consensus", description="")], os.environ["OUT_cons"], "fasta")

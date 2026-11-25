@@ -1,0 +1,33 @@
+name: fisher_exact_test
+tool: scipy.stats 1.14.1 fisher_exact
+summary: Fisher's exact test on the 2x2 table of two binary columns.
+usage: |
+  Use for two columns that each take exactly two values, especially with small counts. The odds ratio is the sample (unconditional) estimate for the sorted level order.
+inputs:
+  data: table
+outputs:
+  result: fisher_exact_result
+params:
+  row_col:
+    default: ''
+    help: Binary column forming the table rows.
+  col_col:
+    default: ''
+    help: Binary column forming the table columns.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  ct = pd.crosstab(data[e["PARAM_row_col"]], data[e["PARAM_col_col"]])
+  res = stats.fisher_exact(ct.values, alternative=e["PARAM_alternative"])
+  a, b, c, d = ct.values.ravel()
+  row = dict(odds_ratio=res.statistic, pvalue=res.pvalue, a=a, b=b, c=c, d=d)
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

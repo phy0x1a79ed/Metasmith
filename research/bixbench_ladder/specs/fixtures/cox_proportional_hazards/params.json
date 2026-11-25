@@ -1,0 +1,4 @@
+{
+ "formula": "time ~ x1 + C(group)",
+ "status_col": "event"
+}

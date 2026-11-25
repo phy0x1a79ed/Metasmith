@@ -1,0 +1,21 @@
+name: bio_tree_distance_matrix
+tool: Biopython 1.84 Bio.Phylo Tree.distance
+summary: Compute the matrix of patristic (path-length) distances between all tips of a tree.
+usage: |
+  Use for the full tip-to-tip distance matrix of a tree with branch lengths. The distance is the sum of branch lengths along the path. Tips are listed in tree order.
+inputs:
+  tree: tree
+outputs:
+  matrix: tree_distance_matrix_table
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import Phylo
+  t = Phylo.read(os.environ["IN_tree"], "newick")
+  tips = t.get_terminals()
+  names = [x.name for x in tips]
+  df = pd.DataFrame([[0.0 if a is b else t.distance(a, b) for b in tips] for a in tips], index=names, columns=names)
+  df.index.name = "taxon"
+  df.to_csv(os.environ["OUT_matrix"])

@@ -1,0 +1,37 @@
+name: rstatix_cor_test
+tool: rstatix 0.7.2 cor_test
+summary: Correlation test between two numeric columns.
+usage: |
+  Use for Pearson, Kendall or Spearman correlation with p-value and (Pearson) confidence interval. Missing pairs are dropped (pairwise.complete.obs).
+inputs:
+  data: table
+outputs:
+  result: rstatix_cor_test_table
+params:
+  var1:
+    default: ''
+    help: First numeric column.
+  var2:
+    default: ''
+    help: Second numeric column.
+  method:
+    default: pearson
+    help: pearson, kendall or spearman.
+  alternative:
+    default: two.sided
+    help: 'Alternative: two.sided, less or greater.'
+  conf_level:
+    default: '0.95'
+    help: Confidence level.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- cor_test(data, vars = Sys.getenv("PARAM_var1"), vars2 = Sys.getenv("PARAM_var2"), method = Sys.getenv("PARAM_method"),
+                  alternative = Sys.getenv("PARAM_alternative"), conf.level = as.numeric(Sys.getenv("PARAM_conf_level")))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

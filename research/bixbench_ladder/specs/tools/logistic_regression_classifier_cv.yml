@@ -1,0 +1,48 @@
+name: logistic_regression_classifier_cv
+tool: scikit-learn 1.6.0 LogisticRegression
+summary: Cross-validated score of an L2-regularised logistic regression classifier.
+usage: |
+  Use as a linear baseline classifier. Features are not scaled here. C is the inverse regularisation strength (scikit-learn default 1.0).
+inputs:
+  data: table
+outputs:
+  result: logistic_regression_classifier_cv_scores
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Name of the class label column.
+  cv:
+    default: '5'
+    help: Number of cross-validation folds (stratified for classifiers, unshuffled).
+  scoring:
+    default: ''
+    help: scikit-learn scoring name, for example accuracy, roc_auc, f1, balanced_accuracy; empty uses the estimator's default (accuracy).
+  c_value:
+    default: '1.0'
+    help: Inverse regularisation strength.
+  penalty:
+    default: l2
+    help: l2 or None.
+  max_iter:
+    default: '100'
+    help: Maximum solver iterations.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.model_selection import cross_val_score
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  y = data[e["PARAM_target_col"]]
+  from sklearn.linear_model import LogisticRegression
+  model = LogisticRegression(C=float(e["PARAM_c_value"]), penalty=e["PARAM_penalty"], max_iter=int(e["PARAM_max_iter"]))
+  scores = cross_val_score(model, X, y, cv=int(e["PARAM_cv"]), scoring=e["PARAM_scoring"] or None)
+  out = pd.DataFrame({"fold": range(1, len(scores) + 1), "score": scores})
+  out.to_csv(e["OUT_result"], index=False)

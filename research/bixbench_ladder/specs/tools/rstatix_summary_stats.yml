@@ -1,0 +1,32 @@
+name: rstatix_summary_stats
+tool: rstatix 0.7.2 get_summary_stats
+summary: Descriptive statistics of numeric columns, optionally per group.
+usage: |
+  Use for n, min, max, median, quartiles, IQR, MAD, mean, sd, se and 95% CI of columns. type full is the default.
+inputs:
+  data: table
+outputs:
+  result: rstatix_summary_table
+params:
+  variables:
+    default: ''
+    help: Comma-separated numeric columns.
+  group_col:
+    default: ''
+    help: Optional grouping column.
+  type:
+    default: full
+    help: full, common, robust, five_number, mean_sd, mean_se, mean_ci, median_iqr, median_mad, quantile, mean or median.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  vars <- trimws(strsplit(Sys.getenv("PARAM_variables"), ",")[[1]])
+  if (nzchar(Sys.getenv("PARAM_group_col"))) data <- group_by(data, .data[[Sys.getenv("PARAM_group_col")]])
+  res <- get_summary_stats(data, vars, type = Sys.getenv("PARAM_type"))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

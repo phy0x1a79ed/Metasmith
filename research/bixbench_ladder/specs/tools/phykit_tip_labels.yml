@@ -1,0 +1,12 @@
+name: phykit_tip_labels
+tool: PhyKIT 2.0.1 tip_labels
+summary: List the tip names of a tree.
+usage: |
+  Use for the taxon set of a tree, for example before pruning or comparing trees.
+inputs:
+  tree: tree
+outputs:
+  out: tree_tip_labels
+interpreter: bash
+script: |
+  phykit tip_labels "$IN_tree" > "$OUT_out"

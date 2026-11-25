@@ -1,0 +1,41 @@
+name: silhouette_analysis
+tool: scikit-learn 1.6.0 silhouette_score
+summary: Mean silhouette score of k-means clusterings over a range of k.
+usage: |
+  Use to choose the number of clusters: higher silhouette means better separated clusters. Clusters come from KMeans with the stated seed.
+inputs:
+  data: table
+outputs:
+  result: silhouette_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  k_min:
+    default: '2'
+    help: Smallest k.
+  k_max:
+    default: '10'
+    help: Largest k.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.cluster import KMeans
+  from sklearn.metrics import silhouette_score
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  rows = []
+  for k in range(int(e["PARAM_k_min"]), int(e["PARAM_k_max"]) + 1):
+      km = KMeans(n_clusters=k, n_init="auto", random_state=rs).fit(X)
+      rows.append(dict(k=k, silhouette_score=silhouette_score(X, km.labels_), inertia=km.inertia_))
+  out = pd.DataFrame(rows)
+  out.to_csv(e["OUT_result"], index=False)

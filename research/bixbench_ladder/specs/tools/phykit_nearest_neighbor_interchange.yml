@@ -1,0 +1,13 @@
+name: phykit_nearest_neighbor_interchange
+tool: PhyKIT 2.0.1 nearest_neighbor_interchange
+summary: Generate every tree one nearest-neighbour interchange (NNI) away from a tree.
+usage: |
+  Use to build the set of neighbouring topologies for a tree, for example to test whether a tree is a local optimum. The output holds the original tree and each NNI neighbour, one tree per line.
+inputs:
+  tree: source_tree
+outputs:
+  out: nni_tree_set
+interpreter: bash
+script: |
+  phykit nearest_neighbor_interchange "$IN_tree" -o nni > /dev/null
+  cp nni "$OUT_out"

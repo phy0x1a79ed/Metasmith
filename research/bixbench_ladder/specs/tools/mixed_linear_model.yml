@@ -1,0 +1,41 @@
+name: mixed_linear_model
+tool: statsmodels 0.14.4 mixedlm
+summary: Linear mixed-effects model with a random intercept (and optional random slopes) per group.
+usage: |
+  Use for repeated or clustered measures. formula holds the fixed effects. groups names the clustering column. re_formula None gives a random intercept only; for a random slope give e.g. '~x1'. Fitted by REML (default).
+inputs:
+  data: table
+outputs:
+  result: mixedlm_estimates
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+  groups_col:
+    default: ''
+    help: Column identifying the clusters, for example the subject.
+  re_formula:
+    default: None
+    help: Random-effects formula, None for intercept only.
+  reml:
+    default: 'True'
+    help: True for REML, False for maximum likelihood.
+  alpha:
+    default: '0.05'
+    help: Significance level; confidence intervals are 1 - alpha.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  re = None if e["PARAM_re_formula"] == "None" else e["PARAM_re_formula"]
+  res = smf.mixedlm(e["PARAM_formula"], data, groups=data[e["PARAM_groups_col"]], re_formula=re).fit(reml=e["PARAM_reml"] == "True")
+  ci = res.conf_int(alpha=float(e["PARAM_alpha"]))
+  out = pd.DataFrame({"term": res.params.index, "estimate": res.params.values, "std_err": res.bse.values,
+      "statistic": res.tvalues.values, "pvalue": res.pvalues.values, "ci_low": ci[0].values, "ci_high": ci[1].values})
+  out.to_csv(e["OUT_result"], index=False)

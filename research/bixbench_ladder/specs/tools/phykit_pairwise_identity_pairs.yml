@@ -1,0 +1,18 @@
+name: phykit_pairwise_identity_pairs
+tool: PhyKIT 2.0.1 pairwise_identity
+summary: List the pairwise sequence identity of every pair of sequences in an alignment.
+usage: |
+  One row per pair of sequences. Use for the full identity matrix in long form. exclude_gaps decides whether columns with a gap are ignored.
+inputs:
+  aln: alignment
+outputs:
+  out: pairwise_identity_pairs_table
+params:
+  exclude_gaps:
+    default: 'no'
+    help: yes ignores every site that has a gap in either sequence of a pair
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_exclude_gaps" = yes ]; then flag+=(-e); fi
+  { echo "taxon_1,taxon_2,identity"; phykit pairwise_identity "$IN_aln" -v "${flag[@]}" | tr '\t' ','; } > "$OUT_out"

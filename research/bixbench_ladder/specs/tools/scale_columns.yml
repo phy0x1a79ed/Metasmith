@@ -1,0 +1,31 @@
+name: scale_columns
+tool: scikit-learn 1.6.0 StandardScaler / MinMaxScaler / RobustScaler
+summary: Rescale numeric columns (z-score, min-max or robust).
+usage: |
+  Use before distance-based or penalised models. standard subtracts the mean and divides by the population sd (ddof 0, scikit-learn convention); minmax maps to 0-1; robust uses median and IQR. Other columns pass through.
+inputs:
+  data: table
+outputs:
+  result: scaled_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  scaler:
+    default: standard
+    help: standard, minmax, robust or maxabs.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn import preprocessing as pp
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  sc = {"standard": pp.StandardScaler, "minmax": pp.MinMaxScaler, "robust": pp.RobustScaler, "maxabs": pp.MaxAbsScaler}[e["PARAM_scaler"]]()
+  out = data.copy()
+  out[cols] = sc.fit_transform(X)
+  out.to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,13 @@
+name: phykit_monophyly_check
+tool: PhyKIT 2.0.1 monophyly_check
+summary: Test whether a set of taxa forms a monophyletic group in a tree, with the support of the clade.
+usage: |
+  The taxa list is one name per line. A group is monophyletic when its tips are exactly the descendants of one node in the (as given) rooting. Reports the verdict, mean, maximum, minimum and standard deviation of the support of the clade's branches, and the intruding taxa if it is not monophyletic.
+inputs:
+  tree: tree
+  taxa: taxon_list
+outputs:
+  out: monophyly_check_table
+interpreter: bash
+script: |
+  { echo "result,mean_support,max_support,min_support,support_standard_deviation,intruding_taxa"; phykit monophyly_check "$IN_tree" "$IN_taxa" | awk 'BEGIN{FS=OFS="\t"} NF<6{$6=""} {print}' | tr '\t' ','; } > "$OUT_out"

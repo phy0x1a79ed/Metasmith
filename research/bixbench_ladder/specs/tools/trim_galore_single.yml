@@ -1,0 +1,43 @@
+name: trim_galore_single
+tool: Trim Galore 0.6.10 (Cutadapt)
+summary: Trim adapters and low-quality bases from single-end reads.
+usage: |
+  Use on raw single-end FASTQ before alignment or assembly. Quality trimming (quality) removes low-quality 3' ends first, then the adapter is removed if its overlap with the read end is at least stringency bp and mismatch rate at most error_rate; reads shorter than length afterwards are dropped. Leave adapter empty to auto-detect.
+inputs:
+  reads: source_reads_fastq
+outputs:
+  trimmed: trimmed_reads_fastq
+  report: trim_galore_report
+params:
+  quality:
+    default: '20'
+    help: Phred score below which 3' bases are trimmed from reads
+  length:
+    default: '20'
+    help: reads shorter than this after trimming are discarded
+  stringency:
+    default: '1'
+    help: minimum adapter overlap in bp required to trim
+  error_rate:
+    default: '0.1'
+    help: maximum allowed error rate of the adapter match
+  adapter:
+    default: ''
+    help: adapter sequence to trim; empty auto-detects among Illumina, Nextera and small RNA adapters
+  clip_5prime:
+    default: '0'
+    help: bp removed from the 5' end of read 1 before adapter trimming; 0 does nothing
+  clip_3prime:
+    default: '0'
+    help: bp removed from the 3' end of read 1 after adapter trimming; 0 does nothing
+interpreter: bash
+script: |
+  mkdir -p tg_out
+  args=()
+  if [ -n "$PARAM_adapter" ]; then args+=(-a "$PARAM_adapter"); fi
+  if [ "$PARAM_clip_5prime" -gt 0 ]; then args+=(--clip_R1 "$PARAM_clip_5prime"); fi
+  if [ "$PARAM_clip_3prime" -gt 0 ]; then args+=(--three_prime_clip_R1 "$PARAM_clip_3prime"); fi
+  trim_galore -q "$PARAM_quality" --length "$PARAM_length" --stringency "$PARAM_stringency" -e "$PARAM_error_rate" \
+    --dont_gzip --cores 1 -o tg_out "${args[@]}" "$IN_reads" > /dev/null 2>&1
+  cp tg_out/*_trimmed.fq "$OUT_trimmed"
+  cp tg_out/*_trimming_report.txt "$OUT_report"

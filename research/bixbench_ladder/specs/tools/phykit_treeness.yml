@@ -1,0 +1,12 @@
+name: phykit_treeness
+tool: PhyKIT 2.0.1 treeness
+summary: Compute treeness (stemminess) of a tree.
+usage: |
+  Treeness is the sum of internal branch lengths divided by total tree length; higher values mean more of the tree's evolution lies on internal branches, a proxy for signal over noise.
+inputs:
+  tree: tree
+outputs:
+  out: treeness_table
+interpreter: bash
+script: |
+  { echo "treeness"; phykit treeness "$IN_tree" | tr '\t' ','; } > "$OUT_out"

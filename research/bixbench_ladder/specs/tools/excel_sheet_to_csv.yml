@@ -1,0 +1,28 @@
+name: excel_sheet_to_csv
+tool: pandas 2.2.3 read_excel (openpyxl 3.1.5)
+summary: Convert one worksheet of an Excel workbook to a CSV table.
+usage: |
+  Use to extract a sheet from an .xlsx file. sheet_name is a sheet name or a 0-based index. header gives the 0-based row holding column names.
+inputs:
+  book: excel_workbook
+outputs:
+  result: excel_sheet_table
+params:
+  sheet_name:
+    default: '0'
+    help: Sheet name, or 0-based sheet position.
+  header:
+    default: '0'
+    help: 0-based row number used as the header; empty for no header.
+  skiprows:
+    default: '0'
+    help: Number of leading rows to skip.
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  e = os.environ
+  sheet = int(e["PARAM_sheet_name"]) if e["PARAM_sheet_name"].isdigit() else e["PARAM_sheet_name"]
+  header = int(e["PARAM_header"]) if e["PARAM_header"] else None
+  pd.read_excel(e["IN_book"], sheet_name=sheet, header=header, skiprows=int(e["PARAM_skiprows"]), engine="openpyxl").to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,32 @@
+name: rstatix_anova_test
+tool: rstatix 0.7.2 anova_test
+summary: ANOVA table with effect sizes for between-subject designs.
+usage: |
+  Use for one-way or factorial ANOVA written as a formula, e.g. 'value ~ group * arm'. type is the sums-of-squares type (rstatix default 2). effect_size ges is generalised eta squared, pes partial.
+inputs:
+  data: table
+outputs:
+  result: rstatix_anova_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  type:
+    default: '2'
+    help: 'Sums of squares type: 1, 2 or 3.'
+  effect_size:
+    default: ges
+    help: ges or pes.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- anova_test(data, as.formula(Sys.getenv("PARAM_formula")), type = as.integer(Sys.getenv("PARAM_type")),
+                    effect.size = Sys.getenv("PARAM_effect_size"), detailed = FALSE)
+  res <- as.data.frame(get_anova_table(res))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

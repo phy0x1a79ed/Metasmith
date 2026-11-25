@@ -117,6 +117,9 @@ def lint(types: dict, tools: list[dict]) -> list[str]:
                 errors.append(f"{name}: slot {slot} is not a lower_snake identifier")
             if tname not in types:
                 errors.append(f"{name}: slot {slot} names unknown type {tname}")
+        taken = list(tool.get("inputs", {}).values())
+        if len(set(taken)) != len(taken):
+            errors.append(f"{name}: two inputs share a type; the solver cannot tell the slots apart")
         script = tool.get("script", "")
         for slot in tool.get("inputs", {}):
             if f"IN_{slot}" not in script:
@@ -184,8 +187,9 @@ def catalogue(types: dict, tools: list[dict]) -> dict:
 def types_yml(types: dict) -> str:
     # A type stands in for another when its properties are a superset. A child inherits
     # its parent's properties, so it adds one of its own and redefines none.
+    # The engine resolves a parent when it reads the child, so parents come first.
     out = {}
-    for name, t in types.items():
+    for name, t in sorted(types.items(), key=lambda kv: len(ancestors(types, kv[0]))):
         if t.get("extends"):
             out[name] = {"extends": [t["extends"]], "properties": {name: t["description"]}}
         else:

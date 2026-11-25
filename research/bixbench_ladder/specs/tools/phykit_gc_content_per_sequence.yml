@@ -1,0 +1,12 @@
+name: phykit_gc_content_per_sequence
+tool: PhyKIT 2.0.1 gc_content
+summary: Compute the GC fraction of each sequence in a FASTA file.
+usage: |
+  One row per record. Use to compare GC content between taxa or genes.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  out: gc_content_per_sequence_table
+interpreter: bash
+script: |
+  { echo "sequence,gc_content"; phykit gc_content "$IN_seqs" -v | tr '\t' ','; } > "$OUT_out"

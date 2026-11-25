@@ -1,0 +1,14 @@
+name: phykit_rename_tree_tips
+tool: PhyKIT 2.0.1 rename_tree_tips
+summary: Rename the tips of a tree using a two-column identifier map.
+usage: |
+  Use to replace tip names, for example accession codes with species names. Tips missing from the map keep their names. The map has current name in column 1 and new name in column 2, tab separated.
+inputs:
+  tree: source_tree
+  idmap: id_map
+outputs:
+  out: renamed_tree
+interpreter: bash
+script: |
+  phykit rename_tree_tips "$IN_tree" -i "$IN_idmap" -o renamed > /dev/null
+  cp renamed "$OUT_out"

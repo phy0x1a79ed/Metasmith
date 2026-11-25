@@ -1,0 +1,31 @@
+name: negative_binomial_regression
+tool: statsmodels 0.14.4 negativebinomial
+summary: Negative binomial regression for overdispersed counts, with the dispersion parameter estimated.
+usage: |
+  Use for count responses where variance exceeds the mean. The last row, alpha, is the estimated dispersion.
+inputs:
+  data: table
+outputs:
+  result: negbin_coefficients
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+  alpha:
+    default: '0.05'
+    help: Significance level; confidence intervals are 1 - alpha.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  res = smf.negativebinomial(e["PARAM_formula"], data).fit(disp=0)
+  ci = res.conf_int(alpha=float(e["PARAM_alpha"]))
+  out = pd.DataFrame({"term": res.params.index, "estimate": res.params.values, "std_err": res.bse.values,
+      "statistic": res.tvalues.values, "pvalue": res.pvalues.values, "ci_low": ci[0].values, "ci_high": ci[1].values})
+  out.to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,43 @@
+name: de_select_genes
+tool: pandas (Python), threshold selection of differential expression results
+summary: Select the genes that pass an adjusted p-value and fold change threshold in a differential expression table.
+usage: |
+  Use to turn a DESeq2 or pydeseq2 results table into the gene list for over-representation analysis. Rows with NA in the p-value column never pass.
+  Choices that change the list: the p-value column, its maximum, the fold change column, the minimum absolute fold change and whether up, down or both directions are kept.
+inputs:
+  results: de_results_table
+outputs:
+  genes: de_gene_list
+params:
+  p_column:
+    default: "padj"
+    help: Column holding the p-value to threshold, for example padj or pvalue.
+  max_p:
+    default: "0.05"
+    help: Keep genes with p-value at or below this.
+  lfc_column:
+    default: "log2FoldChange"
+    help: Column holding the log2 fold change.
+  min_abs_lfc:
+    default: "0"
+    help: Keep genes whose absolute fold change is at least this.
+  direction:
+    default: "both"
+    help: both, up (fold change above zero) or down (below zero).
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  df = pd.read_csv(os.environ["IN_results"])
+  gene = df.columns[0]
+  keep = df[os.environ["PARAM_p_column"]] <= float(os.environ["PARAM_max_p"])
+  lfc = df[os.environ["PARAM_lfc_column"]]
+  keep &= lfc.abs() >= float(os.environ["PARAM_min_abs_lfc"])
+  direction = os.environ["PARAM_direction"]
+  if direction == "up":
+      keep &= lfc > 0
+  elif direction == "down":
+      keep &= lfc < 0
+  with open(os.environ["OUT_genes"], "w") as f:
+      f.write("".join(f"{g}\n" for g in df.loc[keep, gene].astype(str)))

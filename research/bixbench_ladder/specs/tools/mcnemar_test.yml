@@ -1,0 +1,36 @@
+name: mcnemar_test
+tool: statsmodels 0.14.4 mcnemar
+summary: McNemar test for paired binary outcomes.
+usage: |
+  Use when two binary columns record the same subjects under two conditions. Tests whether the discordant cells differ. exact True uses the binomial test (statsmodels default).
+inputs:
+  data: table
+outputs:
+  result: mcnemar_result
+params:
+  col_1:
+    default: ''
+    help: First binary column.
+  col_2:
+    default: ''
+    help: Second binary column.
+  exact:
+    default: 'True'
+    help: Exact binomial test (True) or chi-square (False).
+  correction:
+    default: 'True'
+    help: Continuity correction for the chi-square version.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.contingency_tables import mcnemar
+  ct = pd.crosstab(data[e["PARAM_col_1"]], data[e["PARAM_col_2"]])
+  res = mcnemar(ct.values, exact=e["PARAM_exact"] == "True", correction=e["PARAM_correction"] == "True")
+  pd.DataFrame([dict(statistic=res.statistic, pvalue=res.pvalue, n_01=ct.values[0, 1], n_10=ct.values[1, 0])]).to_csv(e["OUT_result"], index=False)

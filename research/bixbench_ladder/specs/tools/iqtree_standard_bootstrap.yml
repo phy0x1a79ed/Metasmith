@@ -1,0 +1,28 @@
+name: iqtree_standard_bootstrap
+tool: IQ-TREE 2.3.6 standard bootstrap
+summary: Infer a maximum-likelihood tree with standard non-parametric bootstrap support.
+usage: |
+  Use for classical Felsenstein bootstrap support: the alignment columns are resampled and the tree is re-inferred for each replicate, so it is slow but conservative. Support is the percentage of replicates containing each branch. Writes the ML tree with support values and the consensus tree of the replicates.
+inputs:
+  aln: alignment
+outputs:
+  tree: iqtree_bootstrap_tree
+  consensus: iqtree_bootstrap_consensus_tree
+params:
+  model:
+    default: MFP
+    help: substitution model, for example MFP (ModelFinder then tree search), GTR+G, HKY+F+I, LG+G4, JC; MFP picks the best by BIC
+  replicates:
+    default: '100'
+    help: number of bootstrap replicates; 100 or more
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" -b "$PARAM_replicates" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  cp run.treefile "$OUT_tree"
+  cp run.contree "$OUT_consensus"

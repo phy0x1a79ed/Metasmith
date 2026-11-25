@@ -1,0 +1,28 @@
+name: rstatix_levene_test
+tool: rstatix 0.7.2 levene_test
+summary: Levene's test for homogeneity of variance from a formula.
+usage: |
+  Use to check equal variances across groups. center median (Brown-Forsythe) is the rstatix default; mean is the original Levene test.
+inputs:
+  data: table
+outputs:
+  result: rstatix_levene_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  center:
+    default: median
+    help: median or mean.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  ctr <- if (Sys.getenv("PARAM_center") == "mean") mean else median
+  res <- levene_test(data, as.formula(Sys.getenv("PARAM_formula")), center = ctr)
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

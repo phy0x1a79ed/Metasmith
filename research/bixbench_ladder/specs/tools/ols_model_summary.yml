@@ -1,0 +1,27 @@
+name: ols_model_summary
+tool: statsmodels 0.14.4 ols
+summary: 'Fit statistics of an OLS regression: R-squared, F test, information criteria.'
+usage: |
+  Use to report overall fit of a linear model fitted from a formula.
+inputs:
+  data: table
+outputs:
+  result: ols_fit_statistics
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  res = smf.ols(e["PARAM_formula"], data).fit()
+  row = dict(nobs=res.nobs, df_model=res.df_model, df_resid=res.df_resid, rsquared=res.rsquared, rsquared_adj=res.rsquared_adj,
+             fvalue=res.fvalue, f_pvalue=res.f_pvalue, aic=res.aic, bic=res.bic, llf=res.llf, mse_resid=res.mse_resid)
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,49 @@
+name: gradient_boosting_classifier_cv
+tool: scikit-learn 1.6.0 GradientBoostingClassifier
+summary: Cross-validated score of a gradient boosted tree classifier.
+usage: |
+  Use for a boosted tree ensemble. Defaults are scikit-learn's: 100 stages, learning rate 0.1, depth 3.
+inputs:
+  data: table
+outputs:
+  result: gradient_boosting_classifier_cv_scores
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Name of the class label column.
+  cv:
+    default: '5'
+    help: Number of cross-validation folds (stratified for classifiers, unshuffled).
+  scoring:
+    default: ''
+    help: scikit-learn scoring name, for example accuracy, roc_auc, f1, balanced_accuracy; empty uses the estimator's default (accuracy).
+  n_estimators:
+    default: '100'
+    help: Number of boosting stages.
+  learning_rate:
+    default: '0.1'
+    help: Shrinkage.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.model_selection import cross_val_score
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  y = data[e["PARAM_target_col"]]
+  from sklearn.ensemble import GradientBoostingClassifier
+  model = GradientBoostingClassifier(n_estimators=int(e["PARAM_n_estimators"]), learning_rate=float(e["PARAM_learning_rate"]), random_state=rs)
+  scores = cross_val_score(model, X, y, cv=int(e["PARAM_cv"]), scoring=e["PARAM_scoring"] or None)
+  out = pd.DataFrame({"fold": range(1, len(scores) + 1), "score": scores})
+  out.to_csv(e["OUT_result"], index=False)

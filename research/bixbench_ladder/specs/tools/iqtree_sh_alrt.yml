@@ -1,0 +1,30 @@
+name: iqtree_sh_alrt
+tool: IQ-TREE 2.3.6 SH-aLRT
+summary: Infer a maximum-likelihood tree with SH-like approximate likelihood ratio test (and optionally aBayes) branch support.
+usage: |
+  Use for fast single-run branch support. SH-aLRT is a percentage, with 80 or more usually taken as reliable. With abayes yes the label is SH-aLRT/aBayes; the aBayes value is a posterior probability between 0 and 1. Combine with UFBoot by running iqtree_ufboot_tree separately.
+inputs:
+  aln: alignment
+outputs:
+  tree: iqtree_alrt_tree
+params:
+  model:
+    default: MFP
+    help: substitution model, for example MFP (ModelFinder then tree search), GTR+G, HKY+F+I, LG+G4, JC; MFP picks the best by BIC
+  replicates:
+    default: '1000'
+    help: number of SH-aLRT replicates
+  abayes:
+    default: 'no'
+    help: yes also computes approximate Bayes support
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  if [ "$PARAM_abayes" = yes ]; then args+=(-abayes); fi
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" -alrt "$PARAM_replicates" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  cp run.treefile "$OUT_tree"

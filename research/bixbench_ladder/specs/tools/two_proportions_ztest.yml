@@ -1,0 +1,42 @@
+name: two_proportions_ztest
+tool: statsmodels 0.14.4 proportions_ztest
+summary: Z-test comparing success proportions of two (or one against a value) from counts.
+usage: |
+  Use when each row of the table is one group with a success count and a total. With two rows it compares proportions; with one row, set value for the null proportion. prop_var False uses the observed pooled variance (default).
+inputs:
+  data: table
+outputs:
+  result: proportions_ztest_result
+params:
+  count_col:
+    default: ''
+    help: Column of success counts, one row per group.
+  nobs_col:
+    default: ''
+    help: Column of group sizes.
+  value:
+    default: None
+    help: Null proportion (one group) or difference (two groups); None means 0 difference.
+  alternative:
+    default: two-sided
+    help: two-sided, smaller or larger.
+  prop_var:
+    default: 'False'
+    help: False for the observed pooled proportion, or a number for a fixed variance proportion.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.proportion import proportions_ztest
+  c = data[e["PARAM_count_col"]].values
+  n = data[e["PARAM_nobs_col"]].values
+  val = None if e["PARAM_value"] == "None" else float(e["PARAM_value"])
+  pv = False if e["PARAM_prop_var"] == "False" else float(e["PARAM_prop_var"])
+  z, p = proportions_ztest(c, n, value=val, alternative=e["PARAM_alternative"], prop_var=pv)
+  pd.DataFrame([dict(statistic=z, pvalue=p)]).to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,26 @@
+name: scanpy_scale
+tool: scanpy 1.10.4 (Python)
+summary: Standardise each gene to zero mean and unit variance with scanpy scale, optionally clipping.
+usage: |
+  Use before PCA to stop highly expressed genes dominating. Scaling is applied to every gene in the object; subset to highly variable genes first if intended. Zero-centring makes a sparse matrix dense. The means and standard deviations are stored in var.
+  Choices that change the numbers: zero_center and max_value (values above it are clipped, 10 is common).
+inputs:
+  hvg: anndata_hvg
+outputs:
+  scaled: anndata_scaled
+params:
+  zero_center:
+    default: "True"
+    help: True or False, subtract the gene mean.
+  max_value:
+    default: ""
+    help: Clip scaled values to this maximum. Empty for no clipping.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_hvg"])
+  mv = os.environ["PARAM_max_value"].strip()
+  sc.pp.scale(adata, zero_center=os.environ["PARAM_zero_center"] == "True", max_value=float(mv) if mv else None)
+  adata.write_h5ad(os.environ["OUT_scaled"])

@@ -1,0 +1,51 @@
+name: ttest_independent
+tool: scipy.stats 1.14.1 ttest_ind
+summary: Two-sample t-test comparing the means of two groups in a table.
+usage: |
+  Use to compare a numeric column between two independent groups. Student's test assumes equal variances (equal_var True); set equal_var False for Welch's test. trim above 0 gives Yuen's trimmed test.
+inputs:
+  data: table
+outputs:
+  result: ttest_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Name of the column holding the group labels.
+  group1:
+    default: ''
+    help: Label of the first group; empty takes the alphabetically first level.
+  group2:
+    default: ''
+    help: Label of the second group; empty takes the alphabetically second level.
+  equal_var:
+    default: 'True'
+    help: True for Student's pooled-variance test, False for Welch's test.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+  trim:
+    default: '0'
+    help: Fraction of observations trimmed from each end (0 to 0.5).
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  levels = sorted(data[e["PARAM_group_col"]].dropna().astype(str).unique())
+  g1 = e["PARAM_group1"] or levels[0]
+  g2 = e["PARAM_group2"] or levels[1]
+  col = data[e["PARAM_group_col"]].astype(str)
+  a = data.loc[col == g1, e["PARAM_value_col"]].dropna()
+  b = data.loc[col == g2, e["PARAM_value_col"]].dropna()
+  res = stats.ttest_ind(a, b, equal_var=e["PARAM_equal_var"] == "True", alternative=e["PARAM_alternative"], trim=float(e["PARAM_trim"]))
+  ci = res.confidence_interval()
+  row = dict(group_1=g1, group_2=g2, statistic=res.statistic, pvalue=res.pvalue, df=res.df, mean_1=a.mean(), mean_2=b.mean(),
+             mean_difference=a.mean() - b.mean(), ci_low=ci.low, ci_high=ci.high, n_1=len(a), n_2=len(b))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

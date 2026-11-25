@@ -1,0 +1,12 @@
+name: phykit_compositional_bias_per_site
+tool: PhyKIT 2.0.1 compositional_bias_per_site
+summary: Test every alignment column for compositional bias among the sequences.
+usage: |
+  For each column a chi-square test asks whether the character counts depart from equal frequencies; reports the statistic, the multiple-testing-corrected p-value and the raw p-value. Nan means the test could not be computed (for example a constant column).
+inputs:
+  aln: alignment
+outputs:
+  out: compositional_bias_per_site_table
+interpreter: bash
+script: |
+  { echo "site,chi_square_statistic,corrected_p_value,p_value"; phykit compositional_bias_per_site "$IN_aln" | tr '\t' ','; } > "$OUT_out"

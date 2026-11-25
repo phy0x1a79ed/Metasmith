@@ -1,0 +1,33 @@
+name: linear_regression_simple
+tool: scipy.stats 1.14.1 linregress
+summary: Simple linear regression of one numeric column on another.
+usage: |
+  Use for a single predictor least-squares line with slope p-value and R. For several predictors use a formula based regression.
+inputs:
+  data: table
+outputs:
+  result: linregress_result
+params:
+  x_col:
+    default: ''
+    help: Predictor column.
+  y_col:
+    default: ''
+    help: Response column.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  d = data[[e["PARAM_x_col"], e["PARAM_y_col"]]].dropna()
+  res = stats.linregress(d.iloc[:, 0], d.iloc[:, 1], alternative=e["PARAM_alternative"])
+  row = dict(slope=res.slope, intercept=res.intercept, rvalue=res.rvalue, rsquared=res.rvalue ** 2, pvalue=res.pvalue,
+             stderr=res.stderr, intercept_stderr=res.intercept_stderr, n=len(d))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

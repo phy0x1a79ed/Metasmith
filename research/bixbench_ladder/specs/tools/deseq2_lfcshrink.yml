@@ -1,0 +1,42 @@
+name: deseq2_lfcshrink
+tool: DESeq2 1.42.0 (R) with apeglm 1.24.0 and ashr
+summary: Shrink DESeq2 log2 fold changes toward zero for ranking and visualisation, with apeglm, ashr or normal shrinkage.
+usage: |
+  Use after a Wald fit when fold changes of low-count genes are noisy. Shrinkage changes log2FoldChange and lfcSE but not the ordering by Wald statistic of the unshrunk test. apeglm needs a coefficient name; ashr and normal accept a contrast or a coefficient.
+  Choices that change the numbers: the shrinkage estimator, the coefficient or contrast, an lfc_threshold (apeglm then returns s-values against that threshold) and whether to report s-values instead of p-values. Which p-value columns appear depends on the type; apeglm returns svalue only when svalue is TRUE.
+inputs:
+  fit: deseq2_wald_fit
+outputs:
+  results: deseq2_shrunk_results_table
+params:
+  type:
+    default: "apeglm"
+    help: Shrinkage estimator, apeglm, ashr or normal.
+  coef:
+    default: ""
+    help: Coefficient name or number from resultsNames(). Empty uses the last coefficient unless contrast is given.
+  contrast:
+    default: ""
+    help: Comma separated factor,numerator,denominator. Not allowed with apeglm.
+  lfc_threshold:
+    default: "0"
+    help: Log2 fold change threshold; for apeglm a non-zero value yields s-values against that threshold.
+  svalue:
+    default: "FALSE"
+    help: TRUE or FALSE, return s-values in place of adjusted p-values (apeglm only).
+interpreter: Rscript
+script: |
+  suppressMessages(library(DESeq2))
+  dds <- readRDS(Sys.getenv("IN_fit"))
+  type <- Sys.getenv("PARAM_type")
+  args <- list(dds = dds, type = type, lfcThreshold = as.numeric(Sys.getenv("PARAM_lfc_threshold")))
+  if (nzchar(Sys.getenv("PARAM_contrast"))) {
+    args$contrast <- trimws(strsplit(Sys.getenv("PARAM_contrast"), ",")[[1]])
+  } else {
+    coef <- if (nzchar(Sys.getenv("PARAM_coef"))) Sys.getenv("PARAM_coef") else tail(resultsNames(dds), 1)
+    args$coef <- if (grepl("^[0-9]+$", coef)) as.integer(coef) else coef
+  }
+  if (type == "apeglm") args$svalue <- as.logical(Sys.getenv("PARAM_svalue"))
+  res <- do.call(lfcShrink, args)
+  out <- data.frame(gene = rownames(res), as.data.frame(res), check.names = FALSE)
+  write.csv(out, Sys.getenv("OUT_results"), row.names = FALSE)

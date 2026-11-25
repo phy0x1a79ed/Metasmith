@@ -1,0 +1,29 @@
+name: gseapy_enrich
+tool: gseapy 1.1.4 (Python)
+summary: Over-representation analysis (Fisher exact test) of a gene list against local gene sets with gseapy enrich, no network.
+usage: |
+  Use for a selected gene list and a GMT file whose member ids match the list. The background is the union of all genes in the GMT file unless background_size gives a number of genes. Results are reported for every set with at least one overlapping gene; Adjusted P-value is Benjamini-Hochberg across the tested sets.
+  Choices that change the numbers: the gene set file, the background, and (for the plot only) the cutoff.
+inputs:
+  genes: gene_list
+  sets: gene_sets
+outputs:
+  result: gseapy_enrich_table
+params:
+  cutoff:
+    default: "0.05"
+    help: Adjusted p-value cutoff gseapy applies for the sets it flags as significant in its own summary; the table still lists every tested set.
+  background_size:
+    default: ""
+    help: Number of genes in the background. Empty uses the union of the genes in the GMT file.
+interpreter: python
+script: |
+  import os
+  import gseapy as gp
+  genes = [x.strip() for x in open(os.environ["IN_genes"]) if x.strip()]
+  sets = gp.read_gmt(os.environ["IN_sets"])
+  background_size = os.environ["PARAM_background_size"].strip()
+  bg = background_size and int(background_size) or sorted({g for gs in sets.values() for g in gs})
+  res = gp.enrich(gene_list=genes, gene_sets=sets, background=bg, cutoff=float(os.environ["PARAM_cutoff"]),
+                  no_plot=True, verbose=False)
+  res.results.to_csv(os.environ["OUT_result"], index=False, float_format="%.17g")

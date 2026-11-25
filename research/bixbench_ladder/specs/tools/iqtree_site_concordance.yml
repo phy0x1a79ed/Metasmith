@@ -1,0 +1,30 @@
+name: iqtree_site_concordance
+tool: IQ-TREE 2.3.6 --scf
+summary: Compute site concordance factors (sCF) for every branch of a reference tree from an alignment.
+usage: |
+  Use to measure how many informative alignment sites support each branch, as a complement to bootstrap. sCF is the percentage of decisive sites that support the branch; sDF1 and sDF2 are the two alternative resolutions. It is computed on a sample of quartets around each branch, so use the seed for reproducibility.  Only the topology of the reference tree is used for the quartets; its branch lengths and labels are kept in the output.
+inputs:
+  tree: source_tree
+  aln: alignment
+outputs:
+  table: site_concordance_table
+  labelled: site_concordance_tree
+params:
+  quartets:
+    default: '100'
+    help: number of quartets sampled per branch (--scf)
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  iqtree2 -t "$IN_tree" -s "$IN_aln" --scf "$PARAM_quartets" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  python - run.cf.stat "$OUT_table" <<'PY'
+  import sys
+  rows = [l.rstrip("\n").split("\t") for l in open(sys.argv[1]) if not l.startswith("#") and l.strip()]
+  open(sys.argv[2], "w").write("\n".join(",".join(r) for r in rows) + "\n")
+  PY
+  cp run.cf.tree "$OUT_labelled"

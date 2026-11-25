@@ -1,0 +1,28 @@
+name: clusterprofiler_bitr
+tool: clusterProfiler 4.10.0 (R) with org.Hs.eg.db 3.18.0
+summary: Convert human gene identifiers between types (symbol, Entrez, Ensembl, UniProt and others) with bitr.
+usage: |
+  Use to move a gene list into the identifier type another step needs. Mapping is offline from org.Hs.eg.db. A gene with several matches in the target type yields several rows; genes with no match are dropped (or kept with NA when drop is FALSE). Input gene ids are read one per line.
+  Choices that change the result: source type, one or more target types (comma separated) and whether unmapped genes are dropped. Valid types are those of columns(org.Hs.eg.db), for example SYMBOL, ENTREZID, ENSEMBL, UNIPROT, REFSEQ, GENENAME.
+inputs:
+  genes: gene_list
+outputs:
+  mapping: id_mapping_table
+params:
+  from_type:
+    default: "SYMBOL"
+    help: Identifier type of the input genes.
+  to_type:
+    default: "ENTREZID"
+    help: One or more target identifier types, comma separated.
+  drop:
+    default: "TRUE"
+    help: TRUE or FALSE, drop input genes that have no match in the target type.
+interpreter: Rscript
+script: |
+  suppressMessages({library(clusterProfiler); library(org.Hs.eg.db)})
+  genes <- unique(trimws(readLines(Sys.getenv("IN_genes")))); genes <- genes[nzchar(genes)]
+  to <- trimws(strsplit(Sys.getenv("PARAM_to_type"), ",")[[1]])
+  m <- bitr(genes, fromType = Sys.getenv("PARAM_from_type"), toType = to, OrgDb = org.Hs.eg.db,
+            drop = as.logical(Sys.getenv("PARAM_drop")))
+  write.csv(m, Sys.getenv("OUT_mapping"), row.names = FALSE)

@@ -1,0 +1,45 @@
+name: metaeuk_easy_predict
+tool: MetaEuk (release 7, bba0d80) easy-predict
+summary: Predict eukaryotic protein-coding genes, including multi-exon genes, in contigs by searching a protein reference database.
+usage: |
+  Use for gene calling in eukaryotic genomes, transcriptomes or metagenomic contigs with a set of reference proteins (for example a clade's orthologs). Each prediction is a set of exons whose translations jointly match a reference protein; the header gives the reference, contig, strand, bit score, e-value and exon coordinates. Sensitivity -s trades speed for finding distant homologs; metaeuk_eval and tcov filter predictions; min_exon_aa, min_intron and max_intron bound the exon-intron structure.
+inputs:
+  contigs: genome_contigs_fasta
+  refs: reference_proteins_fasta
+outputs:
+  proteins: metaeuk_proteins
+  codons: metaeuk_codons
+  gff: metaeuk_gff
+params:
+  sensitivity:
+    default: '4.0'
+    help: 'MMseqs2 search sensitivity -s: 1.0 faster, 4.0 fast, 7.5 sensitive'
+  metaeuk_eval:
+    default: '0.001'
+    help: maximal combined e-value of a predicted exon set
+  metaeuk_tcov:
+    default: '0.5'
+    help: minimal fraction of the reference protein covered by the exon set
+  min_exon_aa:
+    default: '11'
+    help: minimal exon length in amino acids
+  min_intron:
+    default: '15'
+    help: minimal intron length in nucleotides
+  max_intron:
+    default: '10000'
+    help: maximal intron length in nucleotides
+  translation_table:
+    default: '1'
+    help: NCBI genetic code table
+  min_length:
+    default: '15'
+    help: minimal open-reading-frame length in codons for candidate exons
+interpreter: bash
+script: |
+  metaeuk easy-predict "$IN_contigs" "$IN_refs" pred tmp --threads 1 -s "$PARAM_sensitivity" --metaeuk-eval "$PARAM_metaeuk_eval" --metaeuk-tcov "$PARAM_metaeuk_tcov" \
+    --min-exon-aa "$PARAM_min_exon_aa" --min-intron "$PARAM_min_intron" --max-intron "$PARAM_max_intron" --translation-table "$PARAM_translation_table" \
+    --min-length "$PARAM_min_length" > metaeuk.log 2>&1 || { tail -20 metaeuk.log >&2; exit 1; }
+  cp pred.fas "$OUT_proteins"
+  cp pred.codon.fas "$OUT_codons"
+  cp pred.gff "$OUT_gff"

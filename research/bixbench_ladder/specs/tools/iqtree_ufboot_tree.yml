@@ -1,0 +1,32 @@
+name: iqtree_ufboot_tree
+tool: IQ-TREE 2.3.6 ultrafast bootstrap
+summary: Infer a maximum-likelihood tree with ultrafast bootstrap (UFBoot) branch support.
+usage: |
+  Use for fast branch support on a large alignment. UFBoot values are percentages and are less conservative than standard bootstrap; values of 95 or more are usually taken as reliable. Needs at least 1000 replicates. bnni reduces overestimated support when the model is violated. Writes both the ML tree with support and the consensus tree of the bootstrap trees.
+inputs:
+  aln: alignment
+outputs:
+  tree: iqtree_ufboot_tree
+  consensus: iqtree_ufboot_consensus_tree
+params:
+  model:
+    default: MFP
+    help: substitution model, for example MFP (ModelFinder then tree search), GTR+G, HKY+F+I, LG+G4, JC; MFP picks the best by BIC
+  replicates:
+    default: '1000'
+    help: number of ultrafast bootstrap replicates, at least 1000
+  bnni:
+    default: 'no'
+    help: yes refines each bootstrap tree with nearest-neighbour interchange (-bnni)
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  if [ "$PARAM_bnni" = yes ]; then args+=(-bnni); fi
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" -B "$PARAM_replicates" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  cp run.treefile "$OUT_tree"
+  cp run.contree "$OUT_consensus"

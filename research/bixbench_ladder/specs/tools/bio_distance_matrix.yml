@@ -1,0 +1,26 @@
+name: bio_distance_matrix
+tool: Biopython 1.84 Bio.Phylo.TreeConstruction.DistanceCalculator
+summary: Compute a pairwise distance matrix between the sequences of an alignment.
+usage: |
+  The model decides the distance: identity gives 1 minus the fraction of identical aligned positions (p-distance); blastn, megablast and trans use nucleotide scoring matrices; blosum62, pam250 and the other protein matrices give protein distances. Columns with gaps count as mismatches. Models are for the alignment's alphabet: DNA models for nucleotides, protein models for amino acids.
+inputs:
+  aln: alignment
+outputs:
+  matrix: bio_distance_matrix_table
+params:
+  model:
+    default: identity
+    help: 'distance model: identity, or a DNA matrix (blastn, megablast, trans) or protein matrix (blosum62, pam250, ...)'
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import AlignIO
+  from Bio.Phylo.TreeConstruction import DistanceCalculator
+  aln = AlignIO.read(os.environ["IN_aln"], "fasta")
+  dm = DistanceCalculator(os.environ["PARAM_model"]).get_distance(aln)
+  names = list(dm.names)
+  df = pd.DataFrame([[dm[a, b] for b in names] for a in names], index=names, columns=names)
+  df.index.name = "taxon"
+  df.to_csv(os.environ["OUT_matrix"])

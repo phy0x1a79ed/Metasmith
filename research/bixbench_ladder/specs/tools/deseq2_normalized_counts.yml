@@ -1,0 +1,35 @@
+name: deseq2_normalized_counts
+tool: DESeq2 1.42.0 (R)
+summary: Estimate DESeq2 size factors and write counts divided by them.
+usage: |
+  Use to get library-size normalised counts for plotting or export; the values are not log transformed. Size factors do not depend on the design, so the default design "~ 1" is enough.
+  Choices that change the numbers: the size factor estimator (ratio median-of-ratios fails when every gene has a zero; poscounts handles that) and an optional minimum row-sum pre-filter, which changes the factors only through the genes kept.
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  normalized: deseq2_normalized_counts_table
+  size_factors: deseq2_size_factors_table
+params:
+  design:
+    default: "~ 1"
+    help: Design formula, only needed to build the object; it does not change size factors.
+  size_factor_type:
+    default: "ratio"
+    help: Estimator passed to estimateSizeFactors, ratio, poscounts or iterate.
+  min_row_sum:
+    default: "0"
+    help: Drop genes whose total count is below this before estimating factors.
+interpreter: Rscript
+script: |
+  suppressMessages(library(DESeq2))
+  cnt <- read.csv(Sys.getenv("IN_counts"), row.names = 1, check.names = FALSE)
+  cd <- read.csv(Sys.getenv("IN_samples"), row.names = 1, check.names = FALSE)
+  cd <- cd[colnames(cnt), , drop = FALSE]
+  cd[] <- lapply(cd, function(x) if (is.character(x)) factor(x) else x)
+  dds <- DESeqDataSetFromMatrix(as.matrix(cnt), cd, design = as.formula(Sys.getenv("PARAM_design")))
+  dds <- dds[rowSums(counts(dds)) >= as.numeric(Sys.getenv("PARAM_min_row_sum")), ]
+  dds <- estimateSizeFactors(dds, type = Sys.getenv("PARAM_size_factor_type"))
+  nc <- counts(dds, normalized = TRUE)
+  write.csv(data.frame(gene = rownames(nc), nc, check.names = FALSE), Sys.getenv("OUT_normalized"), row.names = FALSE)
+  write.csv(data.frame(sample = colnames(dds), sizeFactor = sizeFactors(dds)), Sys.getenv("OUT_size_factors"), row.names = FALSE)

@@ -1,0 +1,28 @@
+name: bio_alignment_conservation
+tool: Biopython 1.84 Bio.Align (column statistics)
+summary: Score every alignment column for conservation, gaps and Shannon entropy.
+usage: |
+  Use to find conserved or variable positions. conservation is the share of non-gap characters equal to the most common one; shannon_entropy_bits is the entropy of the non-gap character distribution (0 is invariant, 2 is uniform for DNA); gap_fraction is the share of sequences with a gap. consensus is the most common non-gap character (ties broken alphabetically).
+inputs:
+  aln: alignment
+outputs:
+  table: alignment_conservation_table
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  import math
+  from collections import Counter
+  from Bio import AlignIO
+  aln = AlignIO.read(os.environ["IN_aln"], "fasta")
+  rows = []
+  for i in range(aln.get_alignment_length()):
+      col = [c.upper() for c in aln[:, i]]
+      sym = [c for c in col if c not in "-.?"]
+      cnt = Counter(sym)
+      n = len(sym)
+      top = sorted(cnt.items(), key=lambda kv: (-kv[1], kv[0]))[0] if cnt else ("", 0)
+      ent = max(0.0, -sum(v / n * math.log2(v / n) for v in cnt.values())) if n else None
+      rows.append(dict(column=i + 1, consensus=top[0], conservation=top[1] / n if n else None, gap_fraction=1 - n / len(col), shannon_entropy_bits=ent))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

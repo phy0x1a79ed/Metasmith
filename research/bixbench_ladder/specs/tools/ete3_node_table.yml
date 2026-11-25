@@ -1,0 +1,21 @@
+name: ete3_node_table
+tool: ete3 3.1.3 Tree.traverse
+summary: List every node of a tree with its support, branch length, depth and the leaves below it.
+usage: |
+  Use to inspect or filter clades. distance_from_root sums branch lengths from the root; topological_depth counts edges from the root. Nodes are numbered in pre-order starting at 0 for the root.
+inputs:
+  tree: tree
+outputs:
+  table: ete3_node_table
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from ete3 import Tree
+
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  rows = []
+  for i, n in enumerate(t.traverse("preorder")):
+      rows.append(dict(node_id=i, name=n.name, is_leaf=n.is_leaf(), n_leaves=len(n), support=n.support, branch_length=n.dist,
+                       distance_from_root=n.get_distance(t), topological_depth=n.get_distance(t, topology_only=True), leaves=";".join(n.get_leaf_names())))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

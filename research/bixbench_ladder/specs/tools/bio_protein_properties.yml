@@ -1,0 +1,32 @@
+name: bio_protein_properties
+tool: Biopython 1.84 Bio.SeqUtils.ProtParam
+summary: Compute molecular weight, isoelectric point, hydropathy, instability, aromaticity, secondary-structure fractions and net charge for every protein.
+usage: |
+  Use for amino-acid sequences. Stop symbols, gaps and X are removed first. Instability index above 40 predicts an unstable protein; GRAVY is the mean Kyte-Doolittle hydropathy (positive means hydrophobic); the three fractions are the shares of residues typical of helix (VIYFWLM), turn (NGPS) and sheet (EALMQKRH). charge_at_ph is the net charge at the chosen pH.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  table: protein_properties_table
+params:
+  ph:
+    default: '7.0'
+    help: pH at which the net charge is computed
+  monoisotopic:
+    default: 'no'
+    help: yes uses monoisotopic instead of average residue masses
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import SeqIO
+  from Bio.SeqUtils.ProtParam import ProteinAnalysis
+  rows = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      s = "".join(c for c in str(r.seq).upper() if c in "ACDEFGHIKLMNPQRSTVWY")
+      a = ProteinAnalysis(s, monoisotopic=os.environ["PARAM_monoisotopic"] == "yes")
+      h, t, e = a.secondary_structure_fraction()
+      rows.append(dict(id=r.id, length=len(s), molecular_weight=a.molecular_weight(), aromaticity=a.aromaticity(),
+                       instability_index=a.instability_index(), isoelectric_point=a.isoelectric_point(), gravy=a.gravy(),
+                       helix_fraction=h, turn_fraction=t, sheet_fraction=e, charge_at_ph=a.charge_at_pH(float(os.environ["PARAM_ph"]))))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

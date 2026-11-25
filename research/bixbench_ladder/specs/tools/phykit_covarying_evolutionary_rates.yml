@@ -1,0 +1,14 @@
+name: phykit_covarying_evolutionary_rates
+tool: PhyKIT 2.0.1 covarying_evolutionary_rates
+summary: Correlate the branch-specific evolutionary rates of two gene trees after correcting by a reference tree.
+usage: |
+  Use to test whether two genes evolve at correlated rates (for example co-evolving proteins). Each shared branch length is divided by the matching branch length of the reference species tree, outlier branches are removed, and the Pearson correlation is reported with its p-value. All three trees need branch lengths and share a topology on common taxa.
+inputs:
+  tree0: tree
+  tree1: second_tree
+  reference: reference_tree
+outputs:
+  out: covarying_rates_table
+interpreter: bash
+script: |
+  { echo "correlation,p_value"; phykit covarying_evolutionary_rates "$IN_tree0" "$IN_tree1" -r "$IN_reference" | tr '\t' ','; } > "$OUT_out"

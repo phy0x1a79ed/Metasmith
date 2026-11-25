@@ -1,0 +1,37 @@
+name: random_forest_feature_importance
+tool: scikit-learn 1.6.0 RandomForestClassifier
+summary: Impurity-based feature importances of a random forest fitted on all rows.
+usage: |
+  Use to rank numeric features by their contribution to predicting a class label. Impurity importances sum to 1 and favour high-cardinality features.
+inputs:
+  data: table
+outputs:
+  result: feature_importance_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Class label column.
+  n_estimators:
+    default: '100'
+    help: Number of trees.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.ensemble import RandomForestClassifier
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  model = RandomForestClassifier(n_estimators=int(e["PARAM_n_estimators"]), random_state=rs).fit(X, data[e["PARAM_target_col"]])
+  out = pd.DataFrame({"feature": cols, "importance": model.feature_importances_}).sort_values("importance", ascending=False)
+  out.to_csv(e["OUT_result"], index=False)

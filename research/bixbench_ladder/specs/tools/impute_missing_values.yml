@@ -1,0 +1,37 @@
+name: impute_missing_values
+tool: scikit-learn 1.6.0 SimpleImputer / KNNImputer
+summary: Fill missing numeric values with a column statistic or nearest-neighbour average.
+usage: |
+  Use before methods that cannot handle NaN. simple replaces by mean, median, most_frequent or constant; knn averages the n_neighbors closest rows.
+inputs:
+  data: table
+outputs:
+  result: imputed_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  imputer:
+    default: simple
+    help: simple or knn.
+  strategy:
+    default: mean
+    help: 'For simple: mean, median, most_frequent or constant.'
+  n_neighbors:
+    default: '5'
+    help: 'For knn: number of neighbours.'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.impute import SimpleImputer, KNNImputer
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  imp = KNNImputer(n_neighbors=int(e["PARAM_n_neighbors"])) if e["PARAM_imputer"] == "knn" else SimpleImputer(strategy=e["PARAM_strategy"])
+  out = data.copy()
+  out[cols] = imp.fit_transform(X)
+  out.to_csv(e["OUT_result"], index=False)

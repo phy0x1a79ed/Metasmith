@@ -1,0 +1,12 @@
+name: phykit_gc_content
+tool: PhyKIT 2.0.1 gc_content
+summary: Compute the overall GC fraction of the sequences in a FASTA file.
+usage: |
+  Use for nucleotide sequences, aligned or not. The value is G+C over all characters pooled across records. Use phykit_gc_content_per_sequence for each record.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  out: gc_content_table
+interpreter: bash
+script: |
+  { echo "gc_content"; phykit gc_content "$IN_seqs" | tr '\t' ','; } > "$OUT_out"

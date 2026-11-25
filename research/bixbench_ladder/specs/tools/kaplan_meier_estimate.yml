@@ -1,0 +1,37 @@
+name: kaplan_meier_estimate
+tool: statsmodels 0.14.4 SurvfuncRight
+summary: Kaplan-Meier survival curve estimate, overall or per group.
+usage: |
+  Use to tabulate the survival function at each observed time. Standard errors are Greenwood's.
+inputs:
+  data: table
+outputs:
+  result: kaplan_meier_table
+params:
+  time_col:
+    default: ''
+    help: Follow-up time column.
+  status_col:
+    default: ''
+    help: 1 for event, 0 for censored.
+  group_col:
+    default: ''
+    help: Optional group column; empty for one overall curve.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.duration.survfunc import SurvfuncRight
+  g = data[e["PARAM_group_col"]].astype(str) if e["PARAM_group_col"] else pd.Series("all", index=data.index)
+  parts = []
+  for name, d in data.groupby(g):
+      sf = SurvfuncRight(d[e["PARAM_time_col"]], d[e["PARAM_status_col"]])
+      parts.append(pd.DataFrame(dict(group=name, time=sf.surv_times, n_risk=sf.n_risk, n_events=sf.n_events, surv_prob=sf.surv_prob, surv_prob_se=sf.surv_prob_se)))
+  out = pd.concat(parts)
+  out.to_csv(e["OUT_result"], index=False)

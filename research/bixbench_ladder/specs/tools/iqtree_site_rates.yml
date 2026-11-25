@@ -1,0 +1,27 @@
+name: iqtree_site_rates
+tool: IQ-TREE 2.3.6 --rate
+summary: Estimate a relative evolutionary rate for every alignment site by empirical Bayes.
+usage: |
+  Use to find fast and slow sites. Rates are posterior means under a model with rate heterogeneity, so the model should include +G or +R; Cat is the most probable rate category and C_Rate the rate of that category. Rate 1 is the average site.
+inputs:
+  aln: alignment
+outputs:
+  rates: site_rates_table
+params:
+  model:
+    default: MFP
+    help: substitution model with rate heterogeneity, e.g. GTR+G or LG+G4; MFP selects one by BIC
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" --rate --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  python - run.rate "$OUT_rates" <<'PY'
+  import sys
+  rows = [l.rstrip("\n").split("\t") for l in open(sys.argv[1]) if not l.startswith("#") and l.strip()]
+  open(sys.argv[2], "w").write("\n".join(",".join(r) for r in rows) + "\n")
+  PY

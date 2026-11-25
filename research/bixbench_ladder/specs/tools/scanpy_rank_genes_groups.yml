@@ -1,0 +1,38 @@
+name: scanpy_rank_genes_groups
+tool: scanpy 1.10.4 (Python)
+summary: Rank marker genes for each group of cells with scanpy rank_genes_groups and write the full table.
+usage: |
+  Use on log-normalised expression (not scaled) with an obs column that defines the groups, for example a cell type or cluster. Each group is compared with the rest of the cells or with one named reference group. Written values are in the object's X; the table has one row per group and gene, ordered by score within the group.
+  Choices that change the numbers: the grouping column, the test (t-test, t-test_overestim_var, wilcoxon, logreg), the reference group, tie correction for Wilcoxon, and the multiple testing correction. logfoldchanges are computed on the expression scale of X assuming natural-log data.
+inputs:
+  adata: anndata_h5ad
+outputs:
+  ranks: scanpy_rank_genes_table
+params:
+  groupby:
+    default: "cell_type"
+    help: obs column that defines the groups.
+  method:
+    default: "t-test"
+    help: Test, t-test, t-test_overestim_var, wilcoxon or logreg.
+  reference:
+    default: "rest"
+    help: Group to compare against, or rest for all other cells.
+  corr_method:
+    default: "benjamini-hochberg"
+    help: p-value correction, benjamini-hochberg or bonferroni.
+  tie_correct:
+    default: "False"
+    help: True or False, tie correction for the Wilcoxon test.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_adata"])
+  sc.tl.rank_genes_groups(adata, groupby=os.environ["PARAM_groupby"], method=os.environ["PARAM_method"],
+                          reference=os.environ["PARAM_reference"], corr_method=os.environ["PARAM_corr_method"],
+                          tie_correct=os.environ["PARAM_tie_correct"] == "True", n_genes=adata.n_vars)
+  df = sc.get.rank_genes_groups_df(adata, group=None)
+  df.insert(1, "rank", df.groupby("group", observed=True).cumcount() + 1)
+  df.to_csv(os.environ["OUT_ranks"], index=False, float_format="%.17g")

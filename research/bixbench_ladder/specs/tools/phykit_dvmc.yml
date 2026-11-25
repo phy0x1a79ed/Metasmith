@@ -1,0 +1,12 @@
+name: phykit_dvmc
+tool: PhyKIT 2.0.1 degree_of_violation_of_a_molecular_clock
+summary: Report the degree of violation of the molecular clock of a tree.
+usage: |
+  The standard deviation of root-to-tip distances; 0 means a perfectly clock-like (ultrametric) tree. The tree must be rooted sensibly because root-to-tip distances depend on the root.
+inputs:
+  tree: tree
+outputs:
+  out: dvmc_table
+interpreter: bash
+script: |
+  { echo "dvmc"; phykit degree_of_violation_of_a_molecular_clock "$IN_tree" | tr '\t' ','; } > "$OUT_out"

@@ -1,0 +1,43 @@
+name: gseapy_ssgsea
+tool: gseapy 1.1.4 (Python)
+summary: Single-sample GSEA (ssGSEA) enrichment scores of gene sets in each sample of an expression matrix.
+usage: |
+  Use to score each sample for each gene set, for example to compare pathway activity between samples. The matrix is normalised expression with genes in rows. The result has one row per sample and gene set, with the enrichment score (ES) and the normalised score (NES, ES divided by the range of ES over all sets and samples).
+  Choices that change the numbers: the weight exponent (the ssGSEA default is 0.25), how samples and gene-level correlations are normalised, size limits, and ranking direction.
+inputs:
+  matrix: expression_matrix_table
+  sets: gene_sets
+outputs:
+  scores: gseapy_ssgsea_table
+params:
+  sample_norm_method:
+    default: "rank"
+    help: Per-sample normalisation before scoring, rank, log, log_rank or custom.
+  correl_norm_type:
+    default: "rank"
+    help: Normalisation of the gene weights, rank, symrank or zscore.
+  weight:
+    default: "0.25"
+    help: Exponent of the gene weights in the running sum.
+  min_size:
+    default: "15"
+    help: Smallest overlap of a gene set with the matrix genes that is scored.
+  max_size:
+    default: "500"
+    help: Largest overlap that is scored.
+  ascending:
+    default: "False"
+    help: True or False, rank genes from the smallest value.
+interpreter: python
+script: |
+  import os
+  import gseapy as gp
+  import pandas as pd
+
+  mat = pd.read_csv(os.environ["IN_matrix"], index_col=0)
+  mat = mat.groupby(level=0).mean()
+  res = gp.ssgsea(data=mat, gene_sets=os.environ["IN_sets"], sample_norm_method=os.environ["PARAM_sample_norm_method"],
+                  correl_norm_type=os.environ["PARAM_correl_norm_type"], weight=float(os.environ["PARAM_weight"]),
+                  min_size=int(os.environ["PARAM_min_size"]), max_size=int(os.environ["PARAM_max_size"]),
+                  ascending=os.environ["PARAM_ascending"] == "True", threads=1, no_plot=True, verbose=False)
+  res.res2d.to_csv(os.environ["OUT_scores"], index=False, float_format="%.17g")

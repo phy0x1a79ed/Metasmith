@@ -1,0 +1,30 @@
+name: anova_table_ols
+tool: statsmodels 0.14.4 anova_lm
+summary: 'ANOVA table of an OLS model: sums of squares, F and p per term.'
+usage: |
+  Use for one-way, multi-way or ANCOVA designs written as a formula. typ 1 is sequential (statsmodels default and order dependent); typ 2 and 3 are marginal (type 3 needs sum-to-zero coding such as C(g, Sum)).
+inputs:
+  data: table
+outputs:
+  result: anova_lm_table
+params:
+  formula:
+    default: ''
+    help: Patsy model formula, for example 'value ~ x1 + C(group)'.
+  typ:
+    default: '1'
+    help: 'Type of sums of squares: 1, 2 or 3.'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.anova import anova_lm
+  res = smf.ols(e["PARAM_formula"], data).fit()
+  out = anova_lm(res, typ=int(e["PARAM_typ"])).rename_axis("term").reset_index()
+  out.to_csv(e["OUT_result"], index=False)

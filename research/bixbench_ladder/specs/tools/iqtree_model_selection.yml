@@ -1,0 +1,45 @@
+name: iqtree_model_selection
+tool: IQ-TREE 2.3.6 ModelFinder
+summary: Rank candidate substitution models for an alignment with ModelFinder (BIC, AIC, AICc).
+usage: |
+  Use to choose a substitution model before inference, or to report which model fits. Only the model test runs, the tree search that follows is not part of this step. The default sorts by BIC and reports AIC and AICc too. Restrict the candidates with mset (for example HKY,GTR) and rate heterogeneity with mrate to shorten the search.
+inputs:
+  aln: alignment
+outputs:
+  models: modelfinder_table
+  report: modelfinder_report
+params:
+  mset:
+    default: ''
+    help: comma-separated base models to test (e.g. JC,HKY,GTR or LG,WAG); empty tests all
+  mrate:
+    default: ''
+    help: rate-heterogeneity types to test, e.g. E,I,G,I+G,R; empty uses the program default
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  if [ -n "$PARAM_mset" ]; then args+=(-mset "$PARAM_mset"); fi
+  if [ -n "$PARAM_mrate" ]; then args+=(-mrate "$PARAM_mrate"); fi
+  iqtree2 -s "$IN_aln" -m MF --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  cp run.iqtree "$OUT_report"
+  python - run.iqtree "$OUT_models" <<'PY'
+  import sys
+  lines = open(sys.argv[1]).read().splitlines()
+  i = next(k for k, l in enumerate(lines) if l.startswith("List of models sorted by BIC scores"))
+  rows = []
+  for l in lines[i + 3:]:
+      t = l.split()
+      if len(t) != 11:
+          break
+      rows.append(t)
+  cols = "model,logL,AIC,AIC_in_confidence_set,AIC_weight,AICc,AICc_in_confidence_set,AICc_weight,BIC,BIC_in_confidence_set,BIC_weight"
+  with open(sys.argv[2], "w") as f:
+      f.write(cols + "\n")
+      for t in rows:
+          f.write(",".join(t) + "\n")
+  PY

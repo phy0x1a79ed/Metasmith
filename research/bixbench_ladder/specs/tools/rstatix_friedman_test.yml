@@ -1,0 +1,24 @@
+name: rstatix_friedman_test
+tool: rstatix 0.7.2 friedman_test
+summary: Friedman rank test for repeated measures in long format.
+usage: |
+  Use for repeated measures with one row per subject-condition. formula is 'value ~ condition | subject'.
+inputs:
+  data: table
+outputs:
+  result: rstatix_friedman_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ condition | subject'.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages({
+    library(rstatix)
+    library(dplyr)
+  })
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE, stringsAsFactors = FALSE)
+  res <- friedman_test(data, as.formula(Sys.getenv("PARAM_formula")))
+  res <- as.data.frame(res)
+  res <- res[, !sapply(res, is.list), drop = FALSE]
+  write.csv(res, Sys.getenv("OUT_result"), row.names = FALSE)

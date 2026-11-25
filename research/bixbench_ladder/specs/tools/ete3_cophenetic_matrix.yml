@@ -1,0 +1,25 @@
+name: ete3_cophenetic_matrix
+tool: ete3 3.1.3 Tree.get_distance
+summary: Compute the leaf-to-leaf distance matrix of a tree.
+usage: |
+  By default distances are sums of branch lengths. With topology_only yes the distance is the number of edges between leaves, ignoring branch lengths.
+inputs:
+  tree: tree
+outputs:
+  matrix: ete3_cophenetic_matrix_table
+params:
+  topology_only:
+    default: 'no'
+    help: yes counts edges instead of summing branch lengths
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from ete3 import Tree
+
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  names = t.get_leaf_names()
+  topo = os.environ["PARAM_topology_only"] == "yes"
+  df = pd.DataFrame([[0.0 if a == b else t.get_distance(a, b, topology_only=topo) for b in names] for a in names], index=names, columns=names)
+  df.index.name = "taxon"
+  df.to_csv(os.environ["OUT_matrix"])

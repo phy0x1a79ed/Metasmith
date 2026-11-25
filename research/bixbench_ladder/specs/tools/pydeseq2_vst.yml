@@ -1,0 +1,35 @@
+name: pydeseq2_vst
+tool: pydeseq2 0.4.12 (Python)
+summary: Variance stabilising transformation of counts with pydeseq2.
+usage: |
+  Use to get homoscedastic values for clustering, PCA and heat maps; not for testing. By default only an intercept is used to estimate the dispersion trend (blind to the design).
+  Choices that change the numbers: whether the design is used for the trend and the dispersion trend type (parametric or mean).
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  vst: pydeseq2_vst_table
+params:
+  design_factors:
+    default: "condition"
+    help: Comma separated sample sheet columns used as design; matters only when use_design is True.
+  use_design:
+    default: "False"
+    help: True or False, fit the dispersion trend with the full design matrix instead of an intercept.
+  fit_type:
+    default: "parametric"
+    help: Dispersion trend, parametric or mean.
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from pydeseq2.dds import DeseqDataSet
+
+  counts = pd.read_csv(os.environ["IN_counts"], index_col=0).T
+  meta = pd.read_csv(os.environ["IN_samples"], index_col=0).loc[counts.index].astype(str)
+  dds = DeseqDataSet(counts=counts, metadata=meta, design_factors=[c.strip() for c in os.environ["PARAM_design_factors"].split(",")],
+                     fit_type=os.environ["PARAM_fit_type"], n_cpus=1, quiet=True)
+  dds.vst(use_design=os.environ["PARAM_use_design"] == "True", fit_type=os.environ["PARAM_fit_type"])
+  out = pd.DataFrame(dds.layers["vst_counts"], index=counts.index, columns=counts.columns).T
+  out.index.name = "gene"
+  out.reset_index().to_csv(os.environ["OUT_vst"], index=False, float_format="%.17g")

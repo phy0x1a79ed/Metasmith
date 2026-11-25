@@ -1,0 +1,22 @@
+name: makeblastdb
+tool: BLAST+ 2.16.0 makeblastdb
+summary: Build a BLAST database from a FASTA file of nucleotide or protein sequences.
+usage: |
+  Run once on the sequences that will be searched (the subject set) before blastn, blastp, blastx, tblastn, tblastx, psiblast or blastdbcmd. Set dbtype to nucl for DNA or prot for protein. parse_seqids lets blastdbcmd look sequences up by identifier.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  db: blast_database
+params:
+  dbtype:
+    default: nucl
+    help: 'molecule type of the sequences: nucl or prot'
+  parse_seqids:
+    default: 'yes'
+    help: yes parses FASTA identifiers so entries can be retrieved by name; no does not
+interpreter: bash
+script: |
+  mkdir -p "$OUT_db"
+  flag=()
+  if [ "$PARAM_parse_seqids" = yes ]; then flag+=(-parse_seqids); fi
+  makeblastdb -in "$IN_seqs" -dbtype "$PARAM_dbtype" -out "$OUT_db/db" "${flag[@]}"

@@ -1,0 +1,37 @@
+name: proportion_confidence_interval
+tool: statsmodels 0.14.4 proportion_confint
+summary: Confidence interval for a binomial proportion from counts, one per table row.
+usage: |
+  Use for success counts and totals. method: normal (default), agresti_coull, beta (Clopper-Pearson), wilson, jeffreys, binom_test.
+inputs:
+  data: table
+outputs:
+  result: proportion_ci_table
+params:
+  count_col:
+    default: ''
+    help: Column of success counts.
+  nobs_col:
+    default: ''
+    help: Column of totals.
+  alpha:
+    default: '0.05'
+    help: Interval is 1 - alpha.
+  method:
+    default: normal
+    help: Interval method name.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.proportion import proportion_confint
+  c, n = data[e["PARAM_count_col"]], data[e["PARAM_nobs_col"]]
+  lo, hi = proportion_confint(c, n, alpha=float(e["PARAM_alpha"]), method=e["PARAM_method"])
+  out = pd.DataFrame(dict(count=c, nobs=n, proportion=c / n, ci_low=np.asarray(lo), ci_high=np.asarray(hi)))
+  out.to_csv(e["OUT_result"], index=False)

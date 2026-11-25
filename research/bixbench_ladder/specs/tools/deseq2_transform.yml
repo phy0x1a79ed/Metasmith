@@ -1,0 +1,48 @@
+name: deseq2_transform
+tool: DESeq2 1.42.0 (R)
+summary: Variance stabilising (vst), regularised log (rlog) or log2(normalised + 1) transformation of counts.
+usage: |
+  Use to get homoscedastic values for clustering, heat maps and PCA. Not for differential testing. With blind TRUE the design is ignored so the transform is unbiased by the experimental design; with blind FALSE it uses the design to estimate dispersions.
+  Choices that change the numbers: the method, blind, the design (only when blind is FALSE), the dispersion fit type and, for vst, nsub, the number of genes used to fit the trend (vst needs at least nsub genes with mean above 5; rlog is slow beyond a few dozen samples).
+inputs:
+  counts: count_matrix
+  samples: sample_sheet
+outputs:
+  transformed: deseq2_transformed_table
+params:
+  method:
+    default: "vst"
+    help: Transformation, vst, rlog or normTransform (log2 of normalised counts plus a pseudocount).
+  blind:
+    default: "TRUE"
+    help: TRUE or FALSE, ignore the design when estimating the dispersion trend.
+  design:
+    default: "~ 1"
+    help: Design formula used when blind is FALSE, for example "~ condition".
+  fit_type:
+    default: "parametric"
+    help: Dispersion trend for rlog or the vst, parametric, local or mean.
+  nsub:
+    default: "1000"
+    help: Number of genes subsampled to fit the vst trend.
+  pseudocount:
+    default: "1"
+    help: Pseudocount for normTransform.
+interpreter: Rscript
+script: |
+  suppressMessages(library(DESeq2))
+  cnt <- read.csv(Sys.getenv("IN_counts"), row.names = 1, check.names = FALSE)
+  cd <- read.csv(Sys.getenv("IN_samples"), row.names = 1, check.names = FALSE)
+  cd <- cd[colnames(cnt), , drop = FALSE]
+  cd[] <- lapply(cd, function(x) if (is.character(x)) factor(x) else x)
+  dds <- DESeqDataSetFromMatrix(as.matrix(cnt), cd, design = as.formula(Sys.getenv("PARAM_design")))
+  blind <- as.logical(Sys.getenv("PARAM_blind"))
+  fit_type <- Sys.getenv("PARAM_fit_type")
+  method <- Sys.getenv("PARAM_method")
+  tr <- switch(method,
+    vst = vst(dds, blind = blind, nsub = as.integer(Sys.getenv("PARAM_nsub")), fitType = fit_type),
+    rlog = rlog(dds, blind = blind, fitType = fit_type),
+    normTransform = normTransform(estimateSizeFactors(dds), pc = as.numeric(Sys.getenv("PARAM_pseudocount"))),
+    stop("unknown method"))
+  m <- assay(tr)
+  write.csv(data.frame(gene = rownames(m), m, check.names = FALSE), Sys.getenv("OUT_transformed"), row.names = FALSE)

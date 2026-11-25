@@ -1,0 +1,18 @@
+name: phykit_pairwise_identity
+tool: PhyKIT 2.0.1 pairwise_identity
+summary: Summarise pairwise sequence identity in an alignment.
+usage: |
+  Identity of a pair is the fraction of aligned positions with the same character. Reports summary statistics over all pairs, a proxy for evolutionary rate. exclude_gaps decides whether columns with a gap are ignored or counted as mismatches. Summary statistics are mean, median, 25th and 75th percentile, minimum, maximum, standard deviation and variance. Values are rounded by PhyKIT to four decimals.
+inputs:
+  aln: alignment
+outputs:
+  out: pairwise_identity_summary_table
+params:
+  exclude_gaps:
+    default: 'no'
+    help: yes ignores every site that has a gap in either sequence of a pair
+interpreter: bash
+script: |
+  flag=()
+  if [ "$PARAM_exclude_gaps" = yes ]; then flag+=(-e); fi
+  { echo "statistic,value"; phykit pairwise_identity "$IN_aln" "${flag[@]}" | sed 's/: /,/'; } > "$OUT_out"

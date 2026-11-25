@@ -1,0 +1,42 @@
+name: ridge_regression_cv
+tool: scikit-learn 1.6.0 Ridge
+summary: Cross-validated score of ridge (L2 penalised) linear regression.
+usage: |
+  Use for a regularised linear model; scale features first so the penalty is even. alpha default 1.0.
+inputs:
+  data: table
+outputs:
+  result: ridge_regression_cv_scores
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Name of the numeric response column.
+  cv:
+    default: '5'
+    help: Number of cross-validation folds (stratified for classifiers, unshuffled).
+  scoring:
+    default: ''
+    help: scikit-learn scoring name, for example r2, neg_mean_squared_error, neg_mean_absolute_error; empty uses the estimator's default (R-squared).
+  alpha:
+    default: '1.0'
+    help: Penalty strength.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.model_selection import cross_val_score
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  y = data[e["PARAM_target_col"]]
+  from sklearn.linear_model import Ridge
+  model = Ridge(alpha=float(e["PARAM_alpha"]))
+  scores = cross_val_score(model, X, y, cv=int(e["PARAM_cv"]), scoring=e["PARAM_scoring"] or None)
+  out = pd.DataFrame({"fold": range(1, len(scores) + 1), "score": scores})
+  out.to_csv(e["OUT_result"], index=False)

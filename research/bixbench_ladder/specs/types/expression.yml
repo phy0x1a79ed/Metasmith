@@ -1,0 +1,230 @@
+deseq2_fit:
+  description: fitted DESeq2 DESeqDataSet object (size factors, dispersions and model coefficients estimated), saved with saveRDS
+  ext: rds
+deseq2_wald_fit:
+  description: DESeqDataSet fitted with the Wald test (the model coefficients carry Wald statistics), saved with saveRDS
+  ext: rds
+  extends: deseq2_fit
+deseq2_lrt_fit:
+  description: DESeqDataSet fitted with the likelihood ratio test against a reduced design, saved with saveRDS
+  ext: rds
+  extends: deseq2_fit
+de_results_table:
+  description: per-gene differential expression results, one row per gene, first column gene id, with numeric columns such as baseMean, log2FoldChange, lfcSE, stat, pvalue, padj
+  ext: csv
+  extends: table
+deseq2_results_table:
+  description: DESeq2 results() table, columns gene, baseMean, log2FoldChange, lfcSE, stat, pvalue, padj; NA where a gene was filtered or flagged as a Cooks outlier
+  ext: csv
+  extends: de_results_table
+deseq2_shrunk_results_table:
+  description: DESeq2 lfcShrink() table with shrunken log2FoldChange and lfcSE, one row per gene; columns depend on the shrinkage type
+  ext: csv
+  extends: de_results_table
+pydeseq2_results_table:
+  description: pydeseq2 DeseqStats results_df, columns gene, baseMean, log2FoldChange, lfcSE, stat, pvalue, padj
+  ext: csv
+  extends: de_results_table
+pydeseq2_shrunk_results_table:
+  description: pydeseq2 results after lfc_shrink(), same columns as the unshrunk results with shrunken log2FoldChange and lfcSE
+  ext: csv
+  extends: de_results_table
+expression_matrix_table:
+  description: numeric expression matrix, genes in rows, samples in columns, first column the gene id; counts, normalised counts or transformed values
+  ext: csv
+  extends: table
+deseq2_normalized_counts_table:
+  description: DESeq2 counts divided by the per-sample size factors, genes in rows, samples in columns, first column gene
+  ext: csv
+  extends: expression_matrix_table
+deseq2_size_factors_table:
+  description: DESeq2 size factor for each sample, columns sample and sizeFactor
+  ext: csv
+  extends: table
+deseq2_transformed_table:
+  description: variance stabilised (vst), regularised log (rlog) or log2 normalised values, genes in rows, samples in columns, first column gene
+  ext: csv
+  extends: expression_matrix_table
+pydeseq2_normalized_counts_table:
+  description: pydeseq2 counts divided by the per-sample size factors, genes in rows, samples in columns, first column gene
+  ext: csv
+  extends: expression_matrix_table
+pydeseq2_size_factors_table:
+  description: pydeseq2 size factor for each sample, columns sample and sizeFactor
+  ext: csv
+  extends: table
+pydeseq2_vst_table:
+  description: pydeseq2 variance stabilised expression values, genes in rows, samples in columns, first column gene
+  ext: csv
+  extends: expression_matrix_table
+volcano_plot_png:
+  description: EnhancedVolcano scatter plot of log2 fold change against significance, PNG image
+  ext: png
+volcano_classification_table:
+  description: per-gene volcano class (NS, Log2FC, P or P & Log2FC) from the fold change and p-value cutoffs, columns gene, x, y, class
+  ext: csv
+  extends: table
+heatmap_plot_png:
+  description: pheatmap heat map of an expression matrix, PNG image
+  ext: png
+heatmap_order_table:
+  description: row and column order of a pheatmap clustering, columns axis, position, label, cluster
+  ext: csv
+  extends: table
+de_gene_list:
+  description: gene ids passing a differential expression threshold, one per line, no header
+  ext: txt
+  extends: gene_list
+ranked_gene_table:
+  description: genes with a numeric ranking score for pre-ranked gene set analysis, columns gene and score, header row
+  ext: csv
+  extends: table
+gene_cluster_table:
+  description: gene ids with the cluster or group each belongs to, columns gene and cluster, header row
+  ext: csv
+  extends: table
+go_enrichment_object:
+  description: clusterProfiler enrichment result object (enrichResult or gseaResult) saved with saveRDS
+  ext: rds
+enrichgo_object:
+  description: clusterProfiler enrichGO enrichResult object saved with saveRDS
+  ext: rds
+  extends: go_enrichment_object
+enrichgo_universe_object:
+  description: clusterProfiler enrichGO enrichResult object computed against an explicit background universe, saved with saveRDS
+  ext: rds
+  extends: go_enrichment_object
+gsego_object:
+  description: clusterProfiler gseGO gseaResult object saved with saveRDS
+  ext: rds
+  extends: go_enrichment_object
+enrichgo_table:
+  description: enrichGO over-representation table, columns ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count
+  ext: csv
+  extends: table
+enrichgo_universe_table:
+  description: enrichGO over-representation table against an explicit background universe, columns ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count
+  ext: csv
+  extends: table
+enricher_table:
+  description: clusterProfiler enricher over-representation table for a custom GMT gene set collection, columns ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count
+  ext: csv
+  extends: table
+enricher_universe_table:
+  description: clusterProfiler enricher over-representation table for a custom GMT collection against an explicit universe, columns ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count
+  ext: csv
+  extends: table
+gsego_table:
+  description: clusterProfiler gseGO table, columns ID, Description, setSize, enrichmentScore, NES, pvalue, p.adjust, qvalue, rank, leading_edge, core_enrichment
+  ext: csv
+  extends: table
+clusterprofiler_gsea_table:
+  description: clusterProfiler GSEA table for a custom GMT collection, columns ID, Description, setSize, enrichmentScore, NES, pvalue, p.adjust, qvalue, rank, leading_edge, core_enrichment
+  ext: csv
+  extends: table
+comparecluster_go_table:
+  description: compareCluster enrichGO table, one row per cluster and GO term, columns Cluster, ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count
+  ext: csv
+  extends: table
+comparecluster_gmt_table:
+  description: compareCluster enricher table for a custom GMT collection, one row per cluster and gene set, columns Cluster, ID, Description, GeneRatio, BgRatio, pvalue, p.adjust, qvalue, geneID, Count
+  ext: csv
+  extends: table
+simplified_go_table:
+  description: GO enrichment table after clusterProfiler simplify() removed redundant terms, same columns as the input enrichment table
+  ext: csv
+  extends: table
+id_mapping_table:
+  description: gene identifier conversion table from bitr, one column per identifier type, first column the input type
+  ext: csv
+  extends: table
+genomic_regions_bed:
+  description: genomic intervals in BED format, tab separated, no header, columns chrom, start (0-based), end, name, score, strand
+  ext: bed
+genomicranges_overlap_table:
+  description: pairs of query and subject intervals that overlap, columns query_name, subject_name, query_index, subject_index, overlap_width
+  ext: csv
+  extends: table
+gseapy_prerank_table:
+  description: gseapy prerank result table, columns Name, Term, ES, NES, NOM p-val, FDR q-val, FWER p-val, Tag %, Gene %, Lead_genes
+  ext: csv
+  extends: table
+gseapy_gsea_table:
+  description: gseapy gsea (phenotype permutation) result table, columns Name, Term, ES, NES, NOM p-val, FDR q-val, FWER p-val, Tag %, Gene %, Lead_genes
+  ext: csv
+  extends: table
+gseapy_enrich_table:
+  description: gseapy over-representation table against local gene sets, columns Gene_set, Term, Overlap, P-value, Adjusted P-value, Odds Ratio, Combined Score, Genes
+  ext: csv
+  extends: table
+gseapy_ssgsea_table:
+  description: gseapy ssGSEA scores, one row per sample and gene set, columns Name, Term, ES, NES
+  ext: csv
+  extends: table
+anndata_h5ad:
+  description: AnnData object saved as h5ad, cells or samples in obs and genes in var
+  ext: h5ad
+anndata_raw:
+  description: AnnData h5ad built from a count table, X holding raw counts, obs holding sample metadata
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_qc:
+  description: AnnData h5ad after scanpy calculate_qc_metrics, obs gains n_genes_by_counts and total_counts, var gains n_cells_by_counts
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_filtered:
+  description: AnnData h5ad after cell and gene filtering with scanpy, raw counts in X
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_normalized:
+  description: AnnData h5ad after scanpy normalize_total, X holding library-size scaled counts
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_log1p:
+  description: AnnData h5ad after normalize_total and log1p, X holding log-transformed normalised expression
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_hvg:
+  description: AnnData h5ad after highly variable gene selection, var gains highly_variable, optionally subset to those genes
+  ext: h5ad
+  extends: anndata_prepared
+anndata_scaled:
+  description: AnnData h5ad after scanpy scale, each gene standardised to zero mean and unit variance
+  ext: h5ad
+  extends: anndata_prepared
+anndata_prepared:
+  description: AnnData h5ad ready for PCA, log-normalised and optionally scaled (an anndata_hvg or anndata_scaled file)
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_pca:
+  description: AnnData h5ad after scanpy PCA, obsm X_pca and uns pca variance ratios present
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_neighbors:
+  description: AnnData h5ad after scanpy neighbors, obsp connectivities and distances present
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_umap:
+  description: AnnData h5ad after scanpy UMAP, obsm X_umap present
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_tsne:
+  description: AnnData h5ad after scanpy t-SNE, obsm X_tsne present
+  ext: h5ad
+  extends: anndata_h5ad
+anndata_obs_table:
+  description: the obs table of an AnnData object, one row per cell or sample, first column the obs name
+  ext: csv
+  extends: table
+anndata_matrix_table:
+  description: the X matrix of an AnnData object as a dense table, genes in rows, cells in columns, first column gene
+  ext: csv
+  extends: table
+scanpy_rank_genes_table:
+  description: scanpy rank_genes_groups results in long format, columns group, rank, names, scores, logfoldchanges, pvals, pvals_adj
+  ext: csv
+  extends: table
+gseapy_enrich_universe_table:
+  description: gseapy over-representation table against an explicit background universe, columns Gene_set, Term, Overlap, P-value, Adjusted P-value, Odds Ratio, Combined Score, Genes
+  ext: csv
+  extends: table

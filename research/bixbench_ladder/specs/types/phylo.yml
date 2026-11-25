@@ -1,0 +1,633 @@
+nucleotide_fasta:
+  description: unaligned DNA or RNA sequences, one FASTA record per sequence
+  ext: fasta
+  extends: sequences_fasta
+protein_fasta:
+  description: unaligned amino-acid sequences, one FASTA record per sequence
+  ext: fasta
+  extends: sequences_fasta
+fasta_entry:
+  description: a single FASTA record extracted from a larger FASTA file
+  ext: fasta
+renamed_fasta:
+  description: FASTA records whose identifiers were replaced according to an identifier map; sequences unchanged
+  ext: fasta
+reverse_complement_fasta:
+  description: nucleotide sequences, each record reverse-complemented; same record names as the input
+  ext: fasta
+  extends: sequences_fasta
+consensus_sequence_fasta:
+  description: a single consensus sequence derived from an alignment, FASTA
+  ext: fasta
+  extends: sequences_fasta
+id_map:
+  description: 'two tab-separated columns without header: current identifier, new identifier'
+  ext: tsv
+taxon_list:
+  description: taxon or tip names, one per line, no header
+  ext: txt
+tree_tip_labels:
+  description: tip names of a tree, one per line
+  ext: txt
+  extends: taxon_list
+clade_list:
+  description: one clade per line, tip names separated by whitespace
+  ext: txt
+source_alignment:
+  description: multiple sequence alignment (aligned FASTA, nucleotide or protein) as produced by an aligner or supplied by the user, before any trimming, recoding or codon threading
+  ext: fasta
+  extends: alignment
+mafft_alignment:
+  description: multiple sequence alignment written by MAFFT, aligned FASTA
+  ext: fasta
+  extends: source_alignment
+mafft_extended_alignment:
+  description: existing alignment with new sequences added by MAFFT --add, aligned FASTA
+  ext: fasta
+  extends: alignment
+reference_alignment:
+  description: aligned FASTA used as the reference (true or benchmark) alignment when scoring another alignment
+  ext: fasta
+  extends: alignment
+clipkit_alignment:
+  description: alignment after ClipKIT trimmed alignment columns, aligned FASTA
+  ext: fasta
+  extends: alignment
+clipkit_log:
+  description: 'ClipKIT per-site log: one line per alignment column with the column number, keep or trim, and the site type'
+  ext: txt
+recoded_alignment:
+  description: alignment whose residues were replaced by reduced-alphabet recoding symbols (not real nucleotides or amino acids), aligned FASTA
+  ext: fasta
+  extends: alignment
+codon_alignment:
+  description: nucleotide alignment threaded over a protein alignment so it is codon-aware, aligned FASTA
+  ext: fasta
+  extends: alignment
+trimmed_codon_alignment:
+  description: nucleotide codon alignment threaded over a ClipKIT-trimmed protein alignment, aligned FASTA
+  ext: fasta
+  extends: alignment
+concatenated_alignment:
+  description: 'supermatrix: several gene alignments concatenated per taxon, missing genes filled with ?, aligned FASTA'
+  ext: fasta
+  extends: alignment
+concat_partition_file:
+  description: RAxML-style partition file listing each gene's column range in the concatenated alignment
+  ext: txt
+concat_occupancy_table:
+  description: per-gene taxon occupancy of a concatenated alignment, with header
+  ext: csv
+  extends: table
+alignment_set:
+  description: directory of aligned FASTA files, one per gene, sharing taxon names
+source_tree:
+  description: phylogenetic tree in Newick, as inferred by a program or supplied by the user, before any editing step
+  ext: nwk
+  extends: tree
+second_tree:
+  description: a second phylogenetic tree in Newick, the one a first tree is compared with
+  ext: nwk
+  extends: tree
+reference_tree:
+  description: a reference tree in Newick, usually a species tree, used to correct or compare branch lengths of other trees
+  ext: nwk
+  extends: tree
+tree_set:
+  description: several Newick trees in one file, one tree per line
+  ext: nwk
+rooted_tree:
+  description: tree re-rooted on a user-chosen outgroup, Newick
+  ext: nwk
+  extends: tree
+pruned_tree:
+  description: tree with taxa removed (or only chosen taxa kept), Newick
+  ext: nwk
+  extends: tree
+renamed_tree:
+  description: tree whose tip names were replaced using an identifier map, Newick
+  ext: nwk
+  extends: tree
+scaled_tree:
+  description: tree with every branch length multiplied by one factor, Newick
+  ext: nwk
+  extends: tree
+collapsed_tree:
+  description: tree in which branches below a support threshold were collapsed into polytomies, Newick
+  ext: nwk
+  extends: tree
+internode_labeled_tree:
+  description: tree whose internal nodes are labelled with unique integer ids, Newick
+  ext: nwk
+  extends: tree
+lca_subtree:
+  description: subtree rooted at the last common ancestor of a chosen set of taxa, Newick
+  ext: nwk
+  extends: tree
+nni_tree_set:
+  description: the input tree plus every tree one nearest-neighbour interchange away, one Newick tree per line
+  ext: nwk
+  extends: tree_set
+ascii_tree:
+  description: text drawing of a tree
+  ext: txt
+polytomy_groups:
+  description: 'tab-separated groups file for a polytomy test: optional comment lines starting with #, then rows of test name, group 0, group 1, group 2 and outgroup, each group a list of tip names joined by semicolons'
+  ext: txt
+seq_reads_fastq:
+  description: sequencing reads in FASTQ, one record per read (single-end, or one mate file of a pair)
+  ext: fastq
+source_reads_fastq:
+  description: raw single-end sequencing reads in FASTQ as delivered by the sequencer, before any trimming
+  ext: fastq
+  extends: seq_reads_fastq
+reads_r1_fastq:
+  description: read 1 (forward mates) of a paired-end library, FASTQ
+  ext: fastq
+  extends: seq_reads_fastq
+reads_r2_fastq:
+  description: read 2 (reverse mates) of a paired-end library, FASTQ, same read order as read 1
+  ext: fastq
+  extends: seq_reads_fastq
+source_reads_r1_fastq:
+  description: raw read 1 of a paired-end library as delivered by the sequencer, before any trimming, FASTQ
+  ext: fastq
+  extends: reads_r1_fastq
+source_reads_r2_fastq:
+  description: raw read 2 of a paired-end library as delivered by the sequencer, before any trimming, FASTQ
+  ext: fastq
+  extends: reads_r2_fastq
+trimmed_reads_fastq:
+  description: single-end reads after adapter and quality trimming by Trim Galore, FASTQ
+  ext: fastq
+  extends: seq_reads_fastq
+trimmed_reads_r1_fastq:
+  description: read 1 of a pair after adapter and quality trimming by Trim Galore, mates kept in sync with read 2, FASTQ
+  ext: fastq
+  extends: reads_r1_fastq
+trimmed_reads_r2_fastq:
+  description: read 2 of a pair after adapter and quality trimming by Trim Galore, mates kept in sync with read 1, FASTQ
+  ext: fastq
+  extends: reads_r2_fastq
+blast_database:
+  description: BLAST+ database directory made by makeblastdb; the database files are named db.* inside it (pass the prefix db)
+blast_hits_table:
+  description: BLAST hits, comma separated, one row per HSP; header row lists the output columns that were requested
+  ext: csv
+  extends: table
+blastn_hits_table:
+  description: BLAST hits from blastn nucleotide-vs-nucleotide search, comma separated, one row per HSP; header row names the requested columns
+  ext: csv
+  extends: blast_hits_table
+blastp_hits_table:
+  description: BLAST hits from blastp protein-vs-protein search, comma separated, one row per HSP; header row names the requested columns
+  ext: csv
+  extends: blast_hits_table
+blastx_hits_table:
+  description: BLAST hits from blastx translated-nucleotide-vs-protein search, comma separated, one row per HSP; header row names the requested columns
+  ext: csv
+  extends: blast_hits_table
+tblastn_hits_table:
+  description: BLAST hits from tblastn protein-vs-translated-nucleotide search, comma separated, one row per HSP; header row names the requested columns
+  ext: csv
+  extends: blast_hits_table
+tblastx_hits_table:
+  description: BLAST hits from tblastx translated-vs-translated search, comma separated, one row per HSP; header row names the requested columns
+  ext: csv
+  extends: blast_hits_table
+psiblast_hits_table:
+  description: BLAST hits from PSI-BLAST iterated protein search search, comma separated, one row per HSP; header row names the requested columns
+  ext: csv
+  extends: blast_hits_table
+sequence_id_list:
+  description: sequence identifiers, one per line, no header
+  ext: txt
+blastdb_sequences_fasta:
+  description: sequences retrieved from a BLAST database by identifier, FASTA
+  ext: fasta
+  extends: sequences_fasta
+modelfinder_table:
+  description: 'ModelFinder candidate substitution models ranked by BIC, comma separated with header: model, logL, AIC, AIC_in_confidence_set (+/-), AIC_weight, AICc, AICc_in_confidence_set, AICc_weight, BIC, BIC_in_confidence_set, BIC_weight'
+  ext: csv
+  extends: table
+modelfinder_report:
+  description: IQ-TREE report (.iqtree text file) from a ModelFinder run, containing the best-fit model under BIC, AIC and AICc
+  ext: txt
+iqtree_report:
+  description: 'IQ-TREE .iqtree report text of a maximum-likelihood run: model parameters, log-likelihood, tree length and the tree'
+  ext: txt
+iqtree_ml_tree:
+  description: maximum-likelihood tree from IQ-TREE with branch lengths and no support values, Newick
+  ext: nwk
+  extends: source_tree
+iqtree_ufboot_tree:
+  description: maximum-likelihood tree from IQ-TREE with ultrafast bootstrap support (percent) on internal nodes, Newick
+  ext: nwk
+  extends: source_tree
+iqtree_ufboot_consensus_tree:
+  description: majority-rule consensus of the ultrafast bootstrap trees from IQ-TREE, support percentages on nodes, branch lengths from the consensus, Newick
+  ext: nwk
+  extends: source_tree
+iqtree_bootstrap_tree:
+  description: maximum-likelihood tree with standard non-parametric bootstrap support (percent) on internal nodes, Newick
+  ext: nwk
+  extends: source_tree
+iqtree_bootstrap_consensus_tree:
+  description: majority-rule consensus of the standard bootstrap replicate trees, support percentages on nodes, Newick
+  ext: nwk
+  extends: source_tree
+iqtree_alrt_tree:
+  description: maximum-likelihood tree labelled with SH-aLRT support (percent), and aBayes support when requested, Newick
+  ext: nwk
+  extends: source_tree
+constraint_tree:
+  description: a topology (may contain polytomies) that a constrained tree search must respect, Newick
+  ext: nwk
+  extends: tree
+iqtree_constrained_tree:
+  description: maximum-likelihood tree found under a topological constraint, Newick
+  ext: nwk
+  extends: source_tree
+iqtree_topology_test_table:
+  description: 'IQ-TREE topology tests for candidate trees, comma separated with header: tree number, logL, deltaL (difference from best), then for each test its value and a _pass column (+ if the tree is not rejected)'
+  ext: csv
+  extends: table
+site_concordance_table:
+  description: IQ-TREE site concordance factors per branch, comma separated with header ID, sCF, sCF_N, sDF1, sDF1_N, sDF2, sDF2_N, sN, Label, Length
+  ext: csv
+  extends: table
+site_concordance_tree:
+  description: reference tree whose branch labels carry the site concordance factor (sCF), Newick
+  ext: nwk
+  extends: tree
+gene_concordance_table:
+  description: IQ-TREE gene concordance factors per branch, comma separated with header ID, gCF, gCF_N, gDF1, gDF1_N, gDF2, gDF2_N, gDFP, gDFP_N, gN, Label, Length
+  ext: csv
+  extends: table
+gene_concordance_tree:
+  description: reference tree whose branch labels carry the gene concordance factor (gCF), Newick
+  ext: nwk
+  extends: tree
+iqtree_consensus_tree:
+  description: consensus tree of a set of trees made by IQ-TREE, support (percent of trees) on nodes, Newick
+  ext: nwk
+  extends: source_tree
+rf_distance_matrix:
+  description: symmetric matrix of Robinson-Foulds distances between all trees of a set, comma separated, header row and first column name the trees
+  ext: csv
+  extends: table
+site_rates_table:
+  description: IQ-TREE empirical-Bayes site-specific rates, comma separated with header Site, Rate, Cat, C_Rate
+  ext: csv
+  extends: table
+alignment_length_table:
+  description: 'one-row table with header alignment_length: number of alignment columns'
+  ext: csv
+  extends: table
+alignment_length_no_gaps_table:
+  description: 'one-row table: length_without_gap_columns, alignment_length, percent_columns_without_gaps'
+  ext: csv
+  extends: table
+parsimony_informative_sites_table:
+  description: 'one-row table: parsimony_informative_sites, alignment_length, percent_parsimony_informative'
+  ext: csv
+  extends: table
+variable_sites_table:
+  description: 'one-row table: variable_sites, alignment_length, percent_variable'
+  ext: csv
+  extends: table
+relative_composition_variability_table:
+  description: 'one-row table with header rcv: relative composition variability of the alignment'
+  ext: csv
+  extends: table
+relative_composition_variability_taxon_table:
+  description: 'table with header taxon, rcvt: RCV of each taxon'
+  ext: csv
+  extends: table
+pairwise_identity_summary_table:
+  description: 'table with header statistic, value: mean, median, quartiles, min, max, standard deviation and variance of pairwise identity'
+  ext: csv
+  extends: table
+pairwise_identity_pairs_table:
+  description: 'table with header taxon_1, taxon_2, identity: fraction identical for every pair'
+  ext: csv
+  extends: table
+gc_content_table:
+  description: 'one-row table with header gc_content: pooled GC fraction'
+  ext: csv
+  extends: table
+gc_content_per_sequence_table:
+  description: 'table with header sequence, gc_content: GC fraction of every record'
+  ext: csv
+  extends: table
+compositional_bias_per_site_table:
+  description: 'table with header site, chi_square_statistic, corrected_p_value, p_value: one row per alignment column'
+  ext: csv
+  extends: table
+evolutionary_rate_per_site_table:
+  description: 'table with header site, evolutionary_rate: one row per alignment column'
+  ext: csv
+  extends: table
+column_score_table:
+  description: 'one-row table with header column_score: fraction of reference columns found in the query'
+  ext: csv
+  extends: table
+sum_of_pairs_table:
+  description: 'one-row table with header sum_of_pairs_score: fraction of reference residue pairs recovered'
+  ext: csv
+  extends: table
+total_tree_length_table:
+  description: one-row table with header total_tree_length
+  ext: csv
+  extends: table
+treeness_table:
+  description: one-row table with header treeness
+  ext: csv
+  extends: table
+treeness_over_rcv_table:
+  description: 'one-row table: treeness_over_rcv, treeness, rcv'
+  ext: csv
+  extends: table
+evolutionary_rate_table:
+  description: one-row table with header evolutionary_rate
+  ext: csv
+  extends: table
+dvmc_table:
+  description: one-row table with header dvmc
+  ext: csv
+  extends: table
+bipartition_support_summary_table:
+  description: 'table with header statistic, value: summary statistics of internal-branch support'
+  ext: csv
+  extends: table
+bipartition_support_table:
+  description: 'table with header support, clade_taxa: one row per internal branch'
+  ext: csv
+  extends: table
+internal_branch_summary_table:
+  description: 'table with header statistic, value: summary statistics of internal branch lengths'
+  ext: csv
+  extends: table
+internal_branch_lengths_table:
+  description: 'table with header branch_length, clade_taxa: one row per internal branch'
+  ext: csv
+  extends: table
+terminal_branch_summary_table:
+  description: 'table with header statistic, value: summary statistics of terminal branch lengths'
+  ext: csv
+  extends: table
+terminal_branch_lengths_table:
+  description: 'table with header branch_length, taxon: one row per tip'
+  ext: csv
+  extends: table
+long_branch_score_summary_table:
+  description: 'table with header statistic, value: summary statistics of LB scores'
+  ext: csv
+  extends: table
+long_branch_score_per_taxon_table:
+  description: 'table with header taxon, lb_score: LB score of each tip'
+  ext: csv
+  extends: table
+patristic_distance_summary_table:
+  description: 'table with header statistic, value: summary statistics of pairwise tip-to-tip distances'
+  ext: csv
+  extends: table
+patristic_distance_pairs_table:
+  description: 'table with header taxon_1, taxon_2, patristic_distance: one row per pair of tips'
+  ext: csv
+  extends: table
+tip_to_tip_distance_table:
+  description: 'one-row table: tip_1, tip_2, distance'
+  ext: csv
+  extends: table
+tip_to_tip_node_distance_table:
+  description: 'one-row table: tip_1, tip_2, node_distance'
+  ext: csv
+  extends: table
+saturation_table:
+  description: 'one-row table: slope, saturation (absolute 1 - slope)'
+  ext: csv
+  extends: table
+saturation_pairs_table:
+  description: table with header taxon_1, taxon_2, uncorrected_distance, patristic_distance
+  ext: csv
+  extends: table
+phykit_rf_distance_table:
+  description: 'one-row table: robinson_foulds_distance, normalized_robinson_foulds_distance'
+  ext: csv
+  extends: table
+covarying_rates_table:
+  description: 'one-row table: correlation, p_value'
+  ext: csv
+  extends: table
+covarying_rates_branches_table:
+  description: table with header corrected_length_tree0, corrected_length_tree1, clade_taxa
+  ext: csv
+  extends: table
+monophyly_check_table:
+  description: 'one-row table: result, mean_support, max_support, min_support, support_standard_deviation, intruding_taxa'
+  ext: csv
+  extends: table
+hidden_paralogy_table:
+  description: 'table with header clade_line, result: one row per line of the clade file'
+  ext: csv
+  extends: table
+spurious_sequence_table:
+  description: 'table with header taxon, branch_length, threshold, median_branch_length: flagged taxa only'
+  ext: csv
+  extends: table
+polytomy_test_table:
+  description: 'table with header statistic, value: chi-squared, p-value, total genes and the counts of the pairings 0-1, 0-2 and 1-2'
+  ext: csv
+  extends: table
+fastqc_reports:
+  description: 'directory made by FastQC: <name>_fastqc.html, <name>_fastqc.zip and the extracted <name>_fastqc folder with fastqc_data.txt and summary.txt'
+fastqc_summary_table:
+  description: 'FastQC module verdicts, comma separated with header status, module, file: one row per FastQC module with PASS, WARN or FAIL'
+  ext: csv
+  extends: table
+fastqc_basic_statistics_table:
+  description: 'FastQC basic statistics, comma separated with header measure, value: file name, encoding, total sequences, filtered sequences, sequence length, %GC'
+  ext: csv
+  extends: table
+trim_galore_report:
+  description: 'Trim Galore trimming report text: adapter detected, reads with adapters, bases trimmed, reads removed'
+  ext: txt
+trim_galore_paired_report_r1:
+  description: Trim Galore trimming report text for read 1 of a pair
+  ext: txt
+trim_galore_paired_report_r2:
+  description: Trim Galore trimming report text for read 2 of a pair
+  ext: txt
+genome_contigs_fasta:
+  description: assembled genomic contigs or scaffolds, nucleotide FASTA, one record per contig
+  ext: fasta
+  extends: nucleotide_fasta
+reference_proteins_fasta:
+  description: a set of reference protein sequences (for example orthologs of a gene family) used as search targets, FASTA
+  ext: fasta
+  extends: protein_fasta
+assembly_contigs:
+  description: assembled contig sequences, FASTA
+  ext: fasta
+  extends: genome_contigs_fasta
+assembly_scaffolds:
+  description: assembled scaffold sequences, FASTA
+  ext: fasta
+  extends: genome_contigs_fasta
+spades_se_contigs:
+  description: contigs assembled by SPAdes from single-end reads, FASTA; headers carry length and k-mer coverage
+  ext: fasta
+  extends: assembly_contigs
+spades_se_scaffolds:
+  description: scaffolds assembled by SPAdes from single-end reads, FASTA; headers carry length and k-mer coverage
+  ext: fasta
+  extends: assembly_scaffolds
+spades_pe_contigs:
+  description: contigs assembled by SPAdes from paired-end reads, FASTA; headers carry length and k-mer coverage
+  ext: fasta
+  extends: assembly_contigs
+spades_pe_scaffolds:
+  description: scaffolds assembled by SPAdes from paired-end reads, FASTA; headers carry length and k-mer coverage
+  ext: fasta
+  extends: assembly_scaffolds
+metaeuk_proteins:
+  description: protein sequences of eukaryotic genes predicted by MetaEuk, FASTA; headers carry target, contig, strand, score, e-value and exon coordinates
+  ext: fasta
+  extends: protein_fasta
+metaeuk_codons:
+  description: coding (nucleotide) sequences of the genes predicted by MetaEuk, exons joined, FASTA
+  ext: fasta
+  extends: nucleotide_fasta
+metaeuk_gff:
+  description: 'gene models predicted by MetaEuk in GFF3: gene, mRNA, exon and CDS features per prediction'
+  ext: gff3
+nucleotide_composition_table:
+  description: per-sequence nucleotide statistics, comma separated with header id, length, A, C, G, T, other, gc_fraction, gc_skew, molecular_weight
+  ext: csv
+  extends: table
+protein_properties_table:
+  description: per-protein physico-chemical properties, comma separated with header id, length, molecular_weight, aromaticity, instability_index, isoelectric_point, gravy, helix_fraction, turn_fraction, sheet_fraction, charge_at_ph
+  ext: csv
+  extends: table
+orf_table:
+  description: open reading frames found in six frames, comma separated with header record, strand, frame, start, end, length_nt, length_aa, protein; start and end are 1-based inclusive positions on the forward strand
+  ext: csv
+  extends: table
+codon_usage_table:
+  description: codon usage pooled over all sequences, comma separated with header codon, amino_acid, count, per_thousand, rscu (relative synonymous codon usage)
+  ext: csv
+  extends: table
+pairwise_alignment_scores_table:
+  description: pairwise alignment results for every pair of sequences, comma separated with header query, target, score, aligned_length, identities, mismatches, gaps, identity_fraction
+  ext: csv
+  extends: table
+bio_distance_matrix_table:
+  description: square matrix of pairwise sequence distances between alignment records, comma separated, header row and first column are the record names
+  ext: csv
+  extends: table
+bio_nj_tree:
+  description: neighbour-joining tree built by Biopython from alignment distances, Newick; internal nodes are named Inner1, Inner2 ...
+  ext: nwk
+  extends: source_tree
+bio_upgma_tree:
+  description: UPGMA tree (ultrametric, rooted) built by Biopython from alignment distances, Newick; internal nodes are named Inner1, Inner2 ...
+  ext: nwk
+  extends: source_tree
+bio_parsimony_tree:
+  description: maximum-parsimony tree found by Biopython from alignment, nearest-neighbour-interchange search from a starting tree, Newick
+  ext: nwk
+  extends: source_tree
+alignment_conservation_table:
+  description: per-column conservation of an alignment, comma separated with header column, consensus, conservation, gap_fraction, shannon_entropy_bits
+  ext: csv
+  extends: table
+bio_tree_stats_table:
+  description: one-row tree summary, comma separated with header n_terminals, n_internal_nodes, total_branch_length, max_root_to_tip, is_bifurcating, mean_support, min_support
+  ext: csv
+  extends: table
+tree_distance_matrix_table:
+  description: square matrix of tip-to-tip path distances, comma separated, header row and first column are the tip names
+  ext: csv
+  extends: table
+bio_consensus_tree:
+  description: consensus of a set of trees made by Biopython (strict, majority-rule or Adam), Newick; node support is the fraction of trees containing the clade
+  ext: nwk
+  extends: source_tree
+restriction_sites_table:
+  description: restriction enzyme cut positions, comma separated with header record, enzyme, cut_position, where cut_position is the 1-based position of the first base after the cut on the top strand
+  ext: csv
+  extends: table
+ete3_robinson_foulds_table:
+  description: one-row Robinson-Foulds comparison, comma separated with header rf, max_rf, normalized_rf, n_common_leaves
+  ext: csv
+  extends: table
+ete3_tree_summary_table:
+  description: one-row tree summary, comma separated with header n_leaves, n_internal_nodes, total_branch_length, height, n_polytomies, mean_support, is_binary
+  ext: csv
+  extends: table
+ete3_node_table:
+  description: one row per tree node, comma separated with header node_id, name, is_leaf, n_leaves, support, branch_length, distance_from_root, topological_depth, leaves; leaves lists tip names joined by semicolons
+  ext: csv
+  extends: table
+ete3_cophenetic_matrix_table:
+  description: square matrix of distances between all leaves, comma separated, header row and first column are the leaf names
+  ext: csv
+  extends: table
+ete3_root_to_tip_table:
+  description: root-to-leaf distances, comma separated with header leaf, distance_from_root, topological_depth
+  ext: csv
+  extends: table
+ete3_pair_distance_table:
+  description: one-row distance between two named leaves, comma separated with header leaf_1, leaf_2, distance
+  ext: csv
+  extends: table
+ete3_monophyly_table:
+  description: one-row monophyly verdict, comma separated with header is_monophyletic, clade_type (monophyletic, paraphyletic or polyphyletic), offending_taxa joined by semicolons
+  ext: csv
+  extends: table
+ete3_midpoint_rooted_tree:
+  description: tree rooted at the midpoint of its longest leaf-to-leaf path, Newick
+  ext: nwk
+  extends: tree
+ete3_outgroup_rooted_tree:
+  description: tree rooted on the branch to a chosen outgroup, Newick
+  ext: nwk
+  extends: tree
+ete3_unrooted_tree:
+  description: tree with its root removed (basal bifurcation collapsed into a trifurcation), Newick
+  ext: nwk
+  extends: tree
+ete3_pruned_tree:
+  description: tree restricted to a subset of its taxa, Newick
+  ext: nwk
+  extends: tree
+ete3_collapsed_tree:
+  description: tree in which low-support internal branches were removed into polytomies, Newick
+  ext: nwk
+  extends: tree
+ete3_resolved_tree:
+  description: tree whose polytomies were resolved into bifurcations with zero-length branches, Newick
+  ext: nwk
+  extends: tree
+ete3_lca_subtree_tree:
+  description: subtree rooted at the last common ancestor of a set of taxa, Newick
+  ext: nwk
+  extends: tree
+biokit_gc_content_table:
+  description: per-sequence GC content from biokit, comma separated with header id, length, gc_percent
+  ext: csv
+  extends: table
+biokit_hamming_matrix_table:
+  description: square matrix of Hamming distances (number of differing positions) between alignment records, comma separated, header row and first column are the record names
+  ext: csv
+  extends: table
+biokit_gaussian_mixture_components_table:
+  description: 'Gaussian mixture fitted by direct likelihood minimisation: one row per mixture component, comma separated with header component, mean, sigma, weight, neg_log_likelihood, aic, aicc, bic; the last four columns repeat the model-level fit statistics as biokit reports them (biokit''s log-likelihood field holds the negative log-likelihood, and its BIC is not on the AIC scale)'
+  ext: csv
+biokit_em_mixture_components_table:
+  description: 'Gaussian mixture fitted by expectation-maximisation: one row per mixture component, comma separated with header component, mean, sigma, weight, neg_log_likelihood, aic, aicc, bic; the last four columns repeat the model-level fit statistics as biokit reports them (biokit''s log-likelihood field holds the negative log-likelihood, and its BIC is not on the AIC scale)'
+  ext: csv
+biokit_mixture_selection_table:
+  description: model selection over numbers of Gaussian components, comma separated with header k, neg_log_likelihood, aic, aicc, bic, selected (true for the k with the lowest criterion)
+  ext: csv

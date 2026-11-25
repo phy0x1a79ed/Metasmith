@@ -1,0 +1,39 @@
+name: random_undersample
+tool: imbalanced-learn 0.13.0 RandomUnderSampler
+summary: Balance classes by randomly discarding majority-class rows.
+usage: |
+  Use to equalise class sizes by downsampling. sampling_strategy auto reduces every class to the minority size.
+inputs:
+  data: table
+outputs:
+  result: undersampled_table
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  target_col:
+    default: ''
+    help: Class label column.
+  sampling_strategy:
+    default: auto
+    help: auto, majority, or a float ratio for binary problems.
+  random_state:
+    default: None
+    help: Integer random seed, or None for an unseeded run.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from imblearn.under_sampling import RandomUnderSampler
+  rs = None if e["PARAM_random_state"] == "None" else int(e["PARAM_random_state"])
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  ss = e["PARAM_sampling_strategy"]
+  ss = float(ss) if ss.replace(".", "", 1).isdigit() else ss
+  Xr, yr = RandomUnderSampler(sampling_strategy=ss, random_state=rs).fit_resample(X, data[e["PARAM_target_col"]])
+  out = Xr.assign(**{e["PARAM_target_col"]: yr})
+  out.to_csv(e["OUT_result"], index=False)

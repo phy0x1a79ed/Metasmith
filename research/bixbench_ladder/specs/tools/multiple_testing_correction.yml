@@ -1,0 +1,39 @@
+name: multiple_testing_correction
+tool: statsmodels 0.14.4 multipletests
+summary: Adjust a column of p-values for multiple testing (Bonferroni, Holm, Benjamini-Hochberg ...).
+usage: |
+  Use on a column of p-values. method names: bonferroni, sidak, holm-sidak (hs, the statsmodels default), holm, simes-hochberg, hommel, fdr_bh, fdr_by, fdr_tsbh, fdr_tsbky.
+inputs:
+  data: table
+outputs:
+  result: adjusted_pvalues_table
+params:
+  pvalue_col:
+    default: ''
+    help: Column of raw p-values.
+  method:
+    default: hs
+    help: Correction method name.
+  alpha:
+    default: '0.05'
+    help: Family-wise or FDR level.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  import statsmodels.api as sm
+  import statsmodels.formula.api as smf
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from statsmodels.stats.multitest import multipletests
+  p = data[e["PARAM_pvalue_col"]]
+  ok = p.notna()
+  rej, adj, _, _ = multipletests(p[ok], alpha=float(e["PARAM_alpha"]), method=e["PARAM_method"])
+  out = data.copy()
+  out["pvalue_adjusted"] = np.nan
+  out["reject"] = np.nan
+  out.loc[ok, "pvalue_adjusted"] = adj
+  out.loc[ok, "reject"] = rej
+  out.to_csv(e["OUT_result"], index=False)

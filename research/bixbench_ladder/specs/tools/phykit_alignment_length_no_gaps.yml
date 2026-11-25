@@ -1,0 +1,12 @@
+name: phykit_alignment_length_no_gaps
+tool: PhyKIT 2.0.1 alignment_length_no_gaps
+summary: Report the alignment length after removing every column that contains a gap.
+usage: |
+  Use for the number of gap-free columns. A column with any gap character in any sequence is removed. Reports the count, the original length and the percentage of columns kept.
+inputs:
+  aln: alignment
+outputs:
+  out: alignment_length_no_gaps_table
+interpreter: bash
+script: |
+  { echo "length_without_gap_columns,alignment_length,percent_columns_without_gaps"; phykit alignment_length_no_gaps "$IN_aln" | tr '\t' ','; } > "$OUT_out"

@@ -1,0 +1,14 @@
+name: phykit_root_tree
+tool: PhyKIT 2.0.1 root_tree
+summary: Root a tree on a chosen outgroup.
+usage: |
+  Use to place the root before comparing trees or reading clades. The outgroup file lists tip names, one per line; the tree is rooted on the branch leading to them.
+inputs:
+  tree: source_tree
+  outgroup: taxon_list
+outputs:
+  out: rooted_tree
+interpreter: bash
+script: |
+  phykit root_tree "$IN_tree" -r "$IN_outgroup" -o rooted > /dev/null
+  cp rooted "$OUT_out"

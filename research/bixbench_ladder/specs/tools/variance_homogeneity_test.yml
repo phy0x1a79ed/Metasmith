@@ -1,0 +1,37 @@
+name: variance_homogeneity_test
+tool: scipy.stats 1.14.1 levene / bartlett / fligner
+summary: Test equality of variances across groups.
+usage: |
+  Use to check the equal-variance assumption. levene is robust, with center median (Brown-Forsythe) as the scipy default; bartlett assumes normality; fligner is rank-based.
+inputs:
+  data: table
+outputs:
+  result: variance_test_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Name of the column holding the group labels.
+  test:
+    default: levene
+    help: levene, bartlett or fligner.
+  center:
+    default: median
+    help: 'levene and fligner centre: median, mean or trimmed.'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  d = data[[e["PARAM_value_col"], e["PARAM_group_col"]]].dropna()
+  groups = [g[e["PARAM_value_col"]].values for _, g in d.groupby(e["PARAM_group_col"])]
+  t = e["PARAM_test"]
+  res = stats.bartlett(*groups) if t == "bartlett" else {"levene": stats.levene, "fligner": stats.fligner}[t](*groups, center=e["PARAM_center"])
+  row = dict(test=t, statistic=res.statistic, pvalue=res.pvalue, n_groups=len(groups))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

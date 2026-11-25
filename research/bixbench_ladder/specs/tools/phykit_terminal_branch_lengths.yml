@@ -1,0 +1,12 @@
+name: phykit_terminal_branch_lengths
+tool: PhyKIT 2.0.1 terminal_branch_stats
+summary: List the length of every terminal branch of a tree.
+usage: |
+  One row per tip.
+inputs:
+  tree: tree
+outputs:
+  out: terminal_branch_lengths_table
+interpreter: bash
+script: |
+  { echo "branch_length,taxon"; phykit terminal_branch_stats "$IN_tree" -v | tr ' ' ','; } > "$OUT_out"

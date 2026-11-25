@@ -1,0 +1,13 @@
+name: phykit_column_score
+tool: PhyKIT 2.0.1 column_score
+summary: Score a query alignment against a reference alignment with the column score.
+usage: |
+  Use to benchmark an aligner or trimming result: the column score is the fraction of reference columns reproduced exactly in the query. Both alignments must hold the same sequences.
+inputs:
+  aln: alignment
+  reference: reference_alignment
+outputs:
+  out: column_score_table
+interpreter: bash
+script: |
+  { echo "column_score"; phykit column_score "$IN_aln" -r "$IN_reference" | tr '\t' ','; } > "$OUT_out"

@@ -1,0 +1,22 @@
+name: scanpy_log1p
+tool: scanpy 1.10.4 (Python)
+summary: Log-transform normalised expression with log(x + 1).
+usage: |
+  Use after normalize_total. Natural logarithm unless a base is given. Highly variable gene selection with the seurat or cell_ranger flavor and rank_genes_groups expect log-transformed data.
+inputs:
+  normalized: anndata_normalized
+outputs:
+  logged: anndata_log1p
+params:
+  base:
+    default: ""
+    help: Logarithm base, for example 2. Empty uses the natural logarithm.
+interpreter: python
+script: |
+  import os
+  import scanpy as sc
+
+  adata = sc.read_h5ad(os.environ["IN_normalized"])
+  base = os.environ["PARAM_base"].strip()
+  sc.pp.log1p(adata, base=float(base) if base else None)
+  adata.write_h5ad(os.environ["OUT_logged"])

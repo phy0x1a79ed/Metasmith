@@ -1,0 +1,33 @@
+name: factoextra_hcut
+tool: factoextra 1.0.7 hcut
+summary: Hierarchical clustering cut into k clusters.
+usage: |
+  Use for hclust clustering of rows into k groups. hc_method ward.D2 and euclidean distance are the factoextra defaults; stand TRUE scales columns first.
+inputs:
+  data: table
+outputs:
+  result: hcut_clusters
+params:
+  columns:
+    default: ''
+    help: Comma-separated numeric columns.
+  k:
+    default: '2'
+    help: Number of clusters.
+  hc_method:
+    default: ward.D2
+    help: hclust method.
+  hc_metric:
+    default: euclidean
+    help: 'Distance: euclidean, manhattan, pearson, spearman ...'
+  stand:
+    default: 'FALSE'
+    help: TRUE to standardise columns.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(factoextra))
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE)
+  cols <- trimws(strsplit(Sys.getenv("PARAM_columns"), ",")[[1]])
+  h <- hcut(data[, cols], k = as.integer(Sys.getenv("PARAM_k")), hc_method = Sys.getenv("PARAM_hc_method"),
+            hc_metric = Sys.getenv("PARAM_hc_metric"), stand = Sys.getenv("PARAM_stand") == "TRUE")
+  write.csv(data.frame(row = seq_along(h$cluster), cluster = as.integer(h$cluster)), Sys.getenv("OUT_result"), row.names = FALSE)

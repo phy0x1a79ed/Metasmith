@@ -1,0 +1,37 @@
+name: bio_nucleotide_composition
+tool: Biopython 1.84 Bio.SeqUtils
+summary: Compute length, base counts, GC fraction, GC skew and molecular weight for every nucleotide sequence.
+usage: |
+  Use for DNA or RNA records, aligned or not; gap characters are dropped first. gc_fraction is (G+C) over the counted bases; ambiguous controls how IUPAC ambiguity codes (S, W, N ...) are counted: remove excludes them from the denominator, ignore counts them in the denominator, weighted gives partial credit. gc_skew is (G-C)/(G+C). The molecular weight (g/mol) is left empty when the sequence has symbols the weight table does not know (N, ambiguity codes).
+inputs:
+  seqs: sequences_fasta
+outputs:
+  table: nucleotide_composition_table
+params:
+  ambiguous:
+    default: remove
+    help: 'gc_fraction handling of ambiguity codes: remove, ignore or weighted'
+  seq_type:
+    default: DNA
+    help: 'molecular-weight alphabet: DNA or RNA'
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+
+  from Bio import SeqIO
+  from Bio.SeqUtils import gc_fraction, molecular_weight
+  rows = []
+  for r in SeqIO.parse(os.environ["IN_seqs"], "fasta"):
+      s = str(r.seq).upper().replace("-", "")
+      c = {b: s.count(b) for b in "ACGT"}
+      other = len(s) - sum(c.values())
+      gc = c["G"] + c["C"]
+      try:
+          mw = molecular_weight(s, seq_type=os.environ["PARAM_seq_type"])
+      except ValueError:
+          mw = None
+      rows.append(dict(id=r.id, length=len(s), A=c["A"], C=c["C"], G=c["G"], T=c["T"], other=other,
+                       gc_fraction=gc_fraction(s, ambiguous=os.environ["PARAM_ambiguous"]),
+                       gc_skew=(c["G"] - c["C"]) / gc if gc else None, molecular_weight=mw))
+  pd.DataFrame(rows).to_csv(os.environ["OUT_table"], index=False)

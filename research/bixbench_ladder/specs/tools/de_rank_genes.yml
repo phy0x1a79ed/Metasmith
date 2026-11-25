@@ -1,0 +1,41 @@
+name: de_rank_genes
+tool: pandas (Python), ranking of differential expression results
+summary: Build a ranked gene table for pre-ranked gene set enrichment from a differential expression table.
+usage: |
+  Use before gseGO, GSEA or prerank. The ranking metric is a modelling decision: the Wald statistic or a signed p-value uses both direction and evidence, the log2 fold change alone ignores noise. Genes with a missing score are dropped; duplicated gene ids keep the row with the largest absolute score.
+  Choices that change the order: the metric (stat, log2FoldChange, or signed_neglog10_p which is sign(log2FC) times minus log10 p-value) and the column names.
+inputs:
+  results: de_results_table
+outputs:
+  ranked: ranked_gene_table
+params:
+  metric:
+    default: "stat"
+    help: Score to rank by, stat, log2FoldChange or signed_neglog10_p.
+  stat_column:
+    default: "stat"
+    help: Column holding the statistic ranked when metric is stat, for example stat.
+  lfc_column:
+    default: "log2FoldChange"
+    help: Fold change column for the signed p-value metric.
+  p_column:
+    default: "pvalue"
+    help: P-value column for the signed p-value metric.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  df = pd.read_csv(os.environ["IN_results"])
+  metric = os.environ["PARAM_metric"]
+  if metric == "signed_neglog10_p":
+      p = df[os.environ["PARAM_p_column"]].clip(lower=np.finfo(float).tiny)
+      score = np.sign(df[os.environ["PARAM_lfc_column"]]) * -np.log10(p)
+  elif metric == "log2FoldChange":
+      score = df[os.environ["PARAM_lfc_column"]]
+  else:
+      score = df[os.environ["PARAM_stat_column"]]
+  out = pd.DataFrame({"gene": df.iloc[:, 0].astype(str), "score": score}).dropna()
+  out = out.loc[out["score"].abs().sort_values(ascending=False).index].drop_duplicates("gene")
+  out.sort_values("score", ascending=False).to_csv(os.environ["OUT_ranked"], index=False, float_format="%.17g")

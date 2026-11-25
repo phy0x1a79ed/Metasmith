@@ -1,0 +1,24 @@
+name: biokit_hamming_distance_matrix
+tool: biokit 0.5.0 biokit.sequence.seq.Sequence.hamming_distance
+summary: Compute the Hamming distance between every pair of sequences in an alignment with biokit.
+usage: |
+  The distance is the count of positions where the two sequences differ, gaps counted as characters. Use for aligned (equal-length) sequences; with unequal lengths only the shared prefix is compared.
+inputs:
+  aln: alignment
+outputs:
+  matrix: biokit_hamming_matrix_table
+interpreter: python
+script: |
+  import os
+  import matplotlib
+  matplotlib.use('Agg')
+  import numpy as np
+  import pandas as pd
+
+  from Bio import SeqIO
+  from biokit.sequence.seq import Sequence
+  recs = [(r.id, Sequence(str(r.seq).upper())) for r in SeqIO.parse(os.environ["IN_aln"], "fasta")]
+  names = [n for n, _ in recs]
+  df = pd.DataFrame([[a.hamming_distance(b) for _, b in recs] for _, a in recs], index=names, columns=names)
+  df.index.name = "taxon"
+  df.to_csv(os.environ["OUT_matrix"])

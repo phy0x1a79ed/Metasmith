@@ -1,0 +1,22 @@
+name: bio_upgma_tree
+tool: Biopython 1.84 DistanceTreeConstructor.upgma
+summary: Build a UPGMA tree from the pairwise distances of an alignment.
+usage: |
+  UPGMA assumes a constant rate of evolution (a molecular clock) and returns a rooted ultrametric tree; use neighbour joining when rates differ among lineages.
+inputs:
+  aln: alignment
+outputs:
+  tree: bio_upgma_tree
+params:
+  model:
+    default: identity
+    help: 'distance model: identity (p-distance), or a DNA matrix such as blastn or trans, or a protein matrix such as blosum62'
+interpreter: python
+script: |
+  import os
+  from Bio import AlignIO, Phylo
+  from Bio.Phylo.TreeConstruction import DistanceCalculator, DistanceTreeConstructor
+  aln = AlignIO.read(os.environ["IN_aln"], "fasta")
+  dm = DistanceCalculator(os.environ["PARAM_model"]).get_distance(aln)
+  tree = DistanceTreeConstructor().upgma(dm)
+  Phylo.write(tree, os.environ["OUT_tree"], "newick")

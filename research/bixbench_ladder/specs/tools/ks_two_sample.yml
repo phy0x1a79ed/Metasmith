@@ -1,0 +1,46 @@
+name: ks_two_sample
+tool: scipy.stats 1.14.1 ks_2samp
+summary: Two-sample Kolmogorov-Smirnov test comparing two distributions.
+usage: |
+  Use to test whether a numeric column is distributed identically in two groups.
+inputs:
+  data: table
+outputs:
+  result: ks_two_sample_result
+params:
+  value_col:
+    default: ''
+    help: Name of the numeric column holding the measurements.
+  group_col:
+    default: ''
+    help: Name of the column holding the group labels.
+  group1:
+    default: ''
+    help: Label of the first group; empty takes the alphabetically first level.
+  group2:
+    default: ''
+    help: Label of the second group; empty takes the alphabetically second level.
+  alternative:
+    default: two-sided
+    help: 'Alternative hypothesis: two-sided, less or greater (first group relative to second).'
+  method:
+    default: auto
+    help: 'p-value method: auto, exact or asymp.'
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+  from scipy import stats
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  levels = sorted(data[e["PARAM_group_col"]].dropna().astype(str).unique())
+  g1 = e["PARAM_group1"] or levels[0]
+  g2 = e["PARAM_group2"] or levels[1]
+  col = data[e["PARAM_group_col"]].astype(str)
+  a = data.loc[col == g1, e["PARAM_value_col"]].dropna()
+  b = data.loc[col == g2, e["PARAM_value_col"]].dropna()
+  res = stats.ks_2samp(a, b, alternative=e["PARAM_alternative"], method=e["PARAM_method"])
+  row = dict(statistic=res.statistic, pvalue=res.pvalue, n_1=len(a), n_2=len(b))
+  pd.DataFrame([row]).to_csv(e["OUT_result"], index=False)

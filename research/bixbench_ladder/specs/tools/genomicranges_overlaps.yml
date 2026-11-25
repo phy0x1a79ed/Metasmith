@@ -1,0 +1,41 @@
+name: genomicranges_overlaps
+tool: GenomicRanges 1.54.1 (R)
+summary: Find the pairs of overlapping intervals between two BED files with findOverlaps.
+usage: |
+  Use to intersect two interval sets, for example peaks against gene bodies. BED start is 0-based and end is exclusive; the step converts to the 1-based closed ranges of GenomicRanges, so a width is end minus start. Output has one row per overlapping pair (select all), with the width of the overlap region (0 when only a gap match).
+  Choices that change the pairs: the overlap type (any, start, end, within, equal), the minimum overlap in bases, the maximum gap between ranges that still counts, and whether strand must agree. A strand of "." is treated as unstranded and matches both strands.
+inputs:
+  query: genomic_regions_bed
+  subject: subject_regions_bed
+outputs:
+  pairs: genomicranges_overlap_table
+params:
+  type:
+    default: "any"
+    help: Overlap type, any, start, end, within or equal.
+  min_overlap:
+    default: "0"
+    help: Minimum overlap width in bases.
+  max_gap:
+    default: "-1"
+    help: Maximum gap between two ranges that still counts as an overlap. -1 requires a real overlap.
+  ignore_strand:
+    default: "FALSE"
+    help: TRUE or FALSE, ignore strand when matching.
+interpreter: Rscript
+script: |
+  suppressMessages(library(GenomicRanges))
+  read_bed <- function(path) {
+    d <- read.table(path, sep = "\t", header = FALSE, comment.char = "", quote = "", stringsAsFactors = FALSE, fill = TRUE)
+    nm <- if (ncol(d) >= 4) d[[4]] else paste0(d[[1]], ":", d[[2]], "-", d[[3]])
+    st <- if (ncol(d) >= 6) ifelse(d[[6]] %in% c("+", "-"), d[[6]], "*") else rep("*", nrow(d))
+    GRanges(d[[1]], IRanges(d[[2]] + 1L, d[[3]]), strand = st, name = nm)
+  }
+  q <- read_bed(Sys.getenv("IN_query")); s <- read_bed(Sys.getenv("IN_subject"))
+  hits <- findOverlaps(q, s, maxgap = as.integer(Sys.getenv("PARAM_max_gap")),
+                       minoverlap = as.integer(Sys.getenv("PARAM_min_overlap")), type = Sys.getenv("PARAM_type"),
+                       ignore.strand = as.logical(Sys.getenv("PARAM_ignore_strand")))
+  qh <- queryHits(hits); sh <- subjectHits(hits)
+  w <- width(pintersect(ranges(q)[qh], ranges(s)[sh], resolve.empty = "start.x"))
+  write.csv(data.frame(query_name = q$name[qh], subject_name = s$name[sh], query_index = qh, subject_index = sh, overlap_width = w),
+            Sys.getenv("OUT_pairs"), row.names = FALSE)

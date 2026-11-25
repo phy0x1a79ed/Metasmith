@@ -1,0 +1,34 @@
+name: factominer_hcpc
+tool: FactoMineR 2.11 HCPC
+summary: Hierarchical clustering on principal components.
+usage: |
+  Use to cluster rows after PCA. PCA (scaled) is run on the columns, then Ward clustering on the retained components. nb_clust -1 chooses the number automatically by the inertia gain; a positive number fixes it (FactoMineR's own default 0 asks for an interactive cut and cannot run here). consol TRUE applies k-means consolidation.
+inputs:
+  data: table
+outputs:
+  result: factominer_hcpc_clusters
+params:
+  columns:
+    default: ''
+    help: Comma-separated numeric columns.
+  ncp:
+    default: '5'
+    help: Dimensions kept by the PCA step.
+  nb_clust:
+    default: '-1'
+    help: Number of clusters, or -1 for automatic.
+  consol:
+    default: 'TRUE'
+    help: k-means consolidation of the cut.
+  method:
+    default: ward
+    help: 'Agglomeration method: ward, average, single, complete, ...'
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(FactoMineR))
+  data <- read.csv(Sys.getenv("IN_data"), check.names = FALSE)
+  cols <- trimws(strsplit(Sys.getenv("PARAM_columns"), ",")[[1]])
+  pc <- PCA(data[, cols], scale.unit = TRUE, ncp = as.integer(Sys.getenv("PARAM_ncp")), graph = FALSE)
+  h <- HCPC(pc, nb.clust = as.integer(Sys.getenv("PARAM_nb_clust")), consol = Sys.getenv("PARAM_consol") == "TRUE",
+            method = Sys.getenv("PARAM_method"), graph = FALSE)
+  write.csv(data.frame(row = seq_len(nrow(h$data.clust)), cluster = h$data.clust$clust), Sys.getenv("OUT_result"), row.names = FALSE)

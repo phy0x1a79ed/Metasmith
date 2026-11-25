@@ -1,0 +1,36 @@
+name: agglomerative_clustering
+tool: scikit-learn 1.6.0 AgglomerativeClustering
+summary: Hierarchical (agglomerative) clustering of rows on numeric features.
+usage: |
+  Use for a tree-based partition. linkage ward (default) requires euclidean distance. Give n_clusters to cut the tree into that many clusters.
+inputs:
+  data: table
+outputs:
+  result: agglomerative_assignments
+params:
+  features:
+    default: ''
+    help: Comma-separated names of the numeric feature columns.
+  n_clusters:
+    default: '2'
+    help: Number of clusters.
+  linkage:
+    default: ward
+    help: ward, complete, average or single.
+  metric:
+    default: euclidean
+    help: Distance metric; ward needs euclidean.
+interpreter: python
+script: |
+  import os
+  import numpy as np
+  import pandas as pd
+
+  e = os.environ
+  data = pd.read_csv(e["IN_data"])
+  from sklearn.cluster import AgglomerativeClustering
+  cols = [c.strip() for c in e["PARAM_features"].split(",")]
+  X = data[cols]
+  m = AgglomerativeClustering(n_clusters=int(e["PARAM_n_clusters"]), linkage=e["PARAM_linkage"], metric=e["PARAM_metric"]).fit(X)
+  out = pd.DataFrame({"row": range(len(X)), "cluster": m.labels_})
+  out.to_csv(e["OUT_result"], index=False)

@@ -1,0 +1,28 @@
+name: ete3_leaf_pair_distance
+tool: ete3 3.1.3 Tree.get_distance
+summary: Report the distance between two named leaves of a tree.
+usage: |
+  Branch-length distance by default; with topology_only yes the number of edges between them.
+inputs:
+  tree: tree
+outputs:
+  table: ete3_pair_distance_table
+params:
+  leaf_1:
+    default: ''
+    help: name of the first leaf (required)
+  leaf_2:
+    default: ''
+    help: name of the second leaf (required)
+  topology_only:
+    default: 'no'
+    help: yes counts edges instead of summing branch lengths
+interpreter: python
+script: |
+  import os
+  import pandas as pd
+  from ete3 import Tree
+
+  t = Tree(open(os.environ["IN_tree"]).read(), format=0)
+  a, b = os.environ["PARAM_leaf_1"], os.environ["PARAM_leaf_2"]
+  pd.DataFrame([dict(leaf_1=a, leaf_2=b, distance=t.get_distance(a, b, topology_only=os.environ["PARAM_topology_only"] == "yes"))]).to_csv(os.environ["OUT_table"], index=False)

@@ -53,6 +53,7 @@ This directory is the one description of the tools in the experiment image. `gen
 1. Exactly one step produces each type. Give two steps that make similar files two types, and let both extend a shared parent when a later step takes either.
 2. No step takes a type that its own output satisfies.
 3. The script names every input, output and parameter it declares.
+4. No step takes two inputs of one type. Give the second input its own type.
 
 ## Rules the generator cannot check
 

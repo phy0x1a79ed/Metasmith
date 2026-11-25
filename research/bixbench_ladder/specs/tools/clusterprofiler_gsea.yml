@@ -1,0 +1,58 @@
+name: clusterprofiler_gsea
+tool: clusterProfiler 4.10.0 (R)
+summary: Gene set enrichment analysis (GSEA) of a ranked gene list against custom gene sets from a GMT file.
+usage: |
+  Use for a ranked gene table (see the ranking step) and any gene sets whose member ids match the ranked gene ids. A positive normalised enrichment score means the set is enriched among the top-ranked genes. Duplicated gene ids keep the first row; the list is sorted in decreasing order of score.
+  Choices that change the numbers: the ranking, the gene set file, exponent, size limits, the algorithm, the score type and, because p-values come from permutation, the seed.
+inputs:
+  ranked: ranked_gene_table
+  sets: gene_sets
+outputs:
+  table: clusterprofiler_gsea_table
+params:
+  score_type:
+    default: "std"
+    help: std for scores of both signs, pos if only positive scores matter, neg if only negative scores matter.
+  n_perm_simple:
+    default: "1000"
+    help: Number of permutations used by fgsea for the simple p-value estimate.
+  exponent:
+    default: "1"
+    help: Weight of the gene score in the running sum; 0 gives the unweighted Kolmogorov-Smirnov statistic.
+  eps:
+    default: "1e-10"
+    help: Lower boundary for the p-values estimated by fgsea; use 0 for exact small p-values.
+  p_adjust_method:
+    default: "BH"
+    help: Multiple testing method, one of holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.
+  pvalue_cutoff:
+    default: "0.05"
+    help: Sets with an adjusted p-value above this are dropped from the output; use 1 to keep every tested set.
+  min_gs_size:
+    default: "10"
+    help: Smallest gene set size tested.
+  max_gs_size:
+    default: "500"
+    help: Largest gene set size tested.
+  by:
+    default: "fgsea"
+    help: Algorithm, fgsea or DOSE.
+  seed:
+    default: "FALSE"
+    help: TRUE or FALSE, fix the random seed for permutation p-values (FALSE is the tool default and gives run-to-run variation).
+interpreter: Rscript
+script: |
+  suppressMessages(library(clusterProfiler))
+  invisible(runif(1))
+  rk <- read.csv(Sys.getenv("IN_ranked"), check.names = FALSE)
+  rk <- rk[!is.na(rk[[2]]) & !duplicated(rk[[1]]), ]
+  gl <- sort(setNames(rk[[2]], as.character(rk[[1]])), decreasing = TRUE)
+  t2g <- read.gmt(Sys.getenv("IN_sets"))
+  res <- GSEA(geneList = gl, TERM2GENE = t2g, exponent = as.numeric(Sys.getenv("PARAM_exponent")),
+              minGSSize = as.integer(Sys.getenv("PARAM_min_gs_size")), maxGSSize = as.integer(Sys.getenv("PARAM_max_gs_size")),
+              eps = as.numeric(Sys.getenv("PARAM_eps")), pvalueCutoff = as.numeric(Sys.getenv("PARAM_pvalue_cutoff")),
+              pAdjustMethod = Sys.getenv("PARAM_p_adjust_method"), verbose = FALSE,
+              seed = as.logical(Sys.getenv("PARAM_seed")), by = Sys.getenv("PARAM_by"),
+              scoreType = Sys.getenv("PARAM_score_type"), nPermSimple = as.integer(Sys.getenv("PARAM_n_perm_simple")))
+  df <- if (is.null(res)) data.frame() else as.data.frame(res)
+  write.csv(df, Sys.getenv("OUT_table"), row.names = FALSE)

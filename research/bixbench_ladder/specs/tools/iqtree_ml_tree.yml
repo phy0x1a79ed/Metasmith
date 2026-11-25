@@ -1,0 +1,25 @@
+name: iqtree_ml_tree
+tool: IQ-TREE 2.3.6
+summary: Infer a maximum-likelihood tree from an alignment.
+usage: |
+  Use to build a phylogeny from a nucleotide or protein alignment. With the default model MFP, ModelFinder first picks the best model by BIC, then a tree is searched. Give an explicit model to skip model selection. The tree has no support values; use iqtree_ufboot_tree, iqtree_standard_bootstrap or iqtree_sh_alrt for branch support. The tree is unrooted; outgroup rooting is a separate step. The report holds the chosen model, log-likelihood and tree length.
+inputs:
+  aln: alignment
+outputs:
+  tree: iqtree_ml_tree
+  report: iqtree_report
+params:
+  model:
+    default: MFP
+    help: substitution model, for example MFP (ModelFinder then tree search), GTR+G, HKY+F+I, LG+G4, JC; MFP picks the best by BIC
+  seed:
+    default: ''
+    help: random seed for a reproducible run; empty lets IQ-TREE choose one from the clock
+interpreter: bash
+script: |
+  args=()
+  if [ -n "$PARAM_seed" ]; then args+=(-seed "$PARAM_seed"); fi
+
+  iqtree2 -s "$IN_aln" -m "$PARAM_model" --prefix run -T 1 -quiet "${args[@]}" > /dev/null
+  cp run.treefile "$OUT_tree"
+  cp run.iqtree "$OUT_report"

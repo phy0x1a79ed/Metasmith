@@ -1,0 +1,35 @@
+name: ggpubr_compare_means
+tool: ggpubr 0.6.0 compare_means
+summary: Compare means or distributions between groups with Wilcoxon, t-test, Kruskal-Wallis or ANOVA.
+usage: |
+  Use for a quick test of a numeric column across groups. method wilcox.test is the ggpubr default; two groups give one test, more than two give all pairs (with p-adjustment) unless a global method (anova, kruskal.test) is chosen. group_by repeats the test within each level of another column.
+inputs:
+  data: table
+outputs:
+  result: ggpubr_compare_means_table
+params:
+  formula:
+    default: ''
+    help: Formula 'value ~ group' with the numeric column on the left and the grouping column on the right.
+  method:
+    default: wilcox.test
+    help: wilcox.test, t.test, anova or kruskal.test.
+  paired:
+    default: 'FALSE'
+    help: TRUE for paired tests.
+  p_adjust_method:
+    default: holm
+    help: 'p.adjust method: holm, hochberg, hommel, bonferroni, BH, BY, fdr or none.'
+  group_by:
+    default: ''
+    help: Optional column to run the test within each of its levels.
+interpreter: Rscript
+script: |
+  suppressPackageStartupMessages(library(ggpubr))
+  data <- read.csv(Sys.getenv("IN_data"), stringsAsFactors = FALSE)
+  args <- list(as.formula(Sys.getenv("PARAM_formula")), data = data, method = Sys.getenv("PARAM_method"),
+               paired = Sys.getenv("PARAM_paired") == "TRUE", p.adjust.method = Sys.getenv("PARAM_p_adjust_method"))
+  if (nzchar(Sys.getenv("PARAM_group_by"))) args$group.by <- Sys.getenv("PARAM_group_by")
+  res <- do.call(compare_means, args)
+  res <- as.data.frame(res)
+  write.csv(res[, !sapply(res, is.list), drop = FALSE], Sys.getenv("OUT_result"), row.names = FALSE)

@@ -2,15 +2,18 @@ name: mafft_align
 tool: MAFFT 7.526
 summary: Align unaligned sequences into a multiple sequence alignment.
 usage: |
-  Use for a set of homologous nucleotide or protein sequences.
+  Use for a set of homologous nucleotide or protein sequences, for example orthologs of one gene across species. The strategy flags decide accuracy and speed: --auto picks FFT-NS-2 or L-INS-i by data size, --localpair --maxiterate 1000 (L-INS-i) is most accurate for sequences with conserved motifs and long gaps, --globalpair --maxiterate 1000 (G-INS-i) for sequences that align end to end. Gap penalties and the scoring matrix can be added to the same flags (--op, --ep, --bl). Input order is kept.
 inputs:
   seqs: sequences_fasta
 outputs:
   aln: mafft_alignment
 params:
   strategy:
-    default: "--auto"
-    help: MAFFT strategy flags, for example "--auto" or "--localpair --maxiterate 1000".
+    default: --auto
+    help: MAFFT strategy flags, for example "--auto", "--retree 2" (FFT-NS-2), "--localpair --maxiterate 1000" or "--globalpair --maxiterate 1000".
+  extra:
+    default: ''
+    help: optional further MAFFT flags such as "--op 1.53 --ep 0.123" or "--adjustdirection"
 interpreter: bash
 script: |
-  mafft $PARAM_strategy "$IN_seqs" > "$OUT_aln"
+  mafft --quiet $PARAM_strategy $PARAM_extra "$IN_seqs" > "$OUT_aln"

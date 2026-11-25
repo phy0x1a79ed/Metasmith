@@ -1,0 +1,56 @@
+name: deseq2_results
+tool: DESeq2 1.42.0 (R)
+summary: Extract a DESeq2 results table for a contrast or coefficient, with independent filtering and Cooks outlier handling.
+usage: |
+  Use after a Wald or LRT fit. Empty contrast and name give the DESeq2 default: the last coefficient for a Wald fit (the reduced-vs-full test for LRT).
+  Choices that change the numbers: the contrast (factor,numerator,denominator) or coefficient name, alpha (the FDR level that tunes independent filtering), lfc_threshold with alt_hypothesis, independent filtering on or off, the Cooks cutoff and the p-value adjustment method. padj is NA for genes removed by independent filtering or flagged as outliers; pvalue is NA for outliers and all-zero genes.
+inputs:
+  fit: deseq2_fit
+outputs:
+  results: deseq2_results_table
+params:
+  contrast:
+    default: ""
+    help: Comma separated factor,numerator_level,denominator_level, for example "condition,treated,control". Empty uses name or the default.
+  name:
+    default: ""
+    help: Coefficient name from resultsNames(), used when contrast is empty, for example "condition_treated_vs_control".
+  alpha:
+    default: "0.1"
+    help: Significance level used to optimise independent filtering and to count adjusted p-values.
+  lfc_threshold:
+    default: "0"
+    help: Log2 fold change threshold the hypothesis is tested against.
+  alt_hypothesis:
+    default: "greaterAbs"
+    help: Alternative hypothesis relative to lfc_threshold, one of greaterAbs, lessAbs, greater or less.
+  independent_filtering:
+    default: "TRUE"
+    help: TRUE or FALSE, filter low-mean genes automatically before p-value adjustment.
+  cooks_cutoff:
+    default: ""
+    help: Cooks distance cutoff above which p-values are set to NA. Empty uses the DESeq2 default, FALSE disables the outlier filter.
+  p_adjust_method:
+    default: "BH"
+    help: Multiple testing method, any of p.adjust.methods, for example BH, bonferroni, holm.
+interpreter: Rscript
+script: |
+  suppressMessages(library(DESeq2))
+  dds <- readRDS(Sys.getenv("IN_fit"))
+  args <- list(object = dds, alpha = as.numeric(Sys.getenv("PARAM_alpha")),
+               lfcThreshold = as.numeric(Sys.getenv("PARAM_lfc_threshold")),
+               altHypothesis = Sys.getenv("PARAM_alt_hypothesis"),
+               independentFiltering = as.logical(Sys.getenv("PARAM_independent_filtering")),
+               pAdjustMethod = Sys.getenv("PARAM_p_adjust_method"))
+  if (nzchar(Sys.getenv("PARAM_contrast"))) {
+    args$contrast <- trimws(strsplit(Sys.getenv("PARAM_contrast"), ",")[[1]])
+  } else if (nzchar(Sys.getenv("PARAM_name"))) {
+    args$name <- Sys.getenv("PARAM_name")
+  }
+  if (nzchar(Sys.getenv("PARAM_cooks_cutoff"))) {
+    args$cooksCutoff <- if (toupper(Sys.getenv("PARAM_cooks_cutoff")) == "FALSE") FALSE else as.numeric(Sys.getenv("PARAM_cooks_cutoff"))
+  }
+  res <- do.call(results, args)
+  summary(res)
+  out <- data.frame(gene = rownames(res), as.data.frame(res), check.names = FALSE)
+  write.csv(out, Sys.getenv("OUT_results"), row.names = FALSE)
