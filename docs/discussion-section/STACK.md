@@ -6,9 +6,10 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 **claims-reframe** (2026-11-24): claims argued against the literature, Tony's seeds filled. Outline artifact v16 https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d holds 2a, 2b, 1a–1e, 3a–3c with prose.
 - Settled: claim 2 = typed contracts enable radical interoperability (old 2b dropped, seed folded into 2a; SADI precise; local-vocabulary contrast in 2b). Claim 1 = symbolic solver suffices for routing; SHARE beside FlowCraft in 1a; 1b keeps Snakemake, Wings, APE; 1e = ranking (PUCT, learned prior, market as aspiration; no Fast Downward). Claim 3 = levels of accessibility. PlanBench/Blocksworld not reported.
-- 1c accepted (2026-11-24, "good enough for now"): 2026 failure-mode evidence (BioAgent Bench, FlowBench); in `draft/1c-agents.md` and artifact v17.
-- Open now: artifact leftovers: (a) "second claim"/"third claim" lead-ins should stand alone; (b) 3a first sentence reworded from Tony's "we do have a GUI so"; (c) 3c compute-market paragraph: Discussion or Conclusion.
-- Then: write the claims into d2 via capella (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit). The 2026-11-24 morning insert was lost unsaved.
+- Accepted and in d2 (2026-11-25), in Discussion order after Tony's ¶5: 2a (`draft/2a-types.md`), 2b (`draft/2b-ontology.md`), 1c (`draft/1c-agents.md`; lead line "too in the weeds", revisit). All old claim prose and scaffold headings removed from d2.
+- Claim 3 shape settled: "Typed contracts are accessible at different levels of expertise"; 3a interfaces are hierarchical, levels parallel the intent-to-execution gap; 3b own the stack via Nextflow; 3c decentralised compute market ("some compute is too specialised to hand over": ship the product, not the factory).
+- Open now: in-order pass, itemized points then prose, next 1a.
+- d2 access: capella via ssh + schtasks task `msm_word` (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit). The 2026-11-24 morning insert was lost unsaved.
 
 **table-criteria** (deferred by Tony, "will come back to that one"): Table 1 under the three-claim structure (three-claims, DECISIONS.md).
 
@@ -18,6 +19,8 @@ Previous current, superseded by three-claims: **discussion-d2-d4**: tune D2–D4
 
 ## Waiting on the user
 
+- Tony's ¶5 ("If the goal is…") still carries my blue Loach-rubric tail; trim or keep?
+
 - intro-composition: review the Intro edits in d2. All 22 missing refs are now in EndNote (ids 84–105; Loach 93, AutoBA 103, Biomni 104, BixBench 105). Confirm Kiran 2023 (100), Wu 2024 (101), Hsieh 2024 (102). Then convert author-year text to EndNote fields via temporary citations {Author, Year #id} + Update Citations.
 
 ## Preferences
@@ -26,6 +29,7 @@ Previous current, superseded by three-claims: **discussion-d2-d4**: tune D2–D4
 - (2026-11-09) Point form and concise while drafting; fill the field, then cut.
 - (2026-11-15) Talk before acting: discuss a change before making it.
 - (2026-11-22) Agree changes as itemized points in chat, then edit the doc directly. Keep Tony's sentences; add in blue only; no red. Don't echo doc text back in chat.
+- (2026-11-25) Per paragraph: tight itemized points (key message + 4-5 items), then prose in chat, then write into d2 as soon as accepted: plain paragraphs, no claim headings, D1 formatting (Normal, Arial 12), blue.
 
 ## Stack
 
