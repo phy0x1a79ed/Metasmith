@@ -39,7 +39,14 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     - Refs: EDAM, bio.tools, CWL (one clause), Lamprecht 2021, BioMoby (BioMoby Consortium 2008), Zhao 2012.
 - **Claim 1. A symbolic solver is sufficient to automate routing between typed contracts.**
   - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [points in progress]
-  - **1b. Earlier automation matched names or stopped at candidates.** [outline]
+    1. Routing is currently the developer's job, and frameworks give no mechanism for reuse: a Nextflow process is a step, not a module. FlowCraft is the exception (component types checked between neighbours), leading to 2.
+    2. Query-based: SADI makes each service a component described by the properties it consumes and produces, so a query can find it; a multi-step query still spells out the route (Wilkinson 2011, second use). SHARE cut.
+    3. Case in terms of state only, no reads: routing means taking data through the states each tool requires, and the developer does it by hand.
+    4. Tony's seed as bridge: little incentive under immediate research goals; the community's goals are longer term.
+    5. Result: reimplementation, GATK over 200 implementations (Wratten 2021).
+    - Transition ("automating the route would remove this cost, and earlier systems tried to") moves to open 1b.
+    - Source shape: artifact v17 1a.0-1a.4 (several compactions back), with Tony's 2026-11-25 notes.
+  - **1b. Earlier automation (dependency solvers, planners).** [key message under review: Tony to suggest a clearer one; opens with the transition from 1a]
   - **1c? Metasmith routes backwards from the destination, so a plan is correct by construction.** [restore proposed, Tony to decide]
   - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose accepted; lead line to simplify; in d2 out of order; pull pending Tony]
   - **1d. Automated routing aligns the individual's incentive with the community's.** [outline]
