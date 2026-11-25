@@ -15,6 +15,7 @@ hub = "futurehouse/BixBench"
 path = "data/bixbench"
 
 [image]
-# The published futurehouse/bixbench:aviary-notebook-env is arm64-only.
-# The base image is built for amd64 from the unmodified fhda Dockerfile.
+# The published futurehouse/bixbench:aviary-notebook-env is arm64-only, and the fhda
+# Dockerfile does not build a working environment on amd64. image/Dockerfile is that
+# file with the repair its own comments describe. Build context: cache/finch/src/fhda.
 base = "bixbench-ladder/base:fhda-v1.5.0"
