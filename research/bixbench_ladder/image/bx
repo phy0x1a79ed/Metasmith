@@ -12,6 +12,7 @@
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -20,7 +21,7 @@ from pathlib import Path
 LIBRARY = Path(os.environ.get("BX_LIBRARY", "/opt/bx"))
 STATE = Path(os.environ.get("BX_STATE", "/tmp/bx"))
 DATA = STATE / "in.xgdb"
-TRANSFORMS = LIBRARY / "transforms" / "bx"
+TRANSFORMS = STATE / "transforms" / "bx"
 os.environ["METASMITH_WORKSPACE"] = str(STATE / "ws")
 
 
@@ -80,6 +81,9 @@ def cmd_inputs(a) -> None:
 def plan(types: list[str]) -> dict:
     if not DATA.exists():
         sys.exit("nothing declared yet; use: bx add FILE TYPE")
+    if not TRANSFORMS.exists():
+        # Planning writes into the library's metadata, and the image's copy is read-only.
+        shutil.copytree(LIBRARY / "transforms" / "bx", TRANSFORMS)
     args = ["plan", "--data-library", str(DATA), "-r", str(TRANSFORMS)]
     for t in types:
         args += ["--target-type", qualified(t)]
