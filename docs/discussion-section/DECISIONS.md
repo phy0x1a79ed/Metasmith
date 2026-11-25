@@ -100,6 +100,21 @@ One section per closed topic, in the order the topics closed.
   - 3c. Accessibility is designed, not yet measured.
   - 3d. Next, move from your own compute to shared compute on the same types.
 
-Later changes (claims-reframe, 2026-11-24/25), not yet a closed decision: claim 2 became "Describing tools as typed contracts enables radical interoperability" (2a types of use; 2b shared ontology and local namespaces); claim 1 "A symbolic solver is sufficient to automate routing between typed contracts" gained an incentives paragraph and lost 1c (proposed restore pending); claim 3 became "Typed contracts are accessible at different levels of expertise" (3a hierarchical interfaces, 3b own the stack via Nextflow, 3c decentralised compute market).
+**Revised structure (claims-reframe; Tony's reframe 2026-11-24 14:25, refined through 2026-11-25).** Supersedes the primary messages above. Approved piece by piece, never as a whole: "update the artifact" (14:31), "drop 2b but fold the seed" (14:51), SHARE beside FlowCraft (15:18), "keep all 3" in 1b (15:37), agents tiers (18:09–18:20), claim 3 shape (2026-11-25).
+- D1: Tony's opening, radical interoperability.
+- Claim 2, *Describing tools as typed contracts enables radical interoperability*:
+  - 2a. Types join tools, so they must describe how data can be used, where earlier type systems describe format, content or structure. (Accepted, in d2.)
+  - 2b. Interoperability needs a community standard; a new tool should not propose one, so Metasmith starts with local namespaces and lets standards emerge through use. (Accepted, in d2.)
+- Claim 1, *A symbolic solver is sufficient to automate routing between typed contracts*:
+  - 1a. Routing, and making modules reusable, is the developer's job; the incentives do not align; the result is reimplementation. (Points under revision 2026-11-25.)
+  - 1b. Earlier automation (dependency solvers, Wings, APE) matched names or stopped at candidates.
+  - 1c. Agents can propose pipelines, but only typed contracts make their joins checkable. (Accepted; lead line to simplify.)
+  - 1d. Automated routing aligns the individual's incentive with the community's.
+  - 1e. Choosing among valid plans needs a softer search that can rank (PUCT now; learned prior, user metrics, market as aspiration); conditionals and loops; incompleteness.
+  - Open: the reframe has no paragraph stating Metasmith's own routing (original 1c, backward search, correct by construction). Proposed restore pending Tony.
+- Claim 3, *Typed contracts are accessible at different levels of expertise*:
+  - 3a. The interfaces are hierarchical levels that parallel the gap from intent to execution; limit: adding tools needs expertise the GUI does not support.
+  - 3b. Deferring execution to Nextflow gives portability and lets users own the full stack.
+  - 3c. A decentralised compute market: some compute is too specialised to hand over, so ship the product, not the factory (aspiration).
 
 **Landed:** outline artifact v7, https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d
