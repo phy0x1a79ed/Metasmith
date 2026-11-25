@@ -6,8 +6,9 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 
 **claims-reframe** (2026-11-24): claims argued against the literature, Tony's seeds filled. Outline artifact v16 https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d holds 2a, 2b, 1a–1e, 3a–3c with prose.
 - Settled: claim 2 = typed contracts enable radical interoperability (old 2b dropped, seed folded into 2a; SADI precise; local-vocabulary contrast in 2b). Claim 1 = symbolic solver suffices for routing; SHARE beside FlowCraft in 1a; 1b keeps Snakemake, Wings, APE; 1e = ranking (PUCT, learned prior, market as aspiration; no Fast Downward). Claim 3 = levels of accessibility. PlanBench/Blocksworld not reported.
-- Open now: 1c agents paragraph, draft in `draft/1c-agents.md`. Next: find a 2026 benchmark study of bioinformatics agents and cite its failure modes, not a success rate; check Alam & Roy 2025.
-- Then: write 1c into the artifact; then write the claims into d2 via capella (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit). The 2026-11-24 morning insert was lost unsaved.
+- 1c accepted (2026-11-24, "good enough for now"): 2026 failure-mode evidence (BioAgent Bench, FlowBench); in `draft/1c-agents.md` and artifact v17.
+- Open now: artifact leftovers: (a) "second claim"/"third claim" lead-ins should stand alone; (b) 3a first sentence reworded from Tony's "we do have a GUI so"; (c) 3c compute-market paragraph: Discussion or Conclusion.
+- Then: write the claims into d2 via capella (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit). The 2026-11-24 morning insert was lost unsaved.
 
 **table-criteria** (deferred by Tony, "will come back to that one"): Table 1 under the three-claim structure (three-claims, DECISIONS.md).
 
