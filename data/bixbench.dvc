@@ -1,0 +1,6 @@
+outs:
+- md5: bb3412f0290623df52c0b94d397dbf2e.dir
+  size: 5909999805
+  nfiles: 67
+  hash: md5
+  path: bixbench
