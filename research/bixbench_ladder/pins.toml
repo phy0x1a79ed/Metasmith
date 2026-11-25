@@ -1,0 +1,20 @@
+# Third-party sources this experiment is pinned to. Clones live in the gitignored cache/.
+
+[bixbench]
+repo = "https://github.com/Future-House/BixBench.git"
+commit = "49311180bdacb324c596f2e07596c126f2004008"
+
+[fhda]
+repo = "https://github.com/Future-House/finch.git"
+tag = "v1.5.0"
+commit = "953a6b13c5f8e15354525bca08636f620994f954"
+dockerfile = "src/fhda/Dockerfile.pinned"
+
+[dataset]
+hub = "futurehouse/BixBench"
+path = "data/bixbench"
+
+[image]
+# The published futurehouse/bixbench:aviary-notebook-env is arm64-only.
+# The base image is built for amd64 from the unmodified fhda Dockerfile.
+base = "bixbench-ladder/base:fhda-v1.5.0"
