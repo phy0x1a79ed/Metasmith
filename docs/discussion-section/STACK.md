@@ -24,13 +24,13 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
 
 - **D1** Tony's opening: radical interoperability through per-tool typed contracts. [in d2]
 - **Claim 2. Describing tools as typed contracts enables radical interoperability.**
-  - **2a. Types join tools, so they must describe how data can be used; earlier systems typed what data are.** [prose accepted, in d2; points revised 2026-11-25, prose to redo]
+  - **2a. Types join tools, so they must describe how data can be used; earlier systems typed what data are.** [v2 prose accepted, in d2 2026-11-25]
     1. Chaining rule: if an output type satisfies an input type, the tools chain.
     2. Earlier systems typed what data are, with increasing richness: Galaxy format classes; KBase schemas that record properties as fields but match apps by type name (Arkin 2018); SADI classes defined by properties, closest in approach (Wilkinson 2011).
     3. Case: whether reads can go to an assembler depends on the state they have reached (platform, pairing, trimming); none of these systems uses state to decide which tool takes the data.
     4. Metasmith: types are property sets that capture that state; one contract makes a tool chainable with every tool whose types it satisfies, so types are what make tools interoperable.
     - Refs: Galaxy, KBase (Arkin 2018), SADI (Wilkinson 2011). Not here: EDAM, BioMoby, CWL, WDL/Nextflow/Snakemake types.
-  - **2b. Interoperability hinges on a shared vocabulary, which needs a community standard; a new tool should start local and let standards emerge.** [prose accepted, in d2; points revised 2026-11-25, prose to redo]
+  - **2b. Interoperability hinges on a shared vocabulary, which needs a community standard; a new tool should start local and let standards emerge.** [v2 prose accepted, in d2 2026-11-25]
     1. A shared vocabulary needs a standard adopted by a community; Metasmith has neither.
     2. Current standards fall short. Too coarse: EDAM, used by bio.tools and CWL, describes what data are and which operations act on them, not state, so plans run but are wrong (Lamprecht 2021). Too fragile: BioMoby's central registry decayed with its servers (Zhao 2012).
     3. A new standard would be counterproductive: many standards amount to none.
