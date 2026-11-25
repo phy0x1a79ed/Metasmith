@@ -18,6 +18,37 @@ Previous current, superseded by three-claims: **discussion-d2-d4**: tune D2–D4
 - Prose for D2a–e and D3 is in live d2, drafts in blue. Outline artifact: https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d
 - Open: ¶2 promises an assessment against all twelve themes, so check each theme is covered; delete the ¶ scaffold headings?; ¶4 future directions still bullets.
 
+## Structure
+
+Three levels: claim, paragraph key message, sentence points. Read back top-down. Status per paragraph in brackets. References are assigned to one paragraph where possible.
+
+- **D1** Tony's opening: radical interoperability through per-tool typed contracts. [in d2]
+- **Claim 2. Describing tools as typed contracts enables radical interoperability.**
+  - **2a. Types join tools, so they must describe how data can be used; earlier systems typed what data are.** [prose accepted, in d2; points revised 2026-11-25, prose to redo]
+    1. Chaining rule: if an output type satisfies an input type, the tools chain.
+    2. Earlier systems typed what data are, with increasing richness: Galaxy format classes; KBase schemas that record properties as fields but match apps by type name (Arkin 2018); SADI classes defined by properties, closest in approach (Wilkinson 2011).
+    3. Case: whether reads can go to an assembler depends on the state they have reached (platform, pairing, trimming); none of these systems uses state to decide which tool takes the data.
+    4. Metasmith: types are property sets that capture that state; one contract makes a tool chainable with every tool whose types it satisfies, so types are what make tools interoperable.
+    - Refs: Galaxy, KBase (Arkin 2018), SADI (Wilkinson 2011). Not here: EDAM, BioMoby, CWL, WDL/Nextflow/Snakemake types.
+  - **2b. Interoperability hinges on a shared vocabulary, which needs a community standard; a new tool should start local and let standards emerge.** [prose accepted, in d2; points revised 2026-11-25, prose to redo]
+    1. A shared vocabulary needs a standard adopted by a community; Metasmith has neither.
+    2. Current standards fall short. Too coarse: EDAM, used by bio.tools and CWL, describes what data are and which operations act on them, not state, so plans run but are wrong (Lamprecht 2021). Too fragile: BioMoby's central registry decayed with its servers (Zhao 2012).
+    3. A new standard would be counterproductive: many standards amount to none.
+    4. Hence local namespaces, expanded and joined as adopted; local, so they cannot decay with a remote server.
+    5. Narrow claim: types expressive enough for the Results; offer a principle (a type draws exactly the distinctions that decide which tools can take the data); standards left to use.
+    - Refs: EDAM, bio.tools, CWL (one clause), Lamprecht 2021, BioMoby (BioMoby Consortium 2008), Zhao 2012.
+- **Claim 1. A symbolic solver is sufficient to automate routing between typed contracts.**
+  - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [points in progress]
+  - **1b. Earlier automation matched names or stopped at candidates.** [outline]
+  - **1c? Metasmith routes backwards from the destination, so a plan is correct by construction.** [restore proposed, Tony to decide]
+  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose accepted; lead line to simplify; pulled from d2 pending order]
+  - **1d. Automated routing aligns the individual's incentive with the community's.** [outline]
+  - **1e. Choosing among valid plans needs a softer search that can rank; conditionals, loops, incompleteness.** [outline]
+- **Claim 3. Typed contracts are accessible at different levels of expertise.**
+  - **3a. The interfaces are hierarchical levels that parallel the gap from intent to execution; adding tools still needs expertise.** [outline]
+  - **3b. Deferring execution to Nextflow gives portability and lets users own the full stack.** [outline]
+  - **3c. A decentralised compute market: some compute is too specialised to hand over; ship the product, not the factory.** [outline, aspiration]
+
 ## Waiting on the user
 
 - Tony's ¶5 ("If the goal is…") still carries my blue Loach-rubric tail; trim or keep?
