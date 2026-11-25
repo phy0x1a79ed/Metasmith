@@ -41,7 +41,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
   - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [points in progress]
   - **1b. Earlier automation matched names or stopped at candidates.** [outline]
   - **1c? Metasmith routes backwards from the destination, so a plan is correct by construction.** [restore proposed, Tony to decide]
-  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose accepted; lead line to simplify; pulled from d2 pending order]
+  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose accepted; lead line to simplify; in d2 out of order; pull pending Tony]
   - **1d. Automated routing aligns the individual's incentive with the community's.** [outline]
   - **1e. Choosing among valid plans needs a softer search that can rank; conditionals, loops, incompleteness.** [outline]
 - **Claim 3. Typed contracts are accessible at different levels of expertise.**
