@@ -81,4 +81,25 @@ One section per closed topic, in the order the topics closed.
 - Claim 3, *Accessible across the full stack*: 3a one-end-only systems; 3b one user owns the stack (scale is one clause, inherited from Nextflow); 3c limits; 3d compute market.
 - Loach's 12 themes stay as background only. Table 1 is deferred; it supersedes table-criteria/levels and twelve-coverage.
 
+**Primary messages as approved (2026-11-23 17:20, recovered from the transcript 2026-11-25):**
+- D1: radical interoperability, one contract per tool.
+- Claim 2, *Format isn't meaning*:
+  - 2a. Earlier vocabularies described formats, so tools that agreed on format could still disagree on meaning.
+  - 2b. A vocabulary survives only if annotating pays off.
+  - 2c. Metasmith makes annotation pay off, because the planner consumes it.
+  - 2d. Plans are only as right as their types.
+- Claim 1, *Routing is a chore*:
+  - 1a. Most systems hand the route to the user.
+  - 1b. Earlier automation checked routes or sketched them, but the user still did the routing.
+  - 1c. Metasmith routes backwards from the destination, so a plan is correct by construction.
+  - 1d. Agents write routes without guarantees; as clients of the planner they supply judgement while the planner guarantees validity.
+  - 1e. Smarter routing means bringing domain knowledge into the planner (limits: no conditionals or loops, one step per contract, no ranking, MCTS incomplete; future: Nov 5 conditionals/loops fix, ranking from domain logic).
+- Claim 3, *Accessible across the full stack*:
+  - 3a. Existing systems are accessible at only one end of the stack.
+  - 3b. In Metasmith, one end user can own the whole stack.
+  - 3c. Accessibility is designed, not yet measured.
+  - 3d. Next, move from your own compute to shared compute on the same types.
+
+Later changes (claims-reframe, 2026-11-24/25), not yet a closed decision: claim 2 became "Describing tools as typed contracts enables radical interoperability" (2a types of use; 2b shared ontology and local namespaces); claim 1 "A symbolic solver is sufficient to automate routing between typed contracts" gained an incentives paragraph and lost 1c (proposed restore pending); claim 3 became "Typed contracts are accessible at different levels of expertise" (3a hierarchical interfaces, 3b own the stack via Nextflow, 3c decentralised compute market).
+
 **Landed:** outline artifact v7, https://claude.ai/artifact/1md7uDcwDF6aauFp7QGb1d

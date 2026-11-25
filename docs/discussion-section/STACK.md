@@ -9,7 +9,8 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 - Accepted and in d2 (2026-11-25), in Discussion order after Tony's ¶5: 2a (`draft/2a-types.md`), 2b (`draft/2b-ontology.md`), 1c (`draft/1c-agents.md`; lead line "too in the weeds", revisit). All old claim prose and scaffold headings removed from d2.
 - Claim 3 shape settled: "Typed contracts are accessible at different levels of expertise"; 3a interfaces are hierarchical, levels parallel the intent-to-execution gap; 3b own the stack via Nextflow; 3c decentralised compute market ("some compute is too specialised to hand over": ship the product, not the factory).
 - Open now: in-order pass, itemized points then prose, next 1a.
-- d2 access: capella via ssh + schtasks task `msm_word` (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit). The 2026-11-24 morning insert was lost unsaved.
+- Structure reference: DECISIONS.md § three-claims, "Primary messages as approved" plus its later-changes line. Pending: Tony to confirm the merged claim 1 order (1a manual + incentives problem; 1b earlier automation; 1c restored backward routing; 1d incentives aligned; 1e agents; 1f smarter routing).
+- d2 access: capella via ssh + schtasks task `msm_word` (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit).
 
 **table-criteria** (deferred by Tony, "will come back to that one"): Table 1 under the three-claim structure (three-claims, DECISIONS.md).
 
