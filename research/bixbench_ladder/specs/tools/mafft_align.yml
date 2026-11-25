@@ -1,0 +1,17 @@
+name: mafft_align
+tool: MAFFT 7.526
+summary: Align unaligned sequences into a multiple sequence alignment.
+usage: |
+  Use for any set of homologous nucleotide or protein sequences. The default strategy
+  (--auto) picks an algorithm from the input size.
+inputs:
+  seqs: sequences_fasta
+outputs:
+  aln: mafft_alignment
+params:
+  strategy:
+    default: "--auto"
+    help: MAFFT strategy flags, for example "--auto", "--localpair --maxiterate 1000" or "--retree 2".
+interpreter: bash
+script: |
+  mafft $PARAM_strategy "$IN_seqs" > "$OUT_aln"
