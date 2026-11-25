@@ -181,5 +181,6 @@ def _cmd_run(args):
                 kv[k] = float(v)
         overrides[step] = kv
     return _rt.run(
-        args.agent, args.task_key, args.preset, params, overrides or None, args.stub_delay,
+        args.agent, args.task_key, config_preset=args.preset, params=params,
+        resource_overrides=overrides or None, stub_delay=args.stub_delay,
     )
