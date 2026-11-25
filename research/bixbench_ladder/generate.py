@@ -67,7 +67,12 @@ TransformInstance(
 
 
 def load(specs: Path) -> tuple[dict, list[dict]]:
-    types = yaml.safe_load((specs / "types.yml").read_text())
+    types: dict = {}
+    for p in sorted((specs / "types").glob("*.yml")):
+        part = yaml.safe_load(p.read_text()) or {}
+        if types.keys() & part.keys():
+            sys.exit(f"{p.name}: redefines {sorted(types.keys() & part.keys())}")
+        types |= part
     tools = [yaml.safe_load(p.read_text()) | {"_file": p.name} for p in sorted((specs / "tools").glob("*.yml"))]
     return types, tools
 

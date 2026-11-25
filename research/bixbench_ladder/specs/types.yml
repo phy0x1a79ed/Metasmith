@@ -1,9 +1,0 @@
-sequences_fasta:
-  description: unaligned nucleotide or protein sequences, one record per sequence
-  ext: fasta
-mafft_alignment:
-  description: multiple sequence alignment produced by MAFFT, aligned FASTA
-  ext: fasta
-alignment_columns_summary:
-  description: one-row table of alignment length and number of sequences
-  ext: tsv

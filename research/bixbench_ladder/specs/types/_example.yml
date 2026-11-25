@@ -1,0 +1,6 @@
+sequences_fasta:
+  description: unaligned nucleotide or protein sequences, one record per sequence
+  ext: fasta
+mafft_alignment:
+  description: multiple sequence alignment written by MAFFT, aligned FASTA
+  ext: fasta

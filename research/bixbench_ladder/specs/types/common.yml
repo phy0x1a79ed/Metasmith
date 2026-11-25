@@ -1,0 +1,28 @@
+table:
+  description: any rectangular table with a header row, comma separated
+  ext: csv
+sequences_fasta:
+  description: unaligned nucleotide or protein sequences, one record per sequence
+  ext: fasta
+alignment:
+  description: multiple sequence alignment, aligned FASTA, every record the same length
+  ext: fasta
+mafft_alignment:
+  description: multiple sequence alignment written by MAFFT, aligned FASTA
+  ext: fasta
+  extends: alignment
+tree:
+  description: phylogenetic tree in Newick format
+  ext: nwk
+count_matrix:
+  description: raw integer read counts, genes in rows, samples in columns, first column the gene id
+  ext: csv
+sample_sheet:
+  description: one row per sample, first column the sample id as it appears in the count matrix header, other columns the experimental factors
+  ext: csv
+gene_list:
+  description: gene identifiers, one per line, no header
+  ext: txt
+gene_sets:
+  description: gene sets in GMT format, one set per line, name then description then member genes, tab separated
+  ext: gmt
