@@ -3,7 +3,7 @@
 The agent is headless Claude Code on the host with no built-in tools. Its only tools
 are served by sandbox_mcp.py and act inside an offline container that holds the
 capsule data. A rung differs from another only in the text added to the system prompt:
---cards adds the tool cards one model call selects, --system-extra adds a file.
+search adds the tool cards one model call selects, planner adds rungs/planner.md to those.
 """
 from __future__ import annotations
 
@@ -77,15 +77,15 @@ def unpack_capsule(zip_path: Path, dest: Path) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--question-id", required=True)
-    ap.add_argument("--rung", required=True)
+    ap.add_argument("--rung", required=True, choices=["harness", "search", "planner"])
     ap.add_argument("--repeat", type=int, required=True)
     ap.add_argument("--data", type=Path, required=True, help="the BixBench dataset folder")
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--image", required=True)
     ap.add_argument("--model", default="claude-sonnet-5-5")
-    ap.add_argument("--cards", type=Path, help="cards.json from generate.py; one model call selects from it")
+    ap.add_argument("--cards", type=Path, default=HERE / "cache" / "generated" / "cards.json",
+                    help="cards.json from generate.py")
     ap.add_argument("--max-cards", type=int, default=8)
-    ap.add_argument("--system-extra", type=Path)
     ap.add_argument("--max-steps", type=int, default=40)
     ap.add_argument("--max-usd", type=float, default=5.0)
     ap.add_argument("--timeout-s", type=int, default=3600)
@@ -106,14 +106,14 @@ def main() -> int:
 
     system = SYSTEM_PROMPT.format(max_steps=a.max_steps)
     selection = None
-    if a.cards:
+    if a.rung != "harness":
         cards = json.loads(a.cards.read_text())
         selection = select_cards(a.model, q["question"], cards, a.max_cards)
         texts = [c["text"] for c in cards if c["name"] in selection["selected"]]
         if texts:
             system += "\n" + CARDS_HEADER + "\n" + "\n\n".join(texts) + "\n"
-    if a.system_extra:
-        system += "\n" + a.system_extra.read_text()
+    if a.rung == "planner":
+        system += "\n" + (HERE / "rungs" / "planner.md").read_text()
     (run / "system_prompt.txt").write_text(system)
 
     container = f"bxl-{uuid.uuid4().hex[:12]}"

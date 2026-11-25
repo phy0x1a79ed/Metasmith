@@ -7,6 +7,8 @@ The machine also has a workflow planner, `bx`, built on Metasmith. Every step in
     bx run TYPE ... [-p PARAMETER=VALUE ...]
                         run the chain and print the path of each result file
 
+When two steps can make an intermediate type, `bx plan` shows which one the planner chose. Name the intermediate type you want as one more TYPE to choose the other.
+
 A file must match the layout in its type's description. Reformat it with your own code first when it does not. A parameter you do not set keeps the tool's default. A run takes about half a minute plus the time of its steps, so raise the bash timeout for a long chain. A failed step prints its log.
 
 Using the planner is your choice. Use it where its steps fit the question, and write your own code where they do not.
