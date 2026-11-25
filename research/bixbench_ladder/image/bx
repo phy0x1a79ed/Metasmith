@@ -1,0 +1,161 @@
+#!/usr/bin/env python
+"""Plan and run typed analysis steps with Metasmith.
+
+  bx steps [WORD]                 list the steps: inputs, outputs, parameters
+  bx types [WORD]                 list the data types and which step makes each
+  bx add FILE TYPE                declare that FILE is a TYPE
+  bx inputs                       list the declared files
+  bx plan TYPE [TYPE ...]         show the steps that would produce the TYPEs
+  bx run TYPE [TYPE ...] [-p STEP_PARAM=VALUE ...]
+                                  plan, run, and print the path of each result
+"""
+import argparse
+import json
+import os
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+LIBRARY = Path(os.environ.get("BX_LIBRARY", "/opt/bx"))
+STATE = Path(os.environ.get("BX_STATE", "/tmp/bx"))
+DATA = STATE / "in.xgdb"
+TRANSFORMS = LIBRARY / "transforms" / "bx"
+os.environ["METASMITH_WORKSPACE"] = str(STATE / "ws")
+
+
+def msm(*args: str, check: bool = True) -> dict:
+    run = subprocess.run(["metasmith", "--json", *args], capture_output=True, text=True)
+    if run.returncode != 0:
+        if check:
+            sys.exit(f"metasmith {' '.join(args[:2])} failed:\n{run.stderr.strip()[-2000:]}")
+        return {"error": run.stderr.strip()}
+    return json.loads(run.stdout)
+
+
+def qualified(name: str) -> str:
+    return name if "::" in name else f"bx::{name}"
+
+
+def catalogue() -> dict:
+    return json.loads((LIBRARY / "catalogue.json").read_text())
+
+
+def cmd_steps(a) -> None:
+    for s in catalogue()["steps"]:
+        if a.word and a.word.lower() not in json.dumps(s).lower():
+            continue
+        print(f"{s['name']}: {s['summary']}")
+        print(f"    {', '.join(s['inputs'].values())} -> {', '.join(s['outputs'].values())}")
+        for key, p in s["params"].items():
+            print(f"    -p {key}={p['default']!r}  {p['help']}")
+
+
+def cmd_types(a) -> None:
+    for name, t in catalogue()["types"].items():
+        if a.word and a.word.lower() not in (name + t["description"]).lower():
+            continue
+        made = f"made by {t['producer']}" if t["producer"] else "an input you declare"
+        parent = f", is a {t['extends']}" if t.get("extends") else ""
+        print(f"{name} ({made}{parent}): {t['description']}")
+
+
+def cmd_add(a) -> None:
+    path = Path(a.file).resolve()
+    if not path.exists():
+        sys.exit(f"no such file: {path}")
+    if not DATA.exists():
+        STATE.mkdir(parents=True, exist_ok=True)
+        msm("data", "create", str(DATA), "--type-lib", str(LIBRARY / "data_types" / "bx.yml"))
+    msm("data", "add-item", str(DATA), "--path", str(path), "--dtype", qualified(a.type))
+    print(f"declared {path} as {qualified(a.type)}")
+
+
+def cmd_inputs(a) -> None:
+    if not DATA.exists():
+        sys.exit("nothing declared yet; use: bx add FILE TYPE")
+    print(json.dumps(msm("data", "list", str(DATA)), indent=1))
+
+
+def plan(types: list[str]) -> dict:
+    if not DATA.exists():
+        sys.exit("nothing declared yet; use: bx add FILE TYPE")
+    args = ["plan", "--data-library", str(DATA), "-r", str(TRANSFORMS)]
+    for t in types:
+        args += ["--target-type", qualified(t)]
+    found = msm(*args, check=False)
+    if found.get("error") or not found.get("success"):
+        print("no plan reaches the target from the declared files.")
+        print((found.get("error") or json.dumps(found.get("hints"), indent=1))[-1500:])
+        print("check `bx types` for the inputs the producing steps take, and declare them with `bx add`.")
+        sys.exit(1)
+    print("plan: " + " -> ".join(s["name"] if isinstance(s, dict) and "name" in s else str(s.get("transform", s)).split("::")[-1].removesuffix(".py")
+                                 for s in found["steps"]))
+    return found
+
+
+def cmd_plan(a) -> None:
+    plan(a.types)
+
+
+def cmd_run(a) -> None:
+    params = {}
+    for item in a.param:
+        key, _, value = item.partition("=")
+        params[key] = value
+    known = {key for s in catalogue()["steps"] for key in s["params"]}
+    unknown = sorted(set(params) - known)
+    if unknown:
+        sys.exit(f"unknown parameter(s) {unknown}; see `bx steps`")
+    key = plan(a.types)["task_key"]
+
+    # A run directory is reused by a later run of the same plan, and parameters are not
+    # part of a plan's identity. A fresh agent home per run keeps a changed parameter
+    # from returning the previous run's files.
+    home = STATE / f"run{len(list(STATE.glob('run*'))) + 1}"
+    home.mkdir(parents=True)
+    agent = home / "agent.yml"
+    msm("agent", "save", str(agent), "--home", str(home / "home"))
+    agent.write_text(agent.read_text().replace("native: false", "native: true"))
+    msm("agent", "deploy", str(agent))
+    msm("workflow", "stage", str(agent), key)
+    start = time.time()
+    msm("workflow", "run", str(agent), key, "--params", json.dumps(params))
+    waited = msm("workflow", "wait", str(agent), key, "--timeout", str(a.timeout))
+    results = home / "home" / "runs" / key / "results"
+    print(f"status: {waited['status']} after {time.time() - start:.0f} s")
+    failed = False
+    for t in a.types:
+        files = sorted(p for p in (results / qualified(t).replace("::", "-")).glob("*")) if results.exists() else []
+        failed |= not files
+        print(f"{qualified(t)}: {' '.join(map(str, files)) or 'NOT PRODUCED'}")
+    if failed or waited["status"] != "completed":
+        for log in sorted((home / "home" / "runs" / key / "nxf_work").glob("*/*/.command.log")):
+            text = log.read_text(errors="replace")
+            if "reports success" not in text:
+                print(f"--- failed step log: {log}\n{text[-3000:]}")
+        sys.exit(1)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    for name in ("steps", "types"):
+        p = sub.add_parser(name)
+        p.add_argument("word", nargs="?")
+    p = sub.add_parser("add")
+    p.add_argument("file")
+    p.add_argument("type")
+    sub.add_parser("inputs")
+    p = sub.add_parser("plan")
+    p.add_argument("types", nargs="+")
+    p = sub.add_parser("run")
+    p.add_argument("types", nargs="+")
+    p.add_argument("-p", "--param", action="append", default=[])
+    p.add_argument("--timeout", type=int, default=1100)
+    a = ap.parse_args()
+    globals()[f"cmd_{a.cmd}"](a)
+
+
+if __name__ == "__main__":
+    main()

@@ -14,7 +14,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-from generate import INTERPRETERS, lint, load
+from generate import INTERPRETERS, ext_of, lint, load
 
 SPECS = Path(__file__).resolve().parent / "specs"
 
@@ -29,7 +29,7 @@ def check(types: dict, tool: dict) -> str | None:
         return "no fixture"
     env = dict(os.environ)
     for slot, t in tool["inputs"].items():
-        path = slot_path(fixture, slot, types[t].get("ext"))
+        path = slot_path(fixture, slot, ext_of(types, t))
         if not path.exists():
             return f"fixture lacks {path.name}"
         env[f"IN_{slot}"] = str(path)
@@ -37,7 +37,7 @@ def check(types: dict, tool: dict) -> str | None:
     for name, p in (tool.get("params") or {}).items():
         env[f"PARAM_{name}"] = str(overrides.get(name, p["default"]))
     with tempfile.TemporaryDirectory() as work:
-        outputs = {slot: slot_path(Path(work) / "out", slot, types[t].get("ext")) for slot, t in tool["outputs"].items()}
+        outputs = {slot: slot_path(Path(work) / "out", slot, ext_of(types, t)) for slot, t in tool["outputs"].items()}
         (Path(work) / "out").mkdir()
         for slot, path in outputs.items():
             env[f"OUT_{slot}"] = str(path)
