@@ -11,10 +11,10 @@ import argparse
 import ast
 import json
 import re
-import subprocess
-import tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+from llm import ask
 
 # Copied verbatim from bixbench/prompts.py.
 OPEN_ENDED_GRADING_PROMPT = """You are given a question, target answer and a predicted answer. Your task is to compare the target answer with the predicted and assess if the predicted answer is correct, incorrect or it refused to answer.
@@ -31,14 +31,7 @@ NUMBER = re.compile(r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?")
 
 def judge(model: str, question: str, target: str, predicted: str) -> bool:
     prompt = OPEN_ENDED_GRADING_PROMPT.format(question=question, target=target, predicted=predicted)
-    # A neutral directory keeps the host's AGENTS.md and memory out of the judge's context.
-    with tempfile.TemporaryDirectory(dir="/var/tmp") as cwd:
-        out = subprocess.run(
-            ["claude", "--print", "--model", model, "--tools", "", "--strict-mcp-config",
-             "--setting-sources", "", "--disable-slash-commands", "--no-session-persistence",
-             "--system-prompt", "You are a careful grader.", prompt],
-            cwd=cwd, capture_output=True, text=True, stdin=subprocess.DEVNULL, timeout=300, check=True,
-        ).stdout
+    out = ask(model, "You are a careful grader.", prompt)["text"]
     m = re.search(r"<grade>\s*(.*?)\s*</grade>", out, re.DOTALL)
     return bool(m) and m[1].strip().lower() == "correct"
 

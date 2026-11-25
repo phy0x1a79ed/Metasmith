@@ -1,0 +1,9 @@
+# The run image: the BixBench software plus Metasmith, on every rung.
+# build_run.sh stages the build context.
+FROM quay.io/hallamlab/metasmith:0.26.0@sha256:07e2f5f27b8c3c329e55976c95f5f5fcef1e577b0a50be0007a88297adcfbf7c AS msm
+
+FROM bixbench-ladder/base:fhda-v1.5.0
+COPY --from=msm /opt/conda/envs/metasmith_env /opt/conda/envs/metasmith_env
+COPY workflow.py /opt/conda/envs/metasmith_env/lib/python3.12/site-packages/metasmith/coms/cli/workflow.py
+COPY metasmith /usr/local/bin/metasmith
+ENV NXF_OFFLINE=true

@@ -2,7 +2,8 @@
 
 The agent is headless Claude Code on the host with no built-in tools. Its only tools
 are served by sandbox_mcp.py and act inside an offline container that holds the
-capsule data. A rung differs from another only in the text passed by --system-extra.
+capsule data. A rung differs from another only in the text added to the system prompt:
+--cards adds the tool cards one model call selects, --system-extra adds a file.
 """
 from __future__ import annotations
 
@@ -17,6 +18,8 @@ import time
 import uuid
 from pathlib import Path
 
+from llm import ask
+
 HERE = Path(__file__).resolve().parent
 
 SYSTEM_PROMPT = """\
@@ -28,6 +31,32 @@ You have at most {max_steps} tool calls. Base the answer on your own analysis of
 
 End with your final answer inside <answer></answer> tags. Give one short value or phrase in the format the question asks for. Always give an answer.
 """
+
+SELECT_PROMPT = """\
+A bioinformatics analyst will answer the question below by analysing a dataset. Select from the catalogue the tools that are a direct step of that analysis. Select at most {limit}. Select none when no tool fits.
+
+Question: {question}
+
+Catalogue:
+{catalogue}
+
+Reply with a JSON list of tool names and nothing else.
+"""
+
+CARDS_HEADER = """\
+Tool reference. These descriptions were selected for this question from the catalogue of software on the machine. Each ends with a tested reference invocation. Use them when they fit.
+"""
+
+
+def select_cards(model: str, question: str, cards: list[dict], limit: int) -> dict:
+    catalogue = "\n".join(f"- {c['name']}: {c['tool']}. {c['summary']}" for c in cards)
+    reply = ask(model, "You select tools for an analysis.",
+                SELECT_PROMPT.format(limit=limit, question=question, catalogue=catalogue))
+    found = re.search(r"\[.*\]", reply["text"], re.DOTALL)
+    names = json.loads(found[0]) if found else []
+    known = {c["name"] for c in cards}
+    return {"selected": [n for n in names if n in known][:limit], "reply": reply["text"],
+            "usage": reply["usage"], "cost_usd": reply["cost_usd"]}
 
 
 def unpack_capsule(zip_path: Path, dest: Path) -> None:
@@ -54,6 +83,8 @@ def main() -> int:
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--image", required=True)
     ap.add_argument("--model", default="claude-sonnet-5-5")
+    ap.add_argument("--cards", type=Path, help="cards.json from generate.py; one model call selects from it")
+    ap.add_argument("--max-cards", type=int, default=8)
     ap.add_argument("--system-extra", type=Path)
     ap.add_argument("--max-steps", type=int, default=40)
     ap.add_argument("--max-usd", type=float, default=5.0)
@@ -74,6 +105,13 @@ def main() -> int:
     unpack_capsule(a.data / q["data_folder"], work)
 
     system = SYSTEM_PROMPT.format(max_steps=a.max_steps)
+    selection = None
+    if a.cards:
+        cards = json.loads(a.cards.read_text())
+        selection = select_cards(a.model, q["question"], cards, a.max_cards)
+        texts = [c["text"] for c in cards if c["name"] in selection["selected"]]
+        if texts:
+            system += "\n" + CARDS_HEADER + "\n" + "\n\n".join(texts) + "\n"
     if a.system_extra:
         system += "\n" + a.system_extra.read_text()
     (run / "system_prompt.txt").write_text(system)
@@ -135,7 +173,7 @@ def main() -> int:
         "tool_calls": sum(1 for _ in calls.open()) if calls.exists() else 0,
         "usage": final.get("usage"), "cost_usd": final.get("total_cost_usd"),
         "model_usage": final.get("modelUsage"), "model": init.get("model"),
-        "tools_offered": init.get("tools"), "max_steps": a.max_steps,
+        "tools_offered": init.get("tools"), "max_steps": a.max_steps, "selection": selection,
     }
     (run / "result.json").write_text(json.dumps(result, indent=1))
     print(json.dumps({k: result[k] for k in ("question_id", "rung", "repeat", "answer", "seconds", "tool_calls", "cost_usd", "subtype")}))

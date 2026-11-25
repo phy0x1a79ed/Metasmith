@@ -1,0 +1,4 @@
+#!/bin/bash
+# Appended, so a step's `python` and `Rscript` stay the image's own.
+export PATH="$PATH:/opt/conda/envs/metasmith_env/bin"
+exec /opt/conda/envs/metasmith_env/bin/python -m metasmith "$@"

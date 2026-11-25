@@ -48,7 +48,7 @@ def protocol(context: ExecutionContext):
     for name, dep in OUTPUTS.items():
         env[f"OUT_{{name}}"] = str(produced[dep])
     for name, default in PARAMS.items():
-        env[f"PARAM_{{name}}"] = str(context.params.get(f"{name}__{{name}}", default))
+        env[f"PARAM_{{name}}"] = str(context.params.get(f"{name}_{{name}}", default))
     Path("step_script").write_text(SCRIPT)
     code = subprocess.run([*INTERPRETER, "step_script"], env=env).returncode
     return ExecutionResult(
@@ -130,6 +130,12 @@ def lint(types: dict, tools: list[dict]) -> list[str]:
                 errors.append(f"{name}: param {pname} needs a lower_snake name, a default and help")
             if f"PARAM_{pname}" not in script:
                 errors.append(f"{name}: script never reads PARAM_{pname}")
+    # The engine splits a run parameter's key on "_" and nests it, so a key that is a
+    # "_"-prefix of another would be overwritten by it.
+    keys = sorted(f"{t.get('name')}_{p}" for t in tools for p in (t.get("params") or {}))
+    for short, long in zip(keys, keys[1:]):
+        if long == short or long.startswith(short + "_"):
+            errors.append(f"{short}: run parameter key collides with {long}")
     return errors
 
 
@@ -146,8 +152,8 @@ def card(types: dict, tool: dict) -> dict:
     lines += [f"- {slot}: {describe(types, t)}" for slot, t in tool["outputs"].items()]
     if tool.get("params"):
         lines.append("Parameters:")
-        lines += [f"- {n} (default {p['default']!r}): {p['help']}" for n, p in tool["params"].items()]
-    lines += ["", f"Reference invocation ({tool['interpreter']}; IN_*, OUT_* and PARAM_* stand for the paths and values above):",
+        lines += [f"- {tool['name']}_{n} (default {p['default']!r}): {p['help']}" for n, p in tool["params"].items()]
+    lines += ["", f"Reference invocation ({tool['interpreter']}; IN_<input>, OUT_<output> and PARAM_<parameter> stand for the paths and values above):",
               "```", tool["script"].strip(), "```"]
     return {"name": tool["name"], "tool": tool["tool"], "summary": tool["summary"].strip(), "text": "\n".join(lines)}
 
