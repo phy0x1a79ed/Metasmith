@@ -25,7 +25,7 @@ def load(out: Path, grade: str) -> list[dict]:
         r = json.loads(path.read_text())
         g = json.loads((path.parent / "grade.json").read_text())
         calls = path.parent / "tool_calls.jsonl"
-        commands = [json.dumps(json.loads(l)["args"]) for l in calls.open()] if calls.exists() else []
+        commands = [json.loads(l)["args"].get("command", "") for l in calls.open()] if calls.exists() else []
         usage = r.get("usage") or {}
         selection = r.get("selection") or {}
         rows.append({
