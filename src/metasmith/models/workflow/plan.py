@@ -103,11 +103,13 @@ class Case:
     # Requirements only, no products.
     target: Transform
     target_names: list[str]|None = None
+    # Target slot -> the member types that fill its variadic requirement.
+    sets: dict[Dependency, list[Endpoint]] = field(default_factory=dict)
 
     @classmethod
     def ByShape(
         cls, given: list[list[DataInstanceLibraryView]], target: Transform,
-        target_names: list[str]|None = None, name: str = "case",
+        target_names: list[str]|None = None, sets: dict|None = None, name: str = "case",
     ) -> list[Case]:
         shapes: dict[frozenset, list[list[DataInstanceLibraryView]]] = {}
         labels: dict[frozenset, str] = {}
@@ -125,7 +127,7 @@ class Case:
             shapes.setdefault(frozenset(eps), []).append(sample)
             labels.setdefault(frozenset(eps), "+".join(sorted(names)))
         if len(shapes) <= 1:
-            return [cls(name=name, given=list(given), target=target, target_names=target_names)]
+            return [cls(name=name, given=list(given), target=target, target_names=target_names, sets=dict(sets or {}))]
         out: list[Case] = []
         seen: dict[str, int] = {}
         for shape, samples in shapes.items():
@@ -133,7 +135,7 @@ class Case:
             seen[label] = seen.get(label, 0) + 1
             out.append(cls(
                 name=label if seen[label] == 1 else f"{label}#{seen[label]}",
-                given=samples, target=target, target_names=target_names,
+                given=samples, target=target, target_names=target_names, sets=dict(sets or {}),
             ))
         return out
 

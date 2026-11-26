@@ -13,7 +13,11 @@ class TargetSet:
 @dataclass(frozen=True)
 class TargetSpec:
     dtype_name: str
-    parents: tuple["TargetSpec", ...] = ()
+    parents: tuple["TargetSpec|TargetSet", ...] = ()
+
+    @property
+    def members(self) -> tuple[str, ...]:
+        return next((p.dtype_names for p in self.parents if isinstance(p, TargetSet)), ())
 
 class TargetBuilder:
     def __init__(self) -> None:
@@ -29,6 +33,7 @@ class TargetBuilder:
                 ' values Add returns; pass the handle you got back from the'
                 " parent's own Add."
             )
+        assert sum(isinstance(p, TargetSet) for p in parents) <= 1, f"target [{target_type}] names more than one member set"
         spec = TargetSpec(target_type, parents)
         for existing in self._items:
             assert existing != spec, f'target [{target_type}] with identical parents already added'
@@ -60,6 +65,21 @@ class TargetBuilder:
                 handles.append(self.Set(*target["set"]))
             specs.append(self.Add(name, parents=handles or None))
         return specs
+
+    def Pack(self) -> list[str|dict]:
+        """The `AddAll` form: a bare name, or a dict with parent indices and a member set."""
+        index = {s: i for i, s in enumerate(self._items)}
+        out: list[str|dict] = []
+        for s in self._items:
+            parents = [index[p] for p in s.parents if isinstance(p, TargetSpec)]
+            if not parents and not s.members:
+                out.append(s.dtype_name)
+                continue
+            d: dict = {"type": s.dtype_name}
+            if parents: d["parents"] = parents
+            if s.members: d["set"] = list(s.members)
+            out.append(d)
+        return out
 
     def resolve(self) -> list[TargetSpec]:
         return list(self._items)

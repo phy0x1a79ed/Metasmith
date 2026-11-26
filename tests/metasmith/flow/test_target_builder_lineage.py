@@ -53,3 +53,38 @@ def test_resolve_preserves_insertion_order():
     c = tb.Add("ns::c", parents={a, b})
     specs = tb.resolve()
     assert specs.index(a) < specs.index(b) < specs.index(c)
+
+
+def test_member_set_is_a_parent_and_takes_part_in_equality():
+    tb = TargetBuilder()
+    asm = tb.Add("ns::asm")
+    a = tb.Add("ns::refined", parents=[asm, tb.Set("ns::b2", "ns::b1")])
+    b = tb.Add("ns::refined", parents=[asm, tb.Set("ns::b1", "ns::b2", "ns::b3")])
+    assert a.members == ("ns::b1", "ns::b2")
+    assert a != b
+    with pytest.raises(AssertionError, match="identical parents"):
+        tb.Add("ns::refined", parents=[asm, tb.Set("ns::b1", "ns::b2")])
+
+
+@pytest.mark.parametrize("names, match", [((), "at least one"), (("ns::b1", "ns::b1"), "twice")])
+def test_member_set_refuses_empty_and_repeats(names, match):
+    with pytest.raises(AssertionError, match=match):
+        TargetBuilder().Set(*names)
+
+
+def test_one_member_set_per_target():
+    tb = TargetBuilder()
+    with pytest.raises(AssertionError, match="more than one member set"):
+        tb.Add("ns::refined", parents=[tb.Set("ns::b1"), tb.Set("ns::b2")])
+
+
+def test_pack_round_trips_through_add_all():
+    tb = TargetBuilder()
+    asm = tb.Add("ns::asm")
+    tb.Add("ns::refined", parents=[asm, tb.Set("ns::b1", "ns::b2")])
+    tb.Add("ns::plain", parents=[asm])
+    wire = tb.Pack()
+    assert wire == ["ns::asm", {"type": "ns::refined", "parents": [0], "set": ["ns::b1", "ns::b2"]}, {"type": "ns::plain", "parents": [0]}]
+    again = TargetBuilder()
+    again.AddAll(wire)
+    assert again.resolve() == tb.resolve()
