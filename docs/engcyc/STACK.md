@@ -31,6 +31,7 @@ Roadmap to 0.26.1 approved 2026-11-23: /home/tony/.claude/plans/formal-plan-seri
 engcyc-cases — after both workers land: engcyc template as two cases (short reads -> engcyc targets; long reads -> modified set incl. long-read taxonomy lanes), isolate/hybrid templates take accessions, probes short/hybrid/isolate/SRA-short/SRA-long/long-only/mixed two-case.
 
 ## Waiting on the user
+- lane union: A (consumers variadic over lanes, lanes shared; recommended) or B (one union ORF table read by all; needs engine union semantics). annotation_table becomes ORF-only (Tony: contig annotations are separate). GPR merge: keep gpr_table and gpr_table_all types?
 - (at T13) release route: bioconda peer reports Tony said "dont worry about PR, just adds more manual churn" for its 0.26.2 and phy0x1a79ed now has write on hallamlab/Metasmith. Confirm with Tony whether 0.26.1 also pushes release + tag straight to hallamlab.
 
 ## Preferences
@@ -73,7 +74,7 @@ engcyc-cases — after both workers land: engcyc template as two cases (short re
 
 ## Workers
 - none running. Merged: lane-fold (adc7e6dc, full 204->178 steps, lite 99->91), gpr-refs, complete-medium, dbcan-host.
-- variadic peer: ETA ~17:30 for feat/engine/variadic mergeable (das_tool variadic, rc already merged in; they regen specs+golden). Asked them (16:40) about variadic lane aggregators: annotation_table, gpr_4lane, gpr_all_reaction, maybe dram distill; answered 16:50: add annotation::lane_table supertype, each <k>_lane_table extends it (as binning.yml raw_contig_to_bin_table); one slot = one parents set, so anchor the slot to asm (check with a toy row in tests/metasmith/flow/test_variadic.py first) or keep bakta_nc/antismash fixed; protocol iterates context.Inputs(handle) by .type_name; every template's aggregate target names its set explicitly; gpr_4lane must cope with a missing lane or always name all four. Ours, as a lane-variadic worker off rc AFTER variadic lands; no edits under functionalAnnotation/annotation.yml before that. Then: merge, rebuild RC, stop round 2, relaunch run 4 --warm.
+- variadic peer: Tony 2026-11-26: we take over variadic after they implement; it releases with us. Asked for a handoff. ETA ~17:30 for feat/engine/variadic mergeable (das_tool variadic, rc already merged in; they regen specs+golden). Asked them (16:40) about variadic lane aggregators: annotation_table, gpr_4lane, gpr_all_reaction, maybe dram distill; answered 16:50: add annotation::lane_table supertype, each <k>_lane_table extends it (as binning.yml raw_contig_to_bin_table); one slot = one parents set, so anchor the slot to asm (check with a toy row in tests/metasmith/flow/test_variadic.py first) or keep bakta_nc/antismash fixed; protocol iterates context.Inputs(handle) by .type_name; every template's aggregate target names its set explicitly; gpr_4lane must cope with a missing lane or always name all four. Ours, as a lane-variadic worker off rc AFTER variadic lands; no edits under functionalAnnotation/annotation.yml before that. Then: merge, rebuild RC, stop round 2, relaunch run 4 --warm.
 - peers: geospatial-query-dfs (0.26.1 cut), metasmith-dynamic-aggregator-inputs (variadic), metasmith-bioconda (0.26.2 after the tag).
 
 ## Closed
