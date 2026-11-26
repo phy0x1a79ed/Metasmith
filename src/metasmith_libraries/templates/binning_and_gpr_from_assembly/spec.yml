@@ -62,35 +62,35 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/08e834612cc940448ce86c281ecac7fc:
+    /msm_deferred/0413c59a2a534cfda9ff3e155aa92d6e:
       type: ref::lane_calibration
       parents:
-        7cUW7fSSsdtA@reads_metadata.json: sequences::read_metadata
-      instance_id: 1e2013573945e8b8319fb3e262e3970cd4970e854adac3f63a182abe623f755686da
+        LlcnsFdV96Mr@reads_metadata.json: sequences::read_metadata
+      instance_id: 1e201c9e8996fba5e8136614f479eb91f4e8d0ef215b388c578f777601fca1a1a823
       origin: leaf
-    /msm_deferred/39bf2ed2ebdb4da4954ff808dfadf7cd:
+    /msm_deferred/455337a9c6084e33aea449bcd8246560:
       type: sequences::long_reads
       parents:
-        7cUW7fSSsdtA@reads_metadata.json: sequences::read_metadata
-      instance_id: 1e20fb424010f292067a3d53ed8d3bf9494eac8fec78f6a802fe7c500f8b842281d2
+        LlcnsFdV96Mr@reads_metadata.json: sequences::read_metadata
+      instance_id: 1e204098a5e4c646f352ea0b8997bff8b171c026e29bfd627707ed8cac4c3463daa9
       origin: leaf
-    /msm_deferred/3b6474085da24c5f92faa7d28637d89e:
-      type: ref::mnxr_lookup
-      parents:
-        7cUW7fSSsdtA@reads_metadata.json: sequences::read_metadata
-      instance_id: 1e208a58a0d9586657c3bb3618693ad84e38b3c07a1aa393bc7c5803cb296986b46a
-      origin: leaf
-    /msm_deferred/89d348e36efa4a5e9dec5e4f9ca4ed18:
-      type: ref::label_transfer_landmarks
-      parents:
-        7cUW7fSSsdtA@reads_metadata.json: sequences::read_metadata
-      instance_id: 1e20bd9acc0e9d6d888b22b62d6ccfe5eaf3fc06c43e05e0019ee0837ad2528091a6
-      origin: leaf
-    /msm_deferred/a3601c1a0e90475895163b6868eefef1:
+    /msm_deferred/9465ec4ae3374629b3331bfab1f1ab4b:
       type: sequences::assembly
       parents:
-        7cUW7fSSsdtA@reads_metadata.json: sequences::read_metadata
-      instance_id: 1e20ab5217866819f96cbcd44ca36edb6d6b7e2186b224b509688e48121ae8fc482c
+        LlcnsFdV96Mr@reads_metadata.json: sequences::read_metadata
+      instance_id: 1e20ecdf56a298272969f1f3f4070dcb9c87fe9c08417f0c04bad35fdbb35f36cd5f
+      origin: leaf
+    /msm_deferred/d02d841c841a44529a994fa2532dfdd2:
+      type: ref::mnxr_lookup
+      parents:
+        LlcnsFdV96Mr@reads_metadata.json: sequences::read_metadata
+      instance_id: 1e20e1af7594a33f3e39c719cb84fa74d3db20ef34a791a1af1816815613d982b2d1
+      origin: leaf
+    /msm_deferred/d1d85ec51b4c46da80583ed42e5d1de8:
+      type: ref::label_transfer_landmarks
+      parents:
+        LlcnsFdV96Mr@reads_metadata.json: sequences::read_metadata
+      instance_id: 1e2096a0d4a6c66c39148622995d1d59dce6a3b8f6b9c1dfc4d984ae57a185635f5d
       origin: leaf
     reads_metadata.json:
       type: sequences::read_metadata
