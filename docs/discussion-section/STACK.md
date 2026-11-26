@@ -8,7 +8,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 - Settled: claim 2 = typed contracts enable radical interoperability (old 2b dropped, seed folded into 2a; SADI precise; local-vocabulary contrast in 2b). Claim 1 = symbolic solver suffices for routing; SHARE beside FlowCraft in 1a; 1b keeps Snakemake, Wings, APE; 1e = ranking (PUCT, learned prior, market as aspiration; no Fast Downward). Claim 3 = levels of accessibility. PlanBench/Blocksworld not reported.
 - Accepted and in d2 (2026-11-25), in Discussion order after Tony's ¶5: 2a (`draft/2a-types.md`), 2b (`draft/2b-ontology.md`), 1c (`draft/1c-agents.md`; lead line "too in the weeds", revisit). All old claim prose and scaffold headings removed from d2.
 - Claim 3 shape settled: "Typed contracts are accessible at different levels of expertise"; 3a interfaces are hierarchical, levels parallel the intent-to-execution gap; 3b own the stack via Nextflow; 3c decentralised compute market ("some compute is too specialised to hand over": ship the product, not the factory).
-- Open now (2026-11-25): claims 2 and 1 done as a first pass (2a, 2b, 1a, 1b, 1c in d2). Next: claim 3 itemized points (3a-3c). Earlier note: Next: itemized main points for 1a and 1b, same shape as § Structure claim 2 (key message + 4-5 points, refs assigned once); Tony will judge from them whether the backward-routing paragraph (old 1c) returns. Tony's 1a notes: say explicitly routing is the developer's job; frameworks leave it to the developer to make modules extensible; query-based systems (SHARE) begin to define modules/components; incentive mismatch is the problem 1d resolves. Tony cut the "If the goal is…" ¶ himself (2026-11-25). Pending: BioMoby Consortium 2008 beside Zhao in 2b (unanswered).
+- Open now (2026-11-25): claims 2 and 1 done as a first pass (2a, 2b, 1a, 1b, 1c in d2). Claim 3 merged to one paragraph, first pass in d2. Next: Tony reviews the full Discussion; coherence check of claims 1 and 3. Earlier note: Next: itemized main points for 1a and 1b, same shape as § Structure claim 2 (key message + 4-5 points, refs assigned once); Tony will judge from them whether the backward-routing paragraph (old 1c) returns. Tony's 1a notes: say explicitly routing is the developer's job; frameworks leave it to the developer to make modules extensible; query-based systems (SHARE) begin to define modules/components; incentive mismatch is the problem 1d resolves. Tony cut the "If the goal is…" ¶ himself (2026-11-25). Pending: BioMoby Consortium 2008 beside Zhao in 2b (unanswered).
 - Structure reference: DECISIONS.md § three-claims, "Primary messages as approved" plus its later-changes line. Pending: Tony to confirm the merged claim 1 order (1a manual + incentives problem; 1b earlier automation; 1c restored backward routing; 1d incentives aligned; 1e agents; 1f smarter routing).
 - d2 access: capella via ssh + schtasks task `msm_word` (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit).
 
@@ -58,10 +58,13 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     - 1c.4 (typed contracts as checker) now only refers back to 1b.2; trim the accepted prose to match when 1c is rewritten. 1c.1-1c.3 agent evidence and 1c.5 complementarity (Kambhampati 2024) stay.
   - **1d.** [dropped 2026-11-25: overlaps 2b; Tony's incentive seed moved to 1b's intro; payoff clause for 2b offered, not applied]
   - **1e.** [dropped 2026-11-25: ranking folded into 1c; limits into 1b; market to 3c; MCTS/PUCT/learned prior cut]
-- **Claim 3. Typed contracts are accessible at different levels of expertise.**
-  - **3a. The interfaces are hierarchical levels that parallel the gap from intent to execution; adding tools still needs expertise.** [outline]
-  - **3b. Deferring execution to Nextflow gives portability and lets users own the full stack.** [outline]
-  - **3c. A decentralised compute market: some compute is too specialised to hand over; ship the product, not the factory.** [outline, aspiration]
+- **Claim 3. Typed contracts are accessible at different levels of expertise.** [one paragraph, first pass in d2 2026-11-25, draft/3-access.md]
+  - **3. Typed contracts are accessible at different levels of expertise, from stating intent to supplying compute.**
+    1. Tony's seed: hierarchical interface levels following intent to execution (GUI templates, notebook/API/CLI, contracts and types); a contract written once serves every level above.
+    2. Galaxy and Nextflow each fix a point on flexibility vs support (Loach 2026); Metasmith lets the user choose.
+    3. Tony's seed: Nextflow gives portability (executor list) and full-stack ownership; Galaxy contrast: modification and compute go through a central authority, or users stand up the full server, much harder than Nextflow (Tony's wording 2026-11-25).
+    4. Limits: new tools need expertise the GUI lacks; only local and Slurm tested; no user study.
+    5. Aspiration: decentralised compute market; product not factory; track records; paid upkeep answers registry decay (back-ref 2b).
 
 ## Waiting on the user
 
