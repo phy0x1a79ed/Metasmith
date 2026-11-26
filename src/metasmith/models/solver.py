@@ -160,12 +160,14 @@ class Transform:
         super().__init__()
         self.requires: list[Dependency] = list()
         self.produces: list[list[Dependency]] = [[]]
+        self.variadic: Dependency|None = None
         self._group: int = 0
         self._update_hash()
 
     def __str__(self) -> str:
         def _props(d: Dependency):
-            return "{"+"-".join(sorted(d.properties))+"}"
+            star = "*" if d is self.variadic else ""
+            return star+"{"+"-".join(sorted(d.properties))+"}"
         return f"{','.join(_props(r) for r in self.requires)}->{'|'.join(','.join(_props(p) for p in g) for g in self.produces)}"
 
     def __repr__(self) -> str:
@@ -177,8 +179,14 @@ class Transform:
     def _update_hash(self):
         self.hash, self.key = KeyGenerator.FromStr(str(self))
 
-    def AddRequirement(self, example: Node|None=None, properties: Iterable[str]|None=None, parents: set[Dependency]|None=None):
-        return self._add_dependency(destination=self.requires, example=example, properties=properties, parents=parents)
+    def AddRequirement(self, example: Node|None=None, properties: Iterable[str]|None=None, parents: set[Dependency]|None=None, variadic: bool=False):
+        if not variadic:
+            return self._add_dependency(destination=self.requires, example=example, properties=properties, parents=parents)
+        assert self.variadic is None, f"a transform takes one variadic requirement: {self}"
+        dep = self._add_dependency(destination=self.requires, example=example, properties=properties, parents=parents)
+        self.variadic = dep
+        self._update_hash()
+        return dep
 
     def _get_product_group(self):
         if self._group >= len(self.produces):
@@ -213,6 +221,7 @@ class Transform:
             i = len(self.requires)-1
             for p in _parents:
                 assert p in self.requires, f"{p} not added as a requirement"
+                assert p is not self.variadic, f"a variadic requirement cannot anchor another requirement: {self}"
         self._update_hash()
         return _dep
 
