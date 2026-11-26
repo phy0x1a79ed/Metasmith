@@ -92,7 +92,7 @@ class TestASampleReturnsInADifferentRun:
             solve_trio(root, build_named_inputs(root, at, ["X", "A", "Y"]), self.RUN2_TARGETS),
         )
         per_sample = [n for n in PER_SAMPLE if n != "interproscan"]
-        merges = [n for n in MERGES if n != "merge_interproscan"]
+        merges = [n for n in MERGES if n != "interproscan_lane"]
         expected = {n: 2 for n in per_sample + merges}
         expected.update({n: 0 for n in DATABASES if "InterPro" not in n})
         _assert_calls(_calls(virtual_runtime), expected, "[A,B,C] then [X,A,Y]")
@@ -127,7 +127,7 @@ class TestASampleReturnsInADifferentRun:
             ),
         )
         expected = {"prodigal": 2, "chunkOrfsForAnnotation": 2, "diamond_uniref50": 2}
-        expected.update({"kofamscan": 3, "merge_kofamscan": 3, "merge_diamond_uniref50": 2})
+        expected.update({"kofamscan": 3, "kofam_lane": 3, "uniref50_lane": 2})
         expected.update({n: 0 for n in DATABASES if "InterPro" not in n})
         _assert_calls(_calls(virtual_runtime), expected, "kofamscan edited")
 

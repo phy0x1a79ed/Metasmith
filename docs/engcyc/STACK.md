@@ -72,7 +72,8 @@ engcyc-cases — after both workers land: engcyc template as two cases (short re
 - later-templates — pangenome, isolate assembly, hybrid assembly, asv, transcriptomics from the same library
 
 ## Workers
-- lane-fold (feat/engine/lane-fold, worktree engine/lane-fold, started 15:50): fold each merge_X into its X_lane so every lane is tool -> lane. Merged earlier: gpr-refs, complete-medium, dbcan-host.
+- none running. Merged: lane-fold (adc7e6dc, full 204->178 steps, lite 99->91), gpr-refs, complete-medium, dbcan-host.
+- variadic peer: ETA ~17:30 for feat/engine/variadic mergeable (das_tool variadic, rc already merged in; they regen specs+golden). Asked them (16:40) about variadic lane aggregators: annotation_table, gpr_4lane, gpr_all_reaction, maybe dram distill; answered 16:50: add annotation::lane_table supertype, each <k>_lane_table extends it (as binning.yml raw_contig_to_bin_table); one slot = one parents set, so anchor the slot to asm (check with a toy row in tests/metasmith/flow/test_variadic.py first) or keep bakta_nc/antismash fixed; protocol iterates context.Inputs(handle) by .type_name; every template's aggregate target names its set explicitly; gpr_4lane must cope with a missing lane or always name all four. Ours, as a lane-variadic worker off rc AFTER variadic lands; no edits under functionalAnnotation/annotation.yml before that. Then: merge, rebuild RC, stop round 2, relaunch run 4 --warm.
 - peers: geospatial-query-dfs (0.26.1 cut), metasmith-dynamic-aggregator-inputs (variadic), metasmith-bioconda (0.26.2 after the tag).
 
 ## Closed

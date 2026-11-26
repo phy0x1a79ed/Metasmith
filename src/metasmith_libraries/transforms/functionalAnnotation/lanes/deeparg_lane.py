@@ -6,8 +6,11 @@ model = Transform()
 image = model.AddRequirement(lib.GetType("env::python_for_data_science.env"))
 norm  = model.AddRequirement(lib.GetType("env::argnorm.env"))
 orfs  = model.AddRequirement(lib.GetType("sequences::orfs"))
-calls = [
-    model.AddRequirement(lib.GetType("annotation::deeparg_results"), parents={orfs}),
+chunks = [
+    model.AddRequirement(lib.GetType("annotation::deeparg_results_chunk"), parents={orfs}),
+]
+merged = [
+    model.AddProduct(lib.GetType("annotation::deeparg_results")),
 ]
 ev_lib  = model.AddRequirement(lib.GetType("lib::fabfos_evidence.py"))
 gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))
@@ -21,7 +24,11 @@ THREADS = 1
 def protocol(context: ExecutionContext):
     iorfs = context.Input(orfs)
     iout  = context.Output(out)
-    context.ExecWithEnv(env=norm, cmd=f"argnorm deeparg -i {context.Input(calls[0]).container} -o normalised.tsv")
+    group = lambda slot: sorted(context.InputGroup(slot), key=lambda p: str(p.local))
+    merges = " ".join(f"--merge {context.Output(m).container} " + " ".join(str(p.container) for p in group(c))
+                      for c, m in zip(chunks, merged))
+    context.ExecWithEnv(env=image, cmd=f"python3 {context.Input(gpr_lib).container}/fold_chunks.py first-header {merges} ")
+    context.ExecWithEnv(env=norm, cmd=f"argnorm deeparg -i {context.Output(merged[0]).container} -o normalised.tsv")
     paths = "normalised.tsv"
     context.ExecWithEnv(env=image, cmd=f"""
         python3 {context.Input(gpr_lib).container}/annotation_table.py \
@@ -29,7 +36,10 @@ def protocol(context: ExecutionContext):
             --orfs {iorfs.container} --source {iorfs.local.stem} \
             --lane deeparg {paths} --out {iout.container}
     """)
-    return ExecutionResult(manifest=[{out: iout.local}], success=iout.local.exists())
+    for c in chunks:
+        for p in group(c):
+            p.local.unlink(missing_ok=True)
+    return ExecutionResult(manifest=[{out: iout.local, **{m: context.Output(m).local for m in merged}}], success=iout.local.exists())
 
 
 TransformInstance(

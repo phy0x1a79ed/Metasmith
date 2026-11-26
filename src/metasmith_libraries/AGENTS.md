@@ -171,9 +171,9 @@ group. The bootstrap fails a task whose dict is not one whole declared group.
 
 Two products, not one: a hit table keyed on an accession, and a table mapping that
 accession to what it means. The description is written once per key rather than repeated
-on every hit row, and both halves travel the chunk/merge pair — a `<type>_descriptions_chunk`
-beside the `<type>_chunk`, merged with the keys deduplicated.
-`transforms/functionalAnnotation/diamond_uniref50.py` and its merge are the reference.
+on every hit row, and both halves travel as chunks — a `<type>_descriptions_chunk`
+beside the `<type>_chunk`, merged with the keys deduplicated by the lane that reads them.
+`transforms/functionalAnnotation/diamond_uniref50.py` and `lanes/kofam_lane.py` are the reference.
 
 **A merged description table is only delivered if it is a target.** A run publishes what was
 asked for and nothing else, so a template naming `annotation::kofamscan_results` and not
@@ -182,7 +182,9 @@ asked for and nothing else, so a template naming `annotation::kofamscan_results`
 ## A consumer reads lane tables, never a raw tool output
 
 Each annotation lane has one standardizing step, `transforms/functionalAnnotation/lanes/<lane>_lane.py`,
-after its search or merge. It writes `annotation::<lane>_lane_table`: the columns
+after its search. A search that emits `*_chunk` types has no separate merge step: the lane concatenates
+the chunks with `lib::fabfos_gpr/fold_chunks.py` and also publishes the merged types, which other
+transforms read. It writes `annotation::<lane>_lane_table`: the columns
 `ANNOTATION_COLS` in `lib::fabfos_gpr/annotation_table.py` names, then the lane's own fields as
 `<lane>_<field>` columns. A lane whose calls are motifs within the protein also writes
 `annotation::<lane>_hits`, one row per hit. A consuming tool requires only the lane tables it
