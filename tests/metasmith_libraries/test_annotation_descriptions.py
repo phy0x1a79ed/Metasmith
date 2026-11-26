@@ -39,12 +39,11 @@ def kofamscan():
 
 @pytest.fixture(scope="module")
 def merge_uniref():
-    return _load("merge_diamond_uniref50")
-
-
-class _Staged:
-    def __init__(self, path):
-        self.local = path
+    path = MLIB / "resources" / "lib" / "fabfos_gpr" / "fold_chunks.py"
+    spec = importlib.util.spec_from_file_location("_msmlib_fold_chunks", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 class TestUniref50:
@@ -140,7 +139,7 @@ class TestMerge:
         a, b, out = (tmp_path / n for n in ("a.tsv", "b.tsv", "merged.tsv"))
         a.write_text("sseqid\tdescription\nUniRef50_A\tone\nUniRef50_B\ttwo\n")
         b.write_text("sseqid\tdescription\nUniRef50_B\ttwo\nUniRef50_C\tthree\n")
-        merge_uniref._concat_unique([_Staged(a), _Staged(b)], out, "\t")
+        merge_uniref.unique([a, b], out, "\t")
         assert out.read_text().splitlines() == [
             "sseqid\tdescription", "UniRef50_A\tone", "UniRef50_B\ttwo",
             "UniRef50_C\tthree",
@@ -150,14 +149,14 @@ class TestMerge:
         a, b, out = (tmp_path / n for n in ("a.tsv", "b.tsv", "merged.tsv"))
         a.write_text("qseqid\tbsr\nq1\t0.5\n")
         b.write_text("qseqid\tbsr\nq2\t0.7\n")
-        merge_uniref._concat_with_header([_Staged(a), _Staged(b)], out)
+        merge_uniref.header([a, b], out)
         assert out.read_text().splitlines() == ["qseqid\tbsr", "q1\t0.5", "q2\t0.7"]
 
     def test_the_hit_merge_keeps_every_hit_of_an_orf(self, merge_uniref, tmp_path):
         a, b, out = (tmp_path / n for n in ("a.tsv", "b.tsv", "merged.tsv"))
         a.write_text("qseqid\tsseqid\tbsr\nq1\tUniRef50_A\t0.9\nq1\tUniRef50_B\t0.4\n")
         b.write_text("qseqid\tsseqid\tbsr\nq2\tUniRef50_A\t0.7\n")
-        merge_uniref._concat_with_header([_Staged(a), _Staged(b)], out)
+        merge_uniref.header([a, b], out)
         assert out.read_text().splitlines() == [
             "qseqid\tsseqid\tbsr", "q1\tUniRef50_A\t0.9", "q1\tUniRef50_B\t0.4",
             "q2\tUniRef50_A\t0.7",

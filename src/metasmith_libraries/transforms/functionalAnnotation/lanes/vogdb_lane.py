@@ -5,10 +5,14 @@ model = Transform()
 
 image = model.AddRequirement(lib.GetType("env::python_for_data_science.env"))
 orfs  = model.AddRequirement(lib.GetType("sequences::orfs"))
-calls = [
-    model.AddRequirement(lib.GetType("annotation::vogdb_hmmsearch_results"), parents={orfs}),
-    model.AddRequirement(lib.GetType("annotation::vogdb_descriptions"), parents={orfs}),
+chunks = [
+    model.AddRequirement(lib.GetType("annotation::vogdb_hmmsearch_results_chunk"), parents={orfs}),
 ]
+merged = [
+    model.AddProduct(lib.GetType("annotation::vogdb_hmmsearch_results")),
+    model.AddProduct(lib.GetType("annotation::vogdb_descriptions")),
+]
+db      = model.AddRequirement(lib.GetType("ref::vogdb_hmm"))
 ev_lib  = model.AddRequirement(lib.GetType("lib::fabfos_evidence.py"))
 gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))
 out     = model.AddProduct(lib.GetType("annotation::vogdb_lane_table"))
@@ -20,8 +24,12 @@ THREADS = 1
 def protocol(context: ExecutionContext):
     iorfs = context.Input(orfs)
     iout  = context.Output(out)
+    group = lambda slot: sorted(context.InputGroup(slot), key=lambda p: str(p.local))
+    merges = " ".join(f"--merge {context.Output(m).container} " + " ".join(str(p.container) for p in group(c))
+                      for c, m in zip(chunks, merged))
+    context.ExecWithEnv(env=image, cmd=f"python3 {context.Input(gpr_lib).container}/fold_chunks.py vogdb {merges} --db {context.Input(db).container} --desc-out {context.Output(merged[-1]).container}")
     ihits = context.Output(hits)
-    paths = " ".join(str(context.Input(c).container) for c in calls)
+    paths = " ".join(str(context.Output(m).container) for m in merged)
     context.ExecWithEnv(env=image, cmd=f"""
         python3 {context.Input(gpr_lib).container}/annotation_table.py \
             --ev-lib {context.Input(ev_lib).container} \
@@ -29,7 +37,10 @@ def protocol(context: ExecutionContext):
             --hits-out {ihits.container} \
             --lane vogdb {paths} --out {iout.container}
     """)
-    return ExecutionResult(manifest=[{out: iout.local, hits: ihits.local}],
+    for c in chunks:
+        for p in group(c):
+            p.local.unlink(missing_ok=True)
+    return ExecutionResult(manifest=[{out: iout.local, **{m: context.Output(m).local for m in merged}, hits: ihits.local}],
                            success=iout.local.exists() and ihits.local.exists())
 
 
