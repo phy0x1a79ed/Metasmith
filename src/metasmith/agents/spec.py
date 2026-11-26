@@ -11,9 +11,10 @@ from ..models.libraries import (
     TransformInstanceLibrary, TransformInstanceLibraryView,
 )
 from ..models.solver import Dependency, Transform
+from ..models.variadic import SetToken
 from ..models.solver_backend import SEARCH_BUDGET
 from ..models.workflow import Case, WorkflowPlan, WorkflowTask
-from .targets import TargetBuilder, TargetSpec
+from .targets import TargetBuilder, TargetSet, TargetSpec
 
 
 DataLibRef = str | Path | dict | DataInstanceLibrary
@@ -183,12 +184,23 @@ def _target_model(targets: TargetBuilder | list, transforms: list) -> tuple[Tran
     model = Transform()
     deps: dict[TargetSpec, Dependency] = {}
     names: list[str] = []
+    sets = {}
     for spec in targets.resolve():
-        deps[spec] = model.AddRequirement(
-            example=_get_endpoint(spec.dtype_name),
-            parents={deps[p] for p in spec.parents},
+        ep = _get_endpoint(spec.dtype_name)
+        props = set(ep.properties)
+        names_ = [n for p in spec.parents if isinstance(p, TargetSet) for n in p.dtype_names]
+        members = [_get_endpoint(n) for n in names_]
+        if members:
+            props.add(SetToken(names_))
+        dep = model.AddRequirement(
+            properties=props,
+            parents={deps[p] for p in spec.parents if isinstance(p, TargetSpec)},
         )
+        deps[spec] = dep
+        if members:
+            sets[dep] = members
         names.append(spec.dtype_name)
+    model.variadic_sets = sets
     return model, names
 
 

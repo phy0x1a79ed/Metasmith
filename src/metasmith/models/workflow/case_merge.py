@@ -362,6 +362,9 @@ class _Merge:
         return order if len(order) == len(self.nodes) else None
 
 
+from ..variadic import StripToken
+
+
 def PlanCases(
     plan_cls, cases: list[Case],
     transforms: list[TransformInstanceLibrary|TransformInstanceLibraryView],
@@ -375,6 +378,8 @@ def PlanCases(
         )
     except _MixedCase as e:
         raise ValueError(f"case [{cases[e.case].name}] mixes samples of different shapes, such as [{e.label}]") from None
+    from ..variadic import SpecializeInstances, StripToken
+    SpecializeInstances(transform2inst, inst2trlib, [case.target for case in cases])
     names = [_target_names(case, transforms) for case in cases]
     Log.Info(f"solving plan for [{len(given)}] samples as [{len(cases)}] cases")
 
@@ -545,7 +550,7 @@ def PlanCases(
                 k += 1
                 path = Path(f"{e.key}_{k}{e.GetPreferredFileExtension()}")
             paths_taken.add(path)
-            inst = DataInstance(path=path, dtype=e, dtype_name=lib.GetName(Endpoint(d.properties)), parent_lib=lib)
+            inst = DataInstance(path=path, dtype=e, dtype_name=lib.GetName(Endpoint(StripToken(d.properties))), parent_lib=lib)
             inst_cases[inst.instance_id] = set(n.cases)
             instance_map[e] = instance_map.get(e, []) + [inst]
             out_inst[(id(n), d, g)] = inst

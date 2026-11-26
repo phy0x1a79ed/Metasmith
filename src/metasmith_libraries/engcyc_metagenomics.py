@@ -73,7 +73,8 @@ TARGETS = [
     {"type": "sequences::assembly_orfs", "parents": _A},               # 3
     {"type": "sequences::gff", "parents": _A},                         # 4
     # binning; CheckM on DAS Tool's bins, the ones quality_mags filters, not one binner's
-    {"type": "sequences::das_tool_bin_fasta", "parents": _A},          # 5
+    {"type": "sequences::das_tool_bin_fasta", "parents": _A,           # 5
+     "set": [f"binning::{b}_contig_to_bin_table" for b in ("metabat2", "semibin2", "comebin")]},
     {"type": "binning::das_tool_summary", "parents": _A},
     {"type": "taxonomy::checkm_stats", "parents": [DAS]},
     {"type": "binning_local::quality_bin_fasta", "parents": _A},
