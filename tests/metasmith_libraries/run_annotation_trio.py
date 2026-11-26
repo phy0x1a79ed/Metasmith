@@ -92,9 +92,6 @@ OVERRIDES = {
     "diamond_uniref50":        Resources(cpus=8, memory=Size.GB(16), duration=Duration(hours=8)),
     "kofamscan":               Resources(cpus=8, memory=Size.GB(12), duration=Duration(hours=8)),
     "interproscan":            Resources(cpus=8, memory=Size.GB(16), duration=Duration(hours=8)),
-    "merge_kofamscan":         Resources(cpus=1, memory=Size.GB(4),  duration=Duration(hours=1)),
-    "merge_diamond_uniref50":  Resources(cpus=1, memory=Size.GB(4),  duration=Duration(hours=1)),
-    "merge_interproscan":      Resources(cpus=1, memory=Size.GB(4),  duration=Duration(hours=1)),
 }
 
 STEP_RE = re.compile(r"^(p\d+__[A-Za-z0-9_]+)")

@@ -32,9 +32,9 @@ PER_SAMPLE = [
 ]
 # `group_by=parent_orfs`: one task per sample, folding that sample's chunks.
 MERGES = [
-    "merge_diamond_uniref50",
-    "merge_kofamscan",
-    "merge_interproscan",
+    "uniref50_lane",
+    "kofam_lane",
+    "interproscan_lane",
 ]
 DATABASES = [
     "downloadUniRef50DB",

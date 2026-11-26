@@ -40,7 +40,7 @@ def template_for(name, accession=None, rebuild=False) -> Template:
         )],
         transform_libraries=A.transforms(
             "logistics", "assembly", "isolate", "metagenomics", "functionalAnnotation"),
-        resource_libraries=[A.envs()],
+        resource_libraries=[A.envs(), A.MLIB / "resources" / "lib"],
     )
 
 

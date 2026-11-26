@@ -5,9 +5,13 @@ model = Transform()
 
 image = model.AddRequirement(lib.GetType("env::python_for_data_science.env"))
 orfs  = model.AddRequirement(lib.GetType("sequences::orfs"))
-calls = [
-    model.AddRequirement(lib.GetType("annotation::pathofact_tox_ml"), parents={orfs}),
-    model.AddRequirement(lib.GetType("annotation::pathofact_vf_ml"), parents={orfs}),
+chunks = [
+    model.AddRequirement(lib.GetType("annotation::pathofact_tox_ml_chunk"), parents={orfs}),
+    model.AddRequirement(lib.GetType("annotation::pathofact_vf_ml_chunk"), parents={orfs}),
+]
+merged = [
+    model.AddProduct(lib.GetType("annotation::pathofact_tox_ml")),
+    model.AddProduct(lib.GetType("annotation::pathofact_vf_ml")),
 ]
 ev_lib  = model.AddRequirement(lib.GetType("lib::fabfos_evidence.py"))
 gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))
@@ -19,14 +23,21 @@ THREADS = 1
 def protocol(context: ExecutionContext):
     iorfs = context.Input(orfs)
     iout  = context.Output(out)
-    paths = " ".join(str(context.Input(c).container) for c in calls)
+    group = lambda slot: sorted(context.InputGroup(slot), key=lambda p: str(p.local))
+    merges = " ".join(f"--merge {context.Output(m).container} " + " ".join(str(p.container) for p in group(c))
+                      for c, m in zip(chunks, merged))
+    context.ExecWithEnv(env=image, cmd=f"python3 {context.Input(gpr_lib).container}/fold_chunks.py first-header {merges} ")
+    paths = " ".join(str(context.Output(m).container) for m in merged)
     context.ExecWithEnv(env=image, cmd=f"""
         python3 {context.Input(gpr_lib).container}/annotation_table.py \
             --ev-lib {context.Input(ev_lib).container} \
             --orfs {iorfs.container} --source {iorfs.local.stem} \
             --lane pathofact_ml {paths} --out {iout.container}
     """)
-    return ExecutionResult(manifest=[{out: iout.local}], success=iout.local.exists())
+    for c in chunks:
+        for p in group(c):
+            p.local.unlink(missing_ok=True)
+    return ExecutionResult(manifest=[{out: iout.local, **{m: context.Output(m).local for m in merged}}], success=iout.local.exists())
 
 
 TransformInstance(

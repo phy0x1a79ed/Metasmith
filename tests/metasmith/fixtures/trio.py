@@ -87,7 +87,7 @@ def solve_trio(lib_root: Path, inputs, targets: list[str] | None = None,
     task = Plan(
         [spec],
         transform_libraries=[roots[n] for n in TRANSFORM_NAMESPACES],
-        resource_libraries=[lib_root / "resources" / "env"],
+        resource_libraries=[lib_root / "resources" / "env", lib_root / "resources" / "lib"],
     )
     assert task.ok, f"the trio did not solve: dropped={sorted(task.plan.dropped_targets)}"
     return task
