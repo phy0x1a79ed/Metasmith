@@ -20,7 +20,7 @@ def protocol(context: ExecutionContext):
         wget -c --no-check-certificate -O ssu.fna.gz "{URLS['ssu']}"
         gunzip -f ssu.fna.gz
     """)
-    ref = context.Mount(iout.local, "/ref")
+    ref = context.Mount(iout.external, "/ref")
     context.ExecWithEnv(
         env=image,
         binds=[ref],

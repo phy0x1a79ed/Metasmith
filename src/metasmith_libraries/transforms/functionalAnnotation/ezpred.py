@@ -25,7 +25,7 @@ def protocol(context: ExecutionContext):
     context.LocalShell("mkdir -p ezpred_run")
 
     run_dir = context.Mount(context.external_cwd/"ezpred_run", "/work/ezpred_run")
-    ezpred_src = context.Mount(iez.local, "/work/EZpred")
+    ezpred_src = context.Mount(iez.external, "/work/EZpred")
     context.ExecWithEnv(
         env=image,
         binds=[run_dir, ezpred_src],
