@@ -1283,6 +1283,7 @@ def generate_workflow(name):
                     "targets": [
                         {"type": t, "parents": []} if isinstance(t, str)
                         else {"type": t.get("type", ""), "parents": list(t.get("parents") or [])}
+                        | ({"set": list(t["set"])} if t.get("set") else {})
                         for t in c.get("target_types") or []
                     ],
                 }
@@ -1990,7 +1991,10 @@ def _delivered_targets(p, workflow: str, items: list[dict]) -> list[dict]:
     for t in wanted:
         name = t.get("type") if isinstance(t, dict) else str(t)
         paths = have.get(name, [])
-        out.append({"type": name, "count": len(paths), "paths": paths[:20]})
+        row = {"type": name, "count": len(paths), "paths": paths[:20]}
+        if isinstance(t, dict) and t.get("set"):
+            row["set"] = list(t["set"])
+        out.append(row)
     return out
 
 

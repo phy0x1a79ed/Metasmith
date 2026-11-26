@@ -135,13 +135,14 @@ export const mintTargetId = () => `o${(seq++).toString(36)}`
  * Targets were a list of bare type names before they could carry lineage, so
  * both spellings still arrive from disk. A parent that is not an int, or that
  * indexes nothing, is dropped rather than carried -- a bad write should cost a
- * link, never the readability of the file.
+ * link, never the readability of the file. A target's member set is carried
+ * as written: the page shows it and does not edit it.
  */
 export function targetsFromWire(list, mint = mintTargetId) {
   const entries = (list ?? []).map((t) =>
     typeof t === 'string'
       ? { id: mint(), type: t, wire: [] }
-      : { id: mint(), type: t?.type ?? '', wire: t?.parents ?? [] },
+      : { id: mint(), type: t?.type ?? '', wire: t?.parents ?? [], set: t?.set },
   )
   return entries.map((e) => {
     const seen = new Set()
@@ -149,7 +150,9 @@ export function targetsFromWire(list, mint = mintTargetId) {
       const id = Number.isInteger(p) ? entries[p]?.id : undefined
       if (id !== undefined && id !== e.id) seen.add(id)
     }
-    return { id: e.id, type: e.type, parents: [...seen] }
+    const out = { id: e.id, type: e.type, parents: [...seen] }
+    if (Array.isArray(e.set) && e.set.length > 0) out.set = [...e.set]
+    return out
   })
 }
 
@@ -171,8 +174,12 @@ export function targetsToWire(targets) {
   }))
   const ordered = topoOrder(rows)
   const at = new Map(ordered.map((r, i) => [r.key, i]))
-  return ordered.map((r) => ({
-    type: r.target.type ?? '',
-    parents: r.parents.map((p) => at.get(p)).sort((a, b) => a - b),
-  }))
+  return ordered.map((r) => {
+    const out = {
+      type: r.target.type ?? '',
+      parents: r.parents.map((p) => at.get(p)).sort((a, b) => a - b),
+    }
+    if (r.target.set?.length) out.set = [...r.target.set]
+    return out
+  })
 }
