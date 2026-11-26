@@ -54,7 +54,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     2. Strengths, established here (decided 2026-11-25, moved from 1c.4): a join is accepted only on type fit, so plans are valid by construction (main); systematic, reproducible, auditable (APE, Kasalica 2020).
     3. Held back by types: coarse types let invalid plans through as candidates (ref back to 2a); fixed vocabularies pushed structure into human-written templates, so search became template matching (Wings, Gil 2011; ref back to 2b; Lamprecht 2021 second use).
     4. Held back by execution: no clear path from a plan to a machine-executable protocol.
-    4a. [agreed 2026-11-25, coherence #1] Metasmith's answers: types carry state, so invalid joins never become candidates (back to 2a); a plan compiles to Nextflow, so it runs as written; anchor to a Result (open: which one).
+    4a. [agreed 2026-11-25, coherence #1] Metasmith's answers: types carry state, so invalid joins never become candidates (back to 2a); a plan compiles to Nextflow, so it runs as written. No Result anchor: D1's stitching sentence now ends "as a demonstration of interoperability" (Tony, 2026-11-25; in d2, blue).
     4b. [recorded, already in prose] Limits: strong plans over declared output sets (Cimatti 2003); conditional (Peot 1992) and strong cyclic planning (Cimatti 2003) not yet implemented.
     5. Bridge to 1c (Tony's wording 2026-11-25): agents have been applied as an alternative to planners that can also execute, composing and running tools directly (Nextflow, bash), without the guarantees of 2.
     - Make/Snakemake cut. Backward-routing paragraph likely unneeded: 1c's close carries the positive statement.
