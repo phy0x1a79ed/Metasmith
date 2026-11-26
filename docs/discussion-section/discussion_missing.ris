@@ -1,0 +1,187 @@
+TY  - JOUR
+DO  - 10.1038/nbt.4163
+TI  - KBase: The United States Department of Energy Systems Biology Knowledgebase
+T2  - Nature Biotechnology
+AU  - Arkin, Adam P
+AU  - Cottingham, Robert W
+AU  - Henry, Christopher S
+AU  - Harris, Nomi L
+AU  - Stevens, Rick L
+AU  - Maslov, Sergei
+AU  - Dehal, Paramvir
+AU  - Ware, Doreen
+AU  - Perez, Fernando
+AU  - Canon, Shane
+AU  - Sneddon, Michael W
+AU  - Henderson, Matthew L
+AU  - Riehl, William J
+AU  - Murphy-Olson, Dan
+AU  - Chan, Stephen Y
+AU  - Kamimura, Roy T
+AU  - Kumari, Sunita
+AU  - Drake, Meghan M
+AU  - Brettin, Thomas S
+AU  - Glass, Elizabeth M
+AU  - Chivian, Dylan
+AU  - Gunter, Dan
+AU  - Weston, David J
+AU  - Allen, Benjamin H
+AU  - Baumohl, Jason
+AU  - Best, Aaron A
+AU  - Bowen, Ben
+AU  - Brenner, Steven E
+AU  - Bun, Christopher C
+AU  - Chandonia, John-Marc
+AU  - Chia, Jer-Ming
+AU  - Colasanti, Ric
+AU  - Conrad, Neal
+AU  - Davis, James J
+AU  - Davison, Brian H
+AU  - DeJongh, Matthew
+AU  - Devoid, Scott
+AU  - Dietrich, Emily
+AU  - Dubchak, Inna
+AU  - Edirisinghe, Janaka N
+AU  - Fang, Gang
+AU  - Faria, José P
+AU  - Frybarger, Paul M
+AU  - Gerlach, Wolfgang
+AU  - Gerstein, Mark
+AU  - Greiner, Annette
+AU  - Gurtowski, James
+AU  - Haun, Holly L
+AU  - He, Fei
+AU  - Jain, Rashmi
+AU  - Joachimiak, Marcin P
+AU  - Keegan, Kevin P
+AU  - Kondo, Shinnosuke
+AU  - Kumar, Vivek
+AU  - Land, Miriam L
+AU  - Meyer, Folker
+AU  - Mills, Marissa
+AU  - Novichkov, Pavel S
+AU  - Oh, Taeyun
+AU  - Olsen, Gary J
+AU  - Olson, Robert
+AU  - Parrello, Bruce
+AU  - Pasternak, Shiran
+AU  - Pearson, Erik
+AU  - Poon, Sarah S
+AU  - Price, Gavin A
+AU  - Ramakrishnan, Srividya
+AU  - Ranjan, Priya
+AU  - Ronald, Pamela C
+AU  - Schatz, Michael C
+AU  - Seaver, Samuel M D
+AU  - Shukla, Maulik
+AU  - Sutormin, Roman A
+AU  - Syed, Mustafa H
+AU  - Thomason, James
+AU  - Tintle, Nathan L
+AU  - Wang, Daifeng
+AU  - Xia, Fangfang
+AU  - Yoo, Hyunseung
+AU  - Yoo, Shinjae
+AU  - Yu, Dantong
+PY  - 2018
+SP  - 566-569
+IS  - 7
+VL  - 36
+ER  - 
+
+TY  - JOUR
+DO  - 10.1016/s0004-3702(02)00374-0
+TI  - Weak, strong, and strong cyclic planning via symbolic model checking
+T2  - Artificial Intelligence
+AU  - Cimatti, A.
+AU  - Pistore, M.
+AU  - Roveri, M.
+AU  - Traverso, P.
+PY  - 2003
+SP  - 35-84
+IS  - 1-2
+VL  - 147
+ER  - 
+
+TY  - JOUR
+TI  - FlowBench: separating planning, fault recovery and interpretation in agentic bioinformatics
+AU  - Kurjan, Alina
+AU  - Cribbs, Adam P.
+PY  - 2026
+T2  - bioRxiv
+DO  - 10.64898/2026.06.12.731844
+ER  - 
+
+TY  - JOUR
+TI  - From Prompt to Pipeline: Large Language Models for Scientific Workflow Development in Bioinformatics
+AU  - Alam, Khairul
+AU  - Roy, Banani
+PY  - 2025
+T2  - arXiv
+VL  - arXiv:2507.20122
+DO  - 10.48550/arXiv.2507.20122
+ER  - 
+
+TY  - JOUR
+TI  - BioAgent Bench: An AI Agent Evaluation Suite for Bioinformatics
+AU  - Fa, Dionizije
+AU  - Culjak, Marko
+AU  - Pandza, Bruno
+AU  - Cupic, Mateo
+PY  - 2026
+T2  - arXiv
+VL  - arXiv:2601.21800
+DO  - 10.48550/arXiv.2601.21800
+ER  - 
+
+TY  - CONF
+TI  - Faith and Fate: Limits of Transformers on Compositionality
+AU  - Dziri, Nouha
+AU  - Lu, Ximing
+AU  - Sclar, Melanie
+AU  - Li, Xiang Lorraine
+AU  - Jiang, Liwei
+AU  - Lin, Bill Yuchen
+AU  - West, Peter
+AU  - Bhagavatula, Chandra
+AU  - Bras, Ronan Le
+AU  - Hwang, Jena D.
+AU  - Sanyal, Soumya
+AU  - Welleck, Sean
+AU  - Ren, Xiang
+AU  - Ettinger, Allyson
+AU  - Harchaoui, Zaid
+AU  - Choi, Yejin
+PY  - 2023
+T2  - Advances in Neural Information Processing Systems
+VL  - 36
+DO  - 10.48550/arXiv.2305.18654
+ER  - 
+
+TY  - CONF
+TI  - LLMs Can't Plan, But Can Help Planning in LLM-Modulo Frameworks
+AU  - Kambhampati, Subbarao
+AU  - Valmeekam, Karthik
+AU  - Guan, Lin
+AU  - Verma, Mudit
+AU  - Stechly, Kaya
+AU  - Bhambri, Siddhant
+AU  - Saldyt, Lucas
+AU  - Murthy, Anil
+PY  - 2024
+T2  - Proceedings of the 41st International Conference on Machine Learning
+T3  - Proceedings of Machine Learning Research
+VL  - 235
+SP  - 22895-22907
+DO  - 10.48550/arXiv.2402.01817
+ER  - 
+
+TY  - CONF
+TI  - Conditional Nonlinear Planning
+AU  - Peot, Mark A.
+AU  - Smith, David E.
+PY  - 1992
+T2  - Proceedings of the First International Conference on Artificial Intelligence Planning Systems (AIPS-92)
+SP  - 189-197
+PB  - Morgan Kaufmann
+ER  - 
