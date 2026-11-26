@@ -78,7 +78,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     6. Close on the thesis (coherence #7; the Conclusion section is empty): in each case the typed contract is the common unit; it joins tools, lets a solver choose the route, and could let providers offer compute.
     - Lead (coherence #6): "Beyond routing, typed contracts are accessible at different levels of expertise, from stating intent to supplying compute."
 
-- **Conclusion** (2026-11-26, points iterating; Fable advised one short paragraph). Key message: contracts shape tools to be interoperable and set the form variations fill; use decides how far it reaches.
+- **Conclusion** (2026-11-26, own section, prose in d2 blue, no table reference; Fable advised one short paragraph). Key message: contracts shape tools to be interoperable and set the form variations fill; use decides how far it reaches.
   1. Contracts encourage and shape construction to be interoperable; variability (dropping, swapping tools) comes for free. (Tony: "there will likely still be maintenance"; no "pipeline becomes a request".)
   2. The contract sets the shape that variations must fill; a replacement meets the same contract and the planner derives the rest (Table 1A).
   3. Reach: namespaces are built locally so that the user has full access and control; interoperability across a field depends on others expanding and joining them as they adopt them; Metasmith provides the infrastructure but does not prescribe the standard.
