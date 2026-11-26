@@ -1,0 +1,17 @@
+# PROGRESS
+- [ ] read docs (done: setup/install.rst, setup/deployment.rst, setup/ssh.rst, agentic/tool_reference.rst, workflows/engcyc_metagenomics.rst)
+- Fresh start (no prior STEPS/PROGRESS).
+- install running: mamba create -n msm_env ... PID 1413043, log install.log
+- GUI running: msm gui --port 8091, log gui.log, PID 1417395
+- ssh sockeye OK. browser tools loaded. Next: GUI deploy agent via browser at http://127.0.0.1:8091
+- agent primitive-sockeye configured in GUI; deploy clicked (step 10)
+- DEPLOYED primitive-sockeye to sockeye (step 12). Next: slurmAccount param, ping, workflows
+- workflow delectable-heron (engcyc_prep_references_lite) created in GUI; solving (step 15)
+- clicked set up for prep_references_lite (step 17); check runs tab
+- SETUP RUN LAUNCHED from GUI: workflow delectable-heron, run key delectable-heron-ZDVb2 (step 19). Monitor via GUI Runs tab / gui.log
+- setup run drvPib87 (GUI key delectable-heron-ZDVb2) staging on cluster; waiting (step 21)
+- monitor bbdkjqp3p watching setup run on cluster
+- setup run ACTIVE; driver PID 2078146 (cluster). waiting for exit (step 23)
+- setup run drvPib87 FAILED (4 ignored failed steps + p09 pull). Retrying set up from GUI once (step 26)
+- setup RETRY launched: GUI run delectable-heron-05RpS (step 27)
+- waiting on retry setup driver (bg5zl6ikg)
