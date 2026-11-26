@@ -1,6 +1,8 @@
 # Methods discussion stack
 
-Goal: write the d2 Methods with the co-writing protocol (self-improvement/writing-skill `docs/writing-skill/protocol-draft.md`), from `OUTLINE.md`. Decisions: `docs/methods-section/DECISIONS.md`.
+Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Decisions: `docs/methods-section/DECISIONS.md`.
+
+**On every resume or compaction:** load the `dfs-interview` skill, then read and follow the co-writing protocol at `/home/tony/agentic_workspace/projects/self-improvement/writing-skill/docs/writing-skill/protocol-draft.md`, then read `OUTLINE.md`. Any compaction followup must name all three. The protocol is a draft and may change; reread it rather than working from memory.
 
 ## Current
 
