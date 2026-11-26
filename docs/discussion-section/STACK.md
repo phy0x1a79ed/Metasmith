@@ -46,7 +46,13 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Result: reimplementation, GATK over 200 implementations (Wratten 2021).
     - Transition ("automating the route would remove this cost, and earlier systems tried to") moves to open 1b.
     - Source shape: artifact v17 1a.0-1a.4 (several compactions back), with Tony's 2026-11-25 notes.
-  - **1b. Earlier automation (dependency solvers, planners).** [key message under review: Tony to suggest a clearer one; opens with the transition from 1a]
+  - **1b. Planning has proved useful, but earlier planners could not reach their full potential.** [points in progress 2026-11-25]
+    1. Intro answering 1a: if the route were derived rather than written, every module would be reusable at no extra cost to its developer; that is what planning promises.
+    2. Strengths: valid by construction (main), systematic, reproducible, auditable (APE, Kasalica 2020). Proposed: rotate 1c.4's checker sentences here.
+    3. Held back by types: coarse types let invalid plans through as candidates (ref back to 2a); fixed vocabularies pushed structure into human-written templates, so search became template matching (Wings, Gil 2011; ref back to 2b; Lamprecht 2021 second use).
+    4. Held back by execution: no clear path from a plan to a machine-executable protocol.
+    5. Bridge to 1c: agents compose and run tools directly (Nextflow, bash), without the guarantees of 2.
+    - Make/Snakemake cut. Backward-routing paragraph likely unneeded: 1c's close carries the positive statement.
   - **1c? Metasmith routes backwards from the destination, so a plan is correct by construction.** [restore proposed, Tony to decide]
   - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose accepted; lead line to simplify; in d2 out of order; pull pending Tony]
   - **1d. Automated routing aligns the individual's incentive with the community's.** [outline]
