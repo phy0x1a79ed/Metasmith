@@ -23,7 +23,11 @@ Previous current, superseded by three-claims: **discussion-d2-d4**: tune D2–D4
 
 Three levels: claim, paragraph key message, sentence points. Read back top-down. Status per paragraph in brackets. References are assigned to one paragraph where possible.
 
-- **D1** Tony's opening: radical interoperability through per-tool typed contracts. [in d2] Stitching sentence ends "as a demonstration of interoperability"; new last sentence forecasts the claims: "Below, we place these results in the context of earlier work on types, routing and accessibility." [blue, coherence #3, 2026-11-25]
+- **D1** Recap and overview (2026-11-25, rework agreed in points, prose pending). Key message: tools described by contracts interoperated regardless of the workflow they came from; the result rests on three features, each answering a challenge that held back earlier attempts.
+  1. Recap (Tony's opener): Metasmith demonstrated radical interoperability; three pipelines (Nextflow, Snakemake, manual) combined into one workflow on request. (Old evidence point dropped by Tony.)
+  2. Three features, phrased softly, each alluding to earlier challenges: contracts on a type system (types record what data are ready for; earlier types recorded what data are, vocabularies decayed) -> 2a-2b; a planner (derives the route instead of leaving it to the developer or enumerating it in parameters) -> 1a-1c; a "layered interface" (Tony's term; a highly configurable system is not the most accessible) -> 3.
+  3. Optional one-line close (open).
+  - Linked edits: 1b gains "why not just parameterize": templates/parameters vary only what the author foresaw (Wings, Gil 2011, already cited), option combinations outgrow testing (Halin 2019, JHipster, ~36% of configurations failed). 3 opens with the bridge that heavy configuration costs accessibility (Xu 2015, "Too Many Knobs") and uses "layered interface" in its lead. Verify Xu and Halin figures against full texts before citing.
 - **Claim 2. Describing tools as typed contracts enables radical interoperability.**
   - **2a. Types join tools, so they must describe how data can be used; earlier systems typed what data are.** [v2 prose accepted, in d2 2026-11-25]
     1. Chaining rule: if an output type satisfies an input type, the tools chain.
