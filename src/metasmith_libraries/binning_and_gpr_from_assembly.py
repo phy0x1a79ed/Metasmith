@@ -25,6 +25,8 @@ TARGETS = [
     "sequences::metabat2_bin_fasta",
     "sequences::semibin2_bin_fasta",
     "sequences::comebin_bin_fasta",
+    {"type": "sequences::das_tool_bin_fasta",
+     "set": [f"binning::{b}_contig_to_bin_table" for b in ("metabat2", "semibin2", "comebin")]},
     "binning_local::quality_bin_fasta",
     "binning_local::cluster_table",
     "binning::metabat2_contig_to_bin_table",
@@ -62,7 +64,6 @@ def build_template(rebuild: bool = False) -> Template:
                             "sequences::read_metadata")
         lib.AddItem(DEFERRED, "sequences::assembly", parents={meta})
         lib.AddItem(DEFERRED, "sequences::long_reads", parents={meta})
-        lib.AddValue("metabat2_semibin2_comebin.json", {}, "binning::metabat2_semibin2_comebin", parents={meta})
         # These two have consumers and no producer anywhere in the library, so
         # they have to be given. Parenting them to the sample row is what keeps
         # them visible: a sample_type masks the library to that row's lineage,

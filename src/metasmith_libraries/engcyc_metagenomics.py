@@ -63,6 +63,11 @@ default to use your own.
 
 ASSEMBLY = "sequences::assembly"
 
+
+# DAS Tool consolidates the binners its target names as a member set.
+def binner_set(*binners: str) -> list[str]:
+    return [f"binning::{b}_contig_to_bin_table" for b in binners]
+
 # Each entry hangs off the assembly (0), the ORFs (ORFS) or DAS Tool's bins (DAS).
 ORFS, DAS = 3, 5
 _A, _O = [0], [ORFS]
@@ -74,7 +79,7 @@ TARGETS = [
     {"type": "sequences::gff", "parents": _A},                         # 4
     # binning; CheckM on DAS Tool's bins, the ones quality_mags filters, not one binner's
     {"type": "sequences::das_tool_bin_fasta", "parents": _A,           # 5
-     "set": [f"binning::{b}_contig_to_bin_table" for b in ("metabat2", "semibin2", "comebin")]},
+     "set": binner_set("metabat2", "semibin2", "comebin")},
     {"type": "binning::das_tool_summary", "parents": _A},
     {"type": "taxonomy::checkm_stats", "parents": [DAS]},
     {"type": "binning_local::quality_bin_fasta", "parents": _A},
@@ -200,7 +205,9 @@ LITE_REFERENCES = [t for t in REFERENCES if t not in LITE_REFERENCE_DROPS]
 def lite(targets: list) -> list:
     orfs = next(i for i, t in enumerate(targets) if _type(t) == "sequences::assembly_orfs")
     assert not LITE_DROPS & {_type(t) for t in targets[:orfs + 1]}
-    return [t for t in targets if _type(t) not in LITE_DROPS] + [
+    targets = [t | {"set": binner_set("metabat2", "semibin2", "metadecoder")} if isinstance(t, dict) and "set" in t else t
+               for t in targets if _type(t) not in LITE_DROPS]
+    return targets + [
         {"type": "binning::metadecoder_contig_to_bin_table", "parents": [0]}]
 
 
@@ -210,10 +217,6 @@ TYPE_LIBS = ("sequences.yml", "alignment.yml", "ref.yml", "annotation.yml", "tax
              "binning.yml", "binning_local.yml", "viromics.yml", "modelling.yml", "licensed.yml",
              "ncbi.yml")
 SRA = {"short": "ncbi::sra_short_read_accession", "long": "ncbi::sra_long_read_accession"}
-
-
-# Each template gives the marker of its binner set; it picks the DAS Tool variant.
-FULL_BINNERS, LITE_BINNERS = "metabat2_semibin2_comebin", "metabat2_semibin2_metadecoder"
 
 
 def meta_path(name: str) -> str:
@@ -275,8 +278,7 @@ def case_rows(library, metas: list[str], shared: list[str]) -> list[str]:
 
 
 def template_for(name, samples=None, rebuild=False, targets=None, description=DESCRIPTION,
-                 case_targets=CASE_TARGETS, references=REFERENCES,
-                 binners=FULL_BINNERS) -> Template:
+                 case_targets=CASE_TARGETS, references=REFERENCES) -> Template:
     # `samples` lists (case, sample name[, accessions]). With none, one case plans
     # `targets` from the whole library.
     samples = [tuple(s) + (None,) * (3 - len(s)) for s in samples or ()]
@@ -293,11 +295,10 @@ def template_for(name, samples=None, rebuild=False, targets=None, description=DE
         lib.AddValue("complete_medium_name.txt", complete_medium.NAME, "modelling::medium_name")
         # Opts the run into eggNOG's fetch; its content is not read.
         lib.AddValue("eggnog_source.json", {"release": "emapperdb-5.0.2"}, "annotation::eggnog_source")
-        lib.AddValue(f"{binners}.json", {"binners": binners.replace("_", " ")}, f"binning::{binners}")
 
     input_library = A.deferred_inputs(name, inputs, rebuild=rebuild)
     shared = ["contig_study.json", "eggnog_source.json", "complete_medium.tsv",
-              "complete_medium_name.txt", f"{binners}.json"]
+              "complete_medium_name.txt"]
     if not samples:
         cases = [Spec(input_library=input_library, target_types=targets)]
     else:
