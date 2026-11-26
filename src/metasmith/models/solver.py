@@ -181,12 +181,11 @@ class Transform:
         self.hash, self.key = KeyGenerator.FromStr(str(self))
 
     def AddRequirement(self, example: Node|None=None, properties: Iterable[str]|None=None, parents: set[Dependency]|None=None, variadic: bool=False):
-        if not variadic:
-            return self._add_dependency(destination=self.requires, example=example, properties=properties, parents=parents)
-        assert self.variadic is None, f"a transform takes one variadic requirement: {self}"
+        assert not (variadic and self.variadic), f"a transform takes one variadic requirement: {self}"
         dep = self._add_dependency(destination=self.requires, example=example, properties=properties, parents=parents)
-        self.variadic = dep
-        self._update_hash()
+        if variadic:
+            self.variadic = dep
+            self._update_hash()
         return dep
 
     def _get_product_group(self):

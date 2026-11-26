@@ -767,3 +767,33 @@ class TestMultiSampleBinningWorkflow:
         plan_transforms = {app.transform for app in sol.dependency_plan}
         assert seqkit in plan_transforms, \
             "seqkit not included even though read_qc_stats lacks lineage"
+
+
+class TestVariadicContract:
+    def _das(self):
+        t = Transform()
+        asm = t.AddRequirement(properties={"assembly"})
+        tables = t.AddRequirement(properties={"bin_table"}, parents={asm}, variadic=True)
+        t.AddProduct(properties={"refined"}, parents={tables})
+        return t, asm, tables
+
+    def test_flag_marks_the_slot_and_moves_the_key(self):
+        t, _, tables = self._das()
+        assert t.variadic is tables
+        plain = Transform()
+        asm = plain.AddRequirement(properties={"assembly"})
+        tables = plain.AddRequirement(properties={"bin_table"}, parents={asm})
+        plain.AddProduct(properties={"refined"}, parents={tables})
+        assert str(t) == "{assembly},*{bin_table}->{refined}"
+        assert str(plain) == "{assembly},{bin_table}->{refined}"
+        assert t.key != plain.key
+
+    def test_one_variadic_per_transform(self):
+        t, _, _ = self._das()
+        with pytest.raises(AssertionError, match="one variadic"):
+            t.AddRequirement(properties={"checkm"}, variadic=True)
+
+    def test_variadic_cannot_anchor(self):
+        t, _, tables = self._das()
+        with pytest.raises(AssertionError, match="cannot anchor"):
+            t.AddRequirement(properties={"checkm"}, parents={tables})
