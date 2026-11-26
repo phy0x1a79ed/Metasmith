@@ -6,44 +6,33 @@ Status per entry: `proposed`, `agreed` (points accepted), `accepted` (prose acce
 
 ## Level 1: sections
 
-Order follows the Results: the interface, then the contract model, then planning and running, then each benchmark.
+Order (outline-sections, 2026-11-26): the planner's internals, then how intent reaches the planner, then execution, then contract design; benchmarks and declarations last.
 
-### M1. Interface — proposed
-- Role: describes the layers a user can work through.
-- Key message: the Python API, the CLI and the GUI expose the same operations in layers over the external tools.
-- Paragraphs: interface layers.
+### M1. Type system and planner — agreed (outline-sections, 2026-11-26)
+- Role: the internals and definitions; how the planner works.
+- Key message: contracts are matched through property-set types and lineage constraints, and a seeded search composes them into a verified plan.
+- Paragraphs: to be set in outline-paragraphs (candidates: types; lineage; grouping and splitting; search; selection; refinement; determinism and verification).
 
-### M2. Type system — proposed
-- Role: formal definitions behind the contracts in the Results.
-- Key message: contracts are matched through property-set types, lineage constraints, and grouping with implicit splitting.
-- Paragraphs: types; lineage; grouping and splitting; cases.
+### M2. Specifying intent — agreed (outline-sections, 2026-11-26)
+- Role: the surrounding infrastructure that turns a user's intent into a planning problem.
+- Key message: a user gives typed data instances and targets through the API, CLI or GUI, and the planner treats each target as one more transform.
+- Paragraphs: to be set in outline-paragraphs (candidates: interfaces; data instances and given types; targets as transforms; lineage in targets; variadic inputs; optional branching; parallel planned cases; known issues and workarounds).
 
-### M3. Solver — proposed
-- Role: how a specification becomes a plan.
-- Key message: a seeded PUCT search composes the plan, a refiner trims it, and an independent verifier checks it.
-- Paragraphs: search; selection; refinement; determinism and verification.
+### M3. Execution — agreed (outline-sections, 2026-11-26)
+- Role: how a plan runs.
+- Key message: each step compiles to a Nextflow process, runs through local or SLURM presets with each tool in its own container, and is cached under its lineage.
+- Paragraphs: to be set in outline-paragraphs (candidates: compilation to Nextflow; agents and presets; containers and relay; caching; outputs).
 
-### M4. Data instances and caching — proposed
-- Role: how data is identified and reused.
-- Key message: every instance is identified by its lineage, and each execution is cached under that identity.
-- Paragraphs: identity and caching.
-
-### M5. Compilation and execution — proposed
-- Role: how a plan runs on Nextflow.
-- Key message: each step compiles to a Nextflow process, and an agent stages and runs the workflow with each tool in its own container.
-- Paragraphs: transforms; compilation; execution; outputs.
-
-### M6. Contract authoring — proposed
-- Role: how the benchmark contracts were written.
+### M4. Contract authoring and design — agreed (outline-sections, 2026-11-26)
+- Role: how contracts are written and designed.
 - Key message: TODO, from the user.
-- Paragraphs: authoring; Figure 2 toy library.
+- Paragraphs: to be set in outline-paragraphs.
 
-### M7. Benchmarks — proposed
+### M5. Benchmarks — deferred to the end
 - Role: how each Results benchmark was run and scored.
 - Key message: each published pipeline was rebuilt as contracts with its own tools and parameters, run on the original data, and compared output by output.
-- Paragraphs: shared setup (cluster, MAG quality, CPU hours); nf-core/mag; MAG comparison; lines of code; viromics; vOTU comparison; assembler swaps; metaGEM; update ablation; KofamScan; combined workflow and cost.
+- Paragraphs: shared setup; nf-core/mag; MAG comparison; lines of code; viromics; vOTU comparison; assembler swaps; metaGEM; update ablation; KofamScan; combined workflow and cost.
 
-### M8. Statistics, AI use, availability — proposed
-- Role: closing statements a journal requires.
-- Key message: none; these are declarations.
+### M6. Statistics, AI use, availability — deferred to the end
+- Role: declarations a journal requires.
 - Paragraphs: statistics; AI assisted development; data and code availability.
