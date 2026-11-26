@@ -66,15 +66,17 @@ class TransformInstance:
     _dep_names: dict[str, Dependency] = field(default_factory=dict)
     _ambiguous_dep_names: set[str] = field(default_factory=set)
     _protocol_source_hash: str = ""
-    # Set on a specialization: the bare instance it came from and its member slots, in member order.
+    # Set on a specialization: the bare instance it came from, its member slots in member order,
+    # and each other bare dependency's copy, so a protocol's module-level handles still resolve.
     bare: "TransformInstance|None" = None
     members: list[Dependency] = field(default_factory=list)
+    remap: dict[Dependency, Dependency] = field(default_factory=dict)
 
     def Specialized(self, members: list[Endpoint], token: str) -> "TransformInstance":
         from ..variadic import Specialize
         sp, remap, slots = Specialize(self.model, members, token)
         out = copy.copy(self)
-        out.model, out.group_by, out.bare, out.members = sp, remap[self.group_by], self, slots
+        out.model, out.group_by, out.bare, out.members, out.remap = sp, remap[self.group_by], self, slots, remap
         out._key, out._hash = sp.key, sp.hash
         out._env_deps = [remap[d] for d in self._env_deps]
         out._dep_names = {k: remap.get(d, d) for k, d in self._dep_names.items()}

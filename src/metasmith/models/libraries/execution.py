@@ -133,6 +133,9 @@ class ExecutionContext:
     _ambiguous_slots: set[str] = field(default_factory=set)
     _exit_codes: list[int] = field(default_factory=list)
     _get_staging_dir: Callable[[int], ContextPath]|None = None
+    # A specialized step's own dependencies, keyed by the bare handles its protocol module holds.
+    _alias: dict[Dependency, Dependency] = field(default_factory=dict)
+    _members: dict[Dependency, list[Dependency]] = field(default_factory=dict)
 
     def __post_init__(self):
         if isinstance(self._environment, Runtime):
@@ -162,7 +165,15 @@ class ExecutionContext:
         container = replace(self._environment.container, **kw) if kw else self._environment.container
         return replace(self._environment, image=image, container=container)
 
+    def Handle(self, key: Dependency) -> Dependency:
+        return self._alias.get(key, key)
+
+    def Translate(self, result: ExecutionResult) -> ExecutionResult:
+        result.manifest = [{self.Handle(d): p for d, p in m.items()} for m in result.manifest]
+        return result
+
     def GetMeta(self, key: Dependency):
+        key = self.Handle(key)
         d = self._inputs[self._batch_index]
         if key in d:
             return d[key]
@@ -173,6 +184,9 @@ class ExecutionContext:
     
     def InputGroup(self, key: Dependency):
         return self.GetMeta(key).input_group
+
+    def Inputs(self, key: Dependency) -> list[ContextData]:
+        return [self.GetMeta(m) for m in self._members.get(key, [key])]
 
     def ProvenanceOf(self, path: ContextPath) -> dict|None:
         d = self._inputs[self._batch_index]
@@ -201,6 +215,7 @@ class ExecutionContext:
         return chan
 
     def SourcesOf(self, path: ContextPath, key: Dependency) -> list[ContextPath]:
+        key = self.Handle(key)
         if key in self._inputs[self._batch_index]:
             target = self.GetMeta(key)
             if any(p == path for p in target.input_group):
@@ -237,7 +252,7 @@ class ExecutionContext:
         return found[0]
 
     def Output(self, key: Dependency, i: int=0):
-        return self._get_output_paths(key, i, self._batch_index)  
+        return self._get_output_paths(self.Handle(key), i, self._batch_index)
 
     def AsBatch(self):
         while self._batch_index < len(self._inputs):

@@ -653,7 +653,7 @@ members = model.AddRequirement(lib.GetType("{member}"), parents={{anchor}}, vari
 out = model.AddProduct(lib.GetType("{product}"))
 
 def protocol(context: ExecutionContext):
-    out_path = Path("{name}.out")
+    out_path = context.Output(out).local
     out_path.write_text("".join(f"{{m.type_name}}\\n" for m in context.Inputs(members)))
     return ExecutionResult(manifest=[{{out: out_path}}], success=True)
 

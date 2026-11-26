@@ -25,7 +25,7 @@ def StripToken(properties: Iterable[str]) -> set[str]:
     return {p for p in properties if not p.startswith(TOKEN)}
 
 
-def _token(slot: Dependency) -> str:
+def TokenOf(slot: Dependency) -> str:
     tokens = [p for p in slot.properties if p.startswith(TOKEN)]
     assert len(tokens) == 1, f"target slot {sorted(slot.properties)} does not carry one set token"
     return tokens[0]
@@ -92,7 +92,7 @@ def SpecializeCases(
     for sets, target in zip(sets_by_case, targets):
         own: dict[str, TransformInstance] = {}
         for slot, members in sets.items():
-            token = _token(slot)
+            token = TokenOf(slot)
             want = Node(properties=StripToken(slot.properties), parents=set())
             takers = [i for i in bare if _makes(i.model, want) and all(m.IsA(i.model.variadic) for m in members)]
             if not takers:

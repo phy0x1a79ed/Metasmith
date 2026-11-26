@@ -4,11 +4,17 @@ from pathlib import Path
 
 import pytest
 
-from metasmith.agents import Plan, Spec, TargetBuilder
+from metasmith.agents import Agent, Plan, Spec, TargetBuilder
+from metasmith.env import Runtime
+from metasmith.models.direct_run import RunTransform
+from metasmith.models.remote import Source
 from metasmith.models.variadic import VariadicError
+from metasmith.models.workflow import WorkflowPlan
 from metasmith.testing import mock_transforms as mt
 
-from .conftest import _MOCK_TYPE_PROPERTIES, _build_samples_lib, _build_transform_lib, _build_type_lib
+from .conftest import (
+    _MOCK_TYPE_PROPERTIES, BuiltPlan, _build_samples_lib, _build_transform_lib, _build_type_lib, run_and_load,
+)
 
 BINNERS = ["metabat2", "maxbin2", "concoct"]
 
@@ -93,3 +99,62 @@ def test_each_case_solves_with_its_own_set(tmp_path):
         ("pair",): ["mock::maxbin2_bins", "mock::metabat2_bins"],
         ("all",): ["mock::concoct_bins", "mock::maxbin2_bins", "mock::metabat2_bins"],
     }
+
+
+def _libraries(task) -> dict:
+    return {lib.GetKey(): lib for lib in [*task.transform_libraries, *task.data_libraries]}
+
+
+def _shape(plan) -> list:
+    return [(s.transform.GetKey(), sorted(d.key for d in s.dependency_map), [u.instance_id for u in s.uses]) for s in plan.steps]
+
+
+def test_a_saved_plan_reloads_each_specialized_step(tmp_path):
+    task = _plan(*_library(tmp_path), _targets(["metabat2", "maxbin2"], BINNERS))
+    restored = WorkflowPlan.Unpack(task.plan.Pack(), _libraries(task))
+    assert _shape(restored) == _shape(task.plan)
+    assert _das_reads(type(task)(ok=True, plan=restored, data_libraries=[], transform_libraries=[])) == _das_reads(task)
+
+
+@pytest.mark.parametrize("corrupt, match", [
+    pytest.param(lambda s: s.update(schema="v9"), "schema", id="unknown-schema"),
+    pytest.param(lambda s: s["dependency_map"].update(nope=[]), "does not declare", id="unknown-dependency"),
+])
+def test_a_step_this_version_cannot_read_is_refused(tmp_path, corrupt, match):
+    task = _plan(*_library(tmp_path), _targets(["metabat2", "maxbin2"]))
+    packed = task.plan.Pack()
+    (das,) = [s for s in packed["steps"] if s.get("members")]
+    corrupt(das)
+    with pytest.raises(ValueError, match=match):
+        WorkflowPlan.Unpack(packed, _libraries(task))
+
+
+def test_a_compiled_plan_runs_the_specialized_step(tmp_path, virtual_runtime):
+    task = _plan(*_library(tmp_path), _targets(["metabat2", "maxbin2"]))
+    _, results = run_and_load(virtual_runtime, BuiltPlan(task.plan, task.data_libraries[0], list(task.transform_libraries)))
+    assert "mock::merged" in set(results.manifest.values())
+
+
+@pytest.fixture
+def agent_home(tmp_path) -> Path:
+    home = tmp_path / "msm_home"
+    (home / "lib").mkdir(parents=True)
+    Agent(home=Source.FromLocal(home), runtime=Runtime.DOCKER).Save(home / "lib" / "agent.yml")
+    return home
+
+
+def test_a_direct_run_reads_each_member_given(tmp_path, agent_home):
+    samples, tr_lib = _library(tmp_path)
+    (asm,) = [p for p, t in samples.manifest.items() if t == "mock::assembly"]
+    for b in ["metabat2", "maxbin2"]:
+        (samples.location / f"{b}.tsv").write_text("c1\tb1\n", encoding="utf-8")
+        samples.AddItem(Path(f"{b}.tsv"), f"mock::{b}_bins")
+    samples.Save()
+    work = tmp_path / "work"
+    result = RunTransform(
+        transform=tr_lib.location / "das.py", data_library=samples, work_dir=work, agent_home=agent_home,
+        inputs=[("anchor", asm), ("members", Path("metabat2.tsv")), ("members", Path("maxbin2.tsv"))],
+    )
+    assert result.success
+    (out,) = [p for p in work.iterdir() if not p.name.startswith((".", "_"))]
+    assert out.read_text().split() == ["mock::maxbin2_bins", "mock::metabat2_bins"]

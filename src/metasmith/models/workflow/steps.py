@@ -16,10 +16,13 @@ from ...logging import Log
 from ..libraries import (
     DataInstance, DataInstanceLibrary, TransformInstance, TransformInstanceLibrary,
 )
-from ..solver import Dependency
+from ..solver import Dependency, Endpoint
+from ..variadic import TokenOf
 
 # The standard library's image fetch. A setup run gets one step of it per tool image.
 PULL_TRANSFORM = "pullContainer"
+
+STEP_SCHEMAS = ("v1", "v2", "v3")
 
 
 @dataclass
@@ -87,6 +90,11 @@ class WorkflowStep:
             dependency_map={k.key:[v.instance_id for v in lst] for k, lst in self.dependency_map.items()},
             transform=f"{self.transform_library.GetKey()}::{self.transform._path}",
         )
+        if self.transform.bare is not None:
+            # The file names the bare transform; v3 adds the member set that specializes it.
+            packed["schema"] = "v3"
+            packed["members"] = [sorted(m.properties) for m in self.transform.members]
+            packed["token"] = TokenOf(self.transform.model.produces[0][0])
         if self.cases:
             packed["cases"] = list(self.cases)
         if self.groups:
@@ -100,6 +108,11 @@ class WorkflowStep:
         assert isinstance(lib, TransformInstanceLibrary)
         tr = lib.GetTransform(transform_path)
         assert tr is not None
+        schema = raw.get("schema", "v1")
+        if schema not in STEP_SCHEMAS:
+            raise ValueError(f"workflow step [{raw['order']}] has schema [{schema}]; this version reads {STEP_SCHEMAS}")
+        if "members" in raw:
+            tr = tr.Specialized([Endpoint(set(m)) for m in raw["members"]], raw["token"])
         raw_instances: dict[str, DataInstance]|None = None
         uses: list[DataInstance] = []
         produces: list[list[DataInstance]] = []
@@ -139,7 +152,7 @@ class WorkflowStep:
         dep_map: dict[Dependency, list[DataInstance]] = {}
         for dep_key, ids in self._raw_dependency_map.items():
             if dep_key not in deps:
-                continue
+                raise ValueError(f"workflow step [{self.order}] names dependency [{dep_key}], which [{self.transform.name}] does not declare")
             missing = [v for v in ids if v not in data]
             if len(missing)>0:
                 Log.Warn(f"missing [{len(missing)}] DataInstances for dependency [{dep_key}] while unpacking workflow step [{self.order}]")
