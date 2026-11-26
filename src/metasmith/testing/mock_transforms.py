@@ -631,3 +631,32 @@ def protocol(context: ExecutionContext):
 TransformInstance(protocol=protocol, model=model, group_by={group_by})
 '''
     }
+
+
+def variadic_aggregator(name: str, member: str, product: str, anchor: str) -> dict[str, str]:
+    # Takes one or more `member` inputs anchored to `anchor`; writes one line per member it read.
+    return {
+        name: f'''
+from pathlib import Path
+from metasmith.models.libraries import (
+    TransformInstanceLibrary,
+    TransformInstance,
+    ExecutionContext,
+    ExecutionResult,
+)
+from metasmith.models.solver import Transform
+
+lib = TransformInstanceLibrary.ResolveParentLibrary(__file__)
+model = Transform()
+anchor = model.AddRequirement(lib.GetType("{anchor}"))
+members = model.AddRequirement(lib.GetType("{member}"), parents={{anchor}}, variadic=True)
+out = model.AddProduct(lib.GetType("{product}"))
+
+def protocol(context: ExecutionContext):
+    out_path = Path("{name}.out")
+    out_path.write_text("".join(f"{{m.type_name}}\\n" for m in context.Inputs(members)))
+    return ExecutionResult(manifest=[{{out: out_path}}], success=True)
+
+TransformInstance(protocol=protocol, model=model, group_by=anchor)
+'''
+    }

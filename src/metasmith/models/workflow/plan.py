@@ -16,6 +16,7 @@ from ..libraries import (
     TransformInstance, TransformInstanceLibrary, TransformInstanceLibraryView,
 )
 from ..solver_backend import SEARCH_BUDGET
+from ..variadic import SpecializeCases
 from ..solver import (
     Application, Dependency, Endpoint, Transform, solve_by_mcts,
     Solution as SolverResult,
@@ -525,6 +526,7 @@ class WorkflowPlan:
                 f"case [{case.name}] holds samples of [{len(given_endpoints)}] shapes; "
                 "split them with Case.ByShape"
             )
+        (models,) = SpecializeCases([case.sets], [target_model], transform2inst, inst2trlib)
 
         _pl1 = "" if len(given)==1 else "s"
         Log.Info(f"solving plan for [{len(given)}] sample{_pl1} as [1] unique case")
@@ -532,7 +534,7 @@ class WorkflowPlan:
         result = solve_by_mcts(
             given=given_endpoints,
             target=target_model,
-            transforms=transform2inst.keys(),
+            transforms=models,
             max_iter=max_iter,
             max_refine=max_refine,
             seed=seed,
@@ -544,7 +546,7 @@ class WorkflowPlan:
             )
         plan = cls._Assemble(
             result=result, inst2trlib=inst2trlib,
-            solver_case=(case.name, (given_endpoints, list(transform2inst.keys()), target_model)),
+            solver_case=(case.name, (given_endpoints, models, target_model)),
             given_map=given_map, transform2inst=transform2inst,
             transforms=transforms, target_names=target_names, target_model=target_model,
         )

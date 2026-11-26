@@ -1,9 +1,12 @@
 """Variadic requirements: a target names a member set, and the planner specializes the variadic slot per member before the solver sees it."""
 from __future__ import annotations
 
-from typing import Iterable, Mapping, Sequence
+from typing import TYPE_CHECKING, Iterable, Mapping, Sequence
 
-from .solver import Dependency, Node, Transform
+from .solver import Dependency, Endpoint, Node, Transform
+
+if TYPE_CHECKING:
+    from .libraries import TransformInstance, TransformInstanceLibrary
 
 
 class VariadicError(ValueError):
@@ -22,8 +25,17 @@ def StripToken(properties: Iterable[str]) -> set[str]:
     return {p for p in properties if not p.startswith(TOKEN)}
 
 
-def Specialize(tr: Transform, members: Sequence[Node], token: str) -> tuple[Transform, dict[Dependency, Dependency]]:
-    """One ordinary slot per member in place of the variadic slot; every product carries the set's token."""
+def _token(slot: Dependency) -> str:
+    tokens = [p for p in slot.properties if p.startswith(TOKEN)]
+    assert len(tokens) == 1, f"target slot {sorted(slot.properties)} does not carry one set token"
+    return tokens[0]
+
+
+def Specialize(tr: Transform, members: Sequence[Node], token: str) -> tuple[Transform, dict[Dependency, Dependency], list[Dependency]]:
+    """One ordinary slot per member in place of the variadic slot; every product carries the set's token.
+
+    Returns the specialized model, the map from each other bare dependency to its copy, and the member slots in member order.
+    """
     v = tr.variadic
     assert v is not None, f"[{tr}] has no variadic requirement"
     if not members:
@@ -42,8 +54,7 @@ def Specialize(tr: Transform, members: Sequence[Node], token: str) -> tuple[Tran
     for r in tr.requires:
         parents = {remap[p] for p in r.parents}
         if r is v:
-            for m in members:
-                slots.append(out.AddRequirement(properties=m.properties, parents=parents))
+            slots = [out.AddRequirement(properties=m.properties, parents=parents) for m in members]
         else:
             remap[r] = out.AddRequirement(properties=r.properties, parents=parents)
     for i, group in enumerate(tr.produces):
@@ -53,76 +64,49 @@ def Specialize(tr: Transform, members: Sequence[Node], token: str) -> tuple[Tran
             for a in p.parents:
                 parents |= set(slots) if a is v else {remap[a]}
             remap[p] = out.AddProduct(properties=set(p.properties) | {token}, parents=parents)
-    return out, remap
+    return out, remap, slots
 
 
-def SpecializeForTarget(
-    transforms: Iterable[Transform],
-    target: Transform,
-    sets: Mapping[Dependency, Sequence[Node]],
-) -> list[Transform]:
-    """Replace each variadic transform with one specialization per target slot whose member set it can take.
+def _makes(tr: Transform, t: Node) -> bool:
+    return any(p.IsA(t) for g in tr.produces for p in g)
 
-    `sets` maps a target slot to its member set; the slot must already carry the set's token.
-    A variadic transform no set reaches is dropped, because the bare model would fill its product
-    from the fixed slots alone.
+
+def SpecializeCases(
+    sets_by_case: Sequence[Mapping[Dependency, Sequence[Endpoint]]],
+    targets: Sequence[Transform],
+    transform2inst: dict[Transform, TransformInstance],
+    inst2trlib: dict[TransformInstance, TransformInstanceLibrary],
+) -> list[list[Transform]]:
+    """Swap every bare variadic model in the planner's maps for the specializations the cases' member sets ask for.
+
+    Returns, per case, the models that case may solve with: every fixed model plus that case's own specializations.
+    Equal specializations across cases are one instance. A bare variadic model never reaches the solver, because it
+    would fill its product from the fixed slots alone.
     """
-    fixed: list[Transform] = []
-    variadic: list[Transform] = []
-    for tr in transforms:
-        (variadic if tr.variadic is not None else fixed).append(tr)
-    made: dict[str, Transform] = {}
-    origins: dict[Transform, tuple[Transform, dict[Dependency, Dependency]]] = {}
-    for t, members in sets.items():
-        tokens = [p for p in t.properties if p.startswith(TOKEN)]
-        assert len(tokens) == 1, f"target slot {sorted(t.properties)} does not carry one set token"
-        token = tokens[0]
-        bare = Node(properties=StripToken(t.properties), parents=set())
-        takers = [tr for tr in variadic
-                  if any(p.IsA(bare) for g in tr.produces for p in g)
-                  and all(m.IsA(tr.variadic) for m in members)]
-        if not takers:
-            raise VariadicError(f"no variadic transform makes {sorted(bare.properties)} from {[sorted(m.properties) for m in members]}")
-        for tr in takers:
-            sp, remap = Specialize(tr, members, token)
-            if sp.key not in made:
-                made[sp.key] = sp
-                origins[sp] = (tr, remap)
-    for t in target.requires:
-        if t in sets: continue
-        if any(p.IsA(t) for tr in variadic for g in tr.produces for p in g) \
-                and not any(p.IsA(t) for tr in [*fixed, *made.values()] for g in tr.produces for p in g):
-            raise VariadicError(
-                f"target {sorted(t.properties)} is made only by a variadic transform; name its members as a set"
-            )
-    SpecializeForTarget.origins = origins
-    return fixed + list(made.values())
-
-
-def SpecializeInstances(transform2inst: dict, inst2trlib: dict, targets: Iterable[Transform]) -> None:
-    """POC: swap each bare variadic model in the planner's maps for its specializations."""
-    import dataclasses
-    models = list(transform2inst)
-    origins: dict = {}
-    for target in targets:
-        sets = getattr(target, "variadic_sets", {})
-        SpecializeForTarget(models, target, sets)
-        for sp, o in SpecializeForTarget.origins.items():
-            if all(x.key != sp.key for x in origins):
-                origins[sp] = o
-    for m in models:
-        if m.variadic is not None:
-            del transform2inst[m]
-    for sp, (bare, remap) in origins.items():
-        inst = transform2inst.get(sp) or _clone(transform2inst, inst2trlib, bare, sp, remap, models)
-
-
-def _clone(transform2inst, inst2trlib, bare, sp, remap, models):
-    import dataclasses
-    # `bare` was deleted from the map above; find its instance through the library map.
-    inst = next(i for i in inst2trlib if i.model is bare)
-    clone = dataclasses.replace(inst, model=sp, group_by=remap[inst.group_by])
-    clone.name, clone._path, clone._key, clone._hash = inst.name, inst._path, sp.key, sp.hash
-    transform2inst[sp] = clone
-    inst2trlib[clone] = inst2trlib[inst]
-    return clone
+    bare = [i for m, i in transform2inst.items() if m.variadic is not None]
+    for i in bare:
+        del transform2inst[i.model]
+    fixed = list(transform2inst)
+    made: dict[str, TransformInstance] = {}
+    per_case: list[list[Transform]] = []
+    for sets, target in zip(sets_by_case, targets):
+        own: dict[str, TransformInstance] = {}
+        for slot, members in sets.items():
+            token = _token(slot)
+            want = Node(properties=StripToken(slot.properties), parents=set())
+            takers = [i for i in bare if _makes(i.model, want) and all(m.IsA(i.model.variadic) for m in members)]
+            if not takers:
+                raise VariadicError(f"no variadic transform makes {sorted(want.properties)} from {[sorted(m.properties) for m in members]}")
+            for i in takers:
+                sp = i.Specialized(members, token)
+                own[sp.GetKey()] = made.setdefault(sp.GetKey(), sp)
+        models = fixed + [i.model for i in own.values()]
+        for t in target.requires:
+            if t in sets: continue
+            if any(_makes(i.model, t) for i in bare) and not any(_makes(m, t) for m in models):
+                raise VariadicError(f"target {sorted(t.properties)} is made only by a variadic transform; name its members as a set")
+        per_case.append(models)
+    for sp in made.values():
+        transform2inst[sp.model] = sp
+        inst2trlib[sp] = inst2trlib[sp.bare]
+    return per_case

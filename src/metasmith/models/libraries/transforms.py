@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import os
 import re
 import shutil
@@ -65,6 +66,19 @@ class TransformInstance:
     _dep_names: dict[str, Dependency] = field(default_factory=dict)
     _ambiguous_dep_names: set[str] = field(default_factory=set)
     _protocol_source_hash: str = ""
+    # Set on a specialization: the bare instance it came from and its member slots, in member order.
+    bare: "TransformInstance|None" = None
+    members: list[Dependency] = field(default_factory=list)
+
+    def Specialized(self, members: list[Endpoint], token: str) -> "TransformInstance":
+        from ..variadic import Specialize
+        sp, remap, slots = Specialize(self.model, members, token)
+        out = copy.copy(self)
+        out.model, out.group_by, out.bare, out.members = sp, remap[self.group_by], self, slots
+        out._key, out._hash = sp.key, sp.hash
+        out._env_deps = [remap[d] for d in self._env_deps]
+        out._dep_names = {k: remap.get(d, d) for k, d in self._dep_names.items()}
+        return out
 
     def BindableNames(self) -> list[str]:
         return sorted(
@@ -75,6 +89,7 @@ class TransformInstance:
     def __post_init__(self):
         assert self.batch_size>0, self.model
         assert self.group_by in self.model.requires, self.model
+        assert self.group_by is not self.model.variadic, f"a variadic requirement cannot be group_by: {self.model}"
         groups = [frozenset(g) for g in self.model.produces]
         assert len(set(groups)) == len(groups), f"two product groups declare the same outputs: {self.model}"
         for k, vt in [
