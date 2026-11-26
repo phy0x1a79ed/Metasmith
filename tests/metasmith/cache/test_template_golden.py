@@ -16,8 +16,9 @@ def _golden() -> dict:
     return json.loads(GOLDEN.read_text()) if GOLDEN.exists() else {}
 
 
-def _normalized(path: Path, root: Path) -> str:
-    text = path.read_text().replace(str(root), "ROOT")
+# Binds carry absolute paths, so the checkout's location must not reach the digest.
+def _normalized(path: Path, root: Path, libroot: Path) -> str:
+    text = path.read_text().replace(str(root), "ROOT").replace(str(libroot), "LIBROOT")
     text = re.sub(r"msm-template-[A-Za-z0-9_]+", "msm-template-X", text)
     lines = text.split("\n")
     # bind lines come out of a set, so their order is not part of the plan
@@ -28,11 +29,11 @@ def _normalized(path: Path, root: Path) -> str:
     return "\n".join(lines)
 
 
-def _staged_digests(template, tmp_path: Path) -> dict[str, str]:
+def _staged_digests(template, tmp_path: Path, libroot: Path) -> dict[str, str]:
     ws = _stage(template.Plan(), tmp_path)
     out = {}
     for p in sorted([*ws.glob("*.nf"), *ws.glob("*.json"), *ws.glob("*.meta")]):
-        text = _normalized(p, tmp_path)
+        text = _normalized(p, tmp_path, libroot)
         (tmp_path / "normalized").mkdir(exist_ok=True)
         (tmp_path / "normalized" / p.name).write_text(text)
         out[p.name] = hashlib.sha256(text.encode()).hexdigest()
@@ -61,7 +62,7 @@ def test_a_shipped_template_stages_byte_identical_to_its_golden(
     name, metasmith_libraries_root, tmp_path
 ):
     template = _templates(metasmith_libraries_root)[name]
-    got = _staged_digests(template, tmp_path)
+    got = _staged_digests(template, tmp_path, metasmith_libraries_root)
     if os.environ.get(REGEN):
         golden = _golden()
         golden[name] = got
