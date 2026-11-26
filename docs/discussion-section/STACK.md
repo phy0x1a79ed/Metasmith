@@ -8,7 +8,7 @@ Goal: draft the Discussion of the Metasmith manuscript, placing the results in c
 - Settled: claim 2 = typed contracts enable radical interoperability (old 2b dropped, seed folded into 2a; SADI precise; local-vocabulary contrast in 2b). Claim 1 = symbolic solver suffices for routing; SHARE beside FlowCraft in 1a; 1b keeps Snakemake, Wings, APE; 1e = ranking (PUCT, learned prior, market as aspiration; no Fast Downward). Claim 3 = levels of accessibility. PlanBench/Blocksworld not reported.
 - Accepted and in d2 (2026-11-25), in Discussion order after Tony's ¶5: 2a (`draft/2a-types.md`), 2b (`draft/2b-ontology.md`), 1c (`draft/1c-agents.md`; lead line "too in the weeds", revisit). All old claim prose and scaffold headings removed from d2.
 - Claim 3 shape settled: "Typed contracts are accessible at different levels of expertise"; 3a interfaces are hierarchical, levels parallel the intent-to-execution gap; 3b own the stack via Nextflow; 3c decentralised compute market ("some compute is too specialised to hand over": ship the product, not the factory).
-- Open now (2026-11-25): claim 2 done (2a, 2b v2 in d2). Next: itemized main points for 1a and 1b, same shape as § Structure claim 2 (key message + 4-5 points, refs assigned once); Tony will judge from them whether the backward-routing paragraph (old 1c) returns. Tony's 1a notes: say explicitly routing is the developer's job; frameworks leave it to the developer to make modules extensible; query-based systems (SHARE) begin to define modules/components; incentive mismatch is the problem 1d resolves. Tony cut the "If the goal is…" ¶ himself (2026-11-25). Pending: BioMoby Consortium 2008 beside Zhao in 2b (unanswered).
+- Open now (2026-11-25): claims 2 and 1 done as a first pass (2a, 2b, 1a, 1b, 1c in d2). Next: claim 3 itemized points (3a-3c). Earlier note: Next: itemized main points for 1a and 1b, same shape as § Structure claim 2 (key message + 4-5 points, refs assigned once); Tony will judge from them whether the backward-routing paragraph (old 1c) returns. Tony's 1a notes: say explicitly routing is the developer's job; frameworks leave it to the developer to make modules extensible; query-based systems (SHARE) begin to define modules/components; incentive mismatch is the problem 1d resolves. Tony cut the "If the goal is…" ¶ himself (2026-11-25). Pending: BioMoby Consortium 2008 beside Zhao in 2b (unanswered).
 - Structure reference: DECISIONS.md § three-claims, "Primary messages as approved" plus its later-changes line. Pending: Tony to confirm the merged claim 1 order (1a manual + incentives problem; 1b earlier automation; 1c restored backward routing; 1d incentives aligned; 1e agents; 1f smarter routing).
 - d2 access: capella via ssh + schtasks task `msm_word` (ssh + schtasks task `msm_word`, interactive session; save the doc after each edit).
 
@@ -38,7 +38,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Narrow claim: types expressive enough for the Results; offer a principle (a type draws exactly the distinctions that decide which tools can take the data); standards left to use.
     - Refs: EDAM, bio.tools, CWL (one clause), Lamprecht 2021, BioMoby (BioMoby Consortium 2008), Zhao 2012.
 - **Claim 1. A symbolic solver is sufficient to automate routing between typed contracts.**
-  - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [prose in d2 2026-11-25, draft/1a-routing.md; Tony to review]
+  - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [first pass in d2 2026-11-25, draft/1a-routing.md]
     1. Routing is currently the developer's job, and frameworks give no mechanism for reuse: a Nextflow process is a step, not a module. FlowCraft is the exception (component types checked between neighbours), leading to 2.
     2. Query-based: SADI makes each service a component described by the properties it consumes and produces, so a query can find it; a multi-step query still spells out the route (Wilkinson 2011, second use). SHARE cut.
     3. Case in terms of state only, no reads: routing means taking data through the states each tool requires, and the developer does it by hand.
@@ -46,7 +46,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Result: reimplementation, GATK over 200 implementations (Wratten 2021).
     - Transition ("automating the route would remove this cost, and earlier systems tried to") moves to open 1b.
     - Source shape: artifact v17 1a.0-1a.4 (several compactions back), with Tony's 2026-11-25 notes.
-  - **1b. Planning has proved useful, but earlier planners could not reach their full potential.** [prose in d2 2026-11-25, draft/1b-planning.md; Tony to review]
+  - **1b. Planning has proved useful, but earlier planners could not reach their full potential.** [first pass in d2 2026-11-25, draft/1b-planning.md; absorbs 1d seed (intro) and planner limits (conditional, strong cyclic planning)]
     1. Intro answering 1a: if the route were derived rather than written, every module would be reusable at no extra cost to its developer; that is what planning promises.
     2. Strengths, established here (decided 2026-11-25, moved from 1c.4): a join is accepted only on type fit, so plans are valid by construction (main); systematic, reproducible, auditable (APE, Kasalica 2020).
     3. Held back by types: coarse types let invalid plans through as candidates (ref back to 2a); fixed vocabularies pushed structure into human-written templates, so search became template matching (Wings, Gil 2011; ref back to 2b; Lamprecht 2021 second use).
@@ -54,10 +54,10 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Bridge to 1c: agents compose and run tools directly (Nextflow, bash), without the guarantees of 2.
     - Make/Snakemake cut. Backward-routing paragraph likely unneeded: 1c's close carries the positive statement.
   - **1c? Metasmith routes backwards from the destination, so a plan is correct by construction.** [not restored: 1b.2 and 1c's close carry the positive statement; Tony moved on 2026-11-25]
-  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose trimmed and in d2 after 1b, 2026-11-25; lead line to simplify]
+  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [first pass in d2 2026-11-25; absorbs 1e ranking (Han, Wu, Hsieh); lead line to simplify]
     - 1c.4 (typed contracts as checker) now only refers back to 1b.2; trim the accepted prose to match when 1c is rewritten. 1c.1-1c.3 agent evidence and 1c.5 complementarity (Kambhampati 2024) stay.
-  - **1d. Automated routing aligns the individual's incentive with the community's.** [outline]
-  - **1e. Choosing among valid plans needs a softer search that can rank; conditionals, loops, incompleteness.** [outline]
+  - **1d.** [dropped 2026-11-25: overlaps 2b; Tony's incentive seed moved to 1b's intro; payoff clause for 2b offered, not applied]
+  - **1e.** [dropped 2026-11-25: ranking folded into 1c; limits into 1b; market to 3c; MCTS/PUCT/learned prior cut]
 - **Claim 3. Typed contracts are accessible at different levels of expertise.**
   - **3a. The interfaces are hierarchical levels that parallel the gap from intent to execution; adding tools still needs expertise.** [outline]
   - **3b. Deferring execution to Nextflow gives portability and lets users own the full stack.** [outline]
