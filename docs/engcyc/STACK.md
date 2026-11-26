@@ -72,7 +72,7 @@ engcyc-cases — after both workers land: engcyc template as two cases (short re
 - later-templates — pangenome, isolate assembly, hybrid assembly, asv, transcriptomics from the same library
 
 ## Workers
-- none running. Merged: gpr-refs, complete-medium, dbcan-host.
+- lane-fold (feat/engine/lane-fold, worktree engine/lane-fold, started 15:50): fold each merge_X into its X_lane so every lane is tool -> lane. Merged earlier: gpr-refs, complete-medium, dbcan-host.
 - peers: geospatial-query-dfs (0.26.1 cut), metasmith-dynamic-aggregator-inputs (variadic), metasmith-bioconda (0.26.2 after the tag).
 
 ## Closed
