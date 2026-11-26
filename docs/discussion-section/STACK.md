@@ -23,7 +23,7 @@ Previous current, superseded by three-claims: **discussion-d2-d4**: tune D2–D4
 
 Three levels: claim, paragraph key message, sentence points. Read back top-down. Status per paragraph in brackets. References are assigned to one paragraph where possible.
 
-- **D1** Recap and overview (2026-11-25, rework agreed in points, prose pending). Key message: tools described by contracts interoperated regardless of the workflow they came from; the result rests on three features, each answering a challenge that held back earlier attempts.
+- **D1** Recap and overview (2026-11-25, in d2 blue). Key message: tools described by contracts interoperated regardless of the workflow they came from; the result rests on three features, each answering a challenge that held back earlier attempts.
   1. Recap (Tony's opener): Metasmith demonstrated radical interoperability; three pipelines (Nextflow, Snakemake, manual) combined into one workflow on request. (Old evidence point dropped by Tony.)
   2. Three features, phrased softly, each alluding to earlier challenges: contracts on a type system (types record what data are ready for; earlier types recorded what data are, vocabularies decayed) -> 2a-2b; a planner (derives the route instead of leaving it to the developer or enumerating it in parameters) -> 1a-1c; a "layered interface" (Tony's term; a highly configurable system is not the most accessible) -> 3.
   3. Optional one-line close (open).
