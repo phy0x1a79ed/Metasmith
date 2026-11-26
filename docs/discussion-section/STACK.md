@@ -97,6 +97,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
 
 ## Stack
 
+- **feature-table** (2026-11-25): replaces the Loach-themes Table 1 plan (Tony to confirm). Columns: Metasmith, Nextflow, Snakemake, Galaxy, APE, Biomni. Row groups: DAG generation (tool description incl. data state; DAG built by; DAG validity; scope of change), layered interface (GUI, with Seqera hosted and not locally startable; textual definition), execution (directly executable; runs on own compute). Cells 1-3 words, descriptive. Snakemake: DAG from file-name patterns, template-like, built for checkpointing. Checked: APE exports workflows (CWL) for other systems; Galaxy editor blocks format mismatches; Biomni has a local Gradio UI.
 - **table-criteria** (2026-11-22): "first establish what goes in the table: what are we comparing against … and what is the metrics". Table 1 is now `d2/tables/Table_1_wms_themes.csv` (removed from the doc, caption kept). Score cells by levels and criteria from the reviews Loach covers (Wratten 2021 and Kiran 2023 define levels); 17 of 22 full texts are in `data/loach-reviews/` (index.tsv; Kiran 2023 has the level definitions). Untracked: mizar has no dvc CLI, so they are not yet pinned. Wratten 2021, Larsonneur, Marinova and Welivita are paywalled; Tony to drop PDFs in `d2/_fetch`.
   - **systems-list**: which systems are columns. Current: Metasmith, Nextflow/nf-core, Snakemake, CWL, Galaxy, Pegasus, APE/Workflomics, LLM agents.
   - **levels**: one criterion and level definition per theme, drawn from the reviews.
