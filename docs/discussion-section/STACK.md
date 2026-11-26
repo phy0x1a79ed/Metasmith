@@ -38,7 +38,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Narrow claim: types expressive enough for the Results; offer a principle (a type draws exactly the distinctions that decide which tools can take the data); standards left to use.
     - Refs: EDAM, bio.tools, CWL (one clause), Lamprecht 2021, BioMoby (BioMoby Consortium 2008), Zhao 2012.
 - **Claim 1. A symbolic solver is sufficient to automate routing between typed contracts.**
-  - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [points in progress]
+  - **1a. Routing, and making modules reusable, is the developer's job; incentives do not align; the result is reimplementation.** [prose in d2 2026-11-25, draft/1a-routing.md; Tony to review]
     1. Routing is currently the developer's job, and frameworks give no mechanism for reuse: a Nextflow process is a step, not a module. FlowCraft is the exception (component types checked between neighbours), leading to 2.
     2. Query-based: SADI makes each service a component described by the properties it consumes and produces, so a query can find it; a multi-step query still spells out the route (Wilkinson 2011, second use). SHARE cut.
     3. Case in terms of state only, no reads: routing means taking data through the states each tool requires, and the developer does it by hand.
@@ -46,7 +46,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Result: reimplementation, GATK over 200 implementations (Wratten 2021).
     - Transition ("automating the route would remove this cost, and earlier systems tried to") moves to open 1b.
     - Source shape: artifact v17 1a.0-1a.4 (several compactions back), with Tony's 2026-11-25 notes.
-  - **1b. Planning has proved useful, but earlier planners could not reach their full potential.** [points in progress 2026-11-25]
+  - **1b. Planning has proved useful, but earlier planners could not reach their full potential.** [prose in d2 2026-11-25, draft/1b-planning.md; Tony to review]
     1. Intro answering 1a: if the route were derived rather than written, every module would be reusable at no extra cost to its developer; that is what planning promises.
     2. Strengths, established here (decided 2026-11-25, moved from 1c.4): a join is accepted only on type fit, so plans are valid by construction (main); systematic, reproducible, auditable (APE, Kasalica 2020).
     3. Held back by types: coarse types let invalid plans through as candidates (ref back to 2a); fixed vocabularies pushed structure into human-written templates, so search became template matching (Wings, Gil 2011; ref back to 2b; Lamprecht 2021 second use).
@@ -54,7 +54,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
     5. Bridge to 1c: agents compose and run tools directly (Nextflow, bash), without the guarantees of 2.
     - Make/Snakemake cut. Backward-routing paragraph likely unneeded: 1c's close carries the positive statement.
   - **1c? Metasmith routes backwards from the destination, so a plan is correct by construction.** [restore proposed, Tony to decide]
-  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose accepted; lead line to simplify; in d2 out of order; pull pending Tony]
+  - **1c. Agents can propose pipelines, but only typed contracts make their joins checkable.** [prose trimmed and in d2 after 1b, 2026-11-25; lead line to simplify]
     - 1c.4 (typed contracts as checker) now only refers back to 1b.2; trim the accepted prose to match when 1c is rewritten. 1c.1-1c.3 agent evidence and 1c.5 complementarity (Kambhampati 2024) stay.
   - **1d. Automated routing aligns the individual's incentive with the community's.** [outline]
   - **1e. Choosing among valid plans needs a softer search that can rank; conditionals, loops, incompleteness.** [outline]
