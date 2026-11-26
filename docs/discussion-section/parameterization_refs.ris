@@ -1,0 +1,36 @@
+TY  - CONF
+AU  - Xu, Tianyin
+AU  - Jin, Long
+AU  - Fan, Xuepeng
+AU  - Zhou, Yuanyuan
+AU  - Pasupathy, Shankar
+AU  - Talwadker, Rukma
+TI  - Hey, You Have Given Me Too Many Knobs!: Understanding and Dealing with Over-Designed Configuration in System Software
+T2  - Proceedings of the 2015 10th Joint Meeting on Foundations of Software Engineering (ESEC/FSE 2015)
+PY  - 2015
+SP  - 307
+EP  - 319
+PB  - ACM
+DO  - 10.1145/2786805.2786852
+UR  - https://doi.org/10.1145/2786805.2786852
+ER  - 
+
+TY  - JOUR
+AU  - Halin, Axel
+AU  - Nuttinck, Alexandre
+AU  - Acher, Mathieu
+AU  - Devroey, Xavier
+AU  - Perrouin, Gilles
+AU  - Baudry, Benoit
+TI  - Test them all, is it worth it? Assessing configuration sampling on the JHipster Web development stack
+JO  - Empirical Software Engineering
+T2  - Empirical Software Engineering
+PY  - 2019
+VL  - 24
+IS  - 2
+SP  - 674
+EP  - 717
+DO  - 10.1007/s10664-018-9635-4
+UR  - https://doi.org/10.1007/s10664-018-9635-4
+N1  - Published online 17 July 2018; arXiv:1710.07980
+ER  - 
