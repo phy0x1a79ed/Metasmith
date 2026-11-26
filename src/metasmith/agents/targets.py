@@ -6,6 +6,11 @@ from typing import Iterable, Literal
 from ..models.libraries import Resources, TransformInstance
 
 @dataclass(frozen=True)
+class TargetSet:
+    """A member set: one parent that fills a variadic requirement, one element per type."""
+    dtype_names: tuple[str, ...]
+
+@dataclass(frozen=True)
 class TargetSpec:
     dtype_name: str
     parents: tuple["TargetSpec", ...] = ()
@@ -18,7 +23,7 @@ class TargetBuilder:
         assert "::" in target_type, f'expected @type to in the form of "namespace::type_name" but got [{target_type}]'
         parents = tuple(parents or ())
         for p in parents:
-            assert isinstance(p, TargetSpec), (
+            assert isinstance(p, (TargetSpec, TargetSet)), (
                 f'target [{target_type}] was given [{p!r}] as a parent, which is'
                 ' a type name rather than a handle. Parents are the TargetSpec'
                 ' values Add returns; pass the handle you got back from the'
@@ -29,6 +34,11 @@ class TargetBuilder:
             assert existing != spec, f'target [{target_type}] with identical parents already added'
         self._items.append(spec)
         return spec
+
+    def Set(self, *dtype_names: str) -> TargetSet:
+        assert dtype_names, "a member set has at least one member"
+        assert len(set(dtype_names)) == len(dtype_names), f"a member set names a type twice: {dtype_names}"
+        return TargetSet(tuple(sorted(dtype_names)))
 
     def AddAll(self, target_types: Iterable[str|dict]) -> list[TargetSpec]:
         specs: list[TargetSpec] = []
@@ -46,6 +56,8 @@ class TargetBuilder:
                     f"which is not one of the {len(specs)} target(s) declared before it"
                 )
                 handles.append(specs[p])
+            if not isinstance(target, str) and target.get("set"):
+                handles.append(self.Set(*target["set"]))
             specs.append(self.Add(name, parents=handles or None))
         return specs
 
