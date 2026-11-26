@@ -80,7 +80,7 @@ Three levels: claim, paragraph key message, sentence points. Read back top-down.
 
 - **Conclusion** (2026-11-26, own section, in d2 blue, no table reference). Tony: too specific, "should touch on the larger themes". Key message: Metasmith demonstrated how typed contracts make tools interoperable; themes reuse, accessibility, community.
   1. Opener (Tony): Metasmith demonstrated how typed contracts can make bioinformatics tools radically interoperable.
-  2. Reuse: derived routes make every tool described once reusable and align individual and community incentives.
+  2. Reuse (Tony: contracts encourage modularity and reusability): "Typed contracts encourage modularity and reuse, with each tool described once and joined wherever it fits."
   3. Accessibility (Tony): a layered interface and compilation to Nextflow make the entire stack accessible and immediately executable.
   4. Community: infrastructure for a shared vocabulary, standard not prescribed, grows with adoption.
   5. Close (Tony): we hope users spend more time on science and less on technical challenges.
