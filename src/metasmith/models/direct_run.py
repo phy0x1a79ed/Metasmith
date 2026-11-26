@@ -17,6 +17,7 @@ from ..models.libraries import (
 )
 from ..models.lineage import LinPayload
 from ..models.solver import Dependency, Endpoint
+from ..models.variadic import SetToken
 from ..models.workflow import WorkflowStep
 from ..models.workflow.payload import build_entry, given_index
 
@@ -109,7 +110,7 @@ def _bind_inputs(
     data_lib: DataInstanceLibrary,
     inst: TransformInstance,
     inputs: list[tuple[str, str | Path]],
-) -> dict[Dependency, list[DataInstance]]:
+) -> tuple[TransformInstance, dict[Dependency, list[DataInstance]]]:
     bindable = inst.BindableNames()
 
     grouped: dict[str, list[Path]] = {}
@@ -152,7 +153,17 @@ def _bind_inputs(
         raise ValueError(
             f"[{inst.name}] requires inputs that were not given: {unbound}"
         )
-    return dep_map
+    if inst.model.variadic is None:
+        return inst, dep_map
+    # The items given to the variadic name are its member set, one member per type.
+    by_type: dict[str, list[DataInstance]] = {}
+    for x in dep_map.pop(inst.model.variadic):
+        by_type.setdefault(x.dtype_name, []).append(x)
+    inst = inst.Specialized([xs[0].dtype for xs in by_type.values()], SetToken(by_type))
+    dep_map = {inst.remap[d]: xs for d, xs in dep_map.items()}
+    for slot in inst.members:
+        dep_map[slot] = next(xs for xs in by_type.values() if set(xs[0].dtype.properties) == set(slot.properties))
+    return inst, dep_map
 
 
 def _build_lineage(dep_map: dict[Dependency, list[DataInstance]], requires: list[Dependency]) -> dict:
@@ -255,7 +266,7 @@ def RunTransform(
     lib, inst = _resolve_transform(transform)
     data_lib = _load_data_library(data_library)
 
-    dep_map = _bind_inputs(data_lib, inst, inputs)
+    inst, dep_map = _bind_inputs(data_lib, inst, inputs)
     for group in inst.model.produces:
         for dep in group:
             dep_map.setdefault(dep, [])

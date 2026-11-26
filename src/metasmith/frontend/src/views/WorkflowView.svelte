@@ -1217,7 +1217,7 @@
 
   // An output row exists before it has a type -- that is what "add an output"
   // makes -- so the plan has to wait for it, and say which one it is waiting on.
-  const lineage = (t) => JSON.stringify([...(t.parents ?? [])].sort())
+  const lineage = (t) => JSON.stringify([[...(t.parents ?? [])].sort(), t.set ?? []])
   const hasDup = (targets) =>
     targets.some((t, i) =>
       targets.some((o, j) => j !== i && !!t.type && o.type === t.type && lineage(o) === lineage(t)),

@@ -17,6 +17,7 @@ from ...logging import Log
 from ..paths import DEFERRED, _DeferredPath, is_deferred, mint_deferred_path
 from ..remote import Logistics, Source, SourceType
 from ..solver import Dependency, Endpoint
+from ..variadic import TOKEN, StripToken
 from .pinned import _PinnedLibrary
 from .identity import _LeafIdentity
 from .telemetry_api import _TelemetryQueries
@@ -282,6 +283,8 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
 
     def GetName(self, dtype: Endpoint):
         if dtype in self._dtype2name: return self._dtype2name[dtype]
+        if any(p.startswith(TOKEN) for p in dtype.properties):
+            return self.GetName(Endpoint(StripToken(dtype.properties)))
         for k, lib in self.types.items():
             def _name(name: str):
                 return f"{k}::{name}"

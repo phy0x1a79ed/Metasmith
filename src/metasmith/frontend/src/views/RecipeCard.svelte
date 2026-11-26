@@ -135,6 +135,7 @@
       id: r.t.id,
       type: r.t.type,
       parents: r.parents,
+      set: r.t.set ?? [],
     })),
   )
 
@@ -608,10 +609,14 @@
               o.id !== row.id &&
               o.type === row.type &&
               row.type &&
-              JSON.stringify([...o.parents].sort()) === JSON.stringify([...row.parents].sort()),
+              JSON.stringify([...o.parents].sort()) === JSON.stringify([...row.parents].sort()) &&
+              JSON.stringify(o.set) === JSON.stringify(row.set),
           )}
           {@render detail(row)}
 
+          {#if row.set.length > 0}
+            <div class="notes row wrap small muted">from {row.set.join(', ')}</div>
+          {/if}
           {#if row.type || dup}
             <div class="notes row wrap small">
               {#if row.type && !info?.known}

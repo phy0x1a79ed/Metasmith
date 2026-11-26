@@ -1,6 +1,6 @@
-# DAS Tool is batch 2's consolidator across MetaBAT2, SemiBin2 and COMEBin,
-# standing where MetaWRAP's bin_refinement stands for batch 1's MetaBAT2/
-# MaxBin2/CONCOCT trio. It needs none of the three binners' own bin FASTAs --
+# DAS Tool consolidates the contig2bin tables of whichever binners a target names
+# as its member set -- engcyc full takes MetaBAT2, SemiBin2 and COMEBin, engcyc lite
+# MetaDecoder in place of COMEBin. It needs none of the binners' own bin FASTAs --
 # `-i` takes each binner's contig2bin TABLE and `-c` the whole assembly, and
 # DAS_Tool cuts its own winning bins out of that assembly itself. Its
 # `Fasta_to_Contig2Bin` helper (bin fastas -> table) is therefore not wired
@@ -24,12 +24,9 @@ model = Transform()
 # ~83 MB) at its --dbDirectory default, so no separate reference input exists
 # to require. See resources/env/das_tool.env for what was checked.
 image    = model.AddRequirement(lib.GetType("env::das_tool.env"))
-model.AddRequirement(lib.GetType("binning::metabat2_semibin2_comebin"))
 asm      = model.AddRequirement(lib.GetType("sequences::assembly"))
 orfs     = model.AddRequirement(lib.GetType("sequences::assembly_orfs"), parents={asm})
-mb_table = model.AddRequirement(lib.GetType("binning::metabat2_contig_to_bin_table"), parents={asm})
-sb_table = model.AddRequirement(lib.GetType("binning::semibin2_contig_to_bin_table"), parents={asm})
-cb_table = model.AddRequirement(lib.GetType("binning::comebin_contig_to_bin_table"), parents={asm})
+tables   = model.AddRequirement(lib.GetType("binning::raw_contig_to_bin_table"), parents={asm}, variadic=True)
 
 bin_fasta = model.AddProduct(lib.GetType("sequences::das_tool_bin_fasta"))
 table     = model.AddProduct(lib.GetType("binning::das_tool_contig_to_bin_table"))
@@ -54,32 +51,30 @@ def _strip_our_header(src: Path, dst: Path) -> None:
 def protocol(context: ExecutionContext):
     iasm = context.Input(asm)
     iorfs = context.Input(orfs)
-    imb = context.Input(mb_table)
-    isb = context.Input(sb_table)
-    icb = context.Input(cb_table)
 
     threads = context.params.get("cpus", 16)
     outbase = "das_tool"
 
-    clean_mb = Path("metabat2.clean.tsv")
-    clean_sb = Path("semibin2.clean.tsv")
-    clean_cb = Path("comebin.clean.tsv")
-    _strip_our_header(imb.local, clean_mb)
-    _strip_our_header(isb.local, clean_sb)
-    _strip_our_header(icb.local, clean_cb)
+    labels, clean = [], []
+    for member in context.Inputs(tables):
+        label = member.type_name.split("::")[-1].removesuffix("_contig_to_bin_table")
+        path = Path(f"{label}.clean.tsv")
+        _strip_our_header(member.path.local, path)
+        labels.append(label)
+        clean.append(str(path))
 
     # DAS_Tool writes its .scg and diamond files beside the protein file, by the path
     # it is given; through a link here, so they land in this work dir and not in the
     # cached ORF product.
     _cmd = f"""
         ln -s "{iorfs.container}" proteins.faa
-        DAS_Tool \
-            -i {clean_mb},{clean_sb},{clean_cb} \
-            -l metabat2,semibin2,comebin \
-            -c {iasm.container} \
-            -p proteins.faa \
-            -o {outbase} \
-            -t {threads} \
+        DAS_Tool \\
+            -i {",".join(clean)} \\
+            -l {",".join(labels)} \\
+            -c {iasm.container} \\
+            -p proteins.faa \\
+            -o {outbase} \\
+            -t {threads} \\
             --write_bins --write_bin_evals
     """
     context.ExecWithEnv(env=image, cmd=_cmd)

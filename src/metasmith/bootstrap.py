@@ -315,6 +315,8 @@ def ExecuteStep(
         _slot_keys=slot_keys,
         _ambiguous_slots=ambiguous_slots,
         _get_staging_dir=_get_staging_dir,
+        _alias=step.transform.remap,
+        _members={step.transform.bare.model.variadic: step.transform.members} if step.transform.bare else {},
     )
     BREAK_LENGTH = 60
     Log.Info(f">>> executing")
@@ -370,6 +372,7 @@ def ExecuteStep(
         results = step.transform.protocol(context)
         if not isinstance(results, list):
             results = [results]
+        results = [context.Translate(r) for r in results]
         for i, result in enumerate(results):
             if len(results)>1:
                 Log.Info(f"batch [{i+1}] of [{len(results)}]")

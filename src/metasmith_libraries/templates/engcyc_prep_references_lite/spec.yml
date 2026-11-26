@@ -68,11 +68,6 @@ input_library:
       instance_id: 1e207c86f58ecb9d9c7e3d781ff76efab9d175638eeef5b1d9f0378e6845a3b76bd8
       origin: leaf
       value: true
-    metabat2_semibin2_comebin.json:
-      type: binning::metabat2_semibin2_comebin
-      instance_id: 1e20dd133893c9d3d4fdd9ec0d3e4fc48cb8d6eae6289159f24aa5c943eea9cab1e7
-      origin: leaf
-      value: true
   values:
     complete_medium.tsv: "exchange\tlower_bound\tupper_bound\tmedium\nEX_12dgr160_e\t\
       -10\t1000\tcomplete\nEX_12dgr180_e\t-10\t1000\tcomplete\nEX_12ppd__R_e\t-10\t\
@@ -351,4 +346,3 @@ input_library:
     complete_medium_name.txt: complete
     contig_study.json: '{"logistics": "contig study"}'
     eggnog_source.json: '{"release": "emapperdb-5.0.2"}'
-    metabat2_semibin2_comebin.json: '{"binners": "metabat2 semibin2 comebin"}'

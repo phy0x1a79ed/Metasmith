@@ -16,6 +16,7 @@ from ..libraries import (
     TransformInstance, TransformInstanceLibrary, TransformInstanceLibraryView,
 )
 from ..solver_backend import SEARCH_BUDGET
+from ..variadic import SpecializeCases
 from ..solver import (
     Application, Dependency, Endpoint, Transform, solve_by_mcts,
     Solution as SolverResult,
@@ -103,11 +104,13 @@ class Case:
     # Requirements only, no products.
     target: Transform
     target_names: list[str]|None = None
+    # Target slot -> the member types that fill its variadic requirement.
+    sets: dict[Dependency, list[Endpoint]] = field(default_factory=dict)
 
     @classmethod
     def ByShape(
         cls, given: list[list[DataInstanceLibraryView]], target: Transform,
-        target_names: list[str]|None = None, name: str = "case",
+        target_names: list[str]|None = None, sets: dict|None = None, name: str = "case",
     ) -> list[Case]:
         shapes: dict[frozenset, list[list[DataInstanceLibraryView]]] = {}
         labels: dict[frozenset, str] = {}
@@ -125,7 +128,7 @@ class Case:
             shapes.setdefault(frozenset(eps), []).append(sample)
             labels.setdefault(frozenset(eps), "+".join(sorted(names)))
         if len(shapes) <= 1:
-            return [cls(name=name, given=list(given), target=target, target_names=target_names)]
+            return [cls(name=name, given=list(given), target=target, target_names=target_names, sets=dict(sets or {}))]
         out: list[Case] = []
         seen: dict[str, int] = {}
         for shape, samples in shapes.items():
@@ -133,7 +136,7 @@ class Case:
             seen[label] = seen.get(label, 0) + 1
             out.append(cls(
                 name=label if seen[label] == 1 else f"{label}#{seen[label]}",
-                given=samples, target=target, target_names=target_names,
+                given=samples, target=target, target_names=target_names, sets=dict(sets or {}),
             ))
         return out
 
@@ -523,6 +526,7 @@ class WorkflowPlan:
                 f"case [{case.name}] holds samples of [{len(given_endpoints)}] shapes; "
                 "split them with Case.ByShape"
             )
+        (models,) = SpecializeCases([case.sets], [target_model], transform2inst, inst2trlib)
 
         _pl1 = "" if len(given)==1 else "s"
         Log.Info(f"solving plan for [{len(given)}] sample{_pl1} as [1] unique case")
@@ -530,7 +534,7 @@ class WorkflowPlan:
         result = solve_by_mcts(
             given=given_endpoints,
             target=target_model,
-            transforms=transform2inst.keys(),
+            transforms=models,
             max_iter=max_iter,
             max_refine=max_refine,
             seed=seed,
@@ -542,7 +546,7 @@ class WorkflowPlan:
             )
         plan = cls._Assemble(
             result=result, inst2trlib=inst2trlib,
-            solver_case=(case.name, (given_endpoints, list(transform2inst.keys()), target_model)),
+            solver_case=(case.name, (given_endpoints, models, target_model)),
             given_map=given_map, transform2inst=transform2inst,
             transforms=transforms, target_names=target_names, target_model=target_model,
         )

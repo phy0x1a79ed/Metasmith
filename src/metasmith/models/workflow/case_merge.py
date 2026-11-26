@@ -11,6 +11,7 @@ from ..libraries import (
     DataInstance, TransformInstance, TransformInstanceLibrary, TransformInstanceLibraryView,
 )
 from ..solver import Application, Dependency, Endpoint, Transform, solve_by_mcts, Solution as SolverResult
+from ..variadic import SpecializeCases
 from .diagnostics import PlanHint
 from .plan import (
     Case, CollectSolverInputs, _MixedCase, _absorb_givens, _dedupe_instances, _target_names, _try_name,
@@ -375,6 +376,7 @@ def PlanCases(
         )
     except _MixedCase as e:
         raise ValueError(f"case [{cases[e.case].name}] mixes samples of different shapes, such as [{e.label}]") from None
+    models = SpecializeCases([c.sets for c in cases], [c.target for c in cases], transform2inst, inst2trlib)
     names = [_target_names(case, transforms) for case in cases]
     Log.Info(f"solving plan for [{len(given)}] samples as [{len(cases)}] cases")
 
@@ -411,7 +413,7 @@ def PlanCases(
         r = job.root
         plan = plan_cls._Refuse(
             result=result, failed=failed, cases=index,
-            solver_case=(cases[r].name, ([case_eps[r]], list(transform2inst.keys()), cases[r].target)),
+            solver_case=(cases[r].name, ([case_eps[r]], models[r], cases[r].target)),
             target_names=names[r], target_model=cases[r].target, **common,
         )
         plan.hints = hints + plan.hints
@@ -457,7 +459,7 @@ def PlanCases(
             guide = list({id(t): t for t in job.guide + aggregate}.values())
             Log.Info(f"solving case [{cases[job.root].name}]{_describe(job, transform2inst)} for [{len(cases[job.root].given)}] sample(s)")
             result = solve_by_mcts(
-                given=[case_eps[job.root]], target=cases[job.root].target, transforms=transform2inst.keys(),
+                given=[case_eps[job.root]], target=cases[job.root].target, transforms=models[job.root],
                 max_iter=max_iter, max_refine=max_refine, seed=seed,
                 fork_groups=list(job.forks.items()), partial=job.partial, guide=guide,
             )
@@ -617,7 +619,7 @@ def PlanCases(
         steps=steps,
         _solver_result=combined,
         _solver_cases=[
-            (cases[j.root].name + _describe(j, transform2inst), ([case_eps[j.root]], list(transform2inst.keys()), cases[j.root].target), r)
+            (cases[j.root].name + _describe(j, transform2inst), ([case_eps[j.root]], models[j.root], cases[j.root].target), r)
             for j, r in zip(jobs, results)
         ],
         dropped_targets=dropped_targets,

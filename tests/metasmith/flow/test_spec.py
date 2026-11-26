@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from metasmith.agents import CaseViews, Plan, Spec, plan_views
+from metasmith.agents import CaseViews, Plan, Spec, TargetBuilder, plan_views
 from metasmith.agents.spec import case_records
 from metasmith.testing import mock_transforms as mt
 
@@ -33,6 +33,15 @@ def test_pack_unpack_round_trips():
         shared_input_paths=["db.fa"],
     )
     assert Spec.Unpack(spec.Pack(), input_library=spec.input_library) == spec
+
+
+def test_a_builder_packs_to_the_wire_form_with_its_member_set():
+    tb = TargetBuilder()
+    asm = tb.Add("mock::assembly")
+    tb.Add("mock::refined", parents=[asm, tb.Set("mock::b1", "mock::b2")])
+    packed = Spec(input_library="input.xgdb", target_types=tb).Pack()
+    assert packed["target_types"] == ["mock::assembly", {"type": "mock::refined", "parents": [0], "set": ["mock::b1", "mock::b2"]}]
+    assert Spec.Unpack(packed, input_library="input.xgdb").Pack() == packed
 
 
 def test_a_request_from_before_cases_reads_as_one_case():

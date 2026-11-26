@@ -11,6 +11,7 @@ from ..models.libraries import (
     TransformInstanceLibrary, TransformInstanceLibraryView,
 )
 from ..models.solver import Dependency, Transform
+from ..models.variadic import SetToken
 from ..models.solver_backend import SEARCH_BUDGET
 from ..models.workflow import Case, WorkflowPlan, WorkflowTask
 from .targets import TargetBuilder, TargetSpec
@@ -72,7 +73,7 @@ class Spec:
         out = {
             "name": self.name,
             "sample_type": self.sample_type,
-            "target_types": list(self.target_types),
+            "target_types": self.target_types.Pack() if isinstance(self.target_types, TargetBuilder) else list(self.target_types),
             "shared_input_paths": [str(p) for p in self.shared_input_paths],
         }
         if self.input_paths is not None:
@@ -150,7 +151,7 @@ def Plan(
     )
 
 
-def _target_model(targets: TargetBuilder | list, transforms: list) -> tuple[Transform, list[str]]:
+def _target_model(targets: TargetBuilder | list, transforms: list) -> tuple[Transform, list[str], dict[Dependency, list]]:
     if not isinstance(targets, TargetBuilder):
         tb = TargetBuilder()
         tb.AddAll(targets)
@@ -183,13 +184,20 @@ def _target_model(targets: TargetBuilder | list, transforms: list) -> tuple[Tran
     model = Transform()
     deps: dict[TargetSpec, Dependency] = {}
     names: list[str] = []
+    sets: dict[Dependency, list] = {}
     for spec in targets.resolve():
-        deps[spec] = model.AddRequirement(
-            example=_get_endpoint(spec.dtype_name),
-            parents={deps[p] for p in spec.parents},
+        props = set(_get_endpoint(spec.dtype_name).properties)
+        if spec.members:
+            props.add(SetToken(spec.members))
+        dep = model.AddRequirement(
+            properties=props,
+            parents={deps[p] for p in spec.parents if isinstance(p, TargetSpec)},
         )
+        deps[spec] = dep
+        if spec.members:
+            sets[dep] = [_get_endpoint(n) for n in spec.members]
         names.append(spec.dtype_name)
-    return model, names
+    return model, names, sets
 
 
 def _view(lib: LibView) -> DataInstanceLibraryView:
@@ -210,11 +218,11 @@ def plan_views(
     common = [_view(lib) for lib in resources]
     cases: list[Case] = []
     for r in requests:
-        target, target_names = _target_model(r.targets, transforms)
+        target, target_names, sets = _target_model(r.targets, transforms)
         own = common + [_view(lib) for lib in r.resources]
         split = Case.ByShape(
             [[_view(s)] + own for s in r.samples],
-            target=target, target_names=target_names, name=r.name,
+            target=target, target_names=target_names, sets=sets, name=r.name,
         )
         if len(requests) > 1 and len(split) > 1:
             for c in split:
