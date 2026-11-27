@@ -49,6 +49,10 @@ types:
     properties:
       src: ppanggolin_summary
       usage: command line
+  interproscan_gff.py:
+    properties:
+      src: interproscan_gff
+      usage: command line
   go_overrepresentation.py:
     properties:
       src: go_overrepresentation
