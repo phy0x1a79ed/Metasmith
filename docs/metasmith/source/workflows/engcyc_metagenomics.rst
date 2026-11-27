@@ -29,3 +29,7 @@ download. Read it in the GUI's template list, or in ``DESCRIPTION`` in
 - Run ``engcyc_prep_references`` first, once per agent, to fetch every reference database
   ahead of the real run. It takes no samples, and its download steps are the ones
   ``engcyc_metagenomics`` plans, so the real run finds them in the cache.
+- Then press **set up** on the ``engcyc_metagenomics`` workflow itself before **stage and
+  run**. Its downloads come from the cache, and it pulls the tool images that only the
+  sample steps use. On a cluster whose compute nodes cannot reach a registry, a step whose
+  image was never pulled fails.

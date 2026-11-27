@@ -111,3 +111,5 @@ Both stations relaunched warm at ~09:15 with the LazyMap fix. Round 7 records ar
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | ok | sockeye, engcyc_metagenomics_lite | The 82-step run compiled and executes: getSraShortReads, kraken2, metaphlan and others submitted. | - |
+| 2 | error | sockeye compute nodes, images | p27 seqkit_reads and p29 sylph failed: `staphb/seqkit:2.13.0` and `staphb/bbtools:39.49` were not in the store, and the compute node has no route to registry-1.docker.io. The agent ran set up only on the prep workflow, which pulls only the prep plan's images. The run's image check is a log warning by design, since lazy pulls are right where nodes reach a registry. | engcyc doc: press set up on the metagenomics workflow too, which pulls the sample steps' images and serves downloads from the cache |
