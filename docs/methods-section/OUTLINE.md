@@ -49,10 +49,17 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
-#### P3. Planning search — proposed
+#### P3. Planning search — agreed (paragraph-points, 2026-11-27)
 - Role: how the plan is found.
 - Key message: a PUCT search grows partial plans from the givens and the target until no input is left unbound.
-- Covers: search state and base case, expansion (one step per child, one child per valid binding), PUCT selection.
+- Points:
+  1. We framed planning as a tree search of the Monte Carlo tree search (MCTS) family: each node is a search state, each edge adds one step, and the search walks from the root until it reaches a solved state.
+  2. A search state is a partial plan; the root holds only the given steps and the target step, and a search state is solved when every input is bound.
+  3. The frontier holds every step that could be added next, one entry per valid binding of a contract's inputs to existing ports.
+  4. Before the search, a breadth-first search (BFS) that ignores lineage walks back from the target's inputs to the contracts that can produce them, level by level, so each contract's distance is the fewest steps between it and the target; it also counts the routes from each contract to the target and drops contracts it never reaches.
+  5. PUCT scores each frontier step a, and the highest is grown next: U(a) = Q(t) + c·P(a)·√(1+N)/(1+n(t)), where t is a's contract, Q(t) is the mean reward t has earned, n(t) is how often t was picked, N is all picks, and P(a) is a prior favouring steps closer to the target and with more routes to it. The first term exploits contracts that made progress; the second favours promising, rarely tried steps and shrinks as a contract is picked.
+  6. The reward is the gain in the target's satisfied inputs, or 1 when solved; there are no random rollouts, and the search stops at the first solved plan or a fixed iteration limit.
+- Note: statistics are per contract, not per node (`policy.rs:469`). Constants (`policy.rs:160`): c = 1.5; prior = softmax at T = 0.5 over min-max normalized channels, closeness 1 - d/d_max and routes 1 - 1/(1 + r/10) (`mcts.rs:127`), weighted 75:20; unvisited Q = 1.5; recency decay 0.985; self-feed penalty w2 = 0.95; reward = 2x progress delta clamped to [0,1]; max_iter 256. BFS in `problem.rs:346`. Reuse the d3 solver paragraph prose.
 
 #### P4. Refinement — proposed
 - Role: the edge-refinement pass after the search.
