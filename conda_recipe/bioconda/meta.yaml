@@ -1,6 +1,6 @@
 {% set name = "metasmith" %}
-{% set version = "0.26.0" %}
-{% set sha256 = "0000000000000000000000000000000000000000000000000000000000000000" %}
+{% set version = "0.26.2" %}
+{% set sha256 = "dec473ce4e0f91cb30c28c705b9fecdbc020d730b0cbd75f355ac6199f7b60fb" %}
 
 package:
   name: {{ name }}
