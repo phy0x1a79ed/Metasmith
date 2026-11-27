@@ -20,7 +20,7 @@ Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine
 - (2026-11-27) Settle the overall structure and grouping before prose; don't go into the weeds.
 - (2026-11-27) One paragraph per concept.
 - (2026-11-27) Order of work: itemized points for each paragraph, one at a time; then a flow check across the group; then prose for the whole group at once; then check again; then into d3.
-- (2026-11-27) Reuse the original d3 prose where it exists; shuffle rather than rewrite.
+- (2026-11-27) Reuse the original d3 prose where it exists, above all the existing Methods prose ("most of that is good already"); update and fill gaps rather than rewrite.
 
 - (2026-11-25) Results are more up to date than Methods; where they contradict, Methods changes.
 

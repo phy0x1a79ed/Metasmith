@@ -30,9 +30,13 @@ Order and names (outline-sections, 2026-11-26): Planning, Specification, Executi
 Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept".
 
 #### P1. Types — proposed
-- Role: the property-set type and its satisfaction test, used throughout.
-- Key message: a type is a set of properties, and X satisfies Y when X has every property of Y.
-- Earlier points (from the old P1, terms 2026-11-27): types are sets of properties, each narrowing the range of variation of the data; S(X,Y) ≡ X ⊇ Y. No EDAM claim: "a rough link".
+- Role: how types work, the property-set type and its satisfaction test.
+- Key message: a type is a set of properties, and one type satisfies another when it has all of its properties.
+- Points (paragraph-points, 2026-11-27):
+  1. Types are sets of properties, and each property narrows the range of variation of the data it describes.
+  2. A type X satisfies Y if X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
+  3. Abstract types follow from the subset test: a type with fewer properties is satisfied by every type that adds to it, but not the reverse. Example: a wooden chair is a chair, but not every chair is wooden.
+- Note: where the test is used (givens, inputs, lineage) belongs to P2. No EDAM claim: "a rough link".
 
 #### P2. Contracts — proposed
 - Role: contracts, the ports they create as steps, and why contracts need lineage constraints.
