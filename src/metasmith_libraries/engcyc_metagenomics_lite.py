@@ -21,6 +21,7 @@ Read taxonomy: MetaPhlAn, sylph and Kraken2 with Bracken, each in its long-read 
 on long reads; inStrain on short and hybrid.
 Gene function: DIAMOND UniRef50 and KOfam; CLEAN, ProteinBERT and BiGG lanes; the
 4-lane GPR table.
+Marker genes: BUSCO bacteria and archaea markers on every ORF.
 Genome features: Bakta non-coding, ARAGORN tRNA, mobileOG, PromoTech promoters.
 Regulation and transport: DeepTFactor, PredicTF, TCDB by DIAMOND.
 Resistome: RGI/CARD, BacMet, VFDB. RefSeq viral lane.

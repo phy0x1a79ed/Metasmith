@@ -45,6 +45,7 @@ TransformInstance(
     model=model,
     group_by=src,
     labels=["local"],
+    download_size=Size.GB(0.069),  # eukaryota_odb10 2024-01-08 Content-Length; other lineages differ
     resources=Resources(
         cpus=1,
         memory=Size.GB(4),

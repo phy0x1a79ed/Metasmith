@@ -507,6 +507,47 @@ def parse_antismash(path):
                         ).assign(namespace="antismash.product")
 
 
+# ---- BUSCO: protein-mode full_table.tsv per chunk and lineage, concatenated. Each table
+# opens with `# The lineage dataset is: <name> (...)`. A Missing marker names no ORF.
+# BUSCO's Duplicated is relative to its input, here one chunk, so it is recomputed over
+# the whole ORF set: a marker with two or more complete hits in a lineage is Duplicated.
+# A table with no hit at all drops the last two columns from its header.
+_BUSCO_COLS = ["Busco id", "Status", "Sequence", "Score", "Length", "OrthoDB url", "Description"]
+_BUSCO_LINEAGE = re.compile(r"^# The lineage dataset is: (\S+)")
+
+
+def parse_busco(path):
+    rows, lineage = [], None
+    with open(path) as fh:
+        for line in fh:
+            line = line.rstrip("\n")
+            m = _BUSCO_LINEAGE.match(line)
+            if m:
+                lineage = m.group(1)
+            elif line.startswith("# Busco id"):
+                got = line[2:].split("\t")
+                if got not in (_BUSCO_COLS, _BUSCO_COLS[:5]):
+                    _refuse_header(got, _BUSCO_COLS, "busco_full_table", "BUSCO 5 protein mode")
+            elif line and not line.startswith("#"):
+                if lineage is None:
+                    raise SystemExit("[annotation] " + path + " has a BUSCO row before any "
+                                     "`# The lineage dataset is:` line")
+                f = line.split("\t")
+                rows.append([lineage] + f + [""] * (len(_BUSCO_COLS) - len(f)))
+    df = pd.DataFrame(rows, columns=["lineage"] + _BUSCO_COLS)
+    df = df[df["Status"] != "Missing"]
+    complete = df["Status"].isin(["Complete", "Duplicated"])
+    hits = df[complete].groupby(["lineage", "Busco id"])["Sequence"].transform("nunique")
+    status = df["Status"].copy()
+    status[complete] = hits.map(lambda k: "Duplicated" if k >= 2 else "Complete")
+    return pd.DataFrame({
+        "orf": df["Sequence"], "namespace": "busco", "term": df["Busco id"],
+        "description": df["Description"], "score": df["Score"], "score_kind": "bitscore",
+        "x_status": status, "x_length": pd.to_numeric(df["Length"], errors="coerce"),
+        "x_lineage": df["lineage"],
+    })
+
+
 # ---- ProteinBERT: numpy kNN label transfer against the labelled landmarks, with the
 # distance quota and the ORF-level abstain.
 # An embedding table's ids and its vectors, taken from the SAME rows. What is checked is
@@ -705,6 +746,7 @@ LANES = {
     "deeparg":       (parse_deeparg, "annotation::deeparg_results", True),
     "bakta_nc":      (parse_bakta_nc, "annotation::bakta_tsv", False),
     "antismash":     (parse_antismash, "annotation::antismash_json", False),
+    "busco":         (parse_busco, "annotation::busco_full_table", True),
 }
 
 

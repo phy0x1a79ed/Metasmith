@@ -6,16 +6,15 @@ from metasmith.python_api import DEFERRED, Spec, Template
 
 NAME = "viromics_survey_from_assembly"
 DESCRIPTION = """
-Call viral contigs from an assembly with VirSorter2 and geNomad, distill their
-auxiliary metabolic genes with DRAM-v, and quantify crAssphage coverage in the
-clean reads as a faecal-source marker.
+Call viral contigs from an assembly with VirSorter2 and geNomad, and quantify
+crAssphage coverage in the clean reads as a faecal-source marker. DRAM-v's
+auxiliary metabolic genes need the vOTU stack; engcyc_metagenomics has them.
 """
 
 TARGETS = [
     "annotation::virsorter2_viral_sequences",
     "taxonomy::genomad_virus_summary",
     "taxonomy::genomad_plasmid_summary",
-    "annotation::dramv_distill",
     "annotation::crassphage_coverage",
 ]
 
