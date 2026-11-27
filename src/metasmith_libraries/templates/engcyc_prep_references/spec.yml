@@ -42,6 +42,8 @@ cases:
   - annotation::mobileog_diamond_db
   - annotation::vfdb_diamond_db
   - annotation::virsorter2_db
+  - annotation::predictf_db
+  - annotation::tcdb_diamond_db
   - ref::antismash
   - ref::checkv_db
   - ref::dbcan_hmm

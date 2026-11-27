@@ -33,11 +33,13 @@ hybrid also run Centrifuger (GTDB r226, 176 GB), phyloFlash (SILVA 138.2, 0.2 GB
 and inStrain on the quality MAGs. Hybrid's StrainPhlAn reads its long reads.
 Gene function: DIAMOND UniRef50 (~24 GB), KOfam (~5 GB), InterProScan (~100 GB),
 eggNOG (12 GB, 55 GB unpacked).
+Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
+(< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
 GPR table: the 4-lane table (KOfam, CLEAN, UniRef50, ProteinBERT); the DeepEC and
 BiGG lane tables beside it. Its reaction bridge is built from MetaNetX, Rhea and KEGG,
 and ProteinBERT's landmarks from Swiss-Prot (0.35 GB together).
 Genome features: Bakta non-coding (~70 GB full DB), ARAGORN tRNA, antiSMASH
-(~10 GB), mobileOG (~1 GB).
+(~10 GB), mobileOG (~1 GB), PromoTech promoters (no download).
 PathoFact 2.0 reports (PathoFact DB 1.1 GB, DeepARG 1.9 GB, CARD, AMRFinderPlus,
 geNomad ~1.5 GB).
 DRAM distill per quality MAG (DRAM forms only; dbCAN ~1 GB, MEROPS ~1 GB, VOGDB
@@ -90,6 +92,9 @@ TARGETS = [
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
       for lane in ("uniref50", "kofam", "interproscan", "eggnog")),
     {"type": "annotation::interproscan_hits", "parents": _O},
+    # regulation and transport: no download, or a small one
+    *({"type": f"annotation::{t}", "parents": _O}
+      for t in ("deeptfactor_results", "predictf_results", "diamond_tcdb_results")),
     # lane tables the GPR tables, DRAM, PathoFact and CarveMe read
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
       for lane in ("merops", "refseq_viral", "vogdb", "dbcan", "deepec", "deeparg",
@@ -101,6 +106,7 @@ TARGETS = [
     {"type": "annotation::trna_gff", "parents": _A},
     {"type": "annotation::antismash_lane_table", "parents": _A},
     {"type": "annotation::mobileog_lane_table", "parents": _O},
+    {"type": "annotation::promotech_predictions", "parents": _A},
     # PathoFact 2.0
     {"type": "annotation::pathofact_report", "parents": _A},
     {"type": "annotation::pathofact_vf", "parents": _A},
@@ -160,7 +166,8 @@ HYBRID_TARGETS = [ASSEMBLY, {"type": "sequences::opera_ms_assembly", "parents": 
 # run finds them in the cache. They take no sample, so they plan as a case of their own.
 REFERENCES = [f"annotation::{t}" for t in (
     "amrfinderplus_db", "bacmet_diamond_db", "bakta_db", "card_db", "eggnog_data",
-    "megares_diamond_db", "mobileog_diamond_db", "vfdb_diamond_db", "virsorter2_db")] + [
+    "megares_diamond_db", "mobileog_diamond_db", "vfdb_diamond_db", "virsorter2_db",
+    "predictf_db", "tcdb_diamond_db")] + [
     f"ref::{t}" for t in (
         "antismash", "checkv_db", "dbcan_hmm", "deeparg_db", "dram_sheets", "ganon2_db", "genomad",
         "gtdb", "gtdb_rrna", "interproscan_data", "iphop_db", "kofamscan_ko_list",

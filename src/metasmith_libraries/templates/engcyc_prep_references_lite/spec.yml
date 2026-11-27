@@ -30,6 +30,8 @@ cases:
   - annotation::mobileog_diamond_db
   - annotation::vfdb_diamond_db
   - annotation::virsorter2_db
+  - annotation::predictf_db
+  - annotation::tcdb_diamond_db
   - ref::checkv_db
   - ref::genomad
   - ref::gtdb
