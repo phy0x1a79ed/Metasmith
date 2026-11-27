@@ -7,7 +7,7 @@ from pathlib import Path
 
 from ..constants import AgentPaths
 from ..logging import Log
-from ..models.libraries import Resources, Size, Duration
+from ..models.libraries import Gpu, Resources, Size, Duration
 from ..models.remote import Source, SourceType, Logistics
 from ..coms.terminals import IDLE_TIMEOUT
 from . import workspace as _ws
@@ -89,6 +89,7 @@ def run(
     resource_overrides: dict | None = None,
     stub_delay: float = 0,
     is_local_preset: bool | None = None,
+    gpu_memory_gb: float | None = None,
 ) -> dict:
     agent = load_agent(agent_path)
     if config_file is None and config_preset:
@@ -122,6 +123,7 @@ def run(
         config_file=Path(config_file) if config_file else None,
         params=params,
         resource_overrides=ro,
+        gpus=None if gpu_memory_gb is None else Gpu(memory=Size.GB(gpu_memory_gb)),
         stub_delay=stub_delay,
         is_local_preset=is_local_preset,
     )

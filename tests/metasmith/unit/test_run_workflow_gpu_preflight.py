@@ -97,6 +97,7 @@ class TestPreflightBlocksTheLaunch:
         with pytest.raises(GpuRequirementError) as e:
             _run(monkeypatch, agent, manifest)
         assert "prott5" in str(e.value)
+        assert "GPU memory field" in str(e.value) and "--gpu-memory" in str(e.value)
         assert RecordingMover.sent == {}
 
     def test_error_names_a_device_it_can_see(self, monkeypatch, agent):

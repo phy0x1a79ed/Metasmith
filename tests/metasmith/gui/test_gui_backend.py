@@ -22,7 +22,8 @@ from metasmith.ops import inputs as op_inputs
 from metasmith.ops import workspace as op_workspace
 
 from tests.metasmith.support import create_transform_library, serve_directory
-from metasmith.gui.api import _pool_resolver
+from metasmith.gui.api import _gpu_need, _pool_resolver
+from metasmith.models.libraries import Gpu, Size
 from metasmith.gui.store import ProjectError
 from metasmith.ops import data as op_data
 
@@ -1900,7 +1901,7 @@ class TestLaunchParams:
     def test_the_dry_run_delay_does_not_land_in_the_gpu_slot(self, client, runnable):
         _, call = self._launch(client, runnable)
         assert call.kwargs.get("stub_delay") == 0
-        assert "gpus" not in call.kwargs
+        assert call.kwargs["gpus"] is None
 
 
 class TestStepSelectors:
@@ -3110,6 +3111,38 @@ class TestLaunchRefusals:
         r, _ = self._post(client, runnable)
         assert r.status_code == 202
 
+
+class TestGpuLaunch:
+    def _needs_gpu(self, client, workflow):
+        project = client.application.config["MSM_PROJECT"]
+        wf = project.read_workflow(workflow)
+        project.write_result(workflow, wf.result | {"gpu": {"required": True, "memory_gb": 16.0}})
+
+    def test_a_solved_plan_says_whether_it_needs_a_gpu(self, client, runnable):
+        assert client.get(f"/api/workflows/{runnable}").get_json()["result"]["gpu"] == {
+            "required": False, "memory_gb": None,
+        }
+        display = [
+            {"declared_resources": {"cpus": 2}},
+            {"declared_resources": {"gpus": "optional", "gpu_memory_gb": 40.0}},
+            {"declared_resources": {"gpus": "required", "gpu_memory_gb": 16.0}},
+        ]
+        assert _gpu_need(display) == {"required": True, "memory_gb": 40.0}
+
+    def test_a_declared_gpu_reaches_run_workflow(self, client, runnable):
+        self._needs_gpu(client, runnable)
+        r, call = TestLaunchRefusals._post(None, client, runnable, gpu_memory_gb="16")
+        assert r.status_code == 202, r.get_json()
+        assert call.kwargs["gpus"] == Gpu(memory=Size.GB(16))
+        assert r.get_json()["run"]["gpu_memory_gb"] == 16.0
+
+    def test_a_plan_needing_a_gpu_is_refused_without_one(self, client, runnable):
+        self._needs_gpu(client, runnable)
+        r, call = TestLaunchRefusals._post(None, client, runnable)
+        assert r.status_code == 409
+        assert "GPU field" in r.get_json()["error"]
+        assert call is None
+        assert client.get("/api/runs").get_json() == []
 
 class TestWorkflowPresetSource:
     def test_a_new_workflow_takes_the_agents_default_preset(self, client, tmp_path):

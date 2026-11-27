@@ -444,6 +444,7 @@
               </td>
             </tr>
           {/if}
+          {#if rec.gpu_memory_gb != null}<tr><td class="muted">GPU</td><td class="mono small">{rec.gpu_memory_gb} GB per device</td></tr>{/if}
           {#if rec.error}<tr><td class="muted">error</td><td class="bad">{rec.error}</td></tr>{/if}
         </tbody>
       </table>
