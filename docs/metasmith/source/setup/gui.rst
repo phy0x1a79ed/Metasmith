@@ -18,7 +18,10 @@ The page opens at http://127.0.0.1:8090. It binds to the loopback interface only
 ``msm gui --help`` for the port, the host and the project folder.
 
 1. Pick a template. The template list shows each template's description.
-2. Give each sample a file of the template's sample type.
+2. Give each sample its inputs. Type a path or an https URL into each row, or paste a sample
+   sheet: a CSV with a header row and one row per sample. With a sheet, pick a column for
+   each row that differs per sample. A row you leave typed holds the same value for every
+   sample.
 3. Deselect any target you do not need.
 4. Solve. The GUI shows the plan as a graph of steps.
 5. Run it on an agent, then follow its progress and open its results.

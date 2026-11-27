@@ -156,10 +156,10 @@ costs one test per image.
 
 .. important::
 
-    The real run must use the **same agent** and the **same task** as the setup
-    run. A different agent home has its own empty cache. A task planned again
-    from a rebuilt resource library cites different references, and so does not
-    find them.
+    The real run must use the **same agent** as the setup run. The cache belongs
+    to the agent home, so any workflow on that agent finds the references, for
+    example ``engcyc_metagenomics`` after ``engcyc_prep_references``. A
+    different agent home has its own empty cache.
 
 Downloads run on the login node
 ------------------------------------------------------------
