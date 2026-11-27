@@ -10,7 +10,7 @@
 
 ## Waiting on the user
 
-- (none until the survey lands)
+- `survey` → what "aggregated" means when done, and the order of the stages.
 
 ## Preferences
 
@@ -35,9 +35,7 @@
 
 ## Workers
 
-- E2E install-loop survey — state, problem list, time sinks, lessons.
-- Cross-project tool survey — every tool run anywhere, and whether it is a release transform.
-- Galaxy / geoquery / ML survey — catalog scale and API, geoquery state, prior ML work.
+- (none running) — the three survey workers reported 2026-11-27; findings in `SURVEY.md`.
 
 ## Closed
 
