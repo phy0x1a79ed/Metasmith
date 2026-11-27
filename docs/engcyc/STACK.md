@@ -6,9 +6,10 @@ then run 4 (a naive agent installs msm end to end and runs it).
 Decisions: docs/engcyc/DECISIONS.md
 
 ## Current
-- 2026-11-27 06:30. Run 4 round 6 on 0.26.2-e0f658e (adds GUI GPU field 550fe2c6, setup confirm stays armed, GPU accounts in the prompt); both stations warm, caps sockeye 900, fir 3000. Earlier: round 5 on d967a2d (sheet-literal fix ea58a129+60dc45aa, antiSMASH f18797ba, docs d56bae05):
-  - sockeye relaunched warm 04:25 (lite templates), watcher msm-e2e-run-4-sockeye-watch3 900 GB. Its round-4 cache uses the new ids, so setup should mostly hit.
-  - fir: round 3 stopped (pre-leaf-identity cache could never hit); /scratch/phyberos/msm_e2e/run-4-fir deleted; relaunched fresh with --max-gb 3000. Expect ~10 h of setup (ganon2 alone ~8 h).
+- 2026-11-27 08:10. Run 4 round 7 pending a build (msm-rc-build-d) of rc dd1bd8da. Fixes landed today, each found by the naive agent:
+  - antiSMASH --check-prereqs dropped (f18797ba); sheet keeps typed rows, per-sample below a bound row (ea58a129, 60dc45aa); GUI GPU field + --gpu-memory + GPU accounts in the prompt (550fe2c6); setup/reset confirm stays armed; removing a case removes its rows; codegen keeps only process calls in the workflow body so 500-step plans compile (1278169d, cache keys unchanged, golden regenerated dd1bd8da); docs for sheets, SRA via GUI, engcyc cases, lite templates, cache per agent (d56bae05).
+  - Round 6 (e0f658e): sockeye setup warm OK, GPU field OK, then MethodTooLargeException at compile. fir still in setup (~840 GB of ~860+).
+  - Next: relaunch both warm on the new tag (sockeye --max-gb 900 lite templates, fir --max-gb 3000), kill remote trees by PID first (script: msm job tmp killtree.sh matched its own shell; exclude bash -s).
   - Records: docs/e2e-install/e2e-test/runs/run-4/ISSUES.md rounds 1-5, round2/, round3/{fir,sockeye}, round4/sockeye. Archive each station's sandbox STEPS/PROGRESS/REPORT/watch.csv before deleting /home/tony/msm_e2e/run-4-<host>.
   - Relaunch: from rc root, PYTHONPATH=$PWD/src:$PWD, nohup python -m tests.metasmith.e2e.agentic.first_install --run 4 --host <h> [--prep engcyc_prep_references_lite --template engcyc_metagenomics_lite for sockeye] --channel $PWD/conda_build --sif $PWD/metasmith.sif --image-tag <tag> [--warm] --max-gb <cap> > ~/msm_e2e/launch/run-4-<h>.out. Kill the remote driver/relay by PID on the login node too (scope stop does not reach it).
   - Build: tests/metasmith/e2e/agentic/install_mock/build_local_artifacts.sh --apptainer with PATH=msm env bin:~/.local/bin (npm) first: 18-29 min.
