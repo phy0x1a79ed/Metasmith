@@ -82,3 +82,10 @@ The build carries the sheet-literal fix, the antiSMASH fix and the docs above. s
 | 3 | ok | fir, SRA via the GUI | The agent followed the engcyc doc's recipe: read_pair row as `ncbi::sra_short_read_accession` = SRR9658108, read rows deleted. It solved after it deleted the empty rows of the deleted cases. | - |
 | 4 | error | GUI stage and run (sockeye, engcyc_metagenomics_lite) | The run job failed in the GUI thread: `GpuRequirementError: workflow requires a GPU but none was declared for this run; offending transforms: clean (step 44)`. Only `RunWorkflow(gpus=Gpu(...))` declares a GPU. The GUI and `ops.runtime.run` cannot, so no GUI user can run an engcyc template. The agent took the click as a launch and polled for a log that never came. | 550fe2c6: GPU memory field on the run panel when a step requires a GPU; launch refused at once without it; `--gpu-memory` on the CLI. The harness tells the agent each cluster's GPU account |
 | 5 | harness | watcher on sockeye | Every walk of the warm home hit the 15 min timeout. The readings were lower bounds (631 GB). | 30 min walk, sockeye watcher restarted 05:29. The 05:46 walk was complete: 120k files, 632 GB |
+
+# Round 6 (release candidate 0.26.2+e0f658e, 2026-11-27)
+
+Both stations relaunched warm at 06:28, sockeye under a 900 GB cap and fir under 3000 GB. The build adds the GPU field (550fe2c6), the set-up confirm that stays armed, and the GPU accounts in the prompt. Records from round 5 are in `round5/`. Round 5 on fir was 2 h into setup (776 GB). Its finished steps should hit the cache and its partial downloads resume.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|

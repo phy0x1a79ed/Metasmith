@@ -6,7 +6,7 @@ then run 4 (a naive agent installs msm end to end and runs it).
 Decisions: docs/engcyc/DECISIONS.md
 
 ## Current
-- 2026-11-27 04:40. Run 4 round 5 on 0.26.2-d967a2d (sheet-literal fix ea58a129+60dc45aa, antiSMASH f18797ba, docs d56bae05):
+- 2026-11-27 06:30. Run 4 round 6 on 0.26.2-e0f658e (adds GUI GPU field 550fe2c6, setup confirm stays armed, GPU accounts in the prompt); both stations warm, caps sockeye 900, fir 3000. Earlier: round 5 on d967a2d (sheet-literal fix ea58a129+60dc45aa, antiSMASH f18797ba, docs d56bae05):
   - sockeye relaunched warm 04:25 (lite templates), watcher msm-e2e-run-4-sockeye-watch3 900 GB. Its round-4 cache uses the new ids, so setup should mostly hit.
   - fir: round 3 stopped (pre-leaf-identity cache could never hit); /scratch/phyberos/msm_e2e/run-4-fir deleted; relaunched fresh with --max-gb 3000. Expect ~10 h of setup (ganon2 alone ~8 h).
   - Records: docs/e2e-install/e2e-test/runs/run-4/ISSUES.md rounds 1-5, round2/, round3/{fir,sockeye}, round4/sockeye. Archive each station's sandbox STEPS/PROGRESS/REPORT/watch.csv before deleting /home/tony/msm_e2e/run-4-<host>.
