@@ -33,6 +33,7 @@ hybrid also run Centrifuger (GTDB r226, 176 GB), phyloFlash (SILVA 138.2, 0.2 GB
 and inStrain on the quality MAGs. Hybrid's StrainPhlAn reads its long reads.
 Gene function: DIAMOND UniRef50 (~24 GB), KOfam (~5 GB), InterProScan (~100 GB),
 eggNOG (12 GB, 55 GB unpacked).
+Marker genes: BUSCO bacteria and archaea odb10 markers on every ORF (0.01 GB).
 Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
 (< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
 GPR table: the 4-lane table (KOfam, CLEAN, UniRef50, ProteinBERT); the DeepEC and
@@ -92,6 +93,7 @@ TARGETS = [
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
       for lane in ("uniref50", "kofam", "interproscan", "eggnog")),
     {"type": "annotation::interproscan_hits", "parents": _O},
+    {"type": "annotation::marker_gene_hit_table", "parents": _O},
     # regulation and transport: no download, or a small one
     *({"type": f"annotation::{t}", "parents": _O}
       for t in ("deeptfactor_results", "predictf_results", "diamond_tcdb_results")),
@@ -172,7 +174,7 @@ REFERENCES = [f"annotation::{t}" for t in (
         "antismash", "checkv_db", "dbcan_hmm", "deeparg_db", "dram_sheets", "ganon2_db", "genomad",
         "gtdb", "gtdb_rrna", "interproscan_data", "iphop_db", "kofamscan_ko_list",
         "kofamscan_profiles", "kraken2_db", "label_transfer_landmarks", "merops_diamond_db",
-        "metabuli_ref", "metaphlan_db", "mnxr_lookup",
+        "metabuli_ref", "metaphlan_db", "mnxr_lookup", "busco_prokaryote_lineages",
         "pathofact_db", "refseq_viral_diamond_db", "sylph_db", "uniref50_diamond_db", "vcontact3_db",
         "vibrant_db", "vogdb_hmm", "centrifuger_db", "phyloflash_db")]
 CASE_TARGETS = {"short": SHORT_TARGETS, "long": LONG_TARGETS, "hybrid": HYBRID_TARGETS}

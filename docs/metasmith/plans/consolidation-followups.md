@@ -24,7 +24,7 @@ same poll. The kill found no process, Nextflow raised `IllegalThreadStateExcepti
 hasn't exited`, and the session aborted before the build step started. The fetched files had
 already moved out of the staging dir into the unpromoted work dir, so a plain rerun fetches them
 again. The race is in Nextflow. Give a local fetch a wall far above its measured time, as
-`downloadDramDB`'s 24 h does. The first move is to reproduce the race on the pinned Nextflow and
+`downloadDramDB`'s 24 h did before its retirement. The first move is to reproduce the race on the pinned Nextflow and
 report it upstream.
 
 **A cancelled local task can keep running after the cancel.** On fir, a ganon2 fetch cancelled

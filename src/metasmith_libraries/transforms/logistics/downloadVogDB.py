@@ -5,7 +5,7 @@ model   = Transform()
 image   = model.AddRequirement(lib.GetType("env::hmmer.env"))
 sources = model.AddProduct(lib.GetType("ref::vogdb_sources"))
 
-# The release downloadDramDB pins; DRAM's own default is `latest`.
+# Pinned; DRAM's own default is `latest`.
 BASE_URL = "https://fileshare.lisc.univie.ac.at/vog"
 RELEASE = "vog237"
 FILES = ("vog.hmm.tar.gz", "vog.annotations.tsv.gz")

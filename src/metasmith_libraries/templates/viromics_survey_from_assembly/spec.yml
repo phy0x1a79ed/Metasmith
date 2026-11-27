@@ -1,10 +1,10 @@
 name: viromics_survey_from_assembly
-description: 'Call viral contigs from an assembly with VirSorter2 and geNomad, distill
-  their
+description: 'Call viral contigs from an assembly with VirSorter2 and geNomad, and
+  quantify
 
-  auxiliary metabolic genes with DRAM-v, and quantify crAssphage coverage in the
+  crAssphage coverage in the clean reads as a faecal-source marker. DRAM-v''s
 
-  clean reads as a faecal-source marker.'
+  auxiliary metabolic genes need the vOTU stack; engcyc_metagenomics has them.'
 transform_libraries:
 - logistics
 - metagenomics
@@ -18,7 +18,6 @@ cases:
   - annotation::virsorter2_viral_sequences
   - taxonomy::genomad_virus_summary
   - taxonomy::genomad_plasmid_summary
-  - annotation::dramv_distill
   - annotation::crassphage_coverage
   shared_input_paths: []
 input_library:

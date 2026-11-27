@@ -766,6 +766,19 @@ def _write_extra_lanes(work: Path) -> list:
         f"Sequence\tPrediction\tProbability\n{ORFS[0]}\t1\t0.95123456\n"
         f"{ORFS[1]}\t0\t0.2\n")
     (w / "deeparg.tsv").write_text(DEEPARG_HEADER + "\n" + _deeparg_row(ORFS[0]) + "\n")
+    # Two chunks' bacteria tables and one archaea table, concatenated as the lane does. The
+    # marker each chunk calls Complete has two ORFs over the whole set.
+    busco = lambda lineage, *rows: (
+        "# BUSCO version is: 5.8.3 \n"
+        f"# The lineage dataset is: {lineage} (Creation date: 2024-01-08, number of genomes: 1, number of BUSCOs: 2)\n"
+        "# Busco id\tStatus\tSequence\tScore\tLength\tOrthoDB url\tDescription\n"
+        + "".join("\t".join(r) + "\n" for r in rows))
+    url = "https://v10-1.orthodb.org/?query="
+    (w / "busco.tsv").write_text(
+        busco("bacteria_odb10", ("1009041at2", "Complete", ORFS[0], "260.1", "220", url, "FtsZ"),
+              ("761140at2", "Missing"))
+        + busco("bacteria_odb10", ("1009041at2", "Complete", ORFS[1], "250.0", "218", url, "FtsZ"))
+        + busco("archaea_odb10", ("115808at2157", "Fragmented", ORFS[0], "48.9", "123", url, "GGR")))
     return [
         *[(lane, w / f"{lane}.tsv", w / f"{lane}_descriptions.tsv") for lane in bsr_lanes],
         ("pathofact_hmm", w / "pf_tox.tbl", w / "pf_vf.tbl", w / "pf_desc.tsv"),
@@ -781,6 +794,7 @@ def _write_extra_lanes(work: Path) -> list:
         ("bigg", w / "bigg.tsv"), ("rgi", w / "rgi.tsv"),
         ("amrfinderplus", w / "amrfinderplus.tsv"),
         ("bakta_nc", w / "bakta.tsv"), ("antismash", w / "antismash.json"),
+        ("busco", w / "busco.tsv"),
     ]
 
 
@@ -832,6 +846,12 @@ def test_annotation_table_carries_every_lane_under_the_fastas_ids(tmp_path):
     assert sorted(cazy.index) == ["GH5_4", "GT2"]
     assert cazy.loc["GH5_4", "score"] == pytest.approx(240 / 280)
     assert set(df.loc[df["lane"] == "merops", "term"]) == {"MER0000002", "MER0000009"}
+    # BUSCO's Missing names no ORF; Duplicated counts the whole ORF set, not one chunk
+    busco = df[df["lane"] == "busco"]
+    assert sorted(zip(busco["busco_lineage"], busco["term"], busco["orf"], busco["busco_status"])) == [
+        ("archaea_odb10", "115808at2157", ORFS[0], "Fragmented"),
+        ("bacteria_odb10", "1009041at2", ORFS[0], "Duplicated"),
+        ("bacteria_odb10", "1009041at2", ORFS[1], "Duplicated")]
 
 
 def test_dram_annotations_render_one_mags_rows_the_way_dram_cuts_them(tmp_path):

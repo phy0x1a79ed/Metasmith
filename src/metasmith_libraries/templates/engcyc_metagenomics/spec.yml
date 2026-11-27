@@ -55,6 +55,8 @@ description: 'The Engcyc metagenomics workflow from reads, in three cases planne
 
   eggNOG (12 GB, 55 GB unpacked).
 
+  Marker genes: BUSCO bacteria and archaea odb10 markers on every ORF (0.01 GB).
+
   Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
 
   (< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
@@ -180,102 +182,105 @@ cases:
     type: annotation::interproscan_hits
     parents: *id002
   - &id018
-    type: annotation::deeptfactor_results
+    type: annotation::marker_gene_hit_table
     parents: *id002
   - &id019
-    type: annotation::predictf_results
+    type: annotation::deeptfactor_results
     parents: *id002
   - &id020
-    type: annotation::diamond_tcdb_results
+    type: annotation::predictf_results
     parents: *id002
   - &id021
-    type: annotation::merops_lane_table
+    type: annotation::diamond_tcdb_results
     parents: *id002
   - &id022
-    type: annotation::refseq_viral_lane_table
+    type: annotation::merops_lane_table
     parents: *id002
   - &id023
-    type: annotation::vogdb_lane_table
+    type: annotation::refseq_viral_lane_table
     parents: *id002
   - &id024
-    type: annotation::dbcan_lane_table
+    type: annotation::vogdb_lane_table
     parents: *id002
   - &id025
-    type: annotation::deepec_lane_table
+    type: annotation::dbcan_lane_table
     parents: *id002
   - &id026
-    type: annotation::deeparg_lane_table
+    type: annotation::deepec_lane_table
     parents: *id002
   - &id027
-    type: annotation::pathofact_ml_lane_table
+    type: annotation::deeparg_lane_table
     parents: *id002
   - &id028
-    type: annotation::pathofact_hmm_lane_table
+    type: annotation::pathofact_ml_lane_table
     parents: *id002
   - &id029
-    type: annotation::pbert_lane_table
+    type: annotation::pathofact_hmm_lane_table
     parents: *id002
   - &id030
-    type: annotation::clean_lane_table
+    type: annotation::pbert_lane_table
     parents: *id002
   - &id031
-    type: annotation::bigg_lane_table
+    type: annotation::clean_lane_table
     parents: *id002
   - &id032
-    type: annotation::gpr_table
+    type: annotation::bigg_lane_table
     parents: *id002
   - &id033
+    type: annotation::gpr_table
+    parents: *id002
+  - &id034
     type: annotation::bakta_nc_lane_table
     parents: *id001
-  - &id034
+  - &id035
     type: annotation::trna_gff
     parents: *id001
-  - &id035
+  - &id036
     type: annotation::antismash_lane_table
     parents: *id001
-  - &id036
+  - &id037
     type: annotation::mobileog_lane_table
     parents: *id002
-  - &id037
+  - &id038
     type: annotation::promotech_predictions
     parents: *id001
-  - &id038
+  - &id039
     type: annotation::pathofact_report
     parents: *id001
-  - &id039
+  - &id040
     type: annotation::pathofact_vf
     parents: *id001
-  - &id040
+  - &id041
     type: annotation::pathofact_tox
     parents: *id001
-  - &id041
+  - &id042
     type: annotation::pathofact_amr
     parents: *id001
-  - &id042
+  - &id043
     type: annotation::dram_metabolism_summary
     parents: *id001
-  - &id043
+  - &id044
     type: annotation::dram_product_tsv
     parents: *id001
-  - &id044
+  - &id045
     type: annotation::rgi_lane_table
     parents: *id002
-  - &id045
+  - &id046
     type: annotation::amrfinderplus_lane_table
     parents: *id002
-  - &id046
+  - &id047
     type: annotation::megares_lane_table
     parents: *id002
-  - &id047
+  - &id048
     type: annotation::bacmet_lane_table
     parents: *id002
-  - &id048
+  - &id049
     type: annotation::vfdb_lane_table
     parents: *id002
-  - &id049
+  - &id050
     type: annotation::integronfinder_integrons
     parents: *id001
-  - &id050
+  - &id051
     type: annotation::mobileelementfinder_results
     parents: *id001
   - type: annotation::instrain_genome_info
@@ -287,35 +292,35 @@ cases:
   - taxonomy::ganon2_report
   - taxonomy::centrifuger_kreport
   - taxonomy::phyloflash_summary
-  - &id051
+  - &id052
     type: modelling::carveme_model
     parents: *id001
-  - &id052
+  - &id053
     type: modelling::memote_score
     parents: *id001
-  - &id053
+  - &id054
     type: viromics::checkv_quality_summary
     parents: *id001
-  - &id054
+  - &id055
     type: viromics::votu_cluster_table
     parents: *id001
-  - &id055
+  - &id056
     type: annotation::dramv_amg_summary
     parents: *id001
-  - &id056
+  - &id057
     type: viromics::cas_operons
     parents: *id001
-  - &id057
+  - &id058
     type: viromics::vcontact3_assignments
     parents: *id001
-  - &id058
+  - &id059
     type: viromics::host_prediction_genus
     parents: *id001
   - viromics::virus_host_links
-  - &id059
+  - &id060
     type: taxonomy::metabuli
     parents: *id001
-  - &id060
+  - &id061
     type: taxonomy::metabuli_report
     parents: *id001
   shared_input_paths:
@@ -324,8 +329,8 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/1fbdf701a1524ab3ab95ab9cad873d33
-  - /msm_deferred/410e192a7c1043dba356a7ced5b4c295
+  - /msm_deferred/46e9062d83414671a2dd47cc3bfc672d
+  - /msm_deferred/a82d60ed54a548b4b455eea86ae7039d
   - short_1_name.txt
   - short_1_read_pair.txt
   - short_1_reads_metadata.json
@@ -378,6 +383,9 @@ cases:
     parents:
     - 4
   - type: annotation::interproscan_hits
+    parents:
+    - 4
+  - type: annotation::marker_gene_hit_table
     parents:
     - 4
   - type: annotation::deeptfactor_results
@@ -526,9 +534,9 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/0a1dda87f99c42c3935af833ab2bf422
-  - /msm_deferred/199541b3316c49e6a4917c99886eee82
-  - /msm_deferred/bf6ef4d7fd784caf9ae67ec4a74fb941
+  - /msm_deferred/65353e735cd14cf2b3a9fd331bf9f4dd
+  - /msm_deferred/a0b4716cb70846599cdefb5a73e96e03
+  - /msm_deferred/aececeb42bf04ddb9c2f891809931aed
   - hybrid_1_name.txt
   - hybrid_1_read_pair.txt
   - hybrid_1_reads_metadata.json
@@ -584,12 +592,12 @@ cases:
   - *id048
   - *id049
   - *id050
+  - *id051
   - taxonomy::metaphlan_profile
   - annotation::strainphlan_consensus_markers
   - taxonomy::sylph_profile
   - taxonomy::kraken2_report
   - taxonomy::ganon2_report
-  - *id051
   - *id052
   - *id053
   - *id054
@@ -597,16 +605,17 @@ cases:
   - *id056
   - *id057
   - *id058
-  - viromics::virus_host_links
   - *id059
+  - viromics::virus_host_links
   - *id060
+  - *id061
   shared_input_paths:
   - contig_study.json
   - eggnog_source.json
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/d440a5730e9041839c25dd90216ec5d2
+  - /msm_deferred/381de23312fc4c6c822d62af57fa594b
   - long_1_name.txt
   - long_1_reads_metadata.json
 - name: references
@@ -642,6 +651,7 @@ cases:
   - ref::metabuli_ref
   - ref::metaphlan_db
   - ref::mnxr_lookup
+  - ref::busco_prokaryote_lineages
   - ref::pathofact_db
   - ref::refseq_viral_diamond_db
   - ref::sylph_db
@@ -664,41 +674,41 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/0a1dda87f99c42c3935af833ab2bf422:
-      type: sequences::long_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_reads_metadata.json: sequences::read_metadata
-      instance_id: 1e2063996927f75e16176f31674fa3b9f68dedc4f5fe7de305c318229d57ead6bb83
-      origin: leaf
-    /msm_deferred/199541b3316c49e6a4917c99886eee82:
-      type: sequences::zipped_forward_short_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e2090e894f9397edc0521ebf8f57c3f7c0c000c82c768d53f1e9f8450530b0ebf16
-      origin: leaf
-    /msm_deferred/1fbdf701a1524ab3ab95ab9cad873d33:
-      type: sequences::zipped_reverse_short_reads
-      parents:
-        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e2050b0567c05a08684393178ba9d8bd74776475fa12a0d717a68d5172cc39fda51
-      origin: leaf
-    /msm_deferred/410e192a7c1043dba356a7ced5b4c295:
-      type: sequences::zipped_forward_short_reads
-      parents:
-        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e20db249d6378316f1893fb03cdf620ecbae1e0777b2e0459a848fef021b86c17fe
-      origin: leaf
-    /msm_deferred/bf6ef4d7fd784caf9ae67ec4a74fb941:
-      type: sequences::zipped_reverse_short_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e20fc058c5d3c90bf2630669730ac978dcdb18d7f03d6efed3fece48ddad9e46cd9
-      origin: leaf
-    /msm_deferred/d440a5730e9041839c25dd90216ec5d2:
+    /msm_deferred/381de23312fc4c6c822d62af57fa594b:
       type: sequences::long_reads
       parents:
         IkuWHv2PBGcI@long_1_reads_metadata.json: sequences::read_metadata
-      instance_id: 1e200facf9527183dd6ce4462e903e3292b20024fe4ce87a6850d424d62076ba2862
+      instance_id: 1e202e6d8dcc2dcab7a0476ef84a1255ca5ef3575b3fac3364ad14fc0a1651c2165d
+      origin: leaf
+    /msm_deferred/46e9062d83414671a2dd47cc3bfc672d:
+      type: sequences::zipped_reverse_short_reads
+      parents:
+        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e209add97e274fcd142e578a953f3bcdd62984a096cfd0fd97791214f5b4530e2ce
+      origin: leaf
+    /msm_deferred/65353e735cd14cf2b3a9fd331bf9f4dd:
+      type: sequences::zipped_reverse_short_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e20d9c72ed07ef23f0a86c16a047baeb87d3a27ec49c1a1830fb75e163f9d733cde
+      origin: leaf
+    /msm_deferred/a0b4716cb70846599cdefb5a73e96e03:
+      type: sequences::long_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_reads_metadata.json: sequences::read_metadata
+      instance_id: 1e2078ae6c0b671c1709c616616b64a6220a9ce0954d35a9b48daf1fcd6072f93427
+      origin: leaf
+    /msm_deferred/a82d60ed54a548b4b455eea86ae7039d:
+      type: sequences::zipped_forward_short_reads
+      parents:
+        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e20415fa47a6dfa6b47454822a831d9e3306cc4806d80002a66155b027ab7e78402
+      origin: leaf
+    /msm_deferred/aececeb42bf04ddb9c2f891809931aed:
+      type: sequences::zipped_forward_short_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e20f141d8d8c7baad6cd3577659f54c1c69454e7defcbd95e5e962b1289fe15d834
       origin: leaf
     complete_medium.tsv:
       type: modelling::media

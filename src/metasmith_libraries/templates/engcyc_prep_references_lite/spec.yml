@@ -42,6 +42,7 @@ cases:
   - ref::label_transfer_landmarks
   - ref::metaphlan_db
   - ref::mnxr_lookup
+  - ref::busco_prokaryote_lineages
   - ref::refseq_viral_diamond_db
   - ref::sylph_db
   - ref::uniref50_diamond_db

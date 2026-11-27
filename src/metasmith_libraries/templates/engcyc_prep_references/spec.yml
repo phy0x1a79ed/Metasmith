@@ -63,6 +63,7 @@ cases:
   - ref::metabuli_ref
   - ref::metaphlan_db
   - ref::mnxr_lookup
+  - ref::busco_prokaryote_lineages
   - ref::pathofact_db
   - ref::refseq_viral_diamond_db
   - ref::sylph_db
