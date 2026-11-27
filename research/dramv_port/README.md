@@ -22,8 +22,10 @@ One CPE3 sample on fir, both arms on the same VirSorter2 run (`--prep-for-dramv`
 1. **Ours.** Target the four `annotation::dramv_*` products with `parents` on the frozen
    set. `probe_dramv_solve.py` is the solve. With one sample, the frozen set is that
    sample's calls and the vOTU representatives are its dereplicated contigs.
-2. **Upstream.** Run `functionalAnnotation/dramv.py` (`DRAM-v.py annotate` and `distill`
-   against a full `annotation::dram_db`) on the same contig batch. Then repeat it on the
+2. **Upstream.** Run `DRAM-v.py annotate` and `distill` against a full DRAM 1.5 database on
+   the same contig batch. The library no longer runs DRAM-v itself; the retired
+   `functionalAnnotation/dramv.py` (last at `0f68bcaf`) is the command, and
+   `research/metasmith_benchmark`'s `e3/dramv_*_pratama` run it against a given `dram_db`. Then repeat it on the
    representatives only: cut the representatives out of VirSorter2's
    `final-viral-combined-for-dramv.fa` by source contig, so that both arms score the same
    contigs.

@@ -329,8 +329,8 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/46e9062d83414671a2dd47cc3bfc672d
-  - /msm_deferred/a82d60ed54a548b4b455eea86ae7039d
+  - /msm_deferred/6cadce8829fe4d92aef3821e804a4d30
+  - /msm_deferred/728c3a847ef9493a8d56f5194e41c794
   - short_1_name.txt
   - short_1_read_pair.txt
   - short_1_reads_metadata.json
@@ -534,9 +534,9 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/65353e735cd14cf2b3a9fd331bf9f4dd
-  - /msm_deferred/a0b4716cb70846599cdefb5a73e96e03
-  - /msm_deferred/aececeb42bf04ddb9c2f891809931aed
+  - /msm_deferred/047bfab3a1ff4af79e46ca9f92e7be10
+  - /msm_deferred/30bbc6a71e5a4965abd7693359c4daec
+  - /msm_deferred/7e4b5adbb71741af9933b573ca156389
   - hybrid_1_name.txt
   - hybrid_1_read_pair.txt
   - hybrid_1_reads_metadata.json
@@ -615,7 +615,7 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/381de23312fc4c6c822d62af57fa594b
+  - /msm_deferred/235ce8d5f9d54f838013fdfe44f2e268
   - long_1_name.txt
   - long_1_reads_metadata.json
 - name: references
@@ -674,41 +674,41 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/381de23312fc4c6c822d62af57fa594b:
+    /msm_deferred/047bfab3a1ff4af79e46ca9f92e7be10:
+      type: sequences::zipped_reverse_short_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e202b8a1e9ce22b1768912fd3ef5e44f5b995f3d291967ee9395c91e92930f3f76f
+      origin: leaf
+    /msm_deferred/235ce8d5f9d54f838013fdfe44f2e268:
       type: sequences::long_reads
       parents:
         IkuWHv2PBGcI@long_1_reads_metadata.json: sequences::read_metadata
-      instance_id: 1e202e6d8dcc2dcab7a0476ef84a1255ca5ef3575b3fac3364ad14fc0a1651c2165d
+      instance_id: 1e2011b5752d16a762bd94e320cc0bc39901cf96034c2bdc8dc0a89ed214bf084dcb
       origin: leaf
-    /msm_deferred/46e9062d83414671a2dd47cc3bfc672d:
+    /msm_deferred/30bbc6a71e5a4965abd7693359c4daec:
+      type: sequences::zipped_forward_short_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e202ddb7cb419f354286b0afedb731540fa4a71b94322905345867396e6b7b02973
+      origin: leaf
+    /msm_deferred/6cadce8829fe4d92aef3821e804a4d30:
+      type: sequences::zipped_forward_short_reads
+      parents:
+        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e204699929b01d966d63b6be4f9c7a03d4dea6fcfc0d73f8ddaed0503d97a07f982
+      origin: leaf
+    /msm_deferred/728c3a847ef9493a8d56f5194e41c794:
       type: sequences::zipped_reverse_short_reads
       parents:
         IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e209add97e274fcd142e578a953f3bcdd62984a096cfd0fd97791214f5b4530e2ce
+      instance_id: 1e2030df4170ca1cbca1f37211e4698f333c7554c176a900247dc1c0b4f01281d671
       origin: leaf
-    /msm_deferred/65353e735cd14cf2b3a9fd331bf9f4dd:
-      type: sequences::zipped_reverse_short_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e20d9c72ed07ef23f0a86c16a047baeb87d3a27ec49c1a1830fb75e163f9d733cde
-      origin: leaf
-    /msm_deferred/a0b4716cb70846599cdefb5a73e96e03:
+    /msm_deferred/7e4b5adbb71741af9933b573ca156389:
       type: sequences::long_reads
       parents:
         IkuWHv2PBGcI@hybrid_1_reads_metadata.json: sequences::read_metadata
-      instance_id: 1e2078ae6c0b671c1709c616616b64a6220a9ce0954d35a9b48daf1fcd6072f93427
-      origin: leaf
-    /msm_deferred/a82d60ed54a548b4b455eea86ae7039d:
-      type: sequences::zipped_forward_short_reads
-      parents:
-        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e20415fa47a6dfa6b47454822a831d9e3306cc4806d80002a66155b027ab7e78402
-      origin: leaf
-    /msm_deferred/aececeb42bf04ddb9c2f891809931aed:
-      type: sequences::zipped_forward_short_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e20f141d8d8c7baad6cd3577659f54c1c69454e7defcbd95e5e962b1289fe15d834
+      instance_id: 1e2094241f011354885d73b4e437de6f2f09f57fd54b05f6977b91113c45bd8313a2
       origin: leaf
     complete_medium.tsv:
       type: modelling::media
