@@ -14,9 +14,9 @@ mags   = model.AddRequirement(lib.GetType("binning_local::quality_bin_fasta"), p
 taxa   = model.AddRequirement(lib.GetType("taxonomy::gtdbtk_quality"), parents={mags})
 chunk  = model.AddProduct(lib.GetType("annotation::psortm_input_chunk"))
 
-# PSORTm runs about 5,000 proteins a core-hour on one core (research/psortm_pilot), so a
-# chunk is about an hour.
-CHUNK_SIZE = 5000
+# PSORTm runs about 5,000 proteins a core-hour (research/psortm_pilot), and psortm runs a
+# chunk on 4 cores, so a chunk is about an hour.
+CHUNK_SIZE = 20000
 
 
 def protocol(context: ExecutionContext):
