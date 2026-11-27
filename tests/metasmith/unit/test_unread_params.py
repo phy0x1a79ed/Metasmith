@@ -24,7 +24,7 @@ def test_a_typo_is_unread_and_a_real_key_is_not():
 def test_engine_keys_and_both_spellings_of_a_nested_key_are_read():
     keys = _plan_param_keys(_task("x = context.params['gtdbtk_pplacer_cpus']\n"))
     given = {"executor": {"cpus": 4}, "process_array": 0, "gtdbtk": {"pplacer": {"cpus": 8}},
-             "gtdbtk_pplacer_cpus": 8, "slurmAccount": "def-x"}
+             "gtdbtk_pplacer_cpus": 8, "slurmAccount": "def-x", "slurmGpuAccount": "def-x-gpu"}
     assert _unread_params(given, keys, PRESET) == []
 
 
