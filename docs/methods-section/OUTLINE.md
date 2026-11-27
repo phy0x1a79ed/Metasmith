@@ -70,6 +70,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   3. A candidate is valid only if every step can be scheduled from the givens without cycles and every lineage constraint still holds.
   4. Valid candidates are ranked first by how few distinct ports their lineage constraints anchor to, then by how close those anchors sit to the inputs that need them.
   5. The same PUCT rule picks which candidate to expand, for a fixed budget of rounds; the best valid plan wins, and steps no longer connected to the target are removed.
+  6. In development testing, the vast majority of plans were already optimal before refinement (Tony, 2026-11-27: the refiner is a real safety net; do not dwell on how often it acts).
 - Note: score = 1000 x (sum p log2 p over anchor-port usage) + (- mean normalized anchor depth, in [-1, 0]), a lexicographic order written as a sum (`refine.rs:344`, from c71a706b, Aug 2025). Budget 8 (`REFINER_BUDGET`); statistics keyed on the swapped-in contract.
 - Effect (records, not rerun): under the old selection rule, 2 of 55 case-seed pairs changed (`isolate_assembly_from_long_reads` seeds 7 and 99: 13 -> 11 and 13 -> 9 steps); every other pair unchanged (`data/metasmith/plans/08-where-the-unpinned-solve-goes.md`). Under PUCT the search finds the 9-step plan directly (`02-puct-selection-poc.md`), and `found_on` = 1 on every measured case, so no recorded PUCT plan is changed by the refiner.
 
