@@ -6,7 +6,7 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**paragraph-sketch / Planning**: sketch the Planning group as itemized points, one paragraph per concept (Tony, 2026-11-27: "one paragraph per concept"). Split the earlier three paragraphs (types+ports+lineage; search+selection; refinement+verification) into one per concept, e.g. types; ports; lineage (strict bound-port check, deliberate, explain why); search state and base case; frontier expansion; PUCT selection; refinement; determinism; verification. Show it in small pieces on Tony's phone. Then the other groups, one at a time. Do not draft prose yet.
+**paragraph-points / Planning**: Planning grouped by concept as P1 Types, P2 Contracts, P3 Planning search, P4 Refinement, P5 Verification (agreed 2026-11-27). Now itemizing points one paragraph at a time, starting with P1. Earlier note: sketch the Planning group as itemized points, one paragraph per concept (Tony, 2026-11-27: "one paragraph per concept"). Split the earlier three paragraphs (types+ports+lineage; search+selection; refinement+verification) into one per concept, e.g. types; ports; lineage (strict bound-port check, deliberate, explain why); search state and base case; frontier expansion; PUCT selection; refinement; determinism; verification. Show it in small pieces on Tony's phone. Then the other groups, one at a time. Do not draft prose yet.
 
 Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine", to be revisited in smaller sections): Specification = givens; targets as contracts (lineage on target inputs); variadic inputs; optional branching and parallel cases; limits and workarounds; interfaces (last, recommended). Execution = compilation (steps → processes, ports → channels, grouping at run time); agents and presets; containers and relay; caching; outputs.
 
@@ -19,6 +19,7 @@ Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine
 - (2026-11-27) Tony is on his phone: short messages, conversational, small sections, one block at a time.
 - (2026-11-27) Settle the overall structure and grouping before prose; don't go into the weeds.
 - (2026-11-27) One paragraph per concept.
+- (2026-11-27) Order of work: itemized points for each paragraph, one at a time; then a flow check across the group; then prose for the whole group at once; then check again; then into d3.
 - (2026-11-27) Reuse the original d3 prose where it exists; shuffle rather than rewrite.
 
 - (2026-11-25) Results are more up to date than Methods; where they contradict, Methods changes.
