@@ -115,3 +115,10 @@ Both stations relaunched warm at ~09:15 with the LazyMap fix. Round 7 records ar
 | 2 | error | sockeye compute nodes, images | p27 seqkit_reads and p29 sylph failed: `staphb/seqkit:2.13.0` and `staphb/bbtools:39.49` were not in the store, and the compute node has no route to registry-1.docker.io. The agent ran set up only on the prep workflow, which pulls only the prep plan's images. The run's image check is a log warning by design, since lazy pulls are right where nodes reach a registry. | Doc line reverted (Tony: fix in code, docs only for usage). Prep templates pull every image their workflow uses on the login node, and a run pulls any image still missing: feat/engine/run-pulls-images, WIP b8268c29 |
 | 3 | error | sockeye, run Hy0Tb5M9 | p31 kraken2 also failed on `staphb/bbtools:39.49`. The run ended with 21 of 24 tasks done. Every step downstream of read cleaning (BBDuk -> assembly -> binning -> annotation) waited on the failed bbtools steps and never ran. The agent collected 23 partial results (775 MB) through the GUI. | Same fix as #2. Blocks round 9 |
 | 4 | note | fir, prep setup | At 10:24 fir was still in prep setup (righteous-octopus, ~1014 GB on disk, no new STEPS entry since 09:58). | Watch |
+
+# Round 9 (release candidate 0.26.2+5f7fae4, 2026-11-27)
+
+Both stations relaunched warm at ~12:05 with the image fix: prep templates pull every image their workflow uses, and a run pulls the images missing from the store (2f271f64). Round 8 records are in `round8/`. The lane changes merged after this build (lane-gap) wait for the next round.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|

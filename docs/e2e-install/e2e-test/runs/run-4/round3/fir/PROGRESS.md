@@ -1,0 +1,93 @@
+# PROGRESS
+- Started fresh run (no prior progress). Reading docs/setup/install.rst, gui.rst, ssh.rst, deployment.rst (done).
+- install: mamba create pid 2155909 running, log logs/install.log
+- Step 1 ssh fir works (login1). Browser tools loaded.
+- Step 2 DONE: metasmith 0.26.0 installed (mamba env msm_env). Next: msm gui --port 8092 from workspace
+- Step 3 DONE: GUI serving http://127.0.0.1:8092 (pid 2166701, log logs/gui.log, project metasmith_ws)
+- Step 4: agent alluring-fir deploy clicked via GUI (in progress)
+- Step 4 DONE: agent alluring-fir deployed to fir (home /scratch/phyberos/msm_e2e/run-4-fir). Next: Workflows tab, engcyc_prep_references setup
+- Step 5: workflow honest-snake (engcyc_prep_references) solved, 55 steps, ~860GB. Next: click set up on agent alluring-fir
+- Step 6: SETUP RUN started via GUI: run id honest-snake/honest-snake-qmbQK (agent alluring-fir). Monitor in GUI Runs tab.
+- Step 6 running: setup run qmbQK (task BubrjZJQ, remote runs/pH2nXrqc) in staging/executing; checked at 2026-11-26T18:09:52-07:00
+- Step 6: setup run qmbQK EXECUTING at 2026-11-26T18:19:29-07:00; next GUI check after timer
+- Step 6: setup qmbQK still running at 2026-11-26T18:41:28-07:00 (remote nxf active)
+- Step 6: setup qmbQK running; nxf_work 592G/~860G at 2026-11-26T19:01:33-07:00
+- Context restart at 2026-11-26T19:21:51-07:00: setup qmbQK still running; remote ssh check timed out once (du on scratch) - avoid du
+- 2026-11-26T19:22:10-07:00: qmbQK running in GUI; buildIphopDB/buildPhyloflashDB slurm running; waiting
+- 2026-11-26T19:24:22-07:00: Monitor b1h6qgvx2 watching remote nextflow exit (setup qmbQK). When it ends, check GUI Runs tab.
+- 2026-11-26T19:24:37-07:00: still running: nxf pids 2, slurm buildIphopDB+buildPhyloflashDB (54min). Background timer bl5om7qxc (9min) pending.
+- 2026-11-26T19:31:16-07:00: setup qmbQK: buildGtdbDB slurm 6454451 started; iphop 6441232 & phyloflash 6441250 running ~61min. Waiting.
+- 2026-11-26T19:33:32-07:00: setup: buildIphopDB done; buildPhyloflashDB + buildGtdbDB running; nxf active. Waiting.
+- 2026-11-26T19:42:37-07:00: setup still running (phyloflash 72min, gtdb 11min). Waiting.
+- 2026-11-26T19:51:51-07:00: GUI qmbQK still running; remote slurm 6441250 (phyloflash) & 6454451 (gtdb) RUNNING. Run dir runs/pH2nXrqc. Waiting.
+- 2026-11-26T20:01:02-07:00: squeue empty; GUI qmbQK still running (nextflow finishing?). Waiting another cycle.
+- 2026-11-26T20:06:26-07:00: all setup slurm jobs COMPLETED (sacct, exit 0). nxf java pid 3811372 still alive (cwd /msm_home/runs/pH2nXrqc). GUI qmbQK still running. Checking whether nextflow finishes.
+- 2026-11-26T20:10:43-07:00: CORRECTION: setup NOT finished. agent.log shows new submits 20:04 (downloadMobileogDB) & 20:06 (downloadGanon2DB); squeue ~20 jobs. Still running. Remote run dir _metasmith/logs.2026-11-26_18-09-56/agent.log is the best progress source.
+- 2026-11-26T20:17:34-07:00: setup: slurm queue empty; 4 local downloads active (UniRef50, InterProScan, Metabuli, Ganon2) and progressing; nxf pid 3811372 alive. Waiting.
+- 2026-11-26T20:26:39-07:00: setup progressing: buildInterProScanDB submitted 20:20; downloads UniRef50, Metabuli, Ganon2 running. nxf alive. Waiting.
+- 2026-11-26T20:35:45-07:00: setup still running (buildInterProScanDB + downloads). Waiting.
+- 2026-11-26T20:44:55-07:00: long downloads progressing (UniRef50 72%, ~55min left at 2.8MB/s); buildInterProScanDB running. Waiting.
+- 2026-11-26T20:54:02-07:00: setup still running; 4 local steps active. Waiting.
+- 2026-11-26T21:03:09-07:00: setup still running at 21:03.
+- 2026-11-26T21:12:16-07:00: buildInterProScanDB done; 3 downloads remain (UniRef50, Metabuli, Ganon2). Waiting.
+- 2026-11-26T21:21:21-07:00: still 3 downloads running. Waiting.
+- 2026-11-26T21:30:30-07:00: UniRef50 93%, Ganon2 73%. Waiting.
+- 2026-11-26T21:39:35-07:00: still 3 downloads. Waiting.
+- 2026-11-26T21:48:41-07:00: buildUniRef50DB submitted 21:40; remaining downloads: Metabuli, Ganon2. Waiting.
+- 2026-11-26T21:57:46-07:00: still 2 downloads (Metabuli, Ganon2); queue empty. Waiting.
+- 2026-11-26T22:06:55-07:00: Metabuli (179GB+) & Ganon2 downloads active. Waiting.
+- 2026-11-26T22:16:00-07:00: still Metabuli & Ganon2 downloads. Waiting.
+- 2026-11-26T22:25:06-07:00: buildMetabuliDB submitted 22:19; downloadBaktaDB running; Ganon2 still running. Waiting.
+- 2026-11-26T22:34:11-07:00: more setup steps progressing (gtdbRrna, virsorter2 submitted). Waiting.
+- 2026-11-26T22:43:18-07:00: vibrantDB submitted 22:34; still running. Waiting.
+- 2026-11-26T22:52:23-07:00: vcontact3 submitted 22:45; still running. Waiting.
+- 2026-11-26T23:01:28-07:00: cardDB, antismashDB submitted; still running. Waiting.
+- 2026-11-26T23:10:39-07:00: ERROR (remote): p47__downloadAntiSmashDB exit 1 first attempt: antismash cassis missing meme/fimo executables in container; nxf retried (once) at 23:07. Watch retry outcome.
+- 2026-11-26T23:18:47-07:00: ERROR: p47__downloadAntiSmashDB retry also exit 1 (same meme/fimo missing); nxf marked 'Error is ignored' so setup continues; antiSMASH DB likely incomplete -> check downstream. Waiting for setup end.
+- 2026-11-26T23:19:57-07:00: context restart #2. GUI pid 2166704 (msm gui, port 8092, HTTP 200). setup qmbQK still running: Ganon2 (p34) + buildMetabuliDB slurm 6523607 (~7h left) active; antiSMASH failed twice but 'Error is ignored'. Waiting.
+- 2026-11-26T23:20:11-07:00: waiting via background sleep (btni340pn) for setup qmbQK to finish
+- 2026-11-26T23:27:52-07:00: 2 steps left: Ganon2 download, 0e0501 (buildMetabuliDB). Waiting.
+- 2026-11-26T23:28:35-07:00: setup qmbQK: 2 steps left (Ganon2 download, buildMetabuliDB); squeue empty; monitor b4k68dsu1 waits for nxf exit
+- 2026-11-26T23:36:58-07:00: only Ganon2 download left. Waiting.
+- 2026-11-26T23:39:10-07:00: setup qmbQK: only p34 Ganon2 download left (buildMetabuli done). nxf alive.
+- 2026-11-26T23:40:41-07:00: context restart #3. Resuming; checking setup qmbQK (Ganon2 last).
+- 2026-11-26T23:40:48-07:00: remote: only p34 downloadGanon2DB left (squeue empty, wget running). GUI 200. Sleeping 540 then recheck.
+- 2026-11-26T23:46:04-07:00: Ganon2 still downloading (log updating). Waiting.
+- 2026-11-26T23:50:01-07:00: bg waiter bgc1q28fo waits for remote nextflow exit (setup qmbQK). Output /tmp/claude-1001/-home-tony-msm-e2e-run-4-fir-sandbox/0997036f-697d-4d17-a6de-b7eb92ee59a1/tasks/bgdqvcj5m.output
+- 2026-11-26T23:55:10-07:00: Ganon2 still running. Waiting.
+- 2026-11-27T00:04:16-07:00: Ganon2 still running. Waiting.
+- 2026-11-27T00:13:21-07:00: Ganon2 (4h) still running, log updating. Waiting.
+- 2026-11-27T00:22:27-07:00: Ganon2 still running. Waiting.
+- 2026-11-27T00:31:38-07:00: Ganon2 active, 57.7% (60731/105198) progressing. Waiting.
+- 2026-11-27T00:40:45-07:00: Ganon2 59.6% (62689/105198), ~2k items per 9min; est. several hours. Waiting.
+- 2026-11-27T00:49:52-07:00: Ganon2 61.5%. Waiting.
+- 2026-11-27T00:58:59-07:00: Ganon2 63.4%. Waiting.
+- 2026-11-27T01:08:04-07:00: Ganon2 65.3%. Waiting.
+- 2026-11-27T01:17:10-07:00: Ganon2 67.2%. Waiting.
+- 2026-11-27T01:26:15-07:00: Ganon2 69.2%. Waiting.
+- 2026-11-27T01:35:22-07:00: Ganon2 71.1%. Waiting.
+- 2026-11-27T01:44:28-07:00: Ganon2 73.1%. Waiting.
+- 2026-11-27T01:52:17-07:00: waiter bgc1q28fo expired; new waiter started (see STEPS 32). Ganon2 p34 still only step left at 01:06 MST.
+- 2026-11-27T01:53:33-07:00: Ganon2 75.2%. Waiting.
+- 2026-11-27T02:02:39-07:00: Ganon2 77.2%. Waiting.
+- 2026-11-27T02:11:45-07:00: Ganon2 79.0%. Waiting.
+- 2026-11-27T02:20:51-07:00: Ganon2 81.1%. Waiting.
+- 2026-11-27T02:29:57-07:00: Ganon2 83.0%. Waiting.
+- 2026-11-27T02:39:04-07:00: Ganon2 84.6%. Waiting.
+- 2026-11-27T02:48:10-07:00: Ganon2 86.6%. Waiting.
+- 2026-11-27T02:57:15-07:00: Ganon2 88.6%. Waiting.
+- 2026-11-27T03:06:22-07:00: Ganon2 90.4%. Waiting.
+- 2026-11-27T03:15:28-07:00: Ganon2 92.0%. Waiting.
+- 2026-11-27T03:24:34-07:00: Ganon2 93.6%. Waiting.
+- 2026-11-27T03:33:40-07:00: Ganon2 95.5%. Waiting.
+- 2026-11-27T03:40:51-07:00: context restart #4. setup qmbQK: Ganon2 wget still running on fir (95.5%); squeue empty. Waiting.
+- 2026-11-27T03:42:47-07:00: Ganon2 97.5%. Waiting.
+- 2026-11-27T03:50:07-07:00: sleep now blocked by harness; using Monitor bv588010n to watch remote nextflow exit (setup qmbQK). Ganon2 still last step. After exit: check GUI Runs tab, then engcyc_metagenomics.
+- 2026-11-27T03:51:53-07:00: Ganon2 99.6%. Waiting.
+- 2026-11-27T03:52:25-07:00: Ganon2 p34 progressing (wget spawning). waiter restarted as see STEPS 35.
+- 2026-11-27T03:54:17-07:00: Ganon2 wgets finished (wget=0, squeue empty); nxf still alive finishing. Monitor bv588010n still armed.
+- 2026-11-27T04:00:08-07:00: re-armed monitor b4vlum3e7 (nxf pid 3811372 exit). Ganon2 p34 still running (log growing).
+- 2026-11-27T04:01:06-07:00: Ganon2 reached 100% (03:53), finishing; no exitcode yet. Waiting.
+- 2026-11-27T04:10:08-07:00: monitor b4vlum3e7 expired (nxf still up). Checking p34 and re-arming.
+- 2026-11-27T04:10:17-07:00: Ganon2 download hit 100% at 03:53; now genome_updater post-processing (find over files/). Not hung yet; watching. nxf pid 3811372 alive.
+- 2026-11-27T04:12:49-07:00: Ganon2 at 100% but no exitcode; genome_updater.sh (refseq archaea/bacteria) still running in task. Waiting for exitcode (bg loop).
