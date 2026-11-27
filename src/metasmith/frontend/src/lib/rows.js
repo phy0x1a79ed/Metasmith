@@ -8,9 +8,9 @@
 // see.
 //
 // There is no syntax here any more. Whether a field holds its own text or reads
-// a column of the sheet is decided by whether a sheet is attached, and by
-// nothing written inside the field -- so braces are ordinary characters and
-// there is nothing to parse.
+// a column of the sheet is decided by which of its two stores is filled -- the
+// column wins when a sheet is attached -- and by nothing written inside the
+// field, so braces are ordinary characters and there is nothing to parse.
 
 // What a value row holds: an ordered list of `{key, value, column}`. One unkeyed
 // entry is a plain typed value and writes its text verbatim; anything else
@@ -30,22 +30,26 @@ export function entries(d) {
     }))
 }
 
-// The sheet column each field of a row binds, in the order the fields are drawn.
+// Each field of a row as `{column, literal}`, in the order the fields are drawn.
 // A file row has one field; a value row has one per entry, and its *keys* are
 // never in here -- a key names the field in the object the row writes and is
-// literal in both states.
-export const boundColumns = (d) =>
+// literal in both states. `ops.samples._fields` is the same read.
+const fields = (d) =>
   d?.mode === 'value'
-    ? entries(d).map((e) => e.column)
-    // A pool row binds no column: what it names is an entry in a pool, and a
+    ? entries(d).map((e) => ({ column: e.column.trim(), literal: String(e.value).trim() }))
+    // A pool row has no fields: what it names is an entry in a pool, and a
     // sheet expands rows over paths rather than over identities.
     : d?.mode === 'pool'
       ? []
-      : [String(d?.column ?? '')]
+      : [{ column: String(d?.column ?? '').trim(), literal: String(d?.path ?? '').trim() }]
 
-// Whether this row would register anything under a sheet. A field bound to
-// nothing is a blank in the recipe, not a constant -- see `ops.samples`.
-export const isBound = (d) => boundColumns(d).every((c) => c.trim() !== '')
+// Under a sheet: a row any of whose fields names a column is expanded over the
+// sheet, and a row none of whose fields does registers once for every sample.
+export const readsSheet = (d) => fields(d).some((f) => f.column)
+
+// A field with neither a column nor a literal is a blank in the recipe, and a
+// row holding one registers nothing under a sheet.
+export const hasBlank = (d) => fields(d).some((f) => !f.column && !f.literal)
 
 /**
  * A row's canonical form: one shape, one key order, whatever it arrived as.

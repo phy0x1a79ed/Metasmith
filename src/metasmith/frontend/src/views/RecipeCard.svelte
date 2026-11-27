@@ -5,7 +5,7 @@
   import TypeSelect from '../components/TypeSelect.svelte'
   import { POINTED, link, marks } from '../lib/highlight.js'
   import { ancestorsOf, byKey, candidates, refKey, topoOrder } from '../lib/lineage.js'
-  import { entries as rowEntries, isBound } from '../lib/rows.js'
+  import { entries as rowEntries, hasBlank, readsSheet } from '../lib/rows.js'
 
   // Inputs and outputs in one list, and the list *is* the form. They are two
   // headings over one run of rows, the way the ssh rail does managed and native
@@ -69,18 +69,19 @@
     onadd,
   } = $props()
 
-  // `entries` and `isBound` are imported (see `lib/rows.js`) rather than
-  // written here: the workflow view asks the same questions, and a row that
-  // reads one way in one place and another in the other is a disagreement
-  // nothing on the page can show.
+  // The row questions are imported (see `lib/rows.js`) rather than written
+  // here: the server asks the same ones, and a row that reads one way in one
+  // place and another in the other is a disagreement nothing on the page can
+  // show.
   //
-  // A sheet attached is the only switch. With one, every field on every row is
-  // a strict choice from that sheet's columns and there is no way to type into
-  // it; with none, every field is free text. Each keeps its own answer, so the
-  // two states are two fields on the row rather than one field being rewritten
-  // -- which is the whole of the switching behaviour, with nothing to save on a
-  // transition. A value entry's *key* is the exception and stays a text box in
-  // both states: it names the field in the object the row writes.
+  // Every field keeps two answers: the text typed into it, and the sheet column
+  // it reads. With no sheet attached only the text counts. With one, a field
+  // reads its column if it names one and its text otherwise -- so a template's
+  // constant stays a constant under a sheet, and a row none of whose fields
+  // names a column registers once, shared by every sample. Neither answer is
+  // rewritten when the other is set, so attaching and detaching a sheet moves
+  // between them with nothing to save on a transition. A value entry's *key* is
+  // only ever text: it names the field in the object the row writes.
   let hasTable = $derived(columns.length > 0)
 
   // What the sheet registered is not rows of this recipe. Those items are in the
@@ -276,15 +277,15 @@
   </div>
 {/snippet}
 
-<!-- One field, two states, and the sheet decides which. With columns it is a
-     strict choice from them -- there is nothing to type, because the sheet
-     carries the finished value and metasmith never builds a string out of one.
-     Without, it is the free text it always was.
+<!-- One field, two stores. Under a sheet the select picks which one the field
+     reads: a column, or the text typed beside it. A column carries the finished
+     value -- metasmith never builds a string out of one -- so the text box goes
+     away while one is picked. Without a sheet there is only the text.
 
-     The two are two separate stores on the row, so neither write touches the
-     other: switching a sheet on and off moves between the last answer given to
-     each. A binding naming a column *this* sheet lacks draws blank and is left
-     alone, so re-attaching the sheet it came from restores it.
+     Neither write touches the other store, so picking "a value" again brings
+     back the text, and detaching the sheet brings back the text too. A binding
+     naming a column *this* sheet lacks is offered as itself and left alone, so
+     re-attaching the sheet it came from restores it.
 
      `field` is only a name, for the label an assistive reader gets. What a
      write means is the caller's business: a path sets one key on the row, a
@@ -292,10 +293,11 @@
 {#snippet sampleField(row, field, value, column, placeholder, mono, apply, bind)}
   {#if hasTable}
     <select
-      class="grow{mono ? ' mono' : ''}"
-      class:unset={!column}
-      aria-label={`${field}, a column of the attached sheet`}
-      value={columns.includes(column) ? column : ''}
+      class="colpick{mono ? ' mono' : ''}"
+      class:grow={!!column}
+      class:unset={!column && !String(value ?? '').trim()}
+      aria-label={`${field}: a column of the attached sheet, or a value`}
+      value={column}
       onchange={(e) => {
         bind(e.currentTarget.value)
         // a select has no blur-after-typing to save on, so the change *is* the
@@ -304,10 +306,14 @@
         oncommit?.()
       }}
     >
-      <option value="">choose a column…</option>
-      {#each columns as c}<option value={c}>{c}</option>{/each}
+      <option value="">a value, the same for every sample</option>
+      {#each columns as c}<option value={c}>column: {c}</option>{/each}
+      {#if column && !columns.includes(column)}
+        <option value={column}>column: {column} (not in this sheet)</option>
+      {/if}
     </select>
-  {:else}
+  {/if}
+  {#if !hasTable || !column}
     <input
       class="grow{mono ? ' mono' : ''}"
       {value}
@@ -453,7 +459,8 @@
       <LineageBand rows={orderedInputRows} marks={hlMarks}>
         {#snippet body(row)}
           {@const info = row.type && counts ? counts(row.type) : null}
-          {@const bound = isBound(row.row)}
+          {@const blank = hasBlank(row.row)}
+          {@const perSample = readsSheet(row.row)}
           <!-- Two lines, not one: the path is the longest thing on an input row and
                was being squeezed into a sliver beside a combobox and a menu. What
                the row points at goes on the first line; what it *is* and what it
@@ -542,37 +549,40 @@
           {#if hasTable}
             <!-- With a sheet attached this row is one declaration, not N rows:
                  what it says about itself is a count of how many items it
-                 stands for. A field bound to nothing makes that count zero, and
-                 saying so here is what keeps the row from going quiet -- it
-                 registers nothing until it is bound. -->
+                 stands for. A blank field makes that count zero, and saying so
+                 here is what keeps the row from going quiet. A row reading no
+                 column is one item, and the solve hands it to every sample. -->
             <div class="notes row wrap small">
-              {#if !bound}
-                <span class="tag warn">pick a column for every field — this registers nothing</span>
+              {#if blank}
+                <span class="tag warn">pick a column or give a value for every field — this registers nothing</span>
+              {:else if !perSample}
+                <span class="tag" title="no field reads the sheet, so this is one item every sample sees">× 1, shared</span>
               {:else if expansion?.counts?.[row.id]}
                 <span class="tag">× {expansion.counts[row.id]} registered</span>
               {:else}
                 <span class="tag">× {rowUniques[row.id] ?? rowCount} once expanded</span>
               {/if}
-              <!-- A sample's mask is one index item's lineage, so a reference
-                   sitting beside the per-sample files is in no sample at all.
-                   Marking it shared is the third way in, and it applies to any
-                   row under a sheet: the usual shape is a column repeating one
-                   path down every row, which groups onto the single instance
+              <!-- A sample's mask is one index item's lineage, so a per-sample
+                   row's items are in no sample but their own. Marking one shared
+                   puts it in every sample: the usual shape is a column repeating
+                   one path down every row, which groups onto the single instance
                    this then shares.
 
                    Keyed by the row, not by a path: a row may not have one yet,
                    and the generate turns the reference into every path that row
                    registered, between the sync that made them and the solve
                    that reads them. -->
-              <button
-                class="star"
-                class:on={sharedPaths.includes(row.key)}
-                aria-pressed={sharedPaths.includes(row.key)}
-                title={sharedPaths.includes(row.key)
-                  ? 'every sample sees this'
-                  : 'let every sample see this — a reference beside the per-sample files is otherwise in no sample at all'}
-                onclick={() => onshared?.(row.key, !sharedPaths.includes(row.key))}
-              >shared by every sample</button>
+              {#if perSample}
+                <button
+                  class="star"
+                  class:on={sharedPaths.includes(row.key)}
+                  aria-pressed={sharedPaths.includes(row.key)}
+                  title={sharedPaths.includes(row.key)
+                    ? 'every sample sees this'
+                    : 'let every sample see this — a reference beside the per-sample files is otherwise in no sample at all'}
+                  onclick={() => onshared?.(row.key, !sharedPaths.includes(row.key))}
+                >shared by every sample</button>
+              {/if}
             </div>
           {/if}
 
@@ -741,9 +751,12 @@
   /* narrow, like `.cols`: a key is one word and the value beside it is what
      wants the width */
   .keybox { flex: 0 1 8em; min-width: 4em; }
-  /* a field under a sheet that has chosen no column yet. It is a blank in the
-     recipe, not a constant, and the row's own note says so -- this is only what
-     makes the blank findable in a long list. */
+  /* beside the text box it is the narrow one; alone, it takes the width */
+  .colpick { flex: 0 1 14em; min-width: 8em; }
+  .colpick.grow { flex: 1; }
+  /* a field under a sheet with neither a column nor a value. It is a blank in
+     the recipe, and the row's own note says so -- this is only what makes the
+     blank findable in a long list. */
   .unset { border-color: var(--warn, var(--line)); }
 
   /* two labelled halves, one lit -- a slider read as one control to flip

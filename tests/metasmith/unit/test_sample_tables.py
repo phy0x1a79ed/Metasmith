@@ -86,12 +86,12 @@ def test_attach_stores_the_upload_verbatim(tmp_path):
 
 def test_a_rows_fields_are_the_columns_it_binds():
     assert op_samples.bound_fields({"mode": "file", "column": "fwd"}) == [("path", "fwd")]
-    assert not op_samples.is_bound({"mode": "file", "path": "/d/{fwd}"})
-    assert op_samples.is_bound({"mode": "file", "column": "fwd"})
+    assert not op_samples.reads_sheet({"mode": "file", "path": "/d/{fwd}"})
+    assert op_samples.reads_sheet({"mode": "file", "column": "fwd"})
 
     keyed = {"mode": "value", "values": _val(("sample", "fwd"))}
     assert op_samples.bound_fields(keyed) == [("[sample]", "fwd")]
-    assert op_samples.is_bound(keyed)
+    assert op_samples.reads_sheet(keyed)
 
 
 def test_array_rows_order_parents_first():
@@ -127,7 +127,7 @@ def test_a_row_that_binds_nothing_is_reported_rather_than_refused(tmp_path):
     rows = _rows(b={"column": ""})
     assert op_samples.validate(str(lib), _table(), rows)["problems"] == []
     (said,) = op_samples.unbound_problems(rows)
-    assert "no column chosen for its path" in said["message"]
+    assert "no column chosen and no value for its path" in said["message"]
     assert op_inputs.problems(rows, _table()) == [said["message"]]
 
     out = op_inputs.sync(str(lib), rows, _table())
@@ -333,16 +333,43 @@ def test_giving_a_field_a_key_keeps_the_items(tmp_path):
     assert '{"of": "P1"}' in {(lib_path / p).read_text() for p in lib.manifest}
 
 
-def test_every_field_of_a_value_row_has_to_bind_one():
-    half = {"mode": "value", "values": [
+def test_every_field_of_a_value_row_needs_a_column_or_a_value():
+    mixed = {"mode": "value", "values": [
         {"key": "a", "value": "1", "column": ""},
         {"key": "b", "value": "", "column": "sample"},
     ]}
-    assert not op_samples.is_bound(half)
-    assert [f for f, c in op_samples.bound_fields(half) if not c] == ["[a]"]
-    both = {"mode": "value", "values": _val(("a", "fwd"), ("b", "sample"))}
-    assert op_samples.is_bound(both)
-    assert not op_samples.is_bound({"mode": "value", "value": "x"})
+    assert op_samples.reads_sheet(mixed) and not op_samples.blank_fields(mixed)
+    half = {"mode": "value", "values": _val(("a", ""), ("b", "sample"))}
+    assert op_samples.blank_fields(half) == ["[a]"]
+    literal = {"mode": "value", "value": "x"}
+    assert not op_samples.reads_sheet(literal) and not op_samples.blank_fields(literal)
+
+
+def test_a_literal_row_under_a_sheet_registers_once(tmp_path):
+    lib_path = _library(tmp_path)
+    rows = _rows(a={"parents": ["#lit"]}) + [
+        {"id": "lit", "mode": "value", "values": [{"key": "", "value": "study", "column": ""}],
+         "dtype": "mock::marker", "parents": []},
+        {"id": "ref", "mode": "file", "path": "/data/ref.fa", "column": "",
+         "dtype": "mock::fwd", "parents": []},
+        {"id": "mix", "mode": "value", "dtype": "mock::rev", "parents": [], "values": [
+            {"key": "of", "value": "", "column": "sample"},
+            {"key": "kind", "value": "short", "column": ""},
+        ]},
+    ]
+    assert op_inputs.problems(rows, _table()) == []
+    out = op_inputs.sync(str(lib_path), rows, _table())
+    assert out["counts"] == {"a": 2, "b": 2, "c": 2, "mix": 2}
+    assert out["rows"]["ref"] == "/data/ref.fa"
+    lit = out["rows"]["lit"]
+
+    lib = DataInstanceLibrary.Load(lib_path)
+    assert (lib_path / lit).read_text() == "study"
+    for p in out["generated"]["a"]:
+        assert [str(m.path) for m in lib.parents[Path(p)]] == [lit]
+    assert {(lib_path / p).read_text() for p in out["generated"]["mix"]} == {
+        '{"of": "S1", "kind": "short"}', '{"of": "S2", "kind": "short"}',
+    }
 
 
 def test_a_field_binding_a_missing_column_is_named_by_its_key(tmp_path):
