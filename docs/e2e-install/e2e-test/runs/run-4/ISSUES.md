@@ -103,3 +103,4 @@ Both stations relaunched warm at 08:20, sockeye under a 900 GB cap and fir under
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | error | setup, both stations | Setup aborted with `NullPointerException: Cannot load from object array because "this.keys" is null` at `LazyMap.buildIfNeeded` <- `Orchestrator._closed`. Since 1278169d the footprint readers map comes from JsonSlurper, whose LazyMap two Nextflow threads raced to build. Stub fixtures were too small to hit it. | Orchestrator.footprint keeps plain copies. Stations stopped 08:52 |
