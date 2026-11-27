@@ -6,11 +6,11 @@
 
 ## Current
 
-`survey` — a comprehensive survey of everything there is to aggregate.
+`curation-ledger` — every tool ever run, each with a disposition, journaled.
 
 ## Waiting on the user
 
-- `survey` → what "aggregated" means when done, and the order of the stages.
+- `curation-ledger` → confirm the ledger's columns and disposition vocabulary.
 
 ## Preferences
 
@@ -19,8 +19,10 @@
 
 ## Stack
 
-- `survey` — "start with like a comprehensive survey of all of the other stuff"
-  - Done inline (git sweep): release holds 375 std transforms in 15 groups, 17 templates, 115 envs, 27 type files; research roots hold 587 more (398 KBase stubs). 96 transform/template/type/env files on unmerged branches, led by fabfos/lipidomics-abundance (18), engine/manuscript(-figures) (16 each), lab/kalen-dofher (10).
+- `curation-ledger` — "run a curation pass … decide what was dropped or replaced, represented by, and then journal that … hit every tool we've ever run"
+  - Harvest worker running: an exhaustive candidate list of every tool run, with evidence.
+- `solve-gate` — solve every template and research root on the released solver
+- `promote` — RNA-seq (research/rnaseq + featureCounts + DE→gene set), phylogenetics group, CoverM, MMseqs2, binners
 - `galaxy-scrape` — "we may want to do a scrape for Galaxy … cover as much of bioinformatics as possible"
 - `geoquery-domains` — "start on stuff like geospatial query, and that'll branch out into other domains"
 - `ml-template` — "a quick machine learning training loop template"
@@ -35,8 +37,8 @@
 
 ## Workers
 
-- (none running) — the three survey workers reported 2026-11-27; findings in `SURVEY.md`.
+- Tool harvest — exhaustive candidate list of every tool ever run, with evidence → `harvest.tsv`.
 
 ## Closed
 
-- (none)
+- `survey` (2026-11-27) — done = every tool is a transform or has a disposition; three-layer gate; curation first.
