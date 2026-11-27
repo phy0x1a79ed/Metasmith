@@ -29,20 +29,25 @@ Order and names (outline-sections, 2026-11-26): Planning, Specification, Executi
 
 Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept".
 
-#### P1. Types — proposed
+#### P1. Types — agreed (paragraph-points, 2026-11-27)
 - Role: how types work, the property-set type and its satisfaction test.
 - Key message: a type is a set of properties, and one type satisfies another when it has all of its properties.
 - Points (paragraph-points, 2026-11-27):
   1. Types are sets of properties, and each property narrows the range of variation of the data it describes.
   2. A type X satisfies Y if X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
-  3. Abstract types follow from the subset test: a type with fewer properties is satisfied by every type that adds to it, but not the reverse. Example: a wooden chair is a chair, but not every chair is wooden.
+  3. Abstract types, which have fewer properties and so are more general, are satisfied by every more specific type, but not the reverse. Example: a wooden chair is a chair, but not every chair is wooden.
 - Note: where the test is used (givens, inputs, lineage) belongs to P2. No EDAM claim: "a rough link".
 
-#### P2. Contracts — proposed
+#### P2. Contracts — agreed (paragraph-points, 2026-11-27)
 - Role: contracts, the ports they create as steps, and why contracts need lineage constraints.
-- Key message: a step exposes one port per output type, inputs bind to ports, and a contract can require that bound ports share lineage.
-- Earlier points: a port is a typed position on a step with a fixed lineage, and inputs bind to ports; a port X satisfies a lineage requirement Z when X was produced from ports with types that map to each type in Z, L(X,Z).
-- Note: the d3 formula is type-based; the code is stricter on purpose and checks the port bound to the ancestor input itself (`workflow_solver/src/search.rs:215`). State the strict check and explain why (Tony, 2026-11-27). M4 covers contract authoring; this paragraph covers only what the planner needs.
+- Key message: a contract lists the input types a tool requires and the output types it promises, and its inputs can require that the data they receive share an origin.
+- Points:
+  1. A contract states the input types a tool requires and the output types it promises.
+  2. Each use of a contract in a plan is a step, which binds each input to a port whose type satisfies it and exposes one new port per output type.
+  3. Each port records its lineage, the ports its step consumed.
+  4. An input can require that its port descends from the port bound to another input of the same step. Example: mapping reads to an assembly requires the assembly built from those reads.
+  5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
+- Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
 #### P3. Planning search — proposed
 - Role: how the plan is found.
