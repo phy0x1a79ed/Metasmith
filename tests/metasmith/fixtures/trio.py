@@ -17,8 +17,8 @@ TARGETS = [
     "annotation::kofamscan_descriptions",
     "annotation::diamond_uniref50_results",
     "annotation::diamond_uniref50_descriptions",
-    "annotation::interproscan_results",
-    "annotation::interproscan_descriptions",
+    "annotation::interproscan_pfam_results",
+    "annotation::interproscan_pfam_descriptions",
 ]
 
 TRANSFORM_NAMESPACES = ("logistics", "metagenomics", "functionalAnnotation")

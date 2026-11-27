@@ -3,7 +3,7 @@
 
   assembly --> prodigal --> orfs --> kofamscan
                                   --> diamond_uniref50
-                                  --> interproscan
+                                  --> interproscan_pfam
 
 The trio is the per-ORF annotation set shared by the fosmid and metagenome
 palettes; the transform fan-out runs over ~5000-ORF chunks (chunkOrfsForAnnotation)
@@ -25,7 +25,7 @@ from metasmith.python_api import DEFERRED, Spec, Template
 
 NAME = "annotation_trio_from_assembly"
 DESCRIPTION = """
-Run the KOFAMSCAN, DIAMOND UniRef50 and InterProScan annotators against an
+Run KOFAMSCAN, DIAMOND UniRef50 and InterProScan's Pfam lane against an
 existing assembly.
 """
 
@@ -47,8 +47,8 @@ def build_template(rebuild: bool = False) -> Template:
                 "annotation::kofamscan_descriptions",
                 "annotation::diamond_uniref50_results",
                 "annotation::diamond_uniref50_descriptions",
-                "annotation::interproscan_results",
-                "annotation::interproscan_descriptions",
+                "annotation::interproscan_pfam_results",
+                "annotation::interproscan_pfam_descriptions",
             ],
         )],
         transform_libraries=A.transforms(

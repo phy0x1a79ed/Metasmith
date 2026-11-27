@@ -102,11 +102,12 @@ def render(table, genes, name, cols=DRAM_COLS):
     ur = _top(_lane(table, "uniref50"), ["score", "evalue"], [False, True])
     out["uniref_id"], out["uniref_hit"], out["uniref_eVal"] = ur["term"], ur["description"], ur["evalue"]
 
-    # InterProScan does not report the Pfam version. DRAM's readers of `pfam_hits` match
-    # `\[PF\d{5}.\d*\]` and drop what follows the dot, so `[PF00001.]` reads as PF00001
-    # to both distill and DRAM-v's transposon test.
-    pf = _lane(table, "interproscan", "pfam").sort_values(["orf", "start"], kind="stable")
-    out["pfam_hits"] = _joined(pf.assign(hit=pf["description"].fillna("") + " [" + pf["term"] + ".]"), "hit")
+    # DRAM's readers of `pfam_hits` match `\[PF\d{5}.\d*\]` and drop what follows the
+    # dot. The Pfam lane carries the version, and an accession without one is given a bare
+    # dot, so `[PF00001.]` still reads as PF00001 to distill and DRAM-v's transposon test.
+    pf = _lane(table, "interproscan_pfam", "pfam").sort_values(["orf", "start"], kind="stable")
+    acc = pf["term"].where(pf["term"].str.contains(".", regex=False), pf["term"] + ".")
+    out["pfam_hits"] = _joined(pf.assign(hit=pf["description"].fillna("") + " [" + acc + "]"), "hit")
 
     vr = _lane(table, "refseq_viral")
     vr = _top(vr[vr["score"] >= MIN_BITSCORE], "score", False)

@@ -147,7 +147,7 @@ types:
     extends:
     - reference_data
     properties:
-      _: InterProScan release tarball as fetched, unindexed, for buildInterProScanDB
+      _: InterProScan release tarball as fetched, unindexed, which each lane's build cuts its own data from
       ext: tar.gz
   metabuli_ref:
     stage: link

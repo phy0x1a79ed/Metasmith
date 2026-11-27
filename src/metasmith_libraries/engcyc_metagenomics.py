@@ -31,8 +31,11 @@ Kraken2 with Bracken (standard 16 GB) and ganon2 (RefSeq archaea and bacteria, o
 genome per species, ~50 GB), each in its long-read mode on long reads. Short and
 hybrid also run Centrifuger (GTDB r226, 176 GB), phyloFlash (SILVA 138.2, 0.2 GB)
 and inStrain on the quality MAGs. Hybrid's StrainPhlAn reads its long reads.
-Gene function: DIAMOND UniRef50 (~24 GB), KOfam (~5 GB), InterProScan (~100 GB),
-eggNOG (12 GB, 55 GB unpacked).
+Gene function: DIAMOND UniRef50 (~24 GB), KOfam (~5 GB), InterProScan 5.67-99.0 (5.4 GB
+download, 48 GB unpacked) in five lanes, each its own job: Pfam (4 GB), families (NCBIfam,
+PIRSF, PIRSR, SFLD, SMART, AntiFam; 4.5 GB), motifs (PROSITE, HAMAP, PRINTS, CDD, Coils,
+MobiDB-lite; 2.3 GB), structure (Gene3D, FunFam, SUPERFAMILY; 29 GB) and PANTHER (8.8 GB),
+with their hits combined; eggNOG (12 GB, 55 GB unpacked).
 Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
 (< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
 GPR table: the 4-lane table (KOfam, CLEAN, UniRef50, ProteinBERT); the DeepEC and
@@ -70,6 +73,18 @@ ASSEMBLY = "sequences::assembly"
 def binner_set(*binners: str) -> list[str]:
     return [f"binning::{b}_contig_to_bin_table" for b in binners]
 
+
+# InterProScan runs as lanes of member databases, each its own job; the combined hit
+# table takes the lanes its target names.
+IPS_LANES = ("pfam", "families", "motifs", "structure", "panther")
+LITE_IPS_LANES = ("pfam", "families", "motifs")
+
+
+def ips_hits(*lanes: str) -> dict:
+    return {"type": "annotation::interproscan_hits", "parents": [ORFS],
+            "set": [f"annotation::interproscan_{lane}_hits" for lane in lanes]}
+
+
 # Each entry hangs off the assembly (0), the ORFs (ORFS) or DAS Tool's bins (DAS).
 ORFS, DAS = 3, 5
 _A, _O = [0], [ORFS]
@@ -90,8 +105,8 @@ TARGETS = [
     {"type": "taxonomy::rrna_gtdb", "parents": _A},
     # gene function, as lane tables
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
-      for lane in ("uniref50", "kofam", "interproscan", "eggnog")),
-    {"type": "annotation::interproscan_hits", "parents": _O},
+      for lane in ("uniref50", "kofam", *(f"interproscan_{l}" for l in IPS_LANES), "eggnog")),
+    ips_hits(*IPS_LANES),
     # regulation and transport: no download, or a small one
     *({"type": f"annotation::{t}", "parents": _O}
       for t in ("deeptfactor_results", "predictf_results", "diamond_tcdb_results")),
@@ -170,7 +185,7 @@ REFERENCES = [f"annotation::{t}" for t in (
     "predictf_db", "tcdb_diamond_db")] + [
     f"ref::{t}" for t in (
         "antismash", "checkv_db", "dbcan_hmm", "deeparg_db", "dram_sheets", "ganon2_db", "genomad",
-        "gtdb", "gtdb_rrna", "interproscan_data", "iphop_db", "kofamscan_ko_list",
+        "gtdb", "gtdb_rrna", *(f"interproscan_{l}_data" for l in IPS_LANES), "iphop_db", "kofamscan_ko_list",
         "kofamscan_profiles", "kraken2_db", "label_transfer_landmarks", "merops_diamond_db",
         "metabuli_ref", "metaphlan_db", "mnxr_lookup",
         "pathofact_db", "refseq_viral_diamond_db", "sylph_db", "uniref50_diamond_db", "vcontact3_db",
@@ -180,7 +195,7 @@ CASE_TARGETS = {"short": SHORT_TARGETS, "long": LONG_TARGETS, "hybrid": HYBRID_T
 # engcyc lite: the lanes of the lite pick in docs/engcyc/DECISIONS.md (engcyc-lite).
 # Each set lists what full has and lite leaves out.
 LITE_DROPS = {
-    "annotation::interproscan_lane_table", "annotation::interproscan_hits",
+    *(f"annotation::interproscan_{l}_lane_table" for l in IPS_LANES if l not in LITE_IPS_LANES),
     "annotation::eggnog_lane_table", "annotation::merops_lane_table",
     "annotation::vogdb_lane_table", "annotation::dbcan_lane_table",
     "annotation::deepec_lane_table", "annotation::deeparg_lane_table",
@@ -200,7 +215,7 @@ LITE_DROPS = {
 LITE_REFERENCE_DROPS = {
     "annotation::amrfinderplus_db", "annotation::eggnog_data", "annotation::megares_diamond_db",
     "ref::antismash", "ref::dbcan_hmm", "ref::deeparg_db", "ref::dram_sheets", "ref::ganon2_db",
-    "ref::interproscan_data", "ref::iphop_db", "ref::merops_diamond_db", "ref::metabuli_ref",
+    *(f"ref::interproscan_{l}_data" for l in IPS_LANES if l not in LITE_IPS_LANES), "ref::iphop_db", "ref::merops_diamond_db", "ref::metabuli_ref",
     "ref::pathofact_db", "ref::vcontact3_db", "ref::vogdb_hmm", "ref::centrifuger_db",
     "ref::phyloflash_db",
 }
@@ -212,7 +227,9 @@ LITE_REFERENCES = [t for t in REFERENCES if t not in LITE_REFERENCE_DROPS]
 def lite(targets: list) -> list:
     orfs = next(i for i, t in enumerate(targets) if _type(t) == "sequences::assembly_orfs")
     assert not LITE_DROPS & {_type(t) for t in targets[:orfs + 1]}
-    targets = [t | {"set": binner_set("metabat2", "semibin2", "metadecoder")} if isinstance(t, dict) and "set" in t else t
+    lite_sets = {"sequences::das_tool_bin_fasta": binner_set("metabat2", "semibin2", "metadecoder"),
+                 "annotation::interproscan_hits": ips_hits(*LITE_IPS_LANES)["set"]}
+    targets = [t | {"set": lite_sets[t["type"]]} if isinstance(t, dict) and "set" in t else t
                for t in targets if _type(t) not in LITE_DROPS]
     return targets + [
         {"type": "binning::metadecoder_contig_to_bin_table", "parents": [0]}]

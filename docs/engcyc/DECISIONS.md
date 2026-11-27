@@ -642,14 +642,14 @@ Design. Four shipped templates: engcyc_metagenomics (full), engcyc_metagenomics_
 - Binning fence: each DAS Tool variant requires a marker given named for its binner set, `binning::metabat2_semibin2_comebin` (`das_tool`) and `binning::metabat2_semibin2_metadecoder` (`das_tool_metadecoder`), and each template gives its own, so neither variant is reachable from the other. Any plan that can reach `das_tool` must give the COMEBin marker. Lite adds one target on MetaDecoder's table, because a hybrid sample has two BAMs and without it lite plans MetaBAT2, SemiBin2 and DAS Tool twice.
 - Read taxonomy: MetaPhlAn, Kraken2 with Bracken, sylph and inStrain in both. StrainPhlAn, ganon2, Centrifuger and phyloFlash in full. Short and hybrid run every caller. Long reads run MetaPhlAn, StrainPhlAn, Kraken2, sylph and ganon2: Centrifuger, phyloFlash and inStrain document short reads only.
 - Contig and MAG taxonomy: GTDB-Tk and the rRNA scan in both. Metabuli in full.
-- Gene function: KOfam, UniRef50 (ten hits per ORF), CLEAN, ProteinBERT and BiGG in both. eggNOG, InterProScan, DeepEC, dbCAN, MEROPS and VOGDB in full. RefSeq viral in both.
+- Gene function: KOfam, UniRef50 (ten hits per ORF), CLEAN, ProteinBERT and BiGG in both. InterProScan's Pfam, families and motifs lanes in both, its structure (Gene3D, FunFam, SUPERFAMILY) and PANTHER lanes in full. eggNOG, DeepEC, dbCAN, MEROPS and VOGDB in full. RefSeq viral in both.
 - GPR: the 4-lane table in both. The all-reaction table is dropped: nothing reads it.
 - Genome features: Bakta non-coding, ARAGORN and mobileOG in both. antiSMASH in full.
 - Resistome: RGI, BacMet and VFDB in both. AMRFinderPlus, MEGARes, IntegronFinder, MobileElementFinder, DeepARG, both PathoFact lanes and the PathoFact report in full.
 - Per-MAG models: CarveMe and MEMOTE in both. DRAM and DRAM-v in full.
 - Viral: geNomad, VirSorter2, VIBRANT and CheckV with vOTUs in both. CCTyper, vConTACT3, iPHoP and virus-host links in full.
 - Virus-host links (`viromics::virus_host_links`): one row per frozen virus, MAG and evidence. Evidence is a CCTyper spacer BLASTn hit (unfiltered, with mismatches and effective mismatches, self-hits flagged), a provirus on a MAG contig, or a whole binned viral contig. Tony: "report the mismatches rather than filter so that filter can be run after the fact. lets just also do the prophage join."
-- References: lite about 220 GB, full about 1,070 GB. The largest are iPHoP 278 GB downloaded (about 350 built), Centrifuger 176 GB, Metabuli 192 GB of sources (77 built), InterProScan 100 and GTDB 98.
+- References: lite about 225 GB, full about 1,070 GB. The largest are iPHoP 278 GB downloaded (about 350 built), Centrifuger 176 GB, Metabuli 192 GB of sources (77 built) and GTDB 98. InterProScan is one 5.4 GB download in both, cut into one archive per lane.
 
 Run 4: lite on sockeye, full unsplit on fir. fir has about 17 TiB free, and nibi refused connections, so the split is not needed.
 

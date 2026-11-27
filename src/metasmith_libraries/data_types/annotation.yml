@@ -295,6 +295,30 @@ types:
       lane: eggnog
       Format: Parquet
       ext: parquet
+  # A lane's hits are one member of the combined table; interproscan_hits names its members
+  # as a set, so a template takes whichever lanes it runs. A member may not set `_`: a
+  # subtype's key replaces its parent's, and the member would stop being one.
+  interproscan_lane_hits:
+    properties:
+      _: every hit within a protein from one InterProScan lane, one row each
+      tool: interproscan
+      content: positional hits
+      Format: Parquet
+      ext: parquet
+  interproscan_hits:
+    properties:
+      _: every InterProScan hit within a protein, one row each, from the lanes the target names
+      lane: interproscan
+      content: positional hits
+      Format: Parquet
+      ext: parquet
+  pfam_hits:
+    properties:
+      _: every Pfam hit within a protein, one row each, its accession carrying the family version
+      lane: interproscan_pfam
+      content: versioned Pfam accessions
+      Format: Parquet
+      ext: parquet
   interproscan_pfam_lane_table:
     properties:
       _: the interproscan_pfam lane (Pfam) in the standard annotation-table format
@@ -302,12 +326,10 @@ types:
       Format: Parquet
       ext: parquet
   interproscan_pfam_hits:
+    extends:
+    - interproscan_lane_hits
     properties:
-      _: every interproscan Pfam hit within a protein, one row each
       lane: interproscan_pfam
-      content: positional hits
-      Format: Parquet
-      ext: parquet
   interproscan_families_lane_table:
     properties:
       _: the interproscan_families lane (NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam) in the standard annotation-table format
@@ -315,12 +337,10 @@ types:
       Format: Parquet
       ext: parquet
   interproscan_families_hits:
+    extends:
+    - interproscan_lane_hits
     properties:
-      _: every interproscan NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam hit within a protein, one row each
       lane: interproscan_families
-      content: positional hits
-      Format: Parquet
-      ext: parquet
   interproscan_motifs_lane_table:
     properties:
       _: the interproscan_motifs lane (PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite) in the standard annotation-table format
@@ -328,12 +348,10 @@ types:
       Format: Parquet
       ext: parquet
   interproscan_motifs_hits:
+    extends:
+    - interproscan_lane_hits
     properties:
-      _: every interproscan PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite hit within a protein, one row each
       lane: interproscan_motifs
-      content: positional hits
-      Format: Parquet
-      ext: parquet
   interproscan_structure_lane_table:
     properties:
       _: the interproscan_structure lane (Gene3D, FunFam and SUPERFAMILY) in the standard annotation-table format
@@ -341,12 +359,10 @@ types:
       Format: Parquet
       ext: parquet
   interproscan_structure_hits:
+    extends:
+    - interproscan_lane_hits
     properties:
-      _: every interproscan Gene3D, FunFam and SUPERFAMILY hit within a protein, one row each
       lane: interproscan_structure
-      content: positional hits
-      Format: Parquet
-      ext: parquet
   interproscan_panther_lane_table:
     properties:
       _: the interproscan_panther lane (PANTHER) in the standard annotation-table format
@@ -354,12 +370,10 @@ types:
       Format: Parquet
       ext: parquet
   interproscan_panther_hits:
+    extends:
+    - interproscan_lane_hits
     properties:
-      _: every interproscan PANTHER hit within a protein, one row each
       lane: interproscan_panther
-      content: positional hits
-      Format: Parquet
-      ext: parquet
   mobileog_lane_table:
     properties:
       _: the mobileog lane in the standard annotation-table format

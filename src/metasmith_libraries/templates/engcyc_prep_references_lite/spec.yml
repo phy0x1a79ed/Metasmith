@@ -36,6 +36,9 @@ cases:
   - ref::genomad
   - ref::gtdb
   - ref::gtdb_rrna
+  - ref::interproscan_pfam_data
+  - ref::interproscan_families_data
+  - ref::interproscan_motifs_data
   - ref::kofamscan_ko_list
   - ref::kofamscan_profiles
   - ref::kraken2_db

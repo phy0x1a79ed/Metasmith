@@ -4,7 +4,7 @@ lib     = TransformInstanceLibrary.ResolveParentLibrary(__file__)
 model   = Transform()
 image   = model.AddRequirement(lib.GetType("env::python_for_data_science.env"))
 genes   = model.AddRequirement(lib.GetType("annotation::gene_set"))
-ipr     = model.AddRequirement(lib.GetType("annotation::interproscan_results"))
+ipr     = model.AddRequirement(lib.GetType("annotation::interproscan_pfam_results"))
 script  = model.AddRequirement(lib.GetType("lib::go_overrepresentation.py"))
 out     = model.AddProduct(lib.GetType("annotation::go_overrepresentation"))
 

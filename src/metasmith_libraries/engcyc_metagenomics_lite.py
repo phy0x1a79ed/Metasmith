@@ -8,7 +8,7 @@ from metasmith.python_api import Template
 NAME = "engcyc_metagenomics_lite"
 DESCRIPTION = """
 engcyc_metagenomics with the lite lanes: the same three cases (short reads, hybrid,
-long reads) and the references case, about 220 GB of reference downloads in place of
+long reads) and the references case, about 225 GB of reference downloads in place of
 full's 1,070 GB. Funnel each sample into the case for its reads, or give an SRA run
 accession. Every lane is its own target; deselect a target to drop its lane, and drop
 its database from the references case too. engcyc_metagenomics' description gives
@@ -19,8 +19,9 @@ Assembly: as full. Binning: MetaBAT2, SemiBin2, MetaDecoder -> DAS Tool -> Check
 Taxonomy: GTDB-Tk r232 on the quality MAGs; rRNA scan against GTDB r232 SSU.
 Read taxonomy: MetaPhlAn, sylph and Kraken2 with Bracken, each in its long-read mode
 on long reads; inStrain on short and hybrid.
-Gene function: DIAMOND UniRef50 and KOfam; CLEAN, ProteinBERT and BiGG lanes; the
-4-lane GPR table.
+Gene function: DIAMOND UniRef50 and KOfam; InterProScan's Pfam, families and motifs
+lanes (5.4 GB download, 11 GB unpacked) with their hits combined; CLEAN, ProteinBERT and
+BiGG lanes; the 4-lane GPR table.
 Genome features: Bakta non-coding, ARAGORN tRNA, mobileOG, PromoTech promoters.
 Regulation and transport: DeepTFactor, PredicTF, TCDB by DIAMOND.
 Resistome: RGI/CARD, BacMet, VFDB. RefSeq viral lane.
