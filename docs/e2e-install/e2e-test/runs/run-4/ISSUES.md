@@ -122,3 +122,4 @@ Both stations relaunched warm at ~12:05 with the image fix: prep templates pull 
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | friction | fir, GUI inputs | The agent's first scripted click on a template row's delete cross only armed it (red check), and it took a second, real click to delete the row. This is the two-click confirm from bd23b804 working as designed. | none: the confirm is intended, and the armed cross's title names the second click |
