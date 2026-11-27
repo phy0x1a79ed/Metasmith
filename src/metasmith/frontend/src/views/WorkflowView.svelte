@@ -131,7 +131,6 @@
   let presetOpen = $state(false)
   let allPresets = $state([])
   let resetArmed = $state(false)
-  let resetTimer
 
   async function loadPreset() {
     const body = await attempt(() => api.get(`/workflows/${name}/preset`))
@@ -181,13 +180,11 @@
   function armReset() {
     if (!presetSource) return
     if (resetArmed) {
-      clearTimeout(resetTimer)
       resetArmed = false
       adoptPreset(presetSource)
       return
     }
     resetArmed = true
-    resetTimer = setTimeout(() => (resetArmed = false), 2000)
   }
 
   // A second after typing in the preset stops, it saves itself -- the same
@@ -1395,18 +1392,15 @@
   }
 
   // A large setup asks first, the way reset does: the first click arms the
-  // button with the size, a second within the window starts it.
+  // button with the size, and it stays armed until the pointer or focus leaves.
   let setupArmed = $state(false)
-  let setupTimer
   function armSetup() {
     if (!wf.result?.setup?.confirm || setupArmed) {
-      clearTimeout(setupTimer)
       setupArmed = false
       launch('setup')
       return
     }
     setupArmed = true
-    setupTimer = setTimeout(() => (setupArmed = false), 4000)
   }
 
   // `setup` runs the image pulls and the steps that read no sample -- the
@@ -2029,6 +2023,8 @@
               class="small"
               disabled={!presetSource}
               onclick={armReset}
+              onmouseleave={() => (resetArmed = false)}
+              onblur={() => (resetArmed = false)}
               title={resetArmed
                 ? "click again to confirm — this discards this workflow's own edits"
                 : 'reset this preset to its stock content, discarding this workflow\'s own edits'}
@@ -2060,6 +2056,8 @@
           </button>
           <button
             onclick={armSetup}
+            onmouseleave={() => (setupArmed = false)}
+            onblur={() => (setupArmed = false)}
             title={setupArmed
               ? `click again to confirm — ${wf.result?.setup?.line}`
               : 'pull every container and download every reference database this workflow needs, without running a sample'}
