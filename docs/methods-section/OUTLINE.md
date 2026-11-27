@@ -11,7 +11,27 @@ Order and names (outline-sections, 2026-11-26): Planning, Specification, Executi
 ### M1. Planning — agreed (outline-sections, 2026-11-26)
 - Role: the internals and definitions; how the planner works.
 - Key message: contracts are matched through property-set types and lineage constraints, and a seeded search composes them into a verified plan.
-- Paragraphs: to be set in outline-paragraphs (candidates: types; lineage; grouping and splitting; search; selection; refinement; determinism and verification).
+- Paragraphs (outline-paragraphs, 2026-11-26): the minimum to convey the implementation; the Results carry the motivation. Group-by is not used by the solver and moves to Execution.
+
+#### P1. Types and lineage — proposed
+- Role: the formal matching rules the solver applies.
+- Key message: an output feeds an input when its type holds every property of the input's type and its ancestry contains the instances the input's lineage names.
+- Points:
+  1. Types are sets of properties from EDAM, declared in YAML libraries, and a type may extend an earlier type by union.
+  2. A type X satisfies Y when X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
+  3. An input may name other inputs of the same contract as required ancestors.
+  4. A data instance satisfies that requirement when each instance bound to a named input is among its ancestors, L(X,Z).
+  5. Each instance carries its ancestry in its signature, so instances of one type with different histories are distinct.
+- Note: the d3 formula says "some ancestor's type satisfies each type in Z"; the code checks the bound instance itself (`workflow_solver/src/search.rs:215`). "DNs" in d3 is undefined. Source of 1: `models/libraries/types.py:50`, EDAM 1.25, strict false.
+
+#### P2. Search and selection — proposed
+- Role: how the plan is found.
+- Key message: a PUCT search grows partial plans from the givens and targets until no input is left unfed.
+- Points: next, after P1 (state, base case, frontier expansion, PUCT selection).
+
+#### P3. Refinement and verification — proposed
+- Role: how the plan is trimmed and trusted.
+- Key message: a refiner removes unneeded steps, the seeded search makes plans reproducible, and an independent checker verifies each plan.
 
 ### M2. Specification — agreed (outline-sections, 2026-11-26)
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.

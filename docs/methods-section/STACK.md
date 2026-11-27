@@ -6,11 +6,11 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**outline-paragraphs / M1 Planning**: level 2 for M1 Planning: its paragraphs and their key messages.
+**paragraph-walk / Planning P1**: types and lineage, points and prose, then into d3 (live doc is d3, edited through Word on capella; d2 is frozen).
 
 ## Waiting on the user
 
-- outline-paragraphs / M1 Planning: agree its paragraph list.
+- Planning P1: accept points and prose.
 
 ## Preferences
 
