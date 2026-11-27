@@ -1,0 +1,20 @@
+# PROGRESS
+- [x] Read docs: setup/install.rst, setup/gui.rst, setup/ssh.rst, setup/deployment.rst
+- [ ] Install metasmith (conda env in sandbox)
+- [~] install running: mamba create (log logs/install.log, pid 2155906)
+- [x] install: envs/msm_env, metasmith 0.26.0
+- [~] GUI: `msm gui --port 8091` from sandbox/metasmith_ws, log logs/gui.log (pid see below)
+- NOTE: another run (run-4-fir) runs its own msm gui on 8092 on this host; not mine, do not touch
+- [~] GUI relaunched detached on 8091, log logs/gui2.log
+- [x] GUI running detached on 8091 (log logs/gui2.log). Next: browser walk-through
+- [~] deploying agent xanthic-sockeye via GUI (started ~18:08); check GUI log panel
+- [x] agent xanthic-sockeye deployed to sockeye (GUI). Next: workflows
+- [~] setup run for engcyc_prep_references_lite started via GUI (workflow brilliant-echidna, agent xanthic-sockeye)
+- [~] SETUP RUN (engcyc_prep_references_lite) running via GUI: run NC9Hx, workflow brilliant-echidna, task gjqtvFfd, agent xanthic-sockeye, preset slurm, slurmAccount=st-shallam-1. Status staging at ~18:14. Check Runs tab in GUI.
+- NOTE: GUI's own run process lives on the sockeye relay; GUI server on 127.0.0.1:8091 (pid chain under nohup setsid)
+- NEXT after setup: create workflow for engcyc_metagenomics_lite (defaults), SRR9658108 sample, same agent, run; then collect results to ./results
+- setup run 63WFbYv5 executing on sockeye (slurm jobs active) as of 18:25
+- setup run still running at 18:54 (5 refs done so far)
+- 19:19 context resumed: setup run 63WFbYv5 still running, 8 of ~10 refs present; GUI 8091 up (200)
+- 21:37 setup run 63WFbYv5 FAILED: p26__downloadVirsorter2DB IllegalThreadStateException (nextflow race; virsorter itself finished). 17 refs present. Next: re-run setup via GUI.
+- 21:38 re-run started via GUI: run brilliant-echidna-7ErBg (setup). Previous run NC9Hx failed. Check GUI Runs tab / ssh runs dir.

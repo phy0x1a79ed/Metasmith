@@ -40,3 +40,14 @@ Both stations ran the prep templates through the GUI from 13:30. Setup ran as st
 | 4 | harness | watcher | The watcher summed bytes per filename. A product is hardlinked from its work dir, the cache and the run's results, so it counted each one up to three times: 563 GB on sockeye where `du` gave 187 GB. It killed sockeye on that. The setup estimate (~162 GB) was close to the truth. | watcher counts each inode once |
 | 5 | ambiguity | GUI set up button | Both agents clicked "set up" 3 times with no effect before the size confirm appeared. The confirm reverts after a few seconds. fir launched only on a double click. | open |
 | 6 | guess | CLI | `metasmith workflow wait <agent> <key>` wants the agent YAML path, not the agent name. The docs are silent. | open |
+
+# Round 3 (release candidate 0.26.0+28876c1, 2026-11-26)
+
+Both stations relaunched with `--warm` at 18:05. fir kept running. The operator stopped sockeye at 21:45 and relaunched it on 0.26.2+630bf27. Records are in `round3/`.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
+| 1 | error | cache, every station | `--warm` gave 0 hits in 53 steps. A leaf's id was its absolute path and mtime on the client. The GUI clones the standard library afresh per install, so every env file got a new id and every key changed. A user who reinstalls re-downloads every reference. | ce14980e: a file of 1 MiB or less is keyed by its library path and bytes. Directory leaves are still stat-keyed |
+| 2 | error | downloadVirsorter2DB (sockeye) | The vs2 conda env took ~100 min on sockeye's Lustre. The protocol reported success at 1 h 50 min, and wrap-up crossed the 2 h limit. Nextflow's local executor killed it and reported `IllegalThreadStateException: process hasn't exited`, not a time limit. Round 2's failure was likely the same. | a57295e8: 8 h |
+| 3 | harness | watcher caps under `--warm` | A warm round starts with the earlier rounds' cache on disk, which counts against the cap. fir started at 888 GB against 1.5 TB. | open: replace the watcher by hand (fir 4 TB, sockeye 900 GB) |
+| 4 | ambiguity | GUI set up button | Again, the size confirm reverted before the agent clicked it (sockeye). | open, round 2 row 5 |
