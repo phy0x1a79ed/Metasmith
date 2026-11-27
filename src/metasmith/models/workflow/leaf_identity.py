@@ -1,6 +1,8 @@
 # Re-deriving leaf identity on the host that owns the files.
 #
-# A leaf id is the file's path and mtime. Where the row was registered decides
+# A leaf id is a small file's bytes, or a large file's or directory's path and
+# mtime (`libraries.identity.leaf_id`), derived here through the same
+# `_leaf_id_of` the client minted with. Where the row was registered decides
 # who could mint it: the client owns the libraries it builds and stats those
 # itself, but it cannot stat an input that lives on the agent's host, and falls
 # back to a fresh random id per registration. Staging is the first moment those
@@ -29,7 +31,7 @@
 # ids against the plan's; a plan on disk still carrying pre-restat ids makes that
 # join raise on inputs the run legitimately read.
 #
-# A path this host cannot stat keeps the id it arrived with. Substituting a
+# A path this host cannot read keeps the id it arrived with. Substituting a
 # derivable id for one that cannot be derived is how a false cache hit is built.
 
 from __future__ import annotations
@@ -37,7 +39,7 @@ from __future__ import annotations
 import os
 
 from ...logging import Log
-from ..libraries.identity import stat_leaf_id, value_leaf_id
+from ..libraries.identity import value_leaf_id
 from ..paths import is_deferred
 
 
@@ -75,7 +77,7 @@ def _client_owned(inst) -> bool:
 def restat_leaf_ids(task) -> dict:
     # Re-mint the leaf ids this host is the authority for, in place.
     #
-    # The derivation is a pure function of (absolute path, mtime), so the several
+    # The derivation is a pure function of the file, so the several
     # DataInstance objects that name one file -- `plan.given` and each step's
     # `dependency_map` hold separate objects joined only by id -- land on the same
     # new id without a translation table.
@@ -107,7 +109,7 @@ def restat_leaf_ids(task) -> dict:
         if meta is not None and meta.get("value"):
             new = value_leaf_id(abs_path, inst.path, lib.fork_id)
         else:
-            new = stat_leaf_id(abs_path, lib.fork_id)
+            new = lib._leaf_id_of(inst.path)
         if new is None:
             unreachable.append(str(abs_path))
             continue
