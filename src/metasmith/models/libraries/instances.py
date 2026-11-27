@@ -19,7 +19,7 @@ from ..remote import Logistics, Source, SourceType
 from ..solver import Dependency, Endpoint
 from ..variadic import TOKEN, StripToken
 from .pinned import _PinnedLibrary
-from .identity import _LeafIdentity
+from .identity import _LeafIdentity, _by_content
 from .telemetry_api import _TelemetryQueries
 from .transfer import _StoreTransfer
 from .types import DataTypeLibrary
@@ -462,12 +462,13 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
     def Invalidate(self, paths: Iterable[Path]|None = None) -> dict:
         """Say that the data behind these items has changed.
 
-        A leaf's identity is the absolute path it sits at and the mtime of the
-        top node -- one stat, whatever the size of what is there, which is what
-        keeps a 24 GB reference from costing a tree walk on every run. The
-        price is that a change below the top node is invisible, and this is the
-        lever for it: touch the path, re-mint through the same formula the
-        agent uses, and every cache key built on the old id stops matching.
+        A large file's or a directory's identity is the absolute path it sits
+        at and the mtime of the top node -- one stat, whatever the size of what
+        is there, which is what keeps a 24 GB reference from costing a tree walk
+        on every run. The price is that a change below the top node is
+        invisible, and this is the lever for it: touch the path, re-mint through
+        the same formula the agent uses, and every cache key built on the old id
+        stops matching. A small file is identified by its bytes and is skipped.
         """
         self._refuse_if_pinned("Invalidate")
         targets = (
@@ -506,6 +507,11 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
                 # an invalidate that leaves the id where it was is worse than
                 # no invalidate at all.
                 st = abs_path.stat()
+                if _by_content(st):
+                    skipped[str(path)] = (
+                        "a small file; its identity is its bytes, so edit the bytes"
+                    )
+                    continue
                 bump = max(time.time_ns(), st.st_mtime_ns + 1)
                 os.utime(abs_path, ns=(bump, bump))
             except OSError as e:

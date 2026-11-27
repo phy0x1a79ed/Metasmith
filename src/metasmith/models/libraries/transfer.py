@@ -193,7 +193,8 @@ class _StoreTransfer:
 
         dtypes = {}
         for p in types_path.iterdir():
-            if p.is_dir(): continue
+            # A concurrent Save leaves its `.lock` and `.tmp` here for a moment.
+            if p.is_dir() or p.suffix != ext: continue
             if p == index_path: continue
             k = p.relative_to(types_path).with_suffix("")
             k = str(k)

@@ -110,7 +110,7 @@ def test_a_pinned_get_touches_no_file(tmp_path, monkeypatch):
     def _boom(*a, **k):
         raise AssertionError("a pinned library re-derived an identity")
 
-    monkeypatch.setattr(identity, "stat_leaf_id", _boom)
+    monkeypatch.setattr(identity, "leaf_id", _boom)
     reloaded = DataInstanceLibrary.Load(lib.location)
     after = {p: reloaded.Get(p).instance_id for p in reloaded.manifest}
     assert after == before

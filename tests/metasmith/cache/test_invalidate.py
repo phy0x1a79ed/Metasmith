@@ -1,7 +1,8 @@
 """`msm data invalidate` -- the lever stat-only leaf identity needs.
 
-A leaf's identity is the absolute path plus the mtime of the top node, which is
-what keeps a large reference from costing a tree walk on every run. The price
+A large leaf's identity is the absolute path plus the mtime of the top node,
+which is what keeps a large reference from costing a tree walk on every run. A
+small file's is its bytes, so it needs no lever. The price
 is that a change below the top node is invisible, so there has to be a way to
 say "this changed" out loud -- and, for an edit the index can see, for that
 to happen on the next load without anyone saying it.
@@ -17,7 +18,7 @@ import pytest
 import yaml
 
 from metasmith.models.libraries import DataInstanceLibrary
-from metasmith.models.libraries.identity import stat_leaf_id
+from metasmith.models.libraries.identity import _DIGEST_MAX_BYTES, leaf_id, value_leaf_id
 from metasmith.models.libraries.pinned import PinnedLibraryError
 
 from tests.metasmith.cache._cache_harness import (
@@ -34,8 +35,17 @@ def _library(tmp_path: Path) -> DataInstanceLibrary:
     )
 
 
-def test_invalidate_moves_the_id_to_the_one_the_agent_will_derive(tmp_path):
+def _big_library(tmp_path: Path) -> DataInstanceLibrary:
+    # Leaves over the content threshold, which are the ones identified by stat.
     lib = _library(tmp_path)
+    for p in lib.manifest:
+        (lib.location / p).write_bytes(b"x" * (_DIGEST_MAX_BYTES + 1))
+    DataInstanceLibrary.Load(lib.location).Save()
+    return DataInstanceLibrary.Load(lib.location)
+
+
+def test_invalidate_moves_the_id_to_the_one_the_agent_will_derive(tmp_path):
+    lib = _big_library(tmp_path)
     item = next(iter(lib.manifest))
     before = lib.instance_meta[item]["instance_id"]
 
@@ -46,7 +56,15 @@ def test_invalidate_moves_the_id_to_the_one_the_agent_will_derive(tmp_path):
     assert report["moved"][str(item)] == {"from": before, "to": after}
     # The same formula the agent re-derives with at staging time; a different
     # one here means client and agent disagree about what the file is.
-    assert after == stat_leaf_id(lib.location / item, lib.fork_id)
+    assert after == leaf_id(lib.location / item, item, lib.fork_id)
+
+
+def test_invalidate_skips_a_small_file_and_says_to_edit_it(tmp_path):
+    lib = _library(tmp_path)
+    item = next(iter(lib.manifest))
+    report = lib.Invalidate([item])
+    assert report["moved"] == {}
+    assert "edit the bytes" in report["skipped"][str(item)]
 
 
 def _reloaded_ids(lib) -> dict:
@@ -77,6 +95,36 @@ def test_a_small_leaf_whose_bytes_did_not_change_keeps_its_id(tmp_path):
     assert DataInstanceLibrary.Load(lib.location).GetKey() == lib.GetKey()
 
 
+def test_a_small_leaf_copied_to_a_new_location_keeps_its_id(tmp_path):
+    # A reinstall clones the library somewhere new; the env files in it are the
+    # same bytes, and every cache key downstream of them must hold.
+    import shutil
+
+    lib = _library(tmp_path)
+    copy = tmp_path / "reinstall" / "lib"
+    shutil.copytree(lib.location, copy)
+    for p in lib.manifest:
+        os.utime(copy / p, ns=(10**18, 10**18))
+    assert _reloaded_ids(DataInstanceLibrary.Load(copy)) == _reloaded_ids(lib)
+
+
+def test_a_small_leaf_recorded_with_a_stat_id_moves_to_its_content_id(tmp_path):
+    # An index written when every leaf was its stat: the next load takes the
+    # bytes' id, once, and it then survives a copy.
+    from metasmith.caching.keys import stat_multihash_key
+
+    lib = _library(tmp_path)
+    item = next(iter(lib.manifest))
+    f = lib.location / item
+    index = lib.location / "_metadata" / "index.yml"
+    raw = yaml.safe_load(index.read_text())
+    stat_id = stat_multihash_key(f, f.stat().st_mtime_ns).hex()
+    raw["manifest"][str(item)]["instance_id"] = stat_id
+    index.write_text(yaml.safe_dump(raw))
+
+    assert _reloaded_ids(lib)[item] == leaf_id(f, item, lib.fork_id) != stat_id
+
+
 def test_an_edit_that_restores_the_mtime_still_moves(tmp_path):
     lib = _library(tmp_path)
     item = next(iter(lib.manifest))
@@ -88,8 +136,9 @@ def test_an_edit_that_restores_the_mtime_still_moves(tmp_path):
     assert _reloaded_ids(lib)[item] != before
 
 
-def test_an_index_written_before_stamps_keeps_its_ids_and_is_stamped_on_save(tmp_path):
-    lib = _library(tmp_path)
+@pytest.mark.parametrize("build", [_library, _big_library], ids=["small", "big"])
+def test_an_index_written_before_stamps_keeps_its_ids_and_is_stamped_on_save(tmp_path, build):
+    lib = build(tmp_path)
     index = lib.location / "_metadata" / "index.yml"
     raw = yaml.safe_load(index.read_text())
     for entry in raw["manifest"].values():
@@ -139,8 +188,6 @@ def test_a_value_is_derived_the_same_from_a_copy_on_another_host(tmp_path):
     # The agent re-derives from its own copy at another absolute path.
     import shutil
 
-    from metasmith.models.libraries.identity import value_leaf_id
-
     lib = _value_library(tmp_path)
     copy = tmp_path / "agent" / "lib"
     shutil.copytree(lib.location, copy)
@@ -150,7 +197,7 @@ def test_a_value_is_derived_the_same_from_a_copy_on_another_host(tmp_path):
 
 
 def test_invalidate_all_moves_every_leaf(tmp_path):
-    lib = _library(tmp_path)
+    lib = _big_library(tmp_path)
     before = {p: m["instance_id"] for p, m in lib.instance_meta.items()}
 
     lib.Invalidate()
@@ -162,7 +209,7 @@ def test_invalidate_all_moves_every_leaf(tmp_path):
 
 
 def test_invalidate_survives_a_reload(tmp_path):
-    lib = _library(tmp_path)
+    lib = _big_library(tmp_path)
     item = next(iter(lib.manifest))
     lib.Invalidate([item])
     expected = lib.instance_meta[item]["instance_id"]

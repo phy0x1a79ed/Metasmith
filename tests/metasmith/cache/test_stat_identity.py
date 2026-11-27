@@ -4,7 +4,9 @@ import os
 from pathlib import Path
 
 from metasmith.models.libraries import DataInstanceLibrary
-from metasmith.models.libraries.identity import stat_leaf_id
+from metasmith.models.libraries.identity import (
+    _DIGEST_MAX_BYTES, leaf_id, value_leaf_id,
+)
 from metasmith.models.workflow import restat_leaf_ids
 
 from tests.metasmith.cache._cache_harness import (
@@ -19,51 +21,106 @@ from tests.metasmith.cache._cache_harness import (
 TYPE_NAMES = ("seed", "mid")
 
 
-class TestStatLeafId:
-    def test_stable_and_moves_with_mtime(self, tmp_path):
-        f = tmp_path / "data.txt"
-        f.write_text("payload\n", encoding="utf-8")
+_BIG = b"x" * (_DIGEST_MAX_BYTES + 1)
 
-        first = stat_leaf_id(f)
+
+class TestStatLeafId:
+    # Over the threshold, and for a directory, the id is the stat.
+    def test_stable_and_moves_with_mtime(self, tmp_path):
+        f = tmp_path / "data.bin"
+        f.write_bytes(_BIG)
+
+        first = leaf_id(f, Path("data.bin"))
         assert first is not None
-        assert stat_leaf_id(f) == first
+        assert leaf_id(f, Path("data.bin")) == first
 
         os.utime(f, ns=(0, 1234567890))
-        assert stat_leaf_id(f) != first
+        assert leaf_id(f, Path("data.bin")) != first
 
     def test_content_is_not_read(self, tmp_path):
-        f = tmp_path / "data.txt"
-        f.write_text("payload\n", encoding="utf-8")
-        before = stat_leaf_id(f)
+        f = tmp_path / "data.bin"
+        f.write_bytes(_BIG)
+        before = leaf_id(f, Path("data.bin"))
         st = f.stat()
-        f.write_text("DIFFERENT payload\n", encoding="utf-8")
+        f.write_bytes(b"y" * len(_BIG))
         os.utime(f, ns=(st.st_atime_ns, st.st_mtime_ns))
-        assert stat_leaf_id(f) == before, (
-            "identity is the stat, not the bytes; an edit that restores mtime is "
-            "invisible here by construction"
+        assert leaf_id(f, Path("data.bin")) == before, (
+            "a large file's identity is the stat, not the bytes; an edit that"
+            " restores mtime is invisible here by construction"
         )
+
+    def test_a_file_over_the_threshold_moves_with_its_location(self, tmp_path):
+        a = tmp_path / "a" / "data.bin"
+        b = tmp_path / "b" / "data.bin"
+        for f in (a, b):
+            f.parent.mkdir()
+            f.write_bytes(_BIG)
+        st = a.stat()
+        os.utime(b, ns=(st.st_atime_ns, st.st_mtime_ns))
+        assert leaf_id(a, Path("data.bin")) != leaf_id(b, Path("data.bin"))
 
     def test_directory_costs_one_stat(self, tmp_path):
         d = tmp_path / "tree"
         (d / "nested").mkdir(parents=True)
         (d / "nested" / "a.txt").write_text("a\n", encoding="utf-8")
-        assert stat_leaf_id(d) is not None
+        assert leaf_id(d, Path("tree")) is not None
 
     def test_unreachable_path_is_none(self, tmp_path):
-        assert stat_leaf_id(tmp_path / "absent.txt") is None
+        assert leaf_id(tmp_path / "absent.txt", Path("absent.txt")) is None
 
     def test_path_is_part_of_the_identity(self, tmp_path):
+        a, b = tmp_path / "a.bin", tmp_path / "b.bin"
+        a.write_bytes(_BIG)
+        b.write_bytes(_BIG)
+        st = a.stat()
+        os.utime(b, ns=(st.st_atime_ns, st.st_mtime_ns))
+        assert leaf_id(a, Path("a.bin")) != leaf_id(b, Path("b.bin"))
+
+    def test_fork_id_separates(self, tmp_path):
+        for name, data in (("small.txt", b"payload\n"), ("big.bin", _BIG)):
+            f = tmp_path / name
+            f.write_bytes(data)
+            assert leaf_id(f, Path(name)) != leaf_id(f, Path(name), "deadbeef")
+
+
+class TestContentLeafId:
+    # At or under the threshold, the id is the bytes and the library path.
+    def test_a_copy_elsewhere_with_a_new_mtime_keeps_its_id(self, tmp_path):
+        a = tmp_path / "install_1" / "dram.env"
+        b = tmp_path / "install_2" / "dram.env"
+        for f in (a, b):
+            f.parent.mkdir()
+            f.write_text("docker://tool:0.5\n", encoding="utf-8")
+        os.utime(b, ns=(10**18, 10**18))
+        assert leaf_id(a, Path("dram.env")) == leaf_id(b, Path("dram.env"))
+
+    def test_a_changed_byte_moves_it(self, tmp_path):
+        f = tmp_path / "dram.env"
+        f.write_text("docker://tool:0.5\n", encoding="utf-8")
+        before = leaf_id(f, Path("dram.env"))
+        st = f.stat()
+        f.write_text("docker://tool:0.6\n", encoding="utf-8")
+        os.utime(f, ns=(st.st_atime_ns, st.st_mtime_ns))
+        assert leaf_id(f, Path("dram.env")) != before
+
+    def test_the_same_bytes_under_two_names_stay_distinct(self, tmp_path):
         a, b = tmp_path / "a.txt", tmp_path / "b.txt"
         a.write_text("same\n", encoding="utf-8")
         b.write_text("same\n", encoding="utf-8")
-        st = a.stat()
-        os.utime(b, ns=(st.st_atime_ns, st.st_mtime_ns))
-        assert stat_leaf_id(a) != stat_leaf_id(b)
+        assert leaf_id(a, Path("a.txt")) != leaf_id(b, Path("b.txt"))
 
-    def test_fork_id_separates(self, tmp_path):
-        f = tmp_path / "data.txt"
-        f.write_text("payload\n", encoding="utf-8")
-        assert stat_leaf_id(f) != stat_leaf_id(f, "deadbeef")
+    def test_the_threshold_itself_is_read(self, tmp_path):
+        a = tmp_path / "a" / "edge.bin"
+        b = tmp_path / "b" / "edge.bin"
+        for f in (a, b):
+            f.parent.mkdir()
+            f.write_bytes(b"x" * _DIGEST_MAX_BYTES)
+        assert leaf_id(a, Path("edge.bin")) == leaf_id(b, Path("edge.bin"))
+
+    def test_a_file_and_a_value_with_the_same_text_differ(self, tmp_path):
+        f = tmp_path / "param"
+        f.write_text("42", encoding="utf-8")
+        assert leaf_id(f, Path("param")) != value_leaf_id(f, Path("param"))
 
 
 def _task(root: Path):
@@ -154,9 +211,17 @@ class TestRestat:
         assert report["kept"] == 0
         assert report["unreachable"] == []
         for inst in leaves:
-            assert inst.instance_id == stat_leaf_id(
-                inst.ResolvePath(), inst.parent_lib.fork_id
+            assert inst.instance_id == leaf_id(
+                inst.ResolvePath(), inst.path, inst.parent_lib.fork_id
             )
+
+    def test_the_agent_derives_the_clients_id_for_a_small_file(self, tmp_path):
+        # The agent reads its own copy at another absolute path; a small file's
+        # id is its bytes and library path, so the two agree and nothing moves.
+        task = _task(tmp_path)
+        leaves = _as_index_only(task)
+        assert leaves, "fixture produced no leaf instances"
+        assert restat_leaf_ids(task)["restated"] == 0
 
     def test_an_absolute_path_is_still_re_derived(self, tmp_path):
         # An input named by an absolute path is not owned by any library, so
@@ -169,8 +234,9 @@ class TestRestat:
 
         assert report["restated"] == len(leaves)
         for inst in leaves:
-            assert inst.instance_id == stat_leaf_id(
-                inst.path, inst.parent_lib.fork_id
+            lib = inst.parent_lib
+            assert inst.instance_id == leaf_id(
+                inst.path, inst.path.relative_to(lib.location), lib.fork_id
             )
 
     def test_separate_objects_for_one_file_converge(self, tmp_path):
@@ -291,7 +357,7 @@ class TestStagedPlanPersistence:
 
 
 class TestLibraryMinting:
-    def test_add_item_mints_the_stat_id(self, tmp_path):
+    def test_add_item_mints_the_leaf_id(self, tmp_path):
         types_path = build_types_library(tmp_path, TYPE_NAMES)
         lib = DataInstanceLibrary(tmp_path / "samples.xgdb")
         lib.AddTypeLibrary(types_path, namespace="cf")
@@ -299,11 +365,9 @@ class TestLibraryMinting:
         f.write_text("payload\n", encoding="utf-8")
 
         lib.AddItem(Path("data.txt"), "cf::seed")
-        assert lib.Get(Path("data.txt")).instance_id == stat_leaf_id(f)
+        assert lib.Get(Path("data.txt")).instance_id == leaf_id(f, Path("data.txt"))
 
     def test_add_value_mints_the_value_id(self, tmp_path):
-        from metasmith.models.libraries.identity import value_leaf_id
-
         types_path = build_types_library(tmp_path, TYPE_NAMES)
         lib = DataInstanceLibrary(tmp_path / "samples.xgdb")
         lib.AddTypeLibrary(types_path, namespace="cf")

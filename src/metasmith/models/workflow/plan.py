@@ -30,7 +30,7 @@ class GivenNotImportedError(ValueError):
 
 
 # A given's identity has to be a record, not something this process worked out.
-# `stat_leaf_id` folds the absolute path and the mtime of whatever this process
+# `leaf_id` folds the absolute path and the mtime of a large file this process
 # can see, so it moves when the file is touched, and it is invented outright
 # when the path belongs to another host -- which is every input of a run driven
 # from a workstation. `_mint_leaf_id` marks what it invented, `Pack` does not

@@ -29,7 +29,7 @@ def _lib(location: Path, types_path: Path) -> DataInstanceLibrary:
 
 
 def test_rename_re_mints_a_leaf_id_to_match_a_fresh_registration(tmp_path, types_path):
-    from metasmith.models.libraries.identity import stat_leaf_id
+    from metasmith.models.libraries.identity import leaf_id
 
     lib = _lib(tmp_path / "a.xgdb", types_path)
     old_id = lib.Get(Path("s0/reads.fq")).instance_id
@@ -38,7 +38,7 @@ def test_rename_re_mints_a_leaf_id_to_match_a_fresh_registration(tmp_path, types
     new_id = lib.Get(Path("s0/renamed.fq")).instance_id
 
     assert new_id != old_id, "leaf id ignored the path it folds in"
-    assert new_id == stat_leaf_id(lib.location / "s0" / "renamed.fq"), (
+    assert new_id == leaf_id(lib.location / "s0" / "renamed.fq", Path("s0/renamed.fq")), (
         "a renamed leaf and a fresh registration of the file now at that path "
         "disagree on identity"
     )

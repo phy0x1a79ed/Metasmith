@@ -97,14 +97,14 @@ def test_the_references_are_not_re_identified_on_every_plan(tmp_path):
 
     import metasmith.models.libraries.identity as identity
 
-    original = identity.stat_leaf_id
+    original = identity.leaf_id
 
     def guarded(path, *args, **kwargs):
         if str(path).startswith(str(common.DATA_PROCESSED)):
             raise AssertionError(f"a reference was re-identified during planning: {path}")
         return original(path, *args, **kwargs)
 
-    identity.stat_leaf_id = guarded
+    identity.leaf_id = guarded
     try:
         keys, ids = [], []
         for i in range(2):
@@ -123,7 +123,7 @@ def test_the_references_are_not_re_identified_on_every_plan(tmp_path):
             ids.append({i.dtype_name: i.instance_id for i in task.plan.given
                         if i.dtype_name.startswith("ref::")})
     finally:
-        identity.stat_leaf_id = original
+        identity.leaf_id = original
 
     assert len(ids[0]) == len(annotation.REF_LAYOUT), (
         f"the plan was given {sorted(ids[0])}, expected all of"
