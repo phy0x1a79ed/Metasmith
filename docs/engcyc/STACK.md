@@ -6,12 +6,13 @@ then run 4 (a naive agent installs msm end to end and runs it).
 Decisions: docs/engcyc/DECISIONS.md
 
 ## Current
-- 2026-11-26 22:25. Run 4:
-  - fir round 3 (tag 0.26.0-28876c1, build includes lane fold + variadic, NOT leaf identity) still in prep: last downloads UniRef50, Metabuli 192 GB, ganon2; then its agent runs engcyc_metagenomics (first real test of lane fold + variadic das_tool + fold_chunks.py kinds). Watcher unit msm-e2e-run-4-fir-watch3 (4000 GB; journalctl --user -u ... -o cat).
-  - sockeye round 4 launched 22:20 on 0.26.2-630bf27 (leaf identity + VirSorter2 8 h); watcher msm-e2e-run-4-sockeye-watch3 (900 GB). Expect cache misses once (ids changed); the round after should hit.
-  - Records: docs/e2e-install/e2e-test/runs/run-4/ISSUES.md rounds 1-3, round2/, round3/sockeye/. Archive each station's sandbox STEPS/PROGRESS/watch.csv before deleting /home/tony/msm_e2e/run-4-<host>.
-  - Relaunch: from rc root, PYTHONPATH=$PWD/src:$PWD, nohup python -m tests.metasmith.e2e.agentic.first_install --run 4 --host <h> [--prep engcyc_prep_references_lite --template engcyc_metagenomics_lite for sockeye] --channel $PWD/conda_build --sif $PWD/metasmith.sif --image-tag <tag> --warm > ~/msm_e2e/launch/run-4-<h>.out --max-gb <cap>.
-  - Build: tests/metasmith/e2e/agentic/install_mock/build_local_artifacts.sh --apptainer with PATH=msm env bin first: 29 min (conda 10, docker 10, sif 8.5).
+- 2026-11-27 04:40. Run 4 round 5 on 0.26.2-d967a2d (sheet-literal fix ea58a129+60dc45aa, antiSMASH f18797ba, docs d56bae05):
+  - sockeye relaunched warm 04:25 (lite templates), watcher msm-e2e-run-4-sockeye-watch3 900 GB. Its round-4 cache uses the new ids, so setup should mostly hit.
+  - fir: round 3 stopped (pre-leaf-identity cache could never hit); /scratch/phyberos/msm_e2e/run-4-fir deleted; relaunched fresh with --max-gb 3000. Expect ~10 h of setup (ganon2 alone ~8 h).
+  - Records: docs/e2e-install/e2e-test/runs/run-4/ISSUES.md rounds 1-5, round2/, round3/{fir,sockeye}, round4/sockeye. Archive each station's sandbox STEPS/PROGRESS/REPORT/watch.csv before deleting /home/tony/msm_e2e/run-4-<host>.
+  - Relaunch: from rc root, PYTHONPATH=$PWD/src:$PWD, nohup python -m tests.metasmith.e2e.agentic.first_install --run 4 --host <h> [--prep engcyc_prep_references_lite --template engcyc_metagenomics_lite for sockeye] --channel $PWD/conda_build --sif $PWD/metasmith.sif --image-tag <tag> [--warm] --max-gb <cap> > ~/msm_e2e/launch/run-4-<h>.out. Kill the remote driver/relay by PID on the login node too (scope stop does not reach it).
+  - Build: tests/metasmith/e2e/agentic/install_mock/build_local_artifacts.sh --apptainer with PATH=msm env bin:~/.local/bin (npm) first: 18-29 min.
+  - After run 4 (each re-keys a step): ganon2 -t and LC_ALL=C (ISSUES r3 #7), VirSorter2 baked image (#8).
 - Open for Tony: lane union A/B; retire DRAM 1.5 dbCAN; dir-leaf content identity with a size cap; viral prodigal-gv pass; example interleaved reads row.
 
 ## Waiting on the user

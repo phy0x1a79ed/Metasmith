@@ -68,3 +68,12 @@ Launched 22:20. Setup (engcyc_prep_references_lite) completed at 03:20: ~162 GB,
 | 4 | ambiguity | docs/setup/deployment.rst | It says the run must use the agent and task of the setup run. The metagenomics workflow is a second workflow, so the agent could not tell whether the references would come from the cache. | d56bae05 |
 | 5 | error, unreproduced | `mamba run -n msm_env msm gui` | Exited with `PackageNotFoundError: werkzeug`, which is installed. The relaunch overwrote the log. The docs say to activate the env, which worked. | open |
 | 6 | harness | watcher | fir read exactly 139,939 files / 1.43 TB twice (00:25, 02:32), and sockeye 159 GB once, between ~1.8 TB and ~460 GB readings. A probe likely stopped partway. A low reading can hide a cap breach. | open |
+
+Round 3 on fir was stopped by the operator at 04:20 on 2026-11-27, inside ganon2's 8 h download. Its build predates leaf identity, so none of its cache could hit a later build. Its home was deleted, and fir relaunched fresh. Records are in `round3/fir/`, and round 4's sockeye records are in `round4/sockeye/`.
+
+# Round 5 (release candidate 0.26.2+d967a2d, 2026-11-27)
+
+The build carries the sheet-literal fix, the antiSMASH fix and the docs above. sockeye relaunched warm at 04:25 (watcher 900 GB). fir relaunched fresh after its home was deleted (watcher 3000 GB).
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
