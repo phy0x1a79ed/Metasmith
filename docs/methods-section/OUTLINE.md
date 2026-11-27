@@ -61,9 +61,17 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   6. The reward is the gain in the target's satisfied inputs, or 1 when solved; there are no random rollouts, and the search stops at the first solved plan or a fixed iteration limit.
 - Note: statistics are per contract, not per node (`policy.rs:469`). Constants (`policy.rs:160`): c = 1.5; prior = softmax at T = 0.5 over min-max normalized channels, closeness 1 - d/d_max and routes 1 - 1/(1 + r/10) (`mcts.rs:127`), weighted 75:20; unvisited Q = 1.5; recency decay 0.985; self-feed penalty w2 = 0.95; reward = 2x progress delta clamped to [0,1]; max_iter 256. BFS in `problem.rs:346`. Reuse the d3 solver paragraph prose.
 
-#### P4. Refinement — proposed
+#### P4. Refinement — agreed (paragraph-points, 2026-11-27)
 - Role: the edge-refinement pass after the search.
-- Key message: a short pass swaps single edges and prunes unneeded steps.
+- Key message: a short search over single-edge swaps tidies the first plan found and removes steps it does not need.
+- Points:
+  1. Lineage makes the search path-dependent and PUCT is optimistic, so the first solved plan is not guaranteed to be the simplest.
+  2. Each candidate rebinds one step's input to another existing port and rebuilds every step downstream so its lineage stays correct.
+  3. A candidate is valid only if every step can be scheduled from the givens without cycles and every lineage constraint still holds.
+  4. Valid candidates are ranked first by how few distinct ports their lineage constraints anchor to, then by how close those anchors sit to the inputs that need them.
+  5. The same PUCT rule picks which candidate to expand, for a fixed budget of rounds; the best valid plan wins, and steps no longer connected to the target are removed.
+- Note: score = 1000 x (sum p log2 p over anchor-port usage) + (- mean normalized anchor depth, in [-1, 0]), a lexicographic order written as a sum (`refine.rs:344`, from c71a706b, Aug 2025). Budget 8 (`REFINER_BUDGET`); statistics keyed on the swapped-in contract.
+- Effect (records, not rerun): under the old selection rule, 2 of 55 case-seed pairs changed (`isolate_assembly_from_long_reads` seeds 7 and 99: 13 -> 11 and 13 -> 9 steps); every other pair unchanged (`data/metasmith/plans/08-where-the-unpinned-solve-goes.md`). Under PUCT the search finds the 9-step plan directly (`02-puct-selection-poc.md`), and `found_on` = 1 on every measured case, so no recorded PUCT plan is changed by the refiner.
 
 #### P5. Verification — proposed
 - Role: how a plan is trusted and reproduced.
