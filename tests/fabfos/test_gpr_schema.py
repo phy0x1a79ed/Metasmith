@@ -778,7 +778,9 @@ def _write_extra_lanes(work: Path) -> list:
         busco("bacteria_odb10", ("1009041at2", "Complete", ORFS[0], "260.1", "220", url, "FtsZ"),
               ("761140at2", "Missing"))
         + busco("bacteria_odb10", ("1009041at2", "Complete", ORFS[1], "250.0", "218", url, "FtsZ"))
-        + busco("archaea_odb10", ("115808at2157", "Fragmented", ORFS[0], "48.9", "123", url, "GGR")))
+        + busco("archaea_odb10", ("115808at2157", "Fragmented", ORFS[0], "48.9", "123", url, "GGR"))
+        # a chunk with no hit at all: BUSCO drops the url and description columns
+        + busco("archaea_odb10", ("115808at2157", "Missing")).replace("\tOrthoDB url\tDescription", ""))
     return [
         *[(lane, w / f"{lane}.tsv", w / f"{lane}_descriptions.tsv") for lane in bsr_lanes],
         ("pathofact_hmm", w / "pf_tox.tbl", w / "pf_vf.tbl", w / "pf_desc.tsv"),

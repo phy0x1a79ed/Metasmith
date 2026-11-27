@@ -511,6 +511,7 @@ def parse_antismash(path):
 # opens with `# The lineage dataset is: <name> (...)`. A Missing marker names no ORF.
 # BUSCO's Duplicated is relative to its input, here one chunk, so it is recomputed over
 # the whole ORF set: a marker with two or more complete hits in a lineage is Duplicated.
+# A table with no hit at all drops the last two columns from its header.
 _BUSCO_COLS = ["Busco id", "Status", "Sequence", "Score", "Length", "OrthoDB url", "Description"]
 _BUSCO_LINEAGE = re.compile(r"^# The lineage dataset is: (\S+)")
 
@@ -525,7 +526,7 @@ def parse_busco(path):
                 lineage = m.group(1)
             elif line.startswith("# Busco id"):
                 got = line[2:].split("\t")
-                if got != _BUSCO_COLS:
+                if got not in (_BUSCO_COLS, _BUSCO_COLS[:5]):
                     _refuse_header(got, _BUSCO_COLS, "busco_full_table", "BUSCO 5 protein mode")
             elif line and not line.startswith("#"):
                 if lineage is None:
