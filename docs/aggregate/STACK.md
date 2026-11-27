@@ -10,7 +10,7 @@
 
 ## Waiting on the user
 
-- `curation-ledger` → confirm the ledger's columns and disposition vocabulary.
+- `curation-ledger` → (1) disposition vocabulary: transform / represented-by / replaced-by / dropped + reason + gate status; (2) sign-off: Claude decides all and journals, only drops/replacements that lose a used analysis go to Tony first. Both recommendations sit in the review artifact https://claude.ai/artifact/1zpFnHSECX9yWFMyD7CNJT (source `review.html`). Asked 2026-11-27; unanswered.
 
 ## Preferences
 
