@@ -28,7 +28,8 @@ PLAYWRIGHT_MCP = Path.home() / "msm_e2e" / "tools" / "playwright-mcp"
 CHROMIUM = Path.home() / ".cache" / "ms-playwright" / "chromium-1248" / "chrome-linux64" / "chrome"
 
 _DEPLOY = (
-    "Deploy an agent to the cluster reachable as `ssh {host}` (Slurm account {account}), "
+    "Deploy an agent to the cluster reachable as `ssh {host}` (Slurm account {account}, "
+    "GPU account {gpu_account}), "
     "with its home under {remote}. "
 )
 _RUN = (
@@ -82,7 +83,7 @@ def build_prompt(goal: str, sandbox: Path, remote: str, sample: str, host: Host,
     targets = TARGET_TEXT[subset]
     if subset:
         targets += f" (a target missing from a workflow's list can be ignored; each line of ./{SUBSET_FILE} is a target type)"
-    text = GOALS[goal].format(host=host.ssh, account=host.account, remote=remote, sample=SAMPLES[sample],
+    text = GOALS[goal].format(host=host.ssh, account=host.account, gpu_account=host.gpu_account, remote=remote, sample=SAMPLES[sample],
                               port=host.gui_port, prep=prep, template=template, targets=targets)
     return text + "\n" + PROTOCOL.format(sandbox=sandbox, host=host.ssh)
 

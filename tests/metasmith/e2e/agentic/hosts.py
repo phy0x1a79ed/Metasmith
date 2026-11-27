@@ -8,6 +8,7 @@ from dataclasses import dataclass
 class Host:
     ssh: str  # alias in the operator's ~/.ssh/config, also the name the naive agent is told
     account: str  # Slurm account the agent is told to charge
+    gpu_account: str  # the account a GPU step charges; a CPU account cannot take GPUs
     scratch_root: str  # parent of every run dir on the cluster
     modules: str  # shell line that makes `apptainer` work, used only when the harness stages an image
     gui_port: int  # distinct per host so concurrent GUIs on altair do not collide
@@ -19,11 +20,9 @@ class Host:
 HOSTS: dict[str, Host] = {
     "sockeye": Host(
         ssh="sockeye",
-        # TODO(run4): confirm the Slurm account; st-shallam-1 is the allocation code seen in
-        # /scratch/st-shallam-1 paths, and workflow_ops treats "st-you-1" as the placeholder form.
         account="st-shallam-1",
+        gpu_account="st-shallam-1-gpu",
         # /scratch/<alloc>/$USER, never bare /scratch/$USER (mkdir refused) or /arc/home (Slurm refuses to submit).
-        # TODO(run4): confirm /scratch/st-shallam-1/txyliu is writable for the account the ssh alias logs in as.
         scratch_root="/scratch/st-shallam-1/txyliu/msm_e2e",
         modules="module load gcc/9.4.0 && module load apptainer",
         gui_port=8091,
@@ -32,7 +31,7 @@ HOSTS: dict[str, Host] = {
     "fir": Host(
         ssh="fir",
         account="def-shallam_cpu",
-        # TODO(run4): msm_e2e under /scratch/phyberos on fir is assumed; no earlier run used it.
+        gpu_account="def-shallam_gpu",
         scratch_root="/scratch/phyberos/msm_e2e",
         modules="module load apptainer",
         gui_port=8092,
@@ -42,6 +41,7 @@ HOSTS: dict[str, Host] = {
     "nibi": Host(
         ssh="nibi",
         account="def-shallam_cpu",
+        gpu_account="def-shallam_gpu",
         scratch_root="/scratch/phyberos/msm_e2e",
         modules="module load apptainer/1.3.5",
         gui_port=8093,
