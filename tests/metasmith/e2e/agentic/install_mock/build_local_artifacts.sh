@@ -59,7 +59,7 @@ echo "=== build_local_artifacts (version $VER) ==="
 # --- 1. pip wheel ----------------------------------------------------------
 WHEEL="$PROJECT/dist/metasmith-${VER}-py3-none-any.whl"
 if [ "$FORCE" = "1" ] || [ ! -f "$WHEEL" ]; then
-    echo "[1/4] building pip wheel"
+    echo "[1/4 $(date +%T)] building pip wheel"
     "$DEV" -bp
 else
     echo "[1/4] wheel already present: $WHEEL"
@@ -67,7 +67,7 @@ fi
 
 # --- 2. conda package ------------------------------------------------------
 if [ "$FORCE" = "1" ] || ! find "$PROJECT/conda_build" -name "metasmith-${VER}*.tar.bz2" 2>/dev/null | grep -q .; then
-    echo "[2/4] building conda package"
+    echo "[2/4 $(date +%T)] building conda package"
     "$DEV" -bc
 else
     echo "[2/4] conda package already present"
@@ -75,7 +75,7 @@ fi
 
 # --- 3. docker image -------------------------------------------------------
 if [ "$FORCE" = "1" ] || ! docker image inspect "$DOCKER_IMAGE" >/dev/null 2>&1; then
-    echo "[3/4] building docker image $DOCKER_IMAGE"
+    echo "[3/4 $(date +%T)] building docker image $DOCKER_IMAGE"
     "$DEV" -bd
 else
     echo "[3/4] docker image already present: $DOCKER_IMAGE"
@@ -85,7 +85,7 @@ fi
 SIF="$PROJECT/metasmith.sif"
 if [ "$WANT_APPTAINER" = "1" ]; then
     if [ "$FORCE" = "1" ] || [ ! -f "$SIF" ] || [ "$SIF" -ot "$PROJECT/src/metasmith/version.txt" ] || [ "$SIF" -ot "$PROJECT/src/metasmith/build_hash.txt" ]; then
-        echo "[4/4] building apptainer .sif from local docker image"
+        echo "[4/4 $(date +%T)] building apptainer .sif from local docker image"
         "$DEV" -bs
     else
         echo "[4/4] apptainer .sif already present: $SIF"
