@@ -4,6 +4,20 @@ The point-form draft of the d2 Methods and the single source for every redraft. 
 
 Status per entry: `proposed`, `agreed` (points accepted), `accepted` (prose accepted), `in doc`.
 
+## Terms (terms, 2026-11-27)
+
+Define each term only from those above it; use one name per idea throughout the paper.
+
+1. property: one statement about data.
+2. type: a set of properties; X satisfies Y when X ⊇ Y.
+3. contract: the input types a tool requires and the output types it promises.
+4. step: one use of a contract in a plan.
+5. port: a typed position on a step, one per output type, with a fixed lineage; later steps bind their inputs to ports. Each port compiles to one Nextflow channel. (Code: `Endpoint`; d0.2 called it a data node, DN.)
+6. plan: a DAG of steps joined through ports.
+7. instance: the data that fills a port when the plan runs.
+
+"Transform" names the code object (contract plus script) and appears only in Execution. "Endpoint", "application" and "data node" leave the paper.
+
 ## Level 1: sections
 
 Order and names (outline-sections, 2026-11-26): Planning, Specification, Execution, Contracts, Benchmarks. Declarations sit outside Methods as their own top-level section.
@@ -15,14 +29,13 @@ Order and names (outline-sections, 2026-11-26): Planning, Specification, Executi
 
 #### P1. Types and lineage — proposed
 - Role: the formal matching rules the solver applies.
-- Key message: an output feeds an input when its type holds every property of the input's type and its ancestry contains the instances the input's lineage names.
-- Points:
-  1. Types are sets of properties from EDAM, declared in YAML libraries, and a type may extend an earlier type by union.
+- Key message: a port feeds an input when its type holds every property of the input's type and its lineage covers the input's lineage requirement.
+- Points (revised in terms, 2026-11-27; keep the original prose, reshuffled; no EDAM claim):
+  1. Types are sets of properties, each narrowing the range of variation of the data.
   2. A type X satisfies Y when X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
-  3. An input may name other inputs of the same contract as required ancestors.
-  4. A data instance satisfies that requirement when each instance bound to a named input is among its ancestors, L(X,Z).
-  5. Each instance carries its ancestry in its signature, so instances of one type with different histories are distinct.
-- Note: the d3 formula says "some ancestor's type satisfies each type in Z"; the code checks the bound instance itself (`workflow_solver/src/search.rs:215`). "DNs" in d3 is undefined. Source of 1: `models/libraries/types.py:50`, EDAM 1.25, strict false.
+  3. A port is a typed position on a step with a fixed lineage, and inputs bind to ports.
+  4. A port X satisfies a lineage requirement Z when X was produced from ports with types that map to each type in Z, L(X,Z).
+- Note: the d3 formula is kept (some ancestor's type satisfies each type in Z). The code is stricter: it checks the port bound to the ancestor input itself (`workflow_solver/src/search.rs:215`). Open for the user. EDAM dropped: "a rough link". 
 
 #### P2. Search and selection — proposed
 - Role: how the plan is found.

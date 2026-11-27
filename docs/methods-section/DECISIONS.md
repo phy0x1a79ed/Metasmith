@@ -13,3 +13,13 @@ One section per closed topic, in the order the topics closed. Open state is in `
 Names revised the same day: "we can call sections: planning, specification, execution, contacts, benchmarks. Declarations is its own super section like methods".
 
 **Landed.** `OUTLINE.md` level 1.
+
+## terms (2026-11-27)
+
+**Question.** What names the plan-level entity between type and instance, and what is the chain of terms?
+
+**Tony's words.** "Data node doesn't really convey matched type… there's like a distinction between the type and the actual matched entity between contract, string, and DAG"; "We've been referring to kinds as types"; "let's try ports".
+
+**Design.** property → type → contract → step → port → plan → instance. A port is a typed position on a step, one per output type, with a fixed lineage; later steps bind their inputs to ports; each port compiles to one Nextflow channel. Contracts keep "input types" and "output types"; "port" is used only for steps, not contracts. d0.2's "data node (DN)" covered both slot and joint and is retired. "Transform" only in Execution; "endpoint" and "application" leave the paper.
+
+**Landed.** `OUTLINE.md` § Terms.

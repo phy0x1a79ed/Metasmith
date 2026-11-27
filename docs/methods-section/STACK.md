@@ -10,7 +10,7 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Waiting on the user
 
-- Planning P1: accept points and prose.
+- Planning P1: accept points and prose (now with ports); decide lineage formula, type-based (d3) or bound-port (code).
 
 ## Preferences
 
@@ -29,4 +29,5 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Closed
 
+- **terms** (2026-11-27). property → type → contract → step → port → plan → instance.
 - **outline-sections** (2026-11-26). Planning, Specification, Execution, Contracts, Benchmarks; Declarations as its own top-level section.
