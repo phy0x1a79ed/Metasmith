@@ -55,3 +55,16 @@ Both stations relaunched with `--warm` at 18:05. fir kept running. The operator 
 | 6 | watch | setup, failed download | Nextflow ignored the failed step and setup carried on. Check that the GUI reports the missing reference at the end of setup, and what the main workflow does without it. | open |
 | 7 | slow | downloadGanon2DB (fir) | genome_updater fetches 105k RefSeq assemblies with `-t 4` on the login node: 57% after 4.4 h, so ~7.5 h in all, the last setup step. Each file logs a progress line plus a perl locale warning, 60 MB of logs. | open, after run 4 (an edit re-keys the step): raise `-t`, export `LC_ALL=C` |
 | 8 | slow | downloadVirsorter2DB (sockeye, round 4) | `virsorter setup` built its conda env for 2 h 50 min on Lustre before the database fetch began. The 8 h limit holds it. | open, after run 4: an image with the env baked in |
+
+# Round 4 (sockeye, release candidate 0.26.2+630bf27, 2026-11-27)
+
+Launched 22:20. Setup (engcyc_prep_references_lite) completed at 03:20: ~162 GB, 10 images, VirSorter2 inside its 8 h limit. The agent stopped at the metagenomics solve. Rows 5-8 above were filed during this round.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
+| 1 | error | GUI, sheet mode | Pasting a sample sheet (`sample,forward,reverse`) turned every field on every row into a column picker. The template's constants (medium table and name, contig_study, eggnog_source, read_metadata) registered nothing. The solve found no plan, so the run never started. | worker feat/engine/sheet-literals: under a sheet a literal row stays literal, registers once and every sample sees it |
+| 2 | ambiguity | GUI, SRA accession | The sample paste box reads paths and URLs. The agent found no way to give SRR9658108 as an accession, so it used the ENA FASTQ URLs. | open: say in the GUI docs that an accession is a sheet column bound to the accession row |
+| 3 | workaround | engcyc case choice | The agent read the vendored spec.yml to learn which cases to delete. The GUI text says to delete cases without samples, but not which case is which. | open, docs |
+| 4 | ambiguity | docs/setup/deployment.rst | It says the run must use the agent and task of the setup run. The metagenomics workflow is a second workflow, so the agent could not tell whether the references would come from the cache. | open, docs: the cache is per agent home, any workflow on that agent hits it |
+| 5 | error, unreproduced | `mamba run -n msm_env msm gui` | Exited with `PackageNotFoundError: werkzeug`, which is installed. The relaunch overwrote the log. The docs say to activate the env, which worked. | open |
+| 6 | harness | watcher | fir read exactly 139,939 files / 1.43 TB twice (00:25, 02:32), and sockeye 159 GB once, between ~1.8 TB and ~460 GB readings. A probe likely stopped partway. A low reading can hide a cap breach. | open |
