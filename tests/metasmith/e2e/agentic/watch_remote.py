@@ -19,7 +19,7 @@ from tests.metasmith.e2e.agentic.hosts import HOSTS, run_tag
 PROBE = r'''
 R=$1; MIN=$2
 if [ -d "$R" ]; then
-  timeout 900 find "$R" -mindepth 1 -printf '%P\t%s\t%i\n' 2>/dev/null | awk -F'\t' -v min="$MIN" -v root="$R" '
+  timeout 1800 find "$R" -mindepth 1 -printf '%P\t%s\t%i\n' 2>/dev/null | awk -F'\t' -v min="$MIN" -v root="$R" '
     seen[$3]++ { next }
     { n++; s+=$2; k=split($1, a, "/"); p="";
       for (i=1; i<=k && i<=4; i++) { p = (i==1 ? a[1] : p "/" a[i]); c[p]++; b[p]+=$2; d[p]=i } }
@@ -69,7 +69,7 @@ def ssh_script(host: str, script: str, *args: str, timeout: float, hop: str | No
 def sample(host: str, remote_dir: str, min_dir_files: int) -> list[dict]:
     now = dt.datetime.now().astimezone().isoformat(timespec="seconds")
     rows = []
-    for line in ssh_script(host, PROBE, remote_dir, str(min_dir_files), timeout=1200).splitlines():
+    for line in ssh_script(host, PROBE, remote_dir, str(min_dir_files), timeout=2400).splitlines():
         kind, path, inodes, nbytes, note = (line.split("\t") + [""] * 5)[:5]
         rows.append(dict(ts=now, kind=kind, path=path, inodes=int(inodes or 0),
                          bytes=int(nbytes or 0), note=note))
