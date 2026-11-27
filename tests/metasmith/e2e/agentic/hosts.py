@@ -38,6 +38,18 @@ HOSTS: dict[str, Host] = {
         max_gb=1500.0,
         login_nodes=("login1", "login2", "login3"),
     ),
+    # A second station on fir, so lite runs beside full on the cluster with the most CPU.
+    # It shares fir's image store (fir's login shell sets APPTAINER_CACHEDIR).
+    "fir-lite": Host(
+        ssh="fir",
+        account="def-shallam_cpu",
+        gpu_account="def-shallam_gpu",
+        scratch_root="/scratch/phyberos/msm_e2e",
+        modules="module load apptainer",
+        gui_port=8094,
+        max_gb=900.0,
+        login_nodes=("login1", "login2", "login3"),
+    ),
     "nibi": Host(
         ssh="nibi",
         account="def-shallam_cpu",

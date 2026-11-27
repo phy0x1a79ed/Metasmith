@@ -10,7 +10,7 @@ import sys
 import time
 from pathlib import Path
 
-from tests.metasmith.e2e.agentic.hosts import HOSTS, run_tag
+from tests.metasmith.e2e.agentic.hosts import HOSTS, Host, run_tag
 
 
 # One find walk feeds every per-directory row: Lustre stats are the cost, so walk once.
@@ -76,12 +76,12 @@ def sample(host: str, remote_dir: str, min_dir_files: int) -> list[dict]:
     return rows
 
 
-def stop_run(host: str, remote_dir: str, local_dir: Path, reason: str, total: dict) -> None:
-    actions = ssh_script(host, STOP, remote_dir, timeout=120).splitlines()
+def stop_run(cfg: Host, remote_dir: str, local_dir: Path, reason: str, total: dict) -> None:
+    actions = ssh_script(cfg.ssh, STOP, remote_dir, timeout=120).splitlines()
     # A fir driver can sit on any login node, and ssh lands on only one.
-    for node in HOSTS[host].login_nodes:
+    for node in cfg.login_nodes:
         try:
-            actions += [f"{node}: {a}" for a in ssh_script(host, STOP, remote_dir, timeout=120, hop=node).splitlines()]
+            actions += [f"{node}: {a}" for a in ssh_script(cfg.ssh, STOP, remote_dir, timeout=120, hop=node).splitlines()]
         except (RuntimeError, subprocess.TimeoutExpired) as e:
             actions.append(f"{node}: stop failed: {str(e)[:120]}")
     # The runner, this watcher and every process the agent detached share one
@@ -122,7 +122,7 @@ def main(argv: list[str] | None = None) -> int:
 
     while True:
         try:
-            rows = sample(args.host, remote_dir, args.min_dir_files)
+            rows = sample(cfg.ssh, remote_dir, args.min_dir_files)
         except (RuntimeError, subprocess.TimeoutExpired) as e:
             rows = [dict(ts=dt.datetime.now().astimezone().isoformat(timespec="seconds"),
                          kind="error", path=remote_dir, inodes=0, bytes=0, note=str(e)[:200])]
@@ -143,7 +143,7 @@ def main(argv: list[str] | None = None) -> int:
             partial = " PARTIAL(walk timed out)" if walk == "124" else ""
             print(f"{total['ts']} files={total['inodes']} gb={total['bytes'] / 1e9:.1f} peak={peak} jobs={jobs}{partial}", flush=True)
             if total["inodes"] >= max_files or total["bytes"] >= max_gb * 1e9:
-                stop_run(args.host, remote_dir, local_dir, f"cap crossed: files {total['inodes']} >= {max_files} "
+                stop_run(cfg, remote_dir, local_dir, f"cap crossed: files {total['inodes']} >= {max_files} "
                          f"or bytes {total['bytes']} >= {max_gb} GB", total)
                 return 2
         else:
