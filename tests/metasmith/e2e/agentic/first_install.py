@@ -215,6 +215,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--image-tag", help="the image tag the candidate pulls, e.g. 0.25.1-abc1234")
     ap.add_argument("--warm", action="store_true",
                     help="reuse the cluster dir's task_cache and container_images from an earlier round; delete the rest")
+    ap.add_argument("--max-gb", type=float,
+                    help="the watcher's byte cap; a --warm round starts with the earlier rounds' cache counted")
     ap.add_argument("--model", default="haiku")
     ap.add_argument("--max-iters", type=int, default=20)
     ap.add_argument("--iter-timeout", type=float, default=4 * 3600.0)
@@ -259,7 +261,8 @@ def main(argv: list[str] | None = None) -> int:
     (run_dir / "harness.pid").write_text(str(os.getpid()))
     if args.goal != "dry":
         with (run_dir / "watch.out").open("w") as log:
-            subprocess.Popen([sys.executable, "-m", "tests.metasmith.e2e.agentic.watch_remote", "--run", str(args.run), "--host", args.host],
+            cap = ["--max-gb", str(args.max_gb)] if args.max_gb else []
+            subprocess.Popen([sys.executable, "-m", "tests.metasmith.e2e.agentic.watch_remote", "--run", str(args.run), "--host", args.host, *cap],
                              stdout=log, stderr=subprocess.STDOUT)
 
     # --strict-mcp-config with no --mcp-config drops the account's claude.ai connectors.
