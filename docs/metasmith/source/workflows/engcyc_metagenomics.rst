@@ -13,6 +13,9 @@ download. Read it in the GUI's template list, or in ``DESCRIPTION`` in
   long reads, and references. Each read case has its own tab with one example sample.
   Delete each read case you have no samples for. Keep the references case: its targets
   are the built databases.
+- ``engcyc_metagenomics_lite`` and ``engcyc_prep_references_lite`` are the same workflow and
+  setup with the lite lanes, about a fifth of the reference downloads. Everything on this
+  page applies to them.
 - Deselect a target to drop its lane. A lane's tools run only for the targets that read it.
 - To start a short-read sample from an SRA run instead of read files, change its
   ``read_pair`` row's type to ``ncbi::sra_short_read_accession``, put the run in it,

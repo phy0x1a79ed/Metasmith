@@ -339,8 +339,19 @@
     persist()
   }
 
+  // A row only the removed case read goes with it: left behind, an empty file
+  // row of that case leaves the recipe unfinished for every case that remains.
   function removeCase(idx) {
+    const gone = recipe.cases[idx]
     const kept = recipe.cases.filter((_, i) => i !== idx)
+    const read = new Set(kept.flatMap((c) =>
+      c.rows === null ? recipe.rows.map((d) => refKey(d.id)) : [...c.rows, ...(c.shared ?? [])]))
+    const orphans = new Set((gone.rows ?? []).filter((k) => !read.has(k)))
+    if (orphans.size) {
+      recipe.rows = recipe.rows
+        .filter((d) => !orphans.has(refKey(d.id)))
+        .map((d) => ({ ...d, parents: d.parents.filter((p) => !orphans.has(p)) }))
+    }
     recipe.cases = kept.length === 1 ? [{ ...kept[0], rows: null }] : kept
     caseIdx = Math.min(caseIdx, recipe.cases.length - 1)
     persist()
