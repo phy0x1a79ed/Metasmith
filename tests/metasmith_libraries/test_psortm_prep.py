@@ -40,9 +40,10 @@ def test_every_orf_is_chunked_and_only_a_phylum_call_is_run(tmp_path):
                     "--contig-taxonomy", str(tmp_path / "lcastar.tsv"), "--chunk-size", "1",
                     "--out-dir", str(tmp_path / "chunks")], check=True)
     records = sorted(p.read_text() for p in (tmp_path / "chunks").glob("chunk_*.faa"))
-    # `Bacteria` is a name PSORTm leaves undetermined: the domain-only and uncalled ORFs keep a row
+    # `Bacteria` is a name PSORTm leaves undetermined, so the uncalled ORF keeps a row as Unknown;
+    # a domain-only archaeon runs, because the archaea envelope needs no phylum
     assert records == [
         ">k141_1_1\tk141_1\tBacteroidetes\td__Bacteria;p__Bacteroidota;c__Bacteroidia\nMKV\n",
-        ">k141_2_1\tk141_2\tBacteria\td__Archaea\nMAA\n",
+        ">k141_2_1\tk141_2\tArchaea\td__Archaea\nMAA\n",
         ">k141_9_1\tk141_9\tBacteria\t\nMGG\n",
     ]

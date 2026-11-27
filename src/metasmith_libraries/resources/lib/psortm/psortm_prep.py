@@ -4,7 +4,8 @@ PSORTm picks a protein's envelope from the NCBI phylum of the taxon name it is g
 NCBI taxonomy of 2017 and a 27-row phylum table. Each ORF takes its contig's LCA* GTDB lineage,
 translated into the NCBI-era name PSORTm resolves; a phylum it has no row for is passed through
 as-is and PSORTm leaves its proteins undetermined. An ORF whose contig has no LCA* call at phylum
-or deeper is tagged `Bacteria`, which PSORTm also leaves undetermined, so it keeps a row.
+or deeper is tagged `Bacteria`, which PSORTm also leaves undetermined, so it keeps a row. An
+archaeal contig runs at domain level, because the archaea envelope needs no phylum.
 
     psortm_prep.py --orfs ORFS.faa --contig-taxonomy CONTIG_LCASTAR.tsv --chunk-size N --out-dir DIR
 
@@ -107,9 +108,10 @@ def main():
         # Prodigal names each protein <contig>_<n>.
         contig = orf.rpartition("_")[0]
         lineage = lineage_of.get(contig, "")
-        taxon = psortm_taxon(lineage) if _rank(lineage, "p__") else None
-        placed += taxon is not None
-        records.append((orf, contig, taxon or "Bacteria", lineage, seq.rstrip("*")))
+        # The archaea envelope needs only the domain; a bacterium needs its phylum.
+        taxon = psortm_taxon(lineage) or "Bacteria"
+        placed += taxon != "Bacteria"
+        records.append((orf, contig, taxon, lineage, seq.rstrip("*")))
     print("[psortm] " + str(placed) + " of " + str(len(records)) + " ORFs lie on a contig LCA* "
           "placed at phylum or deeper", flush=True)
     if not records:
