@@ -77,3 +77,6 @@ The build carries the sheet-literal fix, the antiSMASH fix and the docs above. s
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | ambiguity | GUI set up button | Both stations again: the "fetch ~N GB?" confirm reverted on its 4 s timer before the agent's second click. | committed after this build: set up and reset stay armed until the pointer or focus leaves, as the delete control does (bd23b804) |
+| 2 | ok | sockeye setup, warm | The setup run completed in 18 min (04:30 to 04:48) with 0 errors, nearly all from the round 4 cache. The new leaf ids hold across a reinstall. | - |
+| 3 | ok | fir, SRA via the GUI | The agent followed the engcyc doc's recipe: read_pair row as `ncbi::sra_short_read_accession` = SRR9658108, read rows deleted. It solved after it deleted the empty rows of the deleted cases. | - |
