@@ -26,6 +26,8 @@ def _args():
     p.add_argument("--source")
     p.add_argument("--out", required=True)
     p.add_argument("--hits-out", help="the lane's per-hit table; HIT_LANES only")
+    p.add_argument("--namespace-hits", nargs=2, metavar=("NAMESPACE", "PATH"),
+                   help="also write the per-hit rows of one namespace; with --hits-out")
     p.add_argument("--lane", nargs="+", action="append", default=[], metavar="NAME PATH")
     p.add_argument("--table", nargs="+", default=[])
     p.add_argument("--landmarks", help="ref::label_transfer_landmarks; the pbert lane needs it")
@@ -416,7 +418,7 @@ _IPS_COLS = ["orf", "start", "stop", "score", "database", "Name", "Dbxref", "Ont
 def parse_interproscan(results, descriptions=None):
     df = pd.read_csv(results, dtype=str).fillna("")
     if list(df.columns) != _IPS_COLS:
-        _refuse_header(df.columns, _IPS_COLS, "interproscan_results", "interproscan")
+        _refuse_header(df.columns, _IPS_COLS, "interproscan_<lane>_results", "lib::interproscan_gff.py")
     names = {}
     if descriptions:
         d = pd.read_csv(descriptions, dtype=str).fillna("")
@@ -747,7 +749,11 @@ LANES = {
     "pbert":         (parse_pbert, "annotation::proteinbert_embeddings", True),
     "deepec":        (parse_deepec, "annotation::deepec_predictions", True),
     "eggnog":        (parse_eggnog, "annotation::eggnog_results", True),
-    "interproscan":  (parse_interproscan, "annotation::interproscan_results", True),
+    "interproscan_pfam":      (parse_interproscan, "annotation::interproscan_pfam_results", True),
+    "interproscan_families":  (parse_interproscan, "annotation::interproscan_families_results", True),
+    "interproscan_motifs":    (parse_interproscan, "annotation::interproscan_motifs_results", True),
+    "interproscan_structure": (parse_interproscan, "annotation::interproscan_structure_results", True),
+    "interproscan_panther":   (parse_interproscan, "annotation::interproscan_panther_results", True),
     "mobileog":      (_diamond_lane("mobileog", True), "annotation::mobileog_diamond_results", True),
     "megares":       (_diamond_lane("megares", True), "annotation::megares_diamond_results", True),
     "bacmet":        (_diamond_lane("bacmet", True), "annotation::bacmet_diamond_results", True),
@@ -771,7 +777,8 @@ LANES = {
 
 # Lanes whose calls are motifs or domains within the protein rather than of the whole sequence.
 # PathoFact's HMMs and kofamscan report no coordinates, so they are not among them.
-HIT_LANES = {"interproscan", "dbcan", "vogdb"}
+HIT_LANES = {"interproscan_pfam", "interproscan_families", "interproscan_motifs",
+             "interproscan_structure", "interproscan_panther", "dbcan", "vogdb"}
 
 
 def _finish(df, lane, source, provenance):
@@ -867,7 +874,11 @@ if __name__ == "__main__":
         if hits is not None:
             if not hits:
                 raise SystemExit("[annotation] --hits-out names no lane of " + repr(sorted(HIT_LANES)))
-            EV.write_parquet(pd.concat(hits, ignore_index=True), str(A.hits_out))
+            hits = pd.concat(hits, ignore_index=True)
+            EV.write_parquet(hits, str(A.hits_out))
+            if A.namespace_hits:
+                ns, path = A.namespace_hits
+                EV.write_parquet(hits[hits["namespace"] == ns].reset_index(drop=True), path)
     EV.write_parquet(t, str(A.out))
     print("[annotation] wrote " + str(len(t)) + " rows over " + str(t["lane"].nunique())
           + " lanes -> " + str(A.out), flush=True)

@@ -797,7 +797,7 @@ def _write_extra_lanes(work: Path) -> list:
         ("vogdb", w / "vogdb.domtbl", w / "vogdb_descriptions.tsv"),
         ("refseq_viral", w / "refseq_viral.tsv"),
         ("deepec", w / "deepec.tsv"), ("eggnog", w / "eggnog.tsv"),
-        ("interproscan", w / "ips.csv", w / "ips_descriptions.csv"),
+        ("interproscan_pfam", w / "ips.csv", w / "ips_descriptions.csv"),
         *[(lane, w / f"{lane}.tsv") for lane in ("mobileog", "megares", "bacmet", "vfdb")],
         ("bigg", w / "bigg.tsv"), ("rgi", w / "rgi.tsv"),
         ("amrfinderplus", w / "amrfinderplus.tsv"),
@@ -831,8 +831,10 @@ def test_annotation_table_carries_every_lane_under_the_fastas_ids(tmp_path):
     df = pd.read_parquet(table)
     assert list(df.columns[:len(at.ANNOTATION_COLS)]) == at.ANNOTATION_COLS
     assert {"kofam_threshold", "rgi_cut_off", "dbcan_domain_score"} <= set(df.columns)
-    # every lane given is a lane of the table, the hitless one included only by name
-    assert set(df["lane"]) == set(at.LANES) - {"megares"}
+    # every lane given is a lane of the table, the hitless one included only by name; the
+    # InterProScan lanes share one parser, so only Pfam's is given
+    ips_others = {f"interproscan_{l}" for l in ("families", "motifs", "structure", "panther")}
+    assert set(df["lane"]) == set(at.LANES) - {"megares"} - ips_others
     orf_rows = df[df["orf"].notna()]
     assert set(orf_rows["orf"]) == set(ORFS), "the `<stem>~` prefix reached the table"
     contig_rows = df[df["lane"].isin(["bakta_nc", "antismash"])]
@@ -846,7 +848,7 @@ def test_annotation_table_carries_every_lane_under_the_fastas_ids(tmp_path):
     assert set(egg.loc[egg["namespace"] == "ec", "term"]) == {ECS[1]}
     assert {"go", "pfam", "bigg.reaction", "kegg.reaction", "eggnog.seed"} <= set(egg["namespace"])
     assert set(df.loc[df["lane"] == "rgi", "term"]) == {"3000873"}
-    assert set(df.loc[df["lane"] == "interproscan", "namespace"]) == {"pfam", "interpro", "go"}
+    assert set(df.loc[df["lane"] == "interproscan_pfam", "namespace"]) == {"pfam", "interpro", "go"}
     assert set(df.loc[df["lane"] == "kofam", "description"]) == {"alcohol dehydrogenase",
                                                                  "hexokinase"}
     # one row per ORF x model at its best-covering domain, and DRAM's E-value cut not applied

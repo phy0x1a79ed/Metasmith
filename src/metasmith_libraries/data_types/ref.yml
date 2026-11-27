@@ -117,18 +117,42 @@ types:
     - reference_data
     properties:
       _: UniProtKB/Swiss-Prot uniprot_sprot.fasta.gz with reldate.txt and RELEASE.metalink naming its release
-  interproscan_data:
+  interproscan_pfam_data:
     extends:
     - reference_data
     properties:
-      _: InterProScan data directory
+      _: InterProScan data directory holding the Pfam models and the files every run reads
       ext: tgz
-  # The fetch half of interproscan_data.
+  interproscan_families_data:
+    extends:
+    - reference_data
+    properties:
+      _: InterProScan data directory holding the NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam models and the files every run reads
+      ext: tgz
+  interproscan_motifs_data:
+    extends:
+    - reference_data
+    properties:
+      _: InterProScan data directory holding the PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite models and the files every run reads
+      ext: tgz
+  interproscan_structure_data:
+    extends:
+    - reference_data
+    properties:
+      _: InterProScan data directory holding the Gene3D, FunFam and SUPERFAMILY models and the files every run reads
+      ext: tgz
+  interproscan_panther_data:
+    extends:
+    - reference_data
+    properties:
+      _: InterProScan data directory holding the PANTHER models and the files every run reads
+      ext: tgz
+  # The fetch half of every interproscan_<lane>_data.
   interproscan_sources:
     extends:
     - reference_data
     properties:
-      _: InterProScan release tarball as fetched, unindexed, for buildInterProScanDB
+      _: InterProScan release tarball as fetched, unindexed, which each lane's build cuts its own data from
       ext: tar.gz
   metabuli_ref:
     stage: link

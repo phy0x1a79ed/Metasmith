@@ -37,25 +37,25 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/138f85d3f9c042eda7d0c8a596674edb:
-      type: sequences::assembly
-      instance_id: 1e207c92cb2707410a8f03165ea049316a5a0b8d17998e038ab71c9dea1fc786958f
-      origin: leaf
-    /msm_deferred/450f8364fd164ffe8bf61f0e19960cb9:
-      type: ref::mnxr_lookup
-      instance_id: 1e209aeb1ad60657197f81452d5953db6b3f961a3ca037e6c76a0ddc6fd0a0d9651b
-      origin: leaf
-    /msm_deferred/6062f273f4204c29893b518dc1a71d85:
-      type: licensed::pathway_tools_package
-      instance_id: 1e2017b200a2b41eac3babf04540e9fe1e793462e11c3cd6456d4d466ef40d7f0980
-      origin: leaf
-    /msm_deferred/7424e992351a410c89f9868af3a6027a:
+    /msm_deferred/189e2245b0b74714962377f30607164c:
       type: ref::label_transfer_landmarks
-      instance_id: 1e2068e471507c19ff3f9b517de5374d3475927ef19ec50dec1be11452a3b930663e
+      instance_id: 1e207b646ac0729d37d58ae55187474b6df7f8de1f8686d787658fbe70ba815fed9f
       origin: leaf
-    /msm_deferred/7703b4b8290c4cc682e254b548f5405c:
+    /msm_deferred/72f444972ffc4f07b810a7ef1933a8a7:
+      type: ref::mnxr_lookup
+      instance_id: 1e20e0a2c103b82639943fb45bf19727b1dadc45e6dd88b4e858a28e134fad7971d1
+      origin: leaf
+    /msm_deferred/7ded020d60e346b68385d5eb04bccbb3:
+      type: sequences::assembly
+      instance_id: 1e20f4c93b614be839104d95fc9c20fb17fc7003528de11885ae7c39ac0bdac463fb
+      origin: leaf
+    /msm_deferred/b5459af236f44c83a324cc4dc6955db6:
       type: ref::lane_calibration
-      instance_id: 1e208331ce05d93988d15db16d86af460b320275becf8d07bdb3ca6f755482ce9516
+      instance_id: 1e2087c9f2b43364119705479b9a2ed3e7e95344d75f0180734799ec60c85eb42d22
+      origin: leaf
+    /msm_deferred/d69e16a18ec74635866a591c4f0eb225:
+      type: licensed::pathway_tools_package
+      instance_id: 1e2012c8cdd9114ad2c00dc22fa9f50042d60bb173dd8794ab7ee8c8b9d61daa8e78
       origin: leaf
     eggnog_source.marker:
       type: annotation::eggnog_source

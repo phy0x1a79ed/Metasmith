@@ -1,13 +1,53 @@
 types:
-  # InterProScan
-  interproscan_results:
+  # InterProScan, one lane per group of member databases, each its own job over the ORF chunks.
+  interproscan_pfam_results:
     properties:
-      _: Parsed InterProScan protein matches
+      _: InterProScan Pfam matches, one row per protein_match. Pfam accessions carry their family version, from the HMM library the scan ran.
       Format: CSV
       ext: csv
-  interproscan_descriptions:
+  interproscan_pfam_descriptions:
     properties:
-      _: InterProScan signature accession to its signature description
+      _: InterProScan Pfam signature accession to its signature description
+      Format: CSV
+      ext: csv
+  interproscan_families_results:
+    properties:
+      _: InterProScan NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam matches, one row per protein_match.
+      Format: CSV
+      ext: csv
+  interproscan_families_descriptions:
+    properties:
+      _: InterProScan NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam signature accession to its signature description
+      Format: CSV
+      ext: csv
+  interproscan_motifs_results:
+    properties:
+      _: InterProScan PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite matches, one row per protein_match.
+      Format: CSV
+      ext: csv
+  interproscan_motifs_descriptions:
+    properties:
+      _: InterProScan PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite signature accession to its signature description
+      Format: CSV
+      ext: csv
+  interproscan_structure_results:
+    properties:
+      _: InterProScan Gene3D, FunFam and SUPERFAMILY matches, one row per protein_match.
+      Format: CSV
+      ext: csv
+  interproscan_structure_descriptions:
+    properties:
+      _: InterProScan Gene3D, FunFam and SUPERFAMILY signature accession to its signature description
+      Format: CSV
+      ext: csv
+  interproscan_panther_results:
+    properties:
+      _: InterProScan PANTHER matches, one row per protein_match.
+      Format: CSV
+      ext: csv
+  interproscan_panther_descriptions:
+    properties:
+      _: InterProScan PANTHER signature accession to its signature description
       Format: CSV
       ext: csv
   interproscan_json:
@@ -269,19 +309,85 @@ types:
       lane: eggnog
       Format: Parquet
       ext: parquet
-  interproscan_lane_table:
+  # A lane's hits are one member of the combined table; interproscan_hits names its members
+  # as a set, so a template takes whichever lanes it runs. A member may not set `_`: a
+  # subtype's key replaces its parent's, and the member would stop being one.
+  interproscan_lane_hits:
     properties:
-      _: the interproscan lane in the standard annotation-table format
-      lane: interproscan
+      _: every hit within a protein from one InterProScan lane, one row each
+      tool: interproscan
+      content: positional hits
       Format: Parquet
       ext: parquet
   interproscan_hits:
     properties:
-      _: every interproscan motif or domain hit within a protein, one row each
+      _: every InterProScan hit within a protein, one row each, from the lanes the target names
       lane: interproscan
       content: positional hits
       Format: Parquet
       ext: parquet
+  pfam_hits:
+    properties:
+      _: every Pfam hit within a protein, one row each, its accession carrying the family version
+      lane: interproscan_pfam
+      content: versioned Pfam accessions
+      Format: Parquet
+      ext: parquet
+  interproscan_pfam_lane_table:
+    properties:
+      _: the interproscan_pfam lane (Pfam) in the standard annotation-table format
+      lane: interproscan_pfam
+      Format: Parquet
+      ext: parquet
+  interproscan_pfam_hits:
+    extends:
+    - interproscan_lane_hits
+    properties:
+      lane: interproscan_pfam
+  interproscan_families_lane_table:
+    properties:
+      _: the interproscan_families lane (NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam) in the standard annotation-table format
+      lane: interproscan_families
+      Format: Parquet
+      ext: parquet
+  interproscan_families_hits:
+    extends:
+    - interproscan_lane_hits
+    properties:
+      lane: interproscan_families
+  interproscan_motifs_lane_table:
+    properties:
+      _: the interproscan_motifs lane (PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite) in the standard annotation-table format
+      lane: interproscan_motifs
+      Format: Parquet
+      ext: parquet
+  interproscan_motifs_hits:
+    extends:
+    - interproscan_lane_hits
+    properties:
+      lane: interproscan_motifs
+  interproscan_structure_lane_table:
+    properties:
+      _: the interproscan_structure lane (Gene3D, FunFam and SUPERFAMILY) in the standard annotation-table format
+      lane: interproscan_structure
+      Format: Parquet
+      ext: parquet
+  interproscan_structure_hits:
+    extends:
+    - interproscan_lane_hits
+    properties:
+      lane: interproscan_structure
+  interproscan_panther_lane_table:
+    properties:
+      _: the interproscan_panther lane (PANTHER) in the standard annotation-table format
+      lane: interproscan_panther
+      Format: Parquet
+      ext: parquet
+  interproscan_panther_hits:
+    extends:
+    - interproscan_lane_hits
+    properties:
+      lane: interproscan_panther
   mobileog_lane_table:
     properties:
       _: the mobileog lane in the standard annotation-table format
@@ -668,9 +774,63 @@ types:
   # so the metasmith solver requires the matching merge_<tool> transform to
   # produce the per-sample target dtype — chunk outputs can never satisfy
   # the target directly. See chunkOrfsForAnnotation + merge_<tool>.py.
-  interproscan_results_chunk:
+  interproscan_pfam_results_chunk:
     properties:
-      _: Per-chunk InterProScan CSV (sibling of interproscan_results)
+      _: Per-chunk InterProScan Pfam CSV (sibling of interproscan_pfam_results)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_pfam_descriptions_chunk:
+    properties:
+      _: Per-chunk InterProScan Pfam descriptions (sibling of interproscan_pfam_descriptions)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_families_results_chunk:
+    properties:
+      _: Per-chunk InterProScan NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam CSV (sibling of interproscan_families_results)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_families_descriptions_chunk:
+    properties:
+      _: Per-chunk InterProScan NCBIfam, PIRSF, PIRSR, SFLD, SMART and AntiFam descriptions (sibling of interproscan_families_descriptions)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_motifs_results_chunk:
+    properties:
+      _: Per-chunk InterProScan PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite CSV (sibling of interproscan_motifs_results)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_motifs_descriptions_chunk:
+    properties:
+      _: Per-chunk InterProScan PROSITE patterns and profiles, HAMAP, PRINTS, CDD, Coils and MobiDB-lite descriptions (sibling of interproscan_motifs_descriptions)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_structure_results_chunk:
+    properties:
+      _: Per-chunk InterProScan Gene3D, FunFam and SUPERFAMILY CSV (sibling of interproscan_structure_results)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_structure_descriptions_chunk:
+    properties:
+      _: Per-chunk InterProScan Gene3D, FunFam and SUPERFAMILY descriptions (sibling of interproscan_structure_descriptions)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_panther_results_chunk:
+    properties:
+      _: Per-chunk InterProScan PANTHER CSV (sibling of interproscan_panther_results)
+      Format: CSV
+      granularity: chunk
+      ext: csv
+  interproscan_panther_descriptions_chunk:
+    properties:
+      _: Per-chunk InterProScan PANTHER descriptions (sibling of interproscan_panther_descriptions)
       Format: CSV
       granularity: chunk
       ext: csv
@@ -689,12 +849,6 @@ types:
   kofamscan_results_chunk:
     properties:
       _: Per-chunk KofamScan CSV (sibling of kofamscan_results)
-      Format: CSV
-      granularity: chunk
-      ext: csv
-  interproscan_descriptions_chunk:
-    properties:
-      _: Per-chunk InterProScan descriptions (sibling of interproscan_descriptions)
       Format: CSV
       granularity: chunk
       ext: csv

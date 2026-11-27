@@ -29,7 +29,11 @@ def uniref():
 
 @pytest.fixture(scope="module")
 def interproscan():
-    return _load("interproscan")
+    path = MLIB / "resources" / "lib" / "interproscan_gff.py"
+    spec = importlib.util.spec_from_file_location("_msmlib_interproscan_gff", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 @pytest.fixture(scope="module")
@@ -74,25 +78,37 @@ class TestInterProScan:
         "Name=PF00001;signature_desc=7 transmembrane receptor\n"
         "orf2\tPfam\tpolypeptide\t1\t60\t.\t+\t.\tID=ignored\n"
     )
+    HMM = "HMMER3/f [3.1b2 | February 2015]\nNAME  7tm_1\nACC   PF00001.24\n//\n"
 
-    def test_the_hit_table_keeps_its_seven_columns(self, interproscan, tmp_path):
+    def _run(self, interproscan, tmp_path, monkeypatch, *extra):
         gff, hits, desc = (tmp_path / n for n in ("in.gff3", "hits.csv", "desc.csv"))
         gff.write_text(self.GFF)
-        interproscan.parse_interpro_gff(str(gff), str(hits), str(desc))
-        rows = list(csv.DictReader(hits.open()))
-        assert list(rows[0]) == [
-            "orf", "start", "stop", "score", "database", "Name", "Dbxref"]
+        monkeypatch.setattr(sys, "argv", ["interproscan_gff.py", str(gff), str(hits), str(desc), *extra])
+        interproscan.main()
+        return list(csv.DictReader(hits.open())), list(csv.reader(desc.open()))
+
+    def test_the_hit_table_keeps_its_columns(self, interproscan, tmp_path, monkeypatch):
+        rows, _ = self._run(interproscan, tmp_path, monkeypatch)
+        assert list(rows[0]) == interproscan.HEADERS
         assert [r["orf"] for r in rows] == ["orf1", "orf2"]
         assert rows[0]["Dbxref"] == "IPR000276"
 
-    def test_the_description_table_is_one_row_per_signature(self, interproscan, tmp_path):
-        gff, hits, desc = (tmp_path / n for n in ("in.gff3", "hits.csv", "desc.csv"))
-        gff.write_text(self.GFF)
-        interproscan.parse_interpro_gff(str(gff), str(hits), str(desc))
-        assert list(csv.reader(desc.open())) == [
-            ["Name", "description"],
-            ["PF00001", "7 transmembrane receptor"],
-        ]
+    def test_the_description_table_is_one_row_per_signature(self, interproscan, tmp_path, monkeypatch):
+        _, desc = self._run(interproscan, tmp_path, monkeypatch)
+        assert desc == [["Name", "description"], ["PF00001", "7 transmembrane receptor"]]
+
+    def test_pfam_takes_its_version_from_the_hmm_it_ran(self, interproscan, tmp_path, monkeypatch):
+        (tmp_path / "pfam_a.hmm").write_text(self.HMM)
+        rows, desc = self._run(interproscan, tmp_path, monkeypatch, "--pfam-hmm", str(tmp_path / "pfam_a.hmm"))
+        assert {r["Name"] for r in rows} == {"PF00001.24"}
+        assert desc[1] == ["PF00001.24", "7 transmembrane receptor"]
+
+    def test_no_gff_is_a_chunk_with_no_matches(self, interproscan, tmp_path, monkeypatch):
+        hits, desc = tmp_path / "hits.csv", tmp_path / "desc.csv"
+        monkeypatch.setattr(sys, "argv", ["interproscan_gff.py", str(tmp_path / "absent.gff3"), str(hits), str(desc)])
+        interproscan.main()
+        assert hits.read_text().strip().split(",") == interproscan.HEADERS
+        assert list(csv.reader(desc.open())) == [["Name", "description"]]
 
 
 class TestKofamScan:

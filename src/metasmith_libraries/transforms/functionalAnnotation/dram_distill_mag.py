@@ -11,7 +11,7 @@ asm     = model.AddRequirement(lib.GetType("sequences::assembly"))
 orfs    = model.AddRequirement(lib.GetType("sequences::orfs"), parents={asm})
 # The lanes dram_annotations.render reads.
 lanes   = [model.AddRequirement(lib.GetType(f"annotation::{k}_lane_table"), parents={orfs})
-           for k in ("kofam", "uniref50", "interproscan", "refseq_viral", "dbcan", "merops", "vogdb")]
+           for k in ("kofam", "uniref50", "interproscan_pfam", "refseq_viral", "dbcan", "merops", "vogdb")]
 mag     = model.AddRequirement(lib.GetType("binning_local::quality_bin_fasta"), parents={asm})
 sheets  = model.AddRequirement(lib.GetType("ref::dram_sheets"))
 gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))

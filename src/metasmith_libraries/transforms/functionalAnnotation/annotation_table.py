@@ -12,9 +12,10 @@ gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))
 # Every lane, so this is the one table a user selects to have them all. Each consuming tool
 # requires only the lane tables it reads instead.
 ORF_LANES = ("kofam", "clean", "uniref50", "uniref90", "swissprot", "metacyc", "pbert", "deepec",
-             "eggnog", "interproscan", "mobileog", "megares", "bacmet", "vfdb", "bigg", "dbcan",
-             "merops", "vogdb", "refseq_viral", "rgi", "amrfinderplus", "pathofact_hmm",
-             "pathofact_ml", "deeparg", "psortm")
+             "eggnog", "interproscan_pfam", "interproscan_families", "interproscan_motifs",
+             "interproscan_structure", "interproscan_panther", "mobileog", "megares", "bacmet",
+             "vfdb", "bigg", "dbcan", "merops", "vogdb", "refseq_viral", "rgi", "amrfinderplus",
+             "pathofact_hmm", "pathofact_ml", "deeparg", "psortm")
 CONTIG_LANES = ("bakta_nc", "antismash")
 tables = (
     [model.AddRequirement(lib.GetType(f"annotation::{k}_lane_table"), parents={orfs})

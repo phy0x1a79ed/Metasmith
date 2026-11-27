@@ -91,8 +91,8 @@ class TestASampleReturnsInADifferentRun:
             virtual_runtime,
             solve_trio(root, build_named_inputs(root, at, ["X", "A", "Y"]), self.RUN2_TARGETS),
         )
-        per_sample = [n for n in PER_SAMPLE if n != "interproscan"]
-        merges = [n for n in MERGES if n != "interproscan_lane"]
+        per_sample = [n for n in PER_SAMPLE if n != "interproscan_pfam"]
+        merges = [n for n in MERGES if n != "interproscan_pfam_lane"]
         expected = {n: 2 for n in per_sample + merges}
         expected.update({n: 0 for n in DATABASES if "InterPro" not in n})
         _assert_calls(_calls(virtual_runtime), expected, "[A,B,C] then [X,A,Y]")

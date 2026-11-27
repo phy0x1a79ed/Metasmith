@@ -3,7 +3,7 @@
 
     assembly --> prodigal --> orfs --> chunks --> kofamscan       --> merge
                                               --> diamond_uniref50 --> merge
-                                              --> interproscan     --> merge
+                                              --> interproscan_pfam --> merge
 
 The three reference databases are downloaded by the plan's first three steps
 unless `--givens` supplies them from disk. Those downloads are the only steps
@@ -55,7 +55,7 @@ DEFAULT_ASSEMBLY = Path(
 TARGETS = {
     "kofam":    "annotation::kofamscan_results",
     "uniref50": "annotation::diamond_uniref50_results",
-    "interpro": "annotation::interproscan_results",
+    "interpro": "annotation::interproscan_pfam_results",
 }
 
 # References already materialised in this repo by DVC. Read-only hardlinks into
@@ -68,7 +68,7 @@ GIVENS = {
     "ref::kofamscan_ko_list":   REPO/"data/fabfos/processed/kofam_ref/ko_list.tsv",
 }
 
-# `ref::interproscan_data` is a tgz the download builds by running the tool's
+# `ref::interproscan_pfam_data` is a tgz the download builds by running the tool's
 # own setup.py over the fetched index; nothing on disk here is that artifact,
 # so the interpro arm always downloads.
 GIVEN_TARGETS = {"kofam", "uniref50"}
@@ -91,7 +91,7 @@ OVERRIDES = {
     "chunkOrfsForAnnotation":  Resources(cpus=2, memory=Size.GB(4),  duration=Duration(hours=1)),
     "diamond_uniref50":        Resources(cpus=8, memory=Size.GB(16), duration=Duration(hours=8)),
     "kofamscan":               Resources(cpus=8, memory=Size.GB(12), duration=Duration(hours=8)),
-    "interproscan":            Resources(cpus=8, memory=Size.GB(16), duration=Duration(hours=8)),
+    "interproscan_pfam":       Resources(cpus=8, memory=Size.GB(16), duration=Duration(hours=8)),
 }
 
 STEP_RE = re.compile(r"^(p\d+__[A-Za-z0-9_]+)")
@@ -317,7 +317,7 @@ def main():
     assert not unknown, f"unknown target(s) {unknown}; pick from {sorted(TARGETS)}"
     wanted = [TARGETS[k] for k in keys]
     if args.givens and "interpro" in keys:
-        log("NOTE: --givens cannot serve ref::interproscan_data, so the "
+        log("NOTE: --givens cannot serve ref::interproscan_pfam_data, so the "
             "interpro arm will still download it")
     expect_downloads = (not args.givens) or ("interpro" in keys)
 

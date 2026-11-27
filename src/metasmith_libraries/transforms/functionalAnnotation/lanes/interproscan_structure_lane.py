@@ -6,17 +6,17 @@ model = Transform()
 image = model.AddRequirement(lib.GetType("env::python_for_data_science.env"))
 orfs  = model.AddRequirement(lib.GetType("sequences::orfs"))
 chunks = [
-    model.AddRequirement(lib.GetType("annotation::interproscan_results_chunk"), parents={orfs}),
-    model.AddRequirement(lib.GetType("annotation::interproscan_descriptions_chunk"), parents={orfs}),
+    model.AddRequirement(lib.GetType("annotation::interproscan_structure_results_chunk"), parents={orfs}),
+    model.AddRequirement(lib.GetType("annotation::interproscan_structure_descriptions_chunk"), parents={orfs}),
 ]
 merged = [
-    model.AddProduct(lib.GetType("annotation::interproscan_results")),
-    model.AddProduct(lib.GetType("annotation::interproscan_descriptions")),
+    model.AddProduct(lib.GetType("annotation::interproscan_structure_results")),
+    model.AddProduct(lib.GetType("annotation::interproscan_structure_descriptions")),
 ]
 ev_lib  = model.AddRequirement(lib.GetType("lib::fabfos_evidence.py"))
 gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))
-out     = model.AddProduct(lib.GetType("annotation::interproscan_lane_table"))
-hits    = model.AddProduct(lib.GetType("annotation::interproscan_hits"))
+out     = model.AddProduct(lib.GetType("annotation::interproscan_structure_lane_table"))
+hits    = model.AddProduct(lib.GetType("annotation::interproscan_structure_hits"))
 
 THREADS = 2
 
@@ -36,7 +36,7 @@ def protocol(context: ExecutionContext):
             --ev-lib {context.Input(ev_lib).container} \
             --orfs {iorfs.container} --source {iorfs.local.stem} \
             --hits-out {ihits.container} \
-            --lane interproscan {paths} --out {iout.container}
+            --lane interproscan_structure {paths} --out {iout.container}
     """)
     for c in chunks:
         for p in group(c):

@@ -145,7 +145,8 @@ def build_targets(shape):
     if "annotation" in lanes:
         for dtype in ("annotation::gpr_table", "annotation::kofamscan_results", "annotation::clean_predictions",
                       "annotation::diamond_uniref50_results", "annotation::proteinbert_embeddings",
-                      "annotation::interproscan_results",
+                      *(f"annotation::interproscan_{l}_results"
+                        for l in ("pfam", "families", "motifs", "structure", "panther")),
                       "annotation::busco_results", "annotation::predictf_results"):
             t.add(dtype, orfs)
         for dtype in ("annotation::bakta_tsv", "annotation::antismash_json"):

@@ -1,5 +1,5 @@
 name: annotation_trio_from_assembly
-description: 'Run the KOFAMSCAN, DIAMOND UniRef50 and InterProScan annotators against
+description: 'Run KOFAMSCAN, DIAMOND UniRef50 and InterProScan''s Pfam lane against
   an
 
   existing assembly.'
@@ -18,13 +18,13 @@ cases:
   - annotation::kofamscan_descriptions
   - annotation::diamond_uniref50_results
   - annotation::diamond_uniref50_descriptions
-  - annotation::interproscan_results
-  - annotation::interproscan_descriptions
+  - annotation::interproscan_pfam_results
+  - annotation::interproscan_pfam_descriptions
   shared_input_paths: []
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/e3a539c111fd45d0aa39ed25e57b02ee:
+    /msm_deferred/331cc2b858cf4b78bedd68da6878a2a3:
       type: sequences::assembly
-      instance_id: 1e209e2e2960a19e6cca9bae218cf4e939fba4a6e8097eea811ff24637d9969256d3
+      instance_id: 1e20ccb0766b46ed359151ad5a156181c344a889e8ef724aee646b53fd82a3a53b9f
       origin: leaf

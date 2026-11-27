@@ -36,6 +36,9 @@ cases:
   - ref::genomad
   - ref::gtdb
   - ref::gtdb_rrna
+  - ref::interproscan_pfam_data
+  - ref::interproscan_families_data
+  - ref::interproscan_motifs_data
   - ref::kofamscan_ko_list
   - ref::kofamscan_profiles
   - ref::kraken2_db
@@ -51,187 +54,191 @@ cases:
   - type: env::aragorn.env
   - type: env::pulled_container
     parents:
-    - 24
+    - 27
   - type: env::bakta.env
   - type: env::pulled_container
     parents:
-    - 26
+    - 29
   - type: env::barrnap.env
   - type: env::pulled_container
     parents:
-    - 28
+    - 31
   - type: env::bbtools.env
   - type: env::pulled_container
     parents:
-    - 30
+    - 33
   - type: env::bedtools.env
   - type: env::pulled_container
     parents:
-    - 32
+    - 35
   - type: env::blast.env
   - type: env::pulled_container
     parents:
-    - 34
+    - 37
   - type: env::bracken.env
   - type: env::pulled_container
     parents:
-    - 36
+    - 39
   - type: env::busco.env
   - type: env::pulled_container
     parents:
-    - 38
+    - 41
   - type: env::carveme.env
   - type: env::pulled_container
     parents:
-    - 40
+    - 43
   - type: env::checkm.env
   - type: env::pulled_container
     parents:
-    - 42
+    - 45
   - type: env::checkv.env
   - type: env::pulled_container
     parents:
-    - 44
+    - 47
   - type: env::clean.env
   - type: env::pulled_container
     parents:
-    - 46
+    - 49
   - type: env::das_tool.env
   - type: env::pulled_container
     parents:
-    - 48
+    - 51
   - type: env::deeptfactor.env
   - type: env::pulled_container
     parents:
-    - 50
+    - 53
   - type: env::diamond.env
   - type: env::pulled_container
     parents:
-    - 52
+    - 55
   - type: env::filtlong.env
   - type: env::pulled_container
     parents:
-    - 54
+    - 57
   - type: env::flye.env
   - type: env::pulled_container
     parents:
-    - 56
+    - 59
   - type: env::genomad.env
   - type: env::pulled_container
     parents:
-    - 58
+    - 61
   - type: env::gtdbtk.env
   - type: env::pulled_container
     parents:
-    - 60
+    - 63
   - type: env::instrain.env
   - type: env::pulled_container
     parents:
-    - 62
+    - 65
+  - type: env::interproscan.env
+  - type: env::pulled_container
+    parents:
+    - 67
   - type: env::kofamscan.env
   - type: env::pulled_container
     parents:
-    - 64
+    - 69
   - type: env::kraken2.env
   - type: env::pulled_container
     parents:
-    - 66
+    - 71
   - type: env::megahit.env
   - type: env::pulled_container
     parents:
-    - 68
+    - 73
   - type: env::memote.env
   - type: env::pulled_container
     parents:
-    - 70
+    - 75
   - type: env::metabat2.env
   - type: env::pulled_container
     parents:
-    - 72
+    - 77
   - type: env::metadecoder.env
   - type: env::pulled_container
     parents:
-    - 74
+    - 79
   - type: env::metaphlan.env
   - type: env::pulled_container
     parents:
-    - 76
+    - 81
   - type: env::minimap2.env
   - type: env::pulled_container
     parents:
-    - 78
+    - 83
   - type: env::minimap2_samtools.env
   - type: env::pulled_container
     parents:
-    - 80
+    - 85
   - type: env::mmseqs2.env
   - type: env::pulled_container
     parents:
-    - 82
+    - 87
   - type: env::opera_ms.env
   - type: env::pulled_container
     parents:
-    - 84
+    - 89
   - type: env::polars.env
   - type: env::pulled_container
     parents:
-    - 86
+    - 91
   - type: env::pprodigal.env
   - type: env::pulled_container
     parents:
-    - 88
+    - 93
   - type: env::predictf.env
   - type: env::pulled_container
     parents:
-    - 90
+    - 95
   - type: env::promotech.env
   - type: env::pulled_container
     parents:
-    - 92
+    - 97
   - type: env::proteinbert.env
   - type: env::pulled_container
     parents:
-    - 94
+    - 99
   - type: env::psortm.env
   - type: env::pulled_container
     parents:
-    - 96
+    - 101
   - type: env::python_for_data_science.env
   - type: env::pulled_container
     parents:
-    - 98
+    - 103
   - type: env::rgi.env
   - type: env::pulled_container
     parents:
-    - 100
+    - 105
   - type: env::samtools.env
   - type: env::pulled_container
     parents:
-    - 102
+    - 107
   - type: env::semibin.env
   - type: env::pulled_container
     parents:
-    - 104
+    - 109
   - type: env::seqkit.env
   - type: env::pulled_container
     parents:
-    - 106
+    - 111
   - type: env::skani.env
   - type: env::pulled_container
     parents:
-    - 108
+    - 113
   - type: env::sylph.env
   - type: env::pulled_container
     parents:
-    - 110
+    - 115
   - type: env::vibrant.env
   - type: env::pulled_container
     parents:
-    - 112
+    - 117
   - type: env::virsorter2.env
   - type: env::pulled_container
     parents:
-    - 114
+    - 119
   shared_input_paths: []
 input_library:
   schema: v1
