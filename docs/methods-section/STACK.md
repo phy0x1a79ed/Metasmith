@@ -6,13 +6,20 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**paragraph-walk / Planning P1**: types and lineage, points and prose, then into d3 (live doc is d3, edited through Word on capella; d2 is frozen).
+**paragraph-sketch / Planning**: sketch the Planning group as itemized points, one paragraph per concept (Tony, 2026-11-27: "one paragraph per concept"). Split the earlier three paragraphs (types+ports+lineage; search+selection; refinement+verification) into one per concept, e.g. types; ports; lineage (strict bound-port check, deliberate, explain why); search state and base case; frontier expansion; PUCT selection; refinement; determinism; verification. Show it in small pieces on Tony's phone. Then the other groups, one at a time. Do not draft prose yet.
+
+Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine", to be revisited in smaller sections): Specification = givens; targets as contracts (lineage on target inputs); variadic inputs; optional branching and parallel cases; limits and workarounds; interfaces (last, recommended). Execution = compilation (steps → processes, ports → channels, grouping at run time); agents and presets; containers and relay; caching; outputs.
 
 ## Waiting on the user
 
-- Planning P1: accept points and prose (now with ports); decide lineage formula, type-based (d3) or bound-port (code).
+- Planning sketch: one-paragraph-per-concept points.
 
 ## Preferences
+
+- (2026-11-27) Tony is on his phone: short messages, conversational, small sections, one block at a time.
+- (2026-11-27) Settle the overall structure and grouping before prose; don't go into the weeds.
+- (2026-11-27) One paragraph per concept.
+- (2026-11-27) Reuse the original d3 prose where it exists; shuffle rather than rewrite.
 
 - (2026-11-25) Results are more up to date than Methods; where they contradict, Methods changes.
 
