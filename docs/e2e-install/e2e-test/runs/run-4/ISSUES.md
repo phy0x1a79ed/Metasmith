@@ -96,3 +96,10 @@ Both stations relaunched warm at 06:28, sockeye under a 900 GB cap and fir under
 | 5 | workaround | GUI row edits | Rows reorder after each edit, so the agent hit the wrong row (the hybrid case's read_pair) several times and rebuilt the workflow. | open |
 | 6 | ambiguity | docs, engcyc lite | The doc named only the full templates. | the doc names the lite templates |
 | 7 | workaround | `run completed at` sentinel | The agent found no sentinel line in agent.log after a setup that was all cache hits. It used the GUI status instead. | open: check which log it lands in on an all-cached run |
+
+# Round 7 (release candidate 0.26.2+a7bdba0, 2026-11-27)
+
+Both stations relaunched warm at 08:20, sockeye under a 900 GB cap and fir under 3000 GB. The build adds the split workflow body (1278169d), case removal that removes its rows, and the lite templates in the docs. Round 6 records are in `round6/`. fir was at ~900 GB of setup.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
