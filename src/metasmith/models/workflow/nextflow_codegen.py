@@ -116,34 +116,45 @@ class NextflowGenContext:
     rootfs: "Rootfs|None" = None
 
 def _read_env_declarations(step) -> dict[str, dict[str, str]|None]:
+    return _env_file_declarations(
+        (inst, dep.key) for dep in getattr(step.transform, "_env_deps", [])
+        for inst in step.dependency_map.get(dep, [])
+    )
+
+
+def _env_file_declarations(insts: Iterable[tuple[DataInstance, str]]) -> dict[str, dict[str, str]|None]:
     # Keyed by the resource file name; the value maps `container` / `conda` to what that
     # world resolves to, through the same `ResolveEnvImage` execution uses. A resource
     # that cannot be read is `None` -- UNKNOWN, which the preflight must not read as
     # absent, or a workspace staged before the resource landed fails for the wrong reason.
     found: dict[str, dict[str, str]|None] = {}
-    for dep in getattr(step.transform, "_env_deps", []):
-        for inst in step.dependency_map.get(dep, []):
-            try:
-                p = inst.ResolvePath()
-                name = Path(p).name
-                if name in found: continue
-                with open(p) as f:
-                    content = f.read()
-                parsed = yaml.safe_load(content)
-            except Exception:
-                found[Path(str(getattr(inst, "dtype_name", dep.key))).name] = None
-                continue
-            if isinstance(parsed, dict):
-                found[name] = {
-                    key: ResolveEnvImage(content, runtime, p)
-                    for key, runtime in (("container", Runtime.APPTAINER), ("conda", Runtime.MAMBA))
-                    if parsed.get(key)
-                }
-            else:
-                # A legacy bare-URI (*.oci) resource is a container image and nothing
-                # else; asking `ResolveEnvImage` for its conda form returns the same URI.
-                found[name] = {"container": ResolveEnvImage(content, Runtime.APPTAINER, p)}
+    for inst, fallback in insts:
+        try:
+            p = inst.ResolvePath()
+            name = Path(p).name
+            if name in found: continue
+            with open(p) as f:
+                content = f.read()
+            parsed = yaml.safe_load(content)
+        except Exception:
+            found[Path(str(getattr(inst, "dtype_name", fallback))).name] = None
+            continue
+        if isinstance(parsed, dict):
+            found[name] = {
+                key: ResolveEnvImage(content, runtime, p)
+                for key, runtime in (("container", Runtime.APPTAINER), ("conda", Runtime.MAMBA))
+                if parsed.get(key)
+            }
+        else:
+            # A legacy bare-URI (*.oci) resource is a container image and nothing
+            # else; asking `ResolveEnvImage` for its conda form returns the same URI.
+            found[name] = {"container": ResolveEnvImage(content, Runtime.APPTAINER, p)}
     return found
+
+
+def _pulled_images(step) -> list[str]:
+    found = _env_file_declarations((inst, PULL_TRANSFORM) for inst in step.uses)
+    return sorted({d["container"] for d in found.values() if d and d.get("container")})
 
 _REF_NAMESPACE = "ref::"
 _ENV_NAMESPACE = "env::"
@@ -180,18 +191,22 @@ def DownloadSteps(plan) -> list:
     return found
 
 
-# A setup run's image pulls, in the resources file. They run on the driver's host
-# (`xlocalx`), where a preset retries a failed step once and then ignores it. A pull
-# that fails must stop the run instead: every step that reads its env waits on it
-# (`Orchestrator.after`), and an ignored pull would end the run with those steps never
-# started. `finish` lets the downloads already running complete. A pull always runs,
-# never resumed, because only the store can say an image is still there; finding it
-# there costs one test. How many fetch at once is pullContainer's to cap, since each
-# pull is a process of its own.
+# Image pulls, in the resources file. They run on the driver's host (`xlocalx`), where
+# a preset retries a failed step once and then ignores it. A pull that fails must stop
+# the run instead: every step that reads its env waits on it (`Orchestrator.after`),
+# and an ignored pull would end the run with those steps never started. `finish` lets
+# the downloads already running complete. A pull is never resumed, because only the
+# store can say an image is still there: the launch checks the store and names the
+# pulls to run in PULLS_FILE. How many fetch at once is pullContainer's to cap, since
+# each pull is a process of its own.
 PULL_RESOURCES = [
     "errorStrategy = { task.attempt < 2 ? 'retry' : 'finish' }",
     "cache = false",
 ]
+
+# Written by each launch: the orders of the pull steps whose image is missing from the
+# store. Without it every pull runs.
+PULLS_FILE = "workflow.pulls.json"
 
 _SCRATCH_ONLY = '[ "\\$__msm_wd" = "\\$PWD" ] ||'
 
@@ -733,10 +748,10 @@ def prepare_nextflow(task, context: NextflowGenContext):
     cache_root_literal = path_map.Render(context.cache_root, dialect="groovy")
     hits_log_literal = f"{context.external_work_var}/{CACHE_HITS_LOG}"
 
-    pull_orders = {
-        s.order for s in the_plan.steps if the_plan.setup and s.transform.name == PULL_TRANSFORM
-    }
-    for step in the_plan.steps:
+    pull_orders = {s.order for s in the_plan.steps if s.transform.name == PULL_TRANSFORM}
+    pulled_images: dict[str, list[str]] = {}
+    # A pull holds back the steps that read its env, so its wiring comes first.
+    for step in sorted(the_plan.steps, key=lambda s: s.order not in pull_orders):
         decision = cache_decisions.get(step.order)
         used_archetypes, produced_archetypes = get_io_signature(step)
         produced_names = [get_prod_name(x.dtype) for g in produced_archetypes for x in g]
@@ -766,6 +781,7 @@ def prepare_nextflow(task, context: NextflowGenContext):
         process_name, src, src_res = prepare_step(step)
         if step.order in pull_orders:
             src_res += PULL_RESOURCES
+            pulled_images[str(step.order)] = _pulled_images(step)
         resources[process_name] = src_res
         src_process.append(src)
         if len(used_archetypes)>0:
@@ -829,10 +845,14 @@ def prepare_nextflow(task, context: NextflowGenContext):
             )
             wf_fns += [f"def msm_in_{step.order}(o) {{"] + fn_in + ["}"]
             out_params = "o, miss, hit"
-            wf_main.append(
+            call = (
                 f"msm_out_{step.order}(o, {process_name}(msm_in_{step.order}(o)), "
                 f"{twin_name}(o.ch.{hit_var}))"
             )
+            if step.order in pull_orders:
+                skipped = "; ".join(f"{chan(x)} = o.skipped('{x}')" for x in produced_names)
+                call = f"if (o.pulling({step.order})) {{ {call} }} else {{ {skipped} }}"
+            wf_main.append(call)
             post_args = slot_ids_literal
             for x in used_archetypes:
                 readers.setdefault(stream(x.dtype), set()).add(step.order)
@@ -910,7 +930,7 @@ def prepare_nextflow(task, context: NextflowGenContext):
                 # means none was declared, so the agent's own tendency stands.
                 "rootfs": None if context.rootfs is None else context.rootfs.value,
                 "steps": env_requirements,
-            },
+            } | ({"pulls": pulled_images} if pulled_images else {}),
             f, separators=(",", ":"),
         )
         f.write("\n")
@@ -972,6 +992,8 @@ def prepare_nextflow(task, context: NextflowGenContext):
         TAB+f'def _lf = new groovy.json.JsonSlurper().parseText(file("{LINEAGE_FILE}").text)',
         TAB+'o.seedParents(_lf.child2parent)',
     ] + (
+        [TAB+f'o.pulls(file("{PULLS_FILE}"))'] if pull_orders else []
+    ) + (
         [TAB+'o.seedCases(_lf.cases)'] if the_plan.multi_case else []
     ) + [
         TAB+'return _lf.lineage',

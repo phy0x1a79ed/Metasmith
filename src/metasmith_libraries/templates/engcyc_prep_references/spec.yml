@@ -73,6 +73,258 @@ cases:
   - ref::vogdb_hmm
   - ref::centrifuger_db
   - ref::phyloflash_db
+  - type: env::amrfinderplus.env
+  - type: env::pulled_container
+    parents:
+    - 39
+  - type: env::antismash.env
+  - type: env::pulled_container
+    parents:
+    - 41
+  - type: env::aragorn.env
+  - type: env::pulled_container
+    parents:
+    - 43
+  - type: env::argnorm.env
+  - type: env::pulled_container
+    parents:
+    - 45
+  - type: env::bakta.env
+  - type: env::pulled_container
+    parents:
+    - 47
+  - type: env::barrnap.env
+  - type: env::pulled_container
+    parents:
+    - 49
+  - type: env::bbtools.env
+  - type: env::pulled_container
+    parents:
+    - 51
+  - type: env::bedtools.env
+  - type: env::pulled_container
+    parents:
+    - 53
+  - type: env::blast.env
+  - type: env::pulled_container
+    parents:
+    - 55
+  - type: env::bracken.env
+  - type: env::pulled_container
+    parents:
+    - 57
+  - type: env::carveme.env
+  - type: env::pulled_container
+    parents:
+    - 59
+  - type: env::cctyper.env
+  - type: env::pulled_container
+    parents:
+    - 61
+  - type: env::centrifuger.env
+  - type: env::pulled_container
+    parents:
+    - 63
+  - type: env::checkm.env
+  - type: env::pulled_container
+    parents:
+    - 65
+  - type: env::checkv.env
+  - type: env::pulled_container
+    parents:
+    - 67
+  - type: env::clean.env
+  - type: env::pulled_container
+    parents:
+    - 69
+  - type: env::comebin.env
+  - type: env::pulled_container
+    parents:
+    - 71
+  - type: env::das_tool.env
+  - type: env::pulled_container
+    parents:
+    - 73
+  - type: env::deeparg.env
+  - type: env::pulled_container
+    parents:
+    - 75
+  - type: env::deepec.env
+  - type: env::pulled_container
+    parents:
+    - 77
+  - type: env::deeptfactor.env
+  - type: env::pulled_container
+    parents:
+    - 79
+  - type: env::diamond.env
+  - type: env::pulled_container
+    parents:
+    - 81
+  - type: env::dram.env
+  - type: env::pulled_container
+    parents:
+    - 83
+  - type: env::eggnog-mapper.env
+  - type: env::pulled_container
+    parents:
+    - 85
+  - type: env::filtlong.env
+  - type: env::pulled_container
+    parents:
+    - 87
+  - type: env::flye.env
+  - type: env::pulled_container
+    parents:
+    - 89
+  - type: env::ganon.env
+  - type: env::pulled_container
+    parents:
+    - 91
+  - type: env::genomad.env
+  - type: env::pulled_container
+    parents:
+    - 93
+  - type: env::gtdbtk.env
+  - type: env::pulled_container
+    parents:
+    - 95
+  - type: env::hmmer.env
+  - type: env::pulled_container
+    parents:
+    - 97
+  - type: env::instrain.env
+  - type: env::pulled_container
+    parents:
+    - 99
+  - type: env::integronfinder.env
+  - type: env::pulled_container
+    parents:
+    - 101
+  - type: env::interproscan.env
+  - type: env::pulled_container
+    parents:
+    - 103
+  - type: env::iphop.env
+  - type: env::pulled_container
+    parents:
+    - 105
+  - type: env::kofamscan.env
+  - type: env::pulled_container
+    parents:
+    - 107
+  - type: env::kraken2.env
+  - type: env::pulled_container
+    parents:
+    - 109
+  - type: env::megahit.env
+  - type: env::pulled_container
+    parents:
+    - 111
+  - type: env::memote.env
+  - type: env::pulled_container
+    parents:
+    - 113
+  - type: env::metabat2.env
+  - type: env::pulled_container
+    parents:
+    - 115
+  - type: env::metabuli.env
+  - type: env::pulled_container
+    parents:
+    - 117
+  - type: env::metaphlan.env
+  - type: env::pulled_container
+    parents:
+    - 119
+  - type: env::minimap2.env
+  - type: env::pulled_container
+    parents:
+    - 121
+  - type: env::minimap2_samtools.env
+  - type: env::pulled_container
+    parents:
+    - 123
+  - type: env::mmseqs2.env
+  - type: env::pulled_container
+    parents:
+    - 125
+  - type: env::mobileelementfinder.env
+  - type: env::pulled_container
+    parents:
+    - 127
+  - type: env::opera_ms.env
+  - type: env::pulled_container
+    parents:
+    - 129
+  - type: env::pathofact_models.env
+  - type: env::pulled_container
+    parents:
+    - 131
+  - type: env::phyloflash.env
+  - type: env::pulled_container
+    parents:
+    - 133
+  - type: env::polars.env
+  - type: env::pulled_container
+    parents:
+    - 135
+  - type: env::pprodigal.env
+  - type: env::pulled_container
+    parents:
+    - 137
+  - type: env::predictf.env
+  - type: env::pulled_container
+    parents:
+    - 139
+  - type: env::promotech.env
+  - type: env::pulled_container
+    parents:
+    - 141
+  - type: env::proteinbert.env
+  - type: env::pulled_container
+    parents:
+    - 143
+  - type: env::python_for_data_science.env
+  - type: env::pulled_container
+    parents:
+    - 145
+  - type: env::rgi.env
+  - type: env::pulled_container
+    parents:
+    - 147
+  - type: env::samtools.env
+  - type: env::pulled_container
+    parents:
+    - 149
+  - type: env::semibin.env
+  - type: env::pulled_container
+    parents:
+    - 151
+  - type: env::seqkit.env
+  - type: env::pulled_container
+    parents:
+    - 153
+  - type: env::skani.env
+  - type: env::pulled_container
+    parents:
+    - 155
+  - type: env::sylph.env
+  - type: env::pulled_container
+    parents:
+    - 157
+  - type: env::vcontact3.env
+  - type: env::pulled_container
+    parents:
+    - 159
+  - type: env::vibrant.env
+  - type: env::pulled_container
+    parents:
+    - 161
+  - type: env::virsorter2.env
+  - type: env::pulled_container
+    parents:
+    - 163
   shared_input_paths: []
 input_library:
   schema: v1

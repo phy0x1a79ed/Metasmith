@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -20,6 +21,7 @@ from ..models.remote import GlobusSource, Logistics, LogisticsResult, Source, So
 from ..models.solver import Dependency, Transform
 from ..models.solver_backend import SEARCH_BUDGET
 from ..models.workflow import WorkflowPlan, WorkflowTask
+from ..models.workflow.nextflow_codegen import PULLS_FILE
 from ..models.workflow.setup import SetupFootprint, setup_subplan
 from ..coms.terminals import IDLE_TIMEOUT, PROBE_TIMEOUT
 from .conda import (
@@ -28,7 +30,7 @@ from .conda import (
 from .ceiling import ResourceCeilingError, check_launch
 from .headroom import check_headroom, render_probe
 from .gpu import _plan_gpu_requests, _read_gpu_manifest, _render_gpu_config
-from .images import _check_image_store, _manifest_images
+from .images import _manifest_images, _pulls_to_run
 from .portability import _check_env_portability, _read_env_manifest, _read_env_manifest_doc
 from .shell import AgentShell
 from .spec import CaseViews, plan_views
@@ -687,25 +689,26 @@ class _WorkflowOps:
             )
             _check_env_portability(env_doc.get("steps", {}), agent_env)
 
-            # Image-store report, same placement, and reporting rather than
-            # fetching on purpose: lazy materialisation is right on a cluster
-            # whose nodes can reach a registry, and moving pulls onto every
-            # launch would be a regression for everyone. On a cluster whose
-            # compute nodes cannot, this is what says to run setup first --
-            # and a workspace recording no images (an older stage) is
-            # simply nothing to check, exactly as above.
-            _images, _unknown = _manifest_images(env_doc)
-            _missing = _check_image_store(
-                sh_remote, _images, agent_env, self.home.GetPath(),
-                rootfs=env_doc.get("rootfs"),
+            _, _unknown = _manifest_images(env_doc)
+            _pull_orders, _pulling, _unpulled = _pulls_to_run(
+                sh_remote, env_doc, agent_env, self.home.GetPath(), self._pulls_images(),
             )
-            if _missing:
+            sh_remote.Exec(
+                f"cat > {workspace/PULLS_FILE} <<'MSM_PULLS'\n{json.dumps(_pull_orders)}\nMSM_PULLS",
+                history=True, quiet=True,
+                idle_timeout=PROBE_TIMEOUT, what="recording which images to pull",
+            )
+            if _pulling:
+                Log.Info(
+                    f"pulling [{len(_pulling)}] tool image(s) on this host before the steps"
+                    f" that need them:\n  " + "\n  ".join(_pulling)
+                )
+            if _unpulled:
                 Log.Warn(
-                    f"[{len(_missing)}] of [{len(_images)}] tool image(s) are not in this"
-                    f" agent's store and will be fetched by the first task that needs each"
-                    f" -- which fails on a compute node with no route to a registry."
-                    f" A setup run (`msm workflow setup`) pulls them on this host first:\n  "
-                    + "\n  ".join(_missing)
+                    f"[{len(_unpulled)}] tool image(s) are not in this agent's store and have"
+                    f" no pull step, so the first task that needs each fetches it -- which"
+                    f" fails on a compute node with no route to a registry. Stage the workflow"
+                    f" again to give them pull steps:\n  " + "\n  ".join(_unpulled)
                 )
             if _unknown:
                 Log.Warn(

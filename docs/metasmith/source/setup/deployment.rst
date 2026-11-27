@@ -90,30 +90,23 @@ On a cluster, load the container runtime here:
 Compute nodes with no internet
 ------------------------------------------------------------
 
-Tool images are fetched lazily, by the first task that needs each one. On a
-cluster whose compute nodes can reach a registry that is the right behaviour —
-nothing is downloaded that no step turned out to need. Where the compute nodes
-have **no route out**, it is the wrong place for the fetch to happen, and the
-run fails inside its first task rather than at submit time.
-
-Run setup first, from the login node, where the driver runs:
+On an Apptainer agent, a run pulls each tool image that is not in the agent's
+store before any step that needs it. Start the run from the login node, where the
+driver runs:
 
 .. code-block:: bash
     :caption: Terminal (login node)
 
-    metasmith workflow setup <agent> <task>
     metasmith workflow run <agent> <task>
 
-The setup run pulls every tool image the workflow needs, as steps on the
-driver's host, three at a time. Each step that runs a tool waits for its image,
-so a compute node never starts before its image is in the store. A pull that
-fails stops the setup run. The same run fetches the reference databases, and its
-first line says how much it will download, for example
-``setup: ~439 GB of references, 14 images``.
+The pulls run on the driver's host, three at a time. Each step that runs a tool
+waits for its image, so a compute node never fetches one. A pull that fails stops
+the run. When the store already holds every image, the run pulls nothing. The GUI's
+**stage and run** does the same.
 
-``workflow run`` reports on the store without touching it. It names any image
-the agent does not already hold before anything is transferred. That warning is
-the cue to run setup first.
+To fill the store before the real run, run setup (see below) or the workflow's prep
+template, for example ``engcyc_prep_references``. Each one pulls every tool image
+the workflow uses.
 
 .. note::
 
@@ -151,8 +144,7 @@ record of each image under ``results/envs/``.
 
 When the setup run completes, the real run serves those steps from the agent's
 cache instead of running them again. Running setup a second time downloads
-nothing that is already done. It checks each image in the store again, which
-costs one test per image.
+nothing that is already done, and it pulls no image the store already holds.
 
 .. important::
 

@@ -10,7 +10,9 @@ from metasmith.env import Runtime
 from metasmith.models.libraries import DataInstanceLibrary
 from metasmith.models.remote import Source
 from metasmith.models.workflow import NextflowGenContext, WorkflowTask
-from metasmith.models.workflow.setup import NoSetupStepsError, SetupFootprint, setup_subplan
+from metasmith.models.workflow.setup import (
+    NoSetupStepsError, SetupFootprint, setup_subplan, with_run_pulls,
+)
 from metasmith.testing import mock_transforms as mt
 from metasmith.testing.pool_fixtures import pool_backed
 
@@ -68,9 +70,11 @@ TransformInstance(
 PULL = mt.pull_container_transform(pulled_type="mock::h4")
 
 
-def _solve(tmp_path: Path, transforms: dict[str, str], target: str, resources=True) -> WorkflowTask:
+def _solve(
+    tmp_path: Path, transforms: dict[str, str], target: str, resources=True, cases=("case",),
+) -> WorkflowTask:
     types_path = _build_type_lib(tmp_path / "types.yml")
-    samples = _build_samples_lib(tmp_path, types_path, n_samples=2, dtype="assembly")
+    samples = list(_build_samples_lib(tmp_path, types_path, n_samples=2, dtype="assembly").AsSamples("mock::assembly"))
     refs = DataInstanceLibrary(tmp_path / "refs.xgdb")
     refs.AddTypeLibrary(types_path, namespace="mock")
     (refs.location / "image.txt").write_text("image")
@@ -79,19 +83,21 @@ def _solve(tmp_path: Path, transforms: dict[str, str], target: str, resources=Tr
     refs.Save()
     tr_lib = _build_transform_lib(tmp_path / "tr", types_path, transforms)
     return plan_views(
-        [CaseViews("case", list(samples.AsSamples("mock::assembly")), [], [target])],
+        [CaseViews(c, samples[i::len(cases)], [], [target]) for i, c in enumerate(cases)],
         resources=[refs] if resources else [],
         transforms=[tr_lib],
     )
 
 
-def _stage(task: WorkflowTask, home: Path, monkeypatch) -> tuple[WorkflowTask, Path]:
+def _stage(task: WorkflowTask, home: Path, monkeypatch, run_pulls=False) -> tuple[WorkflowTask, Path]:
     monkeypatch.setattr(AgentPaths, "HOME_ROOT", home)
     monkeypatch.setattr(AgentPaths, "WORK_ROOT", home / "_ws")
     task_path = AgentPaths.to_task(task.GetKey())
     task_path.parent.mkdir(parents=True, exist_ok=True)
     task.SaveAs(Source.FromLocal(task_path))
     staged = WorkflowTask.Load(task_path, alt_data_paths=[AgentPaths.to_data()])
+    if run_pulls:
+        with_run_pulls(staged)
     ws = task_path.parent.parent
     staged.PrepareNextflow(NextflowGenContext(
         workflow_file=AgentPaths.NXF_WORKFLOW, work_dir=ws, external_work=ws,
@@ -227,3 +233,85 @@ def test_a_size_estimate_does_not_move_the_cache_key(tmp_path):
         tr, = [s.transform for s in task.plan.steps if s.transform.name == "fetch"]
         return tr._protocol_source_hash
     assert sig(with_size) == sig(without)
+
+
+def _processes(nf: str) -> dict[str, str]:
+    found, name = {}, None
+    for line in nf.splitlines():
+        if line.startswith("process "):
+            name = line.split()[1]
+            found[name] = ""
+        if name is not None:
+            found[name] += line + "\n"
+            if line == "}":
+                name = None
+    return found
+
+
+def _resources(text: str) -> dict[str, str]:
+    return {b.split("'")[0]: b for b in text.split("withName: '")[1:]}
+
+
+def _compiled(task: WorkflowTask, home: Path, monkeypatch, run_pulls: bool) -> tuple[WorkflowTask, dict]:
+    staged, ws = _stage(task, home, monkeypatch, run_pulls=run_pulls)
+    return staged, {
+        # Each staging into a home counts a session, the one line that differs.
+        "meta": {
+            p.name: [x for x in p.read_text().splitlines() if not x.startswith("session ")]
+            for p in ws.glob("workflow.step_*.meta")
+        },
+        "process": _processes((ws / AgentPaths.NXF_WORKFLOW).read_text()),
+        "resources": _resources((ws / AgentPaths.NXF_RES).read_text()),
+    }
+
+
+def test_a_run_pull_trails_the_plan_and_moves_no_tool_steps_key(tmp_path, monkeypatch):
+    # The same home for both, since a process names the paths it binds.
+    task = _solve(tmp_path, {"fetch": FETCH_WITH_TOOL, "annotate": ANNOTATE, **PULL}, "mock::annotated")
+    plain_task, plain = _compiled(task, tmp_path / "home", monkeypatch, run_pulls=False)
+    pulled_task, pulled = _compiled(task, tmp_path / "home", monkeypatch, run_pulls=True)
+    n = len(plain_task.plan.steps)
+    assert [(s.order, s.transform.name) for s in pulled_task.plan.steps[n:]] == [(n + 1, "pullContainer")]
+    pull = f"p{n + 1:02d}__pullContainer"
+    assert set(pulled["process"]) - set(plain["process"]) == {pull, f"{pull}_cached"}
+    for part, found in plain.items():
+        assert found, part
+        assert {k: pulled[part][k] for k in found} == found, part
+
+
+def test_a_run_pull_runs_only_when_the_launch_names_it(tmp_path, monkeypatch):
+    task = _solve(tmp_path, {"fetch": FETCH_WITH_TOOL, "annotate": ANNOTATE, **PULL}, "mock::annotated")
+    staged, ws = _stage(task, tmp_path / "home", monkeypatch, run_pulls=True)
+    pull, = [s for s in staged.plan.steps if s.transform.name == "pullContainer"]
+    nf = (ws / AgentPaths.NXF_WORKFLOW).read_text()
+    assert 'o.pulls(file("workflow.pulls.json"))' in nf
+    gate, = [x for x in nf.splitlines() if f"o.pulling({pull.order})" in x]
+    assert f"msm_out_{pull.order}(" in gate.split("} else {")[0]
+    assert "o.skipped(" in gate.split("} else {")[1], "a skipped pull still names its product stream"
+    lines = nf.splitlines()
+    hold = next(i for i, x in enumerate(lines) if "o.after(" in x)
+    env = lines[hold].split(" = ")[0].strip()
+    readers = [i for i, x in enumerate(lines) if "o.group(" in x and env in x]
+    assert len(readers) == 2 and readers[0] < hold < readers[1], "the pull reads the env as given; the fetch reads it held"
+    doc = __import__("json").loads((ws / AgentPaths.ENV_MANIFEST).read_text())
+    assert list(doc["pulls"]) == [str(pull.order)] and len(doc["pulls"][str(pull.order)]) == 1
+
+
+def test_a_staged_setup_run_gets_no_second_pull(tmp_path, monkeypatch):
+    task = _solve(tmp_path, {"fetch": FETCH_WITH_TOOL, "annotate": ANNOTATE, **PULL}, "mock::annotated")
+    staged, _ = _stage(setup_subplan(task, pull_images=True), tmp_path / "home", monkeypatch, run_pulls=True)
+    assert [s.transform.name for s in staged.plan.steps] == ["pullContainer", "fetch"]
+
+
+def test_a_run_pull_in_a_plan_of_several_cases_serves_every_case(tmp_path, monkeypatch):
+    task = _solve(
+        tmp_path, {"fetch": FETCH_WITH_TOOL, "annotate": ANNOTATE, **PULL}, "mock::annotated",
+        cases=("a", "b"),
+    )
+    assert task.ok and task.plan.multi_case, task.plan.hints
+    staged, ws = _stage(task, tmp_path / "home", monkeypatch, run_pulls=True)
+    pull, = [s for s in staged.plan.steps if s.transform.name == "pullContainer"]
+    assert sorted(pull.cases) == ["a", "b"]
+    nf = (ws / AgentPaths.NXF_WORKFLOW).read_text()
+    pull_in = nf.split(f"def msm_in_{pull.order}(o) {{")[1].split("}")[0]
+    assert "o.cases(" not in pull_in, "a case filter on the pull would hold its env back forever"

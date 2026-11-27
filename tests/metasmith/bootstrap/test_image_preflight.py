@@ -2,10 +2,10 @@
 #
 # Tool images materialise lazily -- inside the first task that needs each one.
 # On a cluster whose compute nodes have no route to a registry that is exactly
-# where it fails. A setup run's pull steps fetch on the driver's host through
-# `ExecutionContext.MaterialiseImage`, the call a task makes; the launch path only
-# reports, from the stage-time env manifest. Nothing here opens a connection: the
-# shell is a stub.
+# where it fails. Pull steps fetch on the driver's host through
+# `ExecutionContext.MaterialiseImage`, the call a task makes. The launch path
+# fetches nothing: it checks the store against the stage-time env manifest and
+# names the pull steps to run. Nothing here opens a connection: the shell is a stub.
 #
 # The same two halves for an agent that runs no containers at all: a mamba agent
 # needs the conda envs its steps name, and the library ships one recipe per tool
@@ -29,6 +29,7 @@ from metasmith.agents.conda import (
 from metasmith.agents.images import (
     _check_image_store,
     _manifest_images,
+    _pulls_to_run,
     _tool_environment_for,
 )
 from metasmith.env import Environment, Rootfs, Runtime
@@ -199,6 +200,43 @@ class TestLaunchReport:
         assert _check_image_store(sh, [], _apptainer(), HOME, rootfs=None) == []
         assert sh.commands == []
 
+
+
+def _pulled_doc(pulls):
+    steps = {"P1": _step("P1", "kraken2", {"k.env": {"container": KRAKEN}}),
+             "P2": _step("P2", "sylph", {"s.env": {"container": SYLPH}})}
+    return _doc(steps) | {"pulls": pulls}
+
+
+class TestLaunchPulls:
+    def test_a_store_missing_one_image_runs_exactly_its_pull(self):
+        sh = _StubShell(present=[KRAKEN])
+        orders, pulling, unpulled = _pulls_to_run(
+            sh, _pulled_doc({"3": [KRAKEN], "4": [SYLPH]}), _apptainer(), HOME, True,
+        )
+        assert (orders, pulling, unpulled) == ([4], [SYLPH], [])
+        assert sh.materialise_commands() == [], "the launch fetched; only a pull step may"
+
+    def test_a_complete_store_runs_no_pull(self):
+        sh = _StubShell(present=[KRAKEN, SYLPH])
+        assert _pulls_to_run(
+            sh, _pulled_doc({"3": [KRAKEN], "4": [SYLPH]}), _apptainer(), HOME, True,
+        ) == ([], [], [])
+
+    def test_a_missing_image_with_no_pull_is_named(self):
+        sh = _StubShell(present=[SYLPH])
+        assert _pulls_to_run(sh, _pulled_doc({}), _apptainer(), HOME, True) == ([], [], [KRAKEN])
+
+    def test_an_agent_that_pulls_no_images_runs_no_pull(self):
+        sh = _StubShell()
+        assert _pulls_to_run(sh, _pulled_doc({"3": [KRAKEN]}), _mamba(), HOME, False) == ([], [], [])
+        assert sh.commands == []
+
+    def test_a_runtime_with_no_store_to_check_runs_every_pull(self):
+        docker = Environment(image="msm", runtime=Runtime.DOCKER)
+        assert _pulls_to_run(
+            _StubShell(), _pulled_doc({"3": [KRAKEN], "4": [SYLPH]}), docker, HOME, True,
+        ) == ([3, 4], [KRAKEN, SYLPH], [])
 
 BLAST = "blast-2.16"
 DIAMOND = "diamond-2.1"
