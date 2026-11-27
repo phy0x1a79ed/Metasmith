@@ -76,7 +76,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 
 #### P5. Verification — proposed
 - Role: how a plan is trusted and reproduced.
-- Key message: an independent checker verifies each plan, and a fixed seed makes plans reproducible.
+- Key message: rather than prove the solver correct, we proved a small checker correct and run it on every plan.
+- Points (paragraph-points, 2026-11-27; Tony's ladder: a provably correct solver is hard, so prove a witness checker instead, and the checker gates every plan):
+  1. A solver that is provably correct is hard to build, so we instead built a small witness checker that is provably correct and gates every plan the solver returns.
+  2. The checker shares no code with the search and accepts or rejects a plan against the original problem.
+  3. The checker tests ten conditions, among them that every binding satisfies its input type and lineage, every port has one producer and is given or produced before use, the steps form a DAG, and the target appears exactly once.
+  4. A Lean 4 proof shows that the checker's Rust code returns true exactly when a plan meets the formal specification.
+  5. A seeded random-number generator and a fixed iteration order make the same request return the same plan.
+- Note: `check_spec`, `src/solver_witness/lean/Proof/Compose.lean:232`, proved, no sorry; Rust lowered via Charon/Aeneas; ten clauses in `lean/Spec.lean:255`. As of 2026-11-27 the check runs only in tests and `msm_solver check`; asked metasmith-e2e-install-test to run it on every solve in the release (Tony, 2026-11-27). Decoy tests (`testing/witness_check.py`) dropped from the points for now. Seed 42, ChaCha.
 
 ### M2. Specification — agreed (outline-sections, 2026-11-26)
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.
