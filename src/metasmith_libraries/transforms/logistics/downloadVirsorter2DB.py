@@ -116,6 +116,7 @@ TransformInstance(
     resources=Resources(
         cpus=4,
         memory=Size.GB(8),
-        duration=Duration(hours=2),
+        # The vs2 conda env alone took ~100 min on sockeye's Lustre login node.
+        duration=Duration(hours=8),
     ),
 )
