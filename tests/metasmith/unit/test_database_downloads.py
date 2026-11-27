@@ -132,7 +132,6 @@ SPLIT_FETCHERS = {
     "downloadInterProScanDB": None,
     "downloadEggnogDB": None,
     "downloadMetabuliDB": None,
-    "downloadDramDB": None,
     "downloadGtdbDB": {"MD5SUM.txt": "abc  ./auxillary_files/gtdbtk_package/split_package/gtdbtk_r232_data.tar.gz.part_aa\n"},
 }
 _UNPACK = re.compile(r"tar [^|;]*-?x|gunzip|gzip -t|bunzip2|unzip |setup\.py|md5sum ")

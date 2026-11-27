@@ -22,6 +22,7 @@ on long reads; inStrain on short and hybrid.
 Gene function: DIAMOND UniRef50 and KOfam; InterProScan's Pfam, families and motifs
 lanes (5.4 GB download, 11 GB unpacked) with their hits combined; CLEAN, ProteinBERT and
 BiGG lanes; the 4-lane GPR table.
+Marker genes: BUSCO bacteria and archaea markers on every ORF.
 Genome features: Bakta non-coding, ARAGORN tRNA, mobileOG, PromoTech promoters.
 Regulation and transport: DeepTFactor, PredicTF, TCDB by DIAMOND.
 Resistome: RGI/CARD, BacMet, VFDB. RefSeq viral lane.

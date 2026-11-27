@@ -8,8 +8,8 @@ model   = Transform()
 image   = model.AddRequirement(lib.GetType("env::env"))
 record  = model.AddProduct(lib.GetType("env::pulled_container"))
 
-# A setup run pulls every tool image of a plan with one step of this per image
-# (`setup_subplan`). The image stays in the agent's store, which may be on another
+# One step of this pulls one tool image on the driver's host, ahead of the steps
+# that run it (`metasmith.models.workflow.setup`). The image stays in the agent's store, which may be on another
 # filesystem; the product is a record of where, so nothing is linked or copied.
 #
 # Every pull is its own Nextflow process, so no per-process limit caps them. They run

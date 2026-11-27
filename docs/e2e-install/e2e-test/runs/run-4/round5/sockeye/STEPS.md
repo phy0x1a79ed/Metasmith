@@ -1,0 +1,20 @@
+# STEPS
+1. Read docs/setup/install.rst, setup/gui.rst, setup/ssh.rst, setup/deployment.rst. (no doc: n/a)
+2. Checked ~/.ssh/config: Host sockeye ProxyCommand = sandbox/.no-fresh-login, which prints "ssh: no connection to the cluster; ask the operator to reconnect" and exits 1. Noted as ERROR candidate; verify later with ssh sockeye. (no doc: n/a)
+3. Command: mkdir -p logs && nohup setsid mamba create -y -n msm_env -c conda-forge -c bioconda -c hallamlab metasmith > logs/install.log 2>&1 &   (docs/setup/install.rst, section "Installation > Conda")
+4. Command: timeout 60 ssh -o ConnectTimeout=20 sockeye 'echo ok; hostname'  (docs/setup/ssh.rst). Outcome: SUCCESS, prints "ok / login02" despite the ProxyCommand note in step 2. Cluster IS reachable; step 2 was a misreading of the config and is withdrawn.
+5. Install progress: mamba warns that local file:// channel .channels/hallamlab has no repodata (warning only, not fatal so far). (docs/setup/install.rst)
+6. Install finished. envs/msm_env/bin/msm present, metasmith v0.26.2. (docs/setup/install.rst "Conda") Outcome: SUCCESS.
+7. mkdir metasmith_ws; cd metasmith_ws; nohup setsid msm gui --port 8091 --no-browser > logs/gui.log &  (docs/setup/gui.rst "Start it from an empty workspace folder"). Outcome: SUCCESS, serving http://127.0.0.1:8091, HTTP 200. PID 3009884.
+8. GUI (browser): Agents > + agent; "a remote host" tab; host=sockeye; home=/scratch/st-shallam-1/txyliu/msm_e2e/run-4-sockeye; runtime apptainer (default); nextflow preset=slurm; default param slurmAccount=st-shallam-1; setup commands "module load gcc/9.4.0 apptainer/1.3.1". (docs/setup/deployment.rst "Additional setup commands" and the sockeye note; docs/setup/gui.rst). Outcome: form filled, agent auto-renamed brown-sockeye. Note: GUI "+ a param" row appears with delay.
+9. GUI: clicking deploy next.
+9. GUI deploy clicked. Outcome: SUCCESS - log "deployment complete relay-deployed deployed to [ssh://sockeye:/scratch/st-shallam-1/txyliu/msm_e2e/run-4-sockeye]". Agent brown-sockeye. Log included "pseudo-terminal" ssh warnings only (harmless).
+10. GUI: Workflows > + workflow > template engcyc_prep_references_lite > create (workflow brown-armadillo). (docs/setup/gui.rst; docs/setup/deployment.rst "Set up a workflow before its first run"). Outcome: created.
+11. GUI: solve. Outcome: success, "setup: ~162 GB of references, 10 images", 27 steps.
+12. GUI: agent=brown-sockeye, preset=slurm (params slurmAccount=st-shallam-1 inherited). Clicking "set up" (docs/setup/deployment.rst "Set up a workflow before its first run": `workflow setup ... --preset slurm`).
+13. GUI: "set up" then confirmed "fetch ~162 GB?" (the confirm reverts after a few seconds; second attempt clicked both in one batch). Outcome: setup run started, run id brown-armadillo/brown-armadillo-98mbv (URL #runs/brown-armadillo%2Fbrown-armadillo-98mbv).
+14. Monitored setup run via ssh tail of runs/*/_metasmith/logs.*/main.log: pullContainer submitted at 04:30; container_images 19G at 04:31. (docs/setup/deployment.rst). Outcome: progressing.
+15. Background wait loop started (byj550epv) for terminal markers. Sleep >120s in foreground is blocked by the harness, so waiting is done through background tasks.
+16. Setup run finished OK (sockeye log: run completed 04:48:33; 0 ERROR). (docs/setup/deployment.rst). Outcome: SUCCESS.
+17. GUI: created workflow charming-alligator from template engcyc_metagenomics_lite; removed hybrid and long cases (docs/workflows/engcyc_metagenomics.rst "Delete each read case you have no samples for"). First attempt mis-edited the hybrid sample's read_pair row and deleted the wrong rows; those rows were removed and the workflow was corrected: short_1 sample's read_pair changed to ncbi::sra_short_read_accession = SRR9658108 (docs/workflows/engcyc_metagenomics.rst "To start a short-read sample from an SRA run"). Outcome: solved, 82 steps, 39 images (plan success). WORKAROUND: direct DOM edits (evaluate) for discard-confirm and values because the GUI clicks were unreliable.
+18. GUI: agent=brown-sockeye, preset=slurm, clicking stage and run.

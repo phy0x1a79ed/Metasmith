@@ -91,6 +91,11 @@ types:
     - reference_data
     properties:
       _: KOfam release as fetched -- profiles.tar.gz and ko_list.gz from one archives/<date>/, unpacked by buildKofamDB
+  busco_prokaryote_lineages:
+    extends:
+    - reference_data
+    properties:
+      _: BUSCO bacteria_odb10 and archaea_odb10 lineage archives as released, unpacked by each BUSCO task
   # The fetch halves of mnxr_lookup and label_transfer_landmarks, each as released.
   metanetx_reactions:
     extends:

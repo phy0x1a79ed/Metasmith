@@ -241,6 +241,14 @@ types:
   # lib::fabfos_gpr/annotation_table.py, then the lane's own `<lane>_<field>` columns.
   # A lane whose calls are motifs within the protein also writes `<lane>_hits`, every
   # hit one row, in that file's HITS_COLS.
+  # The busco lane, under the name a reader asks for: BUSCO's prokaryote marker genes
+  # (bacteria_odb10 and archaea_odb10) on the ORFs.
+  marker_gene_hit_table:
+    properties:
+      _: BUSCO marker-gene hits per ORF in the standard annotation-table format
+      lane: busco
+      Format: Parquet
+      ext: parquet
   kofam_lane_table:
     properties:
       _: the kofam lane in the standard annotation-table format
@@ -619,7 +627,7 @@ types:
       ext: json
   busco_full_table:
     properties:
-      _: BUSCO full results table with per-sequence marker assignments
+      _: BUSCO protein-mode full_table.tsv of each ORF chunk and prokaryote lineage, concatenated
       Format: TSV
       ext: tsv
   busco_lineage:
@@ -705,7 +713,8 @@ types:
     properties:
       _: VirSorter2 reference database directory
 
-  # DRAM-v
+  # DRAM 1.5 run whole. Nothing here produces these three: research/metasmith_benchmark's
+  # reproduction gives dram_db as an input and produces the two DRAM-v products.
   dramv_annotations:
     properties:
       _: DRAM-v gene annotations for viral contigs
@@ -716,14 +725,6 @@ types:
   dram_db:
     properties:
       _: DRAM database directory
-  # The fetch half of dram_db, split so the network part runs on a login node.
-  dram_sources:
-    properties:
-      _: DRAM database downloads as fetched, unprocessed -- KOfam, Pfam-A.full, Pfam hmm.dat, dbCAN and the five distillation sheets
-  dram_annotations:
-    properties:
-      _: DRAM gene annotations (dbCAN/KOfam/Pfam) TSV
-      ext: tsv
 
   # PromoTech
   promotech_predictions:
@@ -902,12 +903,6 @@ types:
   eggnog_results_chunk:
     properties:
       _: Per-chunk eggNOG-mapper annotations (sibling of eggnog_results)
-      Format: TSV
-      granularity: chunk
-      ext: tsv
-  dram_annotations_chunk:
-    properties:
-      _: Per-chunk DRAM annotations.tsv (sibling of dram_annotations)
       Format: TSV
       granularity: chunk
       ext: tsv

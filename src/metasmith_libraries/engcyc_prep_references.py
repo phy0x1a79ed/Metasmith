@@ -3,6 +3,8 @@ import sys
 
 import _authoring as A
 import engcyc_metagenomics as M
+from metasmith.models.workflow.setup import tool_envs
+from metasmith.models.workflow.steps import PULL_TRANSFORM
 
 NAME = "engcyc_prep_references"
 DESCRIPTION = """
@@ -17,6 +19,13 @@ summary shows the download total; the largest are iPHoP's 278 GB, the Metabuli
 build's 180 GB of sources and Centrifuger's 176 GB. Each archive is deleted once its
 database is built. See engcyc_metagenomics' description for each lane's size.
 """
+
+
+PULLED = "env::pulled_container"
+
+
+def _shift(target: dict, by: int) -> dict:
+    return target | {"parents": [p + by for p in target["parents"]]} if "parents" in target else target
 
 
 def reference_side(plan) -> tuple[set, list[str]]:
@@ -37,6 +46,16 @@ def reference_side(plan) -> tuple[set, list[str]]:
     return steps, sorted({t for i, t in ref_made.items() if i in consumed_by_samples})
 
 
+def image_targets(task) -> list[dict]:
+    # A pull of each tool image `task` runs, as targets: each env, bound to the input that
+    # holds it, anchors one pulled_container under it. A prep run then pulls on the
+    # driver's host every image its paired workflow's steps need, in any case.
+    targets: list[dict] = []
+    for env in sorted({e.dtype_name for e in tool_envs(task)}):
+        targets += [{"type": env}, {"type": PULLED, "parents": [len(targets)]}]
+    return targets
+
+
 def prep_for(main_template, references, name, description, rebuild):
     main = main_template.Plan()
     assert main.ok, f"{main_template.name} does not plan: {sorted(main.plan.dropped_targets)}"
@@ -45,10 +64,18 @@ def prep_for(main_template, references, name, description, rebuild):
         f"{main_template.name}' samples read references its references case does not name: "
         f"missing {sorted(set(targets) - set(references))}, unread {sorted(set(references) - set(targets))}"
     )
-    template = M.template_for(name, rebuild=rebuild, targets=references, description=description)
+    images = image_targets(main)
+    template = M.template_for(name, rebuild=rebuild, description=description,
+                              targets=references + [_shift(t, len(references)) for t in images])
     prep = template.Plan()
     assert prep.ok, f"{name} does not plan: {sorted(prep.plan.dropped_targets)}"
+    pulled = {i.dtype_name for s in prep.plan.steps if s.transform.name == PULL_TRANSFORM for i in s.uses}
+    assert pulled == {t["type"] for t in images[::2]}, (
+        f"{name} pulls a different image set than {main_template.name} runs: "
+        f"{sorted(pulled ^ {t['type'] for t in images[::2]})}"
+    )
     mine, _ = reference_side(prep.plan)
+    mine = {s for s in mine if s[0] != PULL_TRANSFORM}
     assert mine == steps, (
         f"{name} and {main_template.name} plan different reference steps: "
         f"only here {sorted(t for t, _ in mine - steps)}, only there {sorted(t for t, _ in steps - mine)}"

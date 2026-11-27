@@ -142,6 +142,7 @@ class Orchestrator {
     private Map footprint_cfg = [:]
     private Set keep_streams = [] as Set
     private Map readers_of = [:]
+    private Set pull_orders = null
     private final Map products = new java.util.concurrent.ConcurrentHashMap()
     private final Map products_of = new java.util.concurrent.ConcurrentHashMap()
     private final Map pending_reads = new java.util.concurrent.ConcurrentHashMap()
@@ -187,6 +188,23 @@ class Orchestrator {
 
     public boolean isProbing() {
         return this.probing
+    }
+
+    // The pull steps this launch runs, as the launch wrote them after checking the
+    // image store. No file means every pull runs.
+    public void pulls(f) {
+        if (f.exists()) {
+            this.pull_orders = new HashSet(new groovy.json.JsonSlurper().parseText(f.text).collect { it as Integer })
+        }
+    }
+
+    public boolean pulling(int order) {
+        return this.pull_orders == null || order in this.pull_orders
+    }
+
+    // The product stream of a pull this launch skips: empty, and holding nothing back.
+    public def skipped(name) {
+        return new Tuple2(name, this.one_null.filter(x -> false))
     }
 
     // The last statement of the workflow body.
@@ -1606,8 +1624,8 @@ class Orchestrator {
     //     })
     // }
 
-    // Every item of `stream`, held until `signal` has emitted all it will. A setup run's
-    // steps read each env through this, so none starts before that env's image is pulled,
+    // Every item of `stream`, held until `signal` has emitted all it will. A step reads
+    // its env through this when the env has a pull, so none starts before the image is pulled,
     // and the wait touches no index, so no cache key sees it. A signal that emits nothing
     // holds the stream forever, which is why a failed pull stops the run (codegen).
     public def after(stream, signal) {

@@ -165,7 +165,7 @@ def build_targets(shape):
         if "mags" in lanes:
             t.add("viromics::host_prediction_genome", frozen)
             t.add("viromics::spacer_host_links", frozen)
-        t.add("annotation::dramv_distill", asm)
+        t.add("annotation::dramv_amg_summary", asm)
         t.add("taxonomy::genomad_taxonomy", asm)
     return t.items
 

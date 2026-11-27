@@ -36,6 +36,7 @@ download, 48 GB unpacked) in five lanes, each its own job: Pfam (4 GB), families
 PIRSF, PIRSR, SFLD, SMART, AntiFam; 4.5 GB), motifs (PROSITE, HAMAP, PRINTS, CDD, Coils,
 MobiDB-lite; 2.3 GB), structure (Gene3D, FunFam, SUPERFAMILY; 29 GB) and PANTHER (8.8 GB),
 with their hits combined; eggNOG (12 GB, 55 GB unpacked).
+Marker genes: BUSCO bacteria and archaea odb10 markers on every ORF (0.01 GB).
 Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
 (< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
 GPR table: the 4-lane table (KOfam, CLEAN, UniRef50, ProteinBERT); the DeepEC and
@@ -107,6 +108,7 @@ TARGETS = [
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
       for lane in ("uniref50", "kofam", *(f"interproscan_{l}" for l in IPS_LANES), "eggnog")),
     ips_hits(*IPS_LANES),
+    {"type": "annotation::marker_gene_hit_table", "parents": _O},
     # regulation and transport: no download, or a small one
     *({"type": f"annotation::{t}", "parents": _O}
       for t in ("deeptfactor_results", "predictf_results", "diamond_tcdb_results")),
@@ -187,7 +189,7 @@ REFERENCES = [f"annotation::{t}" for t in (
         "antismash", "checkv_db", "dbcan_hmm", "deeparg_db", "dram_sheets", "ganon2_db", "genomad",
         "gtdb", "gtdb_rrna", *(f"interproscan_{l}_data" for l in IPS_LANES), "iphop_db", "kofamscan_ko_list",
         "kofamscan_profiles", "kraken2_db", "label_transfer_landmarks", "merops_diamond_db",
-        "metabuli_ref", "metaphlan_db", "mnxr_lookup",
+        "metabuli_ref", "metaphlan_db", "mnxr_lookup", "busco_prokaryote_lineages",
         "pathofact_db", "refseq_viral_diamond_db", "sylph_db", "uniref50_diamond_db", "vcontact3_db",
         "vibrant_db", "vogdb_hmm", "centrifuger_db", "phyloflash_db")]
 CASE_TARGETS = {"short": SHORT_TARGETS, "long": LONG_TARGETS, "hybrid": HYBRID_TARGETS}

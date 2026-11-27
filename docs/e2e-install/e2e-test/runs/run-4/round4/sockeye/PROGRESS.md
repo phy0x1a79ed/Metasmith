@@ -1,0 +1,30 @@
+# PROGRESS
+- [x] Read docs (setup/install.rst, setup/gui.rst, setup/deployment.rst, workflows/engcyc_metagenomics.rst)
+- [x] Verified `ssh sockeye` works (BatchMode, reached login02)
+- [x] Install metasmith 0.26.2 -> envs/msm_env (logs/install.log)
+- [x] GUI running: PID 2718304 (envs/msm_env/bin/msm gui --port 8091 --no-browser), cwd metasmith_ws, log logs/gui.log, URL http://127.0.0.1:8091
+  - first launch via `mamba run` died with werkzeug PackageNotFoundError; relaunch with env binary worked.
+- NOTE: another sandbox (run-4-fir) has its own msm gui on 8092 — not mine, do not touch.
+- [x] Browser: deploy agent (done, interesting-sockeye, relay deployed)
+- [ ] Browser: run engcyc_prep_references_lite setup
+- [ ] Browser: run engcyc_metagenomics_lite on SRR9658108
+- [ ] Collect results -> ./results ; REPORT.md ; CONTROL.json
+- [x] Workflow engcyc_prep_references_lite created ('perfect-alligator'), solved (27 steps, ~162 GB refs, 10 images)
+- [~] SETUP RUN in progress: GUI run UnyqV, task key pU61olfk, agent interesting-sockeye, preset slurm, started 2026-11-26 ~22:32 (server clock). Check Runs tab http://127.0.0.1:8091/#runs/perfect-alligator%2Fperfect-alligator-UnyqV
+  - 22:37 first Slurm job 14221258 (buildRefseqViralDB) PENDING
+  - 23:11 buildMnxrLookup, buildLabelTransferLandmarks COMPLETED; run UnyqV still running
+  - 23:23 driver active: downloadGtdbDB on login02 (~90%), no queued jobs (expected)
+  - 00:30 buildKofamDB completed; 00:41 slow local download (51/6a32ae..., 54%) still running, queue empty
+- 00:51 resumed after restart; GUI PID 2718304 alive; setup run UnyqV still running; Slurm: buildGtdbDB 14222118 and buildKofamDB 14222168 COMPLETED; no jobs queued
+- 00:52 STATUS: run UnyqV (ShUeUoct, setup) still running. Bottleneck: wget of uniref50.fasta.gz on login02 (pid 1569391; part file 5.7 GB at 00:52, ~1 MB/s). Also downloadVirsorter2DB running. Slurm queue empty = expected. Waiting; no action needed.
+- Plan after setup: GUI 'set up'-> then create workflow engcyc_metagenomics_lite (Workflows > + workflow), solve, set defaults, run on SRR9658108 via Data tab, then collect results to ./results.
+- 01:55 UniRef50 download finished; driver moving file. Waiting for Slurm jobs / virsorter2 download.
+- 01:57 Slurm 14226679 nf-p34__buildUniRef50DB RUNNING (setup run continues).
+- 02:53 10 'rescue' jobs (txyliu, WorkDir /scratch/.../txyliu/rescue) running; not from this run; left alone. Setup run's VirSorter2 download still local on login02.
+- 03:20 SETUP RUN COMPLETED (agent log). Next: verify in GUI, then metagenomics workflow.
+- SETUP DONE (UnyqV completed 03:20). Next: create engcyc_metagenomics_lite workflow in GUI, solve, run on SRR9658108.
+- 03:5x ancient-cricket: sample pasted (ENA URLs). Mapping input columns next, then solve, then run on sockeye agent.
+- 03:5x solve#1 no plan. Plan: delete hybrid+long cases (template says delete cases with no samples), map sample columns, re-solve.
+- 04:0x re-solve #2 clicked; checking result.
+- 04:2x STATE: setup run UnyqV COMPLETED (perfect-alligator). Metagenomics: workflow 'ancient-cricket' created from engcyc_metagenomics_lite; hybrid+long cases removed; short case has SRR9658108 as ENA FASTQ URLs via paste (sample,forward,reverse). Solve = 'no plan': constant inputs (complete_medium.tsv, medium_name, contig_study JSON, eggnog JSON, read_metadata JSON) register nothing in the GUI after the sheet was pasted. NOT RUN. Next (if continuing): supply constants via file uploads (spec values in envs/.../templates/engcyc_metagenomics/spec.yml lines ~1020-1030) or find the GUI's literal-value path; re-solve; run on interesting-sockeye.
+- Stray jobs: 10x Slurm 'rescue' (14229317-26) from /scratch/st-shallam-1/txyliu/rescue — not this run's; left alone.

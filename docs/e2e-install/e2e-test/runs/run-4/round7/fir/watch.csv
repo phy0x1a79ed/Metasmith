@@ -1,0 +1,66 @@
+ts,kind,path,inodes,bytes,note
+2026-11-27T08:21:47-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir,50835,908942131012,
+2026-11-27T08:21:47-07:00,dir,container_images,5,8192,
+2026-11-27T08:21:47-07:00,dir,task_cache,50830,908942122820,
+2026-11-27T08:21:47-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da,27876,7672020983,
+2026-11-27T08:21:47-07:00,dir,task_cache/staging/downloadGanon2DB,21602,11855264750,
+2026-11-27T08:21:47-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da/out,27869,7669447223,
+2026-11-27T08:21:47-07:00,dir,task_cache/staging,21635,191912780086,
+2026-11-27T08:21:47-07:00,dir,task_cache/staging/downloadGanon2DB/a839c8f72f76caea,21601,11855260654,
+2026-11-27T08:21:47-07:00,dir,task_cache/1e,29192,717029203470,
+2026-11-27T08:21:47-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir,0,0,0
+2026-11-27T08:21:47-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T08:21:47-07:00,apptainer,/scratch/phyberos/cache/apptainer,285,84167821066,
+2026-11-27T08:21:47-07:00,quota,-,0,0,/home (user phyberos)        13GiB/  48GiB         143K/ 500K
+2026-11-27T08:21:47-07:00,quota,-,0,0,/scratch (user phyberos)      1435GiB/  19TiB         116K/1000K
+2026-11-27T08:31:17-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir,50835,908942131012,
+2026-11-27T08:31:17-07:00,dir,container_images,5,8192,
+2026-11-27T08:31:17-07:00,dir,task_cache,50830,908942122820,
+2026-11-27T08:31:17-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da,27876,7672020983,
+2026-11-27T08:31:17-07:00,dir,task_cache/staging/downloadGanon2DB,21602,11855264750,
+2026-11-27T08:31:17-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da/out,27869,7669447223,
+2026-11-27T08:31:17-07:00,dir,task_cache/staging,21635,191912780086,
+2026-11-27T08:31:17-07:00,dir,task_cache/staging/downloadGanon2DB/a839c8f72f76caea,21601,11855260654,
+2026-11-27T08:31:17-07:00,dir,task_cache/1e,29192,717029203470,
+2026-11-27T08:31:17-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir,0,0,0
+2026-11-27T08:31:17-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T08:31:17-07:00,apptainer,/scratch/phyberos/cache/apptainer,285,84167821066,
+2026-11-27T08:31:17-07:00,quota,-,0,0,/home (user phyberos)        13GiB/  48GiB         143K/ 500K
+2026-11-27T08:31:17-07:00,quota,-,0,0,/scratch (user phyberos)      1435GiB/  19TiB         116K/1000K
+2026-11-27T08:31:17-07:00,proc,login1:1792957,0,0,-bash 
+2026-11-27T08:31:17-07:00,proc,login1:1793620,0,0,./relay/msm_relay start 
+2026-11-27T08:31:17-07:00,proc,login1:1799624,0,0,bash -c cd /scratch/phyberos/msm_e2e/run-4-fir && ls -la relay/login1 | head; echo ---; ls task_cache | head; echo ---; 
+2026-11-27T08:31:17-07:00,proc,login1:1800368,0,0,du -sh container_images task_cache 
+2026-11-27T08:41:05-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir,51342,909024836356,
+2026-11-27T08:41:05-07:00,dir,container_images,5,8192,
+2026-11-27T08:41:05-07:00,dir,task_cache,50830,909014738441,
+2026-11-27T08:41:05-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da,27876,7672020983,
+2026-11-27T08:41:05-07:00,dir,task_cache/staging/downloadGanon2DB,21602,11855264750,
+2026-11-27T08:41:05-07:00,dir,relay,3,1847381,
+2026-11-27T08:41:05-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da/out,27869,7669447223,
+2026-11-27T08:41:05-07:00,dir,runs,499,8222634,
+2026-11-27T08:41:05-07:00,dir,msm,1,1129,
+2026-11-27T08:41:05-07:00,dir,task_cache/staging,21635,191985395707,
+2026-11-27T08:41:05-07:00,dir,task_cache/staging/downloadGanon2DB/a839c8f72f76caea,21601,11855260654,
+2026-11-27T08:41:05-07:00,dir,task_cache/1e,29192,717029203470,
+2026-11-27T08:41:05-07:00,dir,data,1,4096,
+2026-11-27T08:41:05-07:00,dir,lib,3,14483,
+2026-11-27T08:41:05-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir,0,0,0
+2026-11-27T08:41:05-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T08:41:05-07:00,apptainer,/scratch/phyberos/cache/apptainer,285,84167821066,
+2026-11-27T08:41:05-07:00,quota,-,0,0,/home (user phyberos)        13GiB/  48GiB         143K/ 500K
+2026-11-27T08:41:05-07:00,quota,-,0,0,/scratch (user phyberos)      1445GiB/  19TiB         117K/1000K
+2026-11-27T08:41:05-07:00,proc,login1:1793620,0,0,./relay/msm_relay start 
+2026-11-27T08:41:05-07:00,proc,login1:1990913,0,0,/bin/bash ../../msm api run_workflow -a key=5im6f8xT host=login1 log_dir=./_metasmith/logs.2026-11-27_08-41-09 stub_dela
+2026-11-27T08:41:05-07:00,proc,login1:1990993,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=5im6f8x
+2026-11-27T08:41:05-07:00,proc,login1:2055299,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir/relay/login1/GOyJoXiI.running 
+2026-11-27T08:41:05-07:00,proc,login1:2055305,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir/runs/5im6f8xT 22 log
+2026-11-27T08:41:05-07:00,proc,login1:2056027,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir/relay/login1/RrCj113q.running 
+2026-11-27T08:41:05-07:00,proc,login1:2056051,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir/runs/5im6f8xT 34 log
+2026-11-27T08:41:05-07:00,proc,login1:2057255,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir/relay/login1/tHVCzIpi.running 
+2026-11-27T08:41:05-07:00,proc,login1:2057273,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir/runs/5im6f8xT 55 log
+2026-11-27T08:41:05-07:00,proc,login1:2058272,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T08:41:05-07:00,proc,login1:2059556,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T08:41:05-07:00,proc,login1:2059997,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T08:41:05-07:00,proc,login1:2065119,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir/runs/5im6f8xT/nxf_work/51/ea3bc21572002fcb633dd55210e1b5/_metasmith/relay/login
+2026-11-27T08:41:05-07:00,proc,login1:2065129,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir/runs/5im6f8xT/nxf_work/51/ea3bc21572002fcb633dd55210e1b5/_metasmith/relay/login

@@ -13,9 +13,11 @@ One CPE3 quality MAG on fir, both arms on the same Prodigal ORFs:
 1. **Ours.** Target the five `annotation::dram_*` products. `probe_dram_solve.py` is the solve.
 2. **Upstream.** Annotate the MAG's ORFs with DRAM 1.5.0 against a database holding KOfam, Pfam,
    dbCAN, MEROPS and VOGDB, without UniRef90. Then run `DRAM.py distill` on the result.
-   `buildDramDB` does not select `peptidase`, so add it there or build the database by hand. Call
+   The library no longer builds this database or runs DRAM's annotate; the retired `buildDramDB`
+   and `dram_annotate_genes` (last at `0f68bcaf`) show both. `buildDramDB` did not select
+   `peptidase`, so add it or build the database by hand. Call
    `annotate_called_genes(..., use_vogdb=True, rename_genes=False)` from Python, as
-   `dram_annotate_genes` does: the `annotate_genes` CLI has no flag that keeps the gene ids.
+   `dram_annotate_genes` did: the `annotate_genes` CLI has no flag that keeps the gene ids.
 
 ## Compare
 

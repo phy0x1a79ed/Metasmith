@@ -1,6 +1,6 @@
 """Hypergeometric over-representation of GO terms in a gene set.
 
-    go_overrepresentation.py <gene_set.txt> <interproscan_results.csv> <out.tsv>
+    go_overrepresentation.py <gene_set.txt> <interproscan_pfam_results.csv> <out.tsv>
 
 The background is the annotated genome -- every ORF InterProScan matched -- not
 the gene set. Taking the background from the set itself makes every term's
