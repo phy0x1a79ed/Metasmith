@@ -675,3 +675,11 @@ Decided:
 - Localization: open question for a literature review (Claude Science aa4e5064). Tony: "It's not really signal peptide. It's just does the protein go into the membrane or does the protein go in solution?"
 - DeepTMHMM stays licensed and opt-in.
 Open: CLEAN (GPU) in lite; the localization pick; sign-off on the four landed lanes.
+
+## localization-pick — 2026-11-27
+
+Question: which open tool predicts per protein whether it goes into the membrane or into solution, and where the Gram call comes from.
+Evidence: docs/engcyc/localization-review.md (Claude Science review). PSORTb 3.0 (GPLv3) is the only open, accurate whole-cell predictor. It needs the envelope type. PSORTm (Peabody et al. 2020, GPLv3) wraps PSORTb for metagenomes and assigns the envelope itself from phylum taxonomy and the Omp85 marker. Traitar was trained on 234 cultured clinical species and fits uncultivated lineages poorly.
+Tony: "I accept 1, drop 2, accept 3."
+Decided: PSORTm is the localization lane in full and lite, after a pilot measures its speed and Unknown fraction. TMbed (GPU) is out. The Traitar lane is dropped, so the Pfam lane no longer has a Traitar consumer.
+Landed: PSORTm worker on feat/engine/psortm.

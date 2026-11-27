@@ -67,6 +67,7 @@ Decisions: docs/engcyc/DECISIONS.md
 - later-templates — pangenome, isolate assembly, hybrid assembly, asv, transcriptomics from the same library
 
 ## Workers
+- psortm worker (2026-11-27): feat/engine/psortm — PSORTm image, pilot (speed, Unknown fraction), localization lane full+lite. Traitar dropped, TMbed out (DECISIONS localization-pick).
 - Claude Science aa4e5064 (engcyc-lanes): localization + Gram-type literature review, running.
 - image-prep worker (restarted 2026-11-27 ~11:10): finishes WIP b8268c29 on feat/engine/run-pulls-images (worktree .bare/.claude/worktrees/agent-ac02d0cc674598670): prep templates pull every workflow image locally + run pulls missing images. Blocks run-4 round 9.
 - lane-gap worker (2026-11-27 ~11:15): feat/engine/lane-gap — delete DRAM 1.5 annotate; BUSCO genome mode per quality MAG -> marker_gene_hit_table; Traitar Gram lane on its own Pfam 27 (IPS is not in lite), plus validation vs an IPS-fed Traitar on known-Gram genomes (research/traitar_validation/). No PSORTb, no GPU lanes. Golden regen after merge, in rc.
