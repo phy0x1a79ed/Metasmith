@@ -43,13 +43,30 @@ const fields = (d) =>
       ? []
       : [{ column: String(d?.column ?? '').trim(), literal: String(d?.path ?? '').trim() }]
 
-// Under a sheet: a row any of whose fields names a column is expanded over the
-// sheet, and a row none of whose fields does registers once for every sample.
-export const readsSheet = (d) => fields(d).some((f) => f.column)
+const readsSheet = (d) => fields(d).some((f) => f.column)
 
 // A field with neither a column nor a literal is a blank in the recipe, and a
 // row holding one registers nothing under a sheet.
 export const hasBlank = (d) => fields(d).some((f) => !f.column && !f.literal)
+
+// The rows a sheet expands, one item per sample: those reading a column, and
+// the value rows descending from one. Every other row registers once for every
+// sample. `ops.samples._per_sample_ids` is the same read.
+export function perSampleIds(rows) {
+  const ok = rows.filter((d) => !hasBlank(d))
+  const out = new Set(ok.filter(readsSheet).map((d) => d.id))
+  for (let grew = true; grew; ) {
+    grew = false
+    for (const d of ok) {
+      if (out.has(d.id) || d.mode !== 'value') continue
+      if ((d.parents ?? []).some((p) => String(p).startsWith('#') && out.has(String(p).slice(1)))) {
+        out.add(d.id)
+        grew = true
+      }
+    }
+  }
+  return out
+}
 
 /**
  * A row's canonical form: one shape, one key order, whatever it arrived as.

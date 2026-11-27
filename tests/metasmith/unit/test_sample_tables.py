@@ -372,6 +372,31 @@ def test_a_literal_row_under_a_sheet_registers_once(tmp_path):
     }
 
 
+def test_a_literal_below_a_bound_row_is_one_item_per_sample(tmp_path):
+    # engcyc's short-read sample: study -> name -> read metadata -> reads, with
+    # only the read metadata left as the template typed it
+    lib_path = _library(tmp_path)
+    meta = '{"parity": "paired", "length_class": "short"}'
+    rows = _rows(a={"parents": ["#study"]}, b={"parents": ["#meta"]}, c={"parents": ["#meta"]}) + [
+        {"id": "study", "mode": "value", "values": [{"key": "", "value": "study", "column": ""}],
+         "dtype": "mock::marker", "parents": []},
+        {"id": "meta", "mode": "value", "values": [{"key": "", "value": meta, "column": ""}],
+         "dtype": "mock::marker", "parents": ["#a"]},
+    ]
+    out = op_inputs.sync(str(lib_path), rows, _table())
+    assert out["counts"] == {"a": 2, "meta": 2, "b": 2, "c": 2}
+    assert list(out["rows"]) == ["study"]
+
+    lib = DataInstanceLibrary.Load(lib_path)
+    up = lambda p: [str(m.path) for m in lib.parents[Path(p)]]
+    metas = out["generated"]["meta"]
+    assert len(set(metas)) == 2 and all((lib_path / m).read_text() == meta for m in metas)
+    assert sorted(up(m)[0] for m in metas) == sorted(out["generated"]["a"])
+    for fwd, m in zip(out["generated"]["b"], metas):
+        assert up(fwd)[0] == m
+    assert out["generated"]["b"] == ["/data/a_R1.fq", "/data/b_R1.fq"]
+
+
 def test_a_field_binding_a_missing_column_is_named_by_its_key(tmp_path):
     lib = _library(tmp_path)
     rows = [{

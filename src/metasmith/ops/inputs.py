@@ -261,8 +261,10 @@ def _claim(lib, want: dict[str, dict], prior: dict[str, str]) -> dict[str, Path]
     return held
 
 
-def _group_key(row: dict, record: dict) -> str:
+def _group_key(row: dict, record: dict, parents: list[str] = ()) -> str:
     cols = sorted({e["column"] for e in entries(row) if e["column"]})
+    if not cols:
+        return json.dumps(sorted(parents), separators=(",", ":"))
     return json.dumps([[c, record.get(c)] for c in cols], separators=(",", ":"))
 
 
@@ -283,14 +285,6 @@ def _array_plan(
         for row in order:
             rid = str(row["id"])
             is_value = row.get("mode") == "value"
-            if is_value:
-                gkey = _group_key(row, record)
-                path = minted[rid].get(gkey) or prior_minted.get(rid, {}).get(gkey)
-                if path is None:
-                    path = mint_value_path()
-                minted[rid][gkey] = path
-            else:
-                path = (record.get(column_of(row)) or "").strip()
             parents = []
             for p in parent_ids(row):
                 if p in by_id:
@@ -299,6 +293,15 @@ def _array_plan(
                 else:
                     parents.append(f"#{p}")
             parents += literal_parents(row)
+            if is_value:
+                # a row binding no column is told apart by the sample it hangs from
+                gkey = _group_key(row, record, parents)
+                path = minted[rid].get(gkey) or prior_minted.get(rid, {}).get(gkey)
+                if path is None:
+                    path = mint_value_path()
+                minted[rid][gkey] = path
+            else:
+                path = (record.get(column_of(row)) or "").strip()
             here[rid] = path
             generated[rid].append(path)
             if path in seen:

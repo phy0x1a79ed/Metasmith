@@ -260,12 +260,35 @@ def _registers(r) -> bool:
     )
 
 
+def _per_sample_ids(rows: list[dict]) -> set[str]:
+    # A value row typed rather than bound still belongs to one sample when it
+    # descends from a row that reads the sheet: registered once, it would sit
+    # under every sample's parent at once and lineage, being a union, would join
+    # them. A typed path cannot follow -- one path is one item -- and neither
+    # can a row with only bound rows below it, since nothing in a sheet row
+    # tells its copies apart; both stay one item shared by every sample.
+    by_id = {str(r["id"]): r for r in rows if _registers(r)}
+    out = {rid for rid, r in by_id.items() if reads_sheet(r)}
+    grew = True
+    while grew:
+        grew = False
+        for rid, r in by_id.items():
+            if rid in out or r.get("mode") != "value":
+                continue
+            if any(p in out for p in _array_parents(r)):
+                out.add(rid)
+                grew = True
+    return out
+
+
 def array_rows_of(rows: list[dict]) -> list[dict]:
-    return [r for r in rows if _registers(r) and reads_sheet(r)]
+    ids = _per_sample_ids(rows)
+    return [r for r in rows if _registers(r) and str(r["id"]) in ids]
 
 
 def plain_rows_of(rows: list[dict]) -> list[dict]:
-    return [r for r in rows if _registers(r) and not reads_sheet(r)]
+    ids = _per_sample_ids(rows)
+    return [r for r in rows if _registers(r) and str(r["id"]) not in ids]
 
 
 def validate(library_path: str, table: dict, rows: list[dict]) -> dict:

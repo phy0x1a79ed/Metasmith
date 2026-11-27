@@ -5,7 +5,7 @@
   import TypeSelect from '../components/TypeSelect.svelte'
   import { POINTED, link, marks } from '../lib/highlight.js'
   import { ancestorsOf, byKey, candidates, refKey, topoOrder } from '../lib/lineage.js'
-  import { entries as rowEntries, hasBlank, readsSheet } from '../lib/rows.js'
+  import { entries as rowEntries, hasBlank, perSampleIds } from '../lib/rows.js'
 
   // Inputs and outputs in one list, and the list *is* the form. They are two
   // headings over one run of rows, the way the ssh rail does managed and native
@@ -77,12 +77,14 @@
   // Every field keeps two answers: the text typed into it, and the sheet column
   // it reads. With no sheet attached only the text counts. With one, a field
   // reads its column if it names one and its text otherwise -- so a template's
-  // constant stays a constant under a sheet, and a row none of whose fields
-  // names a column registers once, shared by every sample. Neither answer is
-  // rewritten when the other is set, so attaching and detaching a sheet moves
+  // constant stays a constant under a sheet. A row reading a column, or a value
+  // row descending from one, is one item per sample, the typed text repeated in
+  // each; every other row registers once, shared by every sample. Neither answer
+  // is rewritten when the other is set, so attaching and detaching a sheet moves
   // between them with nothing to save on a transition. A value entry's *key* is
   // only ever text: it names the field in the object the row writes.
   let hasTable = $derived(columns.length > 0)
+  let perSampleRows = $derived(perSampleIds(rows))
 
   // What the sheet registered is not rows of this recipe. Those items are in the
   // library and in the plan, and two hundred of them here would be two hundred
@@ -460,7 +462,7 @@
         {#snippet body(row)}
           {@const info = row.type && counts ? counts(row.type) : null}
           {@const blank = hasBlank(row.row)}
-          {@const perSample = readsSheet(row.row)}
+          {@const perSample = perSampleRows.has(row.id)}
           <!-- Two lines, not one: the path is the longest thing on an input row and
                was being squeezed into a sliver beside a combobox and a menu. What
                the row points at goes on the first line; what it *is* and what it
@@ -550,13 +552,13 @@
             <!-- With a sheet attached this row is one declaration, not N rows:
                  what it says about itself is a count of how many items it
                  stands for. A blank field makes that count zero, and saying so
-                 here is what keeps the row from going quiet. A row reading no
-                 column is one item, and the solve hands it to every sample. -->
+                 here is what keeps the row from going quiet. A row the sheet
+                 does not expand is one item, and the solve hands it to every sample. -->
             <div class="notes row wrap small">
               {#if blank}
                 <span class="tag warn">pick a column or give a value for every field — this registers nothing</span>
               {:else if !perSample}
-                <span class="tag" title="no field reads the sheet, so this is one item every sample sees">× 1, shared</span>
+                <span class="tag" title="the sheet does not expand this row, so it is one item every sample sees">× 1, shared</span>
               {:else if expansion?.counts?.[row.id]}
                 <span class="tag">× {expansion.counts[row.id]} registered</span>
               {:else}
