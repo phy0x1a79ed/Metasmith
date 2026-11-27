@@ -1,5 +1,5 @@
-"""Stage each pilot proteome as one MAG the way the lane sees it: Prodigal-style ORF ids
-`<genome>_<n>` on one contig `<genome>`, a GTDB-Tk summary row, then psortm_prep.py chunks.
+"""Stage each pilot proteome the way the lane sees it: Prodigal-style ORF ids `<genome>_<n>`
+on one contig `<genome>`, that contig's LCA* lineage, then psortm_prep.py chunks.
 
     make_inputs.py GENOMES_DIR OUT_DIR CHUNK_SIZE
 """
@@ -39,11 +39,9 @@ def main():
                     fout.write(f">{g}_{n} # pilot\n")
                 else:
                     fout.write(line)
-        (d / "mag.fna").write_text(f">{g}\nACGT\n")
-        (d / "gtdbtk.tsv").write_text(f"user_genome\tclassification\n{g}\t{lineage}\n")
-        (d / "mags.tsv").write_text(f"mag\tfasta\tgtdbtk\n{g}\t{d / 'mag.fna'}\t{d / 'gtdbtk.tsv'}\n")
+        (d / "lcastar.tsv").write_text(f"contig\tlineage\n{g}\t{lineage}\n")
         subprocess.run([sys.executable, str(PREP), "--orfs", str(d / "orfs.faa"),
-                        "--mags", str(d / "mags.tsv"), "--chunk-size", chunk,
+                        "--contig-taxonomy", str(d / "lcastar.tsv"), "--chunk-size", chunk,
                         "--out-dir", str(d / "chunks")], check=True)
 
 

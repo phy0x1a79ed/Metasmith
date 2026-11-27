@@ -1,7 +1,7 @@
 #!/bin/bash
 # PSORTm on one chunk psortm_prep.py wrote, inside the psortm image.
 # usage: psortm.sh <chunk.faa> <out.tsv> <processes>
-# out.tsv: orf, mag, gtdb, envelope, localization, score; one row per ORF of the chunk.
+# out.tsv: orf, contig, lineage, envelope, localization, score; one row per ORF of the chunk.
 # PSORTb has no threads option, so the chunk is dealt round-robin into <processes> parts
 # and each part runs its own psort.
 set -euo pipefail
@@ -41,7 +41,7 @@ awk -F'\t' -v OFS='\t' '
   env=="undetermined" { if (/^>/) { id=substr($1,2); sub(/[ \t].*/,"",id); sub(/_1$/,"",id); print id, tag[id], env, "", "" }; next }
   FNR>1 && NF>=3 { id=$1; sub(/ .*/,"",id); sub(/_1$/,"",id); print id, tag[id], env, $2, $3 }
 ' "$W/tags.tsv" $(ls "$W"/results/*_results.tab) "$W"/results/*_undetermined.fasta > "$OUT.rows"
-{ printf 'orf\tmag\tgtdb\tenvelope\tlocalization\tscore\n'; cat "$OUT.rows"; } > "$OUT"
+{ printf 'orf\tcontig\tlineage\tenvelope\tlocalization\tscore\n'; cat "$OUT.rows"; } > "$OUT"
 rm -f "$OUT.rows"
 cat "$W"/results/*_warnings.txt >&2 || true
 rm -rf "$W"
@@ -54,6 +54,6 @@ for part in "$PWD"/psortm_part_*.faa; do
   run_part "$part" "$PWD/psortm_part_$i.tsv" "$i" & pids+=($!)
 done
 for pid in "${pids[@]}"; do wait "$pid"; done
-{ printf 'orf\tmag\tgtdb\tenvelope\tlocalization\tscore\n'
+{ printf 'orf\tcontig\tlineage\tenvelope\tlocalization\tscore\n'
   for t in "$PWD"/psortm_part_*.tsv; do tail -n +2 "$t"; done; } > "$OUT"
 rm -f "$PWD"/psortm_part_*

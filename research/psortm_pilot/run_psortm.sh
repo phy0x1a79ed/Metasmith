@@ -9,5 +9,5 @@ cp "$FAA" "$OUT/chunk.faa"
 cp "$(dirname "$(realpath "$0")")/../../src/metasmith_libraries/resources/lib/psortm/psortm.sh" "$OUT/"
 /usr/bin/time -f "wall_s %e user_s %U sys_s %S maxrss_kb %M" -o "$OUT/time.txt" \
   apptainer exec --cleanenv --net --network none -B "$OUT:/work" --pwd /work "$SIF" \
-  bash psortm.sh chunk.faa psortm_results.tsv > "$OUT/log.txt" 2>&1
+  bash psortm.sh chunk.faa psortm_results.tsv 1 > "$OUT/log.txt" 2>&1
 cat "$OUT/time.txt"

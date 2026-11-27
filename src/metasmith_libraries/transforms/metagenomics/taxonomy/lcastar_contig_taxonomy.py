@@ -12,7 +12,7 @@ rrna     = model.AddRequirement(lib.GetType("taxonomy::rrna_gtdb"), parents={asm
 tax_map  = model.AddRequirement(lib.GetType("ref::ncbi_to_gtdb_map"))
 mb_ref   = model.AddRequirement(lib.GetType("ref::metabuli_ref"))
 lca_lib  = model.AddRequirement(lib.GetType("lib::lcastar"))
-out      = model.AddProduct(lib.GetType("taxonomy::contig_lcastar"))
+out      = model.AddProduct(lib.GetType("taxonomy::contig_lcastar_metabuli"))
 
 
 def protocol(context: ExecutionContext):

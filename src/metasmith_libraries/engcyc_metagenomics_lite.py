@@ -16,7 +16,8 @@ each lane's size.
 
 Assembly: as full. Binning: MetaBAT2, SemiBin2, MetaDecoder -> DAS Tool -> CheckM2
 -> quality MAGs.
-Taxonomy: GTDB-Tk r232 on the quality MAGs; rRNA scan against GTDB r232 SSU.
+Taxonomy: GTDB-Tk r232 on the quality MAGs; rRNA scan against GTDB r232 SSU; LCA*
+per contig from the UniRef50 ORF LCAs and the rRNA calls, no Metabuli (0.4 GB map).
 Read taxonomy: MetaPhlAn, sylph and Kraken2 with Bracken, each in its long-read mode
 on long reads; inStrain on short and hybrid.
 Gene function: DIAMOND UniRef50 and KOfam; CLEAN, ProteinBERT and BiGG lanes; the
@@ -24,7 +25,8 @@ Gene function: DIAMOND UniRef50 and KOfam; CLEAN, ProteinBERT and BiGG lanes; th
 Marker genes: BUSCO bacteria and archaea markers on every ORF.
 Genome features: Bakta non-coding, ARAGORN tRNA, mobileOG, PromoTech promoters.
 Regulation and transport: DeepTFactor, PredicTF, TCDB by DIAMOND.
-Localization: PSORTm on the quality MAGs' ORFs (no download).
+Localization: PSORTm on every ORF, the envelope from its contig's LCA* phylum (no
+download).
 Resistome: RGI/CARD, BacMet, VFDB. RefSeq viral lane.
 GEM per quality MAG: CarveMe from the BiGG lane, then MEMOTE. CarveMe needs a growth
 medium: give modelling::media and modelling::medium_name.

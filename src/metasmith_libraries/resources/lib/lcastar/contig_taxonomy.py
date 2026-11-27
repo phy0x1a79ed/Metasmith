@@ -153,8 +153,8 @@ def main():
     p.add_argument("--hits", required=True)
     p.add_argument("--descriptions", required=True)
     p.add_argument("--map", required=True)
-    p.add_argument("--metabuli", required=True)
-    p.add_argument("--metabuli-ref", required=True)
+    p.add_argument("--metabuli", help="omit with --metabuli-ref to vote ORFs and rRNA only")
+    p.add_argument("--metabuli-ref")
     p.add_argument("--rrna", required=True)
     p.add_argument("--out", required=True)
     p.add_argument("--min-bitscore", type=float, default=20)
@@ -169,12 +169,14 @@ def main():
     p.add_argument("--metabuli-weight", type=float, default=1.0)
     p.add_argument("--rrna-weight", type=float, default=1.0)
     a = p.parse_args()
+    if (a.metabuli is None) != (a.metabuli_ref is None):
+        p.error("--metabuli and --metabuli-ref go together")
 
     sseq_taxid = read_uniref_taxids(a.descriptions)
     taxid_lineage = read_map(a.map, set(sseq_taxid.values()))
     orf_lineage = lift_to_support(orf_lcas(a.hits, sseq_taxid, taxid_lineage, a), a.lca_min_support)
-    mb_taxonomy = read_metabuli_taxonomy(a.metabuli_ref)
-    mb_calls, mb_matches = read_metabuli(a.metabuli)
+    mb_taxonomy = read_metabuli_taxonomy(a.metabuli_ref) if a.metabuli else {}
+    mb_calls, mb_matches = read_metabuli(a.metabuli) if a.metabuli else ({}, {})
     # Without the database's own taxonomy dump, a match taxID resolves only if
     # some contig was called to it.
     for taxid, lineage in mb_calls.values():

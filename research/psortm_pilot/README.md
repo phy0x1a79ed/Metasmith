@@ -1,14 +1,20 @@
 # PSORTm pilot
 
-Measures what the psortm lane costs and how it calls envelopes, before it ran on real MAGs.
+Measures what the psortm lane costs and how it calls envelopes, before it ran on real data.
 The scripts run the lane's own `resources/lib/psortm/psortm_prep.py` and `psortm.sh` in the
 pinned image (`resources/env/psortm.env`), with the network off.
 
     bash fetch_genomes.sh <genomes_dir>    # 12 RefSeq proteomes
     bash run_pilot.sh <psortm.sif> <genomes_dir> <work_dir> [jobs=12] [chunk=1000]
+    bash lcastar_check.sh <psortm.sif> <work_dir> <check_dir>
 
-`make_inputs.py` stages each proteome as one MAG with Prodigal-style ORF ids and a GTDB r232
-lineage, `run_psortm.sh` times one chunk, and `summarise.py` writes the tables below.
+`make_inputs.py` stages each proteome as one contig with Prodigal-style ORF ids and a GTDB r232
+LCA* lineage, `run_psortm.sh` times one chunk on one process, and `summarise.py` writes the
+tables below. The pilot ran when the lane took its lineage from quality MAGs; the envelope
+calls depend only on the lineage, so they carry over to the LCA*-fed lane.
+`lcastar_check.sh` runs three genomes through a synthetic contig LCA* table: a contig placed to
+order (E. coli) and to class (B. subtilis) run, and a domain-only contig (H. volcanii) and an
+uncalled contig keep their rows as undetermined.
 
 ## Results (altair, 2026-11-27)
 
@@ -50,5 +56,5 @@ two atypical envelopes are the highest: D. radiodurans 35%, M. pneumoniae 32%.
   lineage to the NCBI-era phylum PSORTm resolves. Without the Mollicutes row M. pneumoniae runs
   as Gram-positive. A phylum outside the table (Patescibacteriota, Gemmatimonadota) is passed
   through, and PSORTm runs none of its proteins.
-- **Sizing.** One core, about 5,000 proteins an hour, under 200 MB. The lane chunks at 5,000
-  ORFs with 2 GB and 4 hours. A sample with 500,000 ORFs on quality MAGs is about 100 core-hours.
+- **Sizing.** One core, about 5,000 proteins an hour, under 200 MB per process. A sample with
+  500,000 placed ORFs is about 100 core-hours.

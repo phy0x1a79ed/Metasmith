@@ -29,19 +29,20 @@ def test_gtdb_lineage_becomes_the_name_psortm_resolves(lineage, taxon):
     assert psortm_prep.psortm_taxon(lineage) == taxon
 
 
-def test_only_orfs_on_mag_contigs_are_chunked(tmp_path):
+def test_every_orf_is_chunked_and_only_a_phylum_call_is_run(tmp_path):
     (tmp_path / "orfs.faa").write_text(
-        ">k141_1_1 # 1 # 90 # 1\nMKV*\n>k141_1_2 # 100 # 190 # 1\nMAA\n>k141_9_1 # 1 # 90 # 1\nMGG\n")
-    (tmp_path / "bin1.fna").write_text(">k141_1\nACGT\n")
-    (tmp_path / "bin1.tsv").write_text(
-        "user_genome\tclassification\nbin1\td__Bacteria;p__Bacteroidota;s__Bacteroides x\n")
-    (tmp_path / "mags.tsv").write_text(
-        f"mag\tfasta\tgtdbtk\nbin1\t{tmp_path / 'bin1.fna'}\t{tmp_path / 'bin1.tsv'}\n")
+        ">k141_1_1 # 1 # 90 # 1\nMKV*\n>k141_2_1 # 1 # 90 # 1\nMAA\n>k141_9_1 # 1 # 90 # 1\nMGG\n")
+    (tmp_path / "lcastar.tsv").write_text(
+        "contig\tlineage\trank\n"
+        "k141_1\td__Bacteria;p__Bacteroidota;c__Bacteroidia\tclass\n"
+        "k141_2\td__Archaea\tdomain\n")
     subprocess.run([sys.executable, str(PREP), "--orfs", str(tmp_path / "orfs.faa"),
-                    "--mags", str(tmp_path / "mags.tsv"), "--chunk-size", "1",
+                    "--contig-taxonomy", str(tmp_path / "lcastar.tsv"), "--chunk-size", "1",
                     "--out-dir", str(tmp_path / "chunks")], check=True)
     records = sorted(p.read_text() for p in (tmp_path / "chunks").glob("chunk_*.faa"))
+    # `Bacteria` is a name PSORTm leaves undetermined: the domain-only and uncalled ORFs keep a row
     assert records == [
-        ">k141_1_1\tbin1\tBacteroidetes\td__Bacteria;p__Bacteroidota;s__Bacteroides x\nMKV\n",
-        ">k141_1_2\tbin1\tBacteroidetes\td__Bacteria;p__Bacteroidota;s__Bacteroides x\nMAA\n",
+        ">k141_1_1\tk141_1\tBacteroidetes\td__Bacteria;p__Bacteroidota;c__Bacteroidia\nMKV\n",
+        ">k141_2_1\tk141_2\tBacteria\td__Archaea\nMAA\n",
+        ">k141_9_1\tk141_9\tBacteria\t\nMGG\n",
     ]
