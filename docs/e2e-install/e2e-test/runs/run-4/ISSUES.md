@@ -92,3 +92,7 @@ Both stations relaunched warm at 06:28, sockeye under a 900 GB cap and fir under
 | 1 | ok | GUI GPU field (sockeye) | The agent launched engcyc_metagenomics_lite with the prefilled 16 GB GPU field. | - |
 | 2 | error | Nextflow compile (sockeye, 82-step plan) | `Script compilation failed: MethodTooLargeException: Main$_runScript_closure166$_closure660.doCall`. The generated `workflow {}` body is 662 lines in one closure, over the JVM's 64 KB method limit. The 55-step prep plan fit. The full 178-step plan cannot. | worker feat/engine/nf-method-size: split the workflow body in the codegen |
 | 3 | ambiguity | unread-param warning | Setup warned that `slurmGpuAccount` is "read by no transform". The engine's GPU config reads it. | slurmGpuAccount added to ENGINE_PARAM_KEYS |
+| 4 | guide | GUI case removal (both stations, rounds 5-6) | Deleting the hybrid and long cases left their empty read rows, and the solve reported an unfinished recipe. | removing a case now removes the rows only it read |
+| 5 | workaround | GUI row edits | Rows reorder after each edit, so the agent hit the wrong row (the hybrid case's read_pair) several times and rebuilt the workflow. | open |
+| 6 | ambiguity | docs, engcyc lite | The doc named only the full templates. | the doc names the lite templates |
+| 7 | workaround | `run completed at` sentinel | The agent found no sentinel line in agent.log after a setup that was all cache hits. It used the GUI status instead. | open: check which log it lands in on an all-cached run |
