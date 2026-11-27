@@ -18,6 +18,7 @@ def protocol(context: ExecutionContext):
     ires  = context.Output(results)
     idesc = context.Output(descriptions)
     cpus  = context.params.get("cpus")
+    cpu_flag = "" if cpus is None else f"--cpu {cpus}"
 
     context.LocalShell(f"pigz -dc {context.Input(data).local} | tar xf -")
     ipr_data = context.Mount(context.external_cwd/"data", "/opt/interproscan/data")
@@ -27,7 +28,7 @@ def protocol(context: ExecutionContext):
         cmd=f"""
             sed '/^[^>]/s/\\*//g' {iorfs.container} > orfs.faa
             /opt/interproscan/interproscan.sh --disable-precalc --goterms --seqtype p \
-                {"" if cpus is None else f"--cpu {cpus}"} -appl {APPLICATIONS} \
+                {cpu_flag} -appl {APPLICATIONS} \
                 -i orfs.faa -f gff3 -o matches.gff3
             python3 {context.Input(parser).container} matches.gff3 {ires.container} {idesc.container}
         """,
@@ -43,5 +44,6 @@ TransformInstance(
     protocol=protocol,
     model=model,
     group_by=orfs,
-    resources=Resources(cpus=8, memory=Size.GB(16), duration=Duration(hours=8)),
+    # 2,000 E. coli ORFs with 8 cores offered: 18 min, 4.0 GB peak, 3.1 cores used (2026-11-27)
+    resources=Resources(cpus=4, memory=Size.GB(12), duration=Duration(hours=6)),
 )

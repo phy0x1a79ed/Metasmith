@@ -31,25 +31,25 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/48188cefdd18450a994a337ada3afaf0:
+    /msm_deferred/7b1d72dda0344f60ae7ce1f4709332e1:
       type: sequences::assembly
-      instance_id: 1e2088c90b3bfd8b11ba27e105775eafcb1e569ae7fc83b5c7f57721942562772e6e
+      instance_id: 1e20a5ff718fc2486b2690ac787fa9c2601422a32cfc48a4b6c98f0365d61c73b37e
       origin: leaf
-    /msm_deferred/6634f6fcd3e94715bc5932c64fcdede9:
-      type: ref::label_transfer_landmarks
-      instance_id: 1e20b2833b05561823ab1349013787f2fd30a4a74808f6923bce766a2abdb136787f
-      origin: leaf
-    /msm_deferred/a28dfc1afc9b4824b551604d37a96d41:
-      type: ref::mnxr_lookup
-      instance_id: 1e20fd2570a9827d225e0cb3f1430abbb5b8b9562ffecaf7f9420f6472cc1849b36e
-      origin: leaf
-    /msm_deferred/a54f0466c6ab473da9bbbfd76173d5bb:
-      type: licensed::pathway_tools_package
-      instance_id: 1e2024848079de2d95557056bdc1623000da9599312316ba4e2757857c87e11daa95
-      origin: leaf
-    /msm_deferred/d2fc51ddec3745d1ac6b327f5cb0c065:
+    /msm_deferred/9147e161480547ad88101544b633719b:
       type: ref::lane_calibration
-      instance_id: 1e2087d49c3ba1194c5c462ccbaf53d1c843b0e3c07f4b048b8d14225af7c96bb000
+      instance_id: 1e20380044a8662bbe2fce47e645531e18b735ad0a49c0d58930786435a732c8e936
+      origin: leaf
+    /msm_deferred/aa90cd27ff874b87ac1473782e3c41be:
+      type: ref::mnxr_lookup
+      instance_id: 1e20860f44b4aab89a2e05773e0d27b445a27d1b5d13f9125ae972ab93de2afb2ba2
+      origin: leaf
+    /msm_deferred/d38b483e994c4bcd8f1013118925e2d1:
+      type: ref::label_transfer_landmarks
+      instance_id: 1e20dbe1c38e7f210a6c186dae8d71651bebb1f1fab474ebb1e7c39caa973ff5f728
+      origin: leaf
+    /msm_deferred/feaf005a44534902bf89adaca92581b7:
+      type: licensed::pathway_tools_package
+      instance_id: 1e20d5deb3094bfa3f6f9d1b67b74933b861802fa29eecdbf07d6b011f77b49d213f
       origin: leaf
     eggnog_source.marker:
       type: annotation::eggnog_source

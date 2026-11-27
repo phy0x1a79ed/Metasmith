@@ -24,7 +24,7 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/e0161e78068246368206de801068feab:
+    /msm_deferred/331cc2b858cf4b78bedd68da6878a2a3:
       type: sequences::assembly
-      instance_id: 1e20274887e9e6c5bea536e80c2e82731f3f6148c636a3cc7dff2e9c4df3c49171a1
+      instance_id: 1e20ccb0766b46ed359151ad5a156181c344a889e8ef724aee646b53fd82a3a53b9f
       origin: leaf

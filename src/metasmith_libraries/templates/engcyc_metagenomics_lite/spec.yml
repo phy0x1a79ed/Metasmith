@@ -193,8 +193,8 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/5a2481cbaf7d40bc910147e9b605b187
-  - /msm_deferred/81acd24f31984e43a257d7a9ca8bf044
+  - /msm_deferred/08dad5339fae42388b2154954bf187b6
+  - /msm_deferred/a836429dab204f0f9e3cbad977ca68b6
   - short_1_name.txt
   - short_1_read_pair.txt
   - short_1_reads_metadata.json
@@ -334,9 +334,9 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/20e4fb9a8ac045b9b06c8675e2b2f3a0
-  - /msm_deferred/723d59587fa24222b2c95a2f7846d925
-  - /msm_deferred/fe050303a618478ba46ee2d1e70c0897
+  - /msm_deferred/70f5a573ad8e40d2b8226fd6a7c4ca19
+  - /msm_deferred/9a85eaad0939472c9e065d0e20f18e1c
+  - /msm_deferred/a23598e0d050446e98eaaac2b2c7886b
   - hybrid_1_name.txt
   - hybrid_1_read_pair.txt
   - hybrid_1_reads_metadata.json
@@ -402,7 +402,7 @@ cases:
   - complete_medium.tsv
   - complete_medium_name.txt
   input_paths:
-  - /msm_deferred/6747497e8f594135bc10eb763f4e0504
+  - /msm_deferred/e873a968a0e048839ed8eb850f14487c
   - long_1_name.txt
   - long_1_reads_metadata.json
 - name: references
@@ -447,41 +447,41 @@ cases:
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/20e4fb9a8ac045b9b06c8675e2b2f3a0:
-      type: sequences::zipped_reverse_short_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e2006f3949b11486ce3bc35c0a58fd4044f93dc6b9ad70ee172f305dea248ea7d6e
-      origin: leaf
-    /msm_deferred/5a2481cbaf7d40bc910147e9b605b187:
-      type: sequences::zipped_forward_short_reads
-      parents:
-        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e2011a07afe36575bb9eb3dfec4fa99914c0a5c2193d4070cdf4a6d9b4fffb5277f
-      origin: leaf
-    /msm_deferred/6747497e8f594135bc10eb763f4e0504:
-      type: sequences::long_reads
-      parents:
-        IkuWHv2PBGcI@long_1_reads_metadata.json: sequences::read_metadata
-      instance_id: 1e200a7e6ede8be8ade0d57d3ec6b66d7cea121c081a2ffb6b761aa43e021fa497b7
-      origin: leaf
-    /msm_deferred/723d59587fa24222b2c95a2f7846d925:
-      type: sequences::zipped_forward_short_reads
-      parents:
-        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e200e2aa22f738ac26c79fb1c02f941ba7d91e4d6574fcb513ec052750536744d97
-      origin: leaf
-    /msm_deferred/81acd24f31984e43a257d7a9ca8bf044:
+    /msm_deferred/08dad5339fae42388b2154954bf187b6:
       type: sequences::zipped_reverse_short_reads
       parents:
         IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
-      instance_id: 1e2069d01cf8eb54a6d6c679540d7038f01978227be5bf303880f429db0a9adc4e4c
+      instance_id: 1e209a6465e422fb36146516f5f29d8bec5aa3ec60774210fcd22167bdb6bb851e7a
       origin: leaf
-    /msm_deferred/fe050303a618478ba46ee2d1e70c0897:
+    /msm_deferred/70f5a573ad8e40d2b8226fd6a7c4ca19:
+      type: sequences::zipped_forward_short_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e2047bb43923e1b291bc85e092a03ceb69a3dc077c60120e1fc02b2323b449ff776
+      origin: leaf
+    /msm_deferred/9a85eaad0939472c9e065d0e20f18e1c:
       type: sequences::long_reads
       parents:
         IkuWHv2PBGcI@hybrid_1_reads_metadata.json: sequences::read_metadata
-      instance_id: 1e201152992e31f1cf1aeaf3c0d5bc78face750bc7777961692fb28c27ba9d8b15b4
+      instance_id: 1e20b5e8bb21118c32209fc04c1b2c95b769ed924f237a577f4f3f815fcf68300336
+      origin: leaf
+    /msm_deferred/a23598e0d050446e98eaaac2b2c7886b:
+      type: sequences::zipped_reverse_short_reads
+      parents:
+        IkuWHv2PBGcI@hybrid_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e20b93c717b99ea1649e6049badc5aacf716a811fd28143124977452acb135c6b70
+      origin: leaf
+    /msm_deferred/a836429dab204f0f9e3cbad977ca68b6:
+      type: sequences::zipped_forward_short_reads
+      parents:
+        IkuWHv2PBGcI@short_1_read_pair.txt: sequences::read_pair
+      instance_id: 1e2098ca80597638f13bf1e958264ceae0637e5384fc5808415dd6032c5f52135e16
+      origin: leaf
+    /msm_deferred/e873a968a0e048839ed8eb850f14487c:
+      type: sequences::long_reads
+      parents:
+        IkuWHv2PBGcI@long_1_reads_metadata.json: sequences::read_metadata
+      instance_id: 1e2050e425dc55e29584e7e7d7d583e2be26597578ef9e977fa8a11f800461458e2e
       origin: leaf
     complete_medium.tsv:
       type: modelling::media
