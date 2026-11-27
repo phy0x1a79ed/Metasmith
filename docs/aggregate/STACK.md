@@ -20,7 +20,7 @@
 ## Stack
 
 - `curation-ledger` — "run a curation pass … decide what was dropped or replaced, represented by, and then journal that … hit every tool we've ever run"
-  - Harvest worker running: an exhaustive candidate list of every tool run, with evidence.
+  - Harvest landed: `harvest.tsv`, 209 tools, 116 with a std transform, 93 without. Census scripts in `research/aggregate/harvest/`. Not counted: notebooks/markdown, the 398 KBase stubs (separate pass), Galaxy (never run here).
 - `solve-gate` — solve every template and research root on the released solver
 - `promote` — RNA-seq (research/rnaseq + featureCounts + DE→gene set), phylogenetics group, CoverM, MMseqs2, binners
 - `galaxy-scrape` — "we may want to do a scrape for Galaxy … cover as much of bioinformatics as possible"
@@ -37,7 +37,7 @@
 
 ## Workers
 
-- Tool harvest — exhaustive candidate list of every tool ever run, with evidence → `harvest.tsv`.
+- (none running)
 
 ## Closed
 

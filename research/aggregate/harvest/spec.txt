@@ -1,0 +1,210 @@
+# tool|domain|census keys|env names|extra evidence ;-sep|extra_n|notes
+megahit|assembly|megahit|megahit|journal:42900717-a7d8-4f05-985f-09d09468edf9|1|also research/hybrid_solve, benchmark e2/e3/e5 variants
+spades|assembly|spades|spades|journal:18427293-9254-4ac7-9dbe-432c7cfaf155|1|metaSPAdes and hybrid mode; std transform only in fabfos/spades.py (no general metagenome spades transform on release; benchmark e3 has spades_pratama)
+flye|assembly|flye|flye||1|preset from read platform; ONT-vs-HiFi guess issue journal c979e0ec
+hifiasm|assembly|hifiasm|hifiasm||0|isolate lane
+hifiasm-meta|assembly||hifiasm-meta|journal:journal:151|1|BAM-first reproduction
+miniasm|assembly|miniasm|miniasm||0|isolate lane; KBase stub also exists
+opera-ms|assembly|opera-ms|opera_ms||0|hybrid assembly; env bundles racon, pilon, mummer
+polypolish|assembly|polypolish|polypolish||0|with bwa
+pilon|assembly|pilon||research/metasmith/transforms/std/transforms/pilon.py|0|std on release only nested in opera_ms env; old research std lib has a standalone transform
+polca|assembly|polca||research/metasmith_benchmark/library/transforms/e5/polca.py|0|MaSuRCA POLCA; research benchmark only
+masurca|assembly|masurca||research/metasmith_benchmark/library/resources/e5/masurca.env|0|only as POLCA host env; research benchmark
+racon|assembly|racon||src/metasmith_libraries/resources/env/opera_ms.env|0|only nested inside opera-ms
+medaka|assembly||| biofactorial_fosmids:release/research/pilot-2026-09-25/recovery/sockeye/env.sh|1|ONT polishing in fosmid recovery pilot; script grade
+quast|assembly|quast||research/metasmith_benchmark/library/transforms/e5/quast.py|1|incl metaquast; benchmark research library; container_builds goldrush_external/_reference/quast.py
+mummer|assembly|mummer||src/metasmith_libraries/resources/env/opera_ms.env|0|only nested inside opera-ms env
+gfatools|assembly||gfatools||0|plumbing for hifiasm/miniasm GFA
+bam2fastx|assembly||bam2fastx||0|pbtk; PacBio BAM to fastq
+metamdbg|assembly|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list; no transform
+ale|assembly|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list; no transform
+goldrush|assembly|||container_builds:main/goldrush_external/Dockerfile|0|container build only
+mintia|other|||container_builds:main/mintia/Dockerfile|0|container build of a fork; bundles prokka, spades, diamond; no run evidence
+fastp|qc|fastp|fastp|journal:77b976f2-6d12-4c8d-b1af-c9d43ae82727|1|isolate RNA-seq B2 delivery; single-thread gzip pipe noted
+fastqc|qc|fastqc|fastqc||0|assembly/_disabled/fastqc.py disabled on release
+seqkit|qc|seqkit|seqkit||0|read stats and plumbing
+seqtk|qc|seqtk||research/metasmith/transforms/std/transforms/interleave_pe_reads_seqtk.py|0|old research std transform
+nanoplot|qc|nanoplot|nanoplot||0|
+filtlong|qc|filtlong|filtlong||0|
+chopper|qc|chopper||research/metasmith_benchmark/library/transforms/e2/chopper.py|0|benchmark E2/E5 only
+porechop-abi|qc|porechop||research/metasmith_benchmark/library/transforms/e2/porechop_abi.py|0|benchmark E2 only
+bbtools|qc|bbtools|bbtools||0|bbduk, bbmap, clumpify, reformat, bbmerge; one row
+trimmomatic|qc|trimmomatic||research/metasmith/transforms/std/transforms/trimmomatic.py|0|old research std lib; viromics reference script 02_trimmomatic.sh; no std transform on release
+multiqc|qc|multiqc||research/metasmith_benchmark/results/outcome_metrics.py|0|read from nf-core/mag E1 outputs
+longqc|qc|||research/metasmith/transforms/std/transforms/longqc.py|0|old research std lib only
+adapterremoval|qc|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+nanolyse|qc|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+nanoq|qc|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+bioawk|qc|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+orad|logistics||orad||0|Illumina DRAGEN ORA decompress
+minimap2|alignment|minimap2|minimap2,minimap2_samtools||0|
+bwa|alignment|bwa|bwa||0|metapathways also uses bwa for RPKM
+bowtie2|alignment|bowtie2|bowtie2|nosco-phycocyanin:feat_transcriptomics/main/transcriptomics/fir/map.sbatch|0|
+samtools|alignment|samtools|samtools||0|
+bcftools|alignment|bcftools|bcftools||0|
+bedtools|alignment|bedtools|bedtools||0|
+pbmm2|alignment|||container_builds:main/pbmm2/envs/base.yml|0|container build only
+star|transcriptomics|star|star||0|
+salmon|transcriptomics|salmon|salmon||0|
+stringtie|transcriptomics|stringtie|stringtie||0|
+featurecounts|transcriptomics|featurecounts|subread|nosco-phycocyanin:feat_transcriptomics/main/transcriptomics/make_count_table.py;metapathways:tliu_docs/metapathways/MetaPathways_tpm.py|0|only in research/rnaseq library (featurecounts_strand_sweep); subread env has no std transform
+pysam|transcriptomics|pysam|pysam||0|
+gffread|transcriptomics|gffread|gffread||0|
+braker3|transcriptomics||braker3||0|eukaryote gene prediction
+pydeseq2|transcriptomics|pydeseq2|pydeseq2||0|R DESeq2 appears in nosco rnaseq_dag render and container_builds workspace_r
+freebayes|alignment|freebayes||research/metasmith_benchmark/library/transforms/e5/polca.py|0|only as POLCA dependency; no std transform
+sra-tools|logistics|sra-tools|sra-tools||0|fasterq-dump / prefetch
+ncbi-datasets|logistics|ncbi-datasets|ncbi-datasets||0|
+globus|logistics|globus||journal:journal:325|1|Globus CLI transfers
+rsync|logistics|rsync||cyanoverse:feat_search-transcription-factors/scripts/run_tf_batch_fir.py|0|
+aria2|logistics|aria2|||0|download accelerator in DB fetchers
+dvc|logistics|dvc||research/fabfos|0|data pinning
+metabat2|binning|metabat2|metabat2||0|
+maxbin2|binning|maxbin2||src/metasmith_libraries/transforms/metagenomics/binning/metawrap.py|0|only nested inside metawrap
+concoct|binning|concoct||src/metasmith_libraries/transforms/metagenomics/binning/metawrap.py|0|only nested inside metawrap
+semibin2|binning|semibin|semibin||0|
+comebin|binning|comebin|comebin|journal:journal:349|1|GPU image plus cpu patch lib
+metadecoder|binning|metadecoder|metadecoder||0|
+das-tool|binning|das_tool|das_tool||0|
+magscot|binning|magscot||research/metasmith_benchmark/library/transforms/bench/magscot.py|0|benchmark only
+metawrap|binning|metawrap|metawrap||0|binning plus bin_refinement; bundles checkm1
+metabinner|binning|||container_builds:main/metabinner/Dockerfile|0|container build; nf-core image list
+drep|binning|drep||research/metasmith_benchmark/library/transforms/bench/drep_study.py|0|benchmark only; std uses skani_dedup instead
+skani|binning|skani|skani||0|also nested in gtdbtk
+fastani|taxonomy|fastani|fastani||0|
+amber|binning|amber|amber||0|CAMI AMBER scoring
+checkm2|binning|checkm|checkm|journal:journal:247|1|external_checkm2 image; checkm transform in binning/ (an _disabled copy also)
+checkm|binning|||src/metasmith_libraries/transforms/metagenomics/binning/metawrap.py|1|CheckM1 only nested in metawrap and MetaPathways images
+gunc|qc|gunc||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list only
+gtdbtk|taxonomy|gtdbtk|gtdbtk||0|classify_wf and de_novo_wf; nests pplacer, fasttree, skani, mash
+kraken2|taxonomy|kraken2|kraken2||0|
+bracken|taxonomy|bracken|bracken||0|nested in kraken2 transform
+centrifuger|taxonomy|centrifuger|centrifuger||0|
+metaphlan|taxonomy|metaphlan|metaphlan||0|
+strainphlan|taxonomy|strainphlan|metaphlan||0|
+sylph|taxonomy|sylph|sylph||0|
+ganon|taxonomy|ganon|ganon||0|ganon2
+metabuli|taxonomy|metabuli|metabuli||0|205 GB DB fetch incident
+phyloflash|taxonomy|phyloflash|phyloflash||0|
+krona|taxonomy|krona||src/metasmith_libraries/transforms/metagenomics/taxonomy/metabuli.py|0|plotting side effect
+lcastar|taxonomy|lcastar||src/metasmith_libraries/resources/lib/lcastar/lcastar.py|0|in-house LCA tool
+feast|taxonomy|feast|feast||0|source tracking
+sina|taxonomy|sina|sina||0|SILVA aligner for ASPIRE
+kaiju|taxonomy|||container_builds:main/kaiju/dev.sh|0|container build; KBase stub; no run evidence
+tiara|taxonomy|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+cat-bat|taxonomy|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+metaeuk|annotation|||research/metasmith_benchmark/drivers/e1_nfcore/images.txt|0|nf-core/mag E1 image list
+iqtree|phylogenetics|iqtree||treesapp-amber:untrimmed-training-default/treesapp/wrapper.py|0|nested in TreeSAPP wrapper and gtdbtk de_novo; no standalone transform
+fasttree|phylogenetics|fasttree||src/metasmith_libraries/transforms/metagenomics/taxonomy/gtdbtk_de_novo.py|0|only nested in gtdbtk and TreeSAPP
+raxml-ng|phylogenetics|raxml||treesapp-amber:untrimmed-training-default/environment.yml|0|TreeSAPP backend; fix/raxml-evaluate-force-perf-threads branch
+trimal|phylogenetics|trimal||treesapp-amber:untrimmed-training-default/treesapp/wrapper.py|0|TreeSAPP backend; no transform
+pplacer|phylogenetics|pplacer||src/metasmith_libraries/transforms/metagenomics/taxonomy/gtdbtk.py|0|nested in gtdbtk
+treesapp|phylogenetics|treesapp||cyanoverse:feat_treesapp-refpkgs/main/treesapp_refpkgs/build_refpkg.sbatch;journal:4c1085a2-4b08-4ac5-b50a-eda3eb6d6616;journal:51711bc2-27da-42d6-a7b2-8b1a03cdcca9|2|create/assign/train; TreeSAPP-AMBER fork; most-run tool with no transform
+mafft|phylogenetics|mafft|mafft|metapathways:tliu-dev/docker/ptools_env.yml|0|std use only kbase/align_sequences
+fmalign|phylogenetics|||container_builds:main/FMAlign/dev.sh|0|container build only
+prodigal|annotation|prodigal|pprodigal||0|incl pprodigal; metapathways project also uses it
+prodigal-gv|annotation|||src/metasmith_libraries/transforms/viromics/prodigal_gv.py|0|viromics/prodigal_gv.py runs it inside the checkv env
+bakta|annotation|bakta|bakta||0|
+prokka|annotation|prokka||metapathways:hmmer_parser/Dockerfile|0|metapathways Docker, mintia; no transform
+dram|annotation|dram|dram||0|annotate, distill
+dramv|viromics|||src/metasmith_libraries/transforms/functionalAnnotation/dramv.py|1|DRAM-v annotate and distill; dram env
+eggnog-mapper|annotation|eggnog-mapper|eggnog-mapper||0|
+kofamscan|annotation|kofamscan|kofamscan||0|
+interproscan|annotation|interproscan|interproscan||0|
+antismash|annotation|antismash|antismash||0|
+hmmer|annotation|hmmer|hmmer||0|hmmsearch/hmmbuild; also drives dbcan, vogdb, pathofact_hmm
+diamond|annotation|diamond|diamond||0|blastp/blastx/linclust/cluster; DBs: UniRef50, TCDB, BacMet, MEROPS, MEGARes, VFDB, MobileOG, RefSeq-viral, BiGG
+blast|annotation|blast|blast||0|blastn/blastp/makeblastdb; also tblastn
+mmseqs2|clustering|mmseqs2|mmseqs2|scadc:feat_protein-clustering/main/fosmid_pathways/search_seqsim.py;treesapp-amber:untrimmed-training-default/treesapp_amber/prep/steps/cluster.py|1|std transforms only viromics precluster/votu; general cluster/search/all-vs-all absent
+cd-hit|clustering|cd-hit||metapathways:update_dbprep_from_dev/metapathways/metapathways_utils.py|0|metapathways only
+busco|annotation|busco|busco||0|
+barrnap|annotation|barrnap|barrnap||0|
+trnascan-se|annotation|trnascan-se||src/metasmith_libraries/resources/env/trnascan.env|0|env on release without a transform (env named trnascan.env); metapathways pipeline.py
+aragorn|annotation|aragorn|aragorn||0|tRNA
+infernal|annotation|infernal||metapathways:update_dbprep_from_dev/metapathways/MetaPathways_tRNA_scan.py;container_builds:main/infernal/dev.sh|0|cmsearch; no standalone transform; in MetaPathways
+pilercr|annotation|pilercr||src/metasmith_libraries/resources/lib/piler_cr_to_gff3.py|0|CRISPR via bakta_noncoding
+cctyper|viromics|cctyper|cctyper||0|CRISPR-Cas typing
+amrfinderplus|annotation|amrfinderplus|amrfinderplus||0|
+rgi|annotation|rgi|rgi||0|CARD
+deeparg|annotation|deeparg|deeparg||0|
+argnorm|annotation|argnorm|argnorm||0|
+abricate|annotation|abricate||research/metasmith/transforms/std/transforms/abricate.py|0|old research std lib only
+integron-finder|annotation|integronfinder|integronfinder||0|
+mobileelementfinder|annotation|mobileelementfinder|mobileelementfinder||0|
+signalp6|annotation|signalp|signalp6||0|licensed; image build transform
+deeptmhmm|annotation|tmhmm|deeptmhmm||0|licensed; image build transform
+phobius|annotation|phobius|phobius||0|licensed; image build transform
+psortm|annotation|psortm||src/metasmith_libraries/transforms/functionalAnnotation/psortm_prep.py|1|unmerged branch engine/psortm only; psortb in same
+pathofact|annotation|pathofact|pathofact_models||0|HMM and ML lanes
+predictf|annotation|predictf|predictf||0|
+deeptfactor|annotation|deeptfactor|deeptfactor||0|
+promotech|annotation|promotech|promotech||0|
+deepec|annotation|deepec|deepec||0|
+clean-ec|annotation|clean-ec|clean||0|
+ezpred|annotation|ezpred|ezpred||0|
+clipzyme|annotation|clipzyme||scadc:feat_functional-analysis/main/structure_evidence/clipzyme/clipzyme_screen.sbatch;journal:5d95cfeb-0f62-4830-a4aa-68a80d31067a|1|reaction-edge screen over ESMFold structures; no transform
+proteinbert|protein-structure|proteinbert|proteinbert||0|embeddings
+dbcan|annotation|dbcan||src/metasmith_libraries/transforms/functionalAnnotation/dbcan.py|0|runs via hmmer env
+vogdb|viromics|vogdb||src/metasmith_libraries/transforms/functionalAnnotation/vogdb.py|0|runs via hmmer env
+metapathways|annotation|metapathways|metapathways||0|in-house pipeline (own project)
+pathway-tools|metabolic-modelling|pathway-tools|pathologic||0|licensed; PathoLogic
+esmfold|protein-structure|esmfold|esmfold||0|
+esm-c|protein-structure|esm-c|esmc||0|
+ankh|protein-structure|ankh|ankh||0|
+prott5|protein-structure|prott5|prott5||0|
+saprot|protein-structure|saprot|saprot||0|
+foldseek|protein-structure|foldseek|foldseek||0|3Di
+alphafold|protein-structure|alphafold||rnaseq:research/rnaseq/cb2a_island/afdb.py;container_builds:main/alphafold/dev.sh|0|AFDB lookup in rnaseq; container build; no structure-prediction transform
+genomad|viromics|genomad|genomad||0|
+virsorter2|viromics|virsorter2|virsorter2||0|
+vibrant|viromics|vibrant|vibrant||0|
+deepvirfinder|viromics|deepvirfinder||research/metasmith_benchmark/library/transforms/e5/deepvirfinder.py|0|benchmark only
+checkv|viromics|checkv|checkv||0|
+vcontact3|viromics|vcontact|vcontact3||0|
+iphop|viromics|iphop|iphop||0|
+coverm|viromics|coverm||container_builds:main/coverm/dev.sh;research/metasmith_benchmark/page/tool_table.py|0|assembly_stats chosen over CoverM in E5; no transform
+metapop|viromics|metapop||research/metasmith_benchmark/library/transforms/bench/metapop_study.py|0|benchmark only
+carveme|metabolic-modelling|carveme|carveme||0|CPLEX/SCIP/glpk solver variants in benchmark e4abl
+cobrapy|metabolic-modelling|cobrapy|cobra||0|
+memote|metabolic-modelling|memote|memote||0|
+smetana|metabolic-modelling|smetana||research/metasmith_benchmark/library/transforms/bench/smetana_merge.py|0|benchmark only; CPLEX variant
+gapseq|metabolic-modelling|||container_builds:main/gapseq/dev.sh|0|container build only
+gapmind|metabolic-modelling|||container_builds:main/gapmind/dev.sh|0|container build only
+equilibrator|metabolic-modelling|equilibrator|equilibrator|journal:journal:12|1|dG from EC reactions; envs build-refs only (not a transform env)
+dgbyg|metabolic-modelling|dgbyg|dgbyg||0|ecspr_bake image; ref build envs only
+rdkit|metabolic-modelling|rdkit|rdkit||0|ref-build env; reaction AAM
+ecspr|metabolic-modelling|ecspr|ecspr||0|in-house tool
+modelseed|metabolic-modelling|modelseed||research/fabfos/examples/metabolism_references_dag.py|0|reference DB use
+glpk-scip-cplex|metabolic-modelling|glpk/gurobi||research/metasmith_benchmark/library/transforms/e4abl/carve_scip.py|0|solver backends for carveme/smetana
+msdial|lipidomics|lipidmatch||scadc:feat_lipidomics/main/lipids/run_msdial.sh|0|notebook-grade; LipidMatch/MS-DIAL
+mzmine|lipidomics|mzmine||scadc:feat_lipidomics/main/lipids/lipidio.py;unmerged:feat/fabfos/lipidomics-abundance:research/fabfos/lipidomics/compound_id/library/transforms/ms/feature_table_creator.py|1|feature table creation
+msconvert|lipidomics|proteowizard||scadc:feat_lipidomics/main/lipids/run_msdial.sh|0|ProteoWizard
+goslin-refmet|lipidomics|refmet/goslin||scadc:feat_lipidomics/main/lipids/od_analysis.py;journal:a42e6ec0-3de3-42cb-98a1-808b2e3a924a|1|lipid name normalisation
+metaboscape|lipidomics|||journal:19387654-a958-42b2-bc7a-ef8ed6e992e6|0|facility vendor table analysed downstream; MetaboScape itself not run here
+modkit|other|||journal:22915e23-ae0a-4420-81d1-bb39c5d85fdd|1|ONT methylation pileup (Kalen); container on Sockeye; no transform (CRAGE methylation stubs)
+dorado|other|||journal:22915e23-ae0a-4420-81d1-bb39c5d85fdd|1|ONT basecaller; container on Sockeye; no transform
+qiime2|taxonomy|qiime2|qiime2||0|feature-classifier in aspire/taxonomy
+vsearch|clustering|vsearch|vsearch||0|ASV denoise/merge
+spieceasi|stats|spieceasi||src/metasmith_libraries/resources/lib/aspire/run_spieceasi.R|0|R network inference in aspire env; spieceasi_external transform
+indicspecies|stats|indicspecies||src/metasmith_libraries/resources/lib/aspire/run_indicspecies.R|0|R, aspire env
+vegan|stats|vegan||src/metasmith_libraries/resources/lib/aspire/run_measurement_association.R|0|R, aspire env
+umap|ml|umap||src/metasmith_libraries/transforms/aspire/umap_clustering.py|0|plus scadc, cyanoverse notebooks
+hdbscan|clustering|hdbscan||src/metasmith_libraries/transforms/aspire/umap_clustering.py|0|
+leiden|clustering|leiden||src/metasmith_libraries/resources/lib/comebin_cpu/comebin_leiden_sweep.py|0|
+scikit-learn|ml|sklearn||src/metasmith_libraries/transforms/aspire/umap_clustering.py|0|KMeans, NMF, etc.
+pytorch|ml|torch||scadc:main/main/gene_importance/pbert_select.py;journal:msg:87|0|embedding VAE v3-v8, ProteinBERT select; no training transform
+embedding-vae|ml|||journal:msg:87;journal:journal:14;cyanoverse:functional-embedding|1|custom compositional/KO VAE sweeps (v3-v8); notebook/sbatch grade
+nmf-lda|ml|nmf||cyanoverse:modelling/main/archetypes/run_nmf.py;cyanoverse:feat_modelling/main/archetypes/run_lda.py|0|KO-matrix archetype/guild search
+faiss|ml|faiss||cyanoverse:functional-embedding/main/embedding_umap/08_embedding_distance.py|0|embedding distance
+statsmodels|stats|statsmodels||src/metasmith_libraries/resources/lib/metabolomics/pathway_enrichment.py|0|FDR, GLM
+xgboost|ml|xgboost||scadc:feat_lipidomics/envs/ms2lipid.yml|0|membrane classifier env; PathoFact models env on release
+clusterprofiler|stats|clusterprofiler||research/metasmith/transforms/std/containers/clusterprofiler_enrich.R|0|old research std lib only
+geoquery|geospatial|geoquery|geoquery||0|in-house; 75 source adapters
+geopandas|geospatial|geopandas||research/geospatial_query/geoquery/normalise.py|0|inside geoquery image
+rasterio|geospatial|rasterio||research/geospatial_query/geoquery/adapters_physical.py|0|inside geoquery image
+instrain|viromics|instrain|instrain||0|strain-level profiling; instrain_compare
+scgen|ml|||container_builds:main/scgen/Dockerfile|0|scRNA VAE container build; no analysis run evidence
+tosica|ml|||container_builds:main/tosica/Dockerfile|0|container build only
+vega|ml|||container_builds:main/vega/Dockerfile|0|VAE with pathway-masked decoder; container build only
+sentence-transformers|ml|||container_builds:main/sentence_transformers/Dockerfile|0|container build; text embedding
+mercat|annotation|||container_builds:main/mercat/Dockerfile|0|k-mer counting container build only
