@@ -27,24 +27,31 @@ Order and names (outline-sections, 2026-11-26): Planning, Specification, Executi
 - Key message: contracts are matched through property-set types and lineage constraints, and a seeded search composes them into a verified plan.
 - Paragraphs (outline-paragraphs, 2026-11-26): the minimum to convey the implementation; the Results carry the motivation. Group-by is not used by the solver and moves to Execution.
 
-#### P1. Types and lineage — proposed
-- Role: the formal matching rules the solver applies.
-- Key message: a port feeds an input when its type holds every property of the input's type and its lineage covers the input's lineage requirement.
-- Points (revised in terms, 2026-11-27; keep the original prose, reshuffled; no EDAM claim):
-  1. Types are sets of properties, each narrowing the range of variation of the data.
-  2. A type X satisfies Y when X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
-  3. A port is a typed position on a step with a fixed lineage, and inputs bind to ports.
-  4. A port X satisfies a lineage requirement Z when X was produced from ports with types that map to each type in Z, L(X,Z).
-- Note: the d3 formula is kept (some ancestor's type satisfies each type in Z). The code is stricter on purpose: it checks the port bound to the ancestor input itself (`workflow_solver/src/search.rs:215`). The Methods must state the strict check and explain why (Tony, 2026-11-27). EDAM dropped: "a rough link". 
+Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept".
 
-#### P2. Search and selection — proposed
+#### P1. Types — proposed
+- Role: the property-set type and its satisfaction test, used throughout.
+- Key message: a type is a set of properties, and X satisfies Y when X has every property of Y.
+- Earlier points (from the old P1, terms 2026-11-27): types are sets of properties, each narrowing the range of variation of the data; S(X,Y) ≡ X ⊇ Y. No EDAM claim: "a rough link".
+
+#### P2. Contracts — proposed
+- Role: contracts, the ports they create as steps, and why contracts need lineage constraints.
+- Key message: a step exposes one port per output type, inputs bind to ports, and a contract can require that bound ports share lineage.
+- Earlier points: a port is a typed position on a step with a fixed lineage, and inputs bind to ports; a port X satisfies a lineage requirement Z when X was produced from ports with types that map to each type in Z, L(X,Z).
+- Note: the d3 formula is type-based; the code is stricter on purpose and checks the port bound to the ancestor input itself (`workflow_solver/src/search.rs:215`). State the strict check and explain why (Tony, 2026-11-27). M4 covers contract authoring; this paragraph covers only what the planner needs.
+
+#### P3. Planning search — proposed
 - Role: how the plan is found.
-- Key message: a PUCT search grows partial plans from the givens and targets until no input is left unfed.
-- Points: next, after P1 (state, base case, frontier expansion, PUCT selection).
+- Key message: a PUCT search grows partial plans from the givens and the target until no input is left unbound.
+- Covers: search state and base case, expansion (one step per child, one child per valid binding), PUCT selection.
 
-#### P3. Refinement and verification — proposed
-- Role: how the plan is trimmed and trusted.
-- Key message: a refiner removes unneeded steps, the seeded search makes plans reproducible, and an independent checker verifies each plan.
+#### P4. Refinement — proposed
+- Role: the edge-refinement pass after the search.
+- Key message: a short pass swaps single edges and prunes unneeded steps.
+
+#### P5. Verification — proposed
+- Role: how a plan is trusted and reproduced.
+- Key message: an independent checker verifies each plan, and a fixed seed makes plans reproducible.
 
 ### M2. Specification — agreed (outline-sections, 2026-11-26)
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.
