@@ -191,7 +191,7 @@ def test_a_tool_step_waits_on_its_pull_and_a_failed_pull_stops_the_run(tmp_path,
     hold = next(i for i, x in enumerate(nf) if "o.after(" in x)
     groups = [i for i, x in enumerate(nf) if "o.group(" in x]
     assert groups[0] < hold < groups[1], "the pull reads the env as given; the fetch reads it held"
-    env = nf[hold].split(" = ")[0]
+    env = nf[hold].split(" = ")[0].strip()
     assert env in nf[groups[1]]
     resources = (ws / AgentPaths.NXF_RES).read_text()
     pull_block = resources.split("withName: 'p01__pullContainer' {")[1].split("withName")[0]

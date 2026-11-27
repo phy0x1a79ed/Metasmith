@@ -94,7 +94,7 @@ def _group_calls(nxf: str) -> list[tuple[str, list[str]]]:
         if not m:
             continue
         by = m.group(1)
-        using = [s.strip().lstrip("_") for s in m.group(2).split(",") if s.strip()]
+        using = [s.strip().removeprefix("o.ch._") for s in m.group(2).split(",") if s.strip()]
         calls.append((by, using))
     return calls
 

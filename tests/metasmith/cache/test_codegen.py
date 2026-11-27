@@ -84,7 +84,8 @@ def test_every_grouped_step_gets_a_cached_twin_and_a_three_way_group(tmp_path):
         assert f"process {twin} {{" in body, f"no twin process for {name}"
         n = step.order
         assert f"(__miss_{n}, __hit_{n}, __synth_{n}) = o.group(" in body
-        assert f"o.mixOuts(o.asStreams({name}(__miss_{n})), o.asStreams({twin}(__hit_{n})), __synth_{n})" in body
+        assert f"msm_out_{n}(o, {name}(msm_in_{n}(o)), {twin}(o.ch.__hit_{n}))" in body
+        assert f"o.mixOuts(o.asStreams(miss), o.asStreams(hit), o.ch.__synth_{n})" in body
     assert "Channel.of(" not in body, "a hit is a task now, not a spliced channel"
     assert "publishDir" not in body, "no process publishes into the cache any more"
 

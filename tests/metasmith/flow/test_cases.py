@@ -188,23 +188,23 @@ def test_the_staged_workflow_unions_the_assemblies_and_filters_by_case(tmp_path)
     (megahit,), (hybrid,), (viral_id,), (checkv,) = (steps_of(plan, n) for n in ("megahit", "hybrid", "viral_id", "checkv"))
     asm = stream(viral_id.uses[0].dtype)
     assert stream(megahit.produces[0][0].dtype) == stream(hybrid.produces[0][0].dtype) == asm
-    assert f"_{asm} = o.mix([_{asm}_1, _{asm}_2])" in body
-    assert f"o.group('{asm}', [_{asm}]," in body
+    assert f"o.ch._{asm} = o.mix([o.ch._{asm}_1, o.ch._{asm}_2])" in body
+    assert f"o.group('{asm}', [o.ch._{asm}]," in body
 
     assert f"__cases_{megahit.order} = ['A']" in body
     assert f"__cases_{hybrid.order} = ['B']" in body
     assert f"__cases_{checkv.order} = ['B']" in body
     assert f"__cases_{viral_id.order} =" not in body
     vt = stream(checkv.uses[0].dtype)
-    assert f"o.group('{vt}', [o.cases(_{vt}, __cases_{checkv.order})]," in body
+    assert f"o.group('{vt}', [o.cases(o.ch._{vt}, __cases_{checkv.order})]," in body
 
-    assert f"_{asm} = o.publish(_{asm}, ['B'])" in body
+    assert f"_{asm} = o.publish(o.ch._{asm}, ['B'])" in body
     study = stream(next(x for x in plan.given if str(x.path).endswith("studyX.json")).dtype)
     assert f'["{study}"], [\'A\', \'B\']))[0]' in body
     long = stream(next(x for x in plan.given if str(x.path).endswith("long.fq")).dtype)
     assert f'["{long}"], [\'B\']))[0]' in body
     votu_out = stream(steps_of(plan, "votu")[0].produces[0][0].dtype)
-    assert f"_{votu_out} = o.publish(_{votu_out})" in body
+    assert f"_{votu_out} = o.publish(o.ch._{votu_out})" in body
 
     assert "o.seedCases(_lf.cases)" in body
     assert "'CASES'" in body
@@ -230,7 +230,7 @@ def test_a_slot_each_case_reads_from_its_own_lane_is_staged_as_a_lane(tmp_path):
     )
     groups = [ln for ln in body.splitlines() if "o.group(" in ln]
     (line,) = [ln for ln in groups if f"step: {align.order}," in ln]
-    assert line.startswith(f"(__miss_{align.order}, __hit_{align.order}, __synth_{align.order}) = o.group('{reads}', [_{reads}, _{asm}],")
+    assert line.startswith(f"\tdef (__miss_{align.order}, __hit_{align.order}, __synth_{align.order}) = o.group('{reads}', [o.ch._{reads}, o.ch._{asm}],")
     assert [ln for ln in groups if re.search(r"'\], \[[^\]]*\]\)$", ln)] == [line]
     assert line.endswith(f"'], ['{asm}'])")
 
