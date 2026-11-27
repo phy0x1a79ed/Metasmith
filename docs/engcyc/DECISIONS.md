@@ -684,3 +684,10 @@ Evidence: docs/engcyc/localization-review.md (Claude Science review). PSORTb 3.0
 Tony: "I accept 1, drop 2, accept 3."
 Decided: PSORTm is the localization lane in full and lite, after a pilot measures its speed and Unknown fraction. TMbed (GPU) is out. The Traitar lane is dropped, so the Pfam lane no longer has a Traitar consumer.
 Landed: PSORTm worker on feat/engine/psortm.
+
+## psortm-taxonomy (2026-11-27)
+
+- Question: where PSORTm gets each protein's taxon, so that unbinned contigs get a localization call too.
+- Tony: "If we run LCA star on light, we won't have the meta BULI database, right? So we only do 16S and proteins. So that would give us per contig LCA star taxonomy that could then be mapped onto the protein ... plugged into psort M. So that looks good."
+- Design: each protein takes its contig's LCA* GTDB lineage. Full votes UniRef50, Metabuli and 16S; lite votes UniRef50 and 16S through a no-Metabuli LCA* transform. PSORTm runs 4 PSORTb processes per 20,000-ORF chunk (bd67dd29). PSORTm's phylum-level envelope stays as published: diderm Firmicutes and mycomembranes are accepted edge cases (Tony: "if the tool is bad, then we just have to accept it on these edge cases").
+- Landed: worker psortm-lcastar (branch feat/engine/psortm-lcastar).
