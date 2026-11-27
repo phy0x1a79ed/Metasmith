@@ -75,15 +75,15 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Effect (records, not rerun): under the old selection rule, 2 of 55 case-seed pairs changed (`isolate_assembly_from_long_reads` seeds 7 and 99: 13 -> 11 and 13 -> 9 steps); every other pair unchanged (`data/metasmith/plans/08-where-the-unpinned-solve-goes.md`). Under PUCT the search finds the 9-step plan directly (`02-puct-selection-poc.md`), and `found_on` = 1 on every measured case, so no recorded PUCT plan is changed by the refiner.
 
 #### P5. Verification — proposed
-- Role: how a plan is trusted and reproduced.
-- Key message: rather than prove the solver correct, we proved a small checker correct and run it on every plan.
-- Points (paragraph-points, 2026-11-27; Tony's ladder: a provably correct solver is hard, so prove a witness checker instead, and the checker gates every plan):
-  1. A solver that is provably correct is hard to build, so we instead built a small witness checker that is provably correct and gates every plan the solver returns.
-  2. The checker shares no code with the search and accepts or rejects a plan against the original problem.
-  3. The checker tests ten conditions, among them that every binding satisfies its input type and lineage, every port has one producer and is given or produced before use, the steps form a DAG, and the target appears exactly once.
-  4. A Lean 4 proof shows that the checker's Rust code returns true exactly when a plan meets the formal specification.
-  5. A seeded random-number generator and a fixed iteration order make the same request return the same plan.
-- Note: `check_spec`, `src/solver_witness/lean/Proof/Compose.lean:232`, proved, no sorry; Rust lowered via Charon/Aeneas; ten clauses in `lean/Spec.lean:255`. As of 2026-11-27 the check runs only in tests and `msm_solver check`; asked metasmith-e2e-install-test to run it on every solve in the release (Tony, 2026-11-27); being built on feat/engine/witness-gate for 0.26.4+. Do not describe the gate as landed until e2e reports it merged into feat/engine/rc. Decoy tests (`testing/witness_check.py`) dropped from the points for now. Seed 42, ChaCha.
+- Role: why and how every plan is checked.
+- Key message: rather than prove the solver correct, we proved a small witness checker correct and run it on every plan.
+- Points (paragraph-points, 2026-11-27; Tony's ladder: a provably correct solver is hard, so prove a witness checker, and the checker gates every plan; intro first, then the workings):
+  1. Proving a search-based solver correct is hard, because its path depends on heuristics and on the order it explores.
+  2. Checking a finished plan is far simpler, so we wrote a witness checker and proved that instead.
+  3. Every plan the solver returns passes through the checker, and a plan that fails is refused with the condition it broke.
+  4. The checker reads only the problem and the plan, shares no code with the search, and tests ten conditions, among them that every binding satisfies its input type and lineage, every port has one producer and is given or produced before use, the steps form a DAG, and the target appears exactly once.
+  5. A Lean 4 proof shows that the checker's Rust code returns true exactly when a plan meets the formal specification, so any plan it accepts is correct by that specification.
+- Note: `check_spec`, `src/solver_witness/lean/Proof/Compose.lean:232`, proved, no sorry; Rust lowered via Charon/Aeneas; ten clauses in `lean/Spec.lean:255`. The gate on every solve goes live in the next release (Tony, 2026-11-27; feat/engine/witness-gate). Determinism (seed 42, ChaCha, fixed order) moved out of P5, proposed for the end of P3.
 
 ### M2. Specification — agreed (outline-sections, 2026-11-26)
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.
