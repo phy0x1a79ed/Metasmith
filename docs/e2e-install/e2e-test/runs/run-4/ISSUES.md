@@ -118,7 +118,7 @@ Both stations relaunched warm at ~09:15 with the LazyMap fix. Round 7 records ar
 
 # Round 9 (release candidate 0.26.2+5f7fae4, 2026-11-27)
 
-Both stations relaunched warm at ~12:05 with the image fix: prep templates pull every image their workflow uses, and a run pulls the images missing from the store (2f271f64). Round 8 records are in `round8/`. The lane changes merged after this build (lane-gap) wait for the next round.
+Both stations relaunched warm at ~12:05 with the image fix: prep templates pull every image their workflow uses, and a run pulls the images missing from the store (2f271f64). Round 8 records are in `round8/`. The lane changes merged after this build (lane-gap) wait for the next round. At ~13:20 sockeye was in contention and Tony moved lite to fir, the cluster with the most CPU: the sockeye run stopped mid-setup (records in `round9/sockeye`), and lite relaunched on fir as station `fir-lite` beside full.
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
