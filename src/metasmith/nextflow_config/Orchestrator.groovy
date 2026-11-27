@@ -142,6 +142,7 @@ class Orchestrator {
     private Map footprint_cfg = [:]
     private Set keep_streams = [] as Set
     private Map readers_of = [:]
+    private Set pull_orders = null
     private final Map products = new java.util.concurrent.ConcurrentHashMap()
     private final Map products_of = new java.util.concurrent.ConcurrentHashMap()
     private final Map pending_reads = new java.util.concurrent.ConcurrentHashMap()
@@ -187,6 +188,18 @@ class Orchestrator {
 
     public boolean isProbing() {
         return this.probing
+    }
+
+    // The pull steps this launch runs, as the launch wrote them after checking the
+    // image store. No file means every pull runs.
+    public void pulls(f) {
+        if (f.exists()) {
+            this.pull_orders = new HashSet(new groovy.json.JsonSlurper().parseText(f.text).collect { it as Integer })
+        }
+    }
+
+    public boolean pulling(int order) {
+        return !this.probing && (this.pull_orders == null || order in this.pull_orders)
     }
 
     // The last statement of the workflow body.

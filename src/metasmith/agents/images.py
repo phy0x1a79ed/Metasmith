@@ -1,11 +1,10 @@
-# Reporting on the image store before a launch.
+# Which tool images a launch pulls before the steps that need them.
 #
-# Tool images materialise lazily, inside the first task that needs each one. That
-# is right on a cluster whose nodes can reach a registry and wrong on one whose
-# compute nodes cannot: the fetch happens exactly where there is no route. A setup
-# run pulls every image on the driver's host first (`pullContainer`), and
-# `_check_image_store` rides in `RunWorkflow`'s preflight to name an incomplete
-# store before anything is transferred. It only looks.
+# Left alone, a tool image materialises inside the first task that needs it, which
+# fails on a cluster whose compute nodes cannot reach a registry. So a workspace
+# staged on an agent with an image store carries a pullContainer step per tool
+# image, run on the driver's host, and each launch checks the store and runs only
+# the pulls whose image is missing.
 #
 # It reads the images out of the stage-time env manifest rather than a transform
 # library, because the host doing the launching may hold neither, and builds the
@@ -98,3 +97,23 @@ def _check_image_store(
         if not _is_materialised(shell, env):
             missing.append(image)
     return missing
+
+
+def _pulls_to_run(
+    shell, doc: dict, agent_env: Environment, agent_home: Path,
+) -> tuple[list[int], list[str], list[str]]:
+    # The pull steps to run, the images they fetch, and the missing images no pull
+    # step covers. A runtime with no store to check runs every pull.
+    images, _ = _manifest_images(doc)
+    pulls = {int(order): set(imgs) for order, imgs in (doc.get("pulls") or {}).items()}
+    pulled = set().union(*pulls.values())
+    if not _has_image_store(agent_env):
+        return sorted(pulls), sorted(pulled), []
+    missing = set(_check_image_store(
+        shell, sorted(set(images) | pulled), agent_env, agent_home, rootfs=doc.get("rootfs"),
+    ))
+    return (
+        sorted(o for o, imgs in pulls.items() if imgs & missing),
+        sorted(missing & pulled),
+        sorted(missing - pulled),
+    )

@@ -733,9 +733,12 @@ class WorkflowPlan:
                     continue
                 _seen_given.add(inst.instance_id)
                 _given.append(inst)
+        # A target bound to an input is met by it: nothing makes it and nothing
+        # publishes it. Such a target only anchors the lineage of the targets under it.
+        held = {d for a in target_appls for d, e in a.used.items() if e in given_map}
         dropped_targets = []
         for d, nm in dep_to_name.items():
-            if d not in resolved_deps:
+            if d not in resolved_deps and d not in held:
                 Log.Warn(f"target [{nm}] was requested but not included in plan"
                          " — check if group_by dependency can be satisfied from given inputs")
                 dropped_targets.append(nm)
