@@ -45,7 +45,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   1. A contract states the input types a tool requires and the output types it promises.
   2. Each use of a contract in a plan is a step, which binds each input to a port whose type satisfies it and exposes one new port per output type.
   3. Each port records its lineage, the ports its step consumed.
-  4. An input can require that its port descends from the port bound to another input of the same step. Example: mapping reads to an assembly requires the assembly built from those reads.
+  4. A contract that accepts a general type loses which specific data came in; a compressor that accepts any file yields only a "compressed file" (flow F1, 2026-11-27). So an input can require that its port descends from the port bound to another input of the same step. Example: mapping reads to an assembly requires the assembly built from those reads.
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
@@ -53,7 +53,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Role: how the plan is found.
 - Key message: a PUCT search grows partial plans from the givens and the target until no input is left unbound.
 - Points:
-  1. We framed planning as a tree search of the Monte Carlo tree search (MCTS) family: each node is a search state, each edge adds one step, and the search walks from the root until it reaches a solved state.
+  1. Given a library of contracts, the givens and a target, the planner must find a plan (flow F2, 2026-11-27). We framed planning as a tree search of the Monte Carlo tree search (MCTS) family: each node is a search state, each edge adds one step, and the search walks from the root until it reaches a solved state.
   2. A search state is a partial plan; the root holds only the given steps and the target step, and a search state is solved when every input is bound.
   3. The frontier holds every step that could be added next, one entry per valid binding of a contract's inputs to existing ports.
   4. Before the search, a breadth-first search (BFS) that ignores lineage walks back from the target's inputs to the contracts that can produce them, level by level, so each contract's distance is the fewest steps between it and the target; it also counts the routes from each contract to the target and drops contracts it never reaches.
@@ -68,7 +68,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Points:
   1. Lineage makes the search path-dependent and PUCT is optimistic, so the first solved plan is not guaranteed to be the simplest.
   2. Each candidate rebinds one step's input to another existing port and rebuilds every step downstream so its lineage stays correct.
-  3. A candidate is valid only if every step can be scheduled from the givens without cycles and every lineage constraint still holds.
+  3. A candidate must still pass the plan conditions of P5, chiefly that every step can be scheduled and every lineage constraint holds (flow F3, 2026-11-27).
   4. Valid candidates are ranked first by how few distinct ports their lineage constraints anchor to, then by how close those anchors sit to the inputs that need them.
   5. The same PUCT rule picks which candidate to expand, for a fixed budget of rounds; the best valid plan wins, and steps no longer connected to the target are removed.
   6. In development testing, the vast majority of plans were already optimal before refinement (Tony, 2026-11-27: the refiner is a real safety net; do not dwell on how often it acts).
