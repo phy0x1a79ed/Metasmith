@@ -126,6 +126,11 @@ class Orchestrator {
     private Map zero_posts
     private volatile boolean sealed = false
 
+    // The workflow's channels, by codegen's name for each. Codegen wires each step
+    // in a script function (see nextflow_codegen), and a function cannot bind the
+    // workflow body's variables.
+    public final Map ch = [:]
+
     // The run's footprint (`footprint`). A probe pass runs no process: every
     // member is answered from its shard's manifest, or by a stand-in per output
     // when it has none, and logged, so `caching.footprint.plan_skips` can tell

@@ -31,6 +31,7 @@ CACHE_RECORD_FILE = ".command.cache"
 # One JSON line per member the orchestrator served from a shard.
 CACHE_HITS_LOG = "_metasmith/cache_hits.jsonl"
 DEFAULT_CACHE_HELPER = ("python", "-m", "metasmith.caching.invocation")
+GIVEN_PER_FN = 50
 
 
 def AssertBindPathsAreShellSafe(paths: Iterable[Path], step_name: str):
@@ -713,7 +714,15 @@ def prepare_nextflow(task, context: NextflowGenContext):
     target_streams = {stream(x.instance.dtype) for x in the_plan.targets}
     readers: dict[str, set[int]] = {}
     src_process = []
+    # The workflow body compiles to one JVM method, capped at 64 KB, and a process may
+    # be called only from a workflow body, never from a function or closure. A
+    # sub-workflow would prefix every process name, and with it each Nextflow task
+    # hash. So the body holds only the process calls, each step's wiring is a script
+    # function of its own, and the channels pass between them through `o.ch`.
+    wf_fns: list[str] = []
     wf_main = []
+    def chan(name: str) -> str:
+        return f"o.ch._{name}"
     published_channels: dict[str, tuple[int, DataInstance]] = {}
     resources = {}
     gpu_requirements: dict[str, dict] = {}
@@ -732,10 +741,10 @@ def prepare_nextflow(task, context: NextflowGenContext):
         used_archetypes, produced_archetypes = get_io_signature(step)
         produced_names = [get_prod_name(x.dtype) for g in produced_archetypes for x in g]
         produced_snames = [get_prod_name(x.dtype, force_singular=True) for g in produced_archetypes for x in g]
-        produced = ", ".join(f"_{x}" for x in produced_names)
         produced_k = [f"'{x}'" for x in produced_snames]
         produced_k = ", ".join(produced_k)
-        wf_main.append(f"k = [{produced_k}]")
+        k_line = TAB+f"def k = [{produced_k}]"
+        fn_out = [k_line]
 
         _out_ids = (decision or {}).get("out_instance_ids", {})
         produced_slot_ids = [
@@ -774,12 +783,13 @@ def prepare_nextflow(task, context: NextflowGenContext):
                 )
             _inst = _inst[0]
             gb = stream(_inst.dtype)
-            using_symbols = ", ".join(f"_{stream(x.dtype)}" for x in used_archetypes)
+            fn_in = [k_line]
+            using_symbols = ", ".join(chan(stream(x.dtype)) for x in used_archetypes)
             if the_plan.multi_case and set(step.cases) != set(the_plan.cases):
                 cases_var = f"__cases_{step.order}"
-                wf_main.append(f"{cases_var} = {groovy_strings(step.cases)}")
+                fn_in.append(TAB+f"def {cases_var} = {groovy_strings(step.cases)}")
                 using_symbols = ", ".join(
-                    f"o.cases(_{stream(x.dtype)}, {cases_var})" for x in used_archetypes
+                    f"o.cases({chan(stream(x.dtype))}, {cases_var})" for x in used_archetypes
                 )
             # A slot whose served cases read it from different producers is a
             # lane per case: a by-item shared by those cases must not pool them.
@@ -807,47 +817,59 @@ def prepare_nextflow(task, context: NextflowGenContext):
             hit_var = f"__hit_{step.order}"
             synth_var = f"__synth_{step.order}"
             out_var = f"__out_{step.order}"
-            wf_main.append(
-                f"({miss_var}, {hit_var}, {synth_var}) = o.group('{gb}', [{using_symbols}], k, "
-                f"{step.transform.batch_size}, {cache_literal}{lanes_arg})"
+            fn_in += [
+                TAB+f"def ({miss_var}, {hit_var}, {synth_var}) = o.group('{gb}', [{using_symbols}], k, "
+                f"{step.transform.batch_size}, {cache_literal}{lanes_arg})",
+                TAB+f"o.ch.{hit_var} = {hit_var}",
+                TAB+f"o.ch.{synth_var} = {synth_var}",
+                TAB+f"return {miss_var}",
+            ]
+            fn_out.append(
+                TAB+f"def {out_var} = o.mixOuts(o.asStreams(miss), o.asStreams(hit), o.ch.{synth_var})"
             )
+            wf_fns += [f"def msm_in_{step.order}(o) {{"] + fn_in + ["}"]
+            out_params = "o, miss, hit"
             wf_main.append(
-                f"{out_var} = o.mixOuts(o.asStreams({process_name}({miss_var})), "
-                f"o.asStreams({twin_name}({hit_var})), {synth_var})"
+                f"msm_out_{step.order}(o, {process_name}(msm_in_{step.order}(o)), "
+                f"{twin_name}(o.ch.{hit_var}))"
             )
-            streams_expr = out_var
             post_args = slot_ids_literal
             for x in used_archetypes:
                 readers.setdefault(stream(x.dtype), set()).add(step.order)
         else:
             out_var = f"__out_{step.order}"
-            wf_main.append(
-                f"if (o.isProbing()) {{ {out_var} = o.unknowns({step.order}, {outs_literal}) }}"
-                f" else {{ {out_var} = o.asStreams({process_name}()) }}"
+            fn_out.append(
+                TAB+f"def {out_var} = o.isProbing() ? o.unknowns({step.order}, {outs_literal}) : o.asStreams(ran)"
             )
-            streams_expr = out_var
+            out_params = "o, ran"
+            wf_main.append(
+                f"if (o.isProbing()) {{ msm_out_{step.order}(o, null) }}"
+                f" else {{ msm_out_{step.order}(o, {process_name}()) }}"
+            )
             post_args = slot_ids_literal
             if the_plan.multi_case and set(step.cases) != set(the_plan.cases):
                 post_args += f", {groovy_strings(step.cases)}"
         if len(produced_names) == 1:
-            wf_main.append(
-                f"_{produced_names[0]} = (o.post({streams_expr}, k, {post_args}))[0]"
+            fn_out.append(
+                TAB+f"{chan(produced_names[0])} = (o.post({out_var}, k, {post_args}))[0]"
             )
         else:
-            wf_main.append(
-                f"({produced}) = o.post({streams_expr}, k, {post_args})"
-            )
+            fn_out.append(TAB+f"def __posted = o.post({out_var}, k, {post_args})")
+            fn_out += [
+                TAB+f"{chan(x)} = __posted[{i}]" for i, x in enumerate(produced_names)
+            ]
         if step.order in pull_orders:
             for x in used_archetypes:
-                wf_main.append(f"_{stream(x.dtype)} = o.after(_{stream(x.dtype)}, _{produced_names[0]})")
+                fn_out.append(TAB+f"{chan(stream(x.dtype))} = o.after({chan(stream(x.dtype))}, {chan(produced_names[0])})")
         if step.order in final_steps_for_merging:
             for e in final_steps_for_merging[step.order]:
                 names = to_merge_names[stream(e)]
-                to_mix = [f"_{x}" for x in names]
+                to_mix = [chan(x) for x in names]
                 name = get_prod_name(e, force_singular=True)
-                wf_main.append(
-                    f"_{name} = o.mix([{', '.join(to_mix)}])"
+                fn_out.append(
+                    TAB+f"{chan(name)} = o.mix([{', '.join(to_mix)}])"
                 )
+        wf_fns += [f"def msm_out_{step.order}({out_params}) {{"] + fn_out + ["}", ""]
 
         if the_plan.keep_intermediates:
             to_pubish = [x for g in produced_archetypes for x in g]
@@ -900,13 +922,15 @@ def prepare_nextflow(task, context: NextflowGenContext):
         if any(stream(i.dtype) in published_channels for i in step.ProductsOf(g, dep))
     )
     with open(context.work_dir/FOOTPRINT_FILE, "w") as f:
-        json.dump({"published": published_slots}, f)
+        json.dump({
+            "published": published_slots,
+            "keep": sorted(published_channels),
+            "readers": {k: sorted(v) for k, v in sorted(readers.items())},
+        }, f)
 
-    def groovy_map(d: dict[str, set[int]]) -> str:
-        return "[" + ", ".join(f"'{k}': {sorted(v)}" for k, v in sorted(d.items())) + "]" if d else "[:]"
     footprint_literal = (
         f"[probe: params.msm_probe, delete: {'false' if the_plan.keep_intermediates else 'true'}, "
-        f"keep: {groovy_strings(sorted(published_channels))}, readers: {groovy_map(readers)}, "
+        f"keep: _fp.keep, readers: _fp.readers, "
         f"cache_root: \"{cache_root_literal}\", run: params.msm_run, helper: {helper_literal}, "
         f"skip: \"{context.external_work_var}/{SKIP_FILE}\", "
         f"probe_log: \"{context.external_work_var}/{PROBE_LOG}\", "
@@ -941,19 +965,34 @@ def prepare_nextflow(task, context: NextflowGenContext):
             TAB+"}",
         ]
 
-    content = [
+    setup_fn = [
+        "def msm_setup(o) {",
+        TAB+f'def _fp = new groovy.json.JsonSlurper().parseText(file("{FOOTPRINT_FILE}").text)',
+        TAB+f'o.footprint({footprint_literal})',
+        TAB+f'def _lf = new groovy.json.JsonSlurper().parseText(file("{LINEAGE_FILE}").text)',
+        TAB+'o.seedParents(_lf.child2parent)',
+    ] + (
+        [TAB+'o.seedCases(_lf.cases)'] if the_plan.multi_case else []
+    ) + [
+        TAB+'return _lf.lineage',
+        "}",
+        "",
+    ]
+    given_lines = [
+        TAB+f'{chan(v)} = (o.postIn([in("{p.relative_to(context.work_dir)}", l)], ["{p.name}"]{given_served(v)}))[0] // {n}'
+        for p, v, n in prepared_given
+    ]
+    given_chunks = [given_lines[i:i+GIVEN_PER_FN] for i in range(0, len(given_lines), GIVEN_PER_FN)]
+    for i, chunk in enumerate(given_chunks):
+        setup_fn += [f"def msm_given_{i+1}(o, l) {{"] + chunk + ["}", ""]
+
+    content = setup_fn + wf_fns + [
         f"workflow"+" {",
         "main:",
         f'o = new Orchestrator(Channel.fromList([null])) // cant create channels in groovy',
-        f'o.footprint({footprint_literal})',
-        f'_lf = new groovy.json.JsonSlurper().parseText(file("{LINEAGE_FILE}").text)',
-        f'l = _lf.lineage',
-        f'o.seedParents(_lf.child2parent)',
-    ] + (
-        [f'o.seedCases(_lf.cases)'] if the_plan.multi_case else []
-    ) + [
-        f'_{v} = (o.postIn([in("{p.relative_to(context.work_dir)}", l)], ["{p.name}"]{given_served(v)}))[0] // {n}'
-        for p, v, n in prepared_given
+        'l = msm_setup(o)',
+    ] + [
+        f"msm_given_{i+1}(o, l)" for i in range(len(given_chunks))
     ] + [
         line for line in wf_main
     ] + [
@@ -961,8 +1000,8 @@ def prepare_nextflow(task, context: NextflowGenContext):
         "",
         "publish:",
     ] + [
-        f"_{k} = o.publish(_{k}, {groovy_strings(publish_filter[k])})"
-        if k in publish_filter else f"_{k} = o.publish(_{k})"
+        f"_{k} = o.publish({chan(k)}, {groovy_strings(publish_filter[k])})"
+        if k in publish_filter else f"_{k} = o.publish({chan(k)})"
         for k in published_channels
     ] + [
         "}",
@@ -973,6 +1012,6 @@ def prepare_nextflow(task, context: NextflowGenContext):
     ] + [
         "}",
     ]
-    
+
     with open(context.work_dir/context.workflow_file, "w") as f:
         f.write("\n".join([HEADER]+src_process+content))

@@ -141,6 +141,6 @@ def test_a_step_for_some_cases_reads_its_inputs_through_a_case_filter(tmp_path):
     step = next(s for s in bp.plan.steps if s.transform.name in assemble)
     reads = step.uses[0].dtype.key
     assert f"__cases_{step.order} = [" in body
-    assert f"o.group('{reads}', [o.cases(_{reads}, __cases_{step.order})]" in body
+    assert f"o.group('{reads}', [o.cases(o.ch._{reads}, __cases_{step.order})]" in body
     assert body.count("o.cases(") == 1
     assert "o.exclude(" not in body
