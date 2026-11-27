@@ -179,8 +179,10 @@ class Orchestrator {
         this.footprint_cfg = cfg
         this.probing = cfg.probe?.toString() == 'true'
         this.deleting = cfg.delete == true && !this.probing
-        this.keep_streams = (cfg.keep ?: []) as Set
-        this.readers_of = cfg.readers ?: [:]
+        // cfg comes from JsonSlurper, whose lazy maps fail when Nextflow's threads
+        // iterate them (`this.keys is null`), so hold plain copies.
+        this.keep_streams = new HashSet((cfg.keep ?: []).collect { it as String })
+        this.readers_of = new HashMap((cfg.readers ?: [:]).collectEntries { k, v -> [(k as String), new ArrayList(v as List)] })
     }
 
     public boolean isProbing() {
