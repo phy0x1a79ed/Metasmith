@@ -286,40 +286,62 @@ fn cmd_solve() -> Result<(), String> {
         result.iterations, result.refiner_iterations, WIRE_VERSION,
     );
 
-    // The gate. This is what takes the search out of the trusted computing base:
-    // whatever it explored, the bytes about to leave this process have been
-    // adjudicated against the specification by code that shares nothing with it.
-    //
-    // The condition is `complete -> sound`, NOT `sound`. The search returns a
-    // non-empty plan with no target step when its frontier runs out, and that is
-    // a search that gave up rather than a wrong answer -- `test_known_unsound`
-    // pins exactly that behaviour, and a gate that refused it would break the
-    // regression while looking like it had found something.
-    if plan.complete {
-        let wp = witness::problem_of(&enc);
-        let wq = witness::plan_of(&enc, &plan)?;
-        // The verdict comes from `check`, which is the function `SolverProof
-        // .check_spec` is about. `audit` re-implements the same judgement as
-        // loops that can name a coordinate, and the two are tied only by a
-        // `debug_assert_eq!` that `[profile.release]` compiles out -- so gating
-        // on the audit meant the shipped binary was gated by the half nothing is
-        // proved about. It is called here only to say which clause failed.
-        if !solver_witness::check(&wp, &wq) {
-            eprint!("{}", witness::render(&solver_witness_audit::audit(&wp, &wq)));
-            // The rejected plan is the only evidence of WHY a search failed, and
-            // it never leaves the process otherwise. Off unless asked for, so
-            // the refusal stays a refusal.
-            if let Ok(path) = std::env::var("MSM_SOLVER_DUMP_REJECTED") {
-                let body = serde_json::to_string(&plan).map_err(|e| e.to_string())?;
-                std::fs::write(&path, body).map_err(|e| e.to_string())?;
-                eprintln!("msm_solver: rejected plan written to {path}");
-            }
-            return Err(
-                "the plan this search produced does not satisfy the specification; \
-                 refusing to emit it (see the clauses above)"
-                    .to_string(),
-            );
+    if let Err(e) = gate(&enc, &plan) {
+        // The rejected plan is the only evidence of WHY a search failed, and
+        // it never leaves the process otherwise. Off unless asked for, so
+        // the refusal stays a refusal.
+        if let Ok(path) = std::env::var("MSM_SOLVER_DUMP_REJECTED") {
+            let body = serde_json::to_string(&plan).map_err(|e| e.to_string())?;
+            std::fs::write(&path, body).map_err(|e| e.to_string())?;
+            eprintln!("msm_solver: rejected plan written to {path}");
         }
+        return Err(e);
     }
     emit(&plan)
+}
+
+/// This is what takes the search out of the trusted computing base: whatever it
+/// explored, the bytes about to leave this process have been adjudicated against
+/// the specification by code that shares nothing with it.
+///
+/// The condition is `complete -> sound`, NOT `sound`. The search returns a
+/// non-empty plan with no target step when its frontier runs out, and that is a
+/// search that gave up rather than a wrong answer -- `test_known_unsound` pins
+/// exactly that behaviour, and a gate that refused it would break the regression
+/// while looking like it had found something.
+fn gate(enc: &problem::EncodedProblem, plan: &reply::SolveReply) -> Result<(), String> {
+    if !plan.complete {
+        return Ok(());
+    }
+    let wp = witness::problem_of(enc);
+    let wq = witness::plan_of(enc, plan)?;
+    // The verdict comes from `check`, which is the function `SolverProof
+    // .check_spec` is about. `audit` re-implements the same judgement as loops
+    // that can name a coordinate, and the two are tied only by a
+    // `debug_assert_eq!` that `[profile.release]` compiles out -- so gating on
+    // the audit meant the shipped binary was gated by the half nothing is proved
+    // about. It is called here only to say which clause failed.
+    if solver_witness::check(&wp, &wq) {
+        return Ok(());
+    }
+    Err(format!(
+        "the plan this search produced does not satisfy the specification; \
+         refusing to emit it. Violated clauses:\n{}",
+        witness::render(&solver_witness_audit::audit(&wp, &wq)).trim_end()
+    ))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn a_complete_plan_the_witness_rejects_is_refused_with_its_clause() {
+        let case: CheckRequest =
+            serde_json::from_str(include_str!("testdata/provenance_decoy.json")).unwrap();
+        assert!(case.reply.complete);
+        let err = gate(&case.request, &case.reply).unwrap_err();
+        assert!(err.contains("refusing to emit"), "{err}");
+        assert!(err.lines().skip(1).any(|l| l.starts_with("provenance")), "{err}");
+    }
 }
