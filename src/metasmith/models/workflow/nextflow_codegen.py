@@ -849,9 +849,10 @@ def prepare_nextflow(task, context: NextflowGenContext):
                 f"msm_out_{step.order}(o, {process_name}(msm_in_{step.order}(o)), "
                 f"{twin_name}(o.ch.{hit_var}))"
             )
-            wf_main.append(
-                f"if (o.pulling({step.order})) {{ {call} }}" if step.order in pull_orders else call
-            )
+            if step.order in pull_orders:
+                skipped = "; ".join(f"{chan(x)} = o.skipped('{x}')" for x in produced_names)
+                call = f"if (o.pulling({step.order})) {{ {call} }} else {{ {skipped} }}"
+            wf_main.append(call)
             post_args = slot_ids_literal
             for x in used_archetypes:
                 readers.setdefault(stream(x.dtype), set()).add(step.order)

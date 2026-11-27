@@ -100,10 +100,13 @@ def _check_image_store(
 
 
 def _pulls_to_run(
-    shell, doc: dict, agent_env: Environment, agent_home: Path,
+    shell, doc: dict, agent_env: Environment, agent_home: Path, pulls_images: bool,
 ) -> tuple[list[int], list[str], list[str]]:
     # The pull steps to run, the images they fetch, and the missing images no pull
-    # step covers. A runtime with no store to check runs every pull.
+    # step covers. A conda or native agent runs none, and a runtime with no store to
+    # check runs every pull.
+    if not pulls_images:
+        return [], [], []
     images, _ = _manifest_images(doc)
     pulls = {int(order): set(imgs) for order, imgs in (doc.get("pulls") or {}).items()}
     pulled = set().union(*pulls.values())

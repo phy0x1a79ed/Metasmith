@@ -691,7 +691,7 @@ class _WorkflowOps:
 
             _, _unknown = _manifest_images(env_doc)
             _pull_orders, _pulling, _unpulled = _pulls_to_run(
-                sh_remote, env_doc, agent_env, self.home.GetPath(),
+                sh_remote, env_doc, agent_env, self.home.GetPath(), self._pulls_images(),
             )
             sh_remote.Exec(
                 f"cat > {workspace/PULLS_FILE} <<'MSM_PULLS'\n{json.dumps(_pull_orders)}\nMSM_PULLS",

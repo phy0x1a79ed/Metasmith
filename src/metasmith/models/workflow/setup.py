@@ -169,6 +169,7 @@ def _pull_steps(task: WorkflowTask) -> list[WorkflowStep]:
             dependency_map={image: list(members), record: [product]},
             transform=pull,
             transform_library=lib,
+            cases=list(task.plan.cases),
         ))
     return steps
 
