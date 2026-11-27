@@ -2,34 +2,65 @@ name: viromics_survey_from_assembly
 description: 'Call viral contigs from an assembly with VirSorter2 and geNomad, and
   quantify
 
-  crAssphage coverage in the clean reads as a faecal-source marker. DRAM-v''s
+  crAssphage coverage in the clean reads as a faecal-source marker. Cluster the
 
-  auxiliary metabolic genes need the vOTU stack; engcyc_metagenomics has them.'
+  viral contigs into vOTUs and annotate each with DRAM-v, which reports its
+
+  auxiliary metabolic genes.'
 transform_libraries:
 - logistics
 - metagenomics
 - functionalAnnotation
+- viromics
 resource_libraries:
 - env
+- lib
+- ref
 cases:
 - name: case
-  sample_type: sequences::assembly
+  sample_type: null
   target_types:
   - annotation::virsorter2_viral_sequences
   - taxonomy::genomad_virus_summary
   - taxonomy::genomad_plasmid_summary
   - annotation::crassphage_coverage
-  shared_input_paths: []
+  - annotation::dramv_amg_summary
+  shared_input_paths:
+  - contig_study.json
+  - eggnog_source.json
 input_library:
   schema: v1
   manifest:
-    /msm_deferred/bd283a9984b6436b86574c74949ec075:
+    /msm_deferred/71dd291a44d54bb199af6dd69b749737:
       type: sequences::clean_short_reads
       parents:
-        vLgTGx5gCxwQ@/msm_deferred/f9ca655a9f094e06b6cbaed0ca01b2c5: sequences::assembly
-      instance_id: 1e209f818ffe0c1e8aefbb1dea413fcc55198668364fc662fa0d4c81d28a6fc1defe
+        DxhW47sTETTx@/msm_deferred/9c0380d8826441fab875ac2169122d1a: sequences::assembly
+      instance_id: 1e20b4a4a4f0219b093c982cc2df1f7c6209cc3f05f6046ab84aee9c21285169924a
       origin: leaf
-    /msm_deferred/f9ca655a9f094e06b6cbaed0ca01b2c5:
+    /msm_deferred/9c0380d8826441fab875ac2169122d1a:
       type: sequences::assembly
-      instance_id: 1e2025464aae54f412cf7af5e186c89eed92804aa804150f0388b0bd4585ed153b2f
+      parents:
+        DxhW47sTETTx@sample_reads_metadata.json: sequences::read_metadata
+      instance_id: 1e20e63e2efc6cee067260a31ba8329a5c122278aec066db772caca22f8de7fe134f
       origin: leaf
+    contig_study.json:
+      type: viromics::contig_study
+      instance_id: 1e202f446c0d1cff58a23a8fc62a73d5c053c56ccdd627e5a9cdbb0c165d0f011715
+      origin: leaf
+      value: true
+    eggnog_source.json:
+      type: annotation::eggnog_source
+      instance_id: 1e207c86f58ecb9d9c7e3d781ff76efab9d175638eeef5b1d9f0378e6845a3b76bd8
+      origin: leaf
+      value: true
+    sample_reads_metadata.json:
+      type: sequences::read_metadata
+      parents:
+        DxhW47sTETTx@contig_study.json: viromics::contig_study
+      instance_id: 1e2004b525b4daa75453b691145d8f103f6f97aaf6694d6fa9b1a9f6e17df38155c5
+      origin: leaf
+      value: true
+  values:
+    contig_study.json: '{"logistics": "contig study"}'
+    eggnog_source.json: '{"release": "emapperdb-5.0.2"}'
+    sample_reads_metadata.json: '{"parity": "paired", "length_class": "short"}'
