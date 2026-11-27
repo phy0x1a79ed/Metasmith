@@ -191,42 +191,46 @@ cases:
   - type: env::pulled_container
     parents:
     - 93
-  - type: env::python_for_data_science.env
+  - type: env::psortm.env
   - type: env::pulled_container
     parents:
     - 95
-  - type: env::rgi.env
+  - type: env::python_for_data_science.env
   - type: env::pulled_container
     parents:
     - 97
-  - type: env::samtools.env
+  - type: env::rgi.env
   - type: env::pulled_container
     parents:
     - 99
-  - type: env::semibin.env
+  - type: env::samtools.env
   - type: env::pulled_container
     parents:
     - 101
-  - type: env::seqkit.env
+  - type: env::semibin.env
   - type: env::pulled_container
     parents:
     - 103
-  - type: env::skani.env
+  - type: env::seqkit.env
   - type: env::pulled_container
     parents:
     - 105
-  - type: env::sylph.env
+  - type: env::skani.env
   - type: env::pulled_container
     parents:
     - 107
-  - type: env::vibrant.env
+  - type: env::sylph.env
   - type: env::pulled_container
     parents:
     - 109
-  - type: env::virsorter2.env
+  - type: env::vibrant.env
   - type: env::pulled_container
     parents:
     - 111
+  - type: env::virsorter2.env
+  - type: env::pulled_container
+    parents:
+    - 113
   shared_input_paths: []
 input_library:
   schema: v1

@@ -781,7 +781,13 @@ def _write_extra_lanes(work: Path) -> list:
         + busco("archaea_odb10", ("115808at2157", "Fragmented", ORFS[0], "48.9", "123", url, "GGR"))
         # a chunk with no hit at all: BUSCO drops the url and description columns
         + busco("archaea_odb10", ("115808at2157", "Missing")).replace("\tOrthoDB url\tDescription", ""))
+    lineage = "d__Bacteria;p__Pseudomonadota;s__Escherichia coli"
+    (w / "psortm.tsv").write_text(
+        "orf\tmag\tgtdb\tenvelope\tlocalization\tscore\n"
+        f"{ORFS[0]}\tbin1\t{lineage}\tneg\tCytoplasmicMembrane\t10.00\n"
+        f"{ORFS[1]}\tbin2\td__Bacteria;p__Patescibacteriota\tundetermined\t\t\n")
     return [
+        ("psortm", w / "psortm.tsv"),
         *[(lane, w / f"{lane}.tsv", w / f"{lane}_descriptions.tsv") for lane in bsr_lanes],
         ("pathofact_hmm", w / "pf_tox.tbl", w / "pf_vf.tbl", w / "pf_desc.tsv"),
         ("pathofact_ml", w / "pf_tox_ml.tsv", w / "pf_vf_ml.tsv"),
@@ -854,6 +860,11 @@ def test_annotation_table_carries_every_lane_under_the_fastas_ids(tmp_path):
         ("archaea_odb10", "115808at2157", ORFS[0], "Fragmented"),
         ("bacteria_odb10", "1009041at2", ORFS[0], "Duplicated"),
         ("bacteria_odb10", "1009041at2", ORFS[1], "Duplicated")]
+    # an ORF PSORTm left undetermined keeps its row, as Unknown with no score
+    loc = df[df["lane"] == "psortm"].set_index("orf")
+    assert list(loc.loc[ORFS, "term"]) == ["CytoplasmicMembrane", "Unknown"]
+    assert list(loc.loc[ORFS, "psortm_envelope"]) == ["neg", "undetermined"]
+    assert loc.loc[ORFS[0], "score"] == 10.0 and np.isnan(loc.loc[ORFS[1], "score"])
 
 
 def test_dram_annotations_render_one_mags_rows_the_way_dram_cuts_them(tmp_path):

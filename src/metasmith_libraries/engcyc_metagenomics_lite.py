@@ -24,6 +24,7 @@ Gene function: DIAMOND UniRef50 and KOfam; CLEAN, ProteinBERT and BiGG lanes; th
 Marker genes: BUSCO bacteria and archaea markers on every ORF.
 Genome features: Bakta non-coding, ARAGORN tRNA, mobileOG, PromoTech promoters.
 Regulation and transport: DeepTFactor, PredicTF, TCDB by DIAMOND.
+Localization: PSORTm on the quality MAGs' ORFs (no download).
 Resistome: RGI/CARD, BacMet, VFDB. RefSeq viral lane.
 GEM per quality MAG: CarveMe from the BiGG lane, then MEMOTE. CarveMe needs a growth
 medium: give modelling::media and modelling::medium_name.

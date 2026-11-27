@@ -36,6 +36,9 @@ eggNOG (12 GB, 55 GB unpacked).
 Marker genes: BUSCO bacteria and archaea odb10 markers on every ORF (0.01 GB).
 Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
 (< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
+Localization: PSORTm (PSORTb 3.0; no download, its databases are in its 1.4 GB image)
+on the quality MAGs' ORFs, the envelope from each MAG's GTDB-Tk phylum; ORFs off the
+quality MAGs get no call.
 GPR table: the 4-lane table (KOfam, CLEAN, UniRef50, ProteinBERT); the DeepEC and
 BiGG lane tables beside it. Its reaction bridge is built from MetaNetX, Rhea and KEGG,
 and ProteinBERT's landmarks from Swiss-Prot (0.35 GB together).
@@ -97,6 +100,8 @@ TARGETS = [
     # regulation and transport: no download, or a small one
     *({"type": f"annotation::{t}", "parents": _O}
       for t in ("deeptfactor_results", "predictf_results", "diamond_tcdb_results")),
+    # localization: PSORTm on the quality MAGs' ORFs, enveloped from their GTDB-Tk taxonomy
+    {"type": "annotation::psortm_lane_table", "parents": _O},
     # lane tables the GPR tables, DRAM, PathoFact and CarveMe read
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
       for lane in ("merops", "refseq_viral", "vogdb", "dbcan", "deepec", "deeparg",
