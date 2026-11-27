@@ -783,9 +783,9 @@ def _write_extra_lanes(work: Path) -> list:
         + busco("archaea_odb10", ("115808at2157", "Missing")).replace("\tOrthoDB url\tDescription", ""))
     lineage = "d__Bacteria;p__Pseudomonadota;s__Escherichia coli"
     (w / "psortm.tsv").write_text(
-        "orf\tmag\tgtdb\tenvelope\tlocalization\tscore\n"
-        f"{ORFS[0]}\tbin1\t{lineage}\tneg\tCytoplasmicMembrane\t10.00\n"
-        f"{ORFS[1]}\tbin2\td__Bacteria;p__Patescibacteriota\tundetermined\t\t\n")
+        "orf\tcontig\tlineage\tenvelope\tlocalization\tscore\n"
+        f"{ORFS[0]}\t{CONTIGS[0]}\t{lineage}\tneg\tCytoplasmicMembrane\t10.00\n"
+        f"{ORFS[1]}\t{CONTIGS[0]}\td__Bacteria\tundetermined\t\t\n")
     return [
         ("psortm", w / "psortm.tsv"),
         *[(lane, w / f"{lane}.tsv", w / f"{lane}_descriptions.tsv") for lane in bsr_lanes],
@@ -864,6 +864,7 @@ def test_annotation_table_carries_every_lane_under_the_fastas_ids(tmp_path):
     loc = df[df["lane"] == "psortm"].set_index("orf")
     assert list(loc.loc[ORFS, "term"]) == ["CytoplasmicMembrane", "Unknown"]
     assert list(loc.loc[ORFS, "psortm_envelope"]) == ["neg", "undetermined"]
+    assert set(loc["contig"]) == {CONTIGS[0]}
     assert loc.loc[ORFS[0], "score"] == 10.0 and np.isnan(loc.loc[ORFS[1], "score"])
 
 

@@ -548,9 +548,9 @@ def parse_busco(path):
     })
 
 
-# ---- PSORTm: psortm.sh's merged TSV, one row per ORF on a quality MAG. An ORF whose MAG's
-# phylum PSORTm has no envelope for was not run; it keeps its row as Unknown with no score.
-_PSORTM_COLS = ["orf", "mag", "gtdb", "envelope", "localization", "score"]
+# ---- PSORTm: psortm.sh's merged TSV, one row per ORF. An ORF whose contig has no LCA* phylum,
+# or a phylum PSORTm has no envelope for, was not run; it keeps its row as Unknown with no score.
+_PSORTM_COLS = ["orf", "contig", "lineage", "envelope", "localization", "score"]
 
 
 def parse_psortm(path):
@@ -558,11 +558,11 @@ def parse_psortm(path):
     if list(df.columns) != _PSORTM_COLS:
         _refuse_header(df.columns, _PSORTM_COLS, "psortm_results", "psortm.sh")
     return pd.DataFrame({
-        "orf": df["orf"], "namespace": "psortb.localization",
+        "orf": df["orf"], "contig": df["contig"], "namespace": "psortb.localization",
         "term": df["localization"].where(df["localization"] != "", "Unknown"),
         "score": pd.to_numeric(df["score"], errors="coerce"),
         "score_kind": "psortb_score",
-        "x_envelope": df["envelope"], "x_mag": df["mag"], "x_gtdb": df["gtdb"],
+        "x_envelope": df["envelope"], "x_lineage": df["lineage"],
     })
 
 

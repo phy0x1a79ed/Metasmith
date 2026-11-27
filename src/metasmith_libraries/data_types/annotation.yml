@@ -259,7 +259,7 @@ types:
       ext: parquet
   psortm_lane_table:
     properties:
-      _: the psortm lane in the standard annotation-table format -- one PSORTb localization per ORF on a quality MAG, with the envelope PSORTm ran it under
+      _: the psortm lane in the standard annotation-table format -- one PSORTb localization per ORF, with the envelope PSORTm ran it under and its contig's LCA* lineage
       lane: psortm
       Format: Parquet
       ext: parquet
@@ -718,7 +718,7 @@ types:
       ext: tsv
   psortm_input_chunk:
     properties:
-      _: PSORTm's input -- a chunk of the ORFs on quality MAG contigs, each header `orf<TAB>mag<TAB>PSORTm taxon<TAB>GTDB classification`
+      _: PSORTm's input -- a chunk of the ORFs, each header `orf<TAB>contig<TAB>PSORTm taxon<TAB>LCA* lineage`
       Format: FASTA
       Data: protein sequence
       granularity: chunk
@@ -731,7 +731,7 @@ types:
       ext: tsv
   psortm_results:
     properties:
-      _: PSORTm localization per ORF on a quality MAG -- orf, mag, gtdb, envelope, localization, score
+      _: PSORTm localization per ORF -- orf, contig, lineage, envelope, localization, score
       Format: TSV
       ext: tsv
   diamond_uniref50_results_chunk:

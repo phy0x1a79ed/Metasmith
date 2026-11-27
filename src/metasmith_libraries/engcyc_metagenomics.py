@@ -25,7 +25,9 @@ at >= 50% complete and <= 10% contamination.
 Taxonomy: GTDB-Tk r232 on the quality MAGs (61 GB, 98 GB unpacked); rRNA scan against
 GTDB r232 SSU (~2.4 GB); Metabuli on the contigs, against a GTDB r232 database the
 plan builds from complete genomes, human T2T and RefSeq viral (192 GB download, 77 GB
-built, 203 GB peak disk).
+built, 203 GB peak disk); LCA* per contig, voted from the UniRef50 ORF LCAs, Metabuli
+and the rRNA calls, through an NCBI-to-GTDB map built from the NCBI taxdump and GTDB
+r232 metadata (0.4 GB).
 Read taxonomy: MetaPhlAn and StrainPhlAn (37 GB), sylph (GTDB r220 sketches, 14 GB),
 Kraken2 with Bracken (standard 16 GB) and ganon2 (RefSeq archaea and bacteria, one
 genome per species, ~50 GB), each in its long-read mode on long reads. Short and
@@ -37,8 +39,8 @@ Marker genes: BUSCO bacteria and archaea odb10 markers on every ORF (0.01 GB).
 Regulation and transport: DeepTFactor transcription factors (no download), PredicTF
 (< 1 GB), TCDB transporters by DIAMOND (< 0.1 GB).
 Localization: PSORTm (PSORTb 3.0; no download, its databases are in its 1.4 GB image)
-on the quality MAGs' ORFs, the envelope from each MAG's GTDB-Tk phylum; ORFs off the
-quality MAGs get no call.
+on every ORF, the envelope from its contig's LCA* phylum; an ORF whose contig LCA*
+places no deeper than domain gets Unknown.
 GPR table: the 4-lane table (KOfam, CLEAN, UniRef50, ProteinBERT); the DeepEC and
 BiGG lane tables beside it. Its reaction bridge is built from MetaNetX, Rhea and KEGG,
 and ProteinBERT's landmarks from Swiss-Prot (0.35 GB together).
@@ -74,8 +76,9 @@ ASSEMBLY = "sequences::assembly"
 def binner_set(*binners: str) -> list[str]:
     return [f"binning::{b}_contig_to_bin_table" for b in binners]
 
-# Each entry hangs off the assembly (0), the ORFs (ORFS) or DAS Tool's bins (DAS).
-ORFS, DAS = 3, 5
+# Each entry hangs off the assembly (0), the ORFs (ORFS), DAS Tool's bins (DAS) or the
+# contigs' LCA* taxonomy (LCA).
+ORFS, DAS, LCA = 3, 5, 6
 _A, _O = [0], [ORFS]
 TARGETS = [
     ASSEMBLY,                                                          # 0
@@ -86,6 +89,8 @@ TARGETS = [
     # binning; CheckM on DAS Tool's bins, the ones quality_mags filters, not one binner's
     {"type": "sequences::das_tool_bin_fasta", "parents": _A,           # 5
      "set": binner_set("metabat2", "semibin2", "comebin")},
+    # the Metabuli form of LCA*, named so the solver cannot answer psortm with the other
+    {"type": "taxonomy::contig_lcastar_metabuli", "parents": _A},     # 6
     {"type": "binning::das_tool_summary", "parents": _A},
     {"type": "taxonomy::checkm_stats", "parents": [DAS]},
     {"type": "binning_local::quality_bin_fasta", "parents": _A},
@@ -100,8 +105,8 @@ TARGETS = [
     # regulation and transport: no download, or a small one
     *({"type": f"annotation::{t}", "parents": _O}
       for t in ("deeptfactor_results", "predictf_results", "diamond_tcdb_results")),
-    # localization: PSORTm on the quality MAGs' ORFs, enveloped from their GTDB-Tk taxonomy
-    {"type": "annotation::psortm_lane_table", "parents": _O},
+    # localization: PSORTm on every ORF, enveloped from its contig's LCA* lineage
+    {"type": "annotation::psortm_lane_table", "parents": [ORFS, LCA]},
     # lane tables the GPR tables, DRAM, PathoFact and CarveMe read
     *({"type": f"annotation::{lane}_lane_table", "parents": _O}
       for lane in ("merops", "refseq_viral", "vogdb", "dbcan", "deepec", "deeparg",
@@ -147,6 +152,7 @@ TARGETS = [
 ]
 assert TARGETS[ORFS]["type"] == "sequences::assembly_orfs"
 assert TARGETS[DAS]["type"] == "sequences::das_tool_bin_fasta"
+assert TARGETS[LCA]["type"] == "taxonomy::contig_lcastar_metabuli"
 METABULI = [{"type": t, "parents": _A} for t in ("taxonomy::metabuli", "taxonomy::metabuli_report")]
 # inStrain, Centrifuger and phyloFlash document short reads only.
 SHORT_ONLY = {"annotation::instrain_genome_info", "taxonomy::centrifuger_kreport",
@@ -179,7 +185,7 @@ REFERENCES = [f"annotation::{t}" for t in (
         "antismash", "checkv_db", "dbcan_hmm", "deeparg_db", "dram_sheets", "ganon2_db", "genomad",
         "gtdb", "gtdb_rrna", "interproscan_data", "iphop_db", "kofamscan_ko_list",
         "kofamscan_profiles", "kraken2_db", "label_transfer_landmarks", "merops_diamond_db",
-        "metabuli_ref", "metaphlan_db", "mnxr_lookup", "busco_prokaryote_lineages",
+        "metabuli_ref", "metaphlan_db", "mnxr_lookup", "busco_prokaryote_lineages", "ncbi_to_gtdb_map",
         "pathofact_db", "refseq_viral_diamond_db", "sylph_db", "uniref50_diamond_db", "vcontact3_db",
         "vibrant_db", "vogdb_hmm", "centrifuger_db", "phyloflash_db")]
 CASE_TARGETS = {"short": SHORT_TARGETS, "long": LONG_TARGETS, "hybrid": HYBRID_TARGETS}
@@ -216,11 +222,13 @@ LITE_REFERENCES = [t for t in REFERENCES if t not in LITE_REFERENCE_DROPS]
 
 # A hybrid sample has two BAMs, so without a target on MetaDecoder's table the planner runs
 # MetaBAT2, SemiBin2 and DAS Tool once per BAM. Naming the table plans one of each.
+# Lite has no Metabuli, so its LCA* votes ORFs and rRNA only.
 def lite(targets: list) -> list:
-    orfs = next(i for i, t in enumerate(targets) if _type(t) == "sequences::assembly_orfs")
-    assert not LITE_DROPS & {_type(t) for t in targets[:orfs + 1]}
+    lca = next(i for i, t in enumerate(targets) if _type(t) == "taxonomy::contig_lcastar_metabuli")
+    assert not LITE_DROPS & {_type(t) for t in targets[:lca + 1]}
     targets = [t | {"set": binner_set("metabat2", "semibin2", "metadecoder")} if isinstance(t, dict) and "set" in t else t
                for t in targets if _type(t) not in LITE_DROPS]
+    targets[lca] = targets[lca] | {"type": "taxonomy::contig_lcastar_no_metabuli"}
     return targets + [
         {"type": "binning::metadecoder_contig_to_bin_table", "parents": [0]}]
 

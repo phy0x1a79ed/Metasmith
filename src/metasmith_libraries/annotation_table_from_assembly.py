@@ -9,7 +9,8 @@ DESCRIPTION = """
 Run every annotation lane against an existing assembly and collect their calls into one
 long annotation::annotation_table, one row per lane, ORF or contig feature, and term. Also
 cuts the GPR evidence table over every reaction-mapping lane from it
-(annotation::gpr_table_all).
+(annotation::gpr_table_all). The PSORTm lane's contig taxonomy is LCA* from the UniRef50
+ORF LCAs and the rRNA calls, without Metabuli.
 
 Every lane includes MetaCyc, which is licensed: give the Pathway Tools installer
 (licensed::pathway_tools_package), from which the MetaCyc 27.0 references are built.
@@ -35,7 +36,11 @@ def build_template(rebuild: bool = False) -> Template:
         cases=[Spec(
             input_library=A.deferred_inputs(NAME, inputs, rebuild=rebuild),
             sample_type=None,
-            target_types=["annotation::annotation_table", "annotation::gpr_table_all"],
+            # The psortm lane reads either LCA* form; naming the one without Metabuli spares
+            # its 192 GB database.
+            target_types=["taxonomy::contig_lcastar_no_metabuli",
+                          {"type": "annotation::annotation_table", "parents": [0]},
+                          "annotation::gpr_table_all"],
         )],
         transform_libraries=A.transforms(
             "metagenomics", "logistics", "functionalAnnotation", "fabfos"),

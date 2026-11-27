@@ -125,7 +125,7 @@ class TestContigTaxonomy:
     def _hit(self, orf, sseqid, bits=300.0, bsr=0.9, length=200):
         return [orf, sseqid, "90", str(length), "1", "0", "1", "200", "1", "200", "1e-50", str(bits), str(bsr)]
 
-    def test_three_sources_vote_per_contig(self, tmp_path):
+    def _sources(self, tmp_path):
         hits = tmp_path / "hits.tsv"
         rows = [self._hit(f"c1_{i}", "UniRef50_A") for i in (1, 2, 3)]
         rows += [self._hit("c2_1", "UniRef50_B"), self._hit("c2_2", "UniRef50_A", bsr=0.1)]
@@ -147,13 +147,19 @@ class TestContigTaxonomy:
         rrna = tmp_path / "rrna.tsv"
         rrna.write_text("gene\tcontig\tproduct\tlineage\trank\tbest_identity\tbest_bitscore\tn_hits\n"
                         f"rrna_1\tc1\t16S\t{ECOLI}\tspecies\t99.9\t2700\t1\n")
-        out = tmp_path / "out.tsv"
-        sys.argv = ["contig_taxonomy", "--hits", str(hits), "--descriptions", str(descs),
-                    "--map", str(tax_map), "--metabuli", str(metabuli), "--metabuli-ref", str(mb_ref),
-                    "--rrna", str(rrna), "--out", str(out)]
-        contig_taxonomy.main()
+        common = ["--hits", str(hits), "--descriptions", str(descs), "--map", str(tax_map),
+                  "--rrna", str(rrna)]
+        return common, ["--metabuli", str(metabuli), "--metabuli-ref", str(mb_ref)]
 
-        table = pd.read_csv(out, sep="\t").set_index("contig")
+    def _vote(self, tmp_path, args):
+        out = tmp_path / "out.tsv"
+        sys.argv = ["contig_taxonomy", *args, "--out", str(out)]
+        contig_taxonomy.main()
+        return pd.read_csv(out, sep="\t", keep_default_na=False).set_index("contig")
+
+    def test_three_sources_vote_per_contig(self, tmp_path):
+        common, metabuli = self._sources(tmp_path)
+        table = self._vote(tmp_path, common + metabuli)
         assert table.loc["c1", "lineage"] == ECOLI
         assert (table.loc["c1", "orf_votes"], table.loc["c1", "metabuli_votes"],
                 table.loc["c1", "rrna_votes"]) == (3, 1, 1)
@@ -164,3 +170,11 @@ class TestContigTaxonomy:
         # An empty match column falls back to one vote for the contig's own call.
         assert table.loc["c2", "metabuli_votes"] == 1
         assert "c3" not in table.index
+
+    def test_without_metabuli_orfs_and_rrna_vote_alone(self, tmp_path):
+        common, _ = self._sources(tmp_path)
+        table = self._vote(tmp_path, common)
+        assert table.loc["c1", "lineage"] == ECOLI
+        assert (table.loc["c1", "orf_votes"], table.loc["c1", "metabuli_votes"],
+                table.loc["c1", "rrna_votes"]) == (3, 0, 1)
+        assert table.loc["c1", "metabuli_call"] == ""

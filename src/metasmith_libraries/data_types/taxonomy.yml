@@ -15,10 +15,23 @@ types:
     properties:
       _: GTDB r232 lineage per SSU rRNA gene from blastn, capped at the rank its best identity supports (gene, contig, product, lineage, rank, best_identity, best_bitscore, n_hits)
       ext: tsv
+  # A consumer requires contig_lcastar and takes either form; a template picks one by naming
+  # the subtype as a target, since with both producers reachable the solver's pick is not
+  # the template's to rely on.
   contig_lcastar:
     properties:
-      _: LCA* GTDB r232 lineage per contig voted from UniRef50 ORF LCAs, Metabuli k-mer matches and SSU rRNA, with each source's votes and own call
+      _: LCA* GTDB r232 lineage per contig voted from UniRef50 ORF LCAs, SSU rRNA and, where it runs, Metabuli k-mer matches, with each source's votes and own call
       ext: tsv
+  contig_lcastar_metabuli:
+    extends:
+    - contig_lcastar
+    properties:
+      votes: uniref50 orf lca, metabuli, ssu rrna
+  contig_lcastar_no_metabuli:
+    extends:
+    - contig_lcastar
+    properties:
+      votes: uniref50 orf lca, ssu rrna
 
   genomad_virus_summary:
     properties:

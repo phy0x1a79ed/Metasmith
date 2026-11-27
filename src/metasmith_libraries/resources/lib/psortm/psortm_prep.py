@@ -1,15 +1,14 @@
-"""PSORTm's input chunks: the ORFs on quality MAG contigs, each tagged with the taxon PSORTm reads.
+"""PSORTm's input chunks: every ORF, each tagged with the taxon PSORTm reads for it.
 
 PSORTm picks a protein's envelope from the NCBI phylum of the taxon name it is given, against an
-NCBI taxonomy of 2017 and a 27-row phylum table. GTDB-Tk names a MAG in GTDB, so each MAG's
-GTDB lineage is translated into the NCBI-era name PSORTm resolves; a phylum it has no row for is
-passed through as-is and PSORTm leaves its proteins undetermined. ORFs on contigs outside every
-quality MAG have no taxonomy and are not chunked.
+NCBI taxonomy of 2017 and a 27-row phylum table. Each ORF takes its contig's LCA* GTDB lineage,
+translated into the NCBI-era name PSORTm resolves; a phylum it has no row for is passed through
+as-is and PSORTm leaves its proteins undetermined. An ORF whose contig has no LCA* call at phylum
+or deeper is tagged `Bacteria`, which PSORTm also leaves undetermined, so it keeps a row.
 
-    psortm_prep.py --orfs ORFS.faa --mags MAGS.tsv --chunk-size N --out-dir DIR
+    psortm_prep.py --orfs ORFS.faa --contig-taxonomy CONTIG_LCASTAR.tsv --chunk-size N --out-dir DIR
 
-MAGS.tsv: mag, fasta, gtdbtk (a GTDB-Tk summary table for that MAG). Each chunk record is
-`>orf<TAB>mag<TAB>psortm taxon<TAB>gtdb classification`.
+Each chunk record is `>orf<TAB>contig<TAB>psortm taxon<TAB>LCA* lineage`.
 """
 import argparse
 import csv
@@ -70,13 +69,13 @@ def psortm_taxon(lineage):
     return GTDB_TO_PSORTM.get(phylum, phylum)
 
 
-def gtdb_lineage(table):
+def contig_lineages(table):
     with open(table) as fh:
-        rows = list(csv.DictReader(fh, delimiter="\t"))
-    if not rows or "classification" not in rows[0]:
-        raise SystemExit("[psortm] " + table + " is not a GTDB-Tk summary table with a "
-                         "`classification` column")
-    return rows[0]["classification"]
+        rows = csv.DictReader(fh, delimiter="\t")
+        if not rows.fieldnames or not {"contig", "lineage"} <= set(rows.fieldnames):
+            raise SystemExit("[psortm] " + table + " is not an LCA* contig table with `contig` "
+                             "and `lineage` columns")
+        return {row["contig"]: row["lineage"] for row in rows}
 
 
 def read_fasta(path):
@@ -97,39 +96,35 @@ def main():
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--orfs", required=True)
-    p.add_argument("--mags", required=True)
+    p.add_argument("--contig-taxonomy", required=True)
     p.add_argument("--chunk-size", type=int, required=True)
     p.add_argument("--out-dir", required=True)
     a = p.parse_args()
 
-    contig_tag = {}
-    with open(a.mags) as fh:
-        for row in csv.DictReader(fh, delimiter="\t"):
-            lineage = gtdb_lineage(row["gtdbtk"])
-            taxon = psortm_taxon(lineage) or "Bacteria"
-            print("[psortm] " + row["mag"] + ": " + lineage + " -> " + taxon, flush=True)
-            for contig, _ in read_fasta(row["fasta"]):
-                contig_tag[contig] = (row["mag"], taxon, lineage)
-
-    # Prodigal names each protein <contig>_<n>.
-    records, n_orfs = [], 0
+    lineage_of = contig_lineages(a.contig_taxonomy)
+    records, placed = [], 0
     for orf, seq in read_fasta(a.orfs):
-        n_orfs += 1
-        tag = contig_tag.get(orf.rpartition("_")[0])
-        if tag is not None:
-            records.append((orf, tag, seq.rstrip("*")))
-    print("[psortm] " + str(len(records)) + " of " + str(n_orfs) + " ORFs lie on "
-          + str(len({t[0] for t in contig_tag.values()})) + " quality MAGs", flush=True)
+        # Prodigal names each protein <contig>_<n>.
+        contig = orf.rpartition("_")[0]
+        lineage = lineage_of.get(contig, "")
+        taxon = psortm_taxon(lineage) if _rank(lineage, "p__") else None
+        placed += taxon is not None
+        records.append((orf, contig, taxon or "Bacteria", lineage, seq.rstrip("*")))
+    print("[psortm] " + str(placed) + " of " + str(len(records)) + " ORFs lie on a contig LCA* "
+          "placed at phylum or deeper", flush=True)
     if not records:
-        raise SystemExit("[psortm] no ORF lies on a quality MAG contig; the ORFs and the MAGs "
-                         "come from different assemblies, or the ORF ids are not `<contig>_<n>`")
+        raise SystemExit("[psortm] the ORF FASTA has no records")
+    if not placed:
+        print("[psortm] no ORF's contig has a phylum; every row will be Unknown. Check that the "
+              "LCA* table and the ORFs come from one assembly and the ORF ids are `<contig>_<n>`",
+              flush=True)
 
     os.makedirs(a.out_dir, exist_ok=True)
     n_chunks = math.ceil(len(records) / a.chunk_size)
     for k in range(n_chunks):
         with open(os.path.join(a.out_dir, "chunk_%04d.faa" % k), "w") as out:
-            for orf, (mag, taxon, lineage), seq in records[k::n_chunks]:
-                out.write(">" + "\t".join((orf, mag, taxon, lineage)) + "\n" + seq + "\n")
+            for orf, contig, taxon, lineage, seq in records[k::n_chunks]:
+                out.write(">" + "\t".join((orf, contig, taxon, lineage)) + "\n" + seq + "\n")
 
 
 if __name__ == "__main__":

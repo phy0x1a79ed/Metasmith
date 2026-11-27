@@ -10,13 +10,11 @@ ev_lib  = model.AddRequirement(lib.GetType("lib::fabfos_evidence.py"))
 gpr_lib = model.AddRequirement(lib.GetType("lib::fabfos_gpr"))
 
 # Every lane, so this is the one table a user selects to have them all. Each consuming tool
-# requires only the lane tables it reads instead. The psortm lane is left out: it needs
-# GTDB-classified quality MAGs, which an assembly alone cannot give, and
-# annotation_table_from_assembly would stop solving.
+# requires only the lane tables it reads instead.
 ORF_LANES = ("kofam", "clean", "uniref50", "uniref90", "swissprot", "metacyc", "pbert", "deepec",
              "eggnog", "interproscan", "mobileog", "megares", "bacmet", "vfdb", "bigg", "dbcan",
              "merops", "vogdb", "refseq_viral", "rgi", "amrfinderplus", "pathofact_hmm",
-             "pathofact_ml", "deeparg")
+             "pathofact_ml", "deeparg", "psortm")
 CONTIG_LANES = ("bakta_nc", "antismash")
 tables = (
     [model.AddRequirement(lib.GetType(f"annotation::{k}_lane_table"), parents={orfs})
