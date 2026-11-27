@@ -670,7 +670,8 @@ Decided:
 - In, full and lite: DeepTFactor, PredicTF, TCDB by DIAMOND, PromoTech (1793ea63).
 - Out: crAssphage coverage, UniRef90, GPU-heavy embedding and structure lanes (ESM-C, EzPred, ESMFold, Foldseek, SaProt, ProtT5, Ankh).
 - DRAM: "We don't want to run dram itself. That's why it's like the dram distill." Delete dram_annotate_genes and its DRAM 1.5 database steps.
-- Marker genes: CheckM2 has no marker table, so BUSCO runs in parallel, against the assembly (genome mode per quality MAG). Its per-marker table is published as marker_gene_hit_table.
+- Marker genes: CheckM2 has no marker table, so BUSCO runs in parallel. Tony: "We want to run it on the full assembly so that we have everything. It's just another per protein annotation lane." BUSCO runs in protein mode on every ORF chunk against bacteria_odb10 and archaea_odb10, and the lane publishes marker_gene_hit_table (feat/engine/lane-gap, merged).
+- DRAM 1.5's own pass and the old upstream DRAM-v run (dramv.py) are deleted. viromics_survey_from_assembly loses its AMG output as a result (open: confirm, or load the viromics stack).
 - Gram type: Tony wants "a citable tool", not a rule over KOfam hits. Traitar, fed by InterProScan's Pfam hits through from_annotation_summary, after a check against Traitar's own Pfam 27 pass on known-Gram genomes. PSORTb 3 runs per MAG with that Gram call.
 - Localization: open question for a literature review (Claude Science aa4e5064). Tony: "It's not really signal peptide. It's just does the protein go into the membrane or does the protein go in solution?"
 - DeepTMHMM stays licensed and opt-in.
