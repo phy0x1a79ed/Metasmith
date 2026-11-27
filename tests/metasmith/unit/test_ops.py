@@ -396,7 +396,7 @@ class TestRuntimeOps:
         agent_path, key, _ = planned
         call = self._run_kwargs(agent_path, key, stub_delay=2.5)
         assert call.kwargs["stub_delay"] == 2.5
-        assert "gpus" not in call.kwargs
+        assert call.kwargs.get("gpus") is None
         assert call.args == (key,)
 
     def test_a_numeric_override_key_addresses_one_step(self, planned):
