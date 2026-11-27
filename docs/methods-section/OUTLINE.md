@@ -35,7 +35,7 @@ Order and names (outline-sections, 2026-11-26): Planning, Specification, Executi
   2. A type X satisfies Y when X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
   3. A port is a typed position on a step with a fixed lineage, and inputs bind to ports.
   4. A port X satisfies a lineage requirement Z when X was produced from ports with types that map to each type in Z, L(X,Z).
-- Note: the d3 formula is kept (some ancestor's type satisfies each type in Z). The code is stricter: it checks the port bound to the ancestor input itself (`workflow_solver/src/search.rs:215`). Open for the user. EDAM dropped: "a rough link". 
+- Note: the d3 formula is kept (some ancestor's type satisfies each type in Z). The code is stricter on purpose: it checks the port bound to the ancestor input itself (`workflow_solver/src/search.rs:215`). The Methods must state the strict check and explain why (Tony, 2026-11-27). EDAM dropped: "a rough link". 
 
 #### P2. Search and selection — proposed
 - Role: how the plan is found.

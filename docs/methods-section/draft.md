@@ -1,12 +1,12 @@
-# Methods — draft for d2
+# Methods — draft for d3
 
-Draft prose for the d2 Methods, rebuilt from the code and the benchmark records. `[TODO]` marks a fact no file records. `[CHECK]` marks a place where the records and the d2 Results disagree; each is listed at the end with its source.
+Draft prose for the d3 Methods, rebuilt from the code and the benchmark records. Vocabulary follows `OUTLINE.md` § Terms (property, type, contract, step, port, plan, instance). `[TODO]` marks a fact no file records. `[CHECK]` marks a place where the records and the d2 Results disagree; each is listed at the end with its source.
 
 ## Type system
 
 **Types.** A type is a set of properties, and a type X satisfies a type Y when X carries every property of Y, S(X,Y) ⇔ X ⊇ Y (Figure 1A). Properties are drawn from the EDAM ontology (version 1.25), extended with terms of our own where EDAM is insufficient. Types are declared in YAML libraries, where a type may extend an earlier type by taking the union of its properties. A type has no identity beyond its properties, so two libraries that declare the same property set declare the same type.
 
-**Lineage.** An input of a contract may declare that it must descend from another of the same contract's inputs. The constraint is checked against the data actually bound to that other input: a candidate satisfies it only if the bound instance is among the candidate's transitive ancestors. Because each instance's ancestry is folded into its signature, lineage is part of an instance's identity, and two instances of the same type with different histories are never interchangeable.
+**Lineage.** An input of a contract may declare that it must descend from another of the same contract's inputs. The constraint is checked against the port actually bound to that other input: a candidate port satisfies it only if the bound port is among its transitive ancestors. `[Explain why the check is this strict; deliberate, per Tony 2026-11-27.]` Because each port's ancestry is folded into its signature, lineage is part of a port's identity, and two ports of the same type with different histories are never interchangeable.
 
 **Grouping and splitting.** Each contract names one input as its group-by index. Every value arriving on the index stream defines one input set. Values on the other inputs are related to the index by lineage: an ancestor of the index value is copied into its input set, and descendants of the index value are gathered into it. Each input set yields one execution. Each execution may emit any number of instances of its declared outputs, and each instance is pushed downstream as its own value, so outputs split implicitly (Figure 1C, D). A batch size folds several whole input sets into one job without splitting any of them. Any routing beyond this is written as a contract of its own that takes an enclosing group and re-emits the desired sets.
 
@@ -14,13 +14,13 @@ Draft prose for the d2 Methods, rebuilt from the code and the benchmark records.
 
 ## Solver
 
-**Search.** The solver turns a specification into a DAG of steps by searching over partial plans. A state is a partial DAG that starts with only the given and target steps, and it is solved when no requirement is left unmet. Expanding a state applies one contract with an explicit mapping of which existing outputs satisfy each of its inputs. A mapping is valid only where both the type and the lineage constraints hold, and each valid mapping is a distinct child state.
+**Search.** The solver turns a specification into a DAG of steps by searching over partial plans. A state is a partial DAG that starts with only the given and target steps, and it is solved when no requirement is left unmet. Expanding a state adds one step, a use of one contract that binds each of its inputs to an existing port and exposes one new port per output type. A mapping is valid only where both the type and the lineage constraints hold, and each valid mapping is a distinct child state.
 
 **Selection.** States are chosen for expansion with a PUCT rule, Q + c·p·√(1+N)/(1+n) with c = 1.5. The prior p is a softmax (temperature 0.5) over two normalised scores: the number of requirements a step would satisfy, and a breadth-first estimate of its distance to the targets. A step whose product has the same type as one of its own inputs is penalised in the prior, because such a step can re-enable itself indefinitely. Statistics are kept per contract rather than per state, because a state is expanded only once. Q is the decayed mean (0.985) of the progress each expansion made, and contracts not yet tried start at 1.5. No rollouts are performed. Steps that cannot contribute to any target are pruned before the search starts.
 
 **Refinement.** The first solution is not guaranteed to be the smallest, because lineage makes the search path dependent. A refiner therefore tries single-edge swaps of each step's input bindings, rebuilds downstream lineage, and drops any step left disconnected from the targets. The search is limited to 256 iterations and the refiner to 8.
 
-**Determinism and checking.** The solver is written in Rust and seeded (default 42), so the same specification always yields the same plan. Every plan is checked by an independent verifier before it is returned. The verifier tests ten conditions, including type conformance, a unique producer for every instance, provenance, schedulability and target coverage, and is specified in Lean (src/solver_witness).
+**Determinism and checking.** The solver is written in Rust and seeded (default 42), so the same specification always yields the same plan. Every plan is checked by an independent verifier before it is returned. The verifier tests ten conditions, including type conformance, a unique producer for every port, provenance, schedulability and target coverage, and is specified in Lean (src/solver_witness).
 
 ## Data instances and caching
 
@@ -30,7 +30,7 @@ User inputs are imported by declaring a type for each file, chosen from the type
 
 **Transforms.** A transform pairs a contract with a Python script. The script receives a context object with the paths of its inputs, the paths its outputs must take, and helpers to run shell commands and containers. Most transforms call one external tool and only pass paths through.
 
-**Compilation.** Each step of a plan compiles to one Nextflow process. A Groovy plugin carries each value as a tuple with its index and lineage hashes, and it performs the grouping described above at run time, flushing each input set as soon as it is complete. The plan is also drawn as a DAG, coloured by module.
+**Compilation.** Each step of a plan compiles to one Nextflow process, and each port to one channel. A Groovy plugin carries each value as a tuple with its index and lineage hashes, and it performs the grouping described above at run time, flushing each input set as soon as it is complete. The plan is also drawn as a DAG, coloured by module.
 
 **Execution.** An agent is a home directory, local or reachable over SSH, where workflows are staged and run. Staging writes the workflow, input manifests, parameters and a bootstrap script. Running the bootstrap script launches Nextflow (26.04.1) inside the Metasmith container (quay.io/hallamlab/metasmith), detached from the user's session. Each tool runs in its own container (Docker or Apptainer), started through a relay outside the main container. All Nextflow executors are available. Local and SLURM presets are provided and tested.
 
