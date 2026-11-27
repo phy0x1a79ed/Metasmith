@@ -548,6 +548,24 @@ def parse_busco(path):
     })
 
 
+# ---- PSORTm: psortm.sh's merged TSV, one row per ORF on a quality MAG. An ORF whose MAG's
+# phylum PSORTm has no envelope for was not run; it keeps its row as Unknown with no score.
+_PSORTM_COLS = ["orf", "mag", "gtdb", "envelope", "localization", "score"]
+
+
+def parse_psortm(path):
+    df = pd.read_csv(path, sep="\t", dtype=str, keep_default_na=False)
+    if list(df.columns) != _PSORTM_COLS:
+        _refuse_header(df.columns, _PSORTM_COLS, "psortm_results", "psortm.sh")
+    return pd.DataFrame({
+        "orf": df["orf"], "namespace": "psortb.localization",
+        "term": df["localization"].where(df["localization"] != "", "Unknown"),
+        "score": pd.to_numeric(df["score"], errors="coerce"),
+        "score_kind": "psortb_score",
+        "x_envelope": df["envelope"], "x_mag": df["mag"], "x_gtdb": df["gtdb"],
+    })
+
+
 # ---- ProteinBERT: numpy kNN label transfer against the labelled landmarks, with the
 # distance quota and the ORF-level abstain.
 # An embedding table's ids and its vectors, taken from the SAME rows. What is checked is
@@ -744,6 +762,7 @@ LANES = {
     "pathofact_hmm": (parse_pathofact_hmm, "annotation::pathofact_tox_hmm", True),
     "pathofact_ml":  (parse_pathofact_ml, "annotation::pathofact_tox_ml", True),
     "deeparg":       (parse_deeparg, "annotation::deeparg_results", True),
+    "psortm":        (parse_psortm, "annotation::psortm_results", True),
     "bakta_nc":      (parse_bakta_nc, "annotation::bakta_tsv", False),
     "antismash":     (parse_antismash, "annotation::antismash_json", False),
     "busco":         (parse_busco, "annotation::busco_full_table", True),

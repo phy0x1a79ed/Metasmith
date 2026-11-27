@@ -289,46 +289,50 @@ cases:
   - type: env::pulled_container
     parents:
     - 146
-  - type: env::python_for_data_science.env
+  - type: env::psortm.env
   - type: env::pulled_container
     parents:
     - 148
-  - type: env::rgi.env
+  - type: env::python_for_data_science.env
   - type: env::pulled_container
     parents:
     - 150
-  - type: env::samtools.env
+  - type: env::rgi.env
   - type: env::pulled_container
     parents:
     - 152
-  - type: env::semibin.env
+  - type: env::samtools.env
   - type: env::pulled_container
     parents:
     - 154
-  - type: env::seqkit.env
+  - type: env::semibin.env
   - type: env::pulled_container
     parents:
     - 156
-  - type: env::skani.env
+  - type: env::seqkit.env
   - type: env::pulled_container
     parents:
     - 158
-  - type: env::sylph.env
+  - type: env::skani.env
   - type: env::pulled_container
     parents:
     - 160
-  - type: env::vcontact3.env
+  - type: env::sylph.env
   - type: env::pulled_container
     parents:
     - 162
-  - type: env::vibrant.env
+  - type: env::vcontact3.env
   - type: env::pulled_container
     parents:
     - 164
-  - type: env::virsorter2.env
+  - type: env::vibrant.env
   - type: env::pulled_container
     parents:
     - 166
+  - type: env::virsorter2.env
+  - type: env::pulled_container
+    parents:
+    - 168
   shared_input_paths: []
 input_library:
   schema: v1

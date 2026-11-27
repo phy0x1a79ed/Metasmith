@@ -61,6 +61,10 @@ types:
     properties:
       src: modelling
       usage: command line
+  psortm:
+    properties:
+      src: psortm
+      usage: command line
   extract_noncoding_chunks.py:
     properties:
       src: extract_noncoding_chunks
