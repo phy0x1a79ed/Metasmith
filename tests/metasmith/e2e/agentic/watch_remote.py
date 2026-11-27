@@ -14,10 +14,13 @@ from tests.metasmith.e2e.agentic.hosts import HOSTS, run_tag
 
 
 # One find walk feeds every per-directory row: Lustre stats are the cost, so walk once.
+# A product is hardlinked from its work dir, the cache and the run's results, so each
+# inode counts once, against the first name the walk meets.
 PROBE = r'''
 R=$1; MIN=$2
 if [ -d "$R" ]; then
-  timeout 900 find "$R" -mindepth 1 -printf '%P\t%s\n' 2>/dev/null | awk -F'\t' -v min="$MIN" -v root="$R" '
+  timeout 900 find "$R" -mindepth 1 -printf '%P\t%s\t%i\n' 2>/dev/null | awk -F'\t' -v min="$MIN" -v root="$R" '
+    seen[$3]++ { next }
     { n++; s+=$2; k=split($1, a, "/"); p="";
       for (i=1; i<=k && i<=4; i++) { p = (i==1 ? a[1] : p "/" a[i]); c[p]++; b[p]+=$2; d[p]=i } }
     END { printf "total\t%s\t%d\t%d\t\n", root, n, s;

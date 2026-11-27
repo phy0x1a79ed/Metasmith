@@ -27,7 +27,7 @@ HOSTS: dict[str, Host] = {
         scratch_root="/scratch/st-shallam-1/txyliu/msm_e2e",
         modules="module load gcc/9.4.0 && module load apptainer",
         gui_port=8091,
-        max_gb=900.0,
+        max_gb=450.0,
     ),
     "fir": Host(
         ssh="fir",
@@ -36,7 +36,7 @@ HOSTS: dict[str, Host] = {
         scratch_root="/scratch/phyberos/msm_e2e",
         modules="module load apptainer",
         gui_port=8092,
-        max_gb=4000.0,
+        max_gb=1500.0,
         login_nodes=("login1", "login2", "login3"),
     ),
     "nibi": Host(
