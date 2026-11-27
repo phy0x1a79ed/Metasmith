@@ -24,6 +24,8 @@ The page opens at http://127.0.0.1:8090. It binds to the loopback interface only
    sample.
 3. Deselect any target you do not need.
 4. Solve. The GUI shows the plan as a graph of steps.
-5. Run it on an agent, then follow its progress and open its results.
+5. Run it on an agent, then follow its progress and open its results. A plan with a step that
+   needs a GPU shows a GPU memory field in the stage and run panel. Enter the memory of one GPU
+   on the agent. The field starts at the largest amount any step asks for.
 
 Read :doc:`../workflows/_index` for what each shipped template does.

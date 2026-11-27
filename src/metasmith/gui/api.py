@@ -20,6 +20,7 @@ from ..agents.workflow_ops import SlurmAccountProblem, SplitParamKeys
 from ..hashing import KeyGenerator
 from ..logging import Log
 from ..models.dag_renderer import THEMES
+from ..models.libraries import Gpus
 from ..models.paths import is_deferred
 from ..models.workflow import NextflowProcessName
 from ..ops import agent as op_agent
@@ -878,6 +879,7 @@ def get_workflow(name):
     out["request"] = wf.request
     if wf.ok and (
         not wf.result.get("step_display")
+        or "gpu" not in wf.result
         or (wf.result.get("plan_graph") or {}).get("v") != op_workflow.GEOMETRY_VERSION
     ):
         display, plan_graph = _step_display(wf.path, p.root)
@@ -888,7 +890,7 @@ def get_workflow(name):
                 (wf.path / stale).unlink(missing_ok=True)
         if display:
             wf = p.write_result(name, wf.result | {
-                "step_display": display, "plan_graph": plan_graph,
+                "step_display": display, "plan_graph": plan_graph, "gpu": _gpu_need(display),
             })
     out["result"] = wf.result
     out["overrides"] = wf.overrides
@@ -1272,6 +1274,7 @@ def generate_workflow(name):
                 )
                 if result.get("success"):
                     result["step_display"], result["plan_graph"] = _step_display_from_task(task, p.root)
+                    result["gpu"] = _gpu_need(result["step_display"])
             job.emit("PHASE:finishing")
             if result.get("success"):
                 staged = staging / result["task_key"]
@@ -1338,6 +1341,15 @@ def _stdlib_transforms(root: Path) -> tuple[list[dict], dict[tuple[str, str], in
     return transforms, {k: v for k, v in seen.items() if v is not None}
 
 
+def _gpu_need(display: list[dict]) -> dict:
+    asks = [s["declared_resources"] for s in display if s["declared_resources"].get("gpus")]
+    memory = [a["gpu_memory_gb"] for a in asks if a.get("gpu_memory_gb") is not None]
+    return {
+        "required": any(a["gpus"] == Gpus.REQUIRED.value for a in asks),
+        "memory_gb": max(memory) if memory else None,
+    }
+
+
 def _step_display(bundle: Path, root: Path) -> tuple[list[dict], dict | None]:
     try:
         task = _load_task(bundle)
@@ -1358,6 +1370,9 @@ def _step_display_from_task(task, root: Path, bundle: Path | None = None) -> tup
             if res.memory is not None: declared["memory_gb"] = round(res.memory.value_gb, 3)
             if res.duration is not None:
                 declared["duration_h"] = round(res.duration._delta.total_seconds() / 3600, 3)
+            if res.wants_gpu:
+                declared["gpus"] = res.gpus.value
+                if res.gpu_memory is not None: declared["gpu_memory_gb"] = res.gpu_memory.value_gb
         file_name = Path(str(step.transform._path)).name
         out.append({
             "order": step.order,
@@ -1593,7 +1608,7 @@ def _run_summary(r) -> dict:
             "setup_steps", "agent", "task_key", "staged_path", "created_at", "launched_at", "finished_at",
             "collected_at", "run_number", "preset_source", "error",
             "probe_error", "probe_error_at",
-            "params", "resource_overrides",
+            "params", "resource_overrides", "gpu_memory_gb",
         )},
     }
 
@@ -1726,6 +1741,16 @@ def _launch_warnings(preset_text: str, preset_source: str | None, params: dict, 
 RUN_KINDS = ("run", "setup")
 
 
+def _checked_gpu_memory(raw) -> float | None:
+    if raw is None or (isinstance(raw, str) and not raw.strip()): return None
+    try:
+        gb = float(raw)
+    except (TypeError, ValueError):
+        raise AssertionError(f"GPU memory must be a number of GB, not [{raw}]")
+    assert gb > 0, "GPU memory must be more than 0 GB"
+    return gb
+
+
 @bp.post("/runs")
 def create_run():
     # kind `setup` runs the full plan's image pulls and the steps that read no
@@ -1740,6 +1765,12 @@ def create_run():
     wf, agent_path = _runnable(p, workflow, agent_name)
     preset_source = _ensure_preset(p, workflow, agent_name)
     params = _checked_params(b.get("params")) or None
+    gpu_memory_gb = _checked_gpu_memory(b.get("gpu_memory_gb")) if kind == "run" else None
+    if kind == "run" and gpu_memory_gb is None and (wf.result.get("gpu") or {}).get("required"):
+        raise ProjectError(
+            f"workflow [{workflow}] has a step that needs a GPU: give the GPU memory"
+            f" of one device on [{agent_name}] in the GPU field"
+        )
     agent_info = op_agent.info(agent_path)
     busy = Busy(agent_info["home"])
     if busy:
@@ -1757,6 +1788,7 @@ def create_run():
         "preset_source": preset_source,
         "params": params,
         "resource_overrides": _checked_overrides(b.get("resource_overrides")) if kind == "run" else None,
+        "gpu_memory_gb": gpu_memory_gb,
         "on_exist": b.get("on_exist", "update"),
         "keep_intermediates": bool(b.get("keep_intermediates", False)) if kind == "run" else False,
         "launched_by": current_app.config.get("MSM_INSTANCE"),
@@ -1781,6 +1813,7 @@ def create_run():
             is_local_preset=rec.record.get("preset_source") == "local",
             params=rec.record.get("params"),
             resource_overrides=rec.record.get("resource_overrides"),
+            gpu_memory_gb=rec.record.get("gpu_memory_gb"),
         )
         return staged["task_key"]
 

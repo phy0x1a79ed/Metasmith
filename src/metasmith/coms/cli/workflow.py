@@ -77,6 +77,8 @@ def register(subs):
     _run.add_argument("--params", help="JSON dict")
     _run.add_argument("--override", action="append", default=[], dest="overrides",
                       help="step_key=KEY:VALUE,KEY:VALUE (e.g. step1=cpus:4,memory_gb:8)")
+    _run.add_argument("--gpu-memory", type=float, default=None, metavar="GB",
+                      help="memory of one GPU on the target; required when a step needs a GPU")
     _run.add_argument("--stub-delay", type=float, default=0)
     _run.set_defaults(func=_cmd_run)
 
@@ -172,4 +174,5 @@ def _cmd_run(args):
         overrides[step] = kv
     return _rt.run(
         args.agent, args.task_key, args.preset, params, overrides or None, args.stub_delay,
+        gpu_memory_gb=args.gpu_memory,
     )

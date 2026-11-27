@@ -52,17 +52,13 @@ def _plan_gpu_requests(
     if device is None:
         if not required: return {}
         offenders = ", ".join(sorted(f"{v['transform']} (step {v['step']})" for v in required))
-        detail = ""
-        if detect is not None:
-            found = detect()
-            if found:
-                detail = (
-                    f" a GPU does appear to be present on the target"
-                    f" [{found}] -- declare it with RunWorkflow(gpus=Gpu(memory=Size.GB(...)))."
-                )
+        seen = detect() if detect is not None else ""
+        seen = f" A GPU does appear to be present on the target [{seen}]." if seen else ""
         raise GpuRequirementError(
             f"workflow requires a GPU but none was declared for this run;"
-            f" offending transforms: {offenders}.{detail}"
+            f" offending transforms: {offenders}.{seen} Declare one with the GPU memory"
+            f" field of the GUI's stage and run panel, `metasmith workflow run --gpu-memory GB`,"
+            f" or RunWorkflow(gpus=Gpu(memory=Size.GB(...)))."
         )
 
     planned: dict[str, int] = {}

@@ -105,6 +105,10 @@
   let savingTemplate = $state(false)
   let launching = $state(false)
   let keepIntermediates = $state(false)
+  // Shown only when a step of the plan requires a GPU. Seeded from the last run
+  // of this workflow that gave one, else from the largest ask in the plan.
+  let gpuMemory = $state('')
+  let gpuNeed = $derived(wf?.result?.gpu ?? null)
   // Starts on the agent last used anywhere, not blank -- picking one every
   // time you open a workflow tab is a chore once you mostly run on one agent.
   let agentChoice = $state(ui.lastAgent)
@@ -475,6 +479,11 @@
         rows: normalizeRows(wf.request.input_drafts),
       }
       overrides = wf.overrides ?? {}
+      const lastGpu = (wf.runs ?? [])
+        .filter((r) => r.gpu_memory_gb != null)
+        .sort((a, b) => (a.created_at ?? '').localeCompare(b.created_at ?? ''))
+        .at(-1)?.gpu_memory_gb
+      gpuMemory = String(lastGpu ?? wf.result?.gpu?.memory_gb ?? '')
     }
     cacheWorkflow(name, { wf, items, table })
   }
@@ -1415,6 +1424,7 @@
         kind,
         params: Object.keys(params).length ? params : null,
         resource_overrides: kind === 'run' ? overridePayload() : null,
+        gpu_memory_gb: kind === 'run' && gpuNeed?.required ? gpuMemory : null,
         keep_intermediates: kind === 'run' ? keepIntermediates : false,
       }),
     )
@@ -1964,6 +1974,20 @@
           <span class="small muted">params</span>
           <ParamRows bind:rows={runParams} inherited={chosenAgent?.default_params ?? {}} />
         </div>
+        {#if gpuNeed?.required}
+          <Field label="GPU memory (GB)">
+            <input
+              class="num"
+              inputmode="decimal"
+              bind:value={gpuMemory}
+              placeholder={gpuNeed.memory_gb ?? ''}
+              title="memory of one GPU on the agent; a step that asks for more is given several devices"
+            />
+          </Field>
+          <p class="small muted">
+            A step of this plan needs a GPU{#if gpuNeed.memory_gb}, the largest asks {gpuNeed.memory_gb} GB{/if}.
+          </p>
+        {/if}
 
         <!-- An agent that is still being filled in is listed and disabled,
              not hidden: "the one I made is missing" is a worse thing to work
@@ -2050,7 +2074,7 @@
             class="primary"
             onclick={() => launch('run')}
             data-tour="launch"
-            disabled={!agentChoice || launching || settingUp || recipeProblems.length > 0 || paramProblems(runParams).length > 0 || !!liveRun}
+            disabled={!agentChoice || launching || settingUp || recipeProblems.length > 0 || paramProblems(runParams).length > 0 || !!liveRun || (gpuNeed?.required && !gpuMemory.trim())}
           >
             {launching ? 'launching…' : 'stage and run'}
           </button>
