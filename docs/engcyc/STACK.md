@@ -6,7 +6,7 @@ then run 4 (a naive agent installs msm end to end and runs it).
 Decisions: docs/engcyc/DECISIONS.md
 
 ## Current
-- 2026-11-27 08:20. Run 4 round 7 launched warm on 0.26.2-a7bdba0 (rc dd1bd8da). Fixes landed today, each found by the naive agent:
+- 2026-11-27 09:15. Run 4 round 8 launched warm on 0.26.2-85a93a4 (round 7 on a7bdba0 died in setup on a LazyMap race from 1278169d, fixed). Fixes landed today, each found by the naive agent:
   - antiSMASH --check-prereqs dropped (f18797ba); sheet keeps typed rows, per-sample below a bound row (ea58a129, 60dc45aa); GUI GPU field + --gpu-memory + GPU accounts in the prompt (550fe2c6); setup/reset confirm stays armed; removing a case removes its rows; codegen keeps only process calls in the workflow body so 500-step plans compile (1278169d, cache keys unchanged, golden regenerated dd1bd8da); docs for sheets, SRA via GUI, engcyc cases, lite templates, cache per agent (d56bae05).
   - Round 6 (e0f658e): sockeye setup warm OK, GPU field OK, then MethodTooLargeException at compile. fir still in setup (~840 GB of ~860+).
   - Next: relaunch both warm on the new tag (sockeye --max-gb 900 lite templates, fir --max-gb 3000), kill remote trees by PID first (script: msm job tmp killtree.sh matched its own shell; exclude bash -s).
