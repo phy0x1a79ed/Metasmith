@@ -136,7 +136,11 @@ def main(argv: list[str] | None = None) -> int:
         if total:
             peak = max(peak, total["inodes"])
             jobs = sum(r["kind"] == "job" for r in rows)
-            print(f"{total['ts']} files={total['inodes']} gb={total['bytes'] / 1e9:.1f} peak={peak} jobs={jobs}", flush=True)
+            # A walk cut off by its timeout is a lower bound: it can still cross a cap,
+            # but it is not a reading.
+            walk = next((r["note"] for r in rows if r["kind"] == "walk_exit"), "0")
+            partial = "" if walk == "0" else f" PARTIAL(walk exit {walk})"
+            print(f"{total['ts']} files={total['inodes']} gb={total['bytes'] / 1e9:.1f} peak={peak} jobs={jobs}{partial}", flush=True)
             if total["inodes"] >= max_files or total["bytes"] >= max_gb * 1e9:
                 stop_run(args.host, remote_dir, local_dir, f"cap crossed: files {total['inodes']} >= {max_files} "
                          f"or bytes {total['bytes']} >= {max_gb} GB", total)
