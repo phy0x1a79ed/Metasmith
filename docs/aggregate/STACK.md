@@ -10,7 +10,7 @@
 
 ## Waiting on the user
 
-- `curation-ledger` → (1) disposition vocabulary: transform / represented-by / replaced-by / dropped + reason + gate status; (2) sign-off: Claude decides all and journals, only drops/replacements that lose a used analysis go to Tony first. Both recommendations sit in the review artifact https://claude.ai/artifact/1zpFnHSECX9yWFMyD7CNJT (source `review.html`). Asked 2026-11-27; unanswered.
+- `curation-ledger` → confirm the tools Tony's pass did not cover: phylogenetics / TreeSAPP, featureCounts + clusterProfiler, CoverM, Kalen's ONT set (dorado, modkit, medaka), eukaryote contig tools (tiara, MetaEuk), psortm, AlphaFold / CLIPZyme, the nf-core/mag comparator-only tools. Asked 2026-11-27.
 
 ## Preferences
 
@@ -20,7 +20,13 @@
 ## Stack
 
 - `curation-ledger` — "run a curation pass … decide what was dropped or replaced, represented by, and then journal that … hit every tool we've ever run"
+  - Rules from Tony (2026-11-27), in DECISIONS § curation-ledger rules: in a template = in; discuss only what it shadows; drop logistics and ML; TOSICA dropped.
+  - Review page now takes a keep / drop / discuss mark per tool (db collection `calls`, 93a8f230).
   - Harvest landed: `harvest.tsv`, 209 tools, 116 with a std transform, 93 without. Census scripts in `research/aggregate/harvest/`. Not counted: notebooks/markdown, the 398 KBase stubs (separate pass), Galaxy (never run here).
+- `viz-set` — "Scikit-learn … UMap … we need like a visualization downstream for ENGCYC" (also hdbscan, leiden; aspire already ships umap_clustering)
+- `fabfos-into-std` — "FabFOS needs to be like added in here" (std has 6 fabfos transforms + fosmid template; src/fabfos owns the rest)
+- `lipidomics-pipeline` — "MZMine … there's a new lipidomics pipeline" (compound_id library on feat/fabfos/lipidomics-abundance, research/fabfos/lipidomics)
+- `euk-transcriptomics` — "we need a eukaryotic transcriptomics pipeline because we do deal with like algae" (STAR, BRAKER3, StringTie, DESeq2 on release; no template)
 - `solve-gate` — solve every template and research root on the released solver
 - `promote` — RNA-seq (research/rnaseq + featureCounts + DE→gene set), phylogenetics group, CoverM, MMseqs2, binners
 - `galaxy-scrape` — "we may want to do a scrape for Galaxy … cover as much of bioinformatics as possible"
