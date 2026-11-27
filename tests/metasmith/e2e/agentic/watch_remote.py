@@ -138,8 +138,9 @@ def main(argv: list[str] | None = None) -> int:
             jobs = sum(r["kind"] == "job" for r in rows)
             # A walk cut off by its timeout is a lower bound: it can still cross a cap,
             # but it is not a reading.
+            # find exits 1 when a file vanishes mid-walk, which still walks everything.
             walk = next((r["note"] for r in rows if r["kind"] == "walk_exit"), "0")
-            partial = "" if walk == "0" else f" PARTIAL(walk exit {walk})"
+            partial = " PARTIAL(walk timed out)" if walk == "124" else ""
             print(f"{total['ts']} files={total['inodes']} gb={total['bytes'] / 1e9:.1f} peak={peak} jobs={jobs}{partial}", flush=True)
             if total["inodes"] >= max_files or total["bytes"] >= max_gb * 1e9:
                 stop_run(args.host, remote_dir, local_dir, f"cap crossed: files {total['inodes']} >= {max_files} "
