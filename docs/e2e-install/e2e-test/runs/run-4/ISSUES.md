@@ -89,3 +89,6 @@ Both stations relaunched warm at 06:28, sockeye under a 900 GB cap and fir under
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | ok | GUI GPU field (sockeye) | The agent launched engcyc_metagenomics_lite with the prefilled 16 GB GPU field. | - |
+| 2 | error | Nextflow compile (sockeye, 82-step plan) | `Script compilation failed: MethodTooLargeException: Main$_runScript_closure166$_closure660.doCall`. The generated `workflow {}` body is 662 lines in one closure, over the JVM's 64 KB method limit. The 55-step prep plan fit. The full 178-step plan cannot. | worker feat/engine/nf-method-size: split the workflow body in the codegen |
+| 3 | ambiguity | unread-param warning | Setup warned that `slurmGpuAccount` is "read by no transform". The engine's GPU config reads it. | slurmGpuAccount added to ENGINE_PARAM_KEYS |
