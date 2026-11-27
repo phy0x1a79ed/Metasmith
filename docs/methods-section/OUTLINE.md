@@ -59,6 +59,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   4. Before the search, a breadth-first search (BFS) that ignores lineage walks back from the target's inputs to the contracts that can produce them, level by level, so each contract's distance is the fewest steps between it and the target; it also counts the routes from each contract to the target and drops contracts it never reaches.
   5. PUCT scores each frontier step a, and the highest is grown next: U(a) = Q(t) + c·P(a)·√(1+N)/(1+n(t)), where t is a's contract, Q(t) is the mean reward t has earned, n(t) is how often t was picked, N is all picks, and P(a) is a prior favouring steps closer to the target and with more routes to it. The first term exploits contracts that made progress; the second favours promising, rarely tried steps and shrinks as a contract is picked.
   6. The reward is the gain in the target's satisfied inputs, or 1 when solved; there are no random rollouts, and the search stops at the first solved plan or a fixed iteration limit.
+  7. A seeded random-number generator and a fixed iteration order make the same request return the same plan (moved from P5, 2026-11-27).
 - Note: statistics are per contract, not per node (`policy.rs:469`). Constants (`policy.rs:160`): c = 1.5; prior = softmax at T = 0.5 over min-max normalized channels, closeness 1 - d/d_max and routes 1 - 1/(1 + r/10) (`mcts.rs:127`), weighted 75:20; unvisited Q = 1.5; recency decay 0.985; self-feed penalty w2 = 0.95; reward = 2x progress delta clamped to [0,1]; max_iter 256. BFS in `problem.rs:346`. Reuse the d3 solver paragraph prose.
 
 #### P4. Refinement — agreed (paragraph-points, 2026-11-27)
@@ -74,16 +75,16 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Note: score = 1000 x (sum p log2 p over anchor-port usage) + (- mean normalized anchor depth, in [-1, 0]), a lexicographic order written as a sum (`refine.rs:344`, from c71a706b, Aug 2025). Budget 8 (`REFINER_BUDGET`); statistics keyed on the swapped-in contract.
 - Effect (records, not rerun): under the old selection rule, 2 of 55 case-seed pairs changed (`isolate_assembly_from_long_reads` seeds 7 and 99: 13 -> 11 and 13 -> 9 steps); every other pair unchanged (`data/metasmith/plans/08-where-the-unpinned-solve-goes.md`). Under PUCT the search finds the 9-step plan directly (`02-puct-selection-poc.md`), and `found_on` = 1 on every measured case, so no recorded PUCT plan is changed by the refiner.
 
-#### P5. Verification — proposed
+#### P5. Verification — agreed (paragraph-points, 2026-11-27)
 - Role: why and how every plan is checked.
 - Key message: rather than prove the solver correct, we proved a small witness checker correct and run it on every plan.
 - Points (paragraph-points, 2026-11-27; Tony's ladder: a provably correct solver is hard, so prove a witness checker, and the checker gates every plan; intro first, then the workings):
   1. Proving a search-based solver correct is hard, because its path depends on heuristics and on the order it explores.
   2. Checking a finished plan is far simpler, so we wrote a witness checker and proved that instead.
   3. Every plan the solver returns passes through the checker, and a plan that fails is refused with the condition it broke.
-  4. The checker reads only the problem and the plan, shares no code with the search, and tests ten conditions, among them that every binding satisfies its input type and lineage, every port has one producer and is given or produced before use, the steps form a DAG, and the target appears exactly once.
+  4. The checker reads only the problem and the plan and tests ten conditions, among them that every binding satisfies its input type and lineage, every port has one producer and is given or produced before use, the steps form a DAG, and the target appears exactly once.
   5. A Lean 4 proof shows that the checker's Rust code returns true exactly when a plan meets the formal specification, so any plan it accepts is correct by that specification.
-- Note: `check_spec`, `src/solver_witness/lean/Proof/Compose.lean:232`, proved, no sorry; Rust lowered via Charon/Aeneas; ten clauses in `lean/Spec.lean:255`. The gate on every solve goes live in the next release (Tony, 2026-11-27; feat/engine/witness-gate). Determinism (seed 42, ChaCha, fixed order) moved out of P5, proposed for the end of P3.
+- Note: `check_spec`, `src/solver_witness/lean/Proof/Compose.lean:232`, proved, no sorry; Rust lowered via Charon/Aeneas; ten clauses in `lean/Spec.lean:255`. The gate on every solve goes live in the next release (Tony, 2026-11-27; feat/engine/witness-gate). Determinism moved to P3 point 7.
 
 ### M2. Specification — agreed (outline-sections, 2026-11-26)
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.
