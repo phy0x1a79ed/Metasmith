@@ -611,14 +611,14 @@ def test_fields_may_bind_different_columns(lib_path):
     assert ids(lib_path) == before
 
 
-def test_a_constant_under_a_sheet_is_a_column_repeated_down_it(lib_path):
+def test_a_constant_field_under_a_sheet_is_typed_rather_than_bound(lib_path):
     sheet = op_samples.parse_table(
-        b"sample,pangenome,kit\ns1,pA,illumina\ns2,pA,illumina\ns3,pB,illumina\n",
+        b"sample,pangenome\ns1,pA\ns2,pA\ns3,pB\n",
         filename="s.csv",
     )
     rows = [row(
         "v", mode="value", dtype="mock::reads",
-        values=bound(("of", "pangenome"), ("kit", "kit")),
+        values=bound(("of", "pangenome")) + [{"key": "kit", "value": "illumina", "column": ""}],
     )]
     out = op_inputs.sync(str(lib_path), rows, sheet)
     made = out["generated"]["v"]
@@ -642,8 +642,14 @@ def test_a_field_keeps_both_answers_across_attach_and_detach(lib_path):
             values=[{"key": "", "value": "asdf", "column": ""}])
     assert written() == "asdf"
 
-    assert op_inputs.problems([r], _sheet()) == ["[asdf] has no column chosen for its value"]
+    assert op_inputs.problems([r], _sheet()) == []
+    assert written(_sheet()) == "asdf", "a literal under a sheet registers once"
+    r["values"][0]["value"] = ""
+    assert op_inputs.problems([r], _sheet()) == [
+        "[v] has no column chosen and no value for its value"
+    ]
     assert written(_sheet()) is None
+    r["values"][0]["value"] = "asdf"
 
     r["values"][0]["column"] = "pangenome"
     out = op_inputs.sync(str(lib_path), [r], _sheet())

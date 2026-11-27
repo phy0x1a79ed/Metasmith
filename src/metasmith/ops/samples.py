@@ -140,8 +140,8 @@ def detach_table(where: str | Path) -> dict:
     return {"removed": removed}
 
 
-def bound_fields(row: dict) -> list[tuple[str, str]]:
-    # A pool row binds no column. A sheet expands a row over paths, and a pool
+def _fields(row: dict) -> list[tuple[str, str, str]]:
+    # A pool row has no fields. A sheet expands a row over paths, and a pool
     # row names an identity rather than a path -- one entry, however many
     # samples the sheet has.
     if row.get("mode") == "pool":
@@ -153,15 +153,23 @@ def bound_fields(row: dict) -> list[tuple[str, str]]:
                 f"[{e['key']}]" if e["key"]
                 else ("value" if len(ents) == 1 else f"field {i + 1}"),
                 e["column"],
+                str(e["value"]).strip(),
             )
             for i, e in enumerate(ents)
         ]
-    return [("path", column_of(row))]
+    return [("path", column_of(row), str(row.get("path") or "").strip())]
 
 
-def is_bound(row: dict) -> bool:
-    fields = bound_fields(row)
-    return bool(fields) and all(col for _label, col in fields)
+def bound_fields(row: dict) -> list[tuple[str, str]]:
+    return [(label, col) for label, col, _lit in _fields(row) if col]
+
+
+def blank_fields(row: dict) -> list[str]:
+    return [label for label, col, lit in _fields(row) if not col and not lit]
+
+
+def reads_sheet(row: dict) -> bool:
+    return bool(bound_fields(row))
 
 
 def row_uniques(table: dict, rows: list[dict]) -> dict[str, int]:
@@ -188,14 +196,11 @@ def unbound_problems(rows: list[dict]) -> list[dict]:
     for row in rows:
         if not isinstance(row, dict) or not (row.get("dtype") or "").strip():
             continue
-        if row.get("mode") == "pool":
-            continue
         label = row_label(row)
-        for field, col in bound_fields(row):
-            if not col:
-                out.append(_problem(str(row.get("id")), (
-                    f"[{label}] has no column chosen for its {field}"
-                )))
+        for field in blank_fields(row):
+            out.append(_problem(str(row.get("id")), (
+                f"[{label}] has no column chosen and no value for its {field}"
+            )))
     return out
 
 
@@ -247,13 +252,20 @@ def _problem(where: str, message: str) -> dict:
     return {"where": where, "message": message}
 
 
+def _registers(r) -> bool:
+    return (
+        isinstance(r, dict) and r.get("id") is not None
+        and (r.get("mode") == "pool" or (r.get("dtype") or "").strip())
+        and not blank_fields(r)
+    )
+
+
 def array_rows_of(rows: list[dict]) -> list[dict]:
-    return [
-        r for r in rows
-        if isinstance(r, dict) and r.get("id") is not None
-        and r.get("mode") != "pool"
-        and (r.get("dtype") or "").strip() and is_bound(r)
-    ]
+    return [r for r in rows if _registers(r) and reads_sheet(r)]
+
+
+def plain_rows_of(rows: list[dict]) -> list[dict]:
+    return [r for r in rows if _registers(r) and not reads_sheet(r)]
 
 
 def validate(library_path: str, table: dict, rows: list[dict]) -> dict:

@@ -2469,6 +2469,22 @@ class TestSharedInputs:
         result = _finish(client, client.post(f"/api/workflows/{name}/generate", json={}).get_json())
         assert result["success"], result
 
+    @pytest.mark.parametrize("literal", [
+        {"mode": "file"},
+        {"mode": "value", "values": [{"key": "", "value": "GCF_1", "column": ""}]},
+    ], ids=["path", "value"])
+    def test_a_literal_row_is_in_every_sample_unmarked(self, client, literal):
+        name, _ = self._shared_setup(client)
+        project = client.application.config["MSM_PROJECT"]
+        f = project.input_library_path(name) / "shared.fa"
+        rows = self.ROWS + [_row("lit", path=f) | literal]
+        client.put(f"/api/workflows/{name}", json={"input_drafts": rows})
+        result = _finish(client, client.post(f"/api/workflows/{name}/generate", json={}).get_json())
+        assert result["success"], result
+        inputs = client.get(f"/api/workflows/{name}/inputs").get_json()
+        assert inputs["expansion"]["counts"] == {"idx": 2}
+        assert inputs["item_count"] == 3
+
     def test_a_shared_path_that_is_not_registered_is_refused(self, client):
         name, _ = self._shared_setup(client)
         client.put(f"/api/workflows/{name}", json={"shared_input_paths": ["/nope.fa"]})

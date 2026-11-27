@@ -1236,9 +1236,18 @@ def generate_workflow(name):
                         out += list(dict.fromkeys(generated.get(s[1:], [])))
                 return out
 
+            # A row the sheet leaves alone is one item for the whole study, so
+            # every sample of a case that reads it sees it -- as a sheet column
+            # repeating one path does once the user marks it shared.
+            constants = (
+                [f"#{r['id']}" for r in op_samples.plain_rows_of(rows)] if table is not None else []
+            )
             specs = []
             for c in cases:
-                resolved = dict(c, shared_input_paths=paths(c.get("shared_input_paths") or []))
+                named = c.get("input_paths")
+                shared = list(c.get("shared_input_paths") or [])
+                shared += [k for k in constants if named is None or k in named]
+                resolved = dict(c, shared_input_paths=paths(list(dict.fromkeys(shared))))
                 if c.get("input_paths") is not None:
                     resolved["input_paths"] = paths(c["input_paths"])
                 specs.append(Spec.Unpack(resolved, input_library=lib_path))

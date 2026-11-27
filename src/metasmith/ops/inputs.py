@@ -310,7 +310,9 @@ def _array_plan(
                 "rid": rid, "path": path, "dtype": (row.get("dtype") or "").strip(),
                 "mode": "value" if is_value else "file",
                 "value": render_value([
-                    {"key": e["key"], "value": (record.get(e["column"]) or "").strip()}
+                    {"key": e["key"], "value": (
+                        (record.get(e["column"]) or "").strip() if e["column"] else e["value"]
+                    )}
                     for e in entries(row)
                 ]) if is_value else None,
                 "parents": list(parents),
@@ -349,7 +351,7 @@ def sync(
     if table is None:
         array_rows, plain_rows = [], rows
     else:
-        array_rows, plain_rows = op_samples.array_rows_of(rows), []
+        array_rows, plain_rows = op_samples.array_rows_of(rows), op_samples.plain_rows_of(rows)
 
     want = _desired(plain_rows, downloads)
     _resolve_pool_rows(want, resolve_pool)
