@@ -33,7 +33,7 @@ Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine
 
 ## Workers
 
-(none)
+- metasmith-e2e-install-test (peer session): witness gate on every solve, branch feat/engine/witness-gate, release 0.26.4+. Will message when merged into feat/engine/rc or if a template violates the spec. P5 must not call it landed before then.
 
 ## Closed
 
