@@ -8,7 +8,8 @@ out   = model.AddProduct(lib.GetType("ref::antismash"))
 # The downloader's sources and checksums belong to the antiSMASH release in
 # antismash.env, so its own fetches stay rather than a FetchCommand. The step is
 # local for the bandwidth; the indexing that follows (hmmpress, diamond makedb)
-# fits the login node.
+# fits the login node. No `antismash --check-prereqs`: it tests every module's
+# tools, and antismash/standalone omits meme and fimo for CASSIS, which no lane enables.
 
 
 def protocol(context: ExecutionContext):
@@ -17,7 +18,6 @@ def protocol(context: ExecutionContext):
     context.ExecWithEnv(env=image, cmd=f"""
         mkdir -p {iout.container}
         download-antismash-databases --database-dir {iout.container}
-        antismash --databases {iout.container} --check-prereqs
     """)
 
     whole = all(
