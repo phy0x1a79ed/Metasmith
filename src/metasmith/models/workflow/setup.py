@@ -15,6 +15,10 @@ class NoSetupStepsError(ValueError):
     pass
 
 
+class NoPullTransformError(ValueError):
+    pass
+
+
 # A setup run that fetches more than this asks before it starts.
 CONFIRM_DOWNLOAD_GB = 100
 
@@ -109,17 +113,38 @@ def _pull_transform(task: WorkflowTask) -> tuple[TransformInstance, TransformIns
         for path in lib.manifest:
             if Path(path).stem == PULL_TRANSFORM:
                 return lib.GetTransform(path), lib
-    raise ValueError(
+    raise NoPullTransformError(
         f"setup pulls tool images with [{PULL_TRANSFORM}], and no transform library of"
         f" [{task.GetKey()}] carries it; plan with the standard library's logistics"
     )
 
 
+def with_run_pulls(task: WorkflowTask) -> int:
+    # A real run on an agent with an image store pulls on the driver's host the tool
+    # images its compute nodes would otherwise fetch, so its staged plan carries a pull
+    # per tool image. They are numbered after the plan's own steps, which keep their
+    # orders and with them their process names. Which pulls run is decided per launch,
+    # from the store (`RunWorkflow`).
+    try:
+        pulls = _pull_steps(task)
+    except NoPullTransformError:
+        return 0
+    for order, step in enumerate(pulls, start=len(task.plan.steps) + 1):
+        step.order = order
+    task.plan.steps += pulls
+    return len(pulls)
+
+
 def _pull_steps(task: WorkflowTask) -> list[WorkflowStep]:
     # One step per env stream, because a step's slot reads one stream. Each product's
     # type descends from its env's type, so each pull posts to a stream of its own and
-    # codegen can hold back exactly the steps that read that env.
-    envs = tool_envs(task)
+    # codegen can hold back exactly the steps that read that env. An env a planned pull
+    # already reads gets no second one.
+    pulled = {
+        inst.instance_id for step in task.plan.steps
+        if step.transform.name == PULL_TRANSFORM for inst in step.uses
+    }
+    envs = [inst for inst in tool_envs(task) if inst.instance_id not in pulled]
     if not envs:
         return []
     pull, lib = _pull_transform(task)
@@ -144,6 +169,7 @@ def _pull_steps(task: WorkflowTask) -> list[WorkflowStep]:
             dependency_map={image: list(members), record: [product]},
             transform=pull,
             transform_library=lib,
+            cases=list(task.plan.cases),
         ))
     return steps
 

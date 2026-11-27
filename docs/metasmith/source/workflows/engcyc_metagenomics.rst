@@ -27,5 +27,5 @@ download. Read it in the GUI's template list, or in ``DESCRIPTION`` in
 - Give a licensed package and add its target to turn on a licensed lane. The description
   names each one.
 - Run ``engcyc_prep_references`` first, once per agent, to fetch every reference database
-  ahead of the real run. It takes no samples, and its download steps are the ones
+  and pull every tool image ahead of the real run. It takes no samples, and its download steps are the ones
   ``engcyc_metagenomics`` plans, so the real run finds them in the cache.

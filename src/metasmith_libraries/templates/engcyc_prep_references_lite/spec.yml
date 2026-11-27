@@ -46,6 +46,182 @@ cases:
   - ref::sylph_db
   - ref::uniref50_diamond_db
   - ref::vibrant_db
+  - type: env::aragorn.env
+  - type: env::pulled_container
+    parents:
+    - 22
+  - type: env::bakta.env
+  - type: env::pulled_container
+    parents:
+    - 24
+  - type: env::barrnap.env
+  - type: env::pulled_container
+    parents:
+    - 26
+  - type: env::bbtools.env
+  - type: env::pulled_container
+    parents:
+    - 28
+  - type: env::bedtools.env
+  - type: env::pulled_container
+    parents:
+    - 30
+  - type: env::blast.env
+  - type: env::pulled_container
+    parents:
+    - 32
+  - type: env::bracken.env
+  - type: env::pulled_container
+    parents:
+    - 34
+  - type: env::carveme.env
+  - type: env::pulled_container
+    parents:
+    - 36
+  - type: env::checkm.env
+  - type: env::pulled_container
+    parents:
+    - 38
+  - type: env::checkv.env
+  - type: env::pulled_container
+    parents:
+    - 40
+  - type: env::clean.env
+  - type: env::pulled_container
+    parents:
+    - 42
+  - type: env::das_tool.env
+  - type: env::pulled_container
+    parents:
+    - 44
+  - type: env::deeptfactor.env
+  - type: env::pulled_container
+    parents:
+    - 46
+  - type: env::diamond.env
+  - type: env::pulled_container
+    parents:
+    - 48
+  - type: env::filtlong.env
+  - type: env::pulled_container
+    parents:
+    - 50
+  - type: env::flye.env
+  - type: env::pulled_container
+    parents:
+    - 52
+  - type: env::genomad.env
+  - type: env::pulled_container
+    parents:
+    - 54
+  - type: env::gtdbtk.env
+  - type: env::pulled_container
+    parents:
+    - 56
+  - type: env::instrain.env
+  - type: env::pulled_container
+    parents:
+    - 58
+  - type: env::kofamscan.env
+  - type: env::pulled_container
+    parents:
+    - 60
+  - type: env::kraken2.env
+  - type: env::pulled_container
+    parents:
+    - 62
+  - type: env::megahit.env
+  - type: env::pulled_container
+    parents:
+    - 64
+  - type: env::memote.env
+  - type: env::pulled_container
+    parents:
+    - 66
+  - type: env::metabat2.env
+  - type: env::pulled_container
+    parents:
+    - 68
+  - type: env::metadecoder.env
+  - type: env::pulled_container
+    parents:
+    - 70
+  - type: env::metaphlan.env
+  - type: env::pulled_container
+    parents:
+    - 72
+  - type: env::minimap2.env
+  - type: env::pulled_container
+    parents:
+    - 74
+  - type: env::minimap2_samtools.env
+  - type: env::pulled_container
+    parents:
+    - 76
+  - type: env::mmseqs2.env
+  - type: env::pulled_container
+    parents:
+    - 78
+  - type: env::opera_ms.env
+  - type: env::pulled_container
+    parents:
+    - 80
+  - type: env::polars.env
+  - type: env::pulled_container
+    parents:
+    - 82
+  - type: env::pprodigal.env
+  - type: env::pulled_container
+    parents:
+    - 84
+  - type: env::predictf.env
+  - type: env::pulled_container
+    parents:
+    - 86
+  - type: env::promotech.env
+  - type: env::pulled_container
+    parents:
+    - 88
+  - type: env::proteinbert.env
+  - type: env::pulled_container
+    parents:
+    - 90
+  - type: env::python_for_data_science.env
+  - type: env::pulled_container
+    parents:
+    - 92
+  - type: env::rgi.env
+  - type: env::pulled_container
+    parents:
+    - 94
+  - type: env::samtools.env
+  - type: env::pulled_container
+    parents:
+    - 96
+  - type: env::semibin.env
+  - type: env::pulled_container
+    parents:
+    - 98
+  - type: env::seqkit.env
+  - type: env::pulled_container
+    parents:
+    - 100
+  - type: env::skani.env
+  - type: env::pulled_container
+    parents:
+    - 102
+  - type: env::sylph.env
+  - type: env::pulled_container
+    parents:
+    - 104
+  - type: env::vibrant.env
+  - type: env::pulled_container
+    parents:
+    - 106
+  - type: env::virsorter2.env
+  - type: env::pulled_container
+    parents:
+    - 108
   shared_input_paths: []
 input_library:
   schema: v1

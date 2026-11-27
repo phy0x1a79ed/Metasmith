@@ -573,6 +573,8 @@ def PlanCases(
                 (n, od) for n in order if c in n.cases for od, oe in n.outputs.items()
                 if streams.find(oe) == streams.find(e)
             ), None)
+            if hit is None and e in given_map:
+                continue
             if hit is None:
                 Log.Warn(f"case [{case.name}]: target [{nm}] was requested but not included in plan")
                 if nm not in dropped_targets:

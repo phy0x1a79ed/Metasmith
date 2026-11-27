@@ -17,7 +17,7 @@ from ..caching import leases
 from ..caching.layout import default_cache_root
 from ..constants import AgentPaths, MODULE_PATH, VERSION
 from ..coms.terminals import LiveShell
-from ..env import Environment, Rootfs
+from ..env import Environment, Rootfs, Runtime
 from ..logging import Log
 from ..models.libraries import DataInstanceLibrary
 from ..models.paths import PathMap
@@ -25,6 +25,7 @@ from ..models.remote import GlobusSource, Logistics, Source
 from ..models.workflow import (
     NextflowGenContext, NextflowProcessName, WorkflowTask, restat_leaf_ids,
 )
+from ..models.workflow.setup import with_run_pulls
 from ..serialization import StdTime
 from .agent import Agent
 from .collect import CollectResults
@@ -421,6 +422,10 @@ def StageWorkflow(task_key: str, verify: bool, host: str, rootfs: Rootfs|None = 
     # the codegen below is about to bake into the cache keys.
     restat_leaf_ids(task)
     _rewrite_staged_plan(task_path, task)
+
+    if agent._pulls_images() and agent.runtime == Runtime.APPTAINER:
+        n = with_run_pulls(task)
+        if n: Log.Info(f"[{n}] tool image pull(s) staged, each to run only if its image is missing")
 
     Log.Info(f"compiling nextflow script")
     task.PrepareNextflow(NextflowGenContext(
