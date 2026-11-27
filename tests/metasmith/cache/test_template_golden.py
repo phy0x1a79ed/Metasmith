@@ -1,3 +1,4 @@
+import fcntl
 import hashlib
 import json
 import os
@@ -64,10 +65,13 @@ def test_a_shipped_template_stages_byte_identical_to_its_golden(
     template = _templates(metasmith_libraries_root)[name]
     got = _staged_digests(template, tmp_path, metasmith_libraries_root)
     if os.environ.get(REGEN):
-        golden = _golden()
-        golden[name] = got
+        # xdist workers regenerate in parallel; without the lock their writes clobber each other
         GOLDEN.parent.mkdir(exist_ok=True)
-        GOLDEN.write_text(json.dumps(golden, indent=1, sort_keys=True) + "\n")
+        with open(GOLDEN.with_suffix(".lock"), "w") as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            golden = _golden()
+            golden[name] = got
+            GOLDEN.write_text(json.dumps(golden, indent=1, sort_keys=True) + "\n")
         return
     want = _golden()[name]
     differ = sorted(k for k in want.keys() | got.keys() if want.get(k) != got.get(k))
