@@ -654,3 +654,24 @@ Design. Four shipped templates: engcyc_metagenomics (full), engcyc_metagenomics_
 Run 4: lite on sockeye, full unsplit on fir. fir has about 17 TiB free, and nibi refused connections, so the split is not needed.
 
 Landed on feat/engine/rc: UniRef50 ten hits 88442e32, virus-host links c4cc4e2d, templates 9b41b3c0, MetaDecoder lane a4ecf90e, lite on MetaDecoder d8e40f09. MetaDecoder image: quay.io/hallamlab/external_metadecoder:1.2.2.
+
+## automate-fixes — 2026-11-27
+
+Question: when the naive agent trips on something, document the step or change the code?
+Tony: "We want to prefer automated fixes where possible and only document as a last resort. In fact, we should probably never document actual fixes and just only document how to use things."
+Design: each run-4 issue is fixed in code. A doc line that only compensates for behaviour is replaced by the behaviour. First case: images a run never pulled. Tony: "we probably want explicit prep plans for the images as well, just like we have the reference database downloads. And those can run locally." Prep templates pull every image their paired workflow uses, on the login node, and a run pulls any image still missing.
+Landed: the doc workaround was reverted on rc. The image work is a worker (feat/engine/run-pulls-images).
+
+## lane-gap — 2026-11-27 (open)
+
+Question: which library lanes are missing from engcyc, and which go in?
+Tony: "add them to the light lane, especially if they don't add new reference databases, or at least large reference databases, say like above 50 gigabytes."
+Decided:
+- In, full and lite: DeepTFactor, PredicTF, TCDB by DIAMOND, PromoTech (1793ea63).
+- Out: crAssphage coverage, UniRef90, GPU-heavy embedding and structure lanes (ESM-C, EzPred, ESMFold, Foldseek, SaProt, ProtT5, Ankh).
+- DRAM: "We don't want to run dram itself. That's why it's like the dram distill." Delete dram_annotate_genes and its DRAM 1.5 database steps.
+- Marker genes: CheckM2 has no marker table, so BUSCO runs in parallel, against the assembly (genome mode per quality MAG). Its per-marker table is published as marker_gene_hit_table.
+- Gram type: Tony wants "a citable tool", not a rule over KOfam hits. Traitar, fed by InterProScan's Pfam hits through from_annotation_summary, after a check against Traitar's own Pfam 27 pass on known-Gram genomes. PSORTb 3 runs per MAG with that Gram call.
+- Localization: open question for a literature review (Claude Science aa4e5064). Tony: "It's not really signal peptide. It's just does the protein go into the membrane or does the protein go in solution?"
+- DeepTMHMM stays licensed and opt-in.
+Open: CLEAN (GPU) in lite; the localization pick; sign-off on the four landed lanes.
