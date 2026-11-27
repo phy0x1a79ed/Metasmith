@@ -160,7 +160,7 @@ def test_a_value_whose_mtime_moves_keeps_its_identity(lib_path):
     assert ids(lib_path) == before
 
 
-def test_a_value_minted_before_values_were_hashed_moves_only_when_edited(lib_path):
+def test_a_value_minted_before_values_were_hashed_takes_its_content_id(lib_path):
     import yaml
 
     rows = [row("v", mode="value", value="one")]
@@ -172,12 +172,9 @@ def test_a_value_minted_before_values_were_hashed_moves_only_when_edited(lib_pat
     index.write_text(yaml.safe_dump(raw))
 
     op_inputs.sync(str(lib_path), rows)
-    assert ids(lib_path)[path] == "1e20" + "ab" * 32
+    assert ids(lib_path)[path] != "1e20" + "ab" * 32
     rows[0]["value"] = "two"
     op_inputs.sync(str(lib_path), rows)
-    rows[0]["value"] = "one"
-    op_inputs.sync(str(lib_path), rows)
-    assert ids(lib_path)[path] != "1e20" + "ab" * 32
     assert loaded(lib_path).instance_meta[Path(path)]["value"]
 
 

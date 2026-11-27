@@ -116,8 +116,8 @@ class _LeafIdentity:
         return self.instance_meta[path]["instance_id"]
 
     def _mark_value(self, path: Path) -> None:
-        # A value item minted before values were hashed keeps its old id until
-        # its text changes, and this is the change.
+        # A value item minted before values were hashed carries no flag, and an
+        # edit is when it gets one.
         entry = self.instance_meta.get(path)
         if entry is not None and not entry.get("value"):
             entry["value"] = True
