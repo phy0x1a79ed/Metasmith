@@ -6,16 +6,16 @@
 /* Layout: one reading column; the decision block first, then the census table as the working surface. */
 :root{
   --bg:#f6f7f6; --surface:#ffffff; --fg:#17201d; --muted:#5c6964; --line:#dfe4e1;
-  --accent:#16705f; --accent-soft:#e2f0ec; --warn:#a4560c; --warn-soft:#f8ebdc; --bar-off:#d5dcd9;
+  --accent:#16705f; --accent-soft:#e2f0ec; --warn:#a4560c; --warn-soft:#f8ebdc; --bar-off:#d5dcd9; --drop:#a3312b; --drop-soft:#f6e1df;
   --sans:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#111715; --surface:#18201d; --fg:#e4ebe8; --muted:#97a6a0; --line:#2a3531;
-  --accent:#4cc3a6; --accent-soft:#173a32; --warn:#e6a15a; --warn-soft:#3a2a17; --bar-off:#33403b; color-scheme:dark}}
+  --accent:#4cc3a6; --accent-soft:#173a32; --warn:#e6a15a; --warn-soft:#3a2a17; --bar-off:#33403b; --drop:#f08a82; --drop-soft:#3d1f1d; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#111715; --surface:#18201d; --fg:#e4ebe8; --muted:#97a6a0; --line:#2a3531;
-  --accent:#4cc3a6; --accent-soft:#173a32; --warn:#e6a15a; --warn-soft:#3a2a17; --bar-off:#33403b; color-scheme:dark}
+  --accent:#4cc3a6; --accent-soft:#173a32; --warn:#e6a15a; --warn-soft:#3a2a17; --bar-off:#33403b; --drop:#f08a82; --drop-soft:#3d1f1d; color-scheme:dark}
 body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.55}
 .wrap{max-width:980px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:40px}
 h1,h2,h3{text-wrap:balance;margin:0;line-height:1.2}
@@ -57,16 +57,29 @@ li{max-width:72ch}
 .controls input[type=search]{flex:1 1 200px;min-width:0}
 .controls label{font-size:.88rem;display:flex;gap:6px;align-items:center}
 .count{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
-.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);max-height:640px;overflow-y:auto}
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:.84rem}
 th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{position:sticky;top:0;background:var(--surface);font-weight:600;font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;z-index:1}
+th{background:var(--surface);font-weight:600;font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;z-index:1}
 td.tool{font-family:var(--mono);font-weight:500;white-space:nowrap}
 td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
 td.ev,td.tr{font-family:var(--mono);font-size:.74rem;color:var(--muted);word-break:break-all;min-width:160px}
 .pill{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:999px;white-space:nowrap}
 .pill.have{background:var(--accent-soft);color:var(--accent)}
 .pill.gap{background:var(--warn-soft);color:var(--warn)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:inherit;font-size:.74rem;padding:3px 9px;border:0;background:var(--surface);color:var(--muted);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button:hover{color:var(--fg)}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.seg button[aria-pressed=true][data-c=keep]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.seg button[aria-pressed=true][data-c=drop]{background:var(--drop-soft);color:var(--drop);font-weight:600}
+.seg button[aria-pressed=true][data-c=discuss]{background:var(--warn-soft);color:var(--warn);font-weight:600}
+td.call{white-space:nowrap}
+tr.c-drop td.tool{text-decoration:line-through;color:var(--muted)}
+.tally{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.tally b{color:var(--fg);font-weight:500}
+.save{font-size:.8rem;color:var(--muted)}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .cols > div{min-width:0;display:flex;flex-direction:column;gap:8px}
 .foot{font-size:.82rem;color:var(--muted)}
@@ -94,8 +107,8 @@ td.ev,td.tr{font-family:var(--mono);font-size:.74rem;color:var(--muted);word-bre
       <p class="rec"><b>Recommendation:</b> these four, plus a gate-status column (solve / plan / tiny run).</p>
     </div>
     <div class="q">
-      <h3>2. Who signs off</h3>
-      <p class="rec"><b>Recommendation:</b> Claude decides every disposition and journals the ledger. Only drops or replacements that lose an analysis the lab actually used come to you before they land.</p>
+      <h3>2. Your call on each tool</h3>
+      <p>Mark each row in the census table <b>keep</b>, <b>drop</b> or <b>discuss</b>. Your marks save automatically and Claude reads them back. Keep rows become a transform or a represented-by / replaced-by entry, drop rows are recorded with a reason, and discuss rows come back to you one at a time. Rows you leave unmarked fall back to Claude's call.</p>
     </div>
   </section>
 
@@ -130,11 +143,14 @@ td.ev,td.tr{font-family:var(--mono);font-size:.74rem;color:var(--muted);word-bre
       <input type="search" id="q" placeholder="Search tools, notes, evidence" aria-label="Search">
       <select id="dom" aria-label="Domain"><option value="">All domains</option></select>
       <label><input type="checkbox" id="gaps"> No transform only</label>
+      <select id="cf" aria-label="Your call"><option value="">Any call</option><option value="none">Unmarked</option><option value="keep">Keep</option><option value="drop">Drop</option><option value="discuss">Discuss</option></select>
       <span class="count" id="count"></span>
     </div>
+    <div class="tally" id="tally"></div>
+    <p class="save" id="save">Connecting to the shared store…</p>
     <div class="tablebox">
       <table>
-        <thead><tr><th>Tool</th><th>Domain</th><th>Sources</th><th>Status</th><th>Standard transform</th><th>Notes</th><th>First evidence</th></tr></thead>
+        <thead><tr><th>Your call</th><th>Tool</th><th>Domain</th><th>Sources</th><th>Status</th><th>Standard transform</th><th>Notes</th><th>First evidence</th></tr></thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
@@ -205,16 +221,58 @@ $('#bars').innerHTML = order.map(([k,v]) => `
   <div class="bar" style="width:${(v.all/maxAll*100).toFixed(1)}%" title="${v.have} of ${v.all} have a transform"><span class="have" style="width:${(v.have/v.all*100).toFixed(1)}%"></span></div>
   <span class="ct">${v.all-v.have} / ${v.all}</span>`).join('');
 $('#dom').insertAdjacentHTML('beforeend', order.map(([k]) => `<option>${esc(k)}</option>`).join(''));
+const CALLS = ['keep','drop','discuss'];
+let calls = {}, db = null;
+const seg = t => `<span class="seg" role="group" aria-label="Call for ${esc(t)}">${CALLS.map(c => `<button data-t="${esc(t)}" data-c="${c}" aria-pressed="${calls[t]===c}">${c}</button>`).join('')}</span>`;
+function tally(){
+  const n = {keep:0, drop:0, discuss:0};
+  ROWS.forEach(r => { if (calls[r[0]]) n[calls[r[0]]]++; });
+  const marked = n.keep + n.drop + n.discuss;
+  $('#tally').innerHTML = `<span><b>${marked}</b> of ${ROWS.length} marked</span><span>keep <b>${n.keep}</b></span><span>drop <b>${n.drop}</b></span><span>discuss <b>${n.discuss}</b></span>`;
+}
 function render(){
-  const q = $('#q').value.trim().toLowerCase(), d = $('#dom').value, g = $('#gaps').checked;
-  const out = ROWS.filter(r => (!d || r[1]===d) && (!g || !r[3]) && (!q || r.join(' ').toLowerCase().includes(q)))
+  const q = $('#q').value.trim().toLowerCase(), d = $('#dom').value, g = $('#gaps').checked, cf = $('#cf').value;
+  const out = ROWS.filter(r => (!d || r[1]===d) && (!g || !r[3]) && (!cf || (calls[r[0]] || 'none')===cf) && (!q || r.join(' ').toLowerCase().includes(q)))
     .sort((a,b) => (!!a[3]-!!b[3]) || (+b[2]-+a[2]) || a[0].localeCompare(b[0]));
-  $('#rows').innerHTML = out.map(r => `<tr><td class="tool">${esc(r[0])}</td><td>${esc(r[1])}</td><td class="n">${esc(r[2])}</td>
+  $('#rows').innerHTML = out.map(r => `<tr class="${calls[r[0]] ? 'c-'+calls[r[0]] : ''}"><td class="call">${seg(r[0])}</td><td class="tool">${esc(r[0])}</td><td>${esc(r[1])}</td><td class="n">${esc(r[2])}</td>
     <td>${r[3] ? '<span class="pill have">transform</span>' : '<span class="pill gap">needs disposition</span>'}</td>
     <td class="tr">${esc(r[3])}</td><td>${esc(r[4])}</td><td class="ev">${esc(r[5])}</td></tr>`).join('');
   $('#count').textContent = `${out.length} of ${ROWS.length}`;
+  tally();
 }
-['#q','#dom','#gaps'].forEach(s => $(s).addEventListener('input', render));
+const LS = 'aggregate-calls';
+function loadLocal(){ try { return JSON.parse(localStorage.getItem(LS) || '{}'); } catch { return {}; } }
+function saveLocal(){ try { localStorage.setItem(LS, JSON.stringify(calls)); } catch {} }
+$('#rows').addEventListener('click', async e => {
+  const b = e.target.closest('.seg button'); if (!b) return;
+  const t = b.dataset.t, c = calls[t] === b.dataset.c ? null : b.dataset.c;
+  const prev = calls[t];
+  if (c) calls[t] = c; else delete calls[t];
+  render();
+  if (!db) { saveLocal(); return; }
+  try {
+    const ref = db.collection('calls').doc(t);
+    if (c) await ref.set({tool: t, call: c, at: new Date().toISOString()}); else await ref.delete();
+    $('#save').textContent = 'Saved to the shared store.';
+  } catch (err) {
+    if (prev) calls[t] = prev; else delete calls[t];
+    render();
+    $('#save').textContent = `Not saved (${err && err.code || 'error'}). You may have view-only access.`;
+  }
+});
+(async () => {
+  const timer = setTimeout(() => { if (!db) $('#save').textContent = 'Shared store unavailable; marks are kept in this browser only.'; }, 10000);
+  try { db = await window.claude?.use?.('db'); } catch { db = null; }
+  if (!db) { clearTimeout(timer); calls = loadLocal(); render(); $('#save').textContent = 'Shared store unavailable; marks are kept in this browser only.'; return; }
+  db.collection('calls').onSnapshot(snap => {
+    clearTimeout(timer);
+    calls = {};
+    snap.docs.forEach(d => { const v = d.data(); if (v && CALLS.includes(v.call)) calls[d.id] = v.call; });
+    render();
+    $('#save').textContent = 'Marks save to the shared store as you click. Click a selected mark again to clear it.';
+  }, err => { clearTimeout(timer); $('#save').textContent = `Shared store error (${err && err.code || 'unknown'}); marks may not save.`; });
+})();
+['#q','#dom','#gaps','#cf'].forEach(s => $(s).addEventListener('input', render));
 document.querySelectorAll('.bars .name').forEach(b => b.addEventListener('click', () => { $('#dom').value = b.dataset.d; render(); $('#t-h').scrollIntoView({behavior:'smooth', block:'start'}); }));
 render();
 </script>
