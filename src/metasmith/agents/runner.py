@@ -230,7 +230,12 @@ def RenderNextflowScript(
             # Raising either number back makes the driver the most attractive OOM victim on a
             # shared node; if a driver ever dies with an in-JVM OutOfMemoryError (a DIFFERENT
             # failure from being Killed), raise -Xmx only.
-            export NXF_OPTS="-Xms512m -Xmx6g -XX:ActiveProcessorCount=1 -Djdk.virtualThreadScheduler.maxPoolSize=512"
+            # CAUTION the carrier ceiling counts against the same per-user limits: a login
+            # node on fir allows each user 512 pids (threads included) across every session.
+            # A virtual thread that pins (blocking I/O on Lustre) makes the JVM start another
+            # carrier, and at 512 a startup burst hit that cap and aborted the run with
+            # "unable to create native thread". Past the ceiling a pinned thread waits instead.
+            export NXF_OPTS="-Xms512m -Xmx6g -XX:ActiveProcessorCount=1 -Djdk.virtualThreadScheduler.maxPoolSize=128"
             set -m
             nextflow \
                 -config ./{AgentPaths.NXF_RES} \
