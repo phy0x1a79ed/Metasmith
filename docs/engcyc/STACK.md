@@ -15,6 +15,7 @@ Decisions: docs/engcyc/DECISIONS.md
   - 17:55 round 10 on 0.26.2-5e44114 (lanes + witness gate): fir-lite relaunched warm. fir full stays on round 9 until Ganon2 builds (download done 17:36), then relaunch it with --image-tag 0.26.2-5e44114. Round 10 launches when it finishes and round 9's fir setups have cached their big downloads.
   - 18:20 fir full still on round 9: downloadGanon2DB's final mv is copying 61,751 genomes across the home and /ws binds (EXDEV fallback). ISSUES round 10 row 1. Let it finish, then relaunch.
   - host-move (feat/engine/host-move, 4dd36b96, worktree engine/host-move): 17 staged downloads mv on the host via external_shell. Tony: no new API; "maybe not repeatedly test the downloads". So it stays OUT of run-4 builds (edits retire the warm reference cache); prove once (one small download through the planner, inode kept), merge into rc just before T13 (todo #35).
+  - ~20:50 round 11 on 0.26.2-7705df9 (seqkit encoding fix 28964c2a): fir-lite relaunched warm. fir full: relaunch with --image-tag 0.26.2-7705df9 once the Ganon2 copy ends.
   - 0.26.3 tagged by geoquery: release f9ebcade on origin + hallamlab. T13 merges release into rc before the bump.
   - Next build bundles: lane-gap (merged), viromics-port (merged), ips-split and psortm when they land. Then round 10.
 - Lane gap — decisions in DECISIONS lane-gap, localization-pick:

@@ -1,0 +1,13 @@
+# PROGRESS
+- DONE: metasmith 0.26.2 installed in sandbox/envs/msm_env (PATH=sandbox/envs/msm_env/bin).
+- RUNNING: msm gui on 8094 (pid ~641552, project sandbox/metasmith_ws, log tmp/gui.log).
+- DONE: agent precious-fir deployed to ssh://fir:/scratch/phyberos/msm_e2e/run-4-fir-lite (apptainer, slurm preset, slurmAccount=def-shallam_cpu, slurmGpuAccount=def-shallam_gpu).
+- DONE: GUI workflow "interesting-cassowary" = engcyc_prep_references_lite; solved (84 steps).
+- RUNNING: SETUP run in GUI Runs tab: run 9hZcR, task key ggoTKczc (started ~2026-11-27 17:58 local). Pulls 12 images, fetches ~168 GB references. Check Runs tab in browser.
+- NEXT: when setup completes, create engcyc_metagenomics_lite workflow (SRR9658108 as ncbi::sra_short_read_accession), solve, stage and run on precious-fir, then collect results to ./results.
+- Setup run ggoTKczc on fir: runs dir /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTKczc, trace _metasmith/trace.jsonl. Monitor armed (tail -F filtered).
+- DONE: radical-magpie = engcyc_metagenomics_lite with SRR9658108 (short case, sra accession), references case; solved 112 steps.
+- WAITING: setup run ggoTKczc on fir (references downloading). Poll bg task br64mpxyt. Then in GUI: radical-magpie -> stage and run (agent precious-fir, preset slurm), then collect results to ./results.
+- DONE: setup run ggoTKczc completed cleanly (219G refs).
+- NEXT: GUI stage and run radical-magpie on precious-fir (slurm).
+- RUNNING: real run radical-magpie = GUI run 5lIWO, task key OGOoRAke on fir (runs/OGOoRAke). Poll on its RUN.pgid to follow.

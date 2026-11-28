@@ -134,3 +134,10 @@ This build adds the lane work (BUSCO marker lane, the DRAM-v port, DeepTFactor, 
 |---|---|---|---|---|
 | 1 | waste | fir full setup, downloadGanon2DB (and 18 other download transforms) | The protocol's `mv` from the staging dir (home bind) to the output (`/ws` bind) crosses two container mounts of one Lustre filesystem, so it falls back to copying: 61,751 genomes copied for 30+ min after a 6 h download, and every staged download pays one full copy and transiently double disk. | Proposed: `ExecutionContext.Move` renames on the host through `external_shell`, and the 19 staging transforms call it. Editing them retires their cached references (protocol-file hash), so a warm rerun re-downloads. Held for Tony's call; then on feat/engine/host-move, merged before the release (no download re-test). |
 | 2 | bug | fir-lite run OGOoRAke, seqkit_reads | `seqkit convert --dry-run` exits 255 "quality encoding not consistent" on SRR9658108 as fastq-dump interleaves it: read 29 (`@15/2`) scores entirely in B..G, seqkit classes that one read Illumina-1.5+ only and the intersection with Sanger empties. The bbduk chain (and everything after) cannot start. | 28964c2a: detect the offset from the quality scores (any character under '@' means Phred+33; scan up to 100k reads); long reads are always Phred+33. Round 11. |
+
+# Round 11 (release candidate 0.26.2+7705df9, 2026-11-27)
+
+This build adds the seqkit encoding fix (round 10 row 2). fir-lite relaunched warm at ~20:50; its round 10 records are in `round10/fir-lite` (lite setup clean, 27 steps; the lite run stopped at seqkit_reads). fir full stays on round 9 until its Ganon2 copy finishes, then relaunches on this build.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|

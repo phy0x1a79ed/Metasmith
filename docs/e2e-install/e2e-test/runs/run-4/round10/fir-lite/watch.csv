@@ -1,0 +1,432 @@
+ts,kind,path,inodes,bytes,note
+2026-11-27T17:50:23-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,56774,275484241946,
+2026-11-27T17:50:23-07:00,dir,container_images,5,8192,
+2026-11-27T17:50:23-07:00,dir,task_cache,56769,275484233754,
+2026-11-27T17:50:23-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da,27876,7672013400,
+2026-11-27T17:50:23-07:00,dir,task_cache/1e/2029aeeb52aea413605dc5b3f190bad43745f12865a2da80e6eba3fa220764b5cf,27949,11290970321,
+2026-11-27T17:50:23-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da/out,27869,7669447223,
+2026-11-27T17:50:23-07:00,dir,task_cache/1e,56746,231388971725,
+2026-11-27T17:50:23-07:00,dir,task_cache/1e/2029aeeb52aea413605dc5b3f190bad43745f12865a2da80e6eba3fa220764b5cf/out,27942,11284727253,
+2026-11-27T17:50:23-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T17:50:23-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T17:50:23-07:00,apptainer,/scratch/phyberos/cache/apptainer,32018,106110770427,
+2026-11-27T17:50:23-07:00,quota,-,0,0,/home (user phyberos)     10048MiB/  48GiB         108K/ 500K
+2026-11-27T17:50:23-07:00,quota,-,0,0,/scratch (user phyberos)      2132GiB/  19TiB         469K/1000K
+2026-11-27T18:01:10-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62132,276369947044,
+2026-11-27T18:01:10-07:00,dir,container_images,5,8192,
+2026-11-27T18:01:10-07:00,dir,runs/ggoTKczc/results/references,55357,220649812991,
+2026-11-27T18:01:10-07:00,dir,task_cache,2553,44245558201,
+2026-11-27T18:01:10-07:00,dir,runs/ggoTKczc/results,55358,220649817087,
+2026-11-27T18:01:10-07:00,dir,relay,3,1847381,
+2026-11-27T18:01:10-07:00,dir,runs,59566,232122513537,
+2026-11-27T18:01:10-07:00,dir,msm,1,1139,
+2026-11-27T18:01:10-07:00,dir,data,1,4096,
+2026-11-27T18:01:10-07:00,dir,runs/ggoTKczc,59565,232122509441,
+2026-11-27T18:01:10-07:00,dir,lib,3,14498,
+2026-11-27T18:01:10-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:01:10-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:01:10-07:00,apptainer,/scratch/phyberos/cache/apptainer,32047,112369173723,
+2026-11-27T18:01:10-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:01:10-07:00,quota,-,0,0,/scratch (user phyberos)      2138GiB/  19TiB         475K/1000K
+2026-11-27T18:01:10-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:01:10-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:01:10-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:01:10-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:01:10-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:01:10-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T18:10:56-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,276073532961,
+2026-11-27T18:10:56-07:00,dir,container_images,5,8192,
+2026-11-27T18:10:56-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T18:10:56-07:00,dir,task_cache,2561,44777399280,
+2026-11-27T18:10:56-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T18:10:56-07:00,dir,relay,3,1847381,
+2026-11-27T18:10:56-07:00,dir,runs,59641,231294258375,
+2026-11-27T18:10:56-07:00,dir,msm,1,1139,
+2026-11-27T18:10:56-07:00,dir,data,1,4096,
+2026-11-27T18:10:56-07:00,dir,runs/ggoTKczc,59640,231294254279,
+2026-11-27T18:10:56-07:00,dir,lib,3,14498,
+2026-11-27T18:10:56-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:10:56-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:10:56-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T18:10:56-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:10:56-07:00,quota,-,0,0,/scratch (user phyberos)      2139GiB/  19TiB         476K/1000K
+2026-11-27T18:10:56-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:10:56-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:10:56-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:10:56-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:10:56-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:10:56-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T18:19:42-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,276458799637,
+2026-11-27T18:19:42-07:00,dir,container_images,5,8192,
+2026-11-27T18:19:42-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T18:19:42-07:00,dir,task_cache,2561,45162663280,
+2026-11-27T18:19:42-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T18:19:42-07:00,dir,relay,3,1847381,
+2026-11-27T18:19:42-07:00,dir,runs,59641,231294261051,
+2026-11-27T18:19:42-07:00,dir,msm,1,1139,
+2026-11-27T18:19:42-07:00,dir,data,1,4096,
+2026-11-27T18:19:42-07:00,dir,runs/ggoTKczc,59640,231294256955,
+2026-11-27T18:19:42-07:00,dir,lib,3,14498,
+2026-11-27T18:19:42-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:19:42-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:19:42-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T18:19:42-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:19:42-07:00,quota,-,0,0,/scratch (user phyberos)      2146GiB/  19TiB         489K/1000K
+2026-11-27T18:19:42-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:19:42-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:19:42-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:19:42-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:19:42-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:19:42-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T18:27:55-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,276869196051,
+2026-11-27T18:27:55-07:00,dir,container_images,5,8192,
+2026-11-27T18:27:55-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T18:27:55-07:00,dir,task_cache,2561,45573055280,
+2026-11-27T18:27:55-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T18:27:55-07:00,dir,relay,3,1847381,
+2026-11-27T18:27:55-07:00,dir,runs,59641,231294265465,
+2026-11-27T18:27:55-07:00,dir,msm,1,1139,
+2026-11-27T18:27:55-07:00,dir,data,1,4096,
+2026-11-27T18:27:55-07:00,dir,runs/ggoTKczc,59640,231294261369,
+2026-11-27T18:27:55-07:00,dir,lib,3,14498,
+2026-11-27T18:27:55-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:27:55-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:27:55-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T18:27:55-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:27:55-07:00,quota,-,0,0,/scratch (user phyberos)      2153GiB/  19TiB         501K/1000K
+2026-11-27T18:27:55-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:27:55-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:27:55-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:27:55-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:27:55-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:27:55-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T18:37:08-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,277262912071,
+2026-11-27T18:37:08-07:00,dir,container_images,5,8192,
+2026-11-27T18:37:08-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T18:37:08-07:00,dir,task_cache,2561,45966767280,
+2026-11-27T18:37:08-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T18:37:08-07:00,dir,relay,3,1847381,
+2026-11-27T18:37:08-07:00,dir,runs,59641,231294269485,
+2026-11-27T18:37:08-07:00,dir,msm,1,1139,
+2026-11-27T18:37:08-07:00,dir,data,1,4096,
+2026-11-27T18:37:08-07:00,dir,runs/ggoTKczc,59640,231294265389,
+2026-11-27T18:37:08-07:00,dir,lib,3,14498,
+2026-11-27T18:37:08-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:37:08-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:37:08-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T18:37:08-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:37:08-07:00,quota,-,0,0,/scratch (user phyberos)      2160GiB/  19TiB         515K/1000K
+2026-11-27T18:37:08-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:37:08-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:37:08-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:37:08-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:37:08-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:37:08-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T18:45:38-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,277814380733,
+2026-11-27T18:45:38-07:00,dir,container_images,5,8192,
+2026-11-27T18:45:38-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T18:45:38-07:00,dir,task_cache,2561,46518231280,
+2026-11-27T18:45:38-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T18:45:38-07:00,dir,relay,3,1847381,
+2026-11-27T18:45:38-07:00,dir,runs,59641,231294274147,
+2026-11-27T18:45:38-07:00,dir,msm,1,1139,
+2026-11-27T18:45:38-07:00,dir,data,1,4096,
+2026-11-27T18:45:38-07:00,dir,runs/ggoTKczc,59640,231294270051,
+2026-11-27T18:45:38-07:00,dir,lib,3,14498,
+2026-11-27T18:45:38-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:45:38-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:45:38-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T18:45:38-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:45:38-07:00,quota,-,0,0,/scratch (user phyberos)      2170GiB/  19TiB         529K/1000K
+2026-11-27T18:45:38-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:45:38-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:45:38-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:45:38-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:45:38-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:45:38-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T18:56:14-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,278484650043,
+2026-11-27T18:56:14-07:00,dir,container_images,5,8192,
+2026-11-27T18:56:14-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T18:56:14-07:00,dir,task_cache,2561,47188495280,
+2026-11-27T18:56:14-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T18:56:14-07:00,dir,relay,3,1847381,
+2026-11-27T18:56:14-07:00,dir,runs,59641,231294279457,
+2026-11-27T18:56:14-07:00,dir,msm,1,1139,
+2026-11-27T18:56:14-07:00,dir,data,1,4096,
+2026-11-27T18:56:14-07:00,dir,runs/ggoTKczc,59640,231294275361,
+2026-11-27T18:56:14-07:00,dir,lib,3,14498,
+2026-11-27T18:56:14-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T18:56:14-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T18:56:14-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T18:56:14-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T18:56:14-07:00,quota,-,0,0,/scratch (user phyberos)      2180GiB/  19TiB         544K/1000K
+2026-11-27T18:56:14-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T18:56:14-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T18:56:14-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T18:56:14-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T18:56:14-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T18:56:14-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:06:04-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,279025982643,
+2026-11-27T19:06:04-07:00,dir,container_images,5,8192,
+2026-11-27T19:06:04-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T19:06:04-07:00,dir,task_cache,2561,47729823280,
+2026-11-27T19:06:04-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T19:06:04-07:00,dir,relay,3,1847381,
+2026-11-27T19:06:04-07:00,dir,runs,59641,231294284057,
+2026-11-27T19:06:04-07:00,dir,msm,1,1139,
+2026-11-27T19:06:04-07:00,dir,data,1,4096,
+2026-11-27T19:06:04-07:00,dir,runs/ggoTKczc,59640,231294279961,
+2026-11-27T19:06:04-07:00,dir,lib,3,14498,
+2026-11-27T19:06:04-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:06:04-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:06:04-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:06:04-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:06:04-07:00,quota,-,0,0,/scratch (user phyberos)      2189GiB/  19TiB         558K/1000K
+2026-11-27T19:06:04-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:06:04-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T19:06:04-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T19:06:04-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T19:06:04-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T19:06:04-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:15:33-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,279690779703,
+2026-11-27T19:15:33-07:00,dir,container_images,5,8192,
+2026-11-27T19:15:33-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T19:15:33-07:00,dir,task_cache,2561,48394615280,
+2026-11-27T19:15:33-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T19:15:33-07:00,dir,relay,3,1847381,
+2026-11-27T19:15:33-07:00,dir,runs,59641,231294289117,
+2026-11-27T19:15:33-07:00,dir,msm,1,1139,
+2026-11-27T19:15:33-07:00,dir,data,1,4096,
+2026-11-27T19:15:33-07:00,dir,runs/ggoTKczc,59640,231294285021,
+2026-11-27T19:15:33-07:00,dir,lib,3,14498,
+2026-11-27T19:15:33-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:15:33-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:15:33-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:15:33-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:15:33-07:00,quota,-,0,0,/scratch (user phyberos)      2197GiB/  19TiB         571K/1000K
+2026-11-27T19:15:33-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:15:33-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T19:15:33-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T19:15:33-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T19:15:33-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T19:15:33-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:24:38-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,280434287739,
+2026-11-27T19:24:38-07:00,dir,container_images,5,8192,
+2026-11-27T19:24:38-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T19:24:38-07:00,dir,task_cache,2561,49138119280,
+2026-11-27T19:24:38-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T19:24:38-07:00,dir,relay,3,1847381,
+2026-11-27T19:24:38-07:00,dir,runs,59641,231294293153,
+2026-11-27T19:24:38-07:00,dir,msm,1,1139,
+2026-11-27T19:24:38-07:00,dir,data,1,4096,
+2026-11-27T19:24:38-07:00,dir,runs/ggoTKczc,59640,231294289057,
+2026-11-27T19:24:38-07:00,dir,lib,3,14498,
+2026-11-27T19:24:38-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:24:38-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:24:38-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:24:38-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:24:38-07:00,quota,-,0,0,/scratch (user phyberos)      2205GiB/  19TiB         584K/1000K
+2026-11-27T19:24:38-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:24:38-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T19:24:38-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T19:24:38-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T19:24:38-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T19:24:38-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:33:28-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62215,280927036155,
+2026-11-27T19:33:28-07:00,dir,container_images,5,8192,
+2026-11-27T19:33:28-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T19:33:28-07:00,dir,task_cache,2561,49630863280,
+2026-11-27T19:33:28-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T19:33:28-07:00,dir,relay,3,1847381,
+2026-11-27T19:33:28-07:00,dir,runs,59641,231294297569,
+2026-11-27T19:33:28-07:00,dir,msm,1,1139,
+2026-11-27T19:33:28-07:00,dir,data,1,4096,
+2026-11-27T19:33:28-07:00,dir,runs/ggoTKczc,59640,231294293473,
+2026-11-27T19:33:28-07:00,dir,lib,3,14498,
+2026-11-27T19:33:28-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:33:28-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:33:28-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:33:28-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:33:28-07:00,quota,-,0,0,/scratch (user phyberos)      2214GiB/  19TiB         598K/1000K
+2026-11-27T19:33:28-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:33:28-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T19:33:28-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T19:33:28-07:00,proc,login1:2173981,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/JQHDmKhq.running 
+2026-11-27T19:33:28-07:00,proc,login1:2174023,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ggoTK
+2026-11-27T19:33:28-07:00,proc,login1:2179777,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:42:25-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,63012,282360889530,
+2026-11-27T19:42:25-07:00,dir,container_images,5,8192,
+2026-11-27T19:42:25-07:00,dir,runs/ggoTKczc/results/references,56570,231265867735,
+2026-11-27T19:42:25-07:00,dir,task_cache,2563,44122432514,
+2026-11-27T19:42:25-07:00,dir,runs/ggoTKczc/results,56576,231265884742,
+2026-11-27T19:42:25-07:00,dir,relay,3,1847381,
+2026-11-27T19:42:25-07:00,dir,runs,60436,238236581710,
+2026-11-27T19:42:25-07:00,dir,msm,1,1139,
+2026-11-27T19:42:25-07:00,dir,data,1,4096,
+2026-11-27T19:42:25-07:00,dir,runs/ggoTKczc,60435,238236577614,
+2026-11-27T19:42:25-07:00,dir,lib,3,14498,
+2026-11-27T19:42:25-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:42:25-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:42:25-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:42:25-07:00,job,6752825,0,0,nf-p81__buildInterProScanPfamDB_(1) RUNNING
+2026-11-27T19:42:25-07:00,job,6752828,0,0,nf-p79__buildInterProScanMotifsDB_(1) RUNNING
+2026-11-27T19:42:25-07:00,job,6752831,0,0,nf-p80__buildInterProScanFamiliesDB_(1) RUNNING
+2026-11-27T19:42:25-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:42:25-07:00,quota,-,0,0,/scratch (user phyberos)      2226GiB/  19TiB         613K/1000K
+2026-11-27T19:42:25-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:42:25-07:00,proc,login1:2134990,0,0,/bin/bash ../../msm api run_workflow -a key=ggoTKczc host=login1 log_dir=./_metasmith/logs.2026-11-27_17-59-35 stub_dela
+2026-11-27T19:42:25-07:00,proc,login1:2135051,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ggoTKcz
+2026-11-27T19:49:18-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,63727,278938472079,
+2026-11-27T19:49:18-07:00,dir,lib,3,14498,
+2026-11-27T19:49:18-07:00,dir,data,1,4096,
+2026-11-27T19:49:18-07:00,dir,msm,1,1139,
+2026-11-27T19:49:18-07:00,dir,runs/ggoTKczc,60403,234809275855,
+2026-11-27T19:49:18-07:00,dir,task_cache,2612,44123996643,
+2026-11-27T19:49:18-07:00,dir,runs/ggoTKczc/results/references,56576,234771189324,
+2026-11-27T19:49:18-07:00,dir,runs,61102,234812600130,
+2026-11-27T19:49:18-07:00,dir,container_images,5,8192,
+2026-11-27T19:49:18-07:00,dir,relay,3,1847381,
+2026-11-27T19:49:18-07:00,dir,runs/ggoTKczc/results,56592,234771250797,
+2026-11-27T19:49:18-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:49:18-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:49:18-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:49:18-07:00,job,6754223,0,0,nf-p39__sylph_(1) RUNNING
+2026-11-27T19:49:18-07:00,job,6754222,0,0,nf-p41__kraken2_(1) RUNNING
+2026-11-27T19:49:18-07:00,job,6754225,0,0,nf-p37__metaphlan_(1) RUNNING
+2026-11-27T19:49:18-07:00,job,6754228,0,0,nf-p40__buildMnxrLookup_(1) RUNNING
+2026-11-27T19:49:18-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:49:18-07:00,quota,-,0,0,/scratch (user phyberos)      2240GiB/  19TiB         640K/1000K
+2026-11-27T19:49:18-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:49:18-07:00,proc,login1:2398758,0,0,/bin/bash ../../msm api run_workflow -a key=OGOoRAke host=login1 log_dir=./_metasmith/logs.2026-11-27_19-49-15 stub_dela
+2026-11-27T19:49:18-07:00,proc,login1:2398875,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=OGOoRAk
+2026-11-27T19:49:18-07:00,proc,login1:2449203,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/F0aBVG42.running 
+2026-11-27T19:49:18-07:00,proc,login1:2449216,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:49:18-07:00,proc,login1:2451830,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:49:18-07:00,proc,login1:2506333,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/psvvcL1G.running 
+2026-11-27T19:49:18-07:00,proc,login1:2506397,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:49:18-07:00,proc,login1:2506868,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/HFnLrtLd.running 
+2026-11-27T19:49:18-07:00,proc,login1:2506931,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:49:18-07:00,proc,login1:2509556,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:49:18-07:00,proc,login1:2509560,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:49:18-07:00,proc,login1:2520391,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/YseZljKf.running 
+2026-11-27T19:49:18-07:00,proc,login1:2520403,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:49:18-07:00,proc,login1:2523358,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:58:01-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,68831,291979663935,
+2026-11-27T19:58:01-07:00,dir,lib,3,14498,
+2026-11-27T19:58:01-07:00,dir,runs/OGOoRAke/results,28406,104984481077,
+2026-11-27T19:58:01-07:00,dir,data,1,4096,
+2026-11-27T19:58:01-07:00,dir,msm,1,1139,
+2026-11-27T19:58:01-07:00,dir,runs/ggoTKczc,34307,129963994654,
+2026-11-27T19:58:01-07:00,dir,task_cache,2631,55952485922,
+2026-11-27T19:58:01-07:00,dir,runs/ggoTKczc/results/references,30480,129925908123,
+2026-11-27T19:58:01-07:00,dir,runs,66187,236025302707,
+2026-11-27T19:58:01-07:00,dir,container_images,5,8192,
+2026-11-27T19:58:01-07:00,dir,runs/OGOoRAke,31879,106061303957,
+2026-11-27T19:58:01-07:00,dir,relay,3,1847381,
+2026-11-27T19:58:01-07:00,dir,runs/OGOoRAke/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-27T19:58:01-07:00,dir,runs/ggoTKczc/results,30496,129925969596,
+2026-11-27T19:58:01-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T19:58:01-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T19:58:01-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T19:58:01-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T19:58:01-07:00,quota,-,0,0,/scratch (user phyberos)      2266GiB/  19TiB         669K/1000K
+2026-11-27T19:58:01-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T19:58:01-07:00,proc,login1:2398758,0,0,/bin/bash ../../msm api run_workflow -a key=OGOoRAke host=login1 log_dir=./_metasmith/logs.2026-11-27_19-49-15 stub_dela
+2026-11-27T19:58:01-07:00,proc,login1:2398875,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=OGOoRAk
+2026-11-27T19:58:01-07:00,proc,login1:2449203,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/F0aBVG42.running 
+2026-11-27T19:58:01-07:00,proc,login1:2449216,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:58:01-07:00,proc,login1:2451830,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:58:01-07:00,proc,login1:2506333,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/psvvcL1G.running 
+2026-11-27T19:58:01-07:00,proc,login1:2506397,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:58:01-07:00,proc,login1:2506868,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/HFnLrtLd.running 
+2026-11-27T19:58:01-07:00,proc,login1:2506931,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:58:01-07:00,proc,login1:2509556,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:58:01-07:00,proc,login1:2509560,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T19:58:01-07:00,proc,login1:2520391,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/YseZljKf.running 
+2026-11-27T19:58:01-07:00,proc,login1:2520403,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T19:58:01-07:00,proc,login1:2523358,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:08:55-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,68824,276223632465,
+2026-11-27T20:08:55-07:00,dir,lib,3,14498,
+2026-11-27T20:08:55-07:00,dir,runs/OGOoRAke/results,28406,104984481077,
+2026-11-27T20:08:55-07:00,dir,data,1,4096,
+2026-11-27T20:08:55-07:00,dir,msm,1,1139,
+2026-11-27T20:08:55-07:00,dir,runs/ggoTKczc,34307,129963994654,
+2026-11-27T20:08:55-07:00,dir,task_cache,2616,6908291926,
+2026-11-27T20:08:55-07:00,dir,runs/ggoTKczc/results/references,30480,129925908123,
+2026-11-27T20:08:55-07:00,dir,runs,66195,269313465233,
+2026-11-27T20:08:55-07:00,dir,container_images,5,8192,
+2026-11-27T20:08:55-07:00,dir,runs/OGOoRAke,31887,139349466483,
+2026-11-27T20:08:55-07:00,dir,relay,3,1847381,
+2026-11-27T20:08:55-07:00,dir,runs/OGOoRAke/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-27T20:08:55-07:00,dir,runs/ggoTKczc/results,30496,129925969596,
+2026-11-27T20:08:55-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T20:08:55-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T20:08:55-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T20:08:55-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T20:08:55-07:00,quota,-,0,0,/scratch (user phyberos)      2224GiB/  19TiB         688K/1000K
+2026-11-27T20:08:55-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T20:08:55-07:00,proc,login1:2398758,0,0,/bin/bash ../../msm api run_workflow -a key=OGOoRAke host=login1 log_dir=./_metasmith/logs.2026-11-27_19-49-15 stub_dela
+2026-11-27T20:08:55-07:00,proc,login1:2398875,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=OGOoRAk
+2026-11-27T20:08:55-07:00,proc,login1:2506333,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/psvvcL1G.running 
+2026-11-27T20:08:55-07:00,proc,login1:2506397,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:08:55-07:00,proc,login1:2506868,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/HFnLrtLd.running 
+2026-11-27T20:08:55-07:00,proc,login1:2506931,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:08:55-07:00,proc,login1:2509556,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:08:55-07:00,proc,login1:2509560,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:08:55-07:00,proc,login1:2520391,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/YseZljKf.running 
+2026-11-27T20:08:55-07:00,proc,login1:2520403,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:08:55-07:00,proc,login1:2523358,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:15:53-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,68945,242881619084,
+2026-11-27T20:15:53-07:00,dir,lib,3,14498,
+2026-11-27T20:15:53-07:00,dir,runs/OGOoRAke/results,56576,213141514570,
+2026-11-27T20:15:53-07:00,dir,data,1,4096,
+2026-11-27T20:15:53-07:00,dir,msm,1,1139,
+2026-11-27T20:15:53-07:00,dir,runs/ggoTKczc,6176,21813782530,
+2026-11-27T20:15:53-07:00,dir,runs/OGOoRAke/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-27T20:15:53-07:00,dir,task_cache,2599,6840951212,
+2026-11-27T20:15:53-07:00,dir,runs,66333,236038792566,
+2026-11-27T20:15:53-07:00,dir,container_images,5,8192,
+2026-11-27T20:15:53-07:00,dir,runs/OGOoRAke,60156,214225005940,
+2026-11-27T20:15:53-07:00,dir,relay,3,1847381,
+2026-11-27T20:15:53-07:00,dir,runs/OGOoRAke/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-27T20:15:53-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T20:15:53-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T20:15:53-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T20:15:53-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T20:15:53-07:00,quota,-,0,0,/scratch (user phyberos)      2233GiB/  19TiB         705K/1000K
+2026-11-27T20:15:53-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T20:15:53-07:00,proc,login1:2398758,0,0,/bin/bash ../../msm api run_workflow -a key=OGOoRAke host=login1 log_dir=./_metasmith/logs.2026-11-27_19-49-15 stub_dela
+2026-11-27T20:15:53-07:00,proc,login1:2398875,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=OGOoRAk
+2026-11-27T20:15:53-07:00,proc,login1:2506333,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/psvvcL1G.running 
+2026-11-27T20:15:53-07:00,proc,login1:2506397,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:15:53-07:00,proc,login1:2509560,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:15:53-07:00,proc,login1:2520391,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/YseZljKf.running 
+2026-11-27T20:15:53-07:00,proc,login1:2520403,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:15:53-07:00,proc,login1:2523358,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:25:46-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,68945,244252531486,
+2026-11-27T20:25:46-07:00,dir,lib,3,14498,
+2026-11-27T20:25:46-07:00,dir,runs/OGOoRAke/results,56576,213141514570,
+2026-11-27T20:25:46-07:00,dir,data,1,4096,
+2026-11-27T20:25:46-07:00,dir,msm,1,1139,
+2026-11-27T20:25:46-07:00,dir,runs/ggoTKczc,6176,21813782530,
+2026-11-27T20:25:46-07:00,dir,runs/OGOoRAke/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-27T20:25:46-07:00,dir,task_cache,2599,8211847212,
+2026-11-27T20:25:46-07:00,dir,runs,66333,236038808968,
+2026-11-27T20:25:46-07:00,dir,container_images,5,8192,
+2026-11-27T20:25:46-07:00,dir,runs/OGOoRAke,60156,214225022342,
+2026-11-27T20:25:46-07:00,dir,relay,3,1847381,
+2026-11-27T20:25:46-07:00,dir,runs/OGOoRAke/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-27T20:25:46-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-27T20:25:46-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-27T20:25:46-07:00,apptainer,/scratch/phyberos/cache/apptainer,32053,112369173723,
+2026-11-27T20:25:46-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-27T20:25:46-07:00,quota,-,0,0,/scratch (user phyberos)      2244GiB/  19TiB         718K/1000K
+2026-11-27T20:25:46-07:00,proc,login1:2107239,0,0,./relay/msm_relay start 
+2026-11-27T20:25:46-07:00,proc,login1:2398758,0,0,/bin/bash ../../msm api run_workflow -a key=OGOoRAke host=login1 log_dir=./_metasmith/logs.2026-11-27_19-49-15 stub_dela
+2026-11-27T20:25:46-07:00,proc,login1:2398875,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=OGOoRAk
+2026-11-27T20:25:46-07:00,proc,login1:2506333,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/psvvcL1G.running 
+2026-11-27T20:25:46-07:00,proc,login1:2506397,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:25:46-07:00,proc,login1:2509560,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-27T20:25:46-07:00,proc,login1:2520391,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/YseZljKf.running 
+2026-11-27T20:25:46-07:00,proc,login1:2520403,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/OGOoR
+2026-11-27T20:25:46-07:00,proc,login1:2523358,0,0,_metasmith/relay/msm_relay start --local 
