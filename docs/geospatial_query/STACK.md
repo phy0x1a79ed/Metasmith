@@ -6,7 +6,7 @@ Decisions: docs/geospatial_query/DECISIONS.md
 Email content stays out of this repo, journals and commits. Koonkie's AOI KML is data under no NDA and is DVC-tracked (aoi-handling). Source: the KML Koonkie sent on 2026-11-12.
 
 ## Current
-fixes-plan: executing data/geospatial_query/plans/03-dictionary-fixes.md (todo list mirrors T0-T17). T0-T9 landed: image geoquery 0.26.3 pinned (release number claimed from metasmith-e2e-install-test; they take 0.26.4+ and want a ping when 0.26.3 is tagged, with remotes). Rerun published locally at /home/tony/.claude/jobs/07dc4bd7/tmp/t8/final/mmap_canada_mining (fir ZnxKG3jD + OSM from QpNX0sKo), changes explained in research/geospatial_query/fixes/rerun.md, dictionaries regenerated. Next T11 re-pin.
+deliverable: send Tomer the 0.26.3 dataset (mmap_canada_mining pin aa39d2f4), both dictionaries, the driver on `release` and metasmith 0.26.3. The message draft waits for the user's review.
 
 ## Waiting on the user
 - census-db: StatCan 2021 dissemination-block files sit behind a Cloudflare challenge; census runs on dissemination areas until the block files are staged (2021_92-151_X.zip, ldb_000b21a_e.zip).
@@ -19,13 +19,11 @@ fixes-plan: executing data/geospatial_query/plans/03-dictionary-fixes.md (todo l
 - 2026-11-27: the driver takes a Nextflow config and params; Tomer writes his own config, ours ships only as an example
 
 ## Stack
-- fixes-plan: a formal plan for the dictionary-pass fixes (feature_descriptions_issues.md), written in plan mode
-- deliverable: send Tomer the rerun dataset (fir run bZZhVN3O), feature_descriptions.csv, the driver on archive/geoquery-tomer-0.26.1 and metasmith 0.26.2
+- deliverable: send Tomer the 0.26.3 dataset, dictionaries, driver and release
 - probed-features: adapters for the 152 probed features
 - query-time: build Query.time after the fixes; selects time-indexed editions per source (decision source-pinning)
 - postgis-loader: whether the tool ships a PostGIS loader
 - packaging: standalone open-source CLI vs metasmith workflow
-- osm: get OpenStreetMap working (Tomer asked); 0.26.3 finds all 11 AOIs when the public mirrors answer, close after the release
 - country-coverage: parked unless Tomer raises it again
 - claude-plan: follow up with Hallam (not build work)
 
@@ -33,6 +31,8 @@ fixes-plan: executing data/geospatial_query/plans/03-dictionary-fixes.md (todo l
 none
 
 ## Closed
+- osm (2026-11-27)
+- fixes-plan (2026-11-27): plan 03-dictionary-fixes.md, metasmith 0.26.3
 - class-column (2026-11-27)
 - feature-renames (2026-11-27)
 - source-pinning (2026-11-27)
