@@ -292,7 +292,10 @@ def RenderProbeScript(*, workspace, log_dir, host: str, run_id: str) -> str:
             # Its own session record, or the real pass would resume this one.
             export NXF_CACHE_DIR=./nxf_probe/.nextflow
             export NXF_OFFLINE=TRUE
-            export NXF_OPTS="-Xms256m -Xmx2g -XX:ActiveProcessorCount=1"
+            # The run's thread settings: the probe decides every step at once, and on
+            # platform threads each waiting step held one (see RenderNextflowScript).
+            export NXF_ENABLE_VIRTUAL_THREADS=true
+            export NXF_OPTS="-Xms256m -Xmx2g -XX:ActiveProcessorCount=1 -Djdk.virtualThreadScheduler.maxPoolSize=128"
             nextflow \
                 -config ./{AgentPaths.NXF_RES} \
                 -config ./{AgentPaths.NXF_CONFIG} \

@@ -1219,16 +1219,26 @@ class Orchestrator {
     // A member whose row is missing, a helper that fails, or a non-zero exit
     // is a miss: the cost of a wrong miss is compute, the cost of a wrong hit
     // is a wrong result.
+    // Each helper is a python process plus two reader threads, and a probe pass
+    // decides every step at once: unbounded, that is hundreds of processes against
+    // a login node's per-user pid limit (512 on fir), and the probe died of it.
+    private static final java.util.concurrent.Semaphore HELPER_SLOTS = new java.util.concurrent.Semaphore(8)
+
     public static String runHelper(helper, Map spec) {
-        def proc = new ProcessBuilder(helper as List<String>).start()
-        proc.outputStream.withWriter("UTF-8") { w -> w << JsonOutput.toJson(spec) }
-        def out = new StringBuilder()
-        def err = new StringBuilder()
-        proc.waitForProcessOutput(out, err)
-        if (proc.exitValue() != 0) {
-            throw new RuntimeException("cache helper failed (${proc.exitValue()}): ${err}")
+        HELPER_SLOTS.acquire()
+        try {
+            def proc = new ProcessBuilder(helper as List<String>).start()
+            proc.outputStream.withWriter("UTF-8") { w -> w << JsonOutput.toJson(spec) }
+            def out = new StringBuilder()
+            def err = new StringBuilder()
+            proc.waitForProcessOutput(out, err)
+            if (proc.exitValue() != 0) {
+                throw new RuntimeException("cache helper failed (${proc.exitValue()}): ${err}")
+            }
+            return out.toString()
+        } finally {
+            HELPER_SLOTS.release()
         }
-        return out.toString()
     }
 
     public static List probeMembers(helper, Map spec) {
