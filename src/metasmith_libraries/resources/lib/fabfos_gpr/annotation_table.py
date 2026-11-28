@@ -221,7 +221,8 @@ def _parse_diamond(path, namespace, with_title):
     names = _BLAST6 + (["stitle"] if with_title else [])
     if os.path.getsize(path) == 0:
         return pd.DataFrame(columns=["orf", "term"])
-    df = pd.read_csv(path, sep="\t", header=None, dtype=str, quoting=3)
+    # `stitle` is the database's own header text, and VFDB's carries Latin-1 bytes (0xa0).
+    df = pd.read_csv(path, sep="\t", header=None, dtype=str, quoting=3, encoding_errors="replace")
     if df.shape[1] != len(names):
         raise SystemExit(
             "[annotation] " + path + " has " + str(df.shape[1]) + " columns; the "
