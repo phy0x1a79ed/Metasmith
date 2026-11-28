@@ -49,17 +49,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
-#### P3. Variadic inputs — proposed (moved from Specification, 2026-11-27: "additional features right after contracts")
-- Role: contracts that take a variable number of inputs of one type.
-- Key message: a variadic input is matched to a set of member types the user names, and is expanded into ordinary inputs before the search.
-- Points:
-  1. Some tools can take a variable number of inputs of one type, so a contract can mark one input as variadic.
-  2. The user matches the variadic input to an actual set by naming, on a target, the member types that fill it, and each member must satisfy the variadic input's type.
-  3. The planner then replaces the variadic input with one ordinary input per named member, and the search plans a route to each member like any other input.
-  4. Outputs of the expanded contract carry a property naming the set, so outputs of different sets are different types and neither satisfies the other.
-- Note: rc `models/variadic.py` (`Specialize`, `SpecializeCases`); target `set:` in template spec.yml (e.g. binning_and_gpr_from_assembly: das_tool over metabat2/semibin2/comebin tables). One variadic input per contract; members distinct types; a target made only by a variadic contract must name its set. Users: `das_tool.py`, `interproscan_combine.py`.
-
-#### P4. Optional branching — proposed (moved from S4, 2026-11-27)
+#### P3. Optional branching — proposed (moved from S4, 2026-11-27: a contract feature, after Contracts)
 - Role: contracts with alternative outcomes.
 - Key message: a contract can declare alternative outputs decided at run time, and the plan holds a route below every outcome.
 - Points:
@@ -68,7 +58,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   3. At run time each task writes only the group it produced, and the branches it did not take stay empty.
 - Note: rc `docs/metasmith/architecture.md` ("A product group is one possible outcome"; "A fork outcome is a case"); `case_merge.PlanCases`; `optional: true` in codegen. No standard-library contract is a fork today. Forward reference: the merge is the parallel-case merge (S4).
 
-#### P5. Planning search — agreed (paragraph-points, 2026-11-27)
+#### P4. Planning search — agreed (paragraph-points, 2026-11-27)
 - Role: how the plan is found.
 - Key message: a PUCT search grows partial plans from the givens and the target until no input is left unbound.
 - Points:
@@ -81,20 +71,20 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   7. A seeded random-number generator and a fixed iteration order make the same request return the same plan (moved from Verification, 2026-11-27).
 - Note: statistics are per contract, not per node (`policy.rs:469`). Constants (`policy.rs:160`): c = 1.5; prior = softmax at T = 0.5 over min-max normalized channels, closeness 1 - d/d_max and routes 1 - 1/(1 + r/10) (`mcts.rs:127`), weighted 75:20; unvisited Q = 1.5; recency decay 0.985; self-feed penalty w2 = 0.95; reward = 2x progress delta clamped to [0,1]; max_iter 256. BFS in `problem.rs:346`. Reuse the d3 solver paragraph prose.
 
-#### P6. Refinement — agreed (paragraph-points, 2026-11-27)
+#### P5. Refinement — agreed (paragraph-points, 2026-11-27)
 - Role: the edge-refinement pass after the search.
 - Key message: a short search over single-edge swaps tidies the first plan found and removes steps it does not need.
 - Points:
   1. Lineage makes the search path-dependent and PUCT is optimistic, so the first solved plan is not guaranteed to be the simplest.
   2. Each candidate rebinds one step's input to another existing port and rebuilds every step downstream so its lineage stays correct.
-  3. A candidate must still pass the plan conditions of P7, chiefly that every step can be scheduled and every lineage constraint holds (flow F3, 2026-11-27).
+  3. A candidate must still pass the plan conditions of P6, chiefly that every step can be scheduled and every lineage constraint holds (flow F3, 2026-11-27).
   4. Valid candidates are ranked first by how few distinct ports their lineage constraints anchor to, then by how close those anchors sit to the inputs that need them.
   5. The same PUCT rule picks which candidate to expand, for a fixed budget of rounds; the best valid plan wins, and steps no longer connected to the target are removed.
   6. In development testing, the vast majority of plans were already optimal before refinement (Tony, 2026-11-27: the refiner is a real safety net; do not dwell on how often it acts).
 - Note: score = 1000 x (sum p log2 p over anchor-port usage) + (- mean normalized anchor depth, in [-1, 0]), a lexicographic order written as a sum (`refine.rs:344`, from c71a706b, Aug 2025). Budget 8 (`REFINER_BUDGET`); statistics keyed on the swapped-in contract.
 - Effect (records, not rerun): under the old selection rule, 2 of 55 case-seed pairs changed (`isolate_assembly_from_long_reads` seeds 7 and 99: 13 -> 11 and 13 -> 9 steps); every other pair unchanged (`data/metasmith/plans/08-where-the-unpinned-solve-goes.md`). Under PUCT the search finds the 9-step plan directly (`02-puct-selection-poc.md`), and `found_on` = 1 on every measured case, so no recorded PUCT plan is changed by the refiner.
 
-#### P7. Verification — agreed (paragraph-points, 2026-11-27)
+#### P6. Verification — agreed (paragraph-points, 2026-11-27)
 - Role: why and how every plan is checked.
 - Key message: rather than prove the solver correct, we proved a small witness checker correct and run it on every plan.
 - Points (paragraph-points, 2026-11-27; Tony's ladder: a provably correct solver is hard, so prove a witness checker, and the checker gates every plan; intro first, then the workings):
@@ -136,7 +126,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     3. The solved plans are merged step by step, so a step that several cases share runs once in the workflow.
     - Justify the final design; do not narrate the design history (Tony, 2026-11-27).
     - Note: sample type is syntactic sugar that generates cases (`Case.ByShape`); not mentioned (Tony: "samples are not well defined here"). Code on rc: `case_merge.py`. A case may reuse another case's route; merged plans are checked per case (P5).
-  - (Variadic inputs and optional branching moved to Planning P3, P4, 2026-11-27.)
+  - S5. Variadic inputs — proposed (after S4; a solver-planning feature, Tony 2026-11-27)
+    - Key message: a variadic input is matched to a set of member types the user names, and is expanded into ordinary inputs before the search.
+    1. Some tools can take a variable number of inputs of one type, so a contract can mark one input as variadic.
+    2. The user matches the variadic input to an actual set by naming, on a target, the member types that fill it, so the user can specify exactly which tools form an ensemble; each member must satisfy the variadic input's type.
+    3. The planner then replaces the variadic input with one ordinary input per named member, and the search plans a route to each member like any other input.
+    4. Outputs of the expanded contract carry a property naming the set, so outputs of different sets are different types and neither satisfies the other.
+    - Note: rc `models/variadic.py` (`Specialize`, `SpecializeCases`); target `set:` in template spec.yml (binning_and_gpr_from_assembly: das_tool over metabat2/semibin2/comebin tables). One variadic input per contract; members distinct types; a target made only by a variadic contract must name its set.
+  - (Optional branching moved to Planning P3, 2026-11-27.)
 
 ### M3. Execution — agreed (outline-sections, 2026-11-26)
 - Role: how a plan runs.
