@@ -49,14 +49,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
-#### P3. Optional branching — proposed (moved from S4, 2026-11-27: a contract feature, after Contracts)
+#### P3. Optional branching — agreed (paragraph-points, 2026-11-27) (moved from S4, 2026-11-27: a contract feature, after Contracts)
 - Role: contracts with alternative outcomes.
 - Key message: a contract can declare alternative outputs decided at run time, and the plan holds a route below every outcome.
 - Points:
   1. Some tools write one of several sets of outputs, decided only at run time, so a contract can declare alternative output groups, which makes it a fork.
-  2. A single solve plans for one group of each fork, and every other group is planned separately from the plan up to the fork and merged in, so the plan holds a route below every outcome.
+  2. A single solve plans for one group of each fork, and every other outcome is planned from the plan up to the fork and merged into one plan, so the plan holds a route below every outcome.
   3. At run time each task writes only the group it produced, and the branches it did not take stay empty.
-- Note: rc `docs/metasmith/architecture.md` ("A product group is one possible outcome"; "A fork outcome is a case"); `case_merge.PlanCases`; `optional: true` in codegen. No standard-library contract is a fork today. Forward reference: the merge is the parallel-case merge (S4).
+- Note: rc `docs/metasmith/architecture.md` ("A product group is one possible outcome"; "A fork outcome is a case"); `case_merge.PlanCases`; `optional: true` in codegen. No standard-library contract is a fork today. The merge is the parallel-case merge, explained in S4 with no explicit pointer (Tony, 2026-11-27).
 
 #### P4. Planning search — agreed (paragraph-points, 2026-11-27)
 - Role: how the plan is found.
@@ -126,7 +126,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     3. The solved plans are merged step by step, so a step that several cases share runs once in the workflow.
     - Justify the final design; do not narrate the design history (Tony, 2026-11-27).
     - Note: sample type is syntactic sugar that generates cases (`Case.ByShape`); not mentioned (Tony: "samples are not well defined here"). Code on rc: `case_merge.py`. A case may reuse another case's route; merged plans are checked per case (P5).
-  - S5. Variadic inputs — proposed (after S4; a solver-planning feature, Tony 2026-11-27)
+  - S5. Variadic inputs — agreed (paragraph-points, 2026-11-27)
     - Key message: a variadic input is matched to a set of member types the user names, and is expanded into ordinary inputs before the search.
     1. Some tools can take a variable number of inputs of one type, so a contract can mark one input as variadic.
     2. The user matches the variadic input to an actual set by naming, on a target, the member types that fill it, so the user can specify exactly which tools form an ensemble; each member must satisfy the variadic input's type.
