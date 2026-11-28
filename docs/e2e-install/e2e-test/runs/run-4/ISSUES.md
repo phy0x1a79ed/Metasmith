@@ -174,3 +174,6 @@ This build adds the cache-probe helper cap (round 13 row 1). Both stations relau
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | bug | fir-lite run, merge_candidate_calls | UnboundLocalError: a later `sample = ...` inside `protocol` made `sample` local, so `context.SourceOf(call_table, sample)` read it unbound. | 43927416: the local is `label`. Pyflakes over every transform and resource script finds no other referenced-before-assignment. |
+| 2 | data | fir-lite run, das_tool | DAS_Tool exits 1: "No bins with bin-score >0.5". Reproduced by hand (`/scratch/phyberos/msm_e2e/dastool_probe`): best bin 0.098. SRR9658108 is 3.5 M pairs and assembles into 41,202 contigs; only 222 carry a single-copy gene and 13 of those are binned, so no bin passes 10% completeness. The tool is right; the run loses its whole MAG branch. | open, Tony: an empty consolidated bin set as a success, a lower `--score_threshold`, or a deeper test sample. |
+| 3 | ok | fir-lite run | The cache probe now works (64 deleted members skipped); the agent set `gpuType=h100` from the docs; 172 steps completed by 02:41. | — |
