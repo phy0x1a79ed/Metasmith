@@ -36,6 +36,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   1. Types are sets of properties, and each property narrows the range of variation of the data it describes.
   2. A type X satisfies Y if X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
   3. Abstract types, which have fewer properties and so are more general, are satisfied by every more specific type, but not the reverse. Example: a wooden chair is a chair, but not every chair is wooden.
+  4. Types are grouped into namespaces, type libraries named as `namespace::type`, which contracts share or extend. (from C1, 2026-11-27)
 - Note: where the test is used (givens, inputs, lineage) belongs to P2. No EDAM claim: "a rough link".
 
 #### P2. Contracts — agreed (paragraph-points, 2026-11-27)
@@ -47,6 +48,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   3. Each port records its lineage, the ports its step consumed.
   4. A contract that accepts a general type loses which specific data came in; a compressor that accepts any file yields only a "compressed file" (flow F1, 2026-11-27). So an input can require that its port descends from the port bound to another input of the same step. Example: mapping reads to an assembly requires the assembly built from those reads.
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
+  6. Besides its types, a contract carries a protocol, a Python procedure that runs its tool, with its output file names, its resource requests and a container image declared as one of its inputs. (from E1/C1, 2026-11-27)
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
 #### P3. Optional branching — agreed (paragraph-points, 2026-11-27) (moved from S4, 2026-11-27: a contract feature, after Contracts)
@@ -139,21 +141,17 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Role: how a plan runs.
 - Key message: each step compiles to a Nextflow process, runs through local or SLURM presets with each tool in its own container, and is cached under its lineage.
 - Paragraphs (outline-paragraphs, 2026-11-27): how a contract runs, how the solved plan compiles, how the workflow runs, then caching.
-  - E1. Contract execution — a contract declares a protocol in Python, run in the contract's own container or environment.
-    1. Each contract carries a protocol, a Python procedure that runs its tool.
-    2. At run time the protocol gets an execution context with the paths of its inputs and expected outputs and a shell.
-    3. A contract names the input it groups by, and a batch size, the number of index items per task (behaviour in the Results; mechanism in E2).
-    4. A protocol typically runs its tool in a container.
-    5. Each step runs its tool in that tool's dedicated container (how: E3.3).
-    6. Each contract compiles to one Nextflow process (lead-in to E2).
-  - E2. Compilation — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping and batching at run time.
+  - E2. Compiling to Nextflow — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping at run time, and each process calls its contract's protocol.
     1. Each step of the plan becomes one Nextflow process, and each port becomes a channel.
     2. Each item in a channel carries a lineage index naming the instances it descends from.
-    3. Channels are joined with three operations only: merge, copy and group.
+    3. Channels are joined with three operations only: merge, copy and group. A contract names the input it groups by and a batch size, the number of index items per task (behaviour in the Results).
     4. At compile time, each other input of a grouping step is classed by its relation to the index input in the plan: ancestor, descendant, sibling (shares an ancestor) or unrelated.
     5. At run time, each index item collects its matches by lineage index: an ancestor by the id in the item's own index, a descendant by the item's id in theirs, a sibling by a shared ancestor id; an unrelated input is passed whole.
     6. A group is released once every item it expects has arrived, as counted by stamps the producing tasks add to each output, or else when the channel closes.
-    7. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
+    7. Each process runs one bootstrap command, which loads its step from the staged plan, matches the files Nextflow staged to the step's inputs by lineage, and calls the contract's protocol with a context of input paths, output paths and a shell.
+    8. The protocol runs its tool in the tool's own container, through the relay (E3).
+    9. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
+    - Note: bootstrap chain from rc `bootstrap.py:StageAndRunTransform`, `ExecuteStep` (protocol call at :372); codegen emits `bootstrap "<workdir>" "<step order>" <host>`.
   - E3. Running the workflow — the workflow runs on a worker, local or SLURM through presets, and results with their lineage are collected back.
     1. A worker home is declared as a path, plus an SSH address if remote; a remote deploy uses existing SSH configuration and otherwise works as a local one.
     2. Staging writes a workspace into the home: the Nextflow workflow, input manifests, parameter files and a launcher script.
@@ -170,16 +168,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     7. So a result is reused whenever the same contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results and its descendants'; changing compute resources does not.
 - Note: given identity per rc `models/libraries/identity.py:leaf_id` (e0c60503, 2026-11-26: small files by bytes; fdd1630c: re-minted on change). d3's "path and modification time" holds only for large files; prose takes the split. Pool imports get an assigned id per import act (`mint_import_id`, nonce; rc architecture.md \"An import assigns an identity\"). rc `architecture.md` fixed to match (bb386cdb).
 
-### M4. Contracts — agreed (outline-sections, 2026-11-26)
-- Role: how contracts are written and designed.
-- Key message: a new tool is added by writing a contract against shared type libraries (namespaces); a standard library ships with Metasmith.
-- Paragraphs (regrouped 2026-11-27: one paragraph on using contracts, no contract counts (Tony: "lets just skip the counts"), minimal overlap with the docs, not a guide):
-  - C1. Using contracts
-    1. A contract needs the types of its inputs and outputs, a protocol, a container providing the tool (declared as one of its inputs), its output file names and its resource requests.
-    2. Types are grouped into namespaces, type libraries named as `namespace::type`; a new contract reuses their types or adds new ones.
-    3. At run time each Nextflow process runs one bootstrap command with its work directory and step number.
-    4. The bootstrap runs Metasmith in the worker's container, loads the step from the staged plan, matches the files Nextflow staged to the step's inputs by lineage, builds the context and calls the contract's protocol; the outputs then go to the cache (E4).
-    - Note: rc `bootstrap.py:StageAndRunTransform`, `ExecuteStep` (protocol call at :372); codegen emits `bootstrap "<workdir>" "<step order>" <host>`.
+### M4. Contracts — dissolved (2026-11-27): namespaces into P1, what a contract carries into P2, the protocol call chain and group-by declaration into E2. No contract counts.
 
 ### M5. Benchmarks — agreed (outline-sections, 2026-11-26)
 - Role: how each Results benchmark was run and scored.
