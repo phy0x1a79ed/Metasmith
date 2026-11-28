@@ -109,10 +109,12 @@ prune and is gone on the next build.
 ## Data and transforms
 
 **A leaf `DataInstance`'s `instance_id` is minted from its file, never from its type.** A file
-of 1 MiB or less is named by its library-relative path and its bytes, so a reinstall that moves
-the library keeps every cache key; a value row by its path and text. A larger file or a
-directory is named by its absolute path and mtime, because bioinformatic inputs reach hundreds
-of GB and hashing them is off the table. A recorded id carries a stamp and is re-minted when its
+of 1 MiB or less, or a directory whose files total 1 MiB or less (`__pycache__` aside), is named
+by its library-relative path and its bytes, so a reinstall that moves the library keeps every
+cache key; a value row by its path and text. A `lib::` resource directory is the case that
+forced the directory half: each install clones it, and every download that reads it missed the
+cache. A larger file or directory is named by its absolute path and mtime, because
+bioinformatic inputs reach hundreds of GB and hashing them is off the table. A recorded id carries a stamp and is re-minted when its
 file changes. Retyping keeps the id; changing a large file's path or touching it costs cache
 reuse, and two different large files at one path and mtime collide; the escape is an explicit
 user-driven fork. The id is *stored* per path rather than re-derived, so
@@ -757,9 +759,9 @@ run on the original banked. The copy goes over the rsync channel staging already
 and mtime are checked against the original, because a failed rsync still leaves a file behind.
 
 **A recorded leaf id moves when its file changes.** Each minted leaf keeps a `stamp` beside its id
-in the index: the stat, plus a content digest for a file of 1 MiB or less. A load re-mints a leaf
+in the index: the stat, plus a content digest for a small file or directory. A load re-mints a leaf
 whose stamp no longer matches, so an edited `.oci` tag misses the cache instead of serving the old
-image's results. A small file is judged by its bytes alone, so a checkout or copy that only moves
+image's results. A small leaf is judged by its bytes alone, so a checkout or copy that only moves
 the mtime keeps the id. The stamp is excluded from the library key for the same reason. An index
 written before stamps existed keeps its ids, and each id gains a stamp at its next save if it still
 re-derives from the file.

@@ -12,16 +12,44 @@ from ...logging import Log
 from ..paths import is_deferred
 from .pinned import _stamp
 
-# A regular file this small is identified by its bytes; anything bigger, and any
-# directory, by its stat. Reading a 24 GB reference or walking a tree on every
-# load is the cost the stat avoids, and a small file is the case where reading is
-# free and a reinstall or checkout that only moves the path and mtime must not
-# move the id.
+# A regular file this small, or a directory whose files total this little, is
+# identified by its bytes; anything bigger by its stat. Reading a 24 GB reference
+# or walking a tree on every load is the cost the stat avoids, and a small leaf is
+# the case where reading is free and a reinstall or checkout that only moves the
+# path and mtime must not move the id. A resource directory of scripts is the
+# common small directory: each install clones it to a new path, and every
+# expensive download that reads it would otherwise miss the cache.
 _DIGEST_MAX_BYTES = 1 << 20
+_DIGEST_MAX_ENTRIES = 1024
+# Written beside the scripts by whatever imports them, and not part of what they are.
+_DIGEST_SKIP_DIRS = {"__pycache__"}
 
 
-def _by_content(st) -> bool:
-    return stat_mod.S_ISREG(st.st_mode) and st.st_size <= _DIGEST_MAX_BYTES
+def _small_files(abs_path: Path, st) -> list[tuple[str, bytes]] | None:
+    # The regular files under a leaf whose bytes name it, by relative path, or
+    # None when the leaf is identified by its stat.
+    if stat_mod.S_ISREG(st.st_mode):
+        return [("", abs_path.read_bytes())] if st.st_size <= _DIGEST_MAX_BYTES else None
+    if not stat_mod.S_ISDIR(st.st_mode):
+        return None
+    files, total, seen = [], 0, 0
+    for root, dirs, names in os.walk(abs_path):
+        dirs[:] = sorted(d for d in dirs if d not in _DIGEST_SKIP_DIRS)
+        for n in sorted(names):
+            seen += 1
+            f = Path(root) / n
+            fst = f.lstat()
+            if not stat_mod.S_ISREG(fst.st_mode):
+                return None
+            total += fst.st_size
+            if total > _DIGEST_MAX_BYTES or seen > _DIGEST_MAX_ENTRIES:
+                return None
+            files.append((str(f.relative_to(abs_path)), f.read_bytes()))
+    return files
+
+
+def _by_content(abs_path: Path) -> bool:
+    return _small_files(abs_path, abs_path.stat()) is not None
 
 
 def _forked(key: bytes, fork_id: str | None) -> str:
@@ -37,6 +65,16 @@ def _content_key(tag: bytes, path: Path, data: bytes) -> bytes:
     return multihash_key(tag + b"\x00" + str(path).encode("utf-8") + b"\x00" + data)
 
 
+def _files_key(path: Path, files: list[tuple[str, bytes]]) -> bytes:
+    if len(files) == 1 and files[0][0] == "":
+        return _content_key(b"file", path, files[0][1])
+    body = b"".join(
+        rel.encode("utf-8") + b"\x00" + str(len(data)).encode() + b"\x00" + data
+        for rel, data in files
+    )
+    return _content_key(b"dir", path, body)
+
+
 def leaf_id(abs_path: Path, path: Path, fork_id: str | None = None) -> str | None:
     # The leaf identity of whatever is at `abs_path` on this host, or None if
     # this host cannot see it. The client mints with it and the agent
@@ -48,8 +86,9 @@ def leaf_id(abs_path: Path, path: Path, fork_id: str | None = None) -> str | Non
     # on every host holding the bytes.
     try:
         st = abs_path.stat()
-        if _by_content(st):
-            return _forked(_content_key(b"file", path, abs_path.read_bytes()), fork_id)
+        files = _small_files(abs_path, st)
+        if files is not None:
+            return _forked(_files_key(path, files), fork_id)
     except OSError:
         return None
     return _forked(stat_multihash_key(abs_path, st.st_mtime_ns), fork_id)
@@ -138,7 +177,11 @@ class _LeafIdentity:
         observed = leaf_stamp(abs_path)
         if observed is None:
             return entry
-        if observed["kind"] == "file" and observed["size"] <= _DIGEST_MAX_BYTES:
+        try:
+            by_content = _by_content(abs_path)
+        except OSError:
+            return entry
+        if by_content:
             # Its bytes re-derive for the price of reading them, so the
             # recorded id is never trusted over them.
             fresh = self._leaf_id_of(path)

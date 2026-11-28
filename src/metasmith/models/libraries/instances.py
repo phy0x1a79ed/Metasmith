@@ -507,9 +507,9 @@ class DataInstanceLibrary(_LeafIdentity, _StoreTransfer, _PinnedLibrary, _Teleme
                 # an invalidate that leaves the id where it was is worse than
                 # no invalidate at all.
                 st = abs_path.stat()
-                if _by_content(st):
+                if _by_content(abs_path):
                     skipped[str(path)] = (
-                        "a small file; its identity is its bytes, so edit the bytes"
+                        "small; its identity is its bytes, so edit the bytes"
                     )
                     continue
                 bump = max(time.time_ns(), st.st_mtime_ns + 1)

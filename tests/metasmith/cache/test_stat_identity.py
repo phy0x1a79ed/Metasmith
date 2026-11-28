@@ -25,7 +25,7 @@ _BIG = b"x" * (_DIGEST_MAX_BYTES + 1)
 
 
 class TestStatLeafId:
-    # Over the threshold, and for a directory, the id is the stat.
+    # Over the threshold, for a file or a directory's files in total, the id is the stat.
     def test_stable_and_moves_with_mtime(self, tmp_path):
         f = tmp_path / "data.bin"
         f.write_bytes(_BIG)
@@ -59,11 +59,12 @@ class TestStatLeafId:
         os.utime(b, ns=(st.st_atime_ns, st.st_mtime_ns))
         assert leaf_id(a, Path("data.bin")) != leaf_id(b, Path("data.bin"))
 
-    def test_directory_costs_one_stat(self, tmp_path):
-        d = tmp_path / "tree"
-        (d / "nested").mkdir(parents=True)
-        (d / "nested" / "a.txt").write_text("a\n", encoding="utf-8")
-        assert leaf_id(d, Path("tree")) is not None
+    def test_a_directory_over_the_threshold_moves_with_its_location(self, tmp_path):
+        a, b = tmp_path / "a" / "tree", tmp_path / "b" / "tree"
+        for d in (a, b):
+            d.mkdir(parents=True)
+            (d / "big.bin").write_bytes(_BIG)
+        assert leaf_id(a, Path("tree")) != leaf_id(b, Path("tree"))
 
     def test_unreachable_path_is_none(self, tmp_path):
         assert leaf_id(tmp_path / "absent.txt", Path("absent.txt")) is None
@@ -84,7 +85,7 @@ class TestStatLeafId:
 
 
 class TestContentLeafId:
-    # At or under the threshold, the id is the bytes and the library path.
+    # At or under the threshold, the id is the bytes (a directory's by relative path) and the library path.
     def test_a_copy_elsewhere_with_a_new_mtime_keeps_its_id(self, tmp_path):
         a = tmp_path / "install_1" / "dram.env"
         b = tmp_path / "install_2" / "dram.env"
@@ -108,6 +109,21 @@ class TestContentLeafId:
         a.write_text("same\n", encoding="utf-8")
         b.write_text("same\n", encoding="utf-8")
         assert leaf_id(a, Path("a.txt")) != leaf_id(b, Path("b.txt"))
+
+    def test_a_small_directory_copied_elsewhere_keeps_its_id(self, tmp_path):
+        # A resource directory of scripts, cloned by each install; whatever imported
+        # the script left a __pycache__ in one copy only.
+        a, b = tmp_path / "install_1" / "metabuli_gtdb", tmp_path / "install_2" / "metabuli_gtdb"
+        for d in (a, b):
+            (d / "sub").mkdir(parents=True)
+            (d / "select_reps.py").write_text("print(1)\n", encoding="utf-8")
+            (d / "sub" / "pattern.txt").write_text("1101\n", encoding="utf-8")
+        (b / "__pycache__").mkdir()
+        (b / "__pycache__" / "select_reps.cpython-312.pyc").write_bytes(b"\x00junk")
+        os.utime(b, ns=(10**18, 10**18))
+        assert leaf_id(a, Path("metabuli_gtdb")) == leaf_id(b, Path("metabuli_gtdb"))
+        (b / "sub" / "pattern.txt").write_text("1111\n", encoding="utf-8")
+        assert leaf_id(a, Path("metabuli_gtdb")) != leaf_id(b, Path("metabuli_gtdb"))
 
     def test_the_threshold_itself_is_read(self, tmp_path):
         a = tmp_path / "a" / "edge.bin"
