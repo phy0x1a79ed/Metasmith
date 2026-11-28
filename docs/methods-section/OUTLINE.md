@@ -194,6 +194,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     - Cost: core-hours as SLURM allocated time over every attempt; Green Algorithms inputs (rows 10, 11).
   - Table (Tony, 2026-11-27): each contract used in the benchmarks, the tool it wraps, the tool version and the container URL. To be generated from the contract files and the containers namespace.
 
-## Declarations (own top-level section, beside Methods) — agreed (outline-sections, 2026-11-26)
-- Role: declarations a journal requires.
-- Paragraphs: statistics; AI assisted development; data and code availability.
+## Declarations (own top-level section, beside Methods) — points agreed 2026-11-27
+- Statistics: cut (Tony, 2026-11-27); add back only if the journal's checklist asks.
+- AI-assisted development
+  1. Metasmith's core was built by hand; Claude models later extended the source code and wrote contracts and container definitions from architectural and methodological guidance.
+  2. Automated and manual tests checked each implementation against its acceptance criteria; Git checkpoints allowed changes to be reverted, and each commit's author is labelled on GitHub.
+  3. The same models helped draft the manuscript.
+  4. Model versions: TODO.
+- Data and code availability
+  1. Data sources go in a table (Tony, 2026-11-27: too many links for text): dataset, source, accession or record. Rows: CAMI II/III (CAMI portal), SRA/ENA accessions per study, published vOTUs (Zenodo 17897233), published metaGEM results (Zenodo records 5596948, 5593111, 5593224, 5596972, 5597227, 5599412), combined-workflow studies.
+  2. Code: Metasmith at https://github.com/hallamlab/metasmith, Zenodo DOI (TODO), documentation at https://metasmith.readthedocs.io; benchmark contracts and drivers under `research/`.
+  3. Benchmark contract table (contract, tool, version, container URL) as a supplementary table.
