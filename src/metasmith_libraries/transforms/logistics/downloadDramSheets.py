@@ -22,9 +22,13 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         *(FetchCommand(Rebase(URLS[name], BASE_URL, mirror), staged.local/f"{name}.tsv", label=f"DRAM {name}")
           for name in SHEETS),
-        f"mkdir -p {isheets.local}",
-        *(f"mv {staged.local}/{name}.tsv {isheets.local}/" for name in SHEETS),
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isheets.external}",
+        *(f"mv {staged.external}/{name}.tsv {isheets.external}/" for name in SHEETS),
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     # A web page passes the fetch; every form is a TSV whose first column is named.

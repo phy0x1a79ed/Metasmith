@@ -69,10 +69,14 @@ def protocol(context: ExecutionContext):
     if context.LocalShell("\n".join([
         "set -euo pipefail",
         f"printf '%s\\n' {' '.join(shlex.quote(s) for s in scripts)} | xargs -P {STREAMS} -n 1 bash",
-        f"mkdir -p {isrc.local}",
-        *(f"mv {staged.local/name} {isrc.local}/" for _, name in chunks),
-        f"cp {md5_list} {isrc.local}/",
     ])) != 0:
+        return failed
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        *(f"mv {staged.external/name} {isrc.external}/" for _, name in chunks),
+        f"cp {staged.external/md5_list.name} {isrc.external}/",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return failed
 
     return ExecutionResult(

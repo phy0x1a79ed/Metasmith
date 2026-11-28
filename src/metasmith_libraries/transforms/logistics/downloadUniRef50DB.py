@@ -24,8 +24,12 @@ def protocol(context: ExecutionContext):
     if context.LocalShell("\n".join([
         "set -euo pipefail",
         FetchCommand(urls, staged.local/"uniref50.fasta.gz", label="uniref50"),
-        f"mv {staged.local}/uniref50.fasta.gz {ifasta.local}",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mv {staged.external}/uniref50.fasta.gz {ifasta.external}",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

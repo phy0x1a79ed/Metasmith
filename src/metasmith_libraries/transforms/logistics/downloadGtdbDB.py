@@ -47,9 +47,13 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         *(FetchCommand(f"{base}/{path}", staged.local/name, md5=md5, label=name)
           for (path, md5), name in zip(parts, names)),
-        f"mkdir -p {iout.local}",
-        *(f"mv {staged.local/name} {iout.local}/" for name in names),
     ])) != 0:
+        return failed
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {iout.external}",
+        *(f"mv {staged.external/name} {iout.external}/" for name in names),
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return failed
 
     with open(iout.local/"MANIFEST", "w") as f:

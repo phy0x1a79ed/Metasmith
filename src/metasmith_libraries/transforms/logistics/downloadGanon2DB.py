@@ -64,13 +64,15 @@ def protocol(context: ExecutionContext):
 
     # Moved, not copied: the product is the only copy, and a later attempt never
     # runs once this one succeeded.
-    if context.LocalShell("\n".join([
-        "set -euo pipefail",
-        f"mkdir -p {iout.local}",
-        f"cp {version}/assembly_summary.txt {iout.local}/assembly_summary.txt",
-        f"mv {version}/files {iout.local}/files",
-        f"mv {staged.local}/taxdump.tar.gz {staged.local}/species_genome_size.txt.gz {iout.local}/",
-    ])) != 0:
+    # `version` is resolved, so it maps back through the resolved staging root.
+    host_version = staged.external/version.relative_to(staged.local.resolve())
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {iout.external}",
+        f"cp {host_version}/assembly_summary.txt {iout.external}/assembly_summary.txt",
+        f"mv {host_version}/files {iout.external}/files",
+        f"mv {staged.external}/taxdump.tar.gz {staged.external}/species_genome_size.txt.gz {iout.external}/",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return failed
     return ExecutionResult(manifest=[{out: iout.local}], success=True)
 

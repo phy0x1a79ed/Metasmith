@@ -23,9 +23,13 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         *(FetchCommand(URLS[name], staged.local/f"{name}.tar.gz", label=f"BUSCO {name}", md5=md5)
           for name, md5 in LINEAGES.items()),
-        f"mkdir -p {iout.local}",
-        *(f"mv {staged.local}/{name}.tar.gz {iout.local}/" for name in LINEAGES),
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {iout.external}",
+        *(f"mv {staged.external}/{name}.tar.gz {iout.external}/" for name in LINEAGES),
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

@@ -45,9 +45,13 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         *(FetchCommand(url, staged.local/name, md5=MD5.get(name), label=name)
           for name, url in URLS.items()),
-        f"mkdir -p {isrc.local}",
-        *(f"mv {staged.local/name} {isrc.local}/" for name in names),
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        *(f"mv {staged.external/name} {isrc.external}/" for name in names),
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     iscripts = context.Input(scripts)

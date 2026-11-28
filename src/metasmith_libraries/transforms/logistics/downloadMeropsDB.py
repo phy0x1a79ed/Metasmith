@@ -18,9 +18,13 @@ def protocol(context: ExecutionContext):
     if context.LocalShell("\n".join([
         "set -euo pipefail",
         FetchCommand(url, staged.local/"pepunit.lib", label="MEROPS pepunit.lib"),
-        f"mkdir -p {isrc.local}",
-        f"mv {staged.local}/pepunit.lib {isrc.local}/",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        f"mv {staged.external}/pepunit.lib {isrc.external}/",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

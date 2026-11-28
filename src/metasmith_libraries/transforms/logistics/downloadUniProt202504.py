@@ -18,12 +18,16 @@ URLS = {path.rsplit("/", 1)[-1]: [f"{m}/{path}" for m in MIRRORS] for path in FI
 def protocol(context: ExecutionContext):
     staged = context.StagingDir()
     outs = {t: context.Output(t) for t in FILES}
-    lines = ["set -euo pipefail"]
-    for t, path in FILES.items():
-        name = path.rsplit("/", 1)[-1]
-        lines += [FetchCommand(URLS[name], staged.local/name, label=name),
-                  f"mv {staged.local}/{name} {outs[t].local}"]
-    if context.LocalShell("\n".join(lines)) != 0:
+    names = {t: path.rsplit("/", 1)[-1] for t, path in FILES.items()}
+    if context.LocalShell("\n".join([
+        "set -euo pipefail",
+        *(FetchCommand(URLS[names[t]], staged.local/names[t], label=names[t]) for t in FILES),
+    ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(
+        " && ".join(f"mv {staged.external/names[t]} {outs[t].external}" for t in FILES),
+        timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
     return ExecutionResult(manifest=[{t: o.local for t, o in outs.items()}],
                            success=all(o.local.stat().st_size > 0 for o in outs.values()))

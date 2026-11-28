@@ -14,6 +14,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -22,6 +23,15 @@ from metasmith.models.libraries import TransformInstanceLibrary
 
 DOWNLOADERS = ["downloadUniRef50DB", "downloadKofamDB", "downloadInterProScanDB"]
 
+
+
+@dataclass
+class _HostShell:
+    calls: list[str] = field(default_factory=list)
+
+    def Exec(self, cmd: str, timeout=None, history=False):
+        self.calls.append(cmd)
+        return SimpleNamespace(out=[], err=[], exit_code=0)
 
 
 @dataclass
@@ -42,6 +52,7 @@ class _RecordingContext:
     commands: list[str] = field(default_factory=list)
     local_shell_calls: list[str] = field(default_factory=list)
     params: dict = field(default_factory=dict)
+    external_shell: _HostShell = field(default_factory=_HostShell)
 
     def StagingDir(self) -> _RecordedPath:
         d = self.external_cwd / "staging"

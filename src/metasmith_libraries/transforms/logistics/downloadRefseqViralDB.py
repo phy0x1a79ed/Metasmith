@@ -21,9 +21,13 @@ def protocol(context: ExecutionContext):
         FetchCommand(Rebase(URLS["viral/viral.1.protein.faa.gz"], BASE_URL, mirror), staged.local/"viral.1.protein.faa.gz",
                      label="RefSeq viral proteins"),
         FetchCommand(Rebase(URLS["RELEASE_NUMBER"], BASE_URL, mirror), staged.local/"RELEASE_NUMBER", label="RefSeq release"),
-        f"mkdir -p {isrc.local}",
-        f"mv {staged.local}/viral.1.protein.faa.gz {staged.local}/RELEASE_NUMBER {isrc.local}/",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        f"mv {staged.external}/viral.1.protein.faa.gz {staged.external}/RELEASE_NUMBER {isrc.external}/",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

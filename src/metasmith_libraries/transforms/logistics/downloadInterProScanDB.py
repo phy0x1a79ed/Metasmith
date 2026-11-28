@@ -14,8 +14,12 @@ def protocol(context: ExecutionContext):
     if context.LocalShell("\n".join([
         "set -euo pipefail",
         FetchCommand(URLS["interproscan"], staged.local/"interproscan-data.tar.gz"),
-        f"mv {staged.local}/interproscan-data.tar.gz {isrc.local}",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mv {staged.external}/interproscan-data.tar.gz {isrc.external}",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

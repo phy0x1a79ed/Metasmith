@@ -18,9 +18,13 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         FetchCommand(URLS["deeparg"], staged.local/"deeparg.zip", label="DeepARG data"),
         f'echo "{MD5}  {staged.local}/deeparg.zip" | md5sum -c -',
-        f"mkdir -p {isrc.local}",
-        f"mv {staged.local}/deeparg.zip {isrc.local}/",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        f"mv {staged.external}/deeparg.zip {isrc.external}/",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

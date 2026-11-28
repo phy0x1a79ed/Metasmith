@@ -21,10 +21,14 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         *(FetchCommand(Rebase(URLS[name], BASE_URL, mirror), staged.local/name, label=f"VOGDB {name}")
           for name in FILES),
-        f"mkdir -p {isrc.local}",
-        *(f"mv {staged.local/name} {isrc.local}/" for name in FILES),
-        f"echo {RELEASE} > {isrc.local}/release",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        *(f"mv {staged.external/name} {isrc.external}/" for name in FILES),
+        f"echo {RELEASE} > {isrc.external}/release",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

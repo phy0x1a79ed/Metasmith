@@ -24,9 +24,13 @@ def protocol(context: ExecutionContext):
         *(FetchCommand(Rebase(URLS[name], BASE_URL, mirror), staged.local/name,
                        label=f"dbCAN {key}", md5=MD5[name])
           for key, name in FILES.items()),
-        f"mkdir -p {isrc.local}",
-        *(f"mv {staged.local/name} {isrc.local}/" for name in FILES.values()),
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        *(f"mv {staged.external/name} {isrc.external}/" for name in FILES.values()),
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

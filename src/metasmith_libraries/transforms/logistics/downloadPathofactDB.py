@@ -27,10 +27,14 @@ def protocol(context: ExecutionContext):
         FetchCommand(URLS["databases"], staged.local/"DATABASES.tar.gz", label="PathoFact 2.0 databases"),
         FetchCommand(URLS["source"], staged.local/"pathofact2.tar.gz", label="PathoFact 2.0 source"),
         f'echo "{DB_MD5}  {staged.local}/DATABASES.tar.gz" | md5sum -c -',
-        f"mkdir -p {isrc.local}",
-        f"mv {staged.local}/DATABASES.tar.gz {staged.local}/pathofact2.tar.gz {isrc.local}/",
-        f"echo {SRC_COMMIT} > {isrc.local}/commit",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        f"mv {staged.external}/DATABASES.tar.gz {staged.external}/pathofact2.tar.gz {isrc.external}/",
+        f"echo {SRC_COMMIT} > {isrc.external}/commit",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(

@@ -21,10 +21,14 @@ def protocol(context: ExecutionContext):
         "set -euo pipefail",
         FetchCommand(Rebase(URLS["profiles.tar.gz"], BASE_URL, mirror), staged.local/"profiles.tar.gz", label="KOfam profiles"),
         FetchCommand(Rebase(URLS["ko_list.gz"], BASE_URL, mirror), staged.local/"ko_list.gz", label="KOfam ko_list"),
-        f"mkdir -p {isrc.local}",
-        f"mv {staged.local}/profiles.tar.gz {staged.local}/ko_list.gz {isrc.local}/",
-        f"echo {RELEASE} > {isrc.local}/release",
     ])) != 0:
+        return ExecutionResult(manifest=[], success=False)
+    res = context.external_shell.Exec(" && ".join([
+        f"mkdir -p {isrc.external}",
+        f"mv {staged.external}/profiles.tar.gz {staged.external}/ko_list.gz {isrc.external}/",
+        f"echo {RELEASE} > {isrc.external}/release",
+    ]), timeout=None, history=True)
+    if res.exit_code != 0:
         return ExecutionResult(manifest=[], success=False)
 
     return ExecutionResult(
