@@ -158,7 +158,7 @@ This build adds the driver thread cap (round 11 row 2). fir full relaunched warm
 | 2 | flake | fir-lite run, metadecoder (job 6785533, node fc30560) | `joblib/parallel.py` read truncated at line 2073 (SyntaxError). The file in the verified sandbox is whole (2,101 lines) and imports cleanly from the login node. A transient Lustre client read on that node. | none; a rerun passes. |
 | 3 | bug | fir-lite run, vfdb_lane | `annotation_table.py` read DIAMOND outfmt 6 as strict UTF-8; VFDB titles (`stitle`) carry Latin-1 byte 0xa0. | 55c5fe8a: decode with `encoding_errors="replace"`; covers the four protein-resistome lanes. |
 | 4 | bug | fir-lite run, clean (GPU) | sbatch refused: fir now requires a GPU model, and metasmith asked a bare `--gpus-per-node=1` with no way to name one from the GUI or CLI. | e15426b1: the request reads the run's `gpuType` param (Nextflow-checked: `--gpus-per-node=h100:1`); deployment.rst says how to set it. |
-| 5 | waste | fir-lite analysis run | The run re-downloaded UniRef50, GTDB, Kofam and InterProScan that its own setup run had just cached: the analysis run is a separate deployment, so every `lib::` directory had a new path and every build that reads one missed. | Root cause row 1; fixed by 3ef00d5e. |
+| 5 | waste | fir-lite analysis run | The run re-downloaded UniRef50, GTDB, Kofam and InterProScan that its own setup run had just cached: the analysis run is a separate deployment, so every `lib::` directory had a new path and every build that reads one missed. | Attributed to row 1 at the time. Round 13 row 1 shows a second cause that also re-downloads exactly these: a failed cache probe. Round 12's run dir is gone, so which one hit here is unverified; both are fixed. |
 
 # Round 13 (release candidate 0.26.2+72ac7d9, 2026-11-28)
 
@@ -166,3 +166,4 @@ This build adds small-directory content identity, lenient DIAMOND titles, `gpuTy
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | bug | fir-lite analysis run ufzXt67u | The cache probe (footprint pass) died with "unable to create native thread": it decides every step at once, and each decision started a python key helper plus two reader threads, hundreds against fir's 512-pid limit. The OutOfMemoryError escaped the helper's `catch (Exception)`, the probe failed, and the run remade every deleted product: UniRef50, GTDB and Kofam re-downloaded although setup (keys identical, verified per step) had cached their builds. | abc967d9: at most 8 helpers at once (a j.u.c Semaphore), and the probe runs on virtual threads with the 128-carrier cap. test_footprint 7 passed. Build 14. |
