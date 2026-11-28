@@ -89,7 +89,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 ### M2. Specification — agreed (outline-sections, 2026-11-26)
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.
 - Key message: a user gives typed data instances and targets through the API, CLI or GUI, and the planner treats each target as one more transform.
-- Paragraphs: to be set in outline-paragraphs (candidates: interfaces; data instances and given types; targets as transforms; lineage in targets; variadic inputs; optional branching; parallel planned cases; known issues and workarounds).
+- Paragraphs (outline-paragraphs, 2026-11-27): each feature reduces to ordinary planning.
+  - S1. Interfaces — the API, CLI and GUI all build the same specification (opener, Tony 2026-11-27).
+  - S2. Givens — user data enter as typed instances, whose types become the outputs of a given step.
+  - S3. Targets — a target is a contract with inputs and no outputs, so it carries lineage constraints like any other.
+  - S4. Samples and cases — a sample type splits the givens into one case per sample; cases are planned in parallel and shared steps merged.
+  - S5. Optional branching — a contract may declare alternative output groups and emit one at run time (`NewProductGroup`; `optional: true`); confirm with Tony.
+  - S6. Variadic inputs — one input type matched to an unknown number of ports; expanded per case before solving (`origin/feat/engine/variadic`, not merged here).
+  - Limits and workarounds: proposed for removal (no concrete content; reads as Discussion).
 
 ### M3. Execution — agreed (outline-sections, 2026-11-26)
 - Role: how a plan runs.
