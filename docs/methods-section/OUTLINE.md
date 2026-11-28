@@ -160,12 +160,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     3. The launcher runs the Nextflow driver inside a container, detached from the user's session; a relay started outside that container lets the driver start each step's container while itself containerized. Running the launcher by hand has the same effect.
     4. Every Nextflow executor is available; local and SLURM were tested and ship as presets.
     5. Each run records a DAG of the plan, the Nextflow logs and a lineage table for every output and intermediate.
-    6. Outputs are written as a data library with their types and lineage, so they can be the givens of a later workflow.
-  - E4. Caching — each result is keyed by its contract, script and consumed inputs, and reused across workflows.
-    1. Every data instance has an id. A given file of 1 MiB or less is identified by its path within its library and its bytes; a larger file or a directory by its path and modification time, since inputs reach hundreds of GB. A given's id is re-derived when its file changes.
-    2. Every other instance takes its id from the task that produced it: a hash of the contract, protocol source included, and of the ids of the instances that task consumed.
-    3. Each task's outputs are stored in the worker's cache under that key; before a task is submitted its key is looked up, and a hit is served without running it.
-    4. So a result is reused whenever the same contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results; changing its compute resources does not.
+  - E4. Caching — results are reused across runs and workflows through a cache Metasmith keeps on top of Nextflow.
+    1. Givens are supplied as a data library, a plain directory of files with a manifest recording each instance's type; outputs are written in the same format with their lineage, so they can be the givens of a later run.
+    2. A result should therefore be reusable by any later run, but Nextflow's resume reuses tasks only within one workflow's own run history, so Metasmith keeps its own cache on top of Nextflow.
+    3. Every data instance has an id. A given file of 1 MiB or less is identified by its path within its library and its bytes; a larger file or a directory by its path and modification time, since inputs reach hundreds of GB. The id is re-derived when the file changes.
+    4. The cache key of a task is a hash of its contract, protocol source included, and of the ids of the instances it consumed; nothing about its outputs takes part. Each output takes its id from that key.
+    5. When a task succeeds, its outputs are stored in the worker's cache under its key.
+    6. Before each task is submitted, its key is looked up. A miss goes to the step's process; a hit goes to a light twin process that places the stored outputs into Nextflow's work directory, so downstream steps and publishing see an ordinary finished task.
+    7. So a result is reused whenever the same contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results and its descendants'; changing compute resources does not.
 - Note: given identity per rc `models/libraries/identity.py:leaf_id` (e0c60503, 2026-11-26: small files by bytes; fdd1630c: re-minted on change). d3's "path and modification time" holds only for large files; prose takes the split. rc `architecture.md` fixed to match (bb386cdb).
 
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
