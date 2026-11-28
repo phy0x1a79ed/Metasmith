@@ -110,15 +110,16 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     2. A target type can name earlier targets as parents, which become lineage constraints on the target's inputs, as in P2.
     3. Because the target is an ordinary contract, the planner needs no special case; a plan is solved once the target step's inputs are bound.
     - Note: `agents/targets.py` (`TargetBuilder`); rc builds the target model in `agents/spec.py:_target_model`.
-  - S4. Parallel cases — proposed (rewritten 2026-11-27 from Tony's premise)
+  - S4. Parallel cases — agreed (paragraph-points, 2026-11-27)
     - Key message: parallel cases let varied inputs reach their own targets in one workflow while reusing the steps they share.
     1. Inputs often vary slightly in form, yet the user wants a common result from all of them, and some cases also need targets of their own.
     2. Each case therefore carries its own givens and targets and is solved on its own.
     3. The solved plans are merged step by step, so a step that several cases share runs once in the workflow.
+    4. A contract may also declare alternative output groups decided at run time, and each outcome is planned as its own case (S5 folded in, 2026-11-27).
     - Justify the final design; do not narrate the design history (Tony, 2026-11-27).
     - Note: sample type is syntactic sugar that generates cases (`Case.ByShape`); not mentioned (Tony: "samples are not well defined here"). Code on rc: `case_merge.py`. A case may reuse another case's route; merged plans are checked per case (P5).
-  - S5. Optional branching — a contract may declare alternative output groups and emit one at run time (`NewProductGroup`; `optional: true`); confirm with Tony.
-  - S6. Variadic inputs — one input type matched to an unknown number of ports; expanded per case before solving (`origin/feat/engine/variadic`, not merged here).
+  - (S5 optional branching folded into S4 point 4: forks, `architecture.md` on rc; no standard-library contract is a fork today.)
+  - S5. Variadic inputs — one input type matched to an unknown number of ports; expanded per case before solving (`origin/feat/engine/variadic`, not merged here).
 
 ### M3. Execution — agreed (outline-sections, 2026-11-26)
 - Role: how a plan runs.
