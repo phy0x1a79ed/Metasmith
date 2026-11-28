@@ -120,3 +120,21 @@ def test_an_incomplete_reply_is_returned_rather_than_refused():
     )
     reply = CallEngine(EngineFor("solve"), "solve", encoded.payload)
     assert reply["complete"] is False, "the fixture is solvable and pins nothing"
+
+
+@needs_engine
+def test_a_merged_case_slice_the_witness_rejects_is_refused_with_its_clause():
+    from metasmith.models.solver import solve_by_mcts
+    from metasmith.models.solver_backend import certify_plan
+    from metasmith.models.solver_engine import EngineError
+
+    name, seed, dials = CORPUS[0]
+    problem = generate_problem(seed, dials, name=name)
+    given = [set(g) for g in problem.given]
+    solution = solve_by_mcts(given, list(problem.transforms), problem.target)
+    assert solution.complete
+    steps = solution.dependency_plan[1:]
+    certify_plan(given, list(problem.transforms), problem.target, steps, "the slice")
+
+    with pytest.raises(EngineError, match=r"the slice does not satisfy.*failed: provenance"):
+        certify_plan(given, list(problem.transforms), problem.target, steps[1:], "the slice")

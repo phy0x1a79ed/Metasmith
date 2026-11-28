@@ -3,12 +3,13 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Iterable, Sequence
 
 if TYPE_CHECKING:
-    from .solver import Endpoint, Solution, Transform
+    from .solver import Application, Endpoint, Solution, Transform
 
 __all__ = [
     "REFINER_BUDGET",
     "SEARCH_BUDGET",
     "Backend",
+    "certify_plan",
     "solve_with_engine",
 ]
 
@@ -53,6 +54,28 @@ def solve_with_engine(
         seed=seed, max_iter=max_iter, max_refine=max_refine,
         fork_groups=fork_groups, partial=partial, guide=guide,
     )
+
+
+def certify_plan(
+    given: list[set[Endpoint]],
+    transforms: Iterable[Transform],
+    target: Transform,
+    steps: Sequence[Application],
+    what: str,
+) -> None:
+    from .solver_engine import SOLVER_WIRE_VERSION, CallEngine, EngineError, EngineFor
+    from .solver_wire import encode_problem, encode_reply
+    info = EngineFor("check")
+    if info is None:
+        raise EngineError(f"no usable solver engine: {_why_not()}")
+    encoded = encode_problem(
+        given, transforms, target, seed=0, max_iter=0, max_refine=0, wire_version=SOLVER_WIRE_VERSION,
+    )
+    reply = encode_reply(encoded, [encoded.given_application, *steps])
+    try:
+        CallEngine(info, "check", {"request": encoded.payload, "reply": reply})
+    except EngineError as e:
+        raise EngineError(f"{what} does not satisfy the specification; refusing it: {e}") from None
 
 
 def Backend(capability: str="solve") -> str:
