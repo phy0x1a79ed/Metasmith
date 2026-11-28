@@ -173,13 +173,12 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
 - Role: how contracts are written and designed.
 - Key message: a new tool is added by writing a contract against shared type libraries (namespaces); a standard library ships with Metasmith.
-- Paragraphs (regrouped 2026-11-27: one paragraph on using contracts, standard-library counts folded in, minimal overlap with the docs, not a guide):
+- Paragraphs (regrouped 2026-11-27: one paragraph on using contracts, no contract counts (Tony: "lets just skip the counts"), minimal overlap with the docs, not a guide):
   - C1. Using contracts
     1. A contract needs the types of its inputs and outputs, a protocol, a container providing the tool (declared as one of its inputs), its output file names and its resource requests.
     2. Types are grouped into namespaces, type libraries named as `namespace::type`; a new contract reuses their types or adds new ones.
-    3. Standard library: the benchmarks in this paper used 139 contracts, and 325 contracts exercised by the benchmarks and ENG CYC are supplied as the standard library. (e2e 2026-11-27: benchmarks = 126 benchmark-only + 13 standard; 325 = 126 + 197 ENG CYC + 2 benchmark standard outside ENG CYC; drivers E2, E3, E4, E5 + hybrid pilot, excluding E1 nf-core and round-1 e5_pilot/e4_metagem; rc canonical 367. Caveat: 197 are planned by the ENG CYC templates; e2e confirms all ran after clean install run 4, the 0.26.4 gate.)
-    4. At run time each Nextflow process runs one bootstrap command with its work directory and step number.
-    5. The bootstrap runs Metasmith in the worker's container, loads the step from the staged plan, matches the files Nextflow staged to the step's inputs by lineage, builds the context and calls the contract's protocol; the outputs then go to the cache (E4).
+    3. At run time each Nextflow process runs one bootstrap command with its work directory and step number.
+    4. The bootstrap runs Metasmith in the worker's container, loads the step from the staged plan, matches the files Nextflow staged to the step's inputs by lineage, builds the context and calls the contract's protocol; the outputs then go to the cache (E4).
     - Note: rc `bootstrap.py:StageAndRunTransform`, `ExecuteStep` (protocol call at :372); codegen emits `bootstrap "<workdir>" "<step order>" <host>`.
 
 ### M5. Benchmarks — agreed (outline-sections, 2026-11-26)
