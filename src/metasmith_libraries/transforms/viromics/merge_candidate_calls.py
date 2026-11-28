@@ -142,7 +142,7 @@ def protocol(context: ExecutionContext):
     with open(ofrozen.local, "w") as fasta, open(oprov.local, "w") as prov:
         prov.write(PROV_HEADER)
         for k, (contigs_path, per_contig) in enumerate(sorted(by_contigs.items())):
-            sample = sample_of[contigs_path]
+            label = sample_of[contigs_path]
             regions = Path(f"regions_{k}.bed")
             wanted = []
             with open(regions, "w") as rf:
@@ -161,19 +161,19 @@ def protocol(context: ExecutionContext):
                 seq = got.get((contig_id, start, end))
                 if seq is None:
                     Log.Warn(
-                        f"[{sample}] {contig_id}:{start}-{end} was called but not "
+                        f"[{label}] {contig_id}:{start}-{end} was called but not "
                         "extracted; the interval is off the end of its contig"
                     )
                     continue
                 # The frozen id carries its whole provenance, because the pooled
                 # set is the only thing most downstream tools ever see and a bare
                 # contig name collides across samples.
-                frozen_id = f"{sample}|{contig_id}|{start}_{end}"
+                frozen_id = f"{label}|{contig_id}|{start}_{end}"
                 fasta.write(f">{frozen_id}\n")
                 for i in range(0, len(seq), 70):
                     fasta.write(seq[i:i + 70] + "\n")
                 prov.write("\t".join([
-                    frozen_id, sample, contig_id, str(start), str(end),
+                    frozen_id, label, contig_id, str(start), str(end),
                     str(end - start + 1), ",".join(callers),
                 ]) + "\n")
                 n_frozen += 1
