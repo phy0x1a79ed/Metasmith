@@ -2,6 +2,7 @@ from metasmith.python_api import *
 import json
 import pandas as pd
 import numpy as np
+import gzip
 
 lib = TransformInstanceLibrary.ResolveParentLibrary(__file__)
 model = Transform()
@@ -13,6 +14,20 @@ reads   = model.AddRequirement(lib.GetType("sequences::short_reads"))
 img_sqk = model.AddRequirement(lib.GetType("env::seqkit.env"))
 stats   = model.AddProduct(lib.GetType("sequences::read_qc_stats"))
 
+# seqkit's own guess (`convert --dry-run`) intersects a per-read range test, so a single
+# read scored entirely in B..J, common in clean modern Illumina data, empties it and seqkit
+# exits. Phred+64 never scores below '@', and Phred+33 data shows a base under Q31 within
+# the first reads.
+def phred_encoding(path, records=100_000) -> str:
+    with open(path, "rb") as raw:
+        gz = raw.read(2) == b"\x1f\x8b"
+    with (gzip.open if gz else open)(path, "rt") as f:
+        for i, line in enumerate(f):
+            if i >= 4*records: break
+            if i % 4 == 3 and min(line.rstrip("\n"), default="~") < "@":
+                return "sanger"
+    return "illumina-1.5+"
+
 def protocol(context: ExecutionContext):
     istats = context.Output(stats)
     ireads = context.Input(reads)
@@ -20,21 +35,11 @@ def protocol(context: ExecutionContext):
     threads = context.params.get('cpus')
     threads = "" if threads is None else f"--threads {threads}"
     seqkit_stats_file = "seqkit_stats.tsv"
-    seqkit_guess_enc_file = "guess_encoding.txt"
     _cmd = f"""
-            seqkit convert --dry-run {ireads.container} 2>&1 | tee {seqkit_guess_enc_file}
             seqkit stat {threads} --all --tabular {ireads.container} | tee {seqkit_stats_file}
         """
     context.ExecWithEnv(env=img_sqk, cmd=_cmd)
-    with open(seqkit_guess_enc_file) as f:
-        K = "guessed quality encoding:"
-        encoding = "sanger"
-        for l in f:
-            if K not in l: continue
-            _enc = l[:-1].split(K)[-1].strip()
-            encoding = _enc
-            break
-        encoding = encoding.lower()
+    encoding = phred_encoding(ireads.local)
 
     def _as_number(x):
         if "." not in x:

@@ -17,21 +17,12 @@ def protocol(context: ExecutionContext):
     threads = context.params.get('cpus')
     threads = "" if threads is None else f"--threads {threads}"
     seqkit_stats_file = "seqkit_stats.tsv"
-    seqkit_guess_enc_file = "guess_encoding.txt"
     _cmd = f"""
-            seqkit convert --dry-run {ireads.container} 2>&1 | tee {seqkit_guess_enc_file}
             seqkit stat {threads} --all --tabular {ireads.container} | tee {seqkit_stats_file}
         """
     context.ExecWithEnv(env=img_sqk, cmd=_cmd)
-    with open(seqkit_guess_enc_file) as f:
-        K = "guessed quality encoding:"
-        encoding = "sanger"
-        for l in f:
-            if K not in l: continue
-            _enc = l[:-1].split(K)[-1].strip()
-            encoding = _enc
-            break
-        encoding = encoding.lower()
+    # Every long-read platform writes Phred+33.
+    encoding = "sanger"
 
     def _as_number(x):
         if "." not in x:
