@@ -6,13 +6,14 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**paragraph-points / Execution** (Planning P1-P6 and Specification S1-S5 points agreed 2026-11-27). Earlier: **paragraph-points / Planning**: Planning grouped by concept as P1 Types, P2 Contracts, P3 Planning search, P4 Refinement, P5 Verification (agreed 2026-11-27). Points for P1-P5 agreed and flow-checked 2026-11-27 (F1-F3 applied). Planning prose waits until all sections have points. Earlier note: sketch the Planning group as itemized points, one paragraph per concept (Tony, 2026-11-27: "one paragraph per concept"). Split the earlier three paragraphs (types+ports+lineage; search+selection; refinement+verification) into one per concept, e.g. types; ports; lineage (strict bound-port check, deliberate, explain why); search state and base case; frontier expansion; PUCT selection; refinement; determinism; verification. Show it in small pieces on Tony's phone. Then the other groups, one at a time. Do not draft prose yet.
+**paragraph-points / Execution**. Planning (P1 Types, P2 Contracts, P3 Optional branching, P4 Planning search, P5 Refinement, P6 Verification) and Specification (S1 Interfaces, S2 Givens, S3 Targets, S4 Parallel cases, S5 Variadic inputs) have agreed points and pass the flow check. Execution paragraph list proposed 2026-11-27 in OUTLINE.md: E1 Contract execution (protocol in Python, own container/env), E2 Compilation (plan -> Nextflow), E3 Running the workflow (local/SLURM presets, results and lineage collected; outputs folded in), E4 Caching. Open: rename "agent" (LLM collision); proposed "compute site" (alternatives host, runner, deployment). Then itemize E1..E4 one at a time, flow check, then Contracts, Benchmarks, Declarations; prose after all sections have points, one section at a time.
 
-Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine", to be revisited in smaller sections): Specification = givens; targets as contracts (lineage on target inputs); variadic inputs; optional branching and parallel cases; limits and workarounds; interfaces (last, recommended). Execution = compilation (steps → processes, ports → channels, grouping at run time); agents and presets; containers and relay; caching; outputs.
+Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind): variadic, cases, forks and the witness gate are there. Read rc with `git show origin/feat/engine/rc:<path>`.
 
 ## Waiting on the user
 
-- Planning sketch: one-paragraph-per-concept points.
+- Agent rename: compute site, host, runner or deployment?
+- Execution paragraph list (E1-E4): agreed set and order?
 
 ## Preferences
 
