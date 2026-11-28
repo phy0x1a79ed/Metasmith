@@ -132,3 +132,4 @@ This build adds the lane work (BUSCO marker lane, the DRAM-v port, DeepTFactor, 
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | waste | fir full setup, downloadGanon2DB (and 18 other download transforms) | The protocol's `mv` from the staging dir (home bind) to the output (`/ws` bind) crosses two container mounts of one Lustre filesystem, so it falls back to copying: 61,751 genomes copied for 30+ min after a 6 h download, and every staged download pays one full copy and transiently double disk. | Proposed: `ExecutionContext.Move` renames on the host through `external_shell`, and the 19 staging transforms call it. Editing them retires their cached references (protocol-file hash), so a warm rerun re-downloads. Held for Tony's call. |

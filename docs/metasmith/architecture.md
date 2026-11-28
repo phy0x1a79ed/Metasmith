@@ -108,11 +108,14 @@ prune and is gone on the next build.
 
 ## Data and transforms
 
-**A `DataInstance`'s `instance_id` derives from path, dtype name and parent library — never
-file bytes.** Bioinformatic inputs reach hundreds of GB, so content hashing is deliberately off
-the table at this level. The consequence is that changing a path or a type re-registers the row
-and costs cache reuse, and two different files at one path collide; the escape is an explicit
-user-driven fork, not an automatic fix. The id is *stored* per path rather than re-derived, so
+**A leaf `DataInstance`'s `instance_id` is minted from its file, never from its type.** A file
+of 1 MiB or less is named by its library-relative path and its bytes, so a reinstall that moves
+the library keeps every cache key; a value row by its path and text. A larger file or a
+directory is named by its absolute path and mtime, because bioinformatic inputs reach hundreds
+of GB and hashing them is off the table. A recorded id carries a stamp and is re-minted when its
+file changes. Retyping keeps the id; changing a large file's path or touching it costs cache
+reuse, and two different large files at one path and mtime collide; the escape is an explicit
+user-driven fork. The id is *stored* per path rather than re-derived, so
 anything moving a manifest entry must move its `instance_meta` with it — the fallback derives
 from the library key, a hash of the whole manifest, which would make one row's identity a
 function of every other row's. The id survives `WithDType()` retyping and `Pack()`/`Unpack()`,
