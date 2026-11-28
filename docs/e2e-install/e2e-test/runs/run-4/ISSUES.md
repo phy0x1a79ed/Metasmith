@@ -183,3 +183,10 @@ This build adds the cache-probe helper cap (round 13 row 1). Both stations relau
 | 7 | bug | fir setup, every Slurm step | buildGanon2DB was OOM-killed (137) in `raptor build` after 3 h, and Nextflow ignored it instead of retrying with doubled memory: the agent bootstrap exits with its cleanup's status, so `.exitcode` read 1. The agent blamed `params.process.tries` (it is read correctly) and reran setup with `process_tries=3`. | The bootstrap exits with the step's own code (`STEP_EXIT`), pinned in test_env_deploy_scripts.py. |
 | 8 | bug | fir setup, buildGanon2DB | 64 GB is too small for the raptor index of RefSeq archaea+bacteria top-1 (~105k species); MaxRSS hit the cap. | 256 GB, as buildMetabuliDB. |
 | 9 | ok | fir setup | downloadMetabuliDB then buildMetabuliDB (64 CPUs, 256 GB) completed: first real run of the Metabuli chain. | — |
+
+# Round 15 (release candidate 0.26.2+9ba5a94, 2026-11-28)
+
+This build adds merge_candidate_calls (row 14.1), the step exit code through the bootstrap (14.7), buildGanon2DB at 256 GB (14.8) and gpuType as an engine param (14.4). das_tool (14.2) is unchanged pending Tony. Before relaunch, the failed Ganon2 build's work dir (245K files) was deleted to bring fir /scratch from 959K to 714K of its 1,000K file quota. Both stations relaunched warm ~06:30, lite five minutes after full. Round 14's records are in `round14/<station>`.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|

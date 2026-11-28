@@ -1,0 +1,12 @@
+# PROGRESS
+- metasmith 0.26.2 installed: sandbox/envs/msm_env. Log tmp/install.log.
+- GUI running: PID 1356758, http://127.0.0.1:8092, workspace sandbox/metasmith_ws, log tmp/gui.log.
+- Agent raspberry-fir DEPLOYED to fir:/scratch/phyberos/msm_e2e/run-4-fir (redeployed 05:40 with default param process_tries=3).
+- Workflow tiny-kakapo = engcyc_prep_references, solved (130 steps).
+- Set-up run #1 tiny-kakapo-2Ja0d (task ekrKC9dy) FAILED 05:24: p122__buildGanon2DB OOM (exit 137 at 64G, raptor build). Cause: slurm preset retry checks params.process.tries which was unset -> ignored. See STEPS 35-37.
+- WORKAROUND: process_tries=3 added to agent params. Set-up run #2 tiny-kakapo-7KRoz started 05:40 MST via GUI (set up -> fetch ~861 GB confirmed). Check GUI Runs tab and `ssh fir squeue -u phyberos`.
+- Stray slurm job from run #1 may still be running (nf-p54__clean); check.
+- Next: when set-up #2 completes -> engcyc_metagenomics SRR9658108 on raspberry-fir; then collect results to ./results.
+- [05:51] set-up #2 7KRoz executing (task ekrKC9dy, driver pid 3687706 on fir). Background watcher task b1cq1bys5 notifies on exit.
+- Quota risk: project file quota ~862k/1M shared; my nxf_work 449k. Do not delete while run active. Run-4-fir-lite (ufzXt67u) is NOT mine; leave it.
+- Stray orphan slurm job 6831429 (nf-p54__clean) from run #1 still running; harmless so far.

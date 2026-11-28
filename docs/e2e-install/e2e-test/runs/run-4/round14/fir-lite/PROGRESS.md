@@ -1,0 +1,14 @@
+# PROGRESS
+- DONE: metasmith 0.26.2 installed to sandbox/envs/msm_env.
+- RUNNING: msm gui on port 8094, PID 1360177, log sandbox/gui.log, workspace sandbox/metasmith_ws.
+- DONE: agent misty-fir deployed to fir (ssh://fir:/scratch/phyberos/msm_e2e/run-4-fir-lite).
+- DONE: setup run U3QhuEEA (engcyc_prep_references_lite) completed; references present on fir.
+- RUNNING: metagenomics run sSsp0 (task key ufzXt67u) on fir, run dir /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ufzXt67u. As of 03:05 MST: 206 COMPLETED, 2 FAILED (p81__merge_candidate_calls: transform bug 'sample' unbound; p80__das_tool exit 1).
+- NEXT: diagnose failures (docs check), decide retry/report, collect results to ./results (sandbox/results).
+- 03:06 MST: monitor b2h4zs9hk watching ufzXt67u; still 206 COMPLETED / 2 FAILED / 4 jobs. Waiting for finish, then collect to ./results.
+- 03:17 MST: still 206 COMPLETED / 2 FAILED / 4 Slurm jobs (promotech 6831407, clean 6831429, bakta_noncoding 6830549, buildGanon2DB 6826532; all RUNNING, 45-56 min in). Monitor bn7pby5ds re-armed. Collect results after jobs=0.
+- 03:27 MST: still 206 COMPLETED / 2 FAILED. Running mine: promotech 6831407 (active, log 03:21), clean 6831429 (log silent since 02:30, in maxsep batch 1/4), bakta_noncoding 6830549 (log silent since 02:28). 6826532 belongs to ANOTHER run (run-4-fir ekrKC9dy), not mine: do not touch. Time limits: clean 4h, bakta 8h. Plan: keep monitoring; if still silent near limit, collect partial results and report.
+- 03:28 MST: clean 6831429 and bakta 6830549 are NOT hung: sstat shows active CPU (2h56m and 1h17m CPU). Time left: clean ~3h, bakta ~7h. Waiting; monitor b05yynjcd (re-arm as needed).
+- 03:4x MST: STOPPED waiting on jobs (clean 6831429 ~2h53m left, bakta 6830549 ~6h50m left, promotech 6831407 ~2h51m left still running on fir). Partial results copy running in background (task baqgjbvw7) -> sandbox/results/ufzXt67u_results (11G so far). NEXT: confirm copy, then finalize REPORT.md and CONTROL.json.
+- 03:44 MST: bakta_noncoding COMPLETED. Trace: 207 COMPLETED, 2 FAILED. Still running: promotech 6831407 and clean 6831429 (~2h45m left each); buildGanon2DB 6826532 is another run's. Partial copy at 20G (background task baqgjbvw7) still running.
+- FINAL: REPORT.md and CONTROL.json written as partial/give_up. Run ufzXt67u still running on fir when stopped.

@@ -1,0 +1,563 @@
+ts,kind,path,inodes,bytes,note
+2026-11-28T02:03:21-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,57580,298722251817,
+2026-11-28T02:03:21-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da/out,27869,7669447223,
+2026-11-28T02:03:21-07:00,dir,task_cache,57575,298722243625,
+2026-11-28T02:03:21-07:00,dir,task_cache/1e/2029aeeb52aea413605dc5b3f190bad43745f12865a2da80e6eba3fa220764b5cf/out,27942,11284727253,
+2026-11-28T02:03:21-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da,27876,7672013400,
+2026-11-28T02:03:21-07:00,dir,task_cache/1e/2029aeeb52aea413605dc5b3f190bad43745f12865a2da80e6eba3fa220764b5cf,27949,11290970321,
+2026-11-28T02:03:21-07:00,dir,container_images,5,8192,
+2026-11-28T02:03:21-07:00,dir,task_cache/1e,57544,235728430897,
+2026-11-28T02:03:21-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:03:21-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:03:21-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:03:21-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:03:21-07:00,quota,-,0,0,/scratch (user phyberos)      2341GiB/  19TiB         462K/1000K
+2026-11-28T02:10:20-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,57586,298724114814,
+2026-11-28T02:10:20-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da/out,27869,7669447223,
+2026-11-28T02:10:20-07:00,dir,lib,3,14514,
+2026-11-28T02:10:20-07:00,dir,msm,1,1139,
+2026-11-28T02:10:20-07:00,dir,task_cache,57575,298722243625,
+2026-11-28T02:10:20-07:00,dir,task_cache/1e/2029aeeb52aea413605dc5b3f190bad43745f12865a2da80e6eba3fa220764b5cf/out,27942,11284727253,
+2026-11-28T02:10:20-07:00,dir,task_cache/1e/20c0e7ee91a7a4c118d17934e89b8372aff48c0b8f263d7fd3d9a85a3a105a77da,27876,7672013400,
+2026-11-28T02:10:20-07:00,dir,task_cache/1e/2029aeeb52aea413605dc5b3f190bad43745f12865a2da80e6eba3fa220764b5cf,27949,11290970321,
+2026-11-28T02:10:20-07:00,dir,container_images,5,8192,
+2026-11-28T02:10:20-07:00,dir,task_cache/1e,57544,235728430897,
+2026-11-28T02:10:20-07:00,dir,relay,2,1847344,
+2026-11-28T02:10:20-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:10:20-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:10:20-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:10:20-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:10:20-07:00,quota,-,0,0,/scratch (user phyberos)      2341GiB/  19TiB         463K/1000K
+2026-11-28T02:10:20-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:10:20-07:00,proc,login1:4104094,0,0,-bash 
+2026-11-28T02:16:04-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,62948,298624832888,
+2026-11-28T02:16:04-07:00,dir,lib,3,14514,
+2026-11-28T02:16:04-07:00,dir,runs/U3QhuEEA,59592,234788325213,
+2026-11-28T02:16:04-07:00,dir,data,1,4096,
+2026-11-28T02:16:04-07:00,dir,msm,1,1139,
+2026-11-28T02:16:04-07:00,dir,task_cache,3342,63834628257,
+2026-11-28T02:16:04-07:00,dir,runs,59593,234788329309,
+2026-11-28T02:16:04-07:00,dir,runs/U3QhuEEA/results,56587,234771236755,
+2026-11-28T02:16:04-07:00,dir,container_images,5,8192,
+2026-11-28T02:16:04-07:00,dir,relay,3,1847381,
+2026-11-28T02:16:04-07:00,dir,runs/U3QhuEEA/results/references,56576,234771189324,
+2026-11-28T02:16:04-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:16:04-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:16:04-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:16:04-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:16:04-07:00,quota,-,0,0,/scratch (user phyberos)      2348GiB/  19TiB         575K/1000K
+2026-11-28T02:16:04-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:22:27-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,63663,298630990091,
+2026-11-28T02:22:27-07:00,dir,lib,3,14514,
+2026-11-28T02:22:27-07:00,dir,runs/U3QhuEEA,59592,234788325213,
+2026-11-28T02:22:27-07:00,dir,data,1,4096,
+2026-11-28T02:22:27-07:00,dir,msm,1,1139,
+2026-11-28T02:22:27-07:00,dir,task_cache,3342,63834628257,
+2026-11-28T02:22:27-07:00,dir,runs,60308,234794486512,
+2026-11-28T02:22:27-07:00,dir,runs/U3QhuEEA/results,56587,234771236755,
+2026-11-28T02:22:27-07:00,dir,container_images,5,8192,
+2026-11-28T02:22:27-07:00,dir,relay,3,1847381,
+2026-11-28T02:22:27-07:00,dir,runs/U3QhuEEA/results/references,56576,234771189324,
+2026-11-28T02:22:27-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:22:27-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:22:27-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:22:27-07:00,job,6826798,0,0,nf-p40__buildMnxrLookup_(1) PENDING
+2026-11-28T02:22:27-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:22:27-07:00,quota,-,0,0,/scratch (user phyberos)      2356GiB/  19TiB         600K/1000K
+2026-11-28T02:22:27-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:22:27-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:22:27-07:00,proc,login1:429435,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/relay/login1/pnnFTgaL.running 
+2026-11-28T02:22:27-07:00,proc,login1:429439,0,0,/bin/bash /scratch/phyberos/msm_e2e/run-4-fir-lite/lib/msm_bootstrap /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ufzXt
+2026-11-28T02:22:27-07:00,proc,login1:431620,0,0,_metasmith/relay/msm_relay start --local 
+2026-11-28T02:22:27-07:00,proc,login1:437483,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ufzXt67u/nxf_work/53/c01bf73257f16a038a9faedd44201c/_metasmith/relay/
+2026-11-28T02:22:27-07:00,proc,login1:437489,0,0,bash /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ufzXt67u/nxf_work/53/c01bf73257f16a038a9faedd44201c/_metasmith/relay/
+2026-11-28T02:22:27-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:28:36-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,69156,300711055887,
+2026-11-28T02:28:36-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T02:28:36-07:00,dir,lib,3,14514,
+2026-11-28T02:28:36-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T02:28:36-07:00,dir,data,1,4096,
+2026-11-28T02:28:36-07:00,dir,msm,1,1139,
+2026-11-28T02:28:36-07:00,dir,runs/ufzXt67u,60434,236776249180,
+2026-11-28T02:28:36-07:00,dir,runs/ufzXt67u/results,56596,235001758126,
+2026-11-28T02:28:36-07:00,dir,task_cache,3348,63903626280,
+2026-11-28T02:28:36-07:00,dir,runs,65795,236805554285,
+2026-11-28T02:28:36-07:00,dir,container_images,5,8192,
+2026-11-28T02:28:36-07:00,dir,relay,3,1847381,
+2026-11-28T02:28:36-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T02:28:36-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:28:36-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:28:36-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:28:36-07:00,job,6832220,0,0,nf-p65__bacmet_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832222,0,0,nf-p67__mobileog_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832237,0,0,nf-p88__vfdb_lane_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_0,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_0,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_1,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_2,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_3,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_4,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_5,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_6,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_7,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_8,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_9,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_10,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_11,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_12,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_13,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_14,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832240_15,0,0,nf-p69__refseq_viral_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_1,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_2,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_3,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_4,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_5,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_6,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_7,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_8,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_9,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_10,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_11,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_12,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_13,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_14,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832241_15,0,0,nf-p72__busco_full_table_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6831447,0,0,nf-p58__semibin2_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6831448,0,0,nf-p60__metadecoder_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832219,0,0,nf-p66__rgi_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_0,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_0,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_1,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_2,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_3,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_4,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_5,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_6,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_7,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_8,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_9,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_10,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_11,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_12,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_13,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_14,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832239_15,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_1,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_2,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_3,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_4,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_5,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_6,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_7,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_8,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_9,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_10,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_11,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_12,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_13,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_14,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832243_15,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_0,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_1,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_2,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_3,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_4,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_5,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_6,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_7,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_8,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_9,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_10,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_11,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_12,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_13,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_14,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6832242_15,0,0,nf-p68__proteinbert_(1) RUNNING
+2026-11-28T02:28:36-07:00,job,6831429,0,0,nf-p54__clean_(1) PENDING
+2026-11-28T02:28:36-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:28:36-07:00,quota,-,0,0,/scratch (user phyberos)      2364GiB/  19TiB         601K/1000K
+2026-11-28T02:28:36-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:28:36-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:28:36-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:34:47-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70572,299032452172,
+2026-11-28T02:34:47-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T02:34:47-07:00,dir,lib,3,14514,
+2026-11-28T02:34:47-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T02:34:47-07:00,dir,data,1,4096,
+2026-11-28T02:34:47-07:00,dir,msm,1,1139,
+2026-11-28T02:34:47-07:00,dir,runs/ufzXt67u,61815,235772571759,
+2026-11-28T02:34:47-07:00,dir,runs/ufzXt67u/results,56624,235027491741,
+2026-11-28T02:34:47-07:00,dir,task_cache,3383,63228699986,
+2026-11-28T02:34:47-07:00,dir,runs,67176,235801876864,
+2026-11-28T02:34:47-07:00,dir,container_images,5,8192,
+2026-11-28T02:34:47-07:00,dir,relay,3,1847381,
+2026-11-28T02:34:47-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T02:34:47-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:34:47-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:34:47-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:34:47-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_0,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_1,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_2,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_3,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_7,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_11,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_12,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_13,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_14,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6833702_15,0,0,nf-p76__interproscan_pfam_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6835417_0,0,0,nf-p108__psortm_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6835417_1,0,0,nf-p108__psortm_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6835417_2,0,0,nf-p108__psortm_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6835417_3,0,0,nf-p108__psortm_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_0,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_0,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_1,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_2,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_3,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_4,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_5,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_6,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_7,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_8,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_9,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_10,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_11,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_12,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_13,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_14,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832239_15,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_1,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_2,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_3,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_4,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_5,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_6,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_7,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_8,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_9,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_10,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_11,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_12,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_13,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_14,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832243_15,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832707_2,0,0,nf-p77__kofamscan_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832707_3,0,0,nf-p77__kofamscan_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832707_4,0,0,nf-p77__kofamscan_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832707_5,0,0,nf-p77__kofamscan_(1) RUNNING
+2026-11-28T02:34:47-07:00,job,6832707_10,0,0,nf-p77__kofamscan_(1) RUNNING
+2026-11-28T02:34:47-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:34:47-07:00,quota,-,0,0,/scratch (user phyberos)      2369GiB/  19TiB         684K/1000K
+2026-11-28T02:34:47-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:34:47-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:34:47-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:40:30-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70739,298955854176,
+2026-11-28T02:40:30-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T02:40:30-07:00,dir,lib,3,14514,
+2026-11-28T02:40:30-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T02:40:30-07:00,dir,data,1,4096,
+2026-11-28T02:40:30-07:00,dir,msm,1,1139,
+2026-11-28T02:40:30-07:00,dir,runs/ufzXt67u,61979,235701239627,
+2026-11-28T02:40:30-07:00,dir,runs/ufzXt67u/results,56630,235029882699,
+2026-11-28T02:40:30-07:00,dir,task_cache,3386,63223434122,
+2026-11-28T02:40:30-07:00,dir,runs,67340,235730544732,
+2026-11-28T02:40:30-07:00,dir,container_images,5,8192,
+2026-11-28T02:40:30-07:00,dir,relay,3,1847381,
+2026-11-28T02:40:30-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T02:40:30-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:40:30-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:40:30-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:40:30-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6835417_0,0,0,nf-p108__psortm_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6835417_1,0,0,nf-p108__psortm_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_0,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_0,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_1,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_2,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_3,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_4,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_5,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_6,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_7,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_8,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_9,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_10,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_11,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_12,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_13,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_14,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832239_15,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_1,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_2,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_3,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_4,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_5,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_6,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_7,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_8,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_9,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_10,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_11,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_12,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_13,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_14,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6832243_15,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:40:30-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T02:40:30-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:40:30-07:00,quota,-,0,0,/scratch (user phyberos)      2405GiB/  19TiB         696K/1000K
+2026-11-28T02:40:30-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:40:30-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:40:30-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:46:01-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70951,298945028056,
+2026-11-28T02:46:01-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T02:46:01-07:00,dir,lib,3,14514,
+2026-11-28T02:46:01-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T02:46:01-07:00,dir,data,1,4096,
+2026-11-28T02:46:01-07:00,dir,msm,1,1139,
+2026-11-28T02:46:01-07:00,dir,runs/ufzXt67u,62148,235701261192,
+2026-11-28T02:46:01-07:00,dir,runs/ufzXt67u/results,56632,235030491457,
+2026-11-28T02:46:01-07:00,dir,task_cache,3429,63212586437,
+2026-11-28T02:46:01-07:00,dir,runs,67509,235730566297,
+2026-11-28T02:46:01-07:00,dir,container_images,5,8192,
+2026-11-28T02:46:01-07:00,dir,relay,3,1847381,
+2026-11-28T02:46:01-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T02:46:01-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:46:01-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:46:01-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:46:01-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6832239_4,0,0,nf-p74__interproscan_motifs_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6832243_8,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6832243_9,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6832243_10,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6832243_11,0,0,nf-p75__interproscan_families_(1) RUNNING
+2026-11-28T02:46:01-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T02:46:01-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:46:01-07:00,quota,-,0,0,/scratch (user phyberos)      2473GiB/  19TiB         719K/1000K
+2026-11-28T02:46:01-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:46:01-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:46:01-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:52:26-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298928989017,
+2026-11-28T02:52:26-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T02:52:26-07:00,dir,lib,3,14514,
+2026-11-28T02:52:26-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T02:52:26-07:00,dir,data,1,4096,
+2026-11-28T02:52:26-07:00,dir,msm,1,1139,
+2026-11-28T02:52:26-07:00,dir,runs/ufzXt67u,62188,235696577596,
+2026-11-28T02:52:26-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T02:52:26-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T02:52:26-07:00,dir,runs,67549,235725882701,
+2026-11-28T02:52:26-07:00,dir,container_images,5,8192,
+2026-11-28T02:52:26-07:00,dir,relay,3,1847381,
+2026-11-28T02:52:26-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T02:52:26-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:52:26-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:52:26-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:52:26-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T02:52:26-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T02:52:26-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T02:52:26-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:52:26-07:00,quota,-,0,0,/scratch (user phyberos)      2534GiB/  19TiB         740K/1000K
+2026-11-28T02:52:26-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:52:26-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:52:26-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T02:58:20-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298931018016,
+2026-11-28T02:58:20-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T02:58:20-07:00,dir,lib,3,14514,
+2026-11-28T02:58:20-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T02:58:20-07:00,dir,data,1,4096,
+2026-11-28T02:58:20-07:00,dir,msm,1,1139,
+2026-11-28T02:58:20-07:00,dir,runs/ufzXt67u,62188,235698606595,
+2026-11-28T02:58:20-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T02:58:20-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T02:58:20-07:00,dir,runs,67549,235727911700,
+2026-11-28T02:58:20-07:00,dir,container_images,5,8192,
+2026-11-28T02:58:20-07:00,dir,relay,3,1847381,
+2026-11-28T02:58:20-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T02:58:20-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T02:58:20-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T02:58:20-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T02:58:20-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T02:58:20-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T02:58:20-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T02:58:20-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T02:58:20-07:00,quota,-,0,0,/scratch (user phyberos)      2597GiB/  19TiB         762K/1000K
+2026-11-28T02:58:20-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T02:58:20-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T02:58:20-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:04:07-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298931020977,
+2026-11-28T03:04:07-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:04:07-07:00,dir,lib,3,14514,
+2026-11-28T03:04:07-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:04:07-07:00,dir,data,1,4096,
+2026-11-28T03:04:07-07:00,dir,msm,1,1139,
+2026-11-28T03:04:07-07:00,dir,runs/ufzXt67u,62188,235698609556,
+2026-11-28T03:04:07-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:04:07-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:04:07-07:00,dir,runs,67549,235727914661,
+2026-11-28T03:04:07-07:00,dir,container_images,5,8192,
+2026-11-28T03:04:07-07:00,dir,relay,3,1847381,
+2026-11-28T03:04:07-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:04:07-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:04:07-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:04:07-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:04:07-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:04:07-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:04:07-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:04:07-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:04:07-07:00,quota,-,0,0,/scratch (user phyberos)      2672GiB/  19TiB         788K/1000K
+2026-11-28T03:04:07-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:04:07-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:04:07-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:09:55-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298933228140,
+2026-11-28T03:09:55-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:09:55-07:00,dir,lib,3,14514,
+2026-11-28T03:09:55-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:09:55-07:00,dir,data,1,4096,
+2026-11-28T03:09:55-07:00,dir,msm,1,1139,
+2026-11-28T03:09:55-07:00,dir,runs/ufzXt67u,62188,235700816719,
+2026-11-28T03:09:55-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:09:55-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:09:55-07:00,dir,runs,67549,235730121824,
+2026-11-28T03:09:55-07:00,dir,container_images,5,8192,
+2026-11-28T03:09:55-07:00,dir,relay,3,1847381,
+2026-11-28T03:09:55-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:09:55-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:09:55-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:09:55-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:09:55-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:09:55-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:09:55-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:09:55-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:09:55-07:00,quota,-,0,0,/scratch (user phyberos)      2730GiB/  19TiB         805K/1000K
+2026-11-28T03:09:55-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:09:55-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:09:55-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:16:22-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298933364507,
+2026-11-28T03:16:22-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:16:22-07:00,dir,lib,3,14514,
+2026-11-28T03:16:22-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:16:22-07:00,dir,data,1,4096,
+2026-11-28T03:16:22-07:00,dir,msm,1,1139,
+2026-11-28T03:16:22-07:00,dir,runs/ufzXt67u,62188,235700953086,
+2026-11-28T03:16:22-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:16:22-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:16:22-07:00,dir,runs,67549,235730258191,
+2026-11-28T03:16:22-07:00,dir,container_images,5,8192,
+2026-11-28T03:16:22-07:00,dir,relay,3,1847381,
+2026-11-28T03:16:22-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:16:22-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:16:22-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:16:22-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:16:22-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:16:22-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:16:22-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:16:22-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:16:22-07:00,quota,-,0,0,/scratch (user phyberos)      2766GiB/  19TiB         818K/1000K
+2026-11-28T03:16:22-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:16:22-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:16:22-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:22:03-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298935416900,
+2026-11-28T03:22:03-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:22:03-07:00,dir,lib,3,14514,
+2026-11-28T03:22:03-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:22:03-07:00,dir,data,1,4096,
+2026-11-28T03:22:03-07:00,dir,msm,1,1139,
+2026-11-28T03:22:03-07:00,dir,runs/ufzXt67u,62188,235703005479,
+2026-11-28T03:22:03-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:22:03-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:22:03-07:00,dir,runs,67549,235732310584,
+2026-11-28T03:22:03-07:00,dir,container_images,5,8192,
+2026-11-28T03:22:03-07:00,dir,relay,3,1847381,
+2026-11-28T03:22:03-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:22:03-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:22:03-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:22:03-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:22:03-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:22:03-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:22:03-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:22:03-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:22:03-07:00,quota,-,0,0,/scratch (user phyberos)      2847GiB/  19TiB         846K/1000K
+2026-11-28T03:22:03-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:22:03-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:22:03-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:28:37-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298935584293,
+2026-11-28T03:28:37-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:28:37-07:00,dir,lib,3,14514,
+2026-11-28T03:28:37-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:28:37-07:00,dir,data,1,4096,
+2026-11-28T03:28:37-07:00,dir,msm,1,1139,
+2026-11-28T03:28:37-07:00,dir,runs/ufzXt67u,62188,235703172872,
+2026-11-28T03:28:37-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:28:37-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:28:37-07:00,dir,runs,67549,235732477977,
+2026-11-28T03:28:37-07:00,dir,container_images,5,8192,
+2026-11-28T03:28:37-07:00,dir,relay,3,1847381,
+2026-11-28T03:28:37-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:28:37-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:28:37-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:28:37-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:28:37-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:28:37-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:28:37-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:28:37-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:28:37-07:00,quota,-,0,0,/scratch (user phyberos)      2863GiB/  19TiB         847K/1000K
+2026-11-28T03:28:37-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:28:37-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:28:37-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:34:58-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298937637290,
+2026-11-28T03:34:58-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:34:58-07:00,dir,lib,3,14514,
+2026-11-28T03:34:58-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:34:58-07:00,dir,data,1,4096,
+2026-11-28T03:34:58-07:00,dir,msm,1,1139,
+2026-11-28T03:34:58-07:00,dir,runs/ufzXt67u,62188,235705225869,
+2026-11-28T03:34:58-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:34:58-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:34:58-07:00,dir,runs,67549,235734530974,
+2026-11-28T03:34:58-07:00,dir,container_images,5,8192,
+2026-11-28T03:34:58-07:00,dir,relay,3,1847381,
+2026-11-28T03:34:58-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:34:58-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:34:58-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:34:58-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:34:58-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:34:58-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:34:58-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:34:58-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:34:58-07:00,quota,-,0,0,/scratch (user phyberos)      2870GiB/  19TiB         847K/1000K
+2026-11-28T03:34:58-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:34:58-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:34:58-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:40:32-07:00,total,/scratch/phyberos/msm_e2e/run-4-fir-lite,70949,298937785072,
+2026-11-28T03:40:32-07:00,dir,runs/ufzXt67u/results/ref-kofamscan_profiles,27868,7667112501,
+2026-11-28T03:40:32-07:00,dir,lib,3,14514,
+2026-11-28T03:40:32-07:00,dir,runs/U3QhuEEA,5360,29301009,
+2026-11-28T03:40:32-07:00,dir,data,1,4096,
+2026-11-28T03:40:32-07:00,dir,msm,1,1139,
+2026-11-28T03:40:32-07:00,dir,runs/ufzXt67u,62188,235705373651,
+2026-11-28T03:40:32-07:00,dir,runs/ufzXt67u/results,56638,235035978273,
+2026-11-28T03:40:32-07:00,dir,task_cache,3387,63201230994,
+2026-11-28T03:40:32-07:00,dir,runs,67549,235734678756,
+2026-11-28T03:40:32-07:00,dir,container_images,5,8192,
+2026-11-28T03:40:32-07:00,dir,relay,3,1847381,
+2026-11-28T03:40:32-07:00,dir,runs/ufzXt67u/results/annotation-virsorter2_db,27942,11284727253,
+2026-11-28T03:40:32-07:00,walk_exit,/scratch/phyberos/msm_e2e/run-4-fir-lite,0,0,0
+2026-11-28T03:40:32-07:00,apptainer,/home/phyberos/.apptainer,92,2679413640,
+2026-11-28T03:40:32-07:00,apptainer,/scratch/phyberos/cache/apptainer,32061,115735479515,
+2026-11-28T03:40:32-07:00,job,6831407,0,0,nf-p61__promotech_(1) RUNNING
+2026-11-28T03:40:32-07:00,job,6831429,0,0,nf-p54__clean_(1) RUNNING
+2026-11-28T03:40:32-07:00,job,6830549,0,0,nf-p47__bakta_noncoding_(1) RUNNING
+2026-11-28T03:40:32-07:00,quota,-,0,0,/home (user phyberos)     10049MiB/  48GiB         108K/ 500K
+2026-11-28T03:40:32-07:00,quota,-,0,0,/scratch (user phyberos)      2878GiB/  19TiB         847K/1000K
+2026-11-28T03:40:32-07:00,proc,login1:355146,0,0,/bin/bash ../../msm api run_workflow -a key=ufzXt67u host=login1 log_dir=./_metasmith/logs.2026-11-28_02-22-04 stub_dela
+2026-11-28T03:40:32-07:00,proc,login1:355217,0,0,/opt/conda/envs/metasmith_env/bin/python3.12 /opt/conda/envs/metasmith_env/bin/metasmith api run_workflow -a key=ufzXt67
+2026-11-28T03:40:32-07:00,proc,login1:4076867,0,0,./relay/msm_relay start 
+2026-11-28T03:40:32-07:00,proc,login1:4148610,0,0,rsync --server --sender -logDtpre.iLsfxCIvu --info=STATS . /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/ufzXt67u/result
