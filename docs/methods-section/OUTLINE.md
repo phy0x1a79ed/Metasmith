@@ -97,9 +97,26 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     3. The Python API calls the operations directly; the command line (`metasmith`, or `msm`) maps each to a subcommand (e.g. `msm plan`, `msm workflow run`); the GUI exposes them as forms around saved templates.
     4. Writing new contracts is the exception: a contract is a Python file, so it is authored in Python.
     - Note: `src/metasmith/ops/` is the shared layer; CLI in `coms/cli/`, GUI (Flask + Svelte) in `gui/`. CLI can scaffold and validate contract files; not mentioned (Tony, 2026-11-27).
-  - S2. Givens — user data enter as typed instances, whose types become the outputs of a given step.
-  - S3. Targets — a target is a contract with inputs and no outputs, so it carries lineage constraints like any other.
-  - S4. Samples and cases — a sample type splits the givens into one case per sample; cases are planned in parallel and shared steps merged.
+  - S2. Givens — agreed (paragraph-points, 2026-11-27)
+    - Key message: a user's data enter as a library of typed instances, which becomes the plan's given step.
+    1. A data library lists the user's files and values, each registered with a type.
+    2. A type can be picked from the types the contracts require, or composed directly from properties.
+    3. An instance can declare parents, so lineage among the givens is recorded before planning.
+    4. The planner sees the givens as one given step with no inputs, whose ports carry the instances' types and declared lineage.
+    - Note: points 1-2 reuse d3 "Data Instances"; that section's caching paragraph moves to Execution. No examples unless necessary (Tony, 2026-11-27).
+  - S3. Targets — agreed (paragraph-points, 2026-11-27)
+    - Key message: a target is a contract with inputs and no outputs, so it is planned like any other step and can carry lineage constraints.
+    1. The user lists target types, which the planner builds into one target contract whose inputs are those types and which has no outputs.
+    2. A target type can name earlier targets as parents, which become lineage constraints on the target's inputs, as in P2.
+    3. Because the target is an ordinary contract, the planner needs no special case; a plan is solved once the target step's inputs are bound.
+    - Note: `agents/targets.py` (`TargetBuilder`); rc builds the target model in `agents/spec.py:_target_model`.
+  - S4. Parallel cases — proposed (rewritten 2026-11-27 from Tony's premise)
+    - Key message: parallel cases let varied inputs reach their own targets in one workflow while reusing the steps they share.
+    1. Inputs often vary slightly in form, yet the user wants a common result from all of them.
+    2. A first design aggregated the varied inputs into a single target set, which proved too rigid when cases needed targets of their own.
+    3. Each case therefore carries its own givens and targets and is solved on its own.
+    4. The solved plans are merged step by step, so a step that several cases share runs once in the workflow.
+    - Note: sample type is syntactic sugar that generates cases (`Case.ByShape`); not mentioned (Tony: "samples are not well defined here"). Code on rc: `case_merge.py`. A case may reuse another case's route; merged plans are checked per case (P5).
   - S5. Optional branching — a contract may declare alternative output groups and emit one at run time (`NewProductGroup`; `optional: true`); confirm with Tony.
   - S6. Variadic inputs — one input type matched to an unknown number of ports; expanded per case before solving (`origin/feat/engine/variadic`, not merged here).
 

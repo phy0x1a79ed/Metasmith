@@ -19,6 +19,8 @@ Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine
 - (2026-11-27) Tony is on his phone: short messages, conversational, small sections, one block at a time.
 - (2026-11-27) Settle the overall structure and grouping before prose; don't go into the weeds.
 - (2026-11-27) One paragraph per concept.
+- (2026-11-27) No examples in points unless necessary.
+- (2026-11-27) Methods paragraphs open with the problem or premise, then the mechanism.
 - (2026-11-27) Order of work: itemized points for each paragraph, one at a time, section by section, with a flow check per section; prose only after all sections have points, then one section at a time; check again; then into d3.
 - (2026-11-27) Reuse the original d3 prose where it exists, above all the existing Methods prose ("most of that is good already"); update and fill gaps rather than rewrite.
 
