@@ -1,0 +1,11 @@
+# PROGRESS
+- Started fresh run (no prior state). Read docs/setup/install.rst, gui.rst, ssh.rst, deployment.rst.
+- DONE: metasmith installed in envs/msm_env (log install_metasmith.log).
+- DONE: GUI running, pid 1124347, log gui.log, workspace sandbox/metasmith_ws, http://127.0.0.1:8094
+- NEXT: read docs deployment/remote_agent/workflows, then deploy agent via browser GUI.
+- Browser: GUI Agents tab open. Next: + agent with host fir, home /scratch/phyberos/msm_e2e/run-4-fir-lite
+- Agent glittering-fir configured in GUI; deploy clicked (check Agents page / gui.log)
+- DONE: agent glittering-fir deployed to fir (GUI). NEXT: Workflows tab -> engcyc_prep_references_lite setup/run.
+- Workflow emerald-grouse (engcyc_prep_references_lite) solved; 'set up' clicked on agent glittering-fir (setup run). NEXT: monitor in Runs tab.
+- RUNNING: setup run N7Gwm (task aLahF0vo, workflow engcyc_prep_references_lite) on glittering-fir. GUI Runs tab.
+- setup run N7Gwm running; slurm job 6770657 on fir (as of 21:52)

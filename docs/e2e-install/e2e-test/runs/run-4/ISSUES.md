@@ -159,3 +159,10 @@ This build adds the driver thread cap (round 11 row 2). fir full relaunched warm
 | 3 | bug | fir-lite run, vfdb_lane | `annotation_table.py` read DIAMOND outfmt 6 as strict UTF-8; VFDB titles (`stitle`) carry Latin-1 byte 0xa0. | 55c5fe8a: decode with `encoding_errors="replace"`; covers the four protein-resistome lanes. |
 | 4 | bug | fir-lite run, clean (GPU) | sbatch refused: fir now requires a GPU model, and metasmith asked a bare `--gpus-per-node=1` with no way to name one from the GUI or CLI. | e15426b1: the request reads the run's `gpuType` param (Nextflow-checked: `--gpus-per-node=h100:1`); deployment.rst says how to set it. |
 | 5 | waste | fir-lite analysis run | The run re-downloaded UniRef50, GTDB, Kofam and InterProScan that its own setup run had just cached: the analysis run is a separate deployment, so every `lib::` directory had a new path and every build that reads one missed. | Root cause row 1; fixed by 3ef00d5e. |
+
+# Round 13 (release candidate 0.26.2+72ac7d9, 2026-11-28)
+
+This build adds small-directory content identity, lenient DIAMOND titles, `gpuType`, run params kept across reloads, and the driver thread cap. fir full relaunched warm ~01:10, fir-lite five minutes later. Round 12's records are in `round12/<station>`. Expect one more miss for every step that reads a `lib::` directory (their keys move once), Metabuli's download included.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
