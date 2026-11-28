@@ -44,11 +44,12 @@ done
 
 STOP = r'''
 R=$1
-for id in $(squeue -u "$USER" -h -o '%i|%Z' | awk -F'|' -v r="$R" 'index($2, r)==1 {print $1}'); do scancel "$id" && echo "scancel $id"; done
+for id in $(squeue -u "$USER" -h -o '%i|%Z' | awk -F'|' -v r="$R" '$2 == r || index($2, r "/") == 1 {print $1}'); do scancel "$id" && echo "scancel $id"; done
 # Container steps run with cwd /ws, so match the run dir in cwd or argv, then take every descendant.
+# The dir must end at a / or the line: run-4-fir is a prefix of run-4-fir-lite.
 roots=$(for p in $(ps -u "$USER" -o pid=); do
   [ "$p" = "$$" ] && continue
-  { readlink /proc/$p/cwd; tr '\0' ' ' < /proc/$p/cmdline; } 2>/dev/null | grep -q "$R" && echo $p
+  { readlink /proc/$p/cwd; tr '\0' '\n' < /proc/$p/cmdline; } 2>/dev/null | grep -qE "$R(/|\$)" && echo $p
 done | tr '\n' ' ')
 ps -u "$USER" -o pid=,ppid= | awk -v roots=" $roots " '
   { parent[$1]=$2 }
