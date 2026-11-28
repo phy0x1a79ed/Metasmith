@@ -11,7 +11,6 @@ cdc_nwss	public health & microbiology	field sample
 cdc_places	public health & microbiology	survey
 clay_v0_embeddings	latent	satellite
 cop_dem_glo30	geology	satellite
-donneesquebec_role	socio-economic	survey
 eccc_ghgrp	hazards	survey
 eccc_naps	hazards	fixed sensor
 eccc_npri	hazards	survey
@@ -26,7 +25,7 @@ etopo_2022_30s_bed	geology	blended
 gbif	macrobiology	crowdsourced
 ghs_pop_r2023a	socio-economic	blended
 ghs_smod_r2023a	socio-economic	blended
-gsc_surficial_1880a	geology	survey
+gsc_surficial_cgm195	geology	survey
 hansen_gfc_v1_13	macrobiology	satellite
 hgb	macrobiology	satellite
 io_lulc_annual_v02	macrobiology	satellite
@@ -59,7 +58,7 @@ phac_wastewater	public health & microbiology	field sample
 s2_signature_v1	spectral	satellite
 sentinel1_rtc	spectral	satellite
 sentinel2_l2a	spectral	satellite
-statcan_csd_2016	socio-economic	survey
+statcan_census_2021	socio-economic	survey
 statcan_dwelling_value	socio-economic	survey
 statcan_odhf	public health & microbiology	survey
 statcan_wds_popest	socio-economic	survey
