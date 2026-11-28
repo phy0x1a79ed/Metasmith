@@ -202,3 +202,43 @@ def solve_via_engine(
         fork_groups=fork_groups, partial=partial, guide=guide,
     )
     return decode_plan(encoded, CallEngine(info, "solve", encoded.payload))
+
+def encode_reply(encoded: EncodedProblem, steps: Sequence[Application]) -> dict:
+    node_ix = {n: i for i, n in enumerate(encoded.nodes)}
+    prop_ix = {p: i for i, p in enumerate(encoded.properties)}
+    rank = {id(t): i for i, t in enumerate(encoded.transforms)}
+    ep_ix: dict[Node, int] = {}
+    rows: list[dict] = []
+
+    def _ep(e: Node) -> int:
+        i = ep_ix.get(e)
+        if i is not None: return i
+        parents = sorted(_ep(p) for p in sorted(e.parents, key=lambda x: x.Signature()))
+        i = ep_ix[e] = len(rows)
+        rows.append({
+            "props": sorted(prop_ix[p] for p in e.properties),
+            "parents": parents,
+            "source_node": node_ix.get(e),
+        })
+        return i
+
+    encoded_steps = [
+        {
+            "transform": rank[id(a.transform)],
+            "timeline": a.initial_timeline,
+            "used": [[node_ix[d], _ep(e)] for d, e in a.used.items()],
+            "produced": [[[node_ix[d], _ep(e)] for d, e in g.items()] for g in a.produced],
+        }
+        for a in steps
+    ]
+    return {
+        "wire_version": encoded.payload["wire_version"],
+        "complete": True,
+        "no_path_possible": False,
+        "endpoints": rows,
+        "steps": encoded_steps,
+        "merged": [],
+        "relevant_transforms": [],
+        "iterations": 0,
+        "refiner_iterations": [],
+    }

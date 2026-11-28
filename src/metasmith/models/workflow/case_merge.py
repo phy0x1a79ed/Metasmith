@@ -11,6 +11,7 @@ from ..libraries import (
     DataInstance, TransformInstance, TransformInstanceLibrary, TransformInstanceLibraryView,
 )
 from ..solver import Application, Dependency, Endpoint, Transform, solve_by_mcts, Solution as SolverResult
+from ..solver_backend import certify_plan
 from ..variadic import SpecializeCases
 from .diagnostics import PlanHint
 from .plan import (
@@ -510,6 +511,17 @@ def PlanCases(
         return refuse(unrouted)
     order = merge._order()
     assert order is not None
+    # Each case is certified on its own slice. A shared node's one application
+    # cannot stand for every case: the files it emits for one case descend from
+    # that case's samples, not from another's.
+    for c, job in enumerate(jobs):
+        target = cases[job.root].target
+        own = [n.apps[c] for n in order if c in n.cases] + [merge.targets[c]]
+        certify_plan(
+            [case_eps[job.root]],
+            list({id(t): t for t in [*models[job.root], *(a.transform for a in own)]}.values()),
+            target, own, f"the plan for case [{cases[job.root].name}{_describe(job, transform2inst)}]",
+        )
 
     streams = merge.streams
     roots_of = [j.root for j in jobs]
