@@ -190,3 +190,7 @@ This build adds merge_candidate_calls (row 14.1), the step exit code through the
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | ok | fir-lite run | merge_candidate_calls completes (14.1). Most steps hit the cache; the run failed at 06:53 after 71 steps. | — |
+| 2 | data | fir-lite run, das_tool | Same as 14.2. | open, Tony. |
+| 3 | node | fir-lite run, CLEAN | CUDA out of memory in ESM-1b's `model.cuda()` (about 2.6 GB) on a whole H100 (fc10512, job 6934041). Round 14's CLEAN ran 3 h on fc10610 without it. The agent read `msm_gpu 81559` as memory in use; it is the engine's `memory.total` probe. Exit 1, so no retry. | none yet: watch for a repeat. |
+| 4 | bug | fir GUI | A second unread-param check, the GUI's launch warning, also flagged gpuType. | It reads `ENGINE_PARAM_KEYS` too; both checks pinned in test_unread_params.py. |

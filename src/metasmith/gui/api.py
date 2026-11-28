@@ -16,7 +16,7 @@ from flask import Blueprint, Response, current_app, jsonify, request
 from ..agents import Spec, Template
 from ..agents.spec import case_records
 from ..agents.agent_lock import Busy
-from ..agents.workflow_ops import SlurmAccountProblem, SplitParamKeys
+from ..agents.workflow_ops import ENGINE_PARAM_KEYS, SlurmAccountProblem, SplitParamKeys
 from ..hashing import KeyGenerator
 from ..logging import Log
 from ..models.dag_renderer import THEMES
@@ -1731,7 +1731,7 @@ def _launch_warnings(preset_text: str, preset_source: str | None, params: dict, 
             " downloads) go to the scheduler instead of this host; reset the preset to refresh it"
         )
     words = set(re.findall(r"[A-Za-z][A-Za-z0-9]*", preset_text))
-    read = _param_names_read_by(library)
+    read = _param_names_read_by(library) | ENGINE_PARAM_KEYS
     unknown = [k for k in params if k not in read and k.split("_", 1)[0] not in words]
     if unknown:
         out.append(f"no preset or transform reads the param(s) {', '.join(sorted(unknown))}")
