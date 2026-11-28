@@ -153,8 +153,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     4. At compile time, each other input of a grouping step is classed by its relation to the index input in the plan: ancestor, descendant, sibling (shares an ancestor) or unrelated.
     5. At run time, each index item collects its matches by lineage index: an ancestor by the id in the item's own index, a descendant by the item's id in theirs, a sibling by a shared ancestor id; an unrelated input is passed whole.
     6. A group is released once every item it expects has arrived, as counted by stamps the producing tasks add to each output, or else when the channel closes.
-    7. Additional routing logic can be placed within contracts themselves.
-    8. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
+    7. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
   - E3. Running the workflow — the workflow runs on a worker, local or SLURM through presets, and results with their lineage are collected back.
     1. A worker home is declared as a path, plus an SSH address if remote; a remote deploy uses existing SSH configuration and otherwise works as a local one.
     2. Staging writes a workspace into the home: the Nextflow workflow, input manifests, parameter files and a launcher script.
@@ -163,6 +162,11 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     5. Each run records a DAG of the plan, the Nextflow logs and a lineage table for every output and intermediate.
     6. Outputs are written as a data library with their types and lineage, so they can be the givens of a later workflow.
   - E4. Caching — each result is keyed by its contract, script and consumed inputs, and reused across workflows.
+    1. Every data instance has an id. A given file of 1 MiB or less is identified by its path within its library and its bytes; a larger file or a directory by its path and modification time, since inputs reach hundreds of GB. A given's id is re-derived when its file changes.
+    2. Every other instance takes its id from the task that produced it: a hash of the contract, protocol source included, and of the ids of the instances that task consumed.
+    3. Each task's outputs are stored in the worker's cache under that key; before a task is submitted its key is looked up, and a hit is served without running it.
+    4. So a result is reused whenever the same contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results; changing its compute resources does not.
+- Note: given identity per rc `models/libraries/identity.py:leaf_id` (e0c60503, 2026-11-26: small files by bytes; fdd1630c: re-minted on change). d3's "path and modification time" holds only for large files; prose takes the split. rc `architecture.md` fixed to match (bb386cdb).
 
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
 - Role: how contracts are written and designed.
