@@ -45,16 +45,23 @@ done
 STOP = r'''
 R=$1
 for id in $(squeue -u "$USER" -h -o '%i|%Z' | awk -F'|' -v r="$R" '$2 == r || index($2, r "/") == 1 {print $1}'); do scancel "$id" && echo "scancel $id"; done
-# Container steps run with cwd /ws, so match the run dir in cwd or argv, then take every descendant.
-# The dir must end at a / or the line: run-4-fir is a prefix of run-4-fir-lite.
+# Match the run dir in cwd or argv, then take every descendant. The dir must end at a / or
+# the line: run-4-fir is a prefix of run-4-fir-lite. A driver inside the agent container sees
+# only /msm_home and outlives its killed parent, so also match by what /msm_home is bound
+# from: mountinfo gives that path relative to the filesystem's own mount, a suffix of $R.
 roots=$(for p in $(ps -u "$USER" -o pid=); do
   [ "$p" = "$$" ] && continue
-  { readlink /proc/$p/cwd; tr '\0' '\n' < /proc/$p/cmdline; } 2>/dev/null | grep -qE "$R(/|\$)" && echo $p
+  { readlink /proc/$p/cwd; tr '\0' '\n' < /proc/$p/cmdline; } 2>/dev/null | grep -qE "$R(/|\$)" && { echo $p; continue; }
+  home=$(awk '$5 == "/msm_home" {print $4; exit}' /proc/$p/mountinfo 2>/dev/null)
+  [ -n "$home" ] && [ "$home" != / ] && case "$R" in *"$home") echo $p ;; esac
 done | tr '\n' ' ')
-ps -u "$USER" -o pid=,ppid= | awk -v roots=" $roots " '
+victims=$(ps -u "$USER" -o pid=,ppid= | awk -v roots=" $roots " '
   { parent[$1]=$2 }
-  END { for (p in parent) { q=p; while (q in parent) { if (index(roots, " " q " ")) { print p; break } q=parent[q] } } }' |
-  while read -r p; do kill "$p" 2>/dev/null && echo "kill $(hostname):$p"; done
+  END { for (p in parent) { q=p; while (q in parent) { if (index(roots, " " q " ")) { print p; break } q=parent[q] } } }')
+for p in $victims; do kill "$p" 2>/dev/null && echo "kill $(hostname):$p"; done
+# A JVM can ignore SIGTERM.
+[ -n "$victims" ] && sleep 5
+for p in $victims; do kill -0 "$p" 2>/dev/null && kill -9 "$p" 2>/dev/null && echo "kill -9 $(hostname):$p"; done
 '''
 
 
