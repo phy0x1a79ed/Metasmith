@@ -48,8 +48,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   3. Each port records its lineage, the ports its step consumed.
   4. A contract that accepts a general type loses which specific data came in; a compressor that accepts any file yields only a "compressed file" (flow F1, 2026-11-27). So an input can require that its port descends from the port bound to another input of the same step. Example: mapping reads to an assembly requires the assembly built from those reads.
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
-  6. A contract also names one input to group by and a batch size, the number of index items per task: each item on that input forms one execution with the lineage-related items of its other inputs (behaviour in the Results; mechanism in E2). (from E2, 2026-11-27)
-  7. Besides its types, a contract carries a protocol, a Python procedure that runs its tool, with its output file names, its resource requests and a container image declared as one of its inputs. (from E1/C1, 2026-11-27)
+  6. Besides its types, a contract carries a protocol, a Python procedure that runs its tool, with its output file names, its resource requests and a container image declared as one of its inputs. (from E1/C1, 2026-11-27)
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
 #### P3. Optional branching — agreed (paragraph-points, 2026-11-27) (moved from S4, 2026-11-27: a contract feature, after Contracts)
@@ -145,7 +144,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   - E2. Compiling to Nextflow — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping at run time, and each process calls its contract's protocol.
     1. Each step of the plan becomes one Nextflow process, and each port becomes a channel.
     2. Each item in a channel carries a lineage index naming the instances it descends from.
-    3. Channels are joined with three operations only: merge, copy and group. Grouping follows the contract's group-by input (P2).
+    3. Channels are joined with three operations only: merge, copy and group. A contract names the input it groups by and a batch size, the number of index items per task (behaviour in the Results).
     4. At compile time, each other input of a grouping step is classed by its relation to the index input in the plan: ancestor, descendant, sibling (shares an ancestor) or unrelated.
     5. At run time, each index item collects its matches by lineage index: an ancestor by the id in the item's own index, a descendant by the item's id in theirs, a sibling by a shared ancestor id; an unrelated input is passed whole.
     6. A group is released once every item it expects has arrived, as counted by stamps the producing tasks add to each output, or else when the channel closes.
