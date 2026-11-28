@@ -141,3 +141,4 @@ This build adds the seqkit encoding fix (round 10 row 2). fir-lite relaunched wa
 
 | # | class | where | issue | fix |
 |---|---|---|---|---|
+| 1 | harness | watch_remote STOP | Stopping run-4-fir matched run-4-fir-lite as a prefix (squeue workdir and process cwd/argv), killing lite's live round 11 run at megahit and 11 Slurm jobs. | 1d4f1c78: match the run dir exactly (dir, or dir followed by /). Dry-run on fir confirmed. Both stations relaunched on round 11 ~21:35; fir full's round 9 records in `round9/fir`, lite's partial round 11 in `round11/fir-lite`. |
