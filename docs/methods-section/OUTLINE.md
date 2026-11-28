@@ -173,14 +173,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
 - Role: how contracts are written and designed.
 - Key message: a new tool is added by writing a contract against shared type libraries (namespaces); a standard library ships with Metasmith.
-- Paragraphs (agreed 2026-11-27; source rc `docs/metasmith/source/tutorials/custom_transforms.rst`):
-  - C1. Writing a contract — scaffold a stub; declare input and output types as `namespace::type`; write the protocol; name a container.
-    1. A tool is added by writing a contract, a short Python file; the CLI or Python API scaffolds a blank one.
-    2. The contract declares the input types the tool requires and the output types it promises, each named as `namespace::type`.
-    3. It then supplies its protocol (E1), the file names of its outputs and the resources it requests.
-    4. The tool's container image is declared as one of the contract's required inputs, so the image is supplied like any other data.
-  - C2. Types and namespaces — reuse existing types so the tool connects to the library; new types go into a namespace (type library, YAML); a one-property type is atomic.
-  - C3. Standard library — 126 contracts were used for the benchmarks in this paper; N in total ship as the standard library (benchmark contracts plus those the ENG CYC driver uses; N being computed).
+- Paragraphs (regrouped 2026-11-27: one paragraph on using contracts, minimal overlap with the docs, not a guide):
+  - C1. Using contracts
+    1. A contract needs the types of its inputs and outputs, a protocol, a container providing the tool (declared as one of its inputs), its output file names and its resource requests.
+    2. Types are grouped into namespaces, type libraries named as `namespace::type`; a new contract reuses their types or adds new ones.
+    3. At run time each Nextflow process runs one bootstrap command with its work directory and step number.
+    4. The bootstrap runs Metasmith in the worker's container, loads the step from the staged plan, matches the files Nextflow staged to the step's inputs by lineage, builds the context and calls the contract's protocol; the outputs then go to the cache (E4).
+    - Note: rc `bootstrap.py:StageAndRunTransform`, `ExecuteStep` (protocol call at :372); codegen emits `bootstrap "<workdir>" "<step order>" <host>`.
+  - C2. Standard library — the benchmarks used 126 benchmark-only contracts plus K standard ones; N contracts exercised by the benchmarks and ENG CYC are supplied as the standard library. e2e (2026-11-27): rc `src/metasmith_libraries` is canonical (367); ENG CYC uses 197 of them on rc; K and N pending from e2e.
 
 ### M5. Benchmarks — agreed (outline-sections, 2026-11-26)
 - Role: how each Results benchmark was run and scored.
