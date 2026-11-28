@@ -6,12 +6,16 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**paragraph-points / Declarations**. Planning, Specification, Execution, Contracts (one paragraph, C1) and Benchmarks (B2 scoring mini paragraphs + contract table; B1 cut) have points. Next: Declarations points, then prose one section at a time from d3/draft.md.
+**prose** (Tony, 2026-11-27: "compact. then write prose in chunks. then have an agent review for coherence and writing style. apply updates"). All sections have agreed points in `OUTLINE.md`, with titles in § Titles: Solver (Types, Contracts, Optional branching, Planning, Refinement, Verification), Specification (Interfaces, Inputs, Outputs, Parallel cases, Variadic contracts), Execution (Compiling to Nextflow, Running workflows, Caching), Benchmarks (seven titled mini paragraphs, three sentences or fewer, only what the Results leave out; details in `draft.md`), Declarations (AI-assisted development in two sentences; Data and code availability with a data table). Statistics cut; M4 Contracts dissolved into P1/P2/E2; B1 cut.
 
-Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind): variadic, cases, forks and the witness gate are there. Read rc with `git show origin/feat/engine/rc:<path>`.
+Plan: write prose section by section into `docs/methods-section/prose.md` (new file), reusing d3 Methods prose (scratch `/home/tony/.claude/jobs/5d52d6e5/tmp/d3.txt`, Methods from line 253) and `draft.md` where they fit; then dispatch a review agent for coherence and writing style (protocol prose rules in protocol-draft.md § Prose rules); apply its fixes; show Tony one section at a time; then into d3 via Word on capella.
+
+Pending d3 Results edit (agreed in principle): MAG pairing is reciprocal best skani match, not Jonker-Volgenant (verified: JV only in `results/e3/votu_lib.py`); Results should just say "reciprocal partner" with the method in Benchmarks/MAG comparison; the 93.9% is Metasmith's MAGs (nf-core/mag's is 94.6%, short arm); the vOTU sentence must name JV with refs 43, 44 since it no longer matches "the same way as for MAGs". Word on capella: recreate an interactive schtasks task (`msm_word`); recipe not in transcripts; blue for additions, copy neighbour formatting (Arial 12), save after each edit.
 
 ## Waiting on the user
 
+- Whether to restart the agent->worker / transform->contract refactor (two attempts were killed by interrupts; worktree `engine/rename-worker-contract` holds an unfinished merge of origin/release, one conflict in tests/metasmith/cache/fixtures/template_golden.json).
+- Benchmark versions (nf-core/mag, Metasmith) and Data table accessions when prose needs them.
 
 ## Preferences
 
@@ -19,6 +23,7 @@ Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind)
 - (2026-11-27) Settle the overall structure and grouping before prose; don't go into the weeds.
 - (2026-11-27) One paragraph per concept.
 - (2026-11-27) No examples in points unless necessary.
+- (2026-11-27) Minimal overlap with the docs and the Results; each Methods paragraph gets a subtitle; benchmarks only document what the Results leave out.
 - (2026-11-27) Methods paragraphs open with the problem or premise, then the mechanism. Justify the final design; never narrate how it was reached.
 - (2026-11-27) Order of work: itemized points for each paragraph, one at a time, section by section, with a flow check per section; prose only after all sections have points, then one section at a time; check again; then into d3.
 - (2026-11-27) Reuse the original d3 prose where it exists, above all the existing Methods prose ("most of that is good already"); update and fill gaps rather than rewrite.
