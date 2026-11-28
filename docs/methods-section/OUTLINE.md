@@ -8,9 +8,9 @@ Status per entry: `proposed`, `agreed` (points accepted), `accepted` (prose acce
 One subtitle per paragraph; section headings above them.
 - Solver: Types · Contracts · Optional branching · Planning · Refinement · Verification
 - Specification: Interfaces · Inputs · Outputs · Parallel cases · Variadic contracts
-- Execution: Compiling to Nextflow · Running workflows · Caching
+- Execution: Compiling to Nextflow · Grouping · Task execution · Running workflows · Caching · Cache keys (split 2026-11-27, Tony: "if grouping can be its own par, it is too long")
 - Benchmarks: MAG comparison · Lines of code · vOTU comparison · GEM comparison · Update ablation · KofamScan annotation · Compute cost (three sentences or fewer each; only what the Results leave out)
-- Declarations: Statistics · AI-assisted development · Data and code availability
+- Declarations: AI-assisted development · Data and code availability (top-level headings in d3)
 Section "Planning" is renamed "Solver"; "Planning" is P4's title, with search as its detail. "Givens"/"targets" are introduced inside Inputs/Outputs.
 
 ## Terms (terms, 2026-11-27)

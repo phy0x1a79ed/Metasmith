@@ -30,11 +30,17 @@ Prose written from the agreed points in `OUTLINE.md`, terse for replication (Ton
 
 ## Execution
 
-**Compiling to Nextflow.** Each step compiles to one Nextflow process and each port to one channel. Each item in a channel carries a lineage index of the instances it descends from. Channels are combined only by merging, copying and grouping. A contract names one input to group by, the index, and a batch size, the number of index items per task. At compile time, each other input of a grouping step is classed by its relation to the index as an ancestor, a descendant, a sibling sharing an ancestor, or unrelated. At run time, each index item collects ancestors by the ids in its own lineage index, descendants by its id in theirs and siblings by a shared ancestor id, while unrelated inputs are passed whole. A group is released once every expected item has arrived, counted by stamps that the producing tasks attach to each output, or when the channel closes. Each process runs a bootstrap command that loads its step from the staged plan, matches the staged files to the step's inputs by lineage and calls the contract's protocol with a context of input paths, output paths and a shell. The protocol typically runs its tool in a dedicated container.
+**Compiling to Nextflow.** Each step compiles to one Nextflow process and each port to one channel. Each item in a channel carries a lineage index of the instances it descends from. Channels are combined only by merging, copying and grouping.
+
+**Grouping.** A contract names one input to group by, the index, and a batch size, the number of index items per task. At compile time, each other input of a grouping step is classed by its relation to the index as an ancestor, a descendant, a sibling sharing an ancestor, or unrelated. At run time, each index item collects ancestors by the ids in its own lineage index, descendants by its id in theirs and siblings by a shared ancestor id, while unrelated inputs are passed whole. A group is released once every expected item has arrived, counted by stamps that the producing tasks attach to each output, or when the channel closes.
+
+**Task execution.** Each process runs a bootstrap command that loads its step from the staged plan, matches the staged files to the step's inputs by lineage and calls the contract's protocol with a context of input paths, output paths and a shell. The protocol typically runs its tool in a dedicated container.
 
 **Running workflows.** A compiled workflow is deployed to a worker home (msm_home), a path on the local filesystem or on a remote machine reached through the existing SSH configuration. Staging writes the workflow, input manifests, parameter files and a launcher script to the home. The launcher runs the Nextflow driver in a container, detached from the user's session, and a relay started outside that container lets the driver start each step's container. The launcher can also be run by hand. All Nextflow executors are available, and local and SLURM ship as presets and were tested. Each run records the plan's DAG, the Nextflow logs and lineage tables for all outputs and intermediates.
 
-**Caching.** A data library is a directory of files with a manifest of instance types. Outputs are written in the same format with their lineage, so any output can be a given of a later run and a worker accumulates a pool of data products across runs. Metasmith therefore keeps its own cache on top of Nextflow's. Instance ids derive from the path within the library and the contents for files of at most 1 MiB, and from the absolute path and modification time for larger files and directories. Ids are re-derived when files change. Data already on the worker can instead be imported into the pool directly by path and type, receiving a fresh id without being read. A task's cache key is a BLAKE3 hash of its contract, protocol source included and resource requests excluded, and of the ids of the instances it consumed. Outputs take their ids from the key. Outputs of successful tasks are stored under the key. Each key is looked up before its task is submitted, a miss runs the step's process, and a hit runs a lightweight twin process that places the stored outputs in Nextflow's work directory, so downstream steps see an ordinary finished task. Results are thus reused whenever a contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results and all results downstream, whereas changing compute resources does not.
+**Caching.** A data library is a directory of files with a manifest of instance types. Outputs are written in the same format with their lineage, so any output can be a given of a later run and a worker accumulates a pool of data products across runs. Metasmith therefore keeps its own cache on top of Nextflow's. Instance ids derive from the path within the library and the contents for files of at most 1 MiB, and from the absolute path and modification time for larger files and directories. Ids are re-derived when files change. Data already on the worker can instead be imported into the pool directly by path and type, receiving a fresh id without being read.
+
+**Cache keys.** A task's cache key is a BLAKE3 hash of its contract, protocol source included and resource requests excluded, and of the ids of the instances it consumed. Outputs take their ids from the key. Outputs of successful tasks are stored under the key. Each key is looked up before its task is submitted, a miss runs the step's process, and a hit runs a lightweight twin process that places the stored outputs in Nextflow's work directory, so downstream steps see an ordinary finished task. Results are thus reused whenever a contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results and all results downstream, whereas changing compute resources does not.
 
 ## Benchmarks
 
@@ -42,7 +48,7 @@ Prose written from the agreed points in `OUTLINE.md`, terse for replication (Ton
 
 **Lines of code.** Counts excluded blank lines, comments and stubs. For nf-core/mag, logistics was the input and output blocks of each process (channel declarations) plus the workflow-level lines of the subworkflows reached by the benchmark configuration (routing), and procedure was the rest of each process. For Metasmith, logistics was the type declarations of each contract and procedure was the rest of its protocol.
 
-**vOTU comparison.** vOTUs were compared with skani 0.2.2 (--small-genomes --min-af 15). A published vOTU was recovered if a reproduced vOTU matched it with ANI ≥ 95% over ≥ 85% of its length. For one-to-one pairing, identity was ANI multiplied by the published vOTU's aligned fraction, and the pairing maximizing total identity was found with the sparse Jonker-Volgenant algorithm in SciPy, which lets vOTUs stay unpaired (43, 44).
+**vOTU comparison.** vOTUs were compared with skani 0.2.2 (--small-genomes --min-af 15). A published vOTU was recovered if a reproduced vOTU matched it with ANI ≥ 95% over ≥ 85% of its length. For one-to-one pairing, identity was ANI multiplied by the published vOTU's aligned fraction, and the pairing maximizing total identity was found with the sparse Jonker-Volgenant algorithm in SciPy, which lets vOTUs stay unpaired.
 
 **GEM comparison.** Reproduced GEMs were built with CarveMe 1.2.2 (-g M8 --fbc2), DIAMOND 0.9.30 (--more-sensitive --top 10) and CPLEX 22.2. Each reproduced GEM was compared with the published GEM of the same bin by the Jaccard index of their BiGG reaction identifiers.
 
@@ -50,21 +56,21 @@ Prose written from the agreed points in `OUTLINE.md`, terse for replication (Ton
 
 **KofamScan annotation.** KofamScan 1.3.0 (E ≤ 0.01, adaptive KO thresholds) annotated the ORFs of the same 1,408 bins. KOs were mapped to reactions through KEGG ko2reaction (release 119) and MetaNetX 4.5, and DIAMOND hits through BiGG gene to MetaNetX reaction mappings.
 
-**Compute cost.** Core-hours were allocated cores multiplied by SLURM elapsed time, summed over every attempt, with cached steps counted as zero. Energy and CO₂ were estimated with Green Algorithms [TODO: CPU model, power per core, memory power, PUE and carbon intensity].
+**Compute cost.** Core-hours were allocated cores multiplied by SLURM elapsed time, summed over every attempt, with cached steps counted as zero. Energy and CO2 were estimated with Green Algorithms [TODO: CPU model, power per core, memory power, PUE and carbon intensity].
 
 ## Declarations
 
 **AI-assisted development.** AI coding assistants extended Metasmith's hand-built core, wrote contracts and container definitions under architectural and methodological guidance, and helped draft this manuscript, with every code change tested and checkpointed in Git under a labeled author. The models were Anthropic's Claude Opus 4.6–5.5, Sonnet 4.6–5.5 and Fable 5–5.2.
 
-**Data availability.** The datasets and their accessions are listed in Table [N].
+**Data and code availability.** The datasets and their accessions are listed in Table 2.
 
 | Dataset | Source | Accession or record |
 |---|---|---|
-| CAMI II strain madness, toy mouse gut, toy HMP, marine, plant-associated | CAMI portal | [TODO] |
-| CAMI III toy human gut | CAMI portal | [TODO] |
+| CAMI II strain madness, toy mouse gut, toy HMP, marine, plant-associated | CAMI data portal | https://data.cami-challenge.org |
+| CAMI III toy human gut | CAMI data portal | https://s3.bi.denbi.de/swift/v1/cami3__human-gut-toy |
 | Pratama et al. viromes | ENA / SRA | PRJEB36505, PRJNA1236243 |
 | Published vOTUs | Zenodo | 17897233 |
 | metaGEM published bins and GEMs | Zenodo | 5596948, 5593111, 5593224, 5596972, 5597227, 5599412 |
 | metaGEM studies (combined run) | ENA / SRA | PRJEB9718, PRJEB1786, PRJNA485196, PRJEB1787, PRJEB7626 |
 
-**Code availability.** Metasmith is available at https://github.com/hallamlab/metasmith [TODO: Zenodo DOI] and documented at https://metasmith.readthedocs.io. Benchmark contracts and drivers are in research/ of the repository. Supplementary Table [N] lists each benchmark contract with its tool, tool version and container image.
+Metasmith is available at https://github.com/hallamlab/metasmith [TODO: Zenodo DOI] and documented at https://metasmith.readthedocs.io. Benchmark contracts and drivers are in research/ of the repository. Supplementary Table 4 lists each benchmark contract with its tool, tool version and container image. Metasmith can be installed with conda install hallamlab::metasmith.
