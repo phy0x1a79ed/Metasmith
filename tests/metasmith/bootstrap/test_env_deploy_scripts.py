@@ -69,6 +69,13 @@ class TestContainerScripts:
         assert "msm_relay stop" in script
         assert "metasmith api execute_transform" in script
 
+    def test_bootstrap_exits_with_the_steps_code(self, runtime):
+        # Nextflow retries an OOM kill on exit 137; the cleanup after the step must not mask it.
+        lines = [x.strip() for x in _render_bootstrap(_container(runtime, workdir=Path("/ws"))).strip().splitlines()]
+        at = next(i for i, x in enumerate(lines) if "api execute_transform" in x)
+        assert "STEP_EXIT=$?" in lines[at+1:at+3]
+        assert lines[-1] == "exit $STEP_EXIT"
+
     def test_wrapper_runs_metasmith_in_container(self, runtime):
         script = _render_wrapper(_container(runtime))
         assert "metasmith $@" in script

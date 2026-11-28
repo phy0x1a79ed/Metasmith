@@ -551,6 +551,8 @@ class Environment:
                 fi
                 echo "execute ========================"
                 run_container metasmith api execute_transform -a step_index=$STEP -a workspace=$TASK_DIR -a stage_root=$STAGE_ROOT host=$(hostname)
+                # Nextflow retries on this code (137 is an OOM kill), so the cleanup below must not replace it.
+                STEP_EXIT=$?
                 echo "post execute ==================="
                 find .
                 ls -lh .
@@ -558,6 +560,7 @@ class Environment:
                 $INTERNALS/relay/msm_relay stop
                 echo "relay logs ====================="
                 $INTERNALS/relay/msm_relay logs
+                exit $STEP_EXIT
                 """
         wrapper = self.MakeWrapperPrefix()
         prefix = f"{wrapper} " if wrapper else ""

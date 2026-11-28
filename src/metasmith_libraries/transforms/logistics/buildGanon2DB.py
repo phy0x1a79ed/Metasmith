@@ -40,7 +40,7 @@ TransformInstance(
     labels=["noscratch"],
     resources=Resources(
         cpus=8,
-        memory=Size.GB(64),
+        memory=Size.GB(256),
         duration=Duration(hours=24),
     ),
 )
