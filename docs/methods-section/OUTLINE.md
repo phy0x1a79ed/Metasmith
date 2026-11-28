@@ -198,7 +198,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Statistics: cut (Tony, 2026-11-27); add back only if the journal's checklist asks.
 - AI-assisted development (two sentences, Tony 2026-11-27: what AI did; models and versions)
   1. AI coding assistants extended Metasmith's hand-built core and wrote contracts and container definitions under architectural and methodological guidance, with every change tested and checkpointed in Git under a labelled author, and helped draft this manuscript.
-  2. The models were Anthropic's Claude Opus 4.6, 4.7, 4.8, 5 and 5.5, Sonnet 4.6, 5 and 5.5, and Fable 5, 5.1 and 5.2, mostly Opus 5 and 5.5.
+  2. The models were Anthropic's Claude Opus 4.6–5.5, Sonnet 4.6–5.5 and Fable 5–5.2.
   - Note: commit trailers on rc: 2,260 of 3,084 commits carry a Claude co-author; Opus 5 1,106, Opus 5.5 901, Opus 4.7 97, Sonnet 5 56, Opus 4.8 46, Opus 4.6 21, Fable 5 19, Fable 5.2 7, Sonnet 5.5 5, Sonnet 4.6 1, Fable 5.1 1.
 - Data and code availability
   1. Data sources go in a table (Tony, 2026-11-27: too many links for text): dataset, source, accession or record. Rows: CAMI II/III (CAMI portal), SRA/ENA accessions per study, published vOTUs (Zenodo 17897233), published metaGEM results (Zenodo records 5596948, 5593111, 5593224, 5596972, 5597227, 5599412), combined-workflow studies.
