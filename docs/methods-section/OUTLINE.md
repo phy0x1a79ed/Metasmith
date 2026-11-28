@@ -186,7 +186,14 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Key message: each published pipeline was rebuilt as contracts with its own tools and parameters, run on the original data, and compared output by output.
 - Paragraphs (revised 2026-11-27: running Metasmith is the rest of the paper; document only what a reader could not reproduce from it):
   - B1 (shared setup) cut (Tony, 2026-11-27: "all of this is just dev"; the data and pipelines are in the Results). Compute stays in Acknowledgements; AI use stays in Declarations.
-  - B2. Scoring — the comparison behind each Results claim: MAG pairing (nf-core/mag), vOTU matching (viromics), GEM comparison (metaGEM), KofamScan agreement, lines-of-code counting, cost (core-hours, Green Algorithms inputs). Settles the matching results-conflicts rows.
+  - B2. Scoring — one mini paragraph per comparison, holding only what the Results leave out (agreed 2026-11-27); details from `draft.md`:
+    - MAGs: skani 0.2.2 flags; partner thresholds ANI >= 95%, both aligned fractions >= 50% (results-conflicts row 1: Jonker-Volgenant vs reciprocal best).
+    - Lines of code: counting rules (no blanks, comments or stubs; nf-core process input/output blocks = channel declarations, workflow-level lines = routing; Metasmith type lines = logistics).
+    - vOTUs: skani flags (`--small-genomes --min-af 15`); one-to-one pairing objective.
+    - GEMs: CarveMe 1.2.2 settings for the reproduction; how reaction sets were compared.
+    - Ablation: stratified 10% (1,408 bins); components added one at a time (BiGG reference, universal model, CarveMe 1.6.6 code, gap filling, DIAMOND, SCIP); share of the drop from median Jaccard.
+    - KofamScan: 1.3.0, E <= 0.01, adaptive thresholds; KEGG ko2reaction r119 and MetaNetX 4.5 (row 7: ORF counts).
+    - Cost: core-hours as SLURM allocated time over every attempt; Green Algorithms inputs (rows 10, 11).
   - Table (Tony, 2026-11-27): each contract used in the benchmarks, the tool it wraps, the tool version and the container URL. To be generated from the contract files and the containers namespace.
 
 ## Declarations (own top-level section, beside Methods) — agreed (outline-sections, 2026-11-26)

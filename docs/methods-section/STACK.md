@@ -6,13 +6,12 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**paragraph-points / Contracts (M4)**. Planning, Specification and Execution (E1 Contract execution, E2 Compilation, E3 Running the workflow, E4 Caching) have agreed points. M4 needs its key message from Tony, then a paragraph list and points; then Benchmarks, Declarations; prose after all sections have points, one section at a time.
+**paragraph-points / Declarations**. Planning, Specification, Execution, Contracts (one paragraph, C1) and Benchmarks (B2 scoring mini paragraphs + contract table; B1 cut) have points. Next: Declarations points, then prose one section at a time from d3/draft.md.
 
 Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind): variadic, cases, forks and the witness gate are there. Read rc with `git show origin/feat/engine/rc:<path>`.
 
 ## Waiting on the user
 
-- M4 Contracts key message.
 
 ## Preferences
 
