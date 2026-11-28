@@ -20,6 +20,6 @@ Names revised the same day: "we can call sections: planning, specification, exec
 
 **Tony's words.** "Data node doesn't really convey matched type… there's like a distinction between the type and the actual matched entity between contract, string, and DAG"; "We've been referring to kinds as types"; "let's try ports".
 
-**Design.** property → type → contract → step → port → plan → instance. A port is a typed position on a step, one per output type, with a fixed lineage; later steps bind their inputs to ports; each port compiles to one Nextflow channel. Contracts keep "input types" and "output types"; "port" is used only for steps, not contracts. d0.2's "data node (DN)" covered both slot and joint and is retired. "Transform" only in Execution; "endpoint" and "application" leave the paper.
+**Design.** property → type → contract → step → port → plan → instance. A port is a typed position on a step, one per output type, with a fixed lineage; later steps bind their inputs to ports; each port compiles to one Nextflow channel. Contracts keep "input types" and "output types"; "port" is used only for steps, not contracts. d0.2's "data node (DN)" covered both slot and joint and is retired. "Endpoint" and "application" leave the paper. Revised 2026-11-27 (outline-paragraphs / Execution): "transform" also leaves the paper, contracts are called contracts throughout, and "agent" is avoided because it now reads as an LLM agent.
 
 **Landed.** `OUTLINE.md` § Terms.

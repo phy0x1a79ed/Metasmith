@@ -31,7 +31,7 @@ Level-2 proposal for Specification and Execution (shown 2026-11-27, "mainly fine
 - **outline-paragraphs**: level 2, section by section: Planning (current), Specification, Execution, Contracts, Benchmarks, Declarations. M2 needs a code survey first (variadic inputs are new, on a branch; optional branching is the old mechanism).
 - **paragraph-walk**: per paragraph in document order: points, prose, then into d2.
 - **results-conflicts**: the 12 rows in `draft.md` where the records do not back the Results (MAG pairing method, metaGEM input, OPERA-MS indels, ORF counts, combined-run solver, core-years, Green Algorithms inputs, and others).
-- **todos**: contract authoring, Figure 2 library, Green Algorithms inputs, Zenodo DOI.
+- **todos**: code refactor transform -> contract hoped for (Tony, 2026-11-27; not requested yet); rename for agents; contract authoring, Figure 2 library, Green Algorithms inputs, Zenodo DOI.
 
 ## Workers
 

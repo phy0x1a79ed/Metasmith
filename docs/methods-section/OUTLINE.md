@@ -16,7 +16,7 @@ Define each term only from those above it; use one name per idea throughout the 
 6. plan: a DAG of steps joined through ports.
 7. instance: the data that fills a port when the plan runs.
 
-"Transform" names the code object (contract plus script) and appears only in Execution. "Endpoint", "application" and "data node" leave the paper.
+The paper calls the code's transforms "contracts" throughout, Execution included (Tony, 2026-11-27). "Transform", "endpoint", "application" and "data node" leave the paper. "Agent" is avoided, since it now reads as an LLM agent.
 
 ## Level 1: sections
 
@@ -138,7 +138,11 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 ### M3. Execution — agreed (outline-sections, 2026-11-26)
 - Role: how a plan runs.
 - Key message: each step compiles to a Nextflow process, runs through local or SLURM presets with each tool in its own container, and is cached under its lineage.
-- Paragraphs: to be set in outline-paragraphs (candidates: compilation to Nextflow; agents and presets; containers and relay; caching; outputs).
+- Paragraphs (outline-paragraphs, 2026-11-27): how a contract runs, how the solved plan compiles, how the workflow runs, then caching.
+  - E1. Contract execution — a contract declares a protocol in Python, run in the contract's own container or environment.
+  - E2. Compilation — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping and batching at run time.
+  - E3. Running the workflow — the workflow runs on a compute site, local or SLURM through presets, and results with their lineage are collected back.
+  - E4. Caching — each result is keyed by its contract, script and consumed inputs, and reused across workflows.
 
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
 - Role: how contracts are written and designed.
