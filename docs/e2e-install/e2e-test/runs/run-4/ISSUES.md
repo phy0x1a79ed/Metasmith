@@ -125,3 +125,10 @@ Both stations relaunched warm at ~12:05 with the image fix: prep templates pull 
 | 1 | friction | fir, GUI inputs | The agent's first scripted click on a template row's delete cross only armed it (red check), and it took a second, real click to delete the row. This is the two-click confirm from bd23b804 working as designed. | none: the confirm is intended, and the armed cross's title names the second click |
 | 2 | ok | fir-lite, setup | One image pull (metadecoder) crashed with `pthread_create failed: Resource temporarily unavailable`: fir login1's per-user thread limit, with two stations' pulls and downloads on the node. The pull's one retry succeeded 19 min later. | none: the retry-once-then-finish policy for pulls absorbed it |
 | 3 | watch | fir, GUI log | The GUI logs `probe failed for run [lime-waxbill/...]: run 1 out of range (1..0)` for a workflow with no runs yet. Harmless so far. | to read if it recurs |
+
+# Round 10 (release candidate 0.26.2+5e44114, 2026-11-27)
+
+This build adds the lane work (BUSCO marker lane, the DRAM-v port, DeepTFactor, PredicTF, TCDB, PromoTech, InterProScan as five member lanes, PSORTm on LCA* taxonomy) and the witness gate on merged multi-case plans. fir-lite relaunched warm at ~17:55 from round 9's cached lite setup; its round 9 records are in `round9/fir-lite` (setup clean; the lite run reached 24 steps with no failure before it was stopped). fir full stays on round 9 until its Ganon2 build finishes, then relaunches.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
