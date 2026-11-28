@@ -142,17 +142,26 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   - E1. Contract execution — a contract declares a protocol in Python, run in the contract's own container or environment.
     1. Each contract carries a protocol, a Python procedure that runs its tool.
     2. At run time the protocol gets an execution context with the paths of its inputs and expected outputs and a shell.
-    3. A contract names one input to group by: each item on that input starts one task, which receives every item on the other inputs that descends from it, so a fan-out per sample folds back into one task per sample.
+    3. A contract names the input it groups by, and a batch size, the number of index items per task (behaviour in the Results; mechanism in E2).
     4. A protocol typically runs its tool in a container.
-    5. Containers are launched through a relay outside the workflow's own container, so each step uses its tool's dedicated container.
+    5. Each step runs its tool in that tool's dedicated container (how: E3.3).
     6. Each contract compiles to one Nextflow process (lead-in to E2).
   - E2. Compilation — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping and batching at run time.
     1. Each step of the plan becomes one Nextflow process, and each port becomes a channel.
     2. Each item in a channel carries a lineage index naming the instances it descends from.
-    3. Channels are joined with three operations only: merge, copy to several consumers, and group by lineage (E1), so many samples run in parallel without mixing.
-    4. Additional routing logic can be placed within contracts themselves.
-    5. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
+    3. Channels are joined with three operations only: merge, copy and group.
+    4. At compile time, each other input of a grouping step is classed by its relation to the index input in the plan: ancestor, descendant, sibling (shares an ancestor) or unrelated.
+    5. At run time, each index item collects its matches by lineage index: an ancestor by the id in the item's own index, a descendant by the item's id in theirs, a sibling by a shared ancestor id; an unrelated input is passed whole.
+    6. A group is released once every item it expects has arrived, as counted by stamps the producing tasks add to each output, or else when the channel closes.
+    7. Additional routing logic can be placed within contracts themselves.
+    8. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
   - E3. Running the workflow — the workflow runs on a worker, local or SLURM through presets, and results with their lineage are collected back.
+    1. A worker home is declared as a path, plus an SSH address if remote; a remote deploy uses existing SSH configuration and otherwise works as a local one.
+    2. Staging writes a workspace into the home: the Nextflow workflow, input manifests, parameter files and a launcher script.
+    3. The launcher runs the Nextflow driver inside a container, detached from the user's session; a relay started outside that container lets the driver start each step's container while itself containerized. Running the launcher by hand has the same effect.
+    4. Every Nextflow executor is available; local and SLURM were tested and ship as presets.
+    5. Each run records a DAG of the plan, the Nextflow logs and a lineage table for every output and intermediate.
+    6. Outputs are written as a data library with their types and lineage, so they can be the givens of a later workflow.
   - E4. Caching — each result is keyed by its contract, script and consumed inputs, and reused across workflows.
 
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
