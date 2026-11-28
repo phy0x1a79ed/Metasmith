@@ -112,10 +112,10 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     - Note: `agents/targets.py` (`TargetBuilder`); rc builds the target model in `agents/spec.py:_target_model`.
   - S4. Parallel cases — proposed (rewritten 2026-11-27 from Tony's premise)
     - Key message: parallel cases let varied inputs reach their own targets in one workflow while reusing the steps they share.
-    1. Inputs often vary slightly in form, yet the user wants a common result from all of them.
-    2. A first design aggregated the varied inputs into a single target set, which proved too rigid when cases needed targets of their own.
-    3. Each case therefore carries its own givens and targets and is solved on its own.
-    4. The solved plans are merged step by step, so a step that several cases share runs once in the workflow.
+    1. Inputs often vary slightly in form, yet the user wants a common result from all of them, and some cases also need targets of their own.
+    2. Each case therefore carries its own givens and targets and is solved on its own.
+    3. The solved plans are merged step by step, so a step that several cases share runs once in the workflow.
+    - Justify the final design; do not narrate the design history (Tony, 2026-11-27).
     - Note: sample type is syntactic sugar that generates cases (`Case.ByShape`); not mentioned (Tony: "samples are not well defined here"). Code on rc: `case_merge.py`. A case may reuse another case's route; merged plans are checked per case (P5).
   - S5. Optional branching — a contract may declare alternative output groups and emit one at run time (`NewProductGroup`; `optional: true`); confirm with Tony.
   - S6. Variadic inputs — one input type matched to an unknown number of ports; expanded per case before solving (`origin/feat/engine/variadic`, not merged here).
