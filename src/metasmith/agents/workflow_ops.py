@@ -172,7 +172,7 @@ def _send_local_inputs(sh_remote, task, home: Source|None, inputs_root: Path) ->
 # Keys the engine itself reads from a run's params, beside those the preset and
 # the plan's transforms read.
 ENGINE_PARAM_KEYS = frozenset({
-    "executor", "localExecutor", "process", "slurmAccount", "slurmGpuAccount", "hostName", "workspace",
+    "executor", "localExecutor", "process", "slurmAccount", "slurmGpuAccount", "gpuType", "hostName", "workspace",
     "home", "output", "testSpread", "bootstrap_def", "gpus", "rootfs",
 })
 _PRESET_PARAM = re.compile(r"\bparams\.([A-Za-z_][A-Za-z0-9_]*)")
