@@ -147,3 +147,11 @@ This build adds the seqkit encoding fix (round 10 row 2). fir-lite relaunched wa
 | 4 | harness | watch_remote STOP | Drivers inside the agent container have cwd `/msm_home/runs/<key>`; once their parent is killed they reparent to init and escape both matches. Round 9 full's nextflow lived on 10 h after its stop (cwd deleted); the mistyped lite run's survived too. Both killed by PID. | Round 11's full driver escaped again into round 12 (killed by PID). Fixed: STOP also matches a process whose `/msm_home` bind (mountinfo root) is the run dir, and `kill -9`s survivors after 5 s. Dry-run on fir: the two stations' sets are disjoint (52 vs 88 pids). |
 | 5 | gui? | fir full agent | Agent reports the run params (slurmAccount, slurmGpuAccount) were cleared after a page reload and had to be re-entered. | Confirmed in WorkflowView.svelte: `runParams` is page state, re-seeded from the agent's defaults on load, so values typed for this run are lost on reload (per-step resource overrides are already kept per workflow). ffec2d2e: typed run params ride the workflow's request.yml and come back on load (GUI backend 280 passed; bundle compiles). In the next build. |
 | 6 | gui | fir-lite agent | The solve button was not discoverable by looking at the page; the agent found it by DOM text search. | The button is a primary `solve` directly under the recipe card; engcyc's long recipe pushes it below the fold for a screenshot-driven agent. No change. |
+
+# Round 12 (release candidate 0.26.2+752a2b8, 2026-11-27)
+
+This build adds the driver thread cap (round 11 row 2). fir full relaunched warm ~22:45, fir-lite ~22:50. Lite setup completed clean at 22:55 and its run started at 23:00.
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|
+| 1 | waste | fir full setup, downloadMetabuliDB | The Metabuli download (192 GB) misses the cache on every install: task_cache/staging/downloadMetabuliDB holds four keys and 357 GB of partial downloads. It requires `lib::metabuli_gtdb`, a directory, and a directory's instance id is its absolute path and mtime, so each install's fresh library clone mints a new id and a new key. Same for every `lib::` resource directory (psortm_prep, ...). A version upgrade would re-download it too. | open, Tony: name a small directory by its relative paths and bytes, as a small file already is (the dir-leaf identity cap question). |
