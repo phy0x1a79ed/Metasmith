@@ -90,13 +90,18 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Role: the surrounding infrastructure that turns a user's intent into a planning problem.
 - Key message: a user gives typed data instances and targets through the API, CLI or GUI, and the planner treats each target as one more transform.
 - Paragraphs (outline-paragraphs, 2026-11-27): each feature reduces to ordinary planning.
-  - S1. Interfaces — the API, CLI and GUI all build the same specification (opener, Tony 2026-11-27).
+  - S1. Interfaces — agreed (paragraph-points, 2026-11-27)
+    - Key message: one set of operations is exposed through three modalities (Python API, command line, GUI), so a user can take the same actions through any of them.
+    1. A single operations layer defines every action, and each modality is a thin front end over it.
+    2. The actions cover registering typed data, choosing contract libraries and targets, planning, deploying to a compute agent, running and monitoring, collecting results, and managing the cache.
+    3. The Python API calls the operations directly; the command line (`metasmith`, or `msm`) maps each to a subcommand (e.g. `msm plan`, `msm workflow run`); the GUI exposes them as forms around saved templates.
+    4. Writing new contracts is the exception: a contract is a Python file, so it is authored in Python.
+    - Note: `src/metasmith/ops/` is the shared layer; CLI in `coms/cli/`, GUI (Flask + Svelte) in `gui/`. CLI can scaffold and validate contract files; not mentioned (Tony, 2026-11-27).
   - S2. Givens — user data enter as typed instances, whose types become the outputs of a given step.
   - S3. Targets — a target is a contract with inputs and no outputs, so it carries lineage constraints like any other.
   - S4. Samples and cases — a sample type splits the givens into one case per sample; cases are planned in parallel and shared steps merged.
   - S5. Optional branching — a contract may declare alternative output groups and emit one at run time (`NewProductGroup`; `optional: true`); confirm with Tony.
   - S6. Variadic inputs — one input type matched to an unknown number of ports; expanded per case before solving (`origin/feat/engine/variadic`, not merged here).
-  - Limits and workarounds: proposed for removal (no concrete content; reads as Discussion).
 
 ### M3. Execution — agreed (outline-sections, 2026-11-26)
 - Role: how a plan runs.
