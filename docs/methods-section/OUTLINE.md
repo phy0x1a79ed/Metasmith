@@ -185,7 +185,10 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 ### M5. Benchmarks — agreed (outline-sections, 2026-11-26)
 - Role: how each Results benchmark was run and scored.
 - Key message: each published pipeline was rebuilt as contracts with its own tools and parameters, run on the original data, and compared output by output.
-- Paragraphs: shared setup; nf-core/mag; MAG comparison; lines of code; viromics; vOTU comparison; assembler swaps; metaGEM; update ablation; KofamScan; combined workflow and cost.
+- Paragraphs (revised 2026-11-27: running Metasmith is the rest of the paper; document only what a reader could not reproduce from it):
+  - B1. Shared setup — data sources (accessions), the published pipeline and version each benchmark reproduces, rebuilt as contracts with the same tools, versions and parameters; compute (clusters, Metasmith version); what the assembler swaps and update ablation changed, as a clause.
+  - B2. Scoring — the comparison behind each Results claim: MAG pairing (nf-core/mag), vOTU matching (viromics), GEM comparison (metaGEM), KofamScan agreement, lines-of-code counting, cost (core-hours, Green Algorithms inputs). Settles the matching results-conflicts rows.
+  - Table (Tony, 2026-11-27): each contract used in the benchmarks, the tool it wraps, the tool version and the container URL. To be generated from the contract files and the containers namespace.
 
 ## Declarations (own top-level section, beside Methods) — agreed (outline-sections, 2026-11-26)
 - Role: declarations a journal requires.

@@ -31,7 +31,7 @@ Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind)
 - **outline-paragraphs**: level 2, section by section: Planning (current), Specification, Execution, Contracts, Benchmarks, Declarations. M2 needs a code survey first (variadic inputs are new, on a branch; optional branching is the old mechanism).
 - **paragraph-walk**: per paragraph in document order: points, prose, then into d2.
 - **results-conflicts**: the 12 rows in `draft.md` where the records do not back the Results (MAG pairing method, metaGEM input, OPERA-MS indels, ORF counts, combined-run solver, core-years, Green Algorithms inputs, and others).
-- **todos**: contract authoring, Figure 2 library, Green Algorithms inputs, Zenodo DOI.
+- **todos**: benchmark contract table (contract, tool, version, container URL); contract authoring, Figure 2 library, Green Algorithms inputs, Zenodo DOI.
 
 ## Workers
 
