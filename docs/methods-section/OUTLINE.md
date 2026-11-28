@@ -140,7 +140,18 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Key message: each step compiles to a Nextflow process, runs through local or SLURM presets with each tool in its own container, and is cached under its lineage.
 - Paragraphs (outline-paragraphs, 2026-11-27): how a contract runs, how the solved plan compiles, how the workflow runs, then caching.
   - E1. Contract execution — a contract declares a protocol in Python, run in the contract's own container or environment.
+    1. Each contract carries a protocol, a Python procedure that runs its tool.
+    2. At run time the protocol gets an execution context with the paths of its inputs and expected outputs and a shell.
+    3. A contract names one input to group by: each item on that input starts one task, which receives every item on the other inputs that descends from it, so a fan-out per sample folds back into one task per sample.
+    4. A protocol typically runs its tool in a container.
+    5. Containers are launched through a relay outside the workflow's own container, so each step uses its tool's dedicated container.
+    6. Each contract compiles to one Nextflow process (lead-in to E2).
   - E2. Compilation — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping and batching at run time.
+    1. Each step of the plan becomes one Nextflow process, and each port becomes a channel.
+    2. Each item in a channel carries a lineage index naming the instances it descends from.
+    3. Channels are joined with three operations only: merge, copy to several consumers, and group by lineage (E1), so many samples run in parallel without mixing.
+    4. Additional routing logic can be placed within contracts themselves.
+    5. The compiled workflow can be deployed to a designated worker home (msm_home), on a local filesystem or a remote machine (lead-in to E3).
   - E3. Running the workflow — the workflow runs on a worker, local or SLURM through presets, and results with their lineage are collected back.
   - E4. Caching — each result is keyed by its contract, script and consumed inputs, and reused across workflows.
 
