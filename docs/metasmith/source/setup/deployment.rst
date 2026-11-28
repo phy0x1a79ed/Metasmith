@@ -308,7 +308,10 @@ A run with a step that needs a GPU refuses to launch until it declares one. Give
 on the target as :python:`gpus=Gpu(memory=Size.GB(16))`, as ``--gpu-memory 16`` to
 ``metasmith workflow run``, or in the GUI's GPU memory field. On SLURM each GPU step then asks
 for ``--gpus-per-node=<n>``, where ``n`` covers the step's own ask. Set the ``slurmGpuAccount``
-param when GPU jobs bill a different account than ``slurmAccount``.
+param when GPU jobs bill a different account than ``slurmAccount``. Set the ``gpuType`` param
+when the cluster requires a GPU model, as fir does: ``gpuType=h100`` asks for
+``--gpus-per-node=h100:<n>``, and a MIG profile such as
+``nvidia_h100_80gb_hbm3_2g.20gb`` asks for a slice of a card.
 
 These are just paths to Nextflow config files, so feel free to point to your own config as well.
 Metasmith doesn't require a specific Nextflow configuration.

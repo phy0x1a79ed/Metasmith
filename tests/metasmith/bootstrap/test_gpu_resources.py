@@ -157,7 +157,7 @@ class TestRenderGpuConfig:
         assert "withName: 'p01__prott5'" in text
         assert "--nodes=1 --ntasks=1" in text
         assert "--account=${params.slurmGpuAccount ?: params.slurmAccount}" in text
-        assert '" --gpus-per-node=2"' in text
+        assert '" --gpus-per-node=${params.gpuType ? params.gpuType + \':\' : \'\'}2"' in text
         assert "params.process.clusterOptionsExtra" in text
 
     def test_gpu_account_falls_back_to_the_default_account(self):

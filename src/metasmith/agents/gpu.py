@@ -85,6 +85,13 @@ def _plan_gpu_requests(
         )
     return planned
 
+def _gpu_request(device: Gpu, devices: int) -> str:
+    if device.type: return device.MakeRequestFlag(devices)
+    # A site that refuses a GPU job without a model (fir) gets it from the run's
+    # `gpuType` param, set beside slurmGpuAccount.
+    return " ".join([f"{device.flag}${{params.gpuType ? params.gpuType + ':' : ''}}{devices}", *device.extra])
+
+
 def _render_gpu_config(planned: dict[str, int], device: Gpu|None, scheduler: bool) -> list[str]:
     if not planned: return []
     TAB = "\t"
@@ -99,7 +106,7 @@ def _render_gpu_config(planned: dict[str, int], device: Gpu|None, scheduler: boo
             extra = '(params.process.clusterOptionsExtra ? " ${params.process.clusterOptionsExtra}" : "")'
             lines += [
                 TAB+f"withName: '{process}' "+"{",
-                TAB+TAB+f'clusterOptions = {{ {base} + " {device.MakeRequestFlag(n)}" + {extra} }}',
+                TAB+TAB+f'clusterOptions = {{ {base} + " {_gpu_request(device, n)}" + {extra} }}',
                 TAB+"}",
             ]
     lines += ["}", ""]
