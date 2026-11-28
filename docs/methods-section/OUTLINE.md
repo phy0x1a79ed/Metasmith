@@ -4,6 +4,15 @@ The point-form draft of the d2 Methods and the single source for every redraft. 
 
 Status per entry: `proposed`, `agreed` (points accepted), `accepted` (prose accepted), `in doc`.
 
+## Titles (agreed 2026-11-27)
+One subtitle per paragraph; section headings above them.
+- Solver: Types · Contracts · Optional branching · Planning · Refinement · Verification
+- Specification: Interfaces · Inputs · Outputs · Parallel cases · Variadic contracts
+- Execution: Compiling to Nextflow · Running workflows · Caching
+- Benchmarks: MAG comparison · Lines of code · vOTU comparison · GEM comparison · Update ablation · KofamScan annotation · Compute cost (three sentences or fewer each; only what the Results leave out)
+- Declarations: Statistics · AI-assisted development · Data and code availability
+Section "Planning" is renamed "Solver"; "Planning" is P4's title, with search as its detail. "Givens"/"targets" are introduced inside Inputs/Outputs.
+
 ## Terms (terms, 2026-11-27)
 
 Define each term only from those above it; use one name per idea throughout the paper.
@@ -36,7 +45,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   1. Types are sets of properties, and each property narrows the range of variation of the data it describes.
   2. A type X satisfies Y if X has all of the properties of Y, S(X,Y) ≡ X ⊇ Y.
   3. Abstract types, which have fewer properties and so are more general, are satisfied by every more specific type, but not the reverse. Example: a wooden chair is a chair, but not every chair is wooden.
-  4. Types are grouped into namespaces, type libraries named as `namespace::type`, which contracts share or extend. (from C1, 2026-11-27)
+  4. Types are declared in namespaces, which are local files (one YAML file per namespace, e.g. `data_types/sequences.yml`), and named as `namespace::type`. The Discussion gives the context for sharing them.
 - Note: where the test is used (givens, inputs, lineage) belongs to P2. No EDAM claim: "a rough link".
 
 #### P2. Contracts — agreed (paragraph-points, 2026-11-27)
@@ -48,7 +57,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   3. Each port records its lineage, the ports its step consumed.
   4. A contract that accepts a general type loses which specific data came in; a compressor that accepts any file yields only a "compressed file" (flow F1, 2026-11-27). So an input can require that its port descends from the port bound to another input of the same step. Example: mapping reads to an assembly requires the assembly built from those reads.
   5. The check requires that exact port, not any ancestor of a matching type, so data from unrelated sources are never joined.
-  6. Besides its types, a contract carries a protocol, a Python procedure that runs its tool, with its output file names, its resource requests and a container image declared as one of its inputs. (from E1/C1, 2026-11-27)
+  6. Beyond its specification, a contract also declares a protocol for how it can be fulfilled: a Python procedure that runs its tool, its output file names, its resource requests and a container image declared as one of its inputs.
 - Note: inputs declare other inputs of the same contract as parents (`src/metasmith/models/solver.py:180`); the bound port must be an ancestor (`workflow_solver/src/search.rs:215`). The d3 formula (type-based) is replaced by the strict check; Tony confirmed the reason, 2026-11-27. M4 covers contract authoring.
 
 #### P3. Optional branching — agreed (paragraph-points, 2026-11-27) (moved from S4, 2026-11-27: a contract feature, after Contracts)
