@@ -175,6 +175,10 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Key message: a new tool is added by writing a contract against shared type libraries (namespaces); a standard library ships with Metasmith.
 - Paragraphs (agreed 2026-11-27; source rc `docs/metasmith/source/tutorials/custom_transforms.rst`):
   - C1. Writing a contract — scaffold a stub; declare input and output types as `namespace::type`; write the protocol; name a container.
+    1. A tool is added by writing a contract, a short Python file; the CLI or Python API scaffolds a blank one.
+    2. The contract declares the input types the tool requires and the output types it promises, each named as `namespace::type`.
+    3. It then supplies its protocol (E1), the file names of its outputs and the resources it requests.
+    4. The tool's container image is declared as one of the contract's required inputs, so the image is supplied like any other data.
   - C2. Types and namespaces — reuse existing types so the tool connects to the library; new types go into a namespace (type library, YAML); a one-property type is atomic.
   - C3. Standard library — 126 contracts were used for the benchmarks in this paper; N in total ship as the standard library (benchmark contracts plus those the ENG CYC driver uses; N being computed).
 
