@@ -6,13 +6,13 @@ Goal: write the d2 Methods with the co-writing protocol, from `OUTLINE.md`. Deci
 
 ## Current
 
-**paragraph-points / Execution**. Planning (P1 Types, P2 Contracts, P3 Optional branching, P4 Planning search, P5 Refinement, P6 Verification) and Specification (S1 Interfaces, S2 Givens, S3 Targets, S4 Parallel cases, S5 Variadic inputs) have agreed points and pass the flow check. Execution paragraph list proposed 2026-11-27 in OUTLINE.md: E1 Contract execution (protocol in Python, own container/env), E2 Compilation (plan -> Nextflow), E3 Running the workflow (local/SLURM presets, results and lineage collected; outputs folded in), E4 Caching. Agent is now "worker" (see DECISIONS rename). Then itemize E1..E4 one at a time, flow check, then Contracts, Benchmarks, Declarations; prose after all sections have points, one section at a time.
+**paragraph-points / Contracts (M4)**. Planning, Specification and Execution (E1 Contract execution, E2 Compilation, E3 Running the workflow, E4 Caching) have agreed points. M4 needs its key message from Tony, then a paragraph list and points; then Benchmarks, Declarations; prose after all sections have points, one section at a time.
 
 Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind): variadic, cases, forks and the witness gate are there. Read rc with `git show origin/feat/engine/rc:<path>`.
 
 ## Waiting on the user
 
-- Execution paragraph list (E1-E4): agreed set and order?
+- M4 Contracts key message.
 
 ## Preferences
 
@@ -35,7 +35,7 @@ Code facts for Execution live on `origin/feat/engine/rc` (this branch is behind)
 
 ## Workers
 
-- rename-refactor (subagent): agent -> worker and transform -> contract on `feat/engine/rename-worker-contract` off rc, read old / write new.
+- rename-refactor: stopped by Tony's interrupt before any change (worktree `engine/rename-worker-contract` at rc 76823961, unpushed); restart only if Tony asks.
 - metasmith-e2e-install-test (peer session): witness gate merged into feat/engine/rc (e47326b9), ships in 0.26.4 (unreleased); will message on release.
 
 ## Closed
