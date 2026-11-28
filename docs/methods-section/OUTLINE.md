@@ -162,13 +162,13 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
     5. Each run records a DAG of the plan, the Nextflow logs and a lineage table for every output and intermediate.
   - E4. Caching — results are reused across runs and workflows through a cache Metasmith keeps on top of Nextflow.
     1. Givens are supplied as a data library, a plain directory of files with a manifest recording each instance's type; outputs are written in the same format with their lineage, so they can be the givens of a later run.
-    2. A result should therefore be reusable by any later run, but Nextflow's resume reuses tasks only within one workflow's own run history, so Metasmith keeps its own cache on top of Nextflow.
-    3. Every data instance has an id. A given file of 1 MiB or less is identified by its path within its library and its bytes; a larger file or a directory by its path and modification time, since inputs reach hundreds of GB. The id is re-derived when the file changes.
+    2. This lets results be reused as inputs in any later run, so a worker holds a pool of data products across runs; caching therefore has to work across runs, and Metasmith keeps its own cache on top of Nextflow's.
+    3. Every data instance has an id. A file of 1 MiB or less in a given library is identified by its path within the library and its bytes; a larger file or a directory by its absolute path and modification time, since inputs reach hundreds of GB. A recorded id is re-derived when its file changes. Data imported into a worker's pool instead receive a fresh id for each import, assigned without reading the data.
     4. The cache key of a task is a hash of its contract, protocol source included, and of the ids of the instances it consumed; nothing about its outputs takes part. Each output takes its id from that key.
     5. When a task succeeds, its outputs are stored in the worker's cache under its key.
     6. Before each task is submitted, its key is looked up. A miss goes to the step's process; a hit goes to a light twin process that places the stored outputs into Nextflow's work directory, so downstream steps and publishing see an ordinary finished task.
     7. So a result is reused whenever the same contract runs on the same inputs, even in a different workflow. Editing a protocol invalidates its results and its descendants'; changing compute resources does not.
-- Note: given identity per rc `models/libraries/identity.py:leaf_id` (e0c60503, 2026-11-26: small files by bytes; fdd1630c: re-minted on change). d3's "path and modification time" holds only for large files; prose takes the split. rc `architecture.md` fixed to match (bb386cdb).
+- Note: given identity per rc `models/libraries/identity.py:leaf_id` (e0c60503, 2026-11-26: small files by bytes; fdd1630c: re-minted on change). d3's "path and modification time" holds only for large files; prose takes the split. Pool imports get an assigned id per import act (`mint_import_id`, nonce; rc architecture.md \"An import assigns an identity\"). rc `architecture.md` fixed to match (bb386cdb).
 
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
 - Role: how contracts are written and designed.
