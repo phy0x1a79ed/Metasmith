@@ -1537,6 +1537,12 @@ class TestWorkflowRename:
         assert r.get_json()["name"] == "chosen-name"
         assert client.get(f"/api/workflows/{name}").status_code == 409
 
+    def test_typed_run_params_ride_the_request_and_survive_a_recipe_save(self, client):
+        name = _make_workflow(client)
+        client.put(f"/api/workflows/{name}", json={"run_params": {"slurmAccount": "def-x"}})
+        client.put(f"/api/workflows/{name}", json={"input_drafts": []})
+        assert client.get(f"/api/workflows/{name}").get_json()["request"]["run_params"] == {"slurmAccount": "def-x"}
+
     def test_the_put_saves_the_recipe_and_the_name_at_once(self, client):
         name = _make_workflow(client)
         r = client.put(f"/api/workflows/{name}", json={

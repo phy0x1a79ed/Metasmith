@@ -205,6 +205,9 @@
   // the page tells "still the agent's defaults" from "someone typed over them".
   let runParams = $state([])
   let seededParams = $state({})
+  // What the server holds under `run_params` in this workflow's request, null
+  // until `load` has read it, so the save effect never writes over it blind.
+  let savedParams = $state(null)
   // Per-step resources, keyed by step position, which is the only form that
   // produces a selector for one step rather than for every step of a transform.
   // Boxes are strings; the server reads and checks the numbers. Seeded from
@@ -490,6 +493,12 @@
         rows: normalizeRows(wf.request.input_drafts),
       }
       overrides = wf.overrides ?? {}
+      // Restored rows count as typed over: `seededParams` stays empty, so the
+      // agent seeding below only adds the keys they lack.
+      savedParams = wf.request.run_params ?? {}
+      runParams = paramRows(savedParams)
+      seededParams = {}
+      if (chosenAgent) seedFromAgent(agentChoice)
       const lastGpu = (wf.runs ?? [])
         .filter((r) => r.gpu_memory_gb != null)
         .sort((a, b) => (a.created_at ?? '').localeCompare(b.created_at ?? ''))
@@ -527,6 +536,9 @@
     focus = null
     drawing = null
     overrides = hit ? (hit.wf.overrides ?? {}) : {}
+    runParams = []
+    seededParams = {}
+    savedParams = null
     // reset unconditionally, cache hit or not: this is what lets the one-time
     // recipe rebuild in `load()` still run on the background revalidation
     // fetch, so a recipe edited outside the browser surfaces even on a hit
@@ -582,6 +594,25 @@
     if (!chosenAgent) return
     const next = agentChoice
     untrack(() => seedFromAgent(next))
+  })
+
+  // Typed run params are saved a moment after typing stops, as the overrides
+  // are. Rows still equal to the agent's defaults are not typed, so they save
+  // as nothing and a later change of agent can still replace them.
+  $effect(() => {
+    const n = name
+    if (savedParams === null) return
+    const typed = toParams(runParams)
+    const out = sameParams(typed, seededParams) ? {} : typed
+    if (sameParams(out, savedParams)) return
+    const t = setTimeout(async () => {
+      await attempt(async () => {
+        await api.put(`/workflows/${n}`, { run_params: out })
+        if (n === untrack(() => name)) savedParams = out
+        return true
+      })
+    }, 600)
+    return () => clearTimeout(t)
   })
 
   // A preset nobody picked or edited follows the agent's default.
