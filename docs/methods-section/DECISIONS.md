@@ -23,3 +23,13 @@ Names revised the same day: "we can call sections: planning, specification, exec
 **Design.** property → type → contract → step → port → plan → instance. A port is a typed position on a step, one per output type, with a fixed lineage; later steps bind their inputs to ports; each port compiles to one Nextflow channel. Contracts keep "input types" and "output types"; "port" is used only for steps, not contracts. d0.2's "data node (DN)" covered both slot and joint and is retired. "Endpoint" and "application" leave the paper. Revised 2026-11-27 (outline-paragraphs / Execution): "transform" also leaves the paper, contracts are called contracts throughout, and "agent" is avoided because it now reads as an LLM agent.
 
 **Landed.** `OUTLINE.md` § Terms.
+
+## rename (2026-11-27)
+
+**Question.** What replaces "agent" (now read as an LLM agent), and how do the agent and transform renames land in the code?
+
+**Tony's words.** "There's a bit of autonomy there, so I think site doesn't quite capture it"; "let's just call it a worker"; "read old, write new. We'll make the transition soft."
+
+**Design.** Agent becomes worker (`Worker`, `msm worker deploy`); transform becomes contract, in the paper and the code. The code writes only the new names and still reads the old ones (agent homes and configs, `transforms/` library directories, `transforms.yml` metadata, template specs) with a deprecation warning; the old names are dropped in a later release.
+
+**Landed.** Paper terms: `OUTLINE.md` § Terms. Code: refactor worker on `feat/engine/rename-worker-contract` off `feat/engine/rc`.

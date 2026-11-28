@@ -16,7 +16,7 @@ Define each term only from those above it; use one name per idea throughout the 
 6. plan: a DAG of steps joined through ports.
 7. instance: the data that fills a port when the plan runs.
 
-The paper calls the code's transforms "contracts" throughout, Execution included (Tony, 2026-11-27). "Transform", "endpoint", "application" and "data node" leave the paper. "Agent" is avoided, since it now reads as an LLM agent.
+The paper calls the code's transforms "contracts" throughout, Execution included (Tony, 2026-11-27). "Transform", "endpoint", "application" and "data node" leave the paper. The code's "agent" is called a "worker" (it reads as an LLM agent otherwise).
 
 ## Level 1: sections
 
@@ -102,7 +102,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
   - S1. Interfaces — agreed (paragraph-points, 2026-11-27)
     - Key message: one set of operations is exposed through three modalities (Python API, command line, GUI), so a user can take the same actions through any of them.
     1. A single operations layer defines every action, and each modality is a thin front end over it.
-    2. The actions cover registering typed data, choosing contract libraries and targets, planning, deploying to a compute agent, running and monitoring, collecting results, and managing the cache.
+    2. The actions cover registering typed data, choosing contract libraries and targets, planning, deploying to a worker, running and monitoring, collecting results, and managing the cache.
     3. The Python API calls the operations directly; the command line (`metasmith`, or `msm`) maps each to a subcommand (e.g. `msm plan`, `msm workflow run`); the GUI exposes them as forms around saved templates.
     4. Writing new contracts is the exception: a contract is a Python file, so it is authored in Python.
     - Note: `src/metasmith/ops/` is the shared layer; CLI in `coms/cli/`, GUI (Flask + Svelte) in `gui/`. CLI can scaffold and validate contract files; not mentioned (Tony, 2026-11-27).
@@ -141,7 +141,7 @@ Grouping by concept (paragraph-sketch, 2026-11-27): "do the grouping by concept"
 - Paragraphs (outline-paragraphs, 2026-11-27): how a contract runs, how the solved plan compiles, how the workflow runs, then caching.
   - E1. Contract execution — a contract declares a protocol in Python, run in the contract's own container or environment.
   - E2. Compilation — the solved plan compiles to Nextflow: steps to processes, ports to channels, grouping and batching at run time.
-  - E3. Running the workflow — the workflow runs on a compute site, local or SLURM through presets, and results with their lineage are collected back.
+  - E3. Running the workflow — the workflow runs on a worker, local or SLURM through presets, and results with their lineage are collected back.
   - E4. Caching — each result is keyed by its contract, script and consumed inputs, and reused across workflows.
 
 ### M4. Contracts — agreed (outline-sections, 2026-11-26)
