@@ -167,3 +167,10 @@ This build adds small-directory content identity, lenient DIAMOND titles, `gpuTy
 | # | class | where | issue | fix |
 |---|---|---|---|---|
 | 1 | bug | fir-lite analysis run ufzXt67u | The cache probe (footprint pass) died with "unable to create native thread": it decides every step at once, and each decision started a python key helper plus two reader threads, hundreds against fir's 512-pid limit. The OutOfMemoryError escaped the helper's `catch (Exception)`, the probe failed, and the run remade every deleted product: UniRef50, GTDB and Kofam re-downloaded although setup (keys identical, verified per step) had cached their builds. | abc967d9: at most 8 helpers at once (a j.u.c Semaphore), and the probe runs on virtual threads with the 128-carrier cap. test_footprint 7 passed. Build 14. |
+
+# Round 14 (release candidate 0.26.2+fd14c9a, 2026-11-28)
+
+This build adds the cache-probe helper cap (round 13 row 1). Both stations relaunched warm ~02:00, lite five minutes after full. Round 13's records are in `round13/<station>`: lite setup clean (28 steps), its analysis run stuck re-downloading; full setup at 43 steps, in the Metabuli and Ganon2 downloads (same keys as round 13, so their partials resume).
+
+| # | class | where | issue | fix |
+|---|---|---|---|---|

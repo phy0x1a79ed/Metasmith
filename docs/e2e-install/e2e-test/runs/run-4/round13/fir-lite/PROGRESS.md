@@ -1,0 +1,17 @@
+# PROGRESS
+- Done: read docs.
+- Next: test ssh fir; install metasmith (conda/mamba).
+- RUNNING: mamba create msm_env (install metasmith), PID 1287690, log logs/install.log
+- RUNNING: msm gui on port 8094 (log logs/gui.log), workspace sandbox/metasmith_ws; started Sat Nov 28 00:55:44 MST 2026
+- GUI at 8094 working via browser (reload+3s wait before clicks). Next: deploy agent to fir via Agents tab.
+- DEPLOYING agent lush-fir via GUI (started Sat Nov 28 00:58:28 MST 2026); check the GUI log panel
+- Agent lush-fir DEPLOYED on fir. Next: prep_references_lite setup run via GUI Workflows tab.
+- Workflow tentacled-mussel (prep_references_lite) created in GUI; next solve + set up on agent lush-fir.
+- prep_references_lite: solved (84 steps). Clicking SET UP on lush-fir (slurm) via GUI Sat Nov 28 01:00:11 MST 2026
+- SETUP RUN started via GUI: run key tentacled-mussel/tentacled-mussel-G591v (agent lush-fir). Monitor in Runs tab.
+- Setup run (prep_references_lite): GUI run G591v, task key U3QhuEEA, cluster dir /scratch/phyberos/msm_e2e/run-4-fir-lite/runs/U3QhuEEA, nextflow log _metasmith/logs.2026-11-28_01-00-04/nxf.log, driver java pid 581401 (started 01:00). Preset slurm.
+- NOTE: another phyberos run (ekrKC9dy under /scratch/phyberos/msm_e2e/run-4-fir/) exists on fir; not mine, do not touch.
+- Metagenomics workflow loud-woodlouse created in GUI (not yet configured). Setup run still executing.
+- loud-woodlouse: short case has SRA row SRR9658108; deleting file read rows; then set gpu/params, solve, stage and run
+- PREP/SETUP RUN DONE (U3QhuEEA, 28 refs published, 220G task_cache). Next: stage and run loud-woodlouse on lush-fir slurm via GUI.
+- METAGENOMICS RUN started via GUI: run YRjXN (task ufzXt67u) on lush-fir slurm, GPU 16GB. GUI Runs tab. Prep run G591v completed.
